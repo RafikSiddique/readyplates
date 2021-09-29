@@ -98,16 +98,19 @@ class _SignupPageState extends State<SignupPage> {
                   Text("user Information",
                       style: TextStyle(
                         fontSize: 17,
-                        color: Color(0xff6E6D7A),
+                        color: Color(0xff2F2E41),
                       )),
                 ],
               ),
-              ListTile(
-                title: Text("Name",
-                    style: TextStyle(fontSize: 13, color: Color(0xff6E6D7A))),
-              ),
+              
+                Padding(
+                  padding: const EdgeInsets.only(left:16),
+                  child: Text("Name",
+                      style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
+                ),
+
               Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
+                margin: EdgeInsets.only(left: 16, right: 16),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: firstname,
@@ -118,7 +121,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
+                margin: EdgeInsets.only(left: 16, right: 16),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: lastname,
@@ -129,20 +132,24 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.only(left: 16),
                 child:
                     Text("Make sure it matches the name on your government ID",
                         style: TextStyle(
                           fontSize: 9,
-                          color: Color(0xff6E6D7A),
+                          color: Color(0xff2F2E41),
                         )),
               ),
-              ListTile(
-                title: Text("Gender",
-                    style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
+
+              SizedBox(height:20),
+              
+              Padding(
+                padding: const EdgeInsets.only(left:16),
+                child: Text("Gender",
+                      style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
+                margin: EdgeInsets.only(left: 16, right: 16),
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -166,17 +173,19 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-              ListTile(
-                title: Text("Date of Birth",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
+             
+              Padding(
+                padding: const EdgeInsets.only(left:16),
+                child: Text("Date of Birth",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
               ),
               Container(
                 margin: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
+                  left: 16,
+                  right: 16,
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
@@ -188,17 +197,18 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-              ListTile(
-                title: Text("Email ID",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
+              Padding(
+                padding: const EdgeInsets.only(left:16),
+                child: Text("Email ID",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
               ),
               Container(
                 margin: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
+                  left: 16,
+                  right: 16,
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
@@ -210,17 +220,18 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-              ListTile(
-                title: Text("Mobile",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
+              Padding(
+                padding: const EdgeInsets.only(left:16),
+                child: Text("Mobile",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
               ),
               Container(
                 margin: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
+                  left: 16,
+                  right: 16,
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
@@ -232,17 +243,18 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-              ListTile(
-                title: Text("Password",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
+             Padding(
+                padding: const EdgeInsets.only(left:16),
+                child: Text("Password",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
               ),
               Container(
                 margin: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
+                  left: 16,
+                  right: 16,
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
@@ -254,17 +266,18 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-              ListTile(
-                title: Text("Password2",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
+              Padding(
+                padding: const EdgeInsets.only(left:16),
+                child: Text("Password2",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
               ),
               Container(
                 margin: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
+                  left: 16,
+                  right: 16,
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
@@ -276,7 +289,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.only(left: 16),
                 child: Text("Strong",
                     style: TextStyle(
                       fontSize: 9,

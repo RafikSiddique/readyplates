@@ -60,21 +60,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/ready.png"),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 300,
+        body: SingleChildScrollView(
+
+
+ child: Container(
+              decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/ready.png"),
+            fit: BoxFit.cover,
           ),
-          SingleChildScrollView(
-            child: Container(
+              ),
+              child: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+               height: 524,
+              width: 375,
+              
+            ),
+            Container(
               height: 500,
               color: Colors.white,
               child: Form(
@@ -108,13 +112,12 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     SizedBox(height: 10),
-                    ListTile(
-                      title: Text("Email address / Mobile Number",
+                   
+                    Text("Email address / Mobile Number",
                           style: TextStyle(
                             fontSize: 13,
                             color: Color(0xff2F2E41),
                           )),
-                    ),
                     Container(
                       margin: EdgeInsets.only(left: 10, right: 10),
                       width: MediaQuery.of(context).size.width,
@@ -234,9 +237,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    ));
+          ],
+              ),
+            ),
+        ));
   }
 }

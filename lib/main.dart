@@ -1,7 +1,9 @@
 //import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:readyplates/pages/imagepage.dart';
 //import 'package:readyplates/pages/empty.dart';
 import 'package:readyplates/pages/loginpage.dart';
+import 'package:readyplates/pages/mappage.dart';
 //import 'package:readyplates/pages/mappage.dart';
 import 'package:readyplates/pages/onbording.dart';
 import 'package:readyplates/pages/shop_screen.dart';
@@ -25,12 +27,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
 
-      initialRoute: "/shop",
+      initialRoute: "/loginpage",
       routes: {
         "/onbording": (context) => OnbordingPage(),
         "/loginpage": (context) => LoginPage(),
         "/signup": (context) => SignupPage(),
         "/shop": (context) => ShopScreen(),
+        "/map" :(context)=>MapPage(),
+          "/image" :(context)=>ImagePage(),
+        
       },
     );
   }

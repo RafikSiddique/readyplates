@@ -7,7 +7,10 @@ class MyRoutes {
   static String SignupPage = "/signup";
 // ignore: non_constant_identifier_names
 //static String GoogleMapScreen = "/map";
-// ignore: non_constant_identifier_names
-  static String EmptyClass = "/empty";
+
+  // ignore: non_constant_identifier_names
+  static String MapPage = "/map";
   static String shopRoute = "/shop";
+  // ignore: non_constant_identifier_names
+  static String ImagePage = "/image";
 }
