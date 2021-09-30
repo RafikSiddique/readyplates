@@ -9,7 +9,7 @@ class MapPage extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/map.jpg"),
+            image: AssetImage("assets/images/newmap1.jpeg"),
             fit: BoxFit.cover,
           ),
         ),
