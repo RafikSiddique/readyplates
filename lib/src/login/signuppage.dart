@@ -36,6 +36,7 @@ class _SignupPageState extends State<SignupPage> {
   final password2 = TextEditingController();
   Signup? users;
 
+  ///U should not call the api here, make a controller and service
   Future<Signup?> registrationuser(
       String firstname,
       String lastname,
@@ -102,13 +103,11 @@ class _SignupPageState extends State<SignupPage> {
                       )),
                 ],
               ),
-              
-                Padding(
-                  padding: const EdgeInsets.only(left:16),
-                  child: Text("Name",
-                      style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
-                ),
-
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Text("Name",
+                    style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
+              ),
               Container(
                 margin: EdgeInsets.only(left: 16, right: 16),
                 width: MediaQuery.of(context).size.width,
@@ -140,13 +139,11 @@ class _SignupPageState extends State<SignupPage> {
                           color: Color(0xff2F2E41),
                         )),
               ),
-
-              SizedBox(height:20),
-              
+              SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left:16),
+                padding: const EdgeInsets.only(left: 16),
                 child: Text("Gender",
-                      style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
+                    style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
               ),
               Container(
                 margin: EdgeInsets.only(left: 16, right: 16),
@@ -173,14 +170,13 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-             
               Padding(
-                padding: const EdgeInsets.only(left:16),
+                padding: const EdgeInsets.only(left: 16),
                 child: Text("Date of Birth",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Color(0xff2F2E41),
-                      )),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Color(0xff2F2E41),
+                    )),
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -198,12 +194,12 @@ class _SignupPageState extends State<SignupPage> {
               ),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left:16),
+                padding: const EdgeInsets.only(left: 16),
                 child: Text("Email ID",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Color(0xff2F2E41),
-                      )),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Color(0xff2F2E41),
+                    )),
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -221,12 +217,12 @@ class _SignupPageState extends State<SignupPage> {
               ),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left:16),
+                padding: const EdgeInsets.only(left: 16),
                 child: Text("Mobile",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Color(0xff2F2E41),
-                      )),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Color(0xff2F2E41),
+                    )),
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -243,13 +239,13 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-             Padding(
-                padding: const EdgeInsets.only(left:16),
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
                 child: Text("Password",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Color(0xff2F2E41),
-                      )),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Color(0xff2F2E41),
+                    )),
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -267,12 +263,12 @@ class _SignupPageState extends State<SignupPage> {
               ),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left:16),
+                padding: const EdgeInsets.only(left: 16),
                 child: Text("Password2",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Color(0xff2F2E41),
-                      )),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Color(0xff2F2E41),
+                    )),
               ),
               Container(
                 margin: EdgeInsets.only(
