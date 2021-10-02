@@ -1,7 +1,54 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:readyplates/utils/routes.dart';
 
 class OnbordingPage extends StatelessWidget {
+  Widget button({
+    required String text,
+    Color? color,
+    BoxBorder? border,
+    Color textColor = Colors.black,
+    required Function() onTap,
+  }) {
+    double blur = 8;
+    return Material(
+      type: MaterialType.transparency,
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            border: border,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: blur,
+                sigmaY: blur,
+              ),
+              child: Container(
+                decoration: BoxDecoration(),
+                alignment: Alignment.center,
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: textColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,23 +84,49 @@ class OnbordingPage extends StatelessWidget {
                 ),
                 Column(
                   children: [
+                    Container(
+                      height: 54,
+                      width: 343,
+                      child: button(
+                          onTap: () {
+                            Navigator.pushNamed(context, MyRoutes.LoginPage);
+                          },
+                          text: "LOGIN",
+                          color: Colors.white.withOpacity(0.35)),
+                    ),
                     SizedBox(
+                      height: 20,
+                    ),
+                    /*     SizedBox(
                       height: 54,
                       width: 343,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromRGBO(255, 255, 255, 0.38),
+                            primary: Colors.white.withOpacity(0.2),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, MyRoutes.LoginPage);
+                            
                           },
                           child: Text('LOGIN',
                               style: TextStyle(
                                 fontSize: 17,
                               ))),
-                    ),
-                    SizedBox(height: 10),
+                    ), */
+                    //SizedBox(height: 10),
                     SizedBox(
+                      height: 54,
+                      width: 343,
+                      child: button(
+                        onTap: () {
+                          Navigator.pushNamed(context, MyRoutes.SignupPage);
+                        },
+                        text: "SIGN UP",
+                        textColor: Colors.white,
+                        border: Border.all(
+                            color: Colors.white.withOpacity(0.5), width: 1.5),
+                      ),
+                    ),
+                    /* SizedBox(
                       height: 54,
                       width: 343,
                       child: ElevatedButton(
@@ -64,13 +137,18 @@ class OnbordingPage extends StatelessWidget {
                                 color: Color.fromRGBO(255, 255, 255, 0.5)),
                           ),
                           onPressed: () {
-                             Navigator.pushNamed(context, MyRoutes.SignupPage);
+                            
                           },
-                          child: Text('SIGN UP',
-                              style: TextStyle(
-                                fontSize: 17,
-                              ))),
-                    ),
+                          child: ClipRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                              child: Text('SIGN UP',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  )),
+                            ),
+                          )),
+                    ), */
                     SizedBox(
                       height: 25,
                     ),
