@@ -9,7 +9,7 @@ class MapPage extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/map.jpg"),
+            image: AssetImage("assets/images/newmap.jpeg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -17,11 +17,13 @@ class MapPage extends StatelessWidget {
           children: [
             SizedBox(
               height: 524,
-              width: 375,
+            //  width: 375,
             ),
             Container(
               height: 300,
-              width: 375,
+              //width: 375,
+              width: MediaQuery.of(context).size.width,
+              
               color: Colors.white,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +108,8 @@ class MapPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: SizedBox(
                       height: 54,
-                      width: 343,
+                        width: MediaQuery.of(context).size.width,
+                      //width: 343,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Colors.black,

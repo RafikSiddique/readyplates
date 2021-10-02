@@ -18,7 +18,7 @@ class ImagePage extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(
-                    Icons.arrow_left,
+                    Icons.chevron_left,
                   ),
                   color: Color(0xff393E46),
                   onPressed: () {

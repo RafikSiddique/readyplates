@@ -13,4 +13,8 @@ class MyRoutes {
   static String shopRoute = "/shop";
   // ignore: non_constant_identifier_names
   static String ImagePage = "/image";
+
+  // ignore: non_constant_identifier_names
+  static String LoginotpScreen = "/loginotp";
+   static String OtpPage = "/otp";
 }

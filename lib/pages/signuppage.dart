@@ -1,7 +1,7 @@
 // import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:http/http.dart' as http;
 import 'package:readyplates/modals/signup.dart';
 // import 'dart:async';
@@ -87,7 +87,7 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(height: 20),
                   IconButton(
                     icon: const Icon(
-                      Icons.arrow_left,
+                      Icons.chevron_left,
                     ),
                     color: Color(0xff393E46),
                     onPressed: () {
@@ -102,33 +102,62 @@ class _SignupPageState extends State<SignupPage> {
                       )),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text("Name",
-                    style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
-              ),
+             Padding(
+               padding: const EdgeInsets.only(left: 16),
+               child: Text("Name",style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
+             ),
+             SizedBox(height: 5,),
               Container(
+                height: 45,
+                
                 margin: EdgeInsets.only(left: 16, right: 16),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: firstname,
                   decoration: InputDecoration(
-                    labelText: "First Name",
-                    border: OutlineInputBorder(),
+
+
+                    hintText: 'First Name',
+                        contentPadding: EdgeInsets.only(
+                          left: 14,
+                          top: 14,
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: -0.264706,
+                          color: Color(0xff2F2E41).withOpacity(0.7),
+                        ),
+                   // labelText: "First Name",
+                    border: OutlineInputBorder( borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            topRight: Radius.circular(6),
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                          ),),
                   ),
                 ),
               ),
               Container(
+                 height: 45,
                 margin: EdgeInsets.only(left: 16, right: 16),
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: lastname,
                   decoration: InputDecoration(
                     labelText: "Last Name",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder( borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(0),
+                            topRight: Radius.circular(0),
+                            bottomLeft: Radius.circular(6),
+                            bottomRight: Radius.circular(6),
+                          ),),
                   ),
                 ),
               ),
+              SizedBox(height: 3),
               Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child:
@@ -138,13 +167,17 @@ class _SignupPageState extends State<SignupPage> {
                           color: Color(0xff2F2E41),
                         )),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 19),
               Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text("Gender",
-                    style: TextStyle(fontSize: 13, color: Color(0xff2F2E41))),
-              ),
+               padding: const EdgeInsets.only(left: 16),
+               child: Text("Gender",style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
+             ),
+              SizedBox(height: 5),
               Container(
+                 height: 45,
                 margin: EdgeInsets.only(left: 16, right: 16),
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
@@ -168,16 +201,17 @@ class _SignupPageState extends State<SignupPage> {
                           })),
                 ),
               ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text("Date of Birth",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
-              ),
+              SizedBox(height: 19),
+               Padding(
+               padding: const EdgeInsets.only(left: 16),
+               child: Text("Date of Birth",style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
+             ),
+              SizedBox(height: 5),
               Container(
+                 height: 45,
                 margin: EdgeInsets.only(
                   left: 16,
                   right: 16,
@@ -186,21 +220,37 @@ class _SignupPageState extends State<SignupPage> {
                 child: TextFormField(
                   controller: dob,
                   decoration: InputDecoration(
-                    labelText: "dd/mm/yyyy",
-                    border: OutlineInputBorder(),
+
+                      hintText: 'dd/mm/yyyy',
+                        contentPadding: EdgeInsets.only(
+                          left: 14,
+                          top: 14,
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: -0.264706,
+                          color: Color(0xff2F2E41).withOpacity(0.7),),
+                   // labelText: "dd/mm/yyyy",
+                    border: OutlineInputBorder( borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            topRight: Radius.circular(6),
+                            bottomLeft: Radius.circular(6),
+                            bottomRight: Radius.circular(6),
+                          ),),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text("Email ID",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
-              ),
+              SizedBox(height: 19),
+               Padding(
+               padding: const EdgeInsets.only(left: 16),
+               child: Text("Email ID",style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
+             ),
+              SizedBox(height: 5),
               Container(
+                 height: 45,
                 margin: EdgeInsets.only(
                   left: 16,
                   right: 16,
@@ -209,21 +259,37 @@ class _SignupPageState extends State<SignupPage> {
                 child: TextFormField(
                   controller: email,
                   decoration: InputDecoration(
-                    labelText: "rafiq.siddhiqi@fladdra.com",
-                    border: OutlineInputBorder(),
+
+                       hintText: 'rafiq.siddhiqi@fladdra.com',
+                        contentPadding: EdgeInsets.only(
+                          left: 14,
+                          top: 14,
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: -0.264706,
+                          color: Color(0xff2F2E41).withOpacity(0.7),),
+                    //labelText: "rafiq.siddhiqi@fladdra.com",
+                    border: OutlineInputBorder( borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            topRight: Radius.circular(6),
+                            bottomLeft: Radius.circular(6),
+                            bottomRight: Radius.circular(6),
+                          ),),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text("Mobile",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
-              ),
+              SizedBox(height: 19),
+               Padding(
+               padding: const EdgeInsets.only(left: 16),
+               child: Text("Mobile",style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
+             ),
+              SizedBox(height: 5),
               Container(
+                 height: 45,
                 margin: EdgeInsets.only(
                   left: 16,
                   right: 16,
@@ -232,21 +298,37 @@ class _SignupPageState extends State<SignupPage> {
                 child: TextFormField(
                   controller: mob_num,
                   decoration: InputDecoration(
-                    labelText: "923944543",
-                    border: OutlineInputBorder(),
+
+                    hintText: '923944543',
+                        contentPadding: EdgeInsets.only(
+                          left: 14,
+                          top: 14,
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: -0.264706,
+                          color: Color(0xff2F2E41).withOpacity(0.7),),
+                    //labelText: "923944543",
+                    border: OutlineInputBorder( borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            topRight: Radius.circular(6),
+                            bottomLeft: Radius.circular(6),
+                            bottomRight: Radius.circular(6),
+                          ),),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text("Password",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xff2F2E41),
-                    )),
-              ),
+              SizedBox(height: 19),
+               Padding(
+               padding: const EdgeInsets.only(left: 16),
+               child: Text("Password",style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff2F2E41),
+                      )),
+             ),
+              SizedBox(height: 5),
               Container(
+                 height: 45,
                 margin: EdgeInsets.only(
                   left: 16,
                   right: 16,
@@ -255,8 +337,23 @@ class _SignupPageState extends State<SignupPage> {
                 child: TextFormField(
                   controller: password,
                   decoration: InputDecoration(
-                    labelText: "***********",
-                    border: OutlineInputBorder(),
+                      hintText: '********',
+                        contentPadding: EdgeInsets.only(
+                          left: 14,
+                          top: 17,
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: -0.264706,
+                          color: Color(0xff2F2E41).withOpacity(0.7),),
+                    
+                    //labelText: "***********",
+                    border: OutlineInputBorder( borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            topRight: Radius.circular(6),
+                            bottomLeft: Radius.circular(6),
+                            bottomRight: Radius.circular(6),
+                          ),),
                   ),
                 ),
               ),
@@ -270,6 +367,7 @@ class _SignupPageState extends State<SignupPage> {
                     )),
               ),
               Container(
+                 height: 45,
                 margin: EdgeInsets.only(
                   left: 16,
                   right: 16,
@@ -278,11 +376,26 @@ class _SignupPageState extends State<SignupPage> {
                 child: TextFormField(
                   controller: password2,
                   decoration: InputDecoration(
-                    labelText: "***********",
-                    border: OutlineInputBorder(),
+                       hintText: '********',
+                        contentPadding: EdgeInsets.only(
+                          left: 14,
+                          top: 17,
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: 15,
+                          letterSpacing: -0.264706,
+                          color: Color(0xff2F2E41).withOpacity(0.7),),
+                   //] labelText: "***********",
+                    border: OutlineInputBorder( borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            topRight: Radius.circular(6),
+                            bottomLeft: Radius.circular(6),
+                            bottomRight: Radius.circular(6),
+                          ),),
                   ),
                 ),
               ),
+              SizedBox(height: 3,),
               Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child: Text("Strong",
@@ -291,7 +404,7 @@ class _SignupPageState extends State<SignupPage> {
                       color: Color(0xff6E6D7A),
                     )),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 19),
               Row(
                 children: [
                   Padding(
@@ -308,62 +421,67 @@ class _SignupPageState extends State<SignupPage> {
                   Text('I have a referral code',
                       style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xff6E6D7A),
+                        color: Color(0xff3C3B4D),
                       )),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 19),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 10,
                 ),
                 child: SizedBox(
                   height: 45,
-                  width: 343,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        //222831
-                        primary: Color(0xff222831),
-                        side: BorderSide(
-                            width: 1.5,
-                            color: Color.fromRGBO(255, 255, 255, 0.5)),
-                      ),
-                      onPressed: () async {
-                        Navigator.pushNamed(context, MyRoutes.LoginPage);
-                        // final String firstname1 = firstname.text;
-                        // final String lastname1 = lastname.text;
-                        // final String gender1 = gender;
-                        // final String dob1 = dob.text;
-                        // final String email1 = email.text;
-                        // // ignore: non_constant_identifier_names
-                        // final String mob_num1 = mob_num.text;
-                        // final String password1 = password.text;
-                        // final String password22 = password2.text;
-                        // // final String password = passwordController.text;
-                        // final Signup? user = await registrationuser(
-                        //     firstname1,
-                        //     lastname1,
-                        //     gender1,
-                        //     dob1,
-                        //     email1,
-                        //     mob_num1,
-                        //     password1,
-                        //     password22);
-                        // setState(() {
-                        //   users = user;
-                        // });
-                      },
+                   width: MediaQuery.of(context).size.width,
+                   
+                  //width: 343,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left:16,right:16),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          //222831
+                          primary: Color(0xff222831),
+                          side: BorderSide(
+                              width: 1.5,
+                              color: Color.fromRGBO(255, 255, 255, 0.5)),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, MyRoutes.LoginPage);
+                          // final String firstname1 = firstname.text;
+                          // final String lastname1 = lastname.text;
+                          // final String gender1 = gender;
+                          // final String dob1 = dob.text;
+                          // final String email1 = email.text;
+                          // // ignore: non_constant_identifier_names
+                          // final String mob_num1 = mob_num.text;
+                          // final String password1 = password.text;
+                          // final String password22 = password2.text;
+                          // // final String password = passwordController.text;
+                          // final Signup? user = await registrationuser(
+                          //     firstname1,
+                          //     lastname1,
+                          //     gender1,
+                          //     dob1,
+                          //     email1,
+                          //     mob_num1,
+                          //     password1,
+                          //     password22);
+                          // setState(() {
+                          //   users = user;
+                          // });
+                        },
 
-                      /* onPressed: () {
+                        /* onPressed: () {
 
-                      registrationUser();
-                     Navigator.pushNamed(context, MyRoutes.OnbordingPage);
+                        registrationUser();
+                       Navigator.pushNamed(context, MyRoutes.OnbordingPage);
 
-                    },*/
-                      child: Text('CONTINUE',
-                          style: TextStyle(
-                            fontSize: 17,
-                          ))),
+                      },*/
+                        child: Text('CONTINUE',
+                            style: TextStyle(
+                              fontSize: 17,
+                            ))),
+                  ),
                 ),
               ),
               SizedBox(height: 10),
@@ -391,54 +509,70 @@ class _SignupPageState extends State<SignupPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(34, 40, 49, 0.2),
-                      side: BorderSide(
-                          width: 1.5,
-                          color: Color.fromRGBO(255, 255, 255, 0.5)),
-                    ),
-                    onPressed: () {},
-                    child: Wrap(
-                      children: <Widget>[
-                        IconButton(
-                            icon: FaIcon(FontAwesomeIcons.google),
-                            onPressed: () {}),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Text("Continue with google!",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 9)),
-                        ),
-                      ],
+                  Container(
+                    width: 164,
+                    height: 45,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(34, 40, 49, 0.2),
+                        side: BorderSide(
+                            width: 1.5,
+                            color: Color.fromRGBO(255, 255, 255, 0.5)),
+                      ),
+                      onPressed: () {},
+                      child: Wrap(
+                        children: <Widget>[
+                         Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 13, bottom: 14, right: 9),
+                                    child: Container(
+                                        height: 21,
+                                        width: 20,
+                                        child: Image.asset(
+                                            "assets/images/google.png")),
+                                  ),
+                        
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text("Continue with google!",
+                                style:
+                                    TextStyle(color: Colors.black, fontSize: 9)),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(34, 40, 49, 0.2),
-                      side: BorderSide(
-                          width: 1.5,
-                          color: Color.fromRGBO(255, 255, 255, 0.5)),
-                    ),
-                    onPressed: () {},
-                    child: Wrap(
-                      children: <Widget>[
-                        IconButton(
-                            icon: FaIcon(FontAwesomeIcons.facebook),
-                            onPressed: () {}),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Text("Continue with Facebook!",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 9)),
-                        ),
-                      ],
+                  Container(
+                    width: 164,
+                    height: 45,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(34, 40, 49, 0.2),
+                        side: BorderSide(
+                            width: 1.5,
+                            color: Color.fromRGBO(255, 255, 255, 0.5)),
+                      ),
+                      onPressed: () {},
+                      child: Wrap(
+                        children: <Widget>[
+                          Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 13, bottom: 14, right: 9),
+                                      child: Container(
+                                          height: 18,
+                                          width: 10,
+                                          child: Image.asset(
+                                              "assets/images/facebook.png")),
+                                    ),
+                         
+                         Padding(
+                            padding: const EdgeInsets.only(top: 18),
+                            child: Text("Continue with facebook!",
+                                style:
+                                    TextStyle(color: Color(0xff505056), fontSize: 9)),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
