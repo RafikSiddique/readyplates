@@ -16,5 +16,6 @@ class MyRoutes {
 
   // ignore: non_constant_identifier_names
   static String LoginotpScreen = "/loginotp";
+   // ignore: non_constant_identifier_names
    static String OtpPage = "/otp";
 }

@@ -85,8 +85,10 @@ class OnbordingPage extends StatelessWidget {
                 Column(
                   children: [
                     Container(
+                       margin: EdgeInsets.only(left: 16,right: 16),
                       height: 54,
-                      width: 343,
+                      //width: 343,
+                      width: MediaQuery.of(context).size.width,
                       child: button(
                           onTap: () {
                             Navigator.pushNamed(context, MyRoutes.LoginPage);
@@ -113,9 +115,11 @@ class OnbordingPage extends StatelessWidget {
                               ))),
                     ), */
                     //SizedBox(height: 10),
-                    SizedBox(
-                      height: 54,
-                      width: 343,
+                    Container(
+                     height: 54,
+                    //  width: 343,
+                    margin: EdgeInsets.only(left: 16,right: 16),
+                    width: MediaQuery.of(context).size.width,
                       child: button(
                         onTap: () {
                           Navigator.pushNamed(context, MyRoutes.SignupPage);

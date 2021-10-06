@@ -1,16 +1,16 @@
-// import 'dart:convert';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:readyplates/modals/login.dart';
+///import 'package:readyplates/modals/signup.dart';
 import 'package:readyplates/utils/routes.dart';
-// import 'package:http/http.dart' as http;
-import 'dart:async';
-
 import 'package:readyplates/widgets/login_field.dart';
-// import 'dart:io';
+ import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+
+String id = '';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,8 +21,15 @@ class _LoginPageState extends State<LoginPage> {
   bool changeButton = false;
 
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+ // final emailController = TextEditingController();
+ // final passwordController = TextEditingController();
+
+    // https://readyplates.herokuapp.com/restaurants/login/
+// http://192.168.0.197:8000/restaurants/login/
+  
   ScrollController controller = ScrollController();
   Login? users;
 
@@ -42,6 +49,54 @@ class _LoginPageState extends State<LoginPage> {
         changeButton = false;
       });
     }
+  }
+
+
+  // ignore: non_constant_identifier_names
+  Future Signup(
+    String username,
+    String password,
+  ) async {
+    http.Response response;
+    print('object');
+    response = await http.post(
+      Uri.parse('https://readyplates.herokuapp.com/accounts/login/'),
+      body: jsonEncode(
+        {
+          'username': username,
+          'password': password,
+        },
+      ),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print('object1');
+    setState(() {
+      if (response.statusCode == 200) {
+        Map resp = json.decode(response.body);
+        print(resp["ID"]);
+        id = resp["ID"].toString();
+        print('User Id is ---->' + id);
+         print(response.body);
+      } 
+      
+      else if (response.statusCode == 401) {
+        final snackBar = SnackBar(
+            content: Text(
+          'Invalid Credentials. Please Check Username and Password !!!',
+          style: TextStyle(fontSize: 20),
+        ));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } 
+
+    
+      
+      else {
+     //////////print(response.body);
+        throw Exception('Failed to create User.');
+      }
+    });
   }
 
   
@@ -81,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
     return Text(text,
         style: TextStyle(
           fontSize: 13,
-          color: Color(0xff2F2E41),
+          color: Color(0xff374151),
         ));
   }
 
@@ -90,8 +145,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-        body: SingleChildScrollView(
+     body: SingleChildScrollView(
       controller: controller,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 500),
@@ -171,14 +227,17 @@ class _LoginPageState extends State<LoginPage> {
                         "Email address / Mobile Number",
                       ),
                     ),
-                    SizedBox(height: size.height * 0.015),
+                    SizedBox(height: size.height * 0.010),
                     Container(
                       //height: 45,
                       margin: EdgeInsets.only(left: 16, right: 16),
                       width: MediaQuery.of(context).size.width,
                       child: LoginTextField(
-                        controller: emailController,
+                        controller: usernameController,
                         hintText: 'Email address / Mobile Number',
+
+
+                        
                         validation: MultiValidator(
                           [
                             RequiredValidator(errorText: "Required"),
@@ -192,27 +251,66 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.only(left: 16),
                       child: Text("Password",
                           style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xff2F2E41),
+                             fontSize: 13,
+                                fontFamily: 'Inter-Regular',
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.normal,
+                                color: Color(0xff374151),
+                          
+                           
                           )),
                     ),
-                    SizedBox(height: 15),
-                    Container(
-                      //height: 45,
-                      margin: EdgeInsets.only(left: 16, right: 16),
-                      width: MediaQuery.of(context).size.width,
-                      child: LoginTextField(
-                        controller: passwordController,
-                        hintText: 'Password',
-                        validation: MultiValidator(
-                          [
-                            RequiredValidator(errorText: "Required"),
-                            MinLengthValidator(1,
-                                errorText: "More than 6 Required"),
-                          ],
+                    SizedBox(height: size.height * 0.010),
+
+                         Container(
+                 height: 45,
+                margin: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                ),
+                width: MediaQuery.of(context).size.width,
+                child: TextFormField(
+                  obscureText: true,
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                      hintText: '********',
+                        contentPadding: EdgeInsets.only(
+                          left: 14,
+                          top: 17,
                         ),
-                      ),
-                    ),
+                        hintStyle: TextStyle(
+                            fontSize: 15,
+                      letterSpacing: -0.264706,
+                      color: Color(0xff2F2E41).withOpacity(0.7),),
+                    
+                    //labelText: "***********",
+                    border: OutlineInputBorder( 
+                      
+                      borderSide:
+                          BorderSide(width: 1, color: Color(0xffE0E0E0)),
+                      borderRadius: BorderRadius.circular(6.0),),
+                  ),
+                ),
+              ),
+
+
+                    // Container(
+                    //   //height: 45,
+                    //   margin: EdgeInsets.only(left: 16, right: 16),
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: LoginTextField(
+                        
+                    //     controller: passwordController,
+                    //     hintText: 'Password',
+                    //     validation: MultiValidator(
+                    //       [
+                    //         RequiredValidator(errorText: "Required"),
+                    //         MinLengthValidator(1,
+                    //             errorText: "More than 6 Required"),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     TextButton(
                       style: TextButton.styleFrom(
                         textStyle: const TextStyle(fontSize: 13),
@@ -232,75 +330,168 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 30),
-                    SizedBox(
-                      height: 54,
-                      width: MediaQuery.of(context).size.width,
-                      // ignore: deprecated_member_use
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        // ignore: deprecated_member_use
-                        child: RaisedButton(
+                    InkWell(
+                        onTap: ()async {
+                            final String username = usernameController.text;
+                            final String password = passwordController.text;
+
+                                  await Signup(
+                              username,
+                              password,
+                            );
+
+
+
+
+
+Navigator.pushNamed(context, MyRoutes.LoginotpScreen);
+                                                                                           }                      ,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.only(left: 16,right: 16),
+                         
+                          height: 54,
+                          decoration: BoxDecoration(
                             color: Color(0xff222831),
-                            onPressed: () async {
-                              // final String username = emailController.text;
-                              // final String password = passwordController.text;
-                              // final Login? user =
-                              //     await logincall(username, password);
-                              // setState(() {
-                              //   users = user;
-                              // });
-                              moveToHome(context);
-                            },
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          child: Center(
                             child: Text(
-                              "Login",
-                              style: TextStyle(color: Color(0xffFFFFFF)),
-                            )),
+                              'Login',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontFamily: 'Inter-Regular',
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xffE5E5E5),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    
+                    // Container(
+                    //   height: 54,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   // ignore: deprecated_member_use
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(left: 16, right: 16),
+                    //     // ignore: deprecated_member_use
+                    //     child: RaisedButton(
+                    //         color: Color(0xff222831),
+                    //         onPressed: () async {
+                    //           // final String username = emailController.text;
+                    //           // final String password = passwordController.text;
+                    //           // final Login? user =
+                    //           //     await logincall(username, password);
+                    //           // setState(() {
+                    //           //   users = user;
+                    //           // });
+                    //           moveToHome(context);
+                    //         },
+                    //         child: Text(
+                    //           "Login",
+                    //           style: TextStyle(color: Color(0xffFFFFFF)),
+                    //         )),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 10,
                     ),
-                    SizedBox(
-                      height: 54,
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xffB9B9B9),
-                            side: BorderSide(
-                                width: 1.5,
-                                color: Color.fromRGBO(255, 255, 255, 0.5)),
+
+
+
+
+                    InkWell(
+                        onTap: () {
+
+
+
+                          Navigator.pushNamed(context, MyRoutes.LoginotpScreen);
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.only(left: 16,right: 16),
+                           //width:size.width,
+                          height: 54,
+                          decoration: BoxDecoration(
+                            color: Color(0xffF4F4F4),
+                            border: Border.all(
+                              width: 1,
+                              color: Color(0xffB9B9B9),
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
                           ),
-                          onPressed: () {},
-                          child: Wrap(
-                            children: <Widget>[
-                              // SizedBox(width: 75,),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 13, bottom: 14, right: 9),
-                                child: Container(
-                                    height: 27,
-                                    width: 27,
-                                    child: Image.asset(
-                                        "assets/images/google.png")),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 26.42,
+                                height: 27,
+                                child: Image.asset('assets/images/google.png'),
                               ),
                               SizedBox(
                                 width: 10,
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 18, bottom: 14),
-                                child: Text("Continue with google!",
-                                    style: TextStyle(
-                                        color: Color(0xff222222),
-                                        fontSize: 17)),
+                              Center(
+                                child: Text(
+                                  'Sign up with Google',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontFamily: 'Inter-Regular',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff222222),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                    ),
+                    // SizedBox(
+                    //   height: 54,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(left: 16, right: 16),
+                    //     child: ElevatedButton(
+                    //       style: ElevatedButton.styleFrom(
+                    //         primary: Color(0xffB9B9B9),
+                    //         side: BorderSide(
+                    //             width: 1.5,
+                    //             color: Color.fromRGBO(255, 255, 255, 0.5)),
+                    //       ),
+                    //       onPressed: () {},
+                    //       child: Wrap(
+                    //         children: <Widget>[
+                    //           // SizedBox(width: 75,),
+                    //           Padding(
+                    //             padding: const EdgeInsets.only(
+                    //                 top: 13, bottom: 14, right: 9),
+                    //             child: Container(
+                    //                 height: 27,
+                    //                 width: 27,
+                    //                 child: Image.asset(
+                    //                     "assets/images/google.png")),
+                    //           ),
+                    //           SizedBox(
+                    //             width: 10,
+                    //           ),
+                    //           Padding(
+                    //             padding:
+                    //                 const EdgeInsets.only(top: 18, bottom: 14),
+                    //             child: Text("Continue with google!",
+                    //                 style: TextStyle(
+                    //                     color: Color(0xff222222),
+                    //                     fontSize: 17)),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 20,
                     ),

@@ -34,7 +34,13 @@ class MapPage extends StatelessWidget {
                     child: Text("Hello Omar !",
                         style: TextStyle(
                           fontSize: 13,
-                          color: Color(0xff4E535A),
+                                    fontFamily: 'Inter',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.normal,
+                                   // color: Color(0xff4E535A),
+                          
+                          color: Color.fromRGBO(78, 83, 90, 0.8),
+                          
                         )),
                   ),
                   Row(
@@ -43,49 +49,76 @@ class MapPage extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 4, left: 16),
                         child: Text("Confirm your Location",
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
+
                               fontSize: 20,
-                              color: Color(0xff222831),
+                                    fontFamily: 'Inter',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff222831),
+                          
+                              
+                              
+                              
                             )),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.location_on),
-                        color: Color(0xff393E46),
-                        onPressed: () {
-                          // Navigator.pushNamed(
-                          //     context, MyRoutes.OnbordingPage);
-                        },
-                      ),
+                      SizedBox(width: 6,),
+                      Container(
+                                width: 23,
+                                
+                                height: 23,
+                                child: Image.asset('assets/images/gps.png'),
+                              ),
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 16, top: 13),
                     child: Text("NEARBY",
                         style: TextStyle(
-                          fontSize: 10,
-                          color: Color(0xff4E535A),
+
+                                fontSize: 10,
+                                    fontFamily: 'Inter',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500,
+                                   // color: Color(0xff4E535A),
+                                    color: Color.fromRGBO(78, 83, 90, 0.8),
+                          letterSpacing: 1,
+                              
+
+                         
                         )),
                   ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4, left: 16),
-                        child: Text("Talab Masgid Kondhwa budruk",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Color(0xff393E46),
-                            )),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.done),
-                        color: Color(0xff300ADB5),
-                        onPressed: () {
-                          // Navigator.pushNamed(
-                          //     context, MyRoutes.OnbordingPage);
-                        },
-                      ),
-                    ],
+SizedBox(height: 13,),
+
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 31,
+                    child: Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4, left: 16),
+                          child: Text("Talab Masjid Kondhwa budruk",
+                              style: TextStyle(
+                                 fontFamily: 'Inter',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.normal,
+                                      letterSpacing: -0.264706,
+                                color: Color(0xff393E46),
+                              )),
+                        ),
+                        
+                        IconButton(
+                          icon: const Icon(Icons.done),
+                          color: Color(0xff300ADB5),
+                          onPressed: () {
+                            // Navigator.pushNamed(
+                            //     context, MyRoutes.OnbordingPage);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
+                  SizedBox(height: 10,),
                   TextButton(
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 20),
@@ -99,11 +132,17 @@ class MapPage extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 16),
                           child: const Text('Change Location',
                               style: TextStyle(
+                                fontFamily: 'Inter',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: -0.1,
                                   color: Color(0xff00ADB5), fontSize: 13)),
                         ),
                       ],
                     ),
                   ),
+
+                    SizedBox(height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: SizedBox(
@@ -122,20 +161,22 @@ class MapPage extends StatelessWidget {
                           },
                           child: Text('NEXT',
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
+
+                                         fontFamily: 'Inter',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: -0.1,
+                                  color: Color(0xffFFFFFF), fontSize: 17,
+
+
+                               
                               ))),
                     ),
                   ),
                   SizedBox(
                     height: 16,
                   ),
-                  Divider(
-                    indent: 120,
-                    endIndent: 120,
-                    thickness: 5,
-                    color: Color(0xff000000),
-                  )
+                  
                 ],
               ),
             )

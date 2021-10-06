@@ -13,7 +13,7 @@ class OtpPage extends StatelessWidget {
     return Scaffold(
       
         body: Container(
-          height: 300,
+        color: Color(0xffFFFFFF),
        
          width: MediaQuery.of(context).size.width,
           child: Column(
@@ -32,22 +32,29 @@ class OtpPage extends StatelessWidget {
 
   Widget otpField() {
     return OTPTextField(
+      
    
       length: 6,
-      width: 250,
+      width: 310,
       
-       //width: MediaQuery.of(context).size.width,
-      fieldWidth: 30,
+      // width: MediaQuery.of(context).size.width,
+      fieldWidth: 45,
+
       otpFieldStyle: OtpFieldStyle(
+
        //backgroundColor: Color(0xff1d1d1d),
+        
         borderColor: Colors.red,
-        focusBorderColor: Color(0xff1d1d1d),
+        
+        focusBorderColor: Colors.red,
         
         
       ),
       style: TextStyle(fontSize: 17, color: Colors.red),
       textFieldAlignment: MainAxisAlignment.spaceAround,
       fieldStyle: FieldStyle.box,
+
+     
       onCompleted: (pin) {
         print("Completed: " + pin);
         // setState(() {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:readyplates/pages/imagepage.dart';
 import 'package:readyplates/pages/login_otp_screen.dart';
-//import 'package:readyplates/pages/empty.dart';
+
 import 'package:readyplates/pages/loginpage.dart';
 import 'package:readyplates/pages/mappage.dart';
-//import 'package:readyplates/pages/mappage.dart';
 import 'package:readyplates/pages/otppage.dart';
 
 import 'package:readyplates/pages/shop_screen.dart';
