@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:readyplates/utils/routes.dart';
 
 class ShopScreen extends StatelessWidget {
+  static const id = "/shop";
   const ShopScreen({Key? key}) : super(key: key);
 
   @override
@@ -17,7 +18,9 @@ class ShopScreen extends StatelessWidget {
               FontAwesomeIcons.chevronLeft,
               color: Color(0xff000000),
             ),
-            onPressed: () { Navigator.pushNamed(context, MyRoutes.MapPage);}),
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.MapPage);
+            }),
         centerTitle: true,
         title: Text(
           'Nearby Restaurants',

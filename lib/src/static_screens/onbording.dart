@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:readyplates/utils/routes.dart';
 
 class OnbordingPage extends StatelessWidget {
+  static const id = "/onbording";
   Widget button({
     required String text,
     Color? color,
@@ -85,7 +86,7 @@ class OnbordingPage extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                       margin: EdgeInsets.only(left: 16,right: 16),
+                      margin: EdgeInsets.only(left: 16, right: 16),
                       height: 54,
                       //width: 343,
                       width: MediaQuery.of(context).size.width,
@@ -116,10 +117,10 @@ class OnbordingPage extends StatelessWidget {
                     ), */
                     //SizedBox(height: 10),
                     Container(
-                     height: 54,
-                    //  width: 343,
-                    margin: EdgeInsets.only(left: 16,right: 16),
-                    width: MediaQuery.of(context).size.width,
+                      height: 54,
+                      //  width: 343,
+                      margin: EdgeInsets.only(left: 16, right: 16),
+                      width: MediaQuery.of(context).size.width,
                       child: button(
                         onTap: () {
                           Navigator.pushNamed(context, MyRoutes.SignupPage);

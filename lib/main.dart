@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:readyplates/pages/imagepage.dart';
-import 'package:readyplates/pages/login_otp_screen.dart';
 
-import 'package:readyplates/pages/loginpage.dart';
 import 'package:readyplates/pages/mappage.dart';
-import 'package:readyplates/pages/otppage.dart';
 
 import 'package:readyplates/pages/shop_screen.dart';
-import 'package:readyplates/src/login/signuppage.dart';
+import 'package:readyplates/src/login/controller/auth_controller.dart';
+
 import 'package:readyplates/src/static_screens/onbording.dart';
+import 'package:readyplates/utils/shared_preference_helper.dart';
+
+import 'src/login/screens/login_otp_screen.dart';
+import 'src/login/screens/loginpage.dart';
+import 'src/login/screens/otppage.dart';
+import 'src/login/screens/signuppage.dart';
 
 void main() {
+  Get.put(SharedPreferenceHelper());
+  Get.put(AuthController());
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      
-      initialRoute: "/onbording",
-      
+      initialRoute: MapPage.id,
       routes: {
-        "/onbording": (context) => OnbordingPage(),
-        "/loginpage": (context) => LoginPage(),
-        "/signup": (context) => SignupPage(),
-        "/shop": (context) => ShopScreen(),
-        "/map": (context) => MapPage(),
-        "/image": (context) => ImagePage(),
+        OnbordingPage.id: (context) => OnbordingPage(),
+        LoginPage.id: (context) => LoginPage(),
+        SignupPage.id: (context) => SignupPage(),
+        ShopScreen.id: (context) => ShopScreen(),
+        MapPage.id: (context) => MapPage(),
+        ImagePage.id: (context) => ImagePage(),
         "/loginotp": (context) => LoginotpScreen(),
         "/otp": (context) => OtpPage(),
       },
-
     );
   }
 }

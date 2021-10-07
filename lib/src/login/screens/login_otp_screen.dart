@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:readyplates/pages/otppage.dart';
+import 'package:readyplates/src/login/screens/otppage.dart';
+
 import 'package:readyplates/utils/routes.dart';
 
 class LoginotpScreen extends StatefulWidget {
@@ -10,14 +11,10 @@ class LoginotpScreen extends StatefulWidget {
 }
 
 class _LoginotpScreenState extends State<LoginotpScreen> {
-TextEditingController phoneController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController otpController = TextEditingController();
 
-
-
-
-
-   Widget titleText(String text) {
+  Widget titleText(String text) {
     return Text(text,
         style: TextStyle(
           fontSize: 13,
@@ -26,14 +23,14 @@ TextEditingController phoneController = TextEditingController();
   }
 
   bool isScrollOpen = false;
- bool changeButton = false;
+  bool changeButton = false;
 
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-     Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
+        body: SingleChildScrollView(
       //controller: controller,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 500),
@@ -114,85 +111,80 @@ TextEditingController phoneController = TextEditingController();
                       ),
                     ),
                     SizedBox(height: size.height * 0.010),
-                   Container(
-                 height: 45,
-                margin: EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                ),
-                width: MediaQuery.of(context).size.width,
-                child: TextFormField(
-                 // obscureText: true,
-                  //controller: password,
-                  decoration: InputDecoration(
-                      hintText: '9623944543',
-                        contentPadding: EdgeInsets.only(
-                          left: 14,
-                          top: 17,
-                        ),
-                        hintStyle: TextStyle(
-                            fontSize: 15,
-                      letterSpacing: -0.264706,
-                      color: Color(0xff2F2E41).withOpacity(0.7),),
-                    
-                    //labelText: "***********",
-                    border: OutlineInputBorder( 
-                      
-                      borderSide:
-                          BorderSide(width: 1, color: Color(0xffE0E0E0)),
-                      borderRadius: BorderRadius.circular(6.0),),
-                  ),
-                ),
-              ),
-
-
-
-  SizedBox(height: 10),
-                Container(
-                
-                             height: 80,
-                              color:Color(0xffFFFFFF),
-                              width: MediaQuery.of(context).size.width,
-                              child: OtpPage()),
-
-
-                  SizedBox(height: 20),
-              
-                
-                  Center(
-                    child: Text("Incorrect OTP",style: TextStyle(  fontSize: 14,
-                            color: Color(0xffFF7976),
-
-                                    fontFamily: 'Inter',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w600,
-                                    
-                                   ),),
-                  ),
-                    SizedBox(height: 28),
-                   Padding(
-                            padding: const EdgeInsets.only(left: 16, right: 16),
-                            child: SizedBox(
-                              height: 54,
-                              width: MediaQuery.of(context).size.width,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xff979797),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, MyRoutes.ImagePage);
-                                  },
-                                  child: Text('CONTINUE',
-                                      style: TextStyle(
-                                        color: Color(0xffFFFFFF),
-                                        fontSize: 17,
-                                      ))),
-                            ),
+                    Container(
+                      height: 45,
+                      margin: EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                      ),
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        // obscureText: true,
+                        //controller: password,
+                        decoration: InputDecoration(
+                          hintText: '9623944543',
+                          contentPadding: EdgeInsets.only(
+                            left: 14,
+                            top: 17,
                           ),
-                          SizedBox(
+                          hintStyle: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: -0.264706,
+                            color: Color(0xff2F2E41).withOpacity(0.7),
+                          ),
+
+                          //labelText: "***********",
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xffE0E0E0)),
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                        height: 80,
+                        color: Color(0xffFFFFFF),
+                        width: MediaQuery.of(context).size.width,
+                        child: OtpPage()),
+                    SizedBox(height: 20),
+                    Center(
+                      child: Text(
+                        "Incorrect OTP",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xffFF7976),
+                          fontFamily: 'Inter',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 28),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      child: SizedBox(
+                        height: 54,
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xff979797),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, MyRoutes.ImagePage);
+                            },
+                            child: Text('CONTINUE',
+                                style: TextStyle(
+                                  color: Color(0xffFFFFFF),
+                                  fontSize: 17,
+                                ))),
+                      ),
+                    ),
+                    SizedBox(
                       height: 20,
                     ),
-                    ],
+                  ],
                 ),
               ),
             ),
