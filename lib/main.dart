@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
+      
       initialRoute: "/onbording",
+      
       routes: {
         "/onbording": (context) => OnbordingPage(),
         "/loginpage": (context) => LoginPage(),
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
         "/loginotp": (context) => LoginotpScreen(),
         "/otp": (context) => OtpPage(),
       },
+
     );
   }
 }

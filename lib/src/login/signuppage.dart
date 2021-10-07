@@ -797,7 +797,7 @@ final Signup? u = await onboardingapi1( email1,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: 164,
+                    //width: 164,
                     height: 45,
                     color: Color(0xffF2F2F4),
                     child: ElevatedButton(
@@ -821,14 +821,14 @@ final Signup? u = await onboardingapi1( email1,
                                   ),
                         
                           Padding(
-                            padding: const EdgeInsets.only(top: 17),
+                            padding: const EdgeInsets.only(top: 19,left: 4),
                             child: Text("Continue with google!",
                                 style:
                                     TextStyle(
                                        fontSize: 10,
                                 fontFamily: 'Inter',
                                 fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.normal,
+                                fontWeight: FontWeight.w400,
                                  color: Color(0xff505056),
                                       
                             )),
@@ -841,10 +841,10 @@ final Signup? u = await onboardingapi1( email1,
     
 
 
-                  Container(
-                   //width: 164,
-                   height: 45,
-                   color: Color(0xffF2F2F4),
+Container(
+                    //width: 164,
+                    height: 45,
+                    color: Color(0xffF2F2F4),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromRGBO(34, 40, 49, 0.2),
@@ -853,37 +853,39 @@ final Signup? u = await onboardingapi1( email1,
                             color: Color.fromRGBO(255, 255, 255, 0.5)),
                       ),
                       onPressed: () {},
-                      child:  Wrap(
+                      child: Wrap(
                         children: <Widget>[
-                         Center(
-                           child: Padding(
-                             padding: const EdgeInsets.only(
-                                         ),
-                             child: Container(
-                                 height: 50,
-                                 width: 33,
-                                 child: Image.asset(
-                                     "assets/images/fb.png")),
-                           ),
-                         ),
+                         Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10, right: 9),
+                                    child: Container(
+                                       
+                    child: Image.asset(
+                  "assets/images/fbb.png",height: 30,width: 33,fit: BoxFit.cover)),
+                                  ),
                         
                           Padding(
-                            padding: const EdgeInsets.only(top: 18),
-                            child: Text("Continue with Facebook",
+                            padding: const EdgeInsets.only(top: 19,),
+                            child: Text("Continue with facebook!",
                                 style:
                                     TextStyle(
-                                      
-                                       fontSize: 9,
-                                fontFamily: 'Inter-Regular',
+                                       fontSize: 10,
+                                fontFamily: 'Inter',
                                 fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xff505056),
-                                      )),
+                                fontWeight: FontWeight.w400,
+                                 color: Color(0xff505056),
+                                      
+                            )),
                           ),
                         ],
                       ),
                     ),
                   ),
+
+
+//
+
+           
                 ],
               ),
               SizedBox(height: 20),

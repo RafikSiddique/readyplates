@@ -1,3 +1,6 @@
+// ignore_for_file: unnecessary_null_comparison
+
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -72,6 +75,8 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
     print('object1');
+
+    
     setState(() {
       if (response.statusCode == 200) {
         Map resp = json.decode(response.body);
@@ -80,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
         print('User Id is ---->' + id);
          print(response.body);
       } 
+
       
       else if (response.statusCode == 401) {
         final snackBar = SnackBar(
@@ -89,12 +95,11 @@ class _LoginPageState extends State<LoginPage> {
         ));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } 
-
-    
+ else {
+  
+   throw Exception('Failed to create User.');
       
-      else {
-     //////////print(response.body);
-        throw Exception('Failed to create User.');
+      
       }
     });
   }
@@ -340,12 +345,17 @@ class _LoginPageState extends State<LoginPage> {
                               password,
                             );
 
+                            
+                            
 
-
-
-
-Navigator.pushNamed(context, MyRoutes.LoginotpScreen);
-                                                                                           }                      ,
+                               
+           
+                        Navigator.pushNamed(context, MyRoutes.LoginotpScreen);
+                      
+                      
+                      
+                           
+                                                                                                                                                  }                      ,
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.only(left: 16,right: 16),
