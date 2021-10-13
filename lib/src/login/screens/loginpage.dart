@@ -67,66 +67,63 @@ class LoginPage extends StatelessWidget {
               ),
               child: Form(
                 key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.chevron_left,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.chevron_left,
+                            ),
+                            color: Color(0xff393E46),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, MyRoutes.OnbordingPage);
+                            },
                           ),
-                          color: Color(0xff393E46),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, MyRoutes.OnbordingPage);
-                          },
-                        ),
-                        Spacer(
-                          flex: 2,
-                        ),
-                        Text("Login",
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Color(0xff6E6D7A),
-                            )),
-                        Spacer(
-                          flex: 3,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: size.height * 0.03),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: titleText(
+                          Spacer(
+                            flex: 2,
+                          ),
+                          Text("Login",
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Color(0xff6E6D7A),
+                              )),
+                          Spacer(
+                            flex: 3,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: size.height * 0.03),
+                      titleText(
                         "Email address / Mobile Number",
                       ),
-                    ),
-                    SizedBox(height: size.height * 0.010),
-                    Container(
-                      //height: 45,
-                      margin: EdgeInsets.only(left: 16, right: 16),
-                      width: MediaQuery.of(context).size.width,
-                      child: LoginTextField(
-                        controller: controller.usernameController,
-                        hintText: 'Email address / Mobile Number',
-                        validation: MultiValidator(
-                          [
-                            RequiredValidator(errorText: "Required"),
-                            EmailValidator(errorText: "not valid"),
-                          ],
+                      SizedBox(height: size.height * 0.010),
+                      Container(
+                        //height: 45,
+
+                        width: MediaQuery.of(context).size.width,
+                        child: LoginTextField(
+                          controller: controller.usernameController,
+                          hintText: 'Siddiquerafik786@gmail.com',
+                          validation: MultiValidator(
+                            [
+                              RequiredValidator(errorText: "Required"),
+                              EmailValidator(errorText: "not valid"),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: Text("Password",
+                      SizedBox(height: 30),
+                      Text("Password",
                           style: TextStyle(
                             fontSize: 13,
                             fontFamily: 'Inter-Regular',
@@ -134,142 +131,133 @@ class LoginPage extends StatelessWidget {
                             fontWeight: FontWeight.normal,
                             color: Color(0xff374151),
                           )),
-                    ),
-                    SizedBox(height: size.height * 0.010),
-                    Container(
-                      height: 45,
-                      margin: EdgeInsets.only(
-                        left: 16,
-                        right: 16,
-                      ),
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        obscureText: true,
-                        controller: controller.passwordController,
-                        decoration: InputDecoration(
-                          hintText: '********',
-                          contentPadding: EdgeInsets.only(
-                            left: 14,
-                            top: 17,
-                          ),
-                          hintStyle: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: -0.264706,
-                            color: Color(0xff2F2E41).withOpacity(0.7),
-                          ),
+                      SizedBox(height: size.height * 0.010),
+                      Container(
+                        height: 45,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextFormField(
+                          obscureText: true,
+                          controller: controller.passwordController,
+                          decoration: InputDecoration(
+                            hintText: '**** **** ****',
+                            contentPadding: EdgeInsets.only(
+                              left: 14,
+                              top: 17,
+                            ),
+                            hintStyle: TextStyle(
+                              fontSize: 15,
+                              letterSpacing: -0.264706,
+                              color: Color(0xff9CA3AF).withOpacity(0.7),
+                            ),
 
-                          //labelText: "***********",
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1, color: Color(0xffE0E0E0)),
-                            borderRadius: BorderRadius.circular(6.0),
+                            //labelText: "***********",
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xffE0E0E0)),
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 13),
-                      ),
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: const Text('Forget Password',
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 13),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Text('Forget Password',
                                 style: TextStyle(
                                     color: Color(0xff32B768), fontSize: 14)),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    InkWell(
-                      onTap: () async {
-                        _formKey.currentState!.save();
-                        if (_formKey.currentState!.validate()) {
-                          controller.login();
-                        } else {
-                          Get.snackbar("Error", "Please fill all the details");
-                        }
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(left: 16, right: 16),
-                        height: 54,
-                        decoration: BoxDecoration(
-                          color: Color(0xff222831),
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Login',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontFamily: 'Inter-Regular',
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xffE5E5E5),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, MyRoutes.LoginotpScreen);
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(left: 16, right: 16),
-                        //width:size.width,
-                        height: 54,
-                        decoration: BoxDecoration(
-                          color: Color(0xffF4F4F4),
-                          border: Border.all(
-                            width: 1,
-                            color: Color(0xffB9B9B9),
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 26.42,
-                              height: 27,
-                              child: Image.asset('assets/images/google.png'),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Center(
-                              child: Text(
-                                'Sign up with Google',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontFamily: 'Inter-Regular',
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xff222222),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
+                      SizedBox(height: 30),
+                      InkWell(
+                        onTap: () async {
+                          _formKey.currentState!.save();
+                          if (_formKey.currentState!.validate()) {
+                            controller.login();
+                          } else {
+                            Get.snackbar(
+                                "Error", "Please fill all the details");
+                          }
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 54,
+                          decoration: BoxDecoration(
+                            color: Color(0xff222831),
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Login',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontFamily: 'Inter-Regular',
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xffFFFFFF),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, MyRoutes.LoginotpScreen);
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 54,
+                          decoration: BoxDecoration(
+                            color: Color(0xffF4F4F4),
+                            border: Border.all(
+                              width: 1,
+                              color: Color(0xffB9B9B9),
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 26.42,
+                                height: 27,
+                                child: Image.asset('assets/images/google.png'),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Center(
+                                child: Text(
+                                  'Sign up with Google',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontFamily: 'Inter-Regular',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff222222),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

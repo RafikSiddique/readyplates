@@ -75,7 +75,7 @@ class _ImagePageState extends State<ImagePage> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 44,
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xffFFFFFF),
           elevation: 0,
           leading: IconButton(
               iconSize: 14.83,
@@ -90,6 +90,8 @@ class _ImagePageState extends State<ImagePage> {
           title: Text(
             'Add Profile Pic',
             style: TextStyle(
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w500,
               fontSize: 17,
               letterSpacing: -0.226667,
               color: Color(0xff393E46),
@@ -99,141 +101,150 @@ class _ImagePageState extends State<ImagePage> {
         body: SingleChildScrollView(
           child: Container(
             // color: Color(0xffE5E5E5),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-
-                SizedBox(height: 101),
-
-                Container(
-                    height: 200,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(230)),
-                      // color: Colors.black,
-                    ),
-                    child: image != null
-                        ? ClipOval(
-                            child: Image.file(image!,
-                                height: 160, width: 160, fit: BoxFit.cover))
-                        : Image.asset("assets/images/imageman.png")),
-
-                // Center(
-                //   child: Container(
-                //     width: 235,
-                //     height: 200,
-                //     child: Image.asset("assets/images/imageman.png"),
-                //   ),
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 7),
-                  child: Center(
-                    child: Text("OMAR LEVIN",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'Montserrat',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
-                          color: Color(
-                            0xff4E5156,
-                          ),
-                        )),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-                SizedBox(height: 84),
-                Container(
-                  height: 54,
-                  decoration: BoxDecoration(
-                    color: Color(0xffF4F4F4),
-                    border: Border.all(
-                      width: 1,
-                      color: Color(0xff222831),
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.only(left: 16, right: 16),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(
-                          0xffFFFFFF,
-                        ),
+
+                  SizedBox(height: 92),
+
+                  Container(
+                      height: 200,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(230)),
+                        // color: Colors.black,
                       ),
-                      onPressed: () => pickImage(ImageSource.camera),
+                      child: image != null
+                          ? ClipOval(
+                              child: Image.file(image!,
+                                  height: 160, width: 160, fit: BoxFit.cover))
+                          : Image.asset("assets/images/imageman.png")),
 
-                      // {
-                      //   //Navigator.pushNamed(context, MyRoutes.SignupPage);
-                      // },
-                      child: Text('Open Camera',
+                  // Center(
+                  //   child: Container(
+                  //     width: 235,
+                  //     height: 200,
+                  //     child: Image.asset("assets/images/imageman.png"),
+                  //   ),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 7),
+                    child: Center(
+                      child: Text("OMAR LEVIN",
                           style: TextStyle(
-                            fontSize: 17,
-                            fontFamily: 'Inter-Regular',
+                            fontSize: 15,
+                            fontFamily: 'Montserrat',
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w500,
                             color: Color(
-                              0xff222831,
+                              0xff4E5156,
                             ),
-                          ))),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  height: 54,
-                  decoration: BoxDecoration(
-                    color: Color(0xffF4F4F4),
-                    border: Border.all(
-                      width: 1,
-                      color: Color(0xff222831),
+                          )),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.only(left: 16, right: 16),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
+                  SizedBox(height: 84),
+                  Container(
+                    height: 54,
+                    decoration: BoxDecoration(
+                      color: Color(0xffF4F4F4),
+                      border: Border.all(
+                        width: 1,
+                        color: Color(0xff222831),
                       ),
-                      onPressed: () => pickImage(ImageSource.gallery),
-
-                      //{
-                      // print(id);
-
-                      //await pikImage(imageFile: (File ) {  }, imagePath: (String? ) {  }
-
-                      //Navigator.pushNamed(context, MyRoutes.MapPage);
-                      //},
-                      child: Text('Upload Gallery',
-                          style: TextStyle(
-                            color: Color(
-                              0xffFFFFFF,
-                            ),
-                            fontSize: 17,
-                          ))),
-                ),
-                SizedBox(
-                  height: 63,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Skip for Now",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xff4E5156),
-                        )),
-                    IconButton(
-                        iconSize: 14.83,
-                        icon: FaIcon(
-                          FontAwesomeIcons.chevronRight,
-                          color: Color(0xff000000),
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    //  margin: EdgeInsets.only(left: 16, right: 16),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(
+                            0xffFFFFFF,
+                          ),
                         ),
-                        onPressed: () async {
-                          Navigator.pushNamed(context, MyRoutes.MapPage);
-                        }),
-                  ],
-                ),
-              ],
+                        onPressed: () => pickImage(ImageSource.camera),
+
+                        // {
+                        //   //Navigator.pushNamed(context, MyRoutes.SignupPage);
+                        // },
+                        child: Text('Open Camera',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontFamily: 'Inter-Regular',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w500,
+                              color: Color(
+                                0xff222831,
+                              ),
+                            ))),
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    height: 54,
+                    decoration: BoxDecoration(
+                      color: Color(0xffF4F4F4),
+                      border: Border.all(
+                        width: 1,
+                        color: Color(0xff222831),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    // margin: EdgeInsets.only(left: 16, right: 16),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
+                        ),
+                        onPressed: () => pickImage(ImageSource.gallery),
+
+                        //{
+                        // print(id);
+
+                        //await pikImage(imageFile: (File ) {  }, imagePath: (String? ) {  }
+
+                        //Navigator.pushNamed(context, MyRoutes.MapPage);
+                        //},
+                        child: Text('Upload from Gallery',
+                            style: TextStyle(
+                              fontFamily: 'Inter-Regular',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w600,
+                              color: Color(
+                                0xffFFFFFF,
+                              ),
+                              fontSize: 17,
+                            ))),
+                  ),
+                  SizedBox(
+                    height: 63,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Skip for Now",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            color: Color(0xff4E5156),
+                          )),
+                      IconButton(
+                          iconSize: 14.83,
+                          icon: FaIcon(
+                            FontAwesomeIcons.chevronRight,
+                            color: Color(0xff000000),
+                          ),
+                          onPressed: () async {
+                            Navigator.pushNamed(context, MyRoutes.MapPage);
+                          }),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ));

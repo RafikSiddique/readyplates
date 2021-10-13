@@ -20,7 +20,8 @@ class LoginTextField extends TextFormField {
             hintStyle: TextStyle(
               fontSize: 13,
               letterSpacing: -0.264706,
-              color: Color(0xff2F2E41).withOpacity(0.7),
+              fontWeight: FontWeight.normal,
+              color: Color(0xff9CA3AF).withOpacity(0.7),
             ),
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 1, color: Color(0xffE0E0E0)),

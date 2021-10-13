@@ -35,22 +35,25 @@ class MapPage extends StatelessWidget {
           ),
           Container(
             height: size.height * 0.4,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  height: 300,
-                  //width: 375,
-                  width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 300,
+                    //width: 375,
+                    width: MediaQuery.of(context).size.width,
 
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 13),
-                        child: Text("Hello Omar !",
+                    color: Color(0xffFFFFFF),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 13,
+                        ),
+                        Text("Hello Omar !",
                             style: TextStyle(
                               fontSize: 13,
                               fontFamily: 'Inter',
@@ -60,12 +63,12 @@ class MapPage extends StatelessWidget {
 
                               color: Color.fromRGBO(78, 83, 90, 0.8),
                             )),
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4, left: 16),
-                            child: Text("Confirm your Location",
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          children: [
+                            Text("Confirm your Location",
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontFamily: 'Inter',
@@ -73,20 +76,20 @@ class MapPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xff222831),
                                 )),
-                          ),
-                          SizedBox(
-                            width: 6,
-                          ),
-                          Container(
-                            width: 23,
-                            height: 23,
-                            child: Image.asset('assets/images/gps.png'),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 13),
-                        child: Text("NEARBY",
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Container(
+                              width: 16,
+                              height: 20.13,
+                              child: Image.asset('assets/images/gps.png'),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text("NEARBY",
                             style: TextStyle(
                               fontSize: 10,
                               fontFamily: 'Inter',
@@ -96,19 +99,16 @@ class MapPage extends StatelessWidget {
                               color: Color.fromRGBO(78, 83, 90, 0.8),
                               letterSpacing: 1,
                             )),
-                      ),
-                      SizedBox(
-                        height: 13,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 31,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 4, left: 16),
-                              child: Text("Talab Masjid Kondhwa budruk",
+                        SizedBox(
+                          height: 13,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 31,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Talab Masjid Kondhwa budruk",
                                   style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontStyle: FontStyle.normal,
@@ -116,33 +116,30 @@ class MapPage extends StatelessWidget {
                                     letterSpacing: -0.264706,
                                     color: Color(0xff393E46),
                                   )),
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.done),
-                              color: Color(0xff300ADB5),
-                              onPressed: () {
-                                // Navigator.pushNamed(
-                                //     context, MyRoutes.OnbordingPage);
-                              },
-                            ),
-                          ],
+                              IconButton(
+                                icon: const Icon(Icons.done),
+                                color: Color(0xff300ADB5),
+                                onPressed: () {
+                                  // Navigator.pushNamed(
+                                  //     context, MyRoutes.OnbordingPage);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: const TextStyle(fontSize: 20),
+                        SizedBox(
+                          height: 10,
                         ),
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: const Text('Change Location',
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text('Change Location',
                                   style: TextStyle(
                                       fontFamily: 'Inter',
                                       fontStyle: FontStyle.normal,
@@ -150,16 +147,13 @@ class MapPage extends StatelessWidget {
                                       letterSpacing: -0.1,
                                       color: Color(0xff00ADB5),
                                       fontSize: 13)),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: SizedBox(
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
                           height: 54,
                           width: MediaQuery.of(context).size.width,
                           //width: 343,
@@ -184,14 +178,14 @@ class MapPage extends StatelessWidget {
                                     fontSize: 17,
                                   ))),
                         ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                        SizedBox(
+                          height: 8,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],

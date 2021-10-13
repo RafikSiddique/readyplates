@@ -70,101 +70,106 @@ class _LoginotpScreenState extends State<LoginotpScreen> {
               ),
               child: Form(
                 key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.chevron_left,
-                          ),
-                          color: Color(0xff393E46),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, MyRoutes.OnbordingPage);
-                          },
-                        ),
-                        Spacer(
-                          flex: 2,
-                        ),
-                        Text("Login",
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Color(0xff6E6D7A),
-                            )),
-                        Spacer(
-                          flex: 3,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: size.height * 0.03),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: titleText(
-                        "Email address / Mobile Number",
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    SizedBox(height: size.height * 0.010),
-                    Container(
-                      height: 45,
-                      margin: EdgeInsets.only(
-                        left: 16,
-                        right: 16,
+                      Row(
+                        //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.chevron_left,
+                            ),
+                            color: Color(0xff393E46),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, MyRoutes.OnbordingPage);
+                            },
+                          ),
+                          Spacer(
+                            flex: 2,
+                          ),
+                          Text("Login",
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 17,
+                                color: Color(0xff6E6D7A),
+                              )),
+                          Spacer(
+                            flex: 3,
+                          ),
+                        ],
                       ),
-                      width: MediaQuery.of(context).size.width,
-                      child: TextFormField(
-                        // obscureText: true,
-                        //controller: password,
-                        decoration: InputDecoration(
-                          hintText: '9623944543',
-                          contentPadding: EdgeInsets.only(
-                            left: 14,
-                            top: 17,
-                          ),
-                          hintStyle: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: -0.264706,
-                            color: Color(0xff2F2E41).withOpacity(0.7),
-                          ),
-
-                          //labelText: "***********",
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1, color: Color(0xffE0E0E0)),
-                            borderRadius: BorderRadius.circular(6.0),
-                          ),
+                      SizedBox(
+                        height: 33,
+                      ),
+                      //SizedBox(height: size.height * 0.03),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: titleText(
+                          "Email address / Mobile Number",
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                        height: 80,
-                        color: Color(0xffFFFFFF),
+                      SizedBox(height: size.height * 0.010),
+                      Container(
+                        height: 45,
                         width: MediaQuery.of(context).size.width,
-                        child: OtpPage()),
-                    SizedBox(height: 20),
-                    Center(
-                      child: Text(
-                        "Incorrect OTP",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xffFF7976),
-                          fontFamily: 'Inter',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w600,
+                        child: TextFormField(
+                          // obscureText: true,
+                          //controller: password,
+                          decoration: InputDecoration(
+                            hintText: '+91 9623944543',
+                            contentPadding: EdgeInsets.only(
+                              left: 14,
+                              top: 17,
+                              //bottom: 12,
+                            ),
+                            hintStyle: TextStyle(
+                              fontFamily: 'Monstserrat',
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                              letterSpacing: -0.264706,
+                              color: Color(0xff222831).withOpacity(0.7),
+                            ),
+
+                            //labelText: "***********",
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xffBEC5D1)),
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 28),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      child: SizedBox(
+                      SizedBox(height: 20),
+                      Container(
+                          height: 80,
+                          color: Color(0xffFFFFFF),
+                          width: MediaQuery.of(context).size.width,
+                          child: OtpPage()),
+                      //SizedBox(height: 20),
+                      Center(
+                        child: Text(
+                          "Incorrect OTP",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xffFF7976),
+                            fontFamily: 'Inter',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
                         height: 54,
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
@@ -178,13 +183,16 @@ class _LoginotpScreenState extends State<LoginotpScreen> {
                                 style: TextStyle(
                                   color: Color(0xffFFFFFF),
                                   fontSize: 17,
+                                  fontFamily: 'Inter',
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w600,
                                 ))),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
