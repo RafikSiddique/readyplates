@@ -20,4 +20,6 @@ class MyRoutes {
    static String OtpPage = "/otp";
    static String aboutlocation = "/aboutlocation";
    static String shopPage = "/shoppage";
+   static String chekoutdone = "/chekoutdone";
+   static String orderPage = "/orderpage";
 }

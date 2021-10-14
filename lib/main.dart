@@ -7,6 +7,8 @@ import 'package:readyplates/pages/mappage.dart';
 import 'package:readyplates/pages/shop_screen.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/about_location_page.dart';
+import 'package:readyplates/src/login/screens/chekout_done_page.dart';
+import 'package:readyplates/src/login/screens/order_page.dart';
 
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/aboutlocation",
+      initialRoute: "/orderPage",
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -40,6 +42,9 @@ class MyApp extends StatelessWidget {
         "/loginotp": (context) => LoginotpScreen(),
         "/otp": (context) => OtpPage(),
         "/aboutlocation": (context) => Aboutlocation(),
+        "/chekoutdone": (context) => Chekoutdone(),
+         "/orderPage": (context) => OrderPage(),
+
       },
     );
   }
