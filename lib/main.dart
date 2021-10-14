@@ -8,6 +8,7 @@ import 'package:readyplates/pages/shop_screen.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/about_location_page.dart';
 import 'package:readyplates/src/login/screens/chekout_done_page.dart';
+import 'package:readyplates/src/login/screens/homecontroller.dart';
 import 'package:readyplates/src/login/screens/order_page.dart';
 
 import 'package:readyplates/src/static_screens/onbording.dart';
@@ -21,6 +22,7 @@ import 'src/login/screens/signuppage.dart';
 void main() {
   Get.put(SharedPreferenceHelper());
   Get.put(AuthController());
+  Get.put(HomeController());
   runApp(MyApp());
 }
 
@@ -43,8 +45,7 @@ class MyApp extends StatelessWidget {
         "/otp": (context) => OtpPage(),
         "/aboutlocation": (context) => Aboutlocation(),
         "/chekoutdone": (context) => Chekoutdone(),
-         "/orderPage": (context) => OrderPage(),
-
+        "/orderPage": (context) => OrderPage(),
       },
     );
   }
