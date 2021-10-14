@@ -59,216 +59,33 @@ class Aboutlocation extends StatelessWidget {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 25),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Sloppy Joe Burgers",
-                                    style: GoogleFonts.nunito(
-                                      textStyle: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle: FontStyle.normal,
-                                          color: Color(0xff393E46)),
-                                    )),
-                                FaIcon(
-                                  FontAwesomeIcons.solidStar,
-                                  color: Colors.black,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 13.6,
-                                  width: 13.6,
-                                  child: Image(
-                                    image:
-                                        AssetImage('assets/images/clock.png'),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 6.7,
-                                ),
-                                Text(
-                                  "Open",
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.normal,
-                                      fontStyle: FontStyle.normal,
-                                      color: Color(0xff93BF72)),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                Text("(Closes at 10:00 Pm)",
-                                    style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.normal,
-                                          fontStyle: FontStyle.normal,
-                                          color: Color(0xff4E535A)),
-                                    ))
-                              ],
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 14,
-                                  width: 11,
-                                  child: Image(
-                                    image: AssetImage(
-                                        'assets/images/pinroundmap.png'),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 9,
-                                ),
-                                Text("Kondhwa Budruk",
-                                    style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          color: Color(0xff4E535A)),
-                                    )),
-                                SizedBox(
-                                  width: 61,
-                                ),
-                                FaIcon(
-                                  FontAwesomeIcons.walking,
-                                  size: 11,
-                                  color: Color(0xff4E535A),
-                                ),
-                                Text(
-                                  "   15 mins",
-                                  style: GoogleFonts.inter(
+                      padding:
+                          const EdgeInsets.only(right: 16, left: 16, top: 25),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Sloppy Joe Burgers",
+                                  style: GoogleFonts.nunito(
                                     textStyle: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff4E535A)),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            Text(
-                              "About us",
-                              style: GoogleFonts.inter(
-                                  fontSize: 17, fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              "Founded in 1954, Burger King is the second largest fast food hamburger chain in the world. The original Home of the Whopper, our commitment to premium ingredients, signature recipes, and family-friendly dining experiences is what has defined our brand for more than 50 successful years",
-                              style: GoogleFonts.inter(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff4E535A)),
-                            ),
-                            SizedBox(
-                              height: 25.67,
-                            ),
-                            Row(children: [
-                              Container(
-                                height: 15.93,
-                                width: 15.13,
-                                child: Image(
-                                  image: AssetImage('assets/images/spoon.png'),
-                                ),
-                              ),
-                              Text(
-                                "  20 mins serving time",
-                                style: GoogleFonts.inter(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
-                              ),
-                            ]),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            Text(
-                              "Gallery",
-                              style: GoogleFonts.inter(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff222831)),
-                            ),
-                            SizedBox(
-                              height: 9,
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 78,
-                                    // width: 94,
-                                    child: Image(
-                                        image: AssetImage(
-                                            'assets/images/gallery1.png')),
-                                  ),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
-                                  Container(
-                                    height: 78,
-                                    // width: 94,
-                                    child: Image(
-                                        image: AssetImage(
-                                            'assets/images/gallery2.png')),
-                                  ),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
-                                  Container(
-                                    height: 78,
-                                    // width: 94,
-                                    child: Image(
-                                        image: AssetImage(
-                                            'assets/images/gallery1.png')),
-                                  ),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
-                                  Container(
-                                    height: 78,
-                                    // width: 94,
-                                    child: Image(
-                                        image: AssetImage(
-                                            'assets/images/gallery2.png')),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            Row(children: [
-                              Text(
-                                "Events ",
-                                style: GoogleFonts.inter(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    color: Color(0xff222831)),
-                              ),
+                                        color: Color(0xff393E46)),
+                                  )),
+                              FaIcon(
+                                FontAwesomeIcons.solidStar,
+                                color: Colors.black,
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
                               Container(
                                 height: 13.6,
                                 width: 13.6,
@@ -276,102 +93,284 @@ class Aboutlocation extends StatelessWidget {
                                   image: AssetImage('assets/images/clock.png'),
                                 ),
                               ),
-                            ]),
-                            SizedBox(
-                              height: 21,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      "MAY",
-                                      style: GoogleFonts.inter(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle: FontStyle.normal,
-                                          color: Color(0xffF94510)),
-                                    ),
-                                    Text(
-                                      "12",
-                                      style: GoogleFonts.inter(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle: FontStyle.normal,
-                                          color: Color(0xff393E46)),
-                                    )
-                                  ],
+                              SizedBox(
+                                width: 6.7,
+                              ),
+                              Text(
+                                "Open",
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.normal,
+                                    fontStyle: FontStyle.normal,
+                                    color: Color(0xff93BF72)),
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Text("(Closes at 10:00 Pm)",
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FontStyle.normal,
+                                        color: Color(0xff4E535A)),
+                                  ))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 14,
+                                width: 11,
+                                child: Image(
+                                  image: AssetImage(
+                                      'assets/images/pinroundmap.png'),
                                 ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      "All you can eat Buffet",
-                                      style: GoogleFonts.inter(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle: FontStyle.normal,
-                                          color: Color(0xff393E46)),
-                                    ),
-                                    Text(
-                                      "Starts at 6:00 PM",
-                                      style: GoogleFonts.inter(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle: FontStyle.normal,
-                                          color: Color(0xff393E46)),
-                                    )
-                                  ],
+                              ),
+                              SizedBox(
+                                width: 9,
+                              ),
+                              Text("Kondhwa Budruk",
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        fontStyle: FontStyle.normal,
+                                        color: Color(0xff4E535A)),
+                                  )),
+                              SizedBox(
+                                width: 61,
+                              ),
+                              FaIcon(
+                                FontAwesomeIcons.walking,
+                                size: 11,
+                                color: Color(0xff4E535A),
+                              ),
+                              Text(
+                                "   15 mins",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      fontStyle: FontStyle.normal,
+                                      color: Color(0xff4E535A)),
                                 ),
-                                Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        height: 24,
-                                        width: 56,
-                                        child: Image(
-                                          image: AssetImage(
-                                              'assets/images/lessbutton.png'),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 30,
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          Text(
+                            "About us",
+                            style: GoogleFonts.inter(
+                                fontSize: 17, fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            "Founded in 1954, Burger King is the second largest fast food hamburger chain in the world. The original Home of the Whopper, our commitment to premium ingredients, signature recipes, and family-friendly dining experiences is what has defined our brand for more than 50 successful years",
+                            style: GoogleFonts.inter(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff4E535A)),
+                          ),
+                          SizedBox(
+                            height: 25.67,
+                          ),
+                          Row(children: [
+                            Container(
+                              height: 15.93,
+                              width: 15.13,
+                              child: Image(
+                                image: AssetImage('assets/images/spoon.png'),
+                              ),
                             ),
                             Text(
-                              "A unique concept of live grill, fabulous buffet menu perfect for large groups. Has this wide variety of smoky dishes and desserts to choose from.",
+                              "  20 mins serving time",
                               style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  color: Color(0xff71757B)),
+                                  color: Color(0xff4E535A)),
                             ),
-                            Divider(
-                              thickness: 1,
-                              color: Color(0xff71757B),
+                          ]),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          Text(
+                            "Gallery",
+                            style: GoogleFonts.inter(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                color: Color(0xff222831)),
+                          ),
+                          SizedBox(
+                            height: 9,
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 78,
+                                  // width: 94,
+                                  child: Image(
+                                      image: AssetImage(
+                                          'assets/images/gallery1.png')),
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Container(
+                                  height: 78,
+                                  // width: 94,
+                                  child: Image(
+                                      image: AssetImage(
+                                          'assets/images/gallery2.png')),
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Container(
+                                  height: 78,
+                                  // width: 94,
+                                  child: Image(
+                                      image: AssetImage(
+                                          'assets/images/gallery1.png')),
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Container(
+                                  height: 78,
+                                  // width: 94,
+                                  child: Image(
+                                      image: AssetImage(
+                                          'assets/images/gallery2.png')),
+                                )
+                              ],
                             ),
-                            SizedBox(
-                              height: 29,
+                          ),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          Row(children: [
+                            Text(
+                              "Events ",
+                              style: GoogleFonts.inter(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  color: Color(0xff222831)),
                             ),
-                            Elevated(
-                              text: 'Proceed to Menu',
+                            Container(
+                              height: 13.6,
+                              width: 13.6,
+                              child: Image(
+                                image: AssetImage('assets/images/clock.png'),
+                              ),
                             ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Outline(
-                              text: "Schedule for later",
-                            ),
-                            SizedBox(
-                              height: 54,
-                            )
-                          ],
-                        ),
+                          ]),
+                          SizedBox(
+                            height: 21,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    "MAY",
+                                    style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: Color(0xffF94510)),
+                                  ),
+                                  Text(
+                                    "12",
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: Color(0xff393E46)),
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    "All you can eat Buffet",
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: Color(0xff393E46)),
+                                  ),
+                                  Text(
+                                    "Starts at 6:00 PM",
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: Color(0xff393E46)),
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      height: 24,
+                                      width: 56,
+                                      child: Image(
+                                        image: AssetImage(
+                                            'assets/images/lessbutton.png'),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            "A unique concept of live grill, fabulous buffet menu perfect for large groups. Has this wide variety of smoky dishes and desserts to choose from.",
+                            style: GoogleFonts.inter(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                color: Color(0xff71757B)),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            color: Color(0xff71757B),
+                          ),
+                          SizedBox(
+                            height: 29,
+                          ),
+                          Elevated(
+                            text: 'Proceed to Menu',
+                            width:  MediaQuery.of(context).size.width,
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Outline(
+                            text: "Schedule for later",
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          SizedBox(
+                            height: 54,
+                          )
+                        ],
                       ),
                     ),
                   ),

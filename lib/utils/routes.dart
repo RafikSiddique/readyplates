@@ -16,10 +16,12 @@ class MyRoutes {
 
   // ignore: non_constant_identifier_names
   static String LoginotpScreen = "/loginotp";
-   // ignore: non_constant_identifier_names
-   static String OtpPage = "/otp";
-   static String aboutlocation = "/aboutlocation";
-   static String shopPage = "/shoppage";
-   static String chekoutdone = "/chekoutdone";
-   static String orderPage = "/orderpage";
+  // ignore: non_constant_identifier_names
+  static String OtpPage = "/otp";
+  static String aboutlocation = "/aboutlocation";
+  static String shopPage = "/shoppage";
+  static String chekoutdone = "/chekoutdone";
+  static String orderPage = "/orderpage";
+  static String burgersupportingPage = "/burgersupportingPage";
+
 }

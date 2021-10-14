@@ -6,12 +6,13 @@ class Elevated extends StatelessWidget {
   final String text;
   final String fontFamily;
   final FontWeight fontWeight;
-
+  final double width;
   final TextEditingController? secondVal;
   Elevated({
     Key? key,
     this.secondVal,
     required this.text,
+    required this.width,
     this.fontSize = 17,
     this.fontFamily = 'Inter-Bold',
     this.fontWeight = FontWeight.w700,
@@ -21,7 +22,7 @@ class Elevated extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 54,
-      width: 383,
+      width: width,
       child: ElevatedButton(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Color(0xff222831))),
@@ -38,12 +39,14 @@ class Outline extends StatelessWidget {
   final String text;
   final String fontFamily;
   final FontWeight fontWeight;
+    final double width;
 
   final TextEditingController? secondVal;
   Outline({
     Key? key,
     this.secondVal,
     required this.text,
+    required this.width,
     this.fontSize = 10,
     this.fontFamily = 'Inter-Bold',
     this.fontWeight = FontWeight.w500,
@@ -53,7 +56,7 @@ class Outline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 54,
-      width: 383,
+      width: width,
       child: OutlinedButton(
           onPressed: () {},
           child: Text(

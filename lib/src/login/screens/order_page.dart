@@ -296,7 +296,9 @@ class OrderPage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 30),
-                      Elevated(text: " Order Again"),
+                      Elevated(
+                        text: " Order Again", width:272,
+                      ),
                       SizedBox(height: 15),
                     ],
                   ),

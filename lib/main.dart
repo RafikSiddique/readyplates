@@ -6,7 +6,9 @@ import 'package:readyplates/pages/mappage.dart';
 
 import 'package:readyplates/pages/shop_screen.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/src/login/screens/Shop_page.dart';
 import 'package:readyplates/src/login/screens/about_location_page.dart';
+import 'package:readyplates/src/login/screens/burgersupportpage.dart';
 import 'package:readyplates/src/login/screens/chekout_done_page.dart';
 import 'package:readyplates/src/login/screens/homecontroller.dart';
 import 'package:readyplates/src/login/screens/order_page.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/orderPage",
+      initialRoute: "/burgersupportingPage",
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -46,6 +48,8 @@ class MyApp extends StatelessWidget {
         "/aboutlocation": (context) => Aboutlocation(),
         "/chekoutdone": (context) => Chekoutdone(),
         "/orderPage": (context) => OrderPage(),
+        "/shopPage": (context) => ShopPage(),
+          "/burgersupportingPage": (context) => BurgersupportingPage(),
       },
     );
   }
