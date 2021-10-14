@@ -19,4 +19,5 @@ class MyRoutes {
    // ignore: non_constant_identifier_names
    static String OtpPage = "/otp";
    static String aboutlocation = "/aboutlocation";
+   static String shopPage = "/shoppage";
 }

@@ -19,6 +19,7 @@ import 'src/login/screens/signuppage.dart';
 void main() {
   Get.put(SharedPreferenceHelper());
   Get.put(AuthController());
+
   runApp(MyApp());
 }
 
