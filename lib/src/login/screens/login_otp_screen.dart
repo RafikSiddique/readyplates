@@ -126,7 +126,7 @@ class _LoginotpScreenState extends State<LoginotpScreen> {
                           // obscureText: true,
                           //controller: password,
                           decoration: InputDecoration(
-                            hintText: '+919623944543',
+                            hintText: '+91 9623944543',
                             contentPadding: EdgeInsets.only(
                               left: 14,
                               top: 17,
