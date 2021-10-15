@@ -242,7 +242,7 @@ class BurgersupportingPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 270,
+              height: 265,
             ),
             Container(
               height: 100,
@@ -283,7 +283,7 @@ class BurgersupportingPage extends StatelessWidget {
                         fontFamily: 'Inter',
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        width: 185,
+                        width: 185, height: 44,
                       ),
                       SizedBox(
                         width: 9,
@@ -293,7 +293,7 @@ class BurgersupportingPage extends StatelessWidget {
                         fontFamily: 'Inter',
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
-                        width: 185,
+                        width: 185, height: 44,
                       ),
                     ],
                   ),
@@ -303,9 +303,10 @@ class BurgersupportingPage extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
+          
+            type: BottomNavigationBarType.fixed ,
             currentIndex: 0,
-            // iconSize: 20.0,
+          
             items: [
               BottomNavigationBarItem(
                 // ignore: deprecated_member_use

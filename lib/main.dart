@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/burgersupportingPage",
+      initialRoute: "/orderPage",
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         "/chekoutdone": (context) => Chekoutdone(),
         "/orderPage": (context) => OrderPage(),
         "/shopPage": (context) => ShopPage(),
-          "/burgersupportingPage": (context) => BurgersupportingPage(),
+        "/burgersupportingPage": (context) => BurgersupportingPage(),
       },
     );
   }

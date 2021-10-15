@@ -358,14 +358,14 @@ class Aboutlocation extends StatelessWidget {
                           ),
                           Elevated(
                             text: 'Proceed to Menu',
-                            width:  MediaQuery.of(context).size.width,
+                            width: MediaQuery.of(context).size.width, height: 54,
                           ),
                           SizedBox(
                             height: 8,
                           ),
                           Outline(
                             text: "Schedule for later",
-                            width: MediaQuery.of(context).size.width,
+                            width: MediaQuery.of(context).size.width, height: 54,
                           ),
                           SizedBox(
                             height: 54,

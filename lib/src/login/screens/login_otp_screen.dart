@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:readyplates/src/login/screens/otppage.dart';
-
 import 'package:readyplates/utils/routes.dart';
 
 class LoginotpScreen extends StatefulWidget {

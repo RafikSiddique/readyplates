@@ -211,7 +211,7 @@ class OrderPage extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                height: 195,
+                height: 187,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Color(0xffFFFFFF),
@@ -295,11 +295,13 @@ class OrderPage extends StatelessWidget {
                               ))
                         ],
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 20),
                       Elevated(
-                        text: " Order Again", width:272,
+                        text: " Order Again",
+                        width: 272,
+                        height: 44,
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 0),
                     ],
                   ),
                 ),
