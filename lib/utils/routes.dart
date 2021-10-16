@@ -26,5 +26,6 @@ class MyRoutes {
   static String qrCode = "/QrCode";
   static String orderCancelledPage = "/OrderCancelledPage";
   static String paymentPage = "/PaymentPage";
+  static String orderOption = "/OrderOption";
  
 }
