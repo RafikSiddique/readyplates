@@ -11,7 +11,10 @@ import 'package:readyplates/src/login/screens/about_location_page.dart';
 import 'package:readyplates/src/login/screens/burgersupportpage.dart';
 import 'package:readyplates/src/login/screens/chekout_done_page.dart';
 import 'package:readyplates/src/login/screens/homecontroller.dart';
+import 'package:readyplates/src/login/screens/order_cancel_page.dart';
 import 'package:readyplates/src/login/screens/order_page.dart';
+import 'package:readyplates/src/login/screens/payment_page.dart';
+import 'package:readyplates/src/login/screens/qrcodecomplete.dart';
 
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/orderPage",
+      initialRoute: "/PaymentPage",
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -50,7 +53,11 @@ class MyApp extends StatelessWidget {
         "/orderPage": (context) => OrderPage(),
         "/shopPage": (context) => ShopPage(),
         "/burgersupportingPage": (context) => BurgersupportingPage(),
-      },
+        "/QrCode": (context) => QrCode(),
+        "/OrderCancelledPage": (context) => OrderCancelledPage(),
+         "/PaymentPage": (context) => PaymentPage(),
+           
+          },
     );
   }
 }

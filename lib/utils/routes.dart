@@ -23,5 +23,8 @@ class MyRoutes {
   static String chekoutdone = "/chekoutdone";
   static String orderPage = "/orderpage";
   static String burgersupportingPage = "/burgersupportingPage";
-
+  static String qrCode = "/QrCode";
+  static String orderCancelledPage = "/OrderCancelledPage";
+  static String paymentPage = "/PaymentPage";
+ 
 }

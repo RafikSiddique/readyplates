@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Chekoutdone extends StatelessWidget {
-  const Chekoutdone({Key? key}) : super(key: key);
+class QrCode extends StatelessWidget {
+  const QrCode({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,9 @@ class Chekoutdone extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 134,
+                height: 181,
               ),
-              Text("We are waiting for you",
+              Text("Verification is Complete",
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
                         fontSize: 25,
@@ -24,7 +24,7 @@ class Chekoutdone extends StatelessWidget {
                         color: Color(0xff393E46)),
                   )),
               SizedBox(height: 4),
-              Text("Your order #210403AS is complete ",
+              Text("Restaurant will guide you to the table ",
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
                         fontSize: 15,
@@ -33,10 +33,12 @@ class Chekoutdone extends StatelessWidget {
                         color: Color(0xff393E46)),
                   )),
               SizedBox(height: 81),
-              Container(
-                height: 276,
-                child: Image(
-                  image: AssetImage('assets/images/chekoutdone1.png'),
+              Center(
+                child: Container(
+                  height: 276,
+                  child: Image(
+                    image: AssetImage('assets/images/GreenChek.png'),
+                  ),
                 ),
               ),
             ],

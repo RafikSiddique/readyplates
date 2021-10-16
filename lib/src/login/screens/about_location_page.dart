@@ -185,7 +185,7 @@ class Aboutlocation extends StatelessWidget {
                               height: 15.93,
                               width: 15.13,
                               child: Image(
-                                image: AssetImage('assets/images/spoon.png'),
+                                image:AssetImage('assets/images/Spoon.png'),
                               ),
                             ),
                             Text(
