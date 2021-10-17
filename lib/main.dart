@@ -8,6 +8,7 @@ import 'package:readyplates/pages/shop_screen.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/Order_option.dart';
 import 'package:readyplates/src/login/screens/Shop_page.dart';
+import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/login/screens/about_location_page.dart';
 import 'package:readyplates/src/login/screens/burgersupportpage.dart';
 import 'package:readyplates/src/login/screens/chekout_done_page.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/OrderOption",
+      initialRoute: OnbordingPage.id,
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -56,10 +57,10 @@ class MyApp extends StatelessWidget {
         "/burgersupportingPage": (context) => BurgersupportingPage(),
         "/QrCode": (context) => QrCode(),
         "/OrderCancelledPage": (context) => OrderCancelledPage(),
-         "/PaymentPage": (context) => PaymentPage(),
-         "/OrderOption": (context) => OrderOption(),
-           
-          },
+        "/PaymentPage": (context) => PaymentPage(),
+        "/OrderOption": (context) => OrderOption(),
+        "/tellafriend": (context) => Tellafriend(),
+      },
     );
   }
 }

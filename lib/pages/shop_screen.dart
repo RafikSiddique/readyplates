@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:readyplates/utils/routes.dart';
 
 class ShopScreen extends StatelessWidget {
@@ -9,6 +10,115 @@ class ShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: 0,
+          // iconSize: 20.0,
+          items: [
+            BottomNavigationBarItem(
+              // ignore: deprecated_member_use
+              title: Text('Home',
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.normal,
+                      fontSize: 13,
+                      color: Color(0xff393E46))),
+              icon: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, MyRoutes.shopRoute);
+                },
+                child: Container(
+                  child: Image.asset(
+                    "assets/images/BottomBar1.png",
+                    height: 20,
+                    width: 20,
+                  ),
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              // ignore: deprecated_member_use
+              title: Text('Location',
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.normal,
+                      fontSize: 13,
+                      color: Color(0xff393E46))),
+              icon: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, MyRoutes.MapPage);
+                },
+                child: Container(
+                  child: Image.asset(
+                    'assets/images/BottomBar2.png',
+                    height: 16,
+                    width: 16,
+                  ),
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              // ignore: deprecated_member_use
+              title: Text('Orders',
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.normal,
+                      fontSize: 13,
+                      color: Color(0xff00ADB5))),
+              icon: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, MyRoutes.orderOption);
+                },
+                child: Container(
+                  child: Image.asset(
+                    'assets/images/BottomBar3.png',
+                    height: 16,
+                    width: 16,
+                  ),
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              // ignore: deprecated_member_use
+              title: Text('Tell a Friend',
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.normal,
+                      fontSize: 13,
+                      color: Color(0xff393E46))),
+              icon: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, MyRoutes.Tellafriend);
+                },
+                child: Container(
+                  child: Image.asset(
+                    'assets/images/BottomBar4.png',
+                    height: 20,
+                    width: 20,
+                  ),
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              // ignore: deprecated_member_use
+              title: Text('Profile',
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.normal,
+                      fontSize: 13,
+                      color: Color(0xff393E46))),
+              icon: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, MyRoutes.aboutlocation);
+                },
+                child: Image.asset(
+                  'assets/images/BottomBar5.png',
+                  height: 16,
+                  width: 16,
+                ),
+              ),
+            ),
+          ]),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

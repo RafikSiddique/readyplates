@@ -27,5 +27,6 @@ class MyRoutes {
   static String orderCancelledPage = "/OrderCancelledPage";
   static String paymentPage = "/PaymentPage";
   static String orderOption = "/OrderOption";
- 
+  // ignore: non_constant_identifier_names
+  static String Tellafriend = "/tellafriend";
 }

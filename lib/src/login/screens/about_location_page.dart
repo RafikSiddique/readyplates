@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class Aboutlocation extends StatelessWidget {
@@ -185,7 +186,7 @@ class Aboutlocation extends StatelessWidget {
                               height: 15.93,
                               width: 15.13,
                               child: Image(
-                                image:AssetImage('assets/images/Spoon.png'),
+                                image: AssetImage('assets/images/Spoon.png'),
                               ),
                             ),
                             Text(
@@ -356,19 +357,33 @@ class Aboutlocation extends StatelessWidget {
                           SizedBox(
                             height: 29,
                           ),
-                          Elevated(
-                            text: 'Proceed to Menu',
-                            width: MediaQuery.of(context).size.width, height: 54,
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, MyRoutes.burgersupportingPage);
+                            },
+                            child: Elevated(
+                              text: 'Proceed to Menu',
+                              width: MediaQuery.of(context).size.width,
+                              height: 54,
+                            ),
                           ),
                           SizedBox(
                             height: 8,
                           ),
-                          Outline(
-                            text: "Schedule for later",
-                            width: MediaQuery.of(context).size.width, height: 54,
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, MyRoutes.burgersupportingPage);
+                            },
+                            child: Outline(
+                              text: "Schedule for later",
+                              width: MediaQuery.of(context).size.width,
+                              height: 54,
+                            ),
                           ),
                           SizedBox(
-                            height: 54,
+                            height: 10,
                           )
                         ],
                       ),
