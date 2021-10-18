@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class MyRoutes {
 // ignore: non_constant_identifier_names
   static String OnbordingPage = "/onbording";
@@ -29,4 +31,5 @@ class MyRoutes {
   static String orderOption = "/OrderOption";
   // ignore: non_constant_identifier_names
   static String Tellafriend = "/tellafriend";
+  static String ProfilePage = "/profile";
 }

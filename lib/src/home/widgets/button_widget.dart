@@ -15,7 +15,8 @@ class EditButton extends StatelessWidget {
         margin: EdgeInsets.zero,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-        color: Color(0xffFFF0F3),
+        color: Color(0xff6E6D7A),
+        // color: MyTheme.editbuttonColor,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(6),
@@ -35,7 +36,7 @@ class EditButton extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontFamily: 'Inter',
-                    color: Color(0xffFF6E42),
+                    color: Color(0xff6ED7A),
                   ),
                 )
               ],

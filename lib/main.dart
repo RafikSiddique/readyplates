@@ -1,6 +1,7 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readyplates/src/home/screens/profile_page.dart';
 import 'package:readyplates/src/login/screens/imagepage.dart';
 
 import 'package:readyplates/src/login/screens/mappage.dart';
@@ -42,12 +43,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
       home: InitializeApp(),
+      // initialRoute: "/orderPage",
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
         SignupPage.id: (context) => SignupPage(),
         ShopScreen.id: (context) => ShopScreen(),
-        MapPage.id: (context) => MapPage(isHome: false,),
+        MapPage.id: (context) => MapPage(
+              isHome: false,
+            ),
         ImagePage.id: (context) => ImagePage(),
         "/otp": (context) => OtpPage(),
         "/aboutlocation": (context) => Aboutlocation(),
@@ -60,6 +64,7 @@ class MyApp extends StatelessWidget {
         "/PaymentPage": (context) => PaymentPage(),
         "/OrderOption": (context) => OrderOption(),
         "/tellafriend": (context) => Tellafriend(),
+        "/profile": (context) => ProfilePage(),
         LandingPage.id: (context) => LandingPage(),
       },
     );

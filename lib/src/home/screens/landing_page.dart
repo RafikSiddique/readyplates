@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/pages/shop_screen.dart';
 import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/home/screens/profile_page.dart';
 import 'package:readyplates/src/home/widgets/bottom_navigation_bar.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
@@ -25,7 +26,7 @@ class LandingPage extends StatelessWidget {
       case 3:
         return Tellafriend();
       case 4:
-        return Container();
+        return ProfilePage(); //Container();
       default:
         return ShopScreen();
     }

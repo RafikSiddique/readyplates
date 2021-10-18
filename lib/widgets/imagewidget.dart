@@ -42,7 +42,7 @@ class TextwidgetPage extends StatelessWidget {
 
   const TextwidgetPage({
     Key? key,
-    //this.fontSize = 13,
+    // required this.fontSize,
     this.fontFamily = 'Inter',
     this.fontstyle = FontStyle.normal,
     required this.fontWeight,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/imagewidget.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({Key? key}) : super(key: key);
@@ -26,15 +27,75 @@ class OrderPage extends StatelessWidget {
     showMenu(
         context: context,
         elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: Colors.white,
         position: RelativeRect.fromRect(
             details.globalPosition & Size(40, 40), Offset.zero & overlay.size),
         items: [
           PopupMenuItem(
-            
-            child: Text("data")),
-          PopupMenuItem(child: Text("data")),
+            child: Row(children: [
+              ImagewidgetPage(
+                imagePath: 'assets/images/NotePencil.png',
+                width: 15,
+                height: 15,
+              ),
+              // Image
+              //   image: AssetImage('assets/images/NotePencil.png',),
+              // ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                "Edit Order",
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xffF88020),
+                    fontSize: 12),
+              )
+
+              // TextwidgetPage(
+              //   text: 'Edit Order',
+              //   fontWeight: FontWeight.w400,
+              //   color: Color(0xffF88020),
+              //   //fontSize: 12,
+              // )
+              //Text("Edit Order"),
+            ]),
+
+            //  Text("data")
+          ),
+          PopupMenuItem(
+            child: Row(children: [
+              ImagewidgetPage(
+                imagePath: 'assets/images/CheckCircle.png',
+                width: 15,
+                height: 15,
+              ),
+              // Image
+              //   image: AssetImage('assets/images/NotePencil.png',),
+              // ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                "Cancel Order",
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xffF88020),
+                    fontSize: 12),
+              )
+
+              // TextwidgetPage(
+              //   text: 'Edit Order',
+              //   fontWeight: FontWeight.w400,
+              //   color: Color(0xffF88020),
+              //   //fontSize: 12,
+              // )
+              //Text("Edit Order"),
+            ]),
+
+            // Text("data")
+          ),
         ]);
   }
 
