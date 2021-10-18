@@ -31,9 +31,7 @@ class OrderPage extends StatelessWidget {
         position: RelativeRect.fromRect(
             details.globalPosition & Size(40, 40), Offset.zero & overlay.size),
         items: [
-          PopupMenuItem(
-            
-            child: Text("data")),
+          PopupMenuItem(child: Text("data")),
           PopupMenuItem(child: Text("data")),
         ]);
   }
