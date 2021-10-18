@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/routes.dart';
@@ -134,7 +135,11 @@ class _ImagePageState extends State<ImagePage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 7),
                     child: Center(
-                      child: Text("OMAR LEVIN",
+                      child: Text(
+                          (authController.fNamController.text +
+                                  " " +
+                                  authController.lNameController.text)
+                              .toUpperCase(),
                           style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'Montserrat',
@@ -221,27 +226,49 @@ class _ImagePageState extends State<ImagePage> {
                   SizedBox(
                     height: 63,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Skip for Now",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                            color: Color(0xff4E5156),
-                          )),
-                      IconButton(
-                          iconSize: 14.83,
-                          icon: FaIcon(
-                            FontAwesomeIcons.chevronRight,
-                            color: Color(0xff000000),
-                          ),
-                          onPressed: () async {
-                            Navigator.pushNamed(context, MyRoutes.MapPage);
-                          }),
-                    ],
+                  InkWell(
+                    onTap: () async {
+                      bool isLocationEnabled =
+                          await Geolocator.isLocationServiceEnabled();
+                      if (isLocationEnabled) {
+                        LocationPermission permission =
+                            await Geolocator.requestPermission();
+
+                        if (permission == LocationPermission.denied ||
+                            permission == LocationPermission.deniedForever) {
+                          await Geolocator.openAppSettings();
+                        } else {
+                          Position position =
+                              await Geolocator.getCurrentPosition();
+                          Navigator.pushNamed(context, MyRoutes.MapPage);
+                        }
+                      } else {
+                        await Geolocator.openLocationSettings();
+                      }
+                    },
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Skip for Now",
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                color: Color(0xff4E5156),
+                              )),
+                          IconButton(
+                              iconSize: 14.83,
+                              icon: FaIcon(
+                                FontAwesomeIcons.chevronRight,
+                                color: Color(0xff000000),
+                              ),
+                              onPressed: () async {}),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

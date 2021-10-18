@@ -90,8 +90,9 @@ class AuthenticationServices extends ApiService {
           },
         ),
       );
-      if (res.statusCode != 201)
+      if (res.statusCode != 201) {
         throw AppException(code: res.statusCode, message: res.body);
+      }
     } catch (e) {
       rethrow;
     }

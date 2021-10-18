@@ -92,6 +92,7 @@ class PaymentPage extends StatelessWidget {
               AppFormField(
                 toptext: 'Email',
                 hintText: 'Example@123',
+                controller: TextEditingController(),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               SizedBox(
@@ -104,6 +105,7 @@ class PaymentPage extends StatelessWidget {
                   Icons.error,
                   color: Colors.red,
                 ),
+                controller: TextEditingController(),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
@@ -161,7 +163,11 @@ class PaymentPage extends StatelessWidget {
               SizedBox(
                 height: 17,
               ),
-              AppFormField(toptext: "Name On Card", hintText: "ABCD"),
+              AppFormField(
+                toptext: "Name On Card",
+                hintText: "ABCD",
+                controller: TextEditingController(),
+              ),
               SizedBox(
                 height: 16,
               ),
@@ -225,6 +231,7 @@ class PaymentPage extends StatelessWidget {
               AppFormField(
                 toptext: '',
                 hintText: 'ZIP',
+                controller: TextEditingController(),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(6.0),
                   bottomRight: Radius.circular(6.0),

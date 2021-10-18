@@ -11,7 +11,7 @@ class AppFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final String hintText;
   final BorderRadius borderRadius;
-  // final TextEditingController controller;
+  final TextEditingController controller;
   final String? bottomText;
   final bool isPassword;
   final List<TextInputFormatter>? formatters;
@@ -21,10 +21,18 @@ class AppFormField extends StatelessWidget {
   final String fontFamily;
   final FontWeight fontWeight;
   final bool matchVerification;
+  final FocusNode? focusNode;
   final TextEditingController? secondVal;
+  final void Function(String)? onFieldSubmitted;
+  final void Function(String?)? onSaved;
+  final void Function()? onEditingCompleted;
   AppFormField({
     Key? key,
     this.suffixIcon,
+    this.onEditingCompleted,
+    this.onFieldSubmitted,
+    this.focusNode,
+    this.onSaved,
     this.line,
     this.secondVal,
     this.matchVerification = false,
@@ -40,7 +48,7 @@ class AppFormField extends StatelessWidget {
     this.isPassword = false,
     this.borderRadius = const BorderRadius.all(Radius.circular(6)),
     this.validator,
-    // required this.controller,
+    required this.controller,
     this.bottomText,
   })  : assert(matchVerification ? secondVal != null : true),
         super(key: key);
@@ -72,10 +80,13 @@ class AppFormField extends StatelessWidget {
               ),
               child: TextFormField(
                 maxLines: line,
+                onEditingComplete: onEditingCompleted,
+                onFieldSubmitted: onFieldSubmitted,
+                onSaved: onSaved,
                 obscureText: isPassword ? obSecureText : false,
                 inputFormatters: formatters,
-
-                // controller: controller,
+                focusNode: focusNode,
+                controller: controller,
                 validator: (value) {
                   if (value == "") {
                     if (isRequired) {
@@ -84,7 +95,7 @@ class AppFormField extends StatelessWidget {
                   } else {
                     if (matchVerification) {
                       if (value != secondVal!.text) {
-                        return "The ${toptext} does not match";
+                        return "The $toptext does not match";
                       }
                     }
                   }
@@ -104,7 +115,7 @@ class AppFormField extends StatelessWidget {
                     right: 14,
                     bottom: 14,
                   ),
-                  suffixIcon:suffixIcon,
+                  suffixIcon: suffixIcon,
                   hintStyle: TextStyle(
                     fontSize: hintfontSize,
                     fontFamily: 'Inter-Regular',
