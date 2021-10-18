@@ -2,6 +2,15 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/home/screens/profile_page.dart';
+import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
+import 'package:readyplates/src/Order_Screens/Order_cancel_page.dart';
+import 'package:readyplates/src/Order_Screens/Order_option.dart';
+import 'package:readyplates/src/Order_Screens/Orderpage.dart';
+import 'package:readyplates/src/Order_Screens/Payment_page.dart';
+import 'package:readyplates/src/Order_Screens/QrCode.dart';
+import 'package:readyplates/src/Order_Screens/Shop_page.dart';
+import 'package:readyplates/src/Order_Screens/about_location.dart';
+import 'package:readyplates/src/Order_Screens/chekout_done.dart';
 import 'package:readyplates/src/login/screens/imagepage.dart';
 
 import 'package:readyplates/src/login/screens/mappage.dart';
@@ -10,19 +19,9 @@ import 'package:readyplates/pages/shop_screen.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
-import 'package:readyplates/src/login/screens/Order_option.dart';
-import 'package:readyplates/src/login/screens/Shop_page.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
-import 'package:readyplates/src/login/screens/about_location_page.dart';
-import 'package:readyplates/src/login/screens/burgersupportpage.dart';
-import 'package:readyplates/src/login/screens/chekout_done_page.dart';
-
-import 'package:readyplates/src/login/screens/order_cancel_page.dart';
-import 'package:readyplates/src/login/screens/order_page.dart';
-import 'package:readyplates/src/login/screens/payment_page.dart';
-import 'package:readyplates/src/login/screens/qrcodecomplete.dart';
-
 import 'package:readyplates/src/static_screens/onbording.dart';
+import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'src/login/screens/loginpage.dart';
 import 'src/login/screens/otppage.dart';
@@ -44,6 +43,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: InitializeApp(),
       // initialRoute: "/orderPage",
+      // home: InitializeApp(),
+      initialRoute: MyRoutes.orderPage,
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
