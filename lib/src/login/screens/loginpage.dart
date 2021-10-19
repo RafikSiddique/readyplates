@@ -2,13 +2,10 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
-import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/form_field.dart';
-import 'package:readyplates/widgets/login_field.dart';
 import 'package:readyplates/widgets/readyplates.dart';
 
 class LoginPage extends StatelessWidget {
@@ -89,8 +86,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 color: Color(0xff393E46),
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, MyRoutes.OnbordingPage);
+                                  Get.back();
                                 },
                               ),
                               Spacer(
@@ -251,8 +247,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, MyRoutes.LoginotpScreen);
+                              Get.toNamed(LoginPage.id);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,

@@ -8,6 +8,7 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
 class PaymentPage extends StatelessWidget {
+  static const id = "/PaymentPage";
   const PaymentPage({Key? key}) : super(key: key);
 
   @override

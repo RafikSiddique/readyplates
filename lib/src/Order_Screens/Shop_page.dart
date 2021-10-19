@@ -3,14 +3,24 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/modals/cart_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
-
-import 'package:readyplates/utils/routes.dart';
+import 'package:readyplates/src/login/screens/mappage.dart';
+import 'package:readyplates/src/order/screen/booking_details.dart';
+import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/edit_button.dart';
 
-class ShopPage extends StatelessWidget {
+class ShopPage extends StatefulWidget {
+  static const id = "/shopPage";
   ShopPage({Key? key}) : super(key: key);
+
+  @override
+  State<ShopPage> createState() => _ShopPageState();
+}
+
+class _ShopPageState extends State<ShopPage> {
   final controller = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
@@ -26,7 +36,7 @@ class ShopPage extends StatelessWidget {
               color: Color(0xff000000),
             ),
             onPressed: () {
-              Navigator.pushNamed(context, MyRoutes.MapPage);
+              Navigator.pushNamed(context, MapPage.id);
             }),
         centerTitle: true,
         title: Text(
@@ -134,14 +144,60 @@ class ShopPage extends StatelessWidget {
                                     ),
                                     Align(
                                         alignment: Alignment.bottomCenter,
-                                        child: EditButton(
-                                          widthFraction: 0.18,
-                                          onTap: () {
-                                      /*       controller.isEditing = true;
-                                            controller.foodItemModel = e; */
-                                            // Get.toNamed(ShopPage.id);
-                                          },
-                                        ))
+                                        child: cartItems.any(
+                                                (el) => el.id.value == e.id)
+                                            ? Obx(() => IncDecButton(
+                                                  text: cartItems
+                                                      .firstWhere((element) =>
+                                                          element.id.value ==
+                                                          e.id)
+                                                      .quantity
+                                                      .value
+                                                      .toString(),
+                                                  widthFraction: .18,
+                                                  onIncrement: () {
+                                                    cartItems
+                                                        .firstWhere((element) =>
+                                                            element.id.value ==
+                                                            e.id)
+                                                        .quantity++;
+                                                  },
+                                                  onDecrement: () {
+                                                    if (cartItems
+                                                            .firstWhere(
+                                                                (element) =>
+                                                                    element.id
+                                                                        .value ==
+                                                                    e.id)
+                                                            .quantity
+                                                            .value ==
+                                                        1) {
+                                                      cartItems.removeWhere(
+                                                          (element) =>
+                                                              element
+                                                                  .id.value ==
+                                                              e.id);
+                                                      setState(() {});
+                                                    } else {
+                                                      cartItems
+                                                          .firstWhere(
+                                                              (element) =>
+                                                                  element.id
+                                                                      .value ==
+                                                                  e.id)
+                                                          .quantity--;
+                                                    }
+                                                  },
+                                                ))
+                                            : AddButton(
+                                                widthFraction: 0.18,
+                                                onTap: () {
+                                                  cartItems.add(CartModel(
+                                                      id: e.id.obs,
+                                                      quantity: 1.obs));
+                                                  setState(() {});
+                                                },
+                                              ))
                                   ],
                                 ),
                               ),
@@ -209,6 +265,23 @@ class ShopPage extends StatelessWidget {
                     ),
                   )
                   .toList(),
+              Elevated(
+                text: "Proceed to Booking",
+                width: double.infinity,
+                backgroundColor:
+                    cartItems.isEmpty ? Color(0xff979797) : Color(0xff222831),
+                onTap: () {
+                  if (cartItems.isEmpty) {
+                    Get.snackbar("Please add an Item",
+                        "At least add 1 Item to proceed to booking");
+                  } else {
+                    Get.toNamed(BookingDetails.id);
+                  }
+                },
+              ),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

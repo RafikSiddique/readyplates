@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:readyplates/modals/signup.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/utils/routes.dart';
 
 class SignupPage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
                 color: Color(0xff000000),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, MyRoutes.LoginPage);
+                Get.toNamed(LoginPage.id);
               }),
           centerTitle: true,
           title: Text(

@@ -1,14 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:readyplates/utils/routes.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/Order_Screens/about_location.dart';
+import 'package:readyplates/src/login/screens/mappage.dart';
 
 class ShopScreen extends StatelessWidget {
   static const id = "/shop";
-  const ShopScreen({Key? key}) : super(key: key);
+  ShopScreen({Key? key}) : super(key: key);
 
+  final List<String> images = [
+    "assets/images/img1.png",
+    'assets/images/img2.png',
+    'assets/images/img3.png',
+    'assets/images/img4.png',
+  ];
+  final List<String> resNames = [
+    "The Burger Barn Cafe",
+    'Fit Food Co.',
+    'Granny’s Soup Shack',
+    'Jack’s English Breakfast',
+  ];
+  final List<String> desc = [
+    'American, Fast Food',
+    'American, Lebanese, Arabian, Salads ...',
+    'Mediterrarian, Indian, Thai, Pan-Asia',
+    'English, Breakfast, Pancakes, Ice Creams',
+  ];
+  final List<String> add = [
+    '32, Dataran Sunway | 3.1 kms',
+    '21, Kota Damansara | 3.1 kms',
+    '32, Dataran Sunway | 3.1 kms',
+    '32, Dataran Sunway | 3.1 kms',
+  ];
+  final List<String> rateTime = [
+    '4.3 | Serving Time : 37 mins | \$25 for two',
+    '4.3 | Serving Time : 37 mins | \$25 for two',
+    '4.3 | Serving Time : 37 mins | \$25 for two',
+    '4.3 | Serving Time : 37 mins | \$25 for two',
+  ];
+  final List<String> offer = [
+    '30% off upto \$5',
+    '30% off upto \$5',
+    '30% off upto \$5',
+    '30% off upto \$5',
+  ];
+
+  final List<String> category = [
+    'Drinks',
+    'Burger',
+    'Pizza',
+    'Seafood',
+    'Steak',
+    'Burger',
+    'Fast Food',
+    'Chinese',
+  ];
+  List<String> categroyImg = [
+    'assets/images/drinks.png',
+    'assets/images/burger.png',
+    'assets/images/pizza.png',
+    'assets/images/seafood.png',
+    'assets/images/steak.png',
+    'assets/images/burger2.png',
+    'assets/images/fastfood.png',
+    'assets/images/chinese.png',
+  ];
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -20,7 +81,7 @@ class ShopScreen extends StatelessWidget {
               color: Color(0xff000000),
             ),
             onPressed: () {
-              Navigator.pushNamed(context, MyRoutes.MapPage);
+              Navigator.pushNamed(context, MapPage.id);
             }),
         centerTitle: true,
         title: Text(
@@ -46,7 +107,6 @@ class ShopScreen extends StatelessWidget {
                   right: 16,
                 ),
                 child: Container(
-                  width: 343,
                   height: 47,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -86,6 +146,42 @@ class ShopScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
+              Container(
+                //height: MediaQuery.of(context).size.height * 0.2,
+                child: GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 0,
+                  crossAxisSpacing: 0,
+                  padding: EdgeInsets.zero,
+                  children: [
+                    for (var i = 0; i < category.length; i++)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xffFCEBCD),
+                              borderRadius: BorderRadius.circular(11),
+                            ),
+                            height: media.size.height * 0.06,
+                            width: media.size.height * 0.06,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(8),
+                            child: Image.asset(
+                              categroyImg[i],
+                              height:
+                                  MediaQuery.of(context).size.height * 0.035,
+                              width: MediaQuery.of(context).size.height * 0.035,
+                            ),
+                          ),
+                          Text(category[i])
+                        ],
+                      )
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 16,
@@ -118,318 +214,6 @@ class ShopScreen extends StatelessWidget {
               SizedBox(
                 height: 18,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 15,
-                ),
-                child: Container(
-                  width: 344,
-                  height: 162,
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          children: [
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 13.99,
-                                      height: 25,
-                                      child: Image.asset(
-                                          'assets/images/drinks.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                Text(
-                                  'Drinks',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 26,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 22.69,
-                                      height: 23,
-                                      child: Image.asset(
-                                          'assets/images/burger.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                // Image.asset('assets/images/rect.png'),
-                                Text(
-                                  'Burger',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 26,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 25,
-                                      height: 25,
-                                      child: Image.asset(
-                                          'assets/images/pizza.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                // Image.asset('assets/images/rect.png'),
-                                Text(
-                                  'Pizza',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 26,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 25,
-                                      height: 25,
-                                      child: Image.asset(
-                                          'assets/images/seafood.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                // Image.asset('assets/images/rect.png'),
-                                Text(
-                                  'Seafood',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          children: [
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 25,
-                                      height: 25,
-                                      child: Image.asset(
-                                          'assets/images/steak.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                Text(
-                                  'Steak',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 26,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 24.76,
-                                      height: 25,
-                                      child: Image.asset(
-                                          'assets/images/burger2.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                // Image.asset('assets/images/rect.png'),
-                                Text(
-                                  'Burger',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 26,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 20.02,
-                                      height: 20.06,
-                                      child: Image.asset(
-                                          'assets/images/fastfood.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                // Image.asset('assets/images/rect.png'),
-                                Text(
-                                  'Fast Food',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 26,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              direction: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 54,
-                                  height: 54,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCEBCD),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Center(
-                                    child: Container(
-                                      width: 25,
-                                      height: 25,
-                                      child: Image.asset(
-                                          'assets/images/chinese.png'),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                // Image.asset('assets/images/rect.png'),
-                                Text(
-                                  'Chinese',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
               SizedBox(
                 height: 48,
               ),
@@ -437,21 +221,16 @@ class ShopScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16),
                 child: Text('Near Me'),
               ),
-              SizedBox(
-                height: 22,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 17, right: 16),
-                child: Container(
-                  height: 484,
-                  width: 342,
-                  color: Colors.white,
-                  child: Column(
-                    children: [
+              Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    for (var i = 0; i < images.length; i++)
                       Container(
-                        //color: Colors.amber,
-                        width: 342,
-                        height: 112,
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(
+                            horizontal: media.size.width * 0.04,
+                            vertical: media.size.width * 0.02),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -467,61 +246,60 @@ class ShopScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 12,
-                                    top: 14,
-                                  ),
-                                  child: Container(
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(Aboutlocation.id);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.all(media.size.width * 0.025),
+                              child: Row(
+                                children: [
+                                  Container(
                                     // color: Colors.blue,
-                                    width: 84,
-                                    height: 84,
+                                    width: media.size.height * 0.09,
+                                    height: media.size.height * 0.09,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                    child:
-                                        Image.asset('assets/images/img1.png'),
+                                    child: Image.asset(images[i]),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 14),
-                                  child: Column(
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
-                                        'The Burger Barn Cafe',
-                                        style: TextStyle(
-                                            fontSize: 15,
+                                        resNames[i],
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: media.size.height * 0.022,
                                             color: Color(0xff000000),
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.w600),
                                       ),
                                       Text(
-                                        'American, Fast Food',
-                                        style: TextStyle(
-                                          fontSize: 9,
+                                        desc[i],
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: media.size.height * 0.013,
                                           color: Color(0xff919098),
                                         ),
                                       ),
                                       Text(
-                                        '32, Dataran Sunway | 3.1 kms',
-                                        style: TextStyle(
-                                          fontSize: 9,
+                                        add[i],
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: media.size.height * 0.013,
                                           color: Color(0xff919098),
                                         ),
                                       ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
+                                      Row(
                                         children: [
                                           Container(
-                                            width: 7,
-                                            height: 7,
+                                            width: media.size.height * 0.013,
+                                            height: media.size.height * 0.013,
                                             child: Image.asset(
                                                 'assets/images/star.png'),
                                           ),
@@ -529,33 +307,31 @@ class ShopScreen extends StatelessWidget {
                                             width: 3,
                                           ),
                                           Text(
-                                            '4.3 | Serving Time : 37 mins | \$25 for two',
+                                            rateTime[i],
                                             style: TextStyle(
-                                              fontSize: 9,
+                                              fontSize:
+                                                  media.size.height * 0.013,
                                               color: Color(0xff767B91),
                                             ),
                                           ),
                                         ],
                                       ),
                                       Container(
-                                        width: 193,
-                                        height: 0,
+                                        width: (media.size.width -
+                                            media.size.height * 0.18),
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 3),
                                         child: Divider(
                                           color: Color(0xffC7CCDB),
-                                          endIndent: 0,
-                                          indent: 0,
+                                          thickness: 1,
+                                          height: 1,
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
+                                      Row(
                                         children: [
                                           Container(
-                                            width: 8.33,
-                                            height: 8.33,
+                                            width: media.size.height * 0.013,
+                                            height: media.size.height * 0.013,
                                             child: Image.asset(
                                                 'assets/images/tag.png'),
                                           ),
@@ -563,9 +339,10 @@ class ShopScreen extends StatelessWidget {
                                             width: 5,
                                           ),
                                           Text(
-                                            '30% off upto \$5',
+                                            offer[i],
                                             style: TextStyle(
-                                              fontSize: 9,
+                                              fontSize:
+                                                  media.size.height * 0.013,
                                               color: Color(0xff919098),
                                             ),
                                           ),
@@ -573,416 +350,16 @@ class ShopScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        // color: Colors.red,
-                        width: 342,
-                        height: 112,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Color(0xffFFFFFF),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.25),
-                              offset: Offset(0, 2),
-                              blurRadius: 4,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 12,
-                                    top: 14,
-                                  ),
-                                  child: Container(
-                                    // color: Colors.blue,
-                                    width: 84,
-                                    height: 84,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child:
-                                        Image.asset('assets/images/img2.png'),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 14),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Fit Food Co.',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Color(0xff000000),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        'American, Lebanese, Arabian, Salads ...',
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          color: Color(0xff919098),
-                                        ),
-                                      ),
-                                      Text(
-                                        '21, Kota Damansara | 3.1 kms',
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          color: Color(0xff919098),
-                                        ),
-                                      ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 7,
-                                            height: 7,
-                                            child: Image.asset(
-                                                'assets/images/star.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 3,
-                                          ),
-                                          Text(
-                                            '4.3 | Serving Time : 37 mins | \$25 for two',
-                                            style: TextStyle(
-                                              fontSize: 9,
-                                              color: Color(0xff767B91),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 193,
-                                        height: 0,
-                                        child: Divider(
-                                          color: Color(0xffC7CCDB),
-                                          endIndent: 0,
-                                          indent: 0,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 8.33,
-                                            height: 8.33,
-                                            child: Image.asset(
-                                                'assets/images/tag.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            '30% off upto \$5',
-                                            style: TextStyle(
-                                              fontSize: 9,
-                                              color: Color(0xff919098),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        //color: Colors.green,
-                        width: 342,
-                        height: 112,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Color(0xffFFFFFF),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.25),
-                              offset: Offset(0, 2),
-                              blurRadius: 4,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 12,
-                                    top: 14,
-                                  ),
-                                  child: Container(
-                                    // color: Colors.blue,
-                                    width: 84,
-                                    height: 84,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child:
-                                        Image.asset('assets/images/img3.png'),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 14),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Granny’s Soup Shack',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Color(0xff000000),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        'Mediterrarian, Indian, Thai, Pan-Asia',
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          color: Color(0xff919098),
-                                        ),
-                                      ),
-                                      Text(
-                                        '32, Dataran Sunway | 3.1 kms',
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          color: Color(0xff919098),
-                                        ),
-                                      ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 7,
-                                            height: 7,
-                                            child: Image.asset(
-                                                'assets/images/star.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 3,
-                                          ),
-                                          Text(
-                                            '4.3 | Serving Time : 37 mins | \$25 for two',
-                                            style: TextStyle(
-                                              fontSize: 9,
-                                              color: Color(0xff767B91),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 193,
-                                        height: 0,
-                                        child: Divider(
-                                          color: Color(0xffC7CCDB),
-                                          endIndent: 0,
-                                          indent: 0,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 8.33,
-                                            height: 8.33,
-                                            child: Image.asset(
-                                                'assets/images/tag.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            '30% off upto \$5',
-                                            style: TextStyle(
-                                              fontSize: 9,
-                                              color: Color(0xff919098),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        // color: Colors.blue,
-                        width: 342,
-                        height: 112,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Color(0xffFFFFFF),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.25),
-                              offset: Offset(0, 2),
-                              blurRadius: 4,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 12,
-                                    top: 14,
-                                  ),
-                                  child: Container(
-                                    //  color: Colors.blue,
-                                    width: 84,
-                                    height: 84,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child:
-                                        Image.asset('assets/images/img4.png'),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 14),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Jack’s English Breakfast',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Color(0xff000000),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        'English, Breakfast, Pancakes, Ice Creams',
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          color: Color(0xff919098),
-                                        ),
-                                      ),
-                                      Text(
-                                        '32, Dataran Sunway | 3.1 kms',
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          color: Color(0xff919098),
-                                        ),
-                                      ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 7,
-                                            height: 7,
-                                            child: Image.asset(
-                                                'assets/images/star.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 3,
-                                          ),
-                                          Text(
-                                            '4.3 | Serving Time : 37 mins | \$25 for two',
-                                            style: TextStyle(
-                                              fontSize: 9,
-                                              color: Color(0xff767B91),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 193,
-                                        height: 0,
-                                        child: Divider(
-                                          color: Color(0xffC7CCDB),
-                                          endIndent: 0,
-                                          indent: 0,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Wrap(
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 8.33,
-                                            height: 8.33,
-                                            child: Image.asset(
-                                                'assets/images/tag.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            '30% off upto \$5',
-                                            style: TextStyle(
-                                              fontSize: 9,
-                                              color: Color(0xff919098),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(

@@ -6,7 +6,6 @@ import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 // import 'package:readyplates/pages/shop_screen.dart';
-import 'package:readyplates/src/login/screens/loginpage.dart';
 // import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/src/login/services/auth_service.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Tellafriend extends StatelessWidget {
+  static const id = "/tellafriend";
   const Tellafriend({Key? key}) : super(key: key);
 
   @override
@@ -82,7 +86,10 @@ class Tellafriend extends StatelessWidget {
                       //side: BorderSide(
                       //  width: 1.5, color: Color(0xffB9B9B9)),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Share.share(
+                          "Hello, ${Get.find<AuthController>().fNamController} is inviting you to join");
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[

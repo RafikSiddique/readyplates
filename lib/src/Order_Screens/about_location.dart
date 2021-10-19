@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
+import 'package:readyplates/src/Order_Screens/Shop_page.dart';
 import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class Aboutlocation extends StatelessWidget {
+  static const id = "/aboutlocation";
   const Aboutlocation({Key? key}) : super(key: key);
 
   @override
@@ -29,40 +33,39 @@ class Aboutlocation extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: DraggableScrollableSheet(
-              maxChildSize: 1,
-              minChildSize: 0.7,
-              initialChildSize: 0.7,
+              maxChildSize: 0.7,
+              minChildSize: 0.5,
+              initialChildSize: 0.6,
               builder:
                   (BuildContext contex, ScrollController scrollcontroller) {
-                return SingleChildScrollView(
-                  controller: scrollcontroller,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(36.0),
-                        topRight: Radius.circular(36.0),
-                        bottomLeft: Radius.zero,
-                        bottomRight: Radius.zero,
-                      ),
-                      border: Border.all(
-                        color: Color(0xff979797),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(230, 230, 230, 0.547886),
-                          offset: Offset(0, 2),
-                          blurRadius: 4,
-                          spreadRadius: 0,
-                        ),
-                      ],
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(36.0),
+                      topRight: Radius.circular(36.0),
+                      bottomLeft: Radius.zero,
+                      bottomRight: Radius.zero,
                     ),
+                    border: Border.all(
+                      color: Color(0xff979797),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromRGBO(230, 230, 230, 0.547886),
+                        offset: Offset(0, 2),
+                        blurRadius: 4,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: SingleChildScrollView(
+                    controller: scrollcontroller,
                     child: Padding(
-                      padding:
-                          const EdgeInsets.only(right: 16, left: 16, top: 25),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
@@ -357,30 +360,24 @@ class Aboutlocation extends StatelessWidget {
                           SizedBox(
                             height: 29,
                           ),
-                          InkWell(
+                          Elevated(
+                            text: 'Proceed to Menu',
+                            width: MediaQuery.of(context).size.width,
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, MyRoutes.burgersupportingPage);
+                              Get.toNamed(ShopPage.id);
                             },
-                            child: Elevated(
-                              text: 'Proceed to Menu',
-                              width: MediaQuery.of(context).size.width,
-                              height: 54,
-                            ),
                           ),
                           SizedBox(
                             height: 8,
                           ),
-                          InkWell(
+                          Elevated(
+                            text: "Schedule for later",
+                            width: media.size.width,
+                            backgroundColor: Colors.white,
+                            borderColor: Color(0xff222831),
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, MyRoutes.burgersupportingPage);
+                              Get.toNamed(BurgersupportingPage.id);
                             },
-                            child: Outline(
-                              text: "Schedule for later",
-                              width: MediaQuery.of(context).size.width,
-                              height: 54,
-                            ),
                           ),
                           SizedBox(
                             height: 10,

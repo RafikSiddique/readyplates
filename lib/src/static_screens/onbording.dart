@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:readyplates/src/login/screens/loginpage.dart';
+import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/utils/routes.dart';
+import 'package:readyplates/widgets/readyplates.dart';
 
 class OnbordingPage extends StatelessWidget {
   static const id = "/onbording";
@@ -52,6 +55,7 @@ class OnbordingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context);
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(
@@ -64,25 +68,9 @@ class OnbordingPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 42, right: 42, top: 35),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    //crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                          width: 40,
-                          height: 40,
-                          child: Image.asset("assets/images/Vector.png")),
-                      SizedBox(width: 16),
-                      Text(
-                        "READY PLATES",
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Color.fromRGBO(255, 255, 255, 0.9)),
-                      ),
-                    ],
-                  ),
-                ),
+                    padding: EdgeInsets.only(
+                        left: 42, right: 42, top: media.viewPadding.top + 5),
+                    child: ReadyPlatesText()),
                 Column(
                   children: [
                     Container(
@@ -92,7 +80,7 @@ class OnbordingPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       child: button(
                           onTap: () {
-                            Navigator.pushNamed(context, MyRoutes.LoginPage);
+                            Navigator.pushNamed(context, LoginPage.id);
                           },
                           text: "LOGIN",
                           color: Colors.white.withOpacity(0.35)),
@@ -123,7 +111,7 @@ class OnbordingPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       child: button(
                         onTap: () {
-                          Navigator.pushNamed(context, MyRoutes.SignupPage);
+                          Navigator.pushNamed(context, SignupPage.id);
                         },
                         text: "SIGN UP",
                         textColor: Colors.white,

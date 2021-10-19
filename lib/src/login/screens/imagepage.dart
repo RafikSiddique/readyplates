@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/utils/routes.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -85,7 +86,7 @@ class _ImagePageState extends State<ImagePage> {
                 color: Color(0xff000000),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, MyRoutes.LoginotpScreen);
+                Get.back();
               }),
           centerTitle: true,
           title: Text(
@@ -240,7 +241,7 @@ class _ImagePageState extends State<ImagePage> {
                         } else {
                           Position position =
                               await Geolocator.getCurrentPosition();
-                          Navigator.pushNamed(context, MyRoutes.MapPage);
+                          Get.toNamed(MapPage.id);
                         }
                       } else {
                         await Geolocator.openLocationSettings();

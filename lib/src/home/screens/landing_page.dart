@@ -26,7 +26,7 @@ class LandingPage extends StatelessWidget {
       case 3:
         return Tellafriend();
       case 4:
-        return ProfilePage(); //Container();
+        return ProfilePage(); 
       default:
         return ShopScreen();
     }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:readyplates/src/Order_Screens/Order_option.dart';
+import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/utils/routes.dart';
 
 // import 'package:get/get_connect/http/src/utils/utils.dart';
@@ -26,7 +28,6 @@ class ImagewidgetPage extends StatelessWidget {
         imagePath,
         width: width,
         height: height,
-        //color: Color(0xff4E535A),
       ),
     );
   }
@@ -107,7 +108,7 @@ class ElevatedwidgetPage extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, MyRoutes.paymentPage);
+            Navigator.pushNamed(context, PaymentPage.id);
           },
           child: Text(
             text,
@@ -140,11 +141,6 @@ class ElevatedwidgetPage2 extends StatelessWidget {
     required this.backgroundColor,
     required this.text,
     required this.color,
-    // this.fontSize = 13,
-    // this.fontFamily = 'Inter',
-    // required this.fontWeight,
-    // required this.text,
-    // required this.color,
   }) : super(key: key);
 
   @override
@@ -167,7 +163,7 @@ class ElevatedwidgetPage2 extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, MyRoutes.orderOption);
+            Navigator.pushNamed(context, OrderOption.id);
           },
           child: Text(
             text,

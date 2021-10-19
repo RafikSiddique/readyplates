@@ -4,6 +4,7 @@ import 'package:readyplates/src/home/widgets/profile_tile.dart';
 //import 'package:readyplates/widgets/edit_button.dart';
 
 class ProfilePage extends StatelessWidget {
+  static const id = "/profile";
   const ProfilePage({Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {

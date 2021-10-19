@@ -20,11 +20,10 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
+import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
-import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'src/login/screens/loginpage.dart';
-import 'src/login/screens/otppage.dart';
 import 'src/login/screens/signuppage.dart';
 
 void main() {
@@ -39,12 +38,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(),
+      theme: ThemeData(
+          popupMenuTheme: PopupMenuThemeData(
+            enableFeedback: true,
+          ),
+          dividerColor: Color(0xffBBBBB6)),
       debugShowCheckedModeBanner: false,
       home: InitializeApp(),
       // initialRoute: "/orderPage",
       // home: InitializeApp(),
-      initialRoute: MyRoutes.orderPage,
+      //initialRoute: MyRoutes.orderPage,
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -54,19 +57,19 @@ class MyApp extends StatelessWidget {
               isHome: false,
             ),
         ImagePage.id: (context) => ImagePage(),
-        "/otp": (context) => OtpPage(),
-        "/aboutlocation": (context) => Aboutlocation(),
-        "/chekoutdone": (context) => Chekoutdone(),
-        "/orderPage": (context) => OrderPage(),
-        "/shopPage": (context) => ShopPage(),
-        "/burgersupportingPage": (context) => BurgersupportingPage(),
-        "/QrCode": (context) => QrCode(),
-        "/OrderCancelledPage": (context) => OrderCancelledPage(),
-        "/PaymentPage": (context) => PaymentPage(),
-        "/OrderOption": (context) => OrderOption(),
-        "/tellafriend": (context) => Tellafriend(),
-        "/profile": (context) => ProfilePage(),
+        Aboutlocation.id: (context) => Aboutlocation(),
+        Chekoutdone.id: (context) => Chekoutdone(),
+        OrderPage.id: (context) => OrderPage(),
+        ShopPage.id: (context) => ShopPage(),
+        BurgersupportingPage.id: (context) => BurgersupportingPage(),
+        QrCode.id: (context) => QrCode(),
+        OrderCancelledPage.id: (context) => OrderCancelledPage(),
+        PaymentPage.id: (context) => PaymentPage(),
+        OrderOption.id: (context) => OrderOption(),
+        Tellafriend.id: (context) => Tellafriend(),
+        ProfilePage.id: (context) => ProfilePage(),
         LandingPage.id: (context) => LandingPage(),
+        BookingDetails.id: (c) => BookingDetails(),
       },
     );
   }

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/Order_Screens/Orderpage.dart';
+import 'package:readyplates/src/Order_Screens/Shop_page.dart';
+import 'package:readyplates/src/Order_Screens/about_location.dart';
+import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
+import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class OrderOption extends StatelessWidget {
+  static const id = "/OrderOption";
   const OrderOption({Key? key}) : super(key: key);
 
   Widget buildContainer() {
@@ -187,15 +193,18 @@ class OrderOption extends StatelessWidget {
                     SizedBox(
                       height: 16,
                     ),
-                    Outline(
-                        text: "Add to Order ",
-                        width: MediaQuery.of(context).size.width,
-                        height: 44),
+                    Elevated(
+                      text: "Add to Order ",
+                      width: MediaQuery.of(context).size.width,
+                      onTap: () {},
+                      borderColor: Color(0xff222831),
+                      backgroundColor: Colors.white,
+                    ),
                     Container(
                       child: Elevated(
                         text: " Complete Order",
                         width: MediaQuery.of(context).size.width,
-                        height: 44,
+                        onTap: () {},
                       ),
                     ),
                     SizedBox(height: 0),
@@ -221,7 +230,7 @@ class OrderOption extends StatelessWidget {
                       color: Color(0xff393E46))),
               icon: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, MyRoutes.shopRoute);
+                  Navigator.pushNamed(context, ShopPage.id);
                 },
                 child: Container(
                   child: Image.asset(
@@ -242,7 +251,7 @@ class OrderOption extends StatelessWidget {
                       color: Color(0xff393E46))),
               icon: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, MyRoutes.MapPage);
+                  Navigator.pushNamed(context, MapPage.id);
                 },
                 child: Container(
                   child: Image.asset(
@@ -263,7 +272,7 @@ class OrderOption extends StatelessWidget {
                       color: Color(0xff00ADB5))),
               icon: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, MyRoutes.orderOption);
+                  Navigator.pushNamed(context, OrderPage.id);
                 },
                 child: Container(
                   child: Image.asset(
@@ -284,7 +293,7 @@ class OrderOption extends StatelessWidget {
                       color: Color(0xff393E46))),
               icon: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, MyRoutes.Tellafriend);
+                  Navigator.pushNamed(context, Tellafriend.id);
                 },
                 child: Container(
                   child: Image.asset(
@@ -305,7 +314,7 @@ class OrderOption extends StatelessWidget {
                       color: Color(0xff393E46))),
               icon: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, MyRoutes.aboutlocation);
+                  Navigator.pushNamed(context, Aboutlocation.id);
                 },
                 child: Image.asset(
                   'assets/images/BottomBar5.png',

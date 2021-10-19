@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrderCancelledPage extends StatelessWidget {
+  static const id = "/OrderCancelledPage";
   const OrderCancelledPage({Key? key}) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class OrderCancelledPage extends StatelessWidget {
                 color: Color(0xff393E46),
               ),
             ),
-              SizedBox(
+            SizedBox(
               height: 54,
             ),
             Container(
