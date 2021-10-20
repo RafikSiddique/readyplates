@@ -42,12 +42,12 @@ class MyApp extends StatelessWidget {
           popupMenuTheme: PopupMenuThemeData(
             enableFeedback: true,
           ),
+          pageTransitionsTheme: PageTransitionsTheme(builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder()
+          }),
           dividerColor: Color(0xffBBBBB6)),
       debugShowCheckedModeBanner: false,
       home: InitializeApp(),
-      // initialRoute: "/orderPage",
-      // home: InitializeApp(),
-      //initialRoute: MyRoutes.orderPage,
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -86,7 +86,7 @@ class _InitializeAppState extends State<InitializeApp>
     with AfterLayoutMixin<InitializeApp> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 
   @override
