@@ -18,6 +18,8 @@ class MyTheme {
   static Color appbackgroundColor = Color(0xffFFFFFF);
 
   static Color editbuttontextColor = Color(0xffFF6E42);
+  
   static Color devidercolor = Color(0xffD8D8D8);
+
   static Color buttonbackgroundColor = Color(0xff222831);
 }

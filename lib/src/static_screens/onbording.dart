@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/utils/routes.dart';
@@ -56,6 +57,7 @@ class OnbordingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
+    Navigator.pushNamed(context, ImagePage.id);
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(

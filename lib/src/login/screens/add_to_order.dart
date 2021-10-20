@@ -10,8 +10,6 @@ class AddtoorderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context);
-
     return Scaffold(
       backgroundColor: Color(0xffE5E5E5),
       appBar: AppBar(

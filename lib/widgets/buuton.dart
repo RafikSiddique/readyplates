@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// ignore: must_be_immutable
 class Elevated extends StatelessWidget {
   final double fontSize;
   final String text;
@@ -41,8 +40,9 @@ class Elevated extends StatelessWidget {
           padding: padding,
           child: Text(
             text,
-            style:
-                GoogleFonts.inter(fontWeight: fontWeight, color: borderColor),
+            style: GoogleFonts.inter(
+              fontWeight: fontWeight,
+            ),
           ),
         ),
       ),

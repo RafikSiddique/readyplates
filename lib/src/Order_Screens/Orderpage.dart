@@ -6,21 +6,50 @@ import 'package:readyplates/src/Order_Screens/Order_cancel_page.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 
+class PopUpMenuWidget extends StatelessWidget {
+  final Function() onTap;
+  final String text;
+  final String path;
+  final Color color;
+  const PopUpMenuWidget(
+      {Key? key,
+      required this.onTap,
+      required this.text,
+      required this.path,
+      required this.color})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      /* () {
+                
+              }, */
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        ImagewidgetPage(
+          imagePath: path, // '',
+          width: 15,
+          height: 15,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          text, //"Edit Order",
+          style: TextStyle(
+              fontWeight: FontWeight.w400,
+              color: color, // ,
+              fontSize: 12),
+        )
+      ]),
+    );
+  }
+}
+
 class OrderPage extends StatelessWidget {
   static const id = "/orderPage";
   const OrderPage({Key? key}) : super(key: key);
-
-  Widget buildContainer() {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        height: 4,
-        width: 4,
-        decoration: BoxDecoration(
-            color: Color(0xff000000), borderRadius: BorderRadius.circular(24)),
-      ),
-    );
-  }
 
   void showTextMenu({
     required TapDownDetails details,
@@ -47,65 +76,33 @@ class OrderPage extends StatelessWidget {
             details.globalPosition & Size(40, 40), Offset.zero & overlay.size),
         items: <PopupMenuEntry>[
           PopupMenuItem(
-            height: 20,
-            onTap: null,
-            child: InkWell(
-              onTap: () {
-                Get.to(() => BurgersupportingPage());
-              },
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                ImagewidgetPage(
-                  imagePath: 'assets/images/NotePencil.png',
-                  width: 15,
-                  height: 15,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "Edit Order",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xffF88020),
-                      fontSize: 12),
-                )
-              ]),
-            ),
-          ),
+              height: 20,
+              onTap: null,
+              child: PopUpMenuWidget(
+                  onTap: () {
+                    Get.to(() => BurgersupportingPage());
+                  },
+                  text: "Edit Order",
+                  path: 'assets/images/NotePencil.png',
+                  color: Color(0xffF88020))),
           PopupMenuDivider(
             height: 12,
           ),
           PopupMenuItem(
-            height: 20,
-            padding: EdgeInsets.zero,
-            onTap: null,
-            child: InkWell(
-              onTap: () {
-                Get.to(() => OrderCancelledPage());
-              },
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                ImagewidgetPage(
-                  imagePath: 'assets/images/CheckCircle.png',
-                  width: 15,
-                  height: 15,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "Cancel Order",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xffF88020),
-                      fontSize: 12),
-                )
-              ]),
-            ),
+              height: 20,
+              padding: EdgeInsets.zero,
+              onTap: null,
+              child: PopUpMenuWidget(
+                onTap: () {
+                  Get.to(() => OrderCancelledPage());
+                },
+                path: 'assets/images/CheckCircle.png',
+                text: "Cancel Order",
+                color: Color(0xffF88020),
+              )
 
-            // Text("data")
-          ),
+              // Text("data")
+              ),
         ]);
   }
 
@@ -328,15 +325,7 @@ class OrderPage extends StatelessWidget {
                                         color: Color(0xff4E535A)),
                                   )),
                               Spacer(),
-                              buildContainer(),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              buildContainer(),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              buildContainer(),
+                              Icon(Icons.more_horiz)
                             ]),
                       ),
                       SizedBox(

@@ -9,43 +9,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
-import 'package:readyplates/utils/routes.dart';
 import 'package:image_picker/image_picker.dart';
-
-String id = '';
-//final ImagePicker _picker = ImagePicker();
-// final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-// Capture a photo
-// final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
-// Pick a video
-
-/*void pickImage(
-      {
-    required void Function(String?) imagePath,
-    required void Function(String?) imageName}) async {
-    final ImagePicker imagePicker = ImagePicker();
-
-    XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (file != null) {
-      imagePath(file.path);
-      imageName(file.name);
-    }
-  }
-
-void pikImage({
-    required void Function(String?) imagePath,
-    required void Function(String?) imageName,
-    required void Function(File) imageFile,
-  }) async {
-    final ImagePicker imagePicker = ImagePicker();
-    XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
-    if (file != null) {
-      imagePath(file.path);
-      imageName(file.name);
-      imageFile(File(file.path));
-    }
-  }*/
 
 class ImagePage extends StatefulWidget {
   static const id = "/image";
@@ -205,14 +169,6 @@ class _ImagePageState extends State<ImagePage> {
                           primary: Colors.black,
                         ),
                         onPressed: () => pickImage(ImageSource.gallery),
-
-                        //{
-                        // print(id);
-
-                        //await pikImage(imageFile: (File ) {  }, imagePath: (String? ) {  }
-
-                        //Navigator.pushNamed(context, MyRoutes.MapPage);
-                        //},
                         child: Text('Upload from Gallery',
                             style: TextStyle(
                               fontFamily: 'Inter-Regular',
@@ -266,7 +222,7 @@ class _ImagePageState extends State<ImagePage> {
                                 FontAwesomeIcons.chevronRight,
                                 color: Color(0xff000000),
                               ),
-                              onPressed: () async {}),
+                              onPressed: null),
                         ],
                       ),
                     ),
