@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/Order_Screens/Shop_page.dart';
 import 'package:readyplates/src/Order_Screens/chekout_done.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 import 'package:readyplates/widgets/imagewidget.dart';
-
 
 class Bottomcontainer extends StatelessWidget {
   const Bottomcontainer({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class Bottomcontainer extends StatelessWidget {
       // height: MediaQuery.of(context).size.height * 0.10,
 
       decoration: BoxDecoration(
-        color: Color(0xffFFFFFF),
+        color: Colors.white,
       ),
 
       child: Column(
@@ -37,16 +37,18 @@ class Bottomcontainer extends StatelessWidget {
               children: [
                 Text("Total Price",
                     style: TextStyle(
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17,
-                        color: Color(0xff222831))),
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 17,
+                      //  color: Color(0xff222831),
+                      color: MyTheme.buttonbackgroundColor,
+                    )),
                 Text("\$25.50",
                     style: TextStyle(
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w500,
                         fontSize: 17,
-                        color: Color(0xff222831))),
+                        color: MyTheme.buttonbackgroundColor)),
               ],
             ),
           ),
@@ -57,7 +59,7 @@ class Bottomcontainer extends StatelessWidget {
               Elevated(
                 backgroundColor: Colors.white,
                 text: "Add Items",
-                borderColor: Color(0xffFF8400),
+                borderColor: MyTheme.bottomcontainercolor,
                 onTap: () {
                   Get.toNamed(ShopPage.id);
                 },
@@ -111,7 +113,7 @@ class Bottomcontainer2 extends StatelessWidget {
       // height: MediaQuery.of(context).size.height * 0.10,
 
       decoration: BoxDecoration(
-        color: Color(0xffFFFFFF),
+        color: Colors.white,
       ),
 
       child: Column(
@@ -132,13 +134,13 @@ class Bottomcontainer2 extends StatelessWidget {
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w500,
                         fontSize: 17,
-                        color: Color(0xff222831))),
+                        color: MyTheme.buttonbackgroundColor)),
                 Text("\$25.50",
                     style: TextStyle(
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w500,
                         fontSize: 17,
-                        color: Color(0xff222831))),
+                        color: MyTheme.buttonbackgroundColor)),
               ],
             ),
           ),
@@ -150,15 +152,15 @@ class Bottomcontainer2 extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 1,
-                    color: Color(0xffFF8400),
+                    color: MyTheme.bottomcontainercolor,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                 ),
                 child: ElevatedwidgetPage(
-                  backgroundColor: Color(0XFFFFFFF),
+                  backgroundColor: Colors.white,
                   text: 'Add from Menu',
-                  color: Color(0xffFF8400),
-                  // color: Color(0xffFF8400),
+                  color: MyTheme.bottomcontainercolor,
+                  //color: Color(0xffFF8400),
                   height: 44,
                   width: 167,
                 ),
@@ -179,14 +181,14 @@ class Bottomcontainer2 extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 1,
-                    color: Color(0xff222831),
+                    color: MyTheme.buttonbackgroundColor,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                 ),
                 child: ElevatedwidgetPage(
-                  backgroundColor: Color(0xff393E46),
+                  backgroundColor: MyTheme.appbartextColor, //Color(0xff393E46),
                   text: 'Confirm',
-                  color: Color(0xffFFFFFF),
+                  color: Colors.white,
                   //  styl color: Color(0xffFF8400),
                   height: 44,
                   width: 167,

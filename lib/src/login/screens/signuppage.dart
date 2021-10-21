@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:readyplates/modals/signup.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/routes.dart';
 
 class SignupPage extends StatefulWidget {
@@ -27,16 +28,17 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffE5E5E5),
+        backgroundColor: Colors.white, //(0xffE5E5E5),
+
         appBar: AppBar(
           toolbarHeight: 44,
-          backgroundColor: Color(0xffE5E5E5),
+          backgroundColor: Colors.white, //(0xffE5E5E5),
           elevation: 0,
           leading: IconButton(
               iconSize: 14.83,
               icon: FaIcon(
                 FontAwesomeIcons.chevronLeft,
-                color: Color(0xff000000),
+                color: Colors.black,
               ),
               onPressed: () {
                 Get.toNamed(LoginPage.id);
@@ -50,7 +52,7 @@ class _SignupPageState extends State<SignupPage> {
               fontStyle: FontStyle.normal,
               fontSize: 17,
               letterSpacing: -0.226667,
-              color: Color(0xff393E46),
+              color: MyTheme.appbartextColor,
             ),
           ),
         ),
@@ -66,14 +68,11 @@ class _SignupPageState extends State<SignupPage> {
                 children: [
                   Text("Name",
                       style: TextStyle(
-                        fontSize: 13,
-                        fontFamily: 'Inter',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff2F2E41),
-
-                        //  color: Color(0xff2F2E41),
-                      )),
+                          fontSize: 13,
+                          fontFamily: 'Inter',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          color: MyTheme.hinttextchangeColor)),
                   SizedBox(
                     height: 5,
                   ),
@@ -92,7 +91,8 @@ class _SignupPageState extends State<SignupPage> {
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff979797).withOpacity(0.7),
+                          color: MyTheme.hinttextColor,
+                          //color: Color(0xff979797).withOpacity(0.7),
                         ),
                         // labelText: "First Name",
                         border: OutlineInputBorder(
@@ -123,7 +123,8 @@ class _SignupPageState extends State<SignupPage> {
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff979797).withOpacity(0.7),
+                          color: MyTheme.hinttextColor,
+                          //color: Color(0xff979797).withOpacity(0.7),
                         ),
                         border: OutlineInputBorder(
                           borderSide:
@@ -145,7 +146,8 @@ class _SignupPageState extends State<SignupPage> {
                         fontFamily: 'Poppins',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.normal,
-                        color: Color(0xff6E6D7A),
+                        //color: Color(0xff6E6D7A),
+                        color: MyTheme.bottomtextColor,
                       )),
                   SizedBox(height: 19),
                   Text("Gender",
@@ -154,7 +156,8 @@ class _SignupPageState extends State<SignupPage> {
                         fontFamily: 'Inter',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff2F2E41),
+                        color: MyTheme.hinttextchangeColor,
+                        // color: Color(0xff2F2E41),
                         letterSpacing: -0.229412,
                       )),
                   SizedBox(height: 5),
@@ -189,7 +192,8 @@ class _SignupPageState extends State<SignupPage> {
                         hintStyle: TextStyle(
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff979797).withOpacity(0.7),
+                          color: MyTheme.hinttextColor,
+                          //color: Color(0xff979797).withOpacity(0.7),
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.w500,
                         ),
@@ -205,37 +209,12 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
 
-                  // Container(
-                  //    height: 45,
-                  //   margin: EdgeInsets.only(left: 16, right: 16),
-                  //   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(6),
-                  //     border: Border.all(color: Color(0xffE0E0E0), width: 1),
-                  //   ), //2F2E41, #E0E0E0,2F2E41
-
-                  //   child: DropdownButtonHideUnderline(
-                  //     child: DropdownButton<String>(
-                  //         value: valueChoose,
-                  //         iconSize: 36,
-                  //         icon: Icon(
-                  //           Icons.arrow_drop_down,
-                  //           color: Color(0xff000000),
-                  //         ),
-                  //         isExpanded: true,
-                  //         items: items.map(buildMenuItem).toList(),
-                  //         onChanged: (value) => setState(() {
-                  //               valueChoose = value.toString();
-                  //               gender = valueChoose;
-                  //             })),
-                  //   ),
-                  // ),
-
                   SizedBox(height: 19),
                   Text("Date of Birth",
                       style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xff2F2E41),
+                        color: MyTheme.hinttextchangeColor,
+                        //color: Color(0xff2F2E41),
                         fontFamily: 'Inter',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
@@ -271,7 +250,8 @@ class _SignupPageState extends State<SignupPage> {
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff979797).withOpacity(0.7),
+                          color: MyTheme.hinttextColor,
+                          //color: Color(0xff979797).withOpacity(0.7),
                         ),
                         // labelText: "dd/mm/yyyy",
                         border: OutlineInputBorder(
@@ -287,7 +267,8 @@ class _SignupPageState extends State<SignupPage> {
                   Text("Email ID",
                       style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xff2F2E41),
+                        color: MyTheme.hinttextchangeColor,
+                        //     color: Color(0xff2F2E41),
                         fontFamily: 'Inter',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
@@ -322,7 +303,8 @@ class _SignupPageState extends State<SignupPage> {
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff979797).withOpacity(0.7),
+                          color: MyTheme.hinttextColor,
+                          //color: Color(0xff979797).withOpacity(0.7),
                         ),
                       ),
                     ),
@@ -333,7 +315,8 @@ class _SignupPageState extends State<SignupPage> {
                     "Mobile",
                     style: TextStyle(
                       fontSize: 13,
-                      color: Color(0xff2F2E41),
+                      color: MyTheme.hinttextchangeColor,
+                      // color: Color(0xff2F2E41),
                       fontFamily: 'Inter',
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w500,
@@ -356,7 +339,8 @@ class _SignupPageState extends State<SignupPage> {
                         hintStyle: TextStyle(
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff979797).withOpacity(0.7),
+                          color: MyTheme.hinttextColor,
+                          // color: Color(0xff979797).withOpacity(0.7),
                         ),
                         //labelText: "923944543",
                         border: OutlineInputBorder(
@@ -370,7 +354,8 @@ class _SignupPageState extends State<SignupPage> {
                   Text("Password",
                       style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xff2F2E41),
+                        color: MyTheme.hinttextchangeColor,
+                        // color: Color(0xff2F2E41),
                         fontFamily: 'Inter',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
@@ -402,7 +387,8 @@ class _SignupPageState extends State<SignupPage> {
                         hintStyle: TextStyle(
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff2F2E41).withOpacity(0.7),
+                          //color: Color(0xff2F2E41).withOpacity(0.7),
+                          color: MyTheme.hinttextchangeColor,
                         ),
 
                         //labelText: "***********",
@@ -418,8 +404,8 @@ class _SignupPageState extends State<SignupPage> {
                   Text("Confirm Password",
                       style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xff2F2E41),
-
+                        // color: Color(0xff2F2E41),
+                        color: MyTheme.hinttextchangeColor,
                         fontFamily: 'Inter',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
@@ -458,7 +444,8 @@ class _SignupPageState extends State<SignupPage> {
                         hintStyle: TextStyle(
                           fontSize: 15,
                           letterSpacing: -0.264706,
-                          color: Color(0xff2F2E41).withOpacity(0.7),
+                          // color: Color(0xff2F2E41).withOpacity(0.7),
+                          color: MyTheme.hinttextchangeColor,
                         ),
 
                         //] labelText: "***********",
@@ -478,7 +465,7 @@ class _SignupPageState extends State<SignupPage> {
                     child: Text("Strong",
                         style: TextStyle(
                           fontSize: 9,
-                          color: Color(0xff6E6D7A),
+                          color: MyTheme.bottomtextColor,
                           fontFamily: 'Poppins',
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.normal,
@@ -492,7 +479,7 @@ class _SignupPageState extends State<SignupPage> {
                     children: [
                       Checkbox(
                         value: _checkbox,
-                        checkColor: Color(0xffB9B9B9),
+                        checkColor: MyTheme.checkboxcolor,
                         onChanged: (value) {
                           setState(() {
                             _checkbox = !_checkbox;
@@ -502,7 +489,8 @@ class _SignupPageState extends State<SignupPage> {
                       Text('I have a referral code',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Color(0xff3C3B4D),
+                            color: MyTheme.checkboxtextcolor,
+                            // color: Color(0xff3C3B4D),
                             fontFamily: 'Inter',
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w500,
@@ -523,7 +511,8 @@ class _SignupPageState extends State<SignupPage> {
                       //width:size.width,
                       height: 45,
                       decoration: BoxDecoration(
-                        color: Color(0xff222831),
+                        // color: Color(0xff222831),
+                        color: MyTheme.buttonbackgroundColor,
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: Center(
@@ -535,7 +524,7 @@ class _SignupPageState extends State<SignupPage> {
                             fontFamily: 'Inter-Regular',
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xffE5E5E5),
+                            color: Colors.white, //(0xffE5E5E5),
                           ),
                         ),
                       ),
@@ -548,12 +537,13 @@ class _SignupPageState extends State<SignupPage> {
                       // indent: 16,
                       endIndent: 46,
                       thickness: 2,
-                      color: Color(0xffD8D8D8),
+                      color: MyTheme.devidercolor,
                     )),
                     Text(
                       "OR",
                       style: TextStyle(
-                        color: Color(0xff4E535A),
+                        color: MyTheme.dividermiddletext,
+                        //color: Color(0xff4E535A),
                         fontSize: 13,
                         fontFamily: 'Inter-Regular',
                         fontStyle: FontStyle.normal,
@@ -565,7 +555,8 @@ class _SignupPageState extends State<SignupPage> {
                       indent: 44,
                       // endIndent: 20,
                       thickness: 2,
-                      color: Color(0xffD8D8D8),
+                      color: MyTheme.devidercolor,
+                      //  color: Color(0xffD8D8D8),
                     )),
                   ]),
                   SizedBox(height: 15),
@@ -575,12 +566,13 @@ class _SignupPageState extends State<SignupPage> {
                       Container(
                         //width: 164,
                         height: 45,
-                        color: Color(0xffF2F2F2),
+                        color: MyTheme.buttonbackgroundcolor,
+                        // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Color.fromRGBO(34, 40, 49, 0.2),
                             side: BorderSide(
-                                width: 1.5, color: Color(0XFFB9B9B9)),
+                                width: 1.5, color: MyTheme.checkboxcolor),
                           ),
                           onPressed: () {},
                           child: Wrap(
@@ -603,23 +595,25 @@ class _SignupPageState extends State<SignupPage> {
                                       fontFamily: 'Inter',
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w400,
-                                      color: Color(0xff505056),
+                                      color: MyTheme.bottomtextColorsignup,
                                     )),
                               ),
                             ],
                           ),
                         ),
                       ),
-
                       Container(
                         //width: 164,
                         height: 45,
-                        color: Color(0xffF2F2F2),
+                        color: MyTheme.buttonbackgroundcolor,
+                        // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Color.fromRGBO(34, 40, 49, 0.2),
                             side: BorderSide(
-                                width: 1.5, color: Color(0xffB9B9B9)),
+                              width: 1.5,
+                              color: MyTheme.checkboxcolor,
+                            ),
                           ),
                           onPressed: () {},
                           child: Wrap(
@@ -643,15 +637,14 @@ class _SignupPageState extends State<SignupPage> {
                                       fontFamily: 'Inter',
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w400,
-                                      color: Color(0xff505056),
+                                      //color: Color(0xff505056),
+                                      color: MyTheme.bottomtextColorsignup,
                                     )),
                               ),
                             ],
                           ),
                         ),
                       ),
-
-//
                     ],
                   ),
                   SizedBox(height: 20),
@@ -666,6 +659,6 @@ class _SignupPageState extends State<SignupPage> {
       value: item,
       child: Text(
         item,
-        style: TextStyle(color: Color(0xff2F2E41), fontSize: 15),
+        style: TextStyle(color: MyTheme.hinttextchangeColor, fontSize: 15),
       ));
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/Order_cancel_page.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 
@@ -67,7 +68,8 @@ class OrderPage extends StatelessWidget {
               bottomLeft: Radius.circular(10),
               bottomRight: Radius.circular(10)),
           side: BorderSide(
-            color: Color(0xffBBBBB6),
+            color: MyTheme.orderbordercolor,
+            //color: Color(0xffBBBBB6),
           ),
         ),
         useRootNavigator: false,
@@ -79,12 +81,13 @@ class OrderPage extends StatelessWidget {
               height: 20,
               onTap: null,
               child: PopUpMenuWidget(
-                  onTap: () {
-                    Get.to(() => BurgersupportingPage());
-                  },
-                  text: "Edit Order",
-                  path: 'assets/images/NotePencil.png',
-                  color: Color(0xffF88020))),
+                onTap: () {
+                  Get.to(() => BurgersupportingPage());
+                },
+                text: "Edit Order",
+                path: 'assets/images/NotePencil.png',
+                color: MyTheme.orderpopupcolor,
+              )),
           PopupMenuDivider(
             height: 12,
           ),
@@ -98,7 +101,8 @@ class OrderPage extends StatelessWidget {
                 },
                 path: 'assets/images/CheckCircle.png',
                 text: "Cancel Order",
-                color: Color(0xffF88020),
+                color: MyTheme.orderpopupcolor,
+                //color: Color(0xffF88020),
               )
 
               // Text("data")
@@ -109,9 +113,9 @@ class OrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE5E5E5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xffE5E5E5),
+        backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
         title: Text(
@@ -121,7 +125,7 @@ class OrderPage extends StatelessWidget {
                 fontSize: 17,
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.normal,
-                color: Color(0xff4E535A)),
+                color: MyTheme.dividermiddletext),
           ),
         ),
         leading: Container(),
@@ -139,7 +143,7 @@ class OrderPage extends StatelessWidget {
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
-                        color: Color(0xff4E535A)),
+                        color: MyTheme.dividermiddletext),
                   )),
               SizedBox(
                 height: 10,
@@ -147,7 +151,7 @@ class OrderPage extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffFFFFFF),
+                  color: Colors.white,
                 ),
                 height: 376,
                 child: Padding(
@@ -166,7 +170,7 @@ class OrderPage extends StatelessWidget {
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff4E535A)),
+                                        color: MyTheme.dividermiddletext),
                                   )),
                               GestureDetector(
                                   onTapDown: (details) {
@@ -188,7 +192,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               )),
                           Text("\$12.00",
                               style: GoogleFonts.nunito(
@@ -196,7 +200,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               ))
                         ],
                       ),
@@ -212,7 +216,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               )),
                           Text("\$3.00",
                               style: GoogleFonts.nunito(
@@ -220,7 +224,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               ))
                         ],
                       ),
@@ -246,7 +250,8 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff222831)),
+                                    // color: Color(0xff222831),
+                                    color: MyTheme.buttonbackgroundColor),
                               )),
                           Text("10:00 AM",
                               style: GoogleFonts.nunito(
@@ -254,7 +259,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff222831)),
+                                    color: MyTheme.buttonbackgroundColor),
                               ))
                         ],
                       ),
@@ -267,7 +272,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff222831)),
+                                    color: MyTheme.buttonbackgroundColor),
                               )),
                           Text("25th Sep",
                               style: GoogleFonts.nunito(
@@ -275,7 +280,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff222831)),
+                                    color: MyTheme.buttonbackgroundColor),
                               ))
                         ],
                       ),
@@ -293,7 +298,7 @@ class OrderPage extends StatelessWidget {
                       fontSize: 10,
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
-                      color: Color(0xff4E535A)),
+                      color: MyTheme.dividermiddletext),
                 ),
               ),
               SizedBox(
@@ -322,7 +327,7 @@ class OrderPage extends StatelessWidget {
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff4E535A)),
+                                        color: MyTheme.dividermiddletext),
                                   )),
                               Spacer(),
                               Icon(Icons.more_horiz)
@@ -340,7 +345,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               )),
                           Text("\$12.00",
                               style: GoogleFonts.nunito(
@@ -348,7 +353,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               ))
                         ],
                       ),
@@ -364,7 +369,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               )),
                           Text("\$3.00",
                               style: GoogleFonts.nunito(
@@ -372,7 +377,7 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0xff4E535A)),
+                                    color: MyTheme.dividermiddletext),
                               ))
                         ],
                       ),

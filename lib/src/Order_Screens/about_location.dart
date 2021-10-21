@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/Shop_page.dart';
-import 'package:readyplates/utils/routes.dart';
+import 'package:readyplates/utils/my_color.dart';
+// import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class Aboutlocation extends StatelessWidget {
@@ -48,9 +49,7 @@ class Aboutlocation extends StatelessWidget {
                       bottomLeft: Radius.zero,
                       bottomRight: Radius.zero,
                     ),
-                    border: Border.all(
-                      color: Color(0xff979797),
-                    ),
+                    border: Border.all(color: MyTheme.hinttextColor),
                     boxShadow: [
                       BoxShadow(
                         color: Color.fromRGBO(230, 230, 230, 0.547886),
@@ -74,10 +73,11 @@ class Aboutlocation extends StatelessWidget {
                               Text("Sloppy Joe Burgers",
                                   style: GoogleFonts.nunito(
                                     textStyle: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        color: Color(0xff393E46)),
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FontStyle.normal,
+                                      color: MyTheme.appbartextColor,
+                                    ),
                                   )),
                               FaIcon(
                                 FontAwesomeIcons.solidStar,
@@ -103,10 +103,11 @@ class Aboutlocation extends StatelessWidget {
                               Text(
                                 "Open",
                                 style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.normal,
-                                    fontStyle: FontStyle.normal,
-                                    color: Color(0xff93BF72)),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.normal,
+                                  fontStyle: FontStyle.normal,
+                                  color: MyTheme.aboutlocatextcolor,
+                                ),
                               ),
                               SizedBox(
                                 width: 3,
@@ -117,7 +118,7 @@ class Aboutlocation extends StatelessWidget {
                                         fontSize: 13,
                                         fontWeight: FontWeight.normal,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff4E535A)),
+                                        color: MyTheme.dividermiddletext),
                                   ))
                             ],
                           ),
@@ -144,7 +145,7 @@ class Aboutlocation extends StatelessWidget {
                                         fontSize: 13,
                                         fontWeight: FontWeight.w400,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff4E535A)),
+                                        color: MyTheme.dividermiddletext),
                                   )),
                               SizedBox(
                                 width: 61,
@@ -152,7 +153,7 @@ class Aboutlocation extends StatelessWidget {
                               FaIcon(
                                 FontAwesomeIcons.walking,
                                 size: 11,
-                                color: Color(0xff4E535A),
+                                color: MyTheme.dividermiddletext,
                               ),
                               Text(
                                 "   15 mins",
@@ -161,7 +162,7 @@ class Aboutlocation extends StatelessWidget {
                                       fontSize: 13,
                                       fontWeight: FontWeight.w400,
                                       fontStyle: FontStyle.normal,
-                                      color: Color(0xff4E535A)),
+                                      color: MyTheme.dividermiddletext),
                                 ),
                               )
                             ],
@@ -179,7 +180,7 @@ class Aboutlocation extends StatelessWidget {
                             style: GoogleFonts.inter(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xff4E535A)),
+                                color: MyTheme.dividermiddletext),
                           ),
                           SizedBox(
                             height: 25.67,
@@ -198,7 +199,7 @@ class Aboutlocation extends StatelessWidget {
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                  color: MyTheme.dividermiddletext),
                             ),
                           ]),
                           SizedBox(
@@ -210,7 +211,7 @@ class Aboutlocation extends StatelessWidget {
                                 fontSize: 17,
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
-                                color: Color(0xff222831)),
+                                color: MyTheme.dividermiddletext),
                           ),
                           SizedBox(
                             height: 9,
@@ -269,7 +270,7 @@ class Aboutlocation extends StatelessWidget {
                                   fontSize: 17,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  color: Color(0xff222831)),
+                                  color: MyTheme.buttonbackgroundColor),
                             ),
                             Container(
                               height: 13.6,
@@ -293,7 +294,7 @@ class Aboutlocation extends StatelessWidget {
                                         fontSize: 13,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xffF94510)),
+                                        color: MyTheme.aboutlocatextcolors),
                                   ),
                                   Text(
                                     "12",
@@ -301,7 +302,7 @@ class Aboutlocation extends StatelessWidget {
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff393E46)),
+                                        color: MyTheme.appbartextColor),
                                   )
                                 ],
                               ),
@@ -313,7 +314,7 @@ class Aboutlocation extends StatelessWidget {
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff393E46)),
+                                        color: MyTheme.appbartextColor),
                                   ),
                                   Text(
                                     "Starts at 6:00 PM",
@@ -321,7 +322,7 @@ class Aboutlocation extends StatelessWidget {
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
-                                        color: Color(0xff393E46)),
+                                        color: MyTheme.appbartextColor),
                                   )
                                 ],
                               ),
@@ -374,7 +375,7 @@ class Aboutlocation extends StatelessWidget {
                             text: "Schedule for later",
                             width: media.size.width,
                             backgroundColor: Colors.white,
-                            borderColor: Color(0xff222831),
+                            borderColor: MyTheme.buttonbackgroundColor,
                             onTap: () {
                               Get.toNamed(BurgersupportingPage.id);
                             },

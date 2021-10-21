@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyTheme {
+  static Color appbackcolor = Color(0xffEFEFEF);
+
   static Color iconColor = Color(0xff000000);
 
   static Color appbartextColor = Color(0xff393E46);
@@ -18,8 +20,54 @@ class MyTheme {
   static Color appbackgroundColor = Color(0xffFFFFFF);
 
   static Color editbuttontextColor = Color(0xffFF6E42);
-  
+
   static Color devidercolor = Color(0xffD8D8D8);
 
+  static Color checkboxcolor = Color(0xffB9B9B9);
+
+  static Color checkboxtextcolor = Color(0xff3C3B4D);
+
   static Color buttonbackgroundColor = Color(0xff222831);
+
+  static Color bottomtextColorsignup = Color(0xff505056);
+
+  static Color dividermiddletext = Color(0xff4E535A);
+
+  static Color buttonbackgroundcolor = Color(0xffF2F2F2);
+
+  static Color textformtextcolor = Color(0xff374151);
+
+  static Color buttontextlogin = Color(0xff222222);
+
+  static Color forgetpasslogintext = Color(0xff32B768);
+
+  static Color boxdecoration = Color(0xff32B768);
+
+  static Color boxdecoration2 = Color(0xffF4F4F4);
+
+  static Color skiptextcolor = Color(0xff4E5156);
+
+  static Color shopboxcolor = Color(0xffFCEBCD);
+
+  static Color shoptextcolor = Color(0xff767B91);
+
+  static Color shoptextcolor2 = Color(0xff919098);
+
+  static Color aboutlocatextcolor = Color(0xff93BF72);
+
+  static Color aboutlocatextcolors = Color(0xffF94510);
+
+  static Color shoppageimgcolor = Color(0xff25A244);
+
+  static Color bookingtextcolor = Color(0xff84888E);
+
+  static Color bottomcontainercolor = Color(0xffFF8400);
+
+  static Color orderbordercolor = Color(0xffBBBBB6);
+
+  static Color orderpopupcolor = Color(0xffF88020);
+
+  static Color orderoptionbuttoncolor = Color(0xff44C4A1);
+
+  static Color mapboxdecorationcolor = Color(0xff5D5E5F);
 }

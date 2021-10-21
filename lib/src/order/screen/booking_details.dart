@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/Orderpage.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class BookingDetails extends StatefulWidget {
@@ -77,7 +78,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                 val ? numberOfPeople.toString() : numberOfTable.toString(),
                 style: GoogleFonts.nunito(
                     fontWeight: FontWeight.w500,
-                    color: Color(0xff4E535A),
+                    color: MyTheme.dividermiddletext,
                     fontSize: 20),
               ),
             ),
@@ -182,9 +183,10 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Text(
                           selectedDate.day.toString(),
                           style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 40,
-                              color: Color(0xff00ADB5)),
+                            fontWeight: FontWeight.w300,
+                            fontSize: 40,
+                            color: MyTheme.borderchangeColor,
+                          ),
                         ),
                         SizedBox(
                           width: 7,
@@ -241,7 +243,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                         children: [
                           Image.asset(
                             'assets/images/clock.png',
-                            color: Color(0xff00ADB5),
+                            color: MyTheme.borderchangeColor,
                             height: 25,
                           ),
                           SizedBox(
@@ -278,14 +280,15 @@ class _BookingDetailsState extends State<BookingDetails> {
               "Venue",
               style: GoogleFonts.nunito(
                 fontWeight: FontWeight.w300,
-                color: Color(0xff84888E),
+                //color: Color(0xff84888E),
+                color: MyTheme.bookingtextcolor,
               ),
             ),
             Text(
               "Sloppy Joe Burgers",
               style: GoogleFonts.nunito(
                   fontWeight: FontWeight.w500,
-                  color: Color(0xff84888E),
+                  color: MyTheme.bookingtextcolor,
                   fontSize: 20),
             ),
             Divider(),

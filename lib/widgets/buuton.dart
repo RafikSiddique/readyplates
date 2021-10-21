@@ -10,9 +10,11 @@ class Elevated extends StatelessWidget {
   final Color? backgroundColor;
   final Color? borderColor;
   final EdgeInsets padding;
+  final Color? color;
   Elevated({
     Key? key,
     required this.text,
+    this.color,
     this.width,
     required this.onTap,
     this.backgroundColor = const Color(0xff222831),
@@ -42,6 +44,7 @@ class Elevated extends StatelessWidget {
             text,
             style: GoogleFonts.inter(
               fontWeight: fontWeight,
+              color: color,
             ),
           ),
         ),

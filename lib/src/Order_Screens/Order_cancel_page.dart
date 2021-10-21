@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class OrderCancelledPage extends StatelessWidget {
   static const id = "/OrderCancelledPage";
@@ -20,7 +21,7 @@ class OrderCancelledPage extends StatelessWidget {
                 fontSize: 25,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w500,
-                color: Color(0xff393E46),
+                color: MyTheme.appbartextColor,
               ),
             ),
             SizedBox(
@@ -32,7 +33,7 @@ class OrderCancelledPage extends StatelessWidget {
                 fontSize: 15,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.normal,
-                color: Color(0xff393E46),
+                color: MyTheme.appbartextColor,
               ),
             ),
             SizedBox(

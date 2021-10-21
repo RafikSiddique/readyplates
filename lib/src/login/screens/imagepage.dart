@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class ImagePage extends StatefulWidget {
   static const id = "/image";
@@ -39,15 +40,16 @@ class _ImagePageState extends State<ImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 44,
-          backgroundColor: Color(0xffFFFFFF),
+          backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
               iconSize: 14.83,
               icon: FaIcon(
                 FontAwesomeIcons.chevronLeft,
-                color: Color(0xff000000),
+                color: Colors.black,
               ),
               onPressed: () {
                 Get.back();
@@ -60,7 +62,8 @@ class _ImagePageState extends State<ImagePage> {
               fontWeight: FontWeight.w500,
               fontSize: 17,
               letterSpacing: -0.226667,
-              color: Color(0xff393E46),
+              color: MyTheme.appbartextColor,
+              //color: Color(0xff393E46),
             ),
           ),
         ),
@@ -120,10 +123,12 @@ class _ImagePageState extends State<ImagePage> {
                   Container(
                     height: 54,
                     decoration: BoxDecoration(
-                      color: Color(0xffF4F4F4),
+                      color: MyTheme.boxdecoration2,
+                      //color: Color(0xffF4F4F4),
                       border: Border.all(
                         width: 1,
-                        color: Color(0xff222831),
+                        color: MyTheme.buttonbackgroundColor,
+                        // color: Color(0xff222831),
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(6)),
                     ),
@@ -131,9 +136,7 @@ class _ImagePageState extends State<ImagePage> {
                     //  margin: EdgeInsets.only(left: 16, right: 16),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Color(
-                            0xffFFFFFF,
-                          ),
+                          primary: Colors.white,
                         ),
                         onPressed: () => pickImage(ImageSource.camera),
 
@@ -146,9 +149,7 @@ class _ImagePageState extends State<ImagePage> {
                               fontFamily: 'Inter-Regular',
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w500,
-                              color: Color(
-                                0xff222831,
-                              ),
+                              color: MyTheme.buttonbackgroundColor,
                             ))),
                   ),
                   SizedBox(height: 8),
@@ -158,7 +159,7 @@ class _ImagePageState extends State<ImagePage> {
                       color: Color(0xffF4F4F4),
                       border: Border.all(
                         width: 1,
-                        color: Color(0xff222831),
+                        color: MyTheme.buttonbackgroundColor,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(6)),
                     ),
@@ -174,9 +175,7 @@ class _ImagePageState extends State<ImagePage> {
                               fontFamily: 'Inter-Regular',
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w600,
-                              color: Color(
-                                0xffFFFFFF,
-                              ),
+                              color: Colors.white,
                               fontSize: 17,
                             ))),
                   ),
@@ -214,13 +213,14 @@ class _ImagePageState extends State<ImagePage> {
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 15,
-                                color: Color(0xff4E5156),
+                                color: MyTheme.skiptextcolor,
+                                // color: Color(0xff4E5156),
                               )),
                           IconButton(
                               iconSize: 14.83,
                               icon: FaIcon(
                                 FontAwesomeIcons.chevronRight,
-                                color: Color(0xff000000),
+                                color: Colors.black,
                               ),
                               onPressed: null),
                         ],

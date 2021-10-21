@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class QrCode extends StatelessWidget {
   static const id = "/QrCode";
@@ -22,7 +23,7 @@ class QrCode extends StatelessWidget {
                         fontSize: 25,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
-                        color: Color(0xff393E46)),
+                        color: MyTheme.appbartextColor),
                   )),
               SizedBox(height: 4),
               Text("Restaurant will guide you to the table ",
@@ -31,7 +32,7 @@ class QrCode extends StatelessWidget {
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
-                        color: Color(0xff393E46)),
+                        color: MyTheme.appbartextColor),
                   )),
               SizedBox(height: 81),
               Center(

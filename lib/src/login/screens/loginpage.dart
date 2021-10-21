@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/readyplates.dart';
 
@@ -56,7 +57,8 @@ class LoginPage extends StatelessWidget {
                       bottomRight: Radius.zero,
                     ),
                     border: Border.all(
-                      color: Color(0xff979797),
+                      color: MyTheme.hinttextColor,
+                      // color: Color(0xff979797),
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -84,7 +86,8 @@ class LoginPage extends StatelessWidget {
                                 icon: const Icon(
                                   Icons.chevron_left,
                                 ),
-                                color: Color(0xff393E46),
+                                //color: Color(0xff393E46),
+                                color: Colors.black,
                                 onPressed: () {
                                   Get.back();
                                 },
@@ -95,7 +98,7 @@ class LoginPage extends StatelessWidget {
                               Text("Login",
                                   style: TextStyle(
                                     fontSize: 17,
-                                    color: Color(0xff6E6D7A),
+                                    color: MyTheme.appbartextColor,
                                   )),
                               Spacer(
                                 flex: 3,
@@ -115,7 +118,8 @@ class LoginPage extends StatelessWidget {
                                 fontFamily: 'Inter-Regular',
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.normal,
-                                color: Color(0xff374151),
+                                color: MyTheme.textformtextcolor,
+                                // color: Color(0xff374151),
                               )),
                           SizedBox(height: size.height * 0.010),
                           Obx(() => !controller.isNumber.value
@@ -134,14 +138,17 @@ class LoginPage extends StatelessWidget {
                                       hintStyle: TextStyle(
                                         fontSize: 15,
                                         letterSpacing: -0.264706,
-                                        color:
-                                            Color(0xff9CA3AF).withOpacity(0.7),
+                                        //color:
+                                        color: MyTheme.hinttextColor,
+                                        //Color(0xff9CA3AF).withOpacity(0.7),
                                       ),
 
                                       //labelText: "***********",
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            width: 1, color: Color(0xffE0E0E0)),
+                                          width: 1,
+                                          color: MyTheme.borderColor,
+                                        ),
                                         borderRadius:
                                             BorderRadius.circular(6.0),
                                       ),
@@ -169,7 +176,14 @@ class LoginPage extends StatelessWidget {
                                             maxLength: 1,
                                             decoration: InputDecoration(
                                               counterText: "",
-                                              border: OutlineInputBorder(),
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: MyTheme.borderColor,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                              ),
                                             ),
                                             onChanged: (value) {
                                               if (value.length == 1) {
@@ -201,10 +215,13 @@ class LoginPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                const Text('Forget Password',
-                                    style: TextStyle(
-                                        color: Color(0xff32B768),
-                                        fontSize: 14)),
+                                const Text(
+                                  'Forget Password',
+                                  style: TextStyle(
+                                      //color: MyTheme.forgetpasslogintext,
+                                      color: Color(0xff32B768),
+                                      fontSize: 14),
+                                ),
                               ],
                             ),
                           ),
@@ -223,7 +240,7 @@ class LoginPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               height: 54,
                               decoration: BoxDecoration(
-                                color: Color(0xff222831),
+                                color: MyTheme.buttonbackgroundColor,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
@@ -236,7 +253,7 @@ class LoginPage extends StatelessWidget {
                                     fontFamily: 'Inter-Regular',
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xffFFFFFF),
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -253,11 +270,11 @@ class LoginPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               height: 54,
                               decoration: BoxDecoration(
-                                color: Color(0xffF4F4F4),
+                                color: MyTheme.boxdecoration2,
                                 border: Border.all(
-                                  width: 1,
-                                  color: Color(0xffB9B9B9),
-                                ),
+                                    width: 1, color: MyTheme.checkboxcolor
+                                    // color: Color(0xffB9B9B9),
+                                    ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
@@ -275,15 +292,16 @@ class LoginPage extends StatelessWidget {
                                   ),
                                   Center(
                                     child: Text(
-                                      'Sign up with Google',
+                                      'Login with Google',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: 17,
-                                        fontFamily: 'Inter-Regular',
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xff222222),
-                                      ),
+                                          fontSize: 17,
+                                          fontFamily: 'Inter-Regular',
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w600,
+                                          color: MyTheme.buttontextlogin
+                                          //color: Color(0xff222222),
+                                          ),
                                     ),
                                   ),
                                 ],

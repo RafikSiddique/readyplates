@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:readyplates/src/home/widgets/profile_tile.dart';
+import 'package:readyplates/utils/my_color.dart';
 //import 'package:readyplates/widgets/edit_button.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -23,7 +24,8 @@ class ProfilePage extends StatelessWidget {
             fontStyle: FontStyle.normal,
             fontSize: 17,
             letterSpacing: -0.226667,
-            color: Color(0xff393E46),
+            color: MyTheme.appbartextColor,
+            //color: Color(0xff393E46),
           ),
         ),
       ),

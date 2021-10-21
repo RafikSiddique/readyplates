@@ -5,6 +5,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/Order_Screens/about_location.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class ShopScreen extends StatelessWidget {
   static const id = "/shop";
@@ -78,7 +79,7 @@ class ShopScreen extends StatelessWidget {
             iconSize: 14.83,
             icon: FaIcon(
               FontAwesomeIcons.chevronLeft,
-              color: Color(0xff000000),
+              color: Colors.black,
             ),
             onPressed: () {
               Navigator.pushNamed(context, MapPage.id);
@@ -88,7 +89,7 @@ class ShopScreen extends StatelessWidget {
           'Nearby Restaurants',
           style: TextStyle(
             fontSize: 17,
-            color: Color(0xff393E46),
+            color: MyTheme.appbartextColor,
           ),
         ),
       ),
@@ -112,7 +113,7 @@ class ShopScreen extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(4.0),
                     border: Border.all(
-                      color: Color(0xff979797),
+                      color: MyTheme.hinttextColor,
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -129,14 +130,14 @@ class ShopScreen extends StatelessWidget {
                           iconSize: 16,
                           icon: FaIcon(
                             FontAwesomeIcons.search,
-                            color: Color(0xff000000),
+                            color: Colors.black,
                           ),
                           onPressed: () {}),
                       Text(
                         'Search',
                         style: TextStyle(
                           fontSize: 15.0,
-                          color: Color(0xff393E46),
+                          color: MyTheme.appbartextColor,
                         ),
                       ),
                     ],
@@ -162,7 +163,8 @@ class ShopScreen extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: Color(0xffFCEBCD),
+                              //color: Color(0xffFCEBCD),
+                              color: MyTheme.shopboxcolor,
                               borderRadius: BorderRadius.circular(11),
                             ),
                             height: media.size.height * 0.06,
@@ -204,7 +206,7 @@ class ShopScreen extends StatelessWidget {
                         '32nd Street, Long Beach, San Francisco',
                         style: TextStyle(
                           fontSize: 10,
-                          color: Color(0xff393E46),
+                          color: MyTheme.appbartextColor,
                         ),
                       ),
                     ],
@@ -235,7 +237,7 @@ class ShopScreen extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: Color(0xffFFFFFF),
+                            color: Colors.white,
                           ),
                           boxShadow: [
                             BoxShadow(
@@ -278,21 +280,21 @@ class ShopScreen extends StatelessWidget {
                                         resNames[i],
                                         style: GoogleFonts.montserrat(
                                             fontSize: media.size.height * 0.022,
-                                            color: Color(0xff000000),
+                                            color: Colors.black,
                                             fontWeight: FontWeight.w600),
                                       ),
                                       Text(
                                         desc[i],
                                         style: GoogleFonts.montserrat(
                                           fontSize: media.size.height * 0.013,
-                                          color: Color(0xff919098),
+                                          color: MyTheme.shoptextcolor2,
                                         ),
                                       ),
                                       Text(
                                         add[i],
                                         style: GoogleFonts.montserrat(
                                           fontSize: media.size.height * 0.013,
-                                          color: Color(0xff919098),
+                                          color: MyTheme.shoptextcolor2,
                                         ),
                                       ),
                                       Row(
@@ -311,7 +313,8 @@ class ShopScreen extends StatelessWidget {
                                             style: TextStyle(
                                               fontSize:
                                                   media.size.height * 0.013,
-                                              color: Color(0xff767B91),
+                                              //color: Color(0xff767B91),
+                                              color: MyTheme.shoptextcolor,
                                             ),
                                           ),
                                         ],
@@ -322,7 +325,8 @@ class ShopScreen extends StatelessWidget {
                                         margin:
                                             EdgeInsets.symmetric(vertical: 3),
                                         child: Divider(
-                                          color: Color(0xffC7CCDB),
+                                          color: MyTheme.devidercolor,
+                                          //color: Color(0xffC7CCDB),
                                           thickness: 1,
                                           height: 1,
                                         ),
@@ -343,7 +347,7 @@ class ShopScreen extends StatelessWidget {
                                             style: TextStyle(
                                               fontSize:
                                                   media.size.height * 0.013,
-                                              color: Color(0xff919098),
+                                              color: MyTheme.shoptextcolor2,
                                             ),
                                           ),
                                         ],

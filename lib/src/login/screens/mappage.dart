@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/routes.dart';
 
 class MapPage extends StatefulWidget {
@@ -107,7 +108,8 @@ class _MapPageState extends State<MapPage> {
                 shape: CircleBorder(),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Color(0xff5D5E5F).withOpacity(0.2),
+                      color: MyTheme.mapboxdecorationcolor,
+                      //color: Color(0xff5D5E5F).withOpacity(0.2),
                       shape: BoxShape.circle),
                   // padding: const EdgeInsets.all(8.0),
                   margin: EdgeInsets.all(8),
@@ -134,7 +136,7 @@ class _MapPageState extends State<MapPage> {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        color: Color(0xffFFFFFF),
+                        color: Colors.white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -142,15 +144,17 @@ class _MapPageState extends State<MapPage> {
                             SizedBox(
                               height: 13,
                             ),
-                            Text("Hello ${authController.fNamController.text}!",
+                            Text(
+                                "Hello Omar ${authController.fNamController.text}!",
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Inter',
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal,
-                                  // color: Color(0xff4E535A),
+                                  color: MyTheme.dividermiddletext,
+                                  // color: Color(0xff4E535A),dividermiddletext
 
-                                  color: Color.fromRGBO(78, 83, 90, 0.8),
+                                  //color: Color.fromRGBO(78, 83, 90, 0.8),
                                 )),
                             SizedBox(
                               height: 4,
@@ -163,7 +167,8 @@ class _MapPageState extends State<MapPage> {
                                       fontFamily: 'Inter',
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff222831),
+                                      color: MyTheme.buttonbackgroundColor,
+                                      //color: Color(0xff222831),
                                     )),
                                 SizedBox(
                                   width: 6,
@@ -184,8 +189,9 @@ class _MapPageState extends State<MapPage> {
                                   fontFamily: 'Inter',
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500,
-                                  // color: Color(0xff4E535A),
-                                  color: Color.fromRGBO(78, 83, 90, 0.8),
+                                  color: MyTheme.dividermiddletext,
+                                  // color: Color(0xff4E535A),appbartextColor,dividermiddletext
+                                  //color: Color.fromRGBO(78, 83, 90, 0.8),
                                   letterSpacing: 1,
                                 )),
                             SizedBox(
@@ -206,43 +212,20 @@ class _MapPageState extends State<MapPage> {
                                               fontStyle: FontStyle.normal,
                                               fontWeight: FontWeight.normal,
                                               letterSpacing: -0.264706,
-                                              color: Color(0xff393E46),
+                                              color: MyTheme.appbartextColor,
                                             ))),
                                   ),
                                   IconButton(
                                     icon: const Icon(Icons.done),
-                                    color: Color(0xff300ADB5),
+                                    color: MyTheme.borderchangeColor,
                                     onPressed: () {
                                       // Navigator.pushNamed(
-                                      //     context, MyRoutes.OnbordingPage);
+                                      //     context, MyRoutes.OnbordingPage);borderchangeColor
                                     },
                                   ),
                                 ],
                               ),
                             ),
-                            /*        SizedBox(
-                              height: 10,
-                            ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                textStyle: const TextStyle(fontSize: 20),
-                              ),
-                              onPressed: () {},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const Text('Change Location',
-                                      style: TextStyle(
-                                          fontFamily: 'Inter',
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: -0.1,
-                                          color: Color(0xff00ADB5),
-                                          fontSize: 13)),
-                                ],
-                              ),
-                            ), */
                             SizedBox(
                               height: 10,
                             ),
@@ -264,7 +247,7 @@ class _MapPageState extends State<MapPage> {
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: -0.1,
-                                        color: Color(0xffFFFFFF),
+                                        color: Colors.white,
                                         fontSize: 17,
                                       ))),
                             SizedBox(

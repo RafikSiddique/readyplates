@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/bottom_container.dart';
 import 'package:readyplates/widgets/bottomcontainer.dart';
 
@@ -12,10 +13,10 @@ class BurgersupportingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE5E5E5),
+      backgroundColor: Colors.white, //(0xffE5E5E5),
       appBar: AppBar(
         toolbarHeight: 44,
-        backgroundColor: Color(0xffE5E5E5),
+        backgroundColor: Colors.white, //(0xffE5E5E5),
         elevation: 0,
         centerTitle: true,
         title: Text(
@@ -26,7 +27,8 @@ class BurgersupportingPage extends StatelessWidget {
             fontStyle: FontStyle.normal,
             fontSize: 17,
             letterSpacing: -0.226667,
-            color: Color(0xff393E46),
+            //color: Color(0xff393E46),
+            color: MyTheme.appbartextColor,
           ),
         ),
         automaticallyImplyLeading: false,
@@ -56,7 +58,8 @@ class BurgersupportingPage extends StatelessWidget {
                   ),
                   Divider(
                     thickness: 2,
-                    color: Color(0xffE4E4E4),
+                    color: MyTheme.devidercolor,
+                    // color: Color(0xffE4E4E4),
                   ),
                   SizedBox(
                     height: 10,
@@ -67,7 +70,7 @@ class BurgersupportingPage extends StatelessWidget {
                   ),
                   Divider(
                     thickness: 2,
-                    color: Color(0xffE4E4E4),
+                    color: MyTheme.devidercolor,
                   ),
                   SizedBox(
                     height: 10,
@@ -77,14 +80,15 @@ class BurgersupportingPage extends StatelessWidget {
                     children: [
                       Text("TOTAL :",
                           style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: Color(0xff393E46))),
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            color: MyTheme.appbartextColor,
+                          )),
                       TextwidgetPage(
                         text: "\$ 24.0",
-                        color: Color(0xff393E46),
+                        color: MyTheme.appbartextColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ],
@@ -97,23 +101,24 @@ class BurgersupportingPage extends StatelessWidget {
                     children: [
                       Text("EXTRAS :",
                           style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: Color(0xff393E46))),
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            color: MyTheme.appbartextColor,
+                          )),
                       SizedBox(
                         width: 16,
                       ),
                       TextwidgetPage(
                         text: "Cheese",
-                        color: Color(0xff393E46),
+                        color: MyTheme.appbartextColor,
                         fontWeight: FontWeight.w400,
                       ),
                       Spacer(),
                       TextwidgetPage(
                           text: "1 X \$ 0.5",
-                          color: Color(0xff393E46),
+                          color: MyTheme.appbartextColor,
                           fontWeight: FontWeight.w500),
                     ],
                   ),
@@ -125,23 +130,24 @@ class BurgersupportingPage extends StatelessWidget {
                     children: [
                       Text("TAX ",
                           style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: Color(0xff393E46))),
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            color: MyTheme.appbartextColor,
+                          )),
                       SizedBox(
                         width: 48,
                       ),
                       TextwidgetPage(
                         text: "CGST",
-                        color: Color(0xff4E535A),
+                        color: MyTheme.dividermiddletext,
                         fontWeight: FontWeight.w400,
                       ),
                       Spacer(),
                       TextwidgetPage(
                         text: "\$ 0.5",
-                        color: Color(0xff393E46),
+                        color: MyTheme.appbartextColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ],
@@ -158,14 +164,14 @@ class BurgersupportingPage extends StatelessWidget {
 
                       TextwidgetPage(
                         text: "IGST",
-                        color: Color(0xff4E535A),
+                        color: MyTheme.dividermiddletext,
                         fontWeight: FontWeight.w400,
                       ),
 
                       Spacer(),
                       TextwidgetPage(
                         text: "\$ 0.5",
-                        color: Color(0xff393E46),
+                        color: MyTheme.appbartextColor,
                         fontWeight: FontWeight.w500,
                       ),
                       // Text("\$ 0.5",
@@ -184,7 +190,7 @@ class BurgersupportingPage extends StatelessWidget {
                     //indent: 18,
                     //endIndent: 18,
                     thickness: 2,
-                    color: Color(0xffE4E4E4),
+                    color: MyTheme.devidercolor,
                   ),
                   Row(
                     children: [
@@ -206,11 +212,13 @@ class BurgersupportingPage extends StatelessWidget {
                       Text(
                           "Sloppy Joe Burgers, Kondhwa Budruk,Parge,\nNagar,Pune,411048",
                           style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.normal,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: Color(0xff4E535A))),
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.normal,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            // color: Color(0xff4E535A)
+                            color: MyTheme.dividermiddletext,
+                          )),
                     ],
                   ),
                   SizedBox(
@@ -229,11 +237,12 @@ class BurgersupportingPage extends StatelessWidget {
                       Text(
                           "Sunday, 25th, September 2021, 10:00 AM \nPAX: 6 Tables X 2",
                           style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.normal,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: Color(0xff4E535A))),
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.normal,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            color: MyTheme.dividermiddletext,
+                          )),
                     ],
                   ),
                 ],

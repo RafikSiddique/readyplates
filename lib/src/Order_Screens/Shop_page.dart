@@ -7,6 +7,7 @@ import 'package:readyplates/modals/cart_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/edit_button.dart';
 
@@ -33,7 +34,7 @@ class _ShopPageState extends State<ShopPage> {
             iconSize: 14.83,
             icon: FaIcon(
               FontAwesomeIcons.chevronLeft,
-              color: Color(0xff000000),
+              color: Colors.black,
             ),
             onPressed: () {
               Navigator.pushNamed(context, MapPage.id);
@@ -43,7 +44,7 @@ class _ShopPageState extends State<ShopPage> {
           'Sloppy Joe Burgers',
           style: TextStyle(
             fontSize: 17,
-            color: Color(0xff393E46),
+            color: MyTheme.appbartextColor,
           ),
         ),
       ),
@@ -64,7 +65,7 @@ class _ShopPageState extends State<ShopPage> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(4.0),
                   border: Border.all(
-                    color: Color(0xff979797),
+                    color: MyTheme.hinttextColor,
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -81,14 +82,14 @@ class _ShopPageState extends State<ShopPage> {
                         iconSize: 16,
                         icon: FaIcon(
                           FontAwesomeIcons.search,
-                          color: Color(0xff000000),
+                          color: Colors.black,
                         ),
                         onPressed: () {}),
                     Text(
                       'Search',
                       style: TextStyle(
                         fontSize: 15.0,
-                        color: Color(0xff393E46),
+                        color: MyTheme.appbartextColor,
                       ),
                     ),
                   ],
@@ -101,10 +102,11 @@ class _ShopPageState extends State<ShopPage> {
                 "MAIN COURSE",
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xff4E535A)),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    fontStyle: FontStyle.normal,
+                    color: MyTheme.dividermiddletext,
+                  ),
                 ),
               ),
               SizedBox(
@@ -237,7 +239,8 @@ class _ShopPageState extends State<ShopPage> {
                                           (index) => Image.asset(
                                             'assets/images/spice.png',
                                             color: index == 0
-                                                ? Color(0xff25A244)
+                                                ? MyTheme
+                                                    .shoppageimgcolor //Color(0xff25A244)
                                                 : null,
                                           ),
                                         ),
@@ -268,8 +271,9 @@ class _ShopPageState extends State<ShopPage> {
               Elevated(
                 text: "Proceed to Booking",
                 width: double.infinity,
-                backgroundColor:
-                    cartItems.isEmpty ? Color(0xff979797) : Color(0xff222831),
+                backgroundColor: cartItems.isEmpty
+                    ? MyTheme.hinttextColor
+                    : MyTheme.buttonbackgroundColor,
                 onTap: () {
                   if (cartItems.isEmpty) {
                     Get.snackbar("Please add an Item",

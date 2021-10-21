@@ -5,6 +5,7 @@ import 'package:readyplates/src/Order_Screens/Shop_page.dart';
 import 'package:readyplates/src/Order_Screens/about_location.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -19,7 +20,7 @@ class OrderOption extends StatelessWidget {
         height: 4,
         width: 4,
         decoration: BoxDecoration(
-            color: Color(0xff000000), borderRadius: BorderRadius.circular(24)),
+            color: Colors.black, borderRadius: BorderRadius.circular(24)),
       ),
     );
   }
@@ -27,18 +28,19 @@ class OrderOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE5E5E5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xffE5E5E5),
+        backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
         title: Text("Orders",
             style: GoogleFonts.inter(
               textStyle: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.normal,
-                  color: Color(0xff4E535A)),
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.normal,
+                color: MyTheme.dividermiddletext,
+              ),
             )),
       ),
       body: Padding(
@@ -53,20 +55,21 @@ class OrderOption extends StatelessWidget {
               "ACTIVE",
               style: GoogleFonts.inter(
                 textStyle: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.normal,
-                    color: Color(0xff4E535A)),
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.normal,
+                  color: MyTheme.dividermiddletext,
+                ),
               ),
             ),
             SizedBox(
               height: 10,
             ),
             Container(
-              height: 280,
+              height: 320, //280,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xffFFFFFF),
+                color: Colors.white,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
@@ -82,10 +85,11 @@ class OrderOption extends StatelessWidget {
                             Text("Order #210403AS",
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      fontStyle: FontStyle.normal,
-                                      color: Color(0xff4E535A)),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    color: MyTheme.dividermiddletext,
+                                  ),
                                 )),
                             Spacer(),
                             buildContainer(),
@@ -108,18 +112,20 @@ class OrderOption extends StatelessWidget {
                         Text("1 x Flat white (small) 1 x Whole",
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             )),
                         Text("\$12.00",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w300,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             ))
                       ],
                     ),
@@ -132,18 +138,20 @@ class OrderOption extends StatelessWidget {
                         Text("Croissant",
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             )),
                         Text("\$3.00",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w300,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             ))
                       ],
                     ),
@@ -154,18 +162,20 @@ class OrderOption extends StatelessWidget {
                         Text("1 x Flat white (small) 1 x Whole",
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             )),
                         Text("\$12.00",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w300,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             ))
                       ],
                     ),
@@ -175,18 +185,20 @@ class OrderOption extends StatelessWidget {
                         Text("1 x Flat white (small) 1 x Whole",
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             )),
                         Text("\$12.00",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300,
-                                  fontStyle: FontStyle.normal,
-                                  color: Color(0xff4E535A)),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w300,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.dividermiddletext,
+                              ),
                             ))
                       ],
                     ),
@@ -197,14 +209,21 @@ class OrderOption extends StatelessWidget {
                       text: "Add to Order ",
                       width: MediaQuery.of(context).size.width,
                       onTap: () {},
-                      borderColor: Color(0xff222831),
+                      borderColor:
+                          MyTheme.orderoptionbuttoncolor, // Color(0xff222831),
                       backgroundColor: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Container(
                       child: Elevated(
                         text: " Complete Order",
+                        color: Colors.white,
                         width: MediaQuery.of(context).size.width,
                         onTap: () {},
+                        borderColor: MyTheme.orderoptionbuttoncolor,
+                        backgroundColor: MyTheme.orderoptionbuttoncolor,
                       ),
                     ),
                     SizedBox(height: 0),
