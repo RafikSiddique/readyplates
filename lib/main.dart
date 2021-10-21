@@ -26,7 +26,8 @@ import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'src/login/screens/loginpage.dart';
 import 'src/login/screens/signuppage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(SharedPreferenceHelper());
   Get.put(AuthController());
   Get.put(HomeController());

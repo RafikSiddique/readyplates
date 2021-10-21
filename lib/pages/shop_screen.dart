@@ -4,49 +4,14 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/Order_Screens/about_location.dart';
+import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/home/widgets/restaurant_card.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class ShopScreen extends StatelessWidget {
   static const id = "/shop";
   ShopScreen({Key? key}) : super(key: key);
-
-  final List<String> images = [
-    "assets/images/img1.png",
-    'assets/images/img2.png',
-    'assets/images/img3.png',
-    'assets/images/img4.png',
-  ];
-  final List<String> resNames = [
-    "The Burger Barn Cafe",
-    'Fit Food Co.',
-    'Granny’s Soup Shack',
-    'Jack’s English Breakfast',
-  ];
-  final List<String> desc = [
-    'American, Fast Food',
-    'American, Lebanese, Arabian, Salads ...',
-    'Mediterrarian, Indian, Thai, Pan-Asia',
-    'English, Breakfast, Pancakes, Ice Creams',
-  ];
-  final List<String> add = [
-    '32, Dataran Sunway | 3.1 kms',
-    '21, Kota Damansara | 3.1 kms',
-    '32, Dataran Sunway | 3.1 kms',
-    '32, Dataran Sunway | 3.1 kms',
-  ];
-  final List<String> rateTime = [
-    '4.3 | Serving Time : 37 mins | \$25 for two',
-    '4.3 | Serving Time : 37 mins | \$25 for two',
-    '4.3 | Serving Time : 37 mins | \$25 for two',
-    '4.3 | Serving Time : 37 mins | \$25 for two',
-  ];
-  final List<String> offer = [
-    '30% off upto \$5',
-    '30% off upto \$5',
-    '30% off upto \$5',
-    '30% off upto \$5',
-  ];
 
   final List<String> category = [
     'Drinks',
@@ -68,6 +33,9 @@ class ShopScreen extends StatelessWidget {
     'assets/images/fastfood.png',
     'assets/images/chinese.png',
   ];
+
+  final HomeController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
@@ -223,148 +191,19 @@ class ShopScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16),
                 child: Text('Near Me'),
               ),
-              Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    for (var i = 0; i < images.length; i++)
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.symmetric(
-                            horizontal: media.size.width * 0.04,
-                            vertical: media.size.width * 0.02),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.25),
-                              offset: Offset(0, 2),
-                              blurRadius: 4,
-                              spreadRadius: 0,
-                            ),
-                          ],
+              Obx(
+                () => controller.restaurants.isNotEmpty &&
+                        controller.restaurants.first.id != -1
+                    ? Container(
+                        color: Colors.white,
+                        child: Column(
+                          children: controller.restaurants
+                              .map((element) =>
+                                  RestaurantCard(restaurantModel: element))
+                              .toList(),
                         ),
-                        child: Material(
-                          type: MaterialType.transparency,
-                          child: InkWell(
-                            onTap: () {
-                              Get.toNamed(Aboutlocation.id);
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.all(media.size.width * 0.025),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    // color: Colors.blue,
-                                    width: media.size.height * 0.09,
-                                    height: media.size.height * 0.09,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Image.asset(images[i]),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        resNames[i],
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: media.size.height * 0.022,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Text(
-                                        desc[i],
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: media.size.height * 0.013,
-                                          color: MyTheme.shoptextcolor2,
-                                        ),
-                                      ),
-                                      Text(
-                                        add[i],
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: media.size.height * 0.013,
-                                          color: MyTheme.shoptextcolor2,
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: media.size.height * 0.013,
-                                            height: media.size.height * 0.013,
-                                            child: Image.asset(
-                                                'assets/images/star.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 3,
-                                          ),
-                                          Text(
-                                            rateTime[i],
-                                            style: TextStyle(
-                                              fontSize:
-                                                  media.size.height * 0.013,
-                                              //color: Color(0xff767B91),
-                                              color: MyTheme.shoptextcolor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: (media.size.width -
-                                            media.size.height * 0.18),
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 3),
-                                        child: Divider(
-                                          color: MyTheme.devidercolor,
-                                          //color: Color(0xffC7CCDB),
-                                          thickness: 1,
-                                          height: 1,
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: media.size.height * 0.013,
-                                            height: media.size.height * 0.013,
-                                            child: Image.asset(
-                                                'assets/images/tag.png'),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            offer[i],
-                                            style: TextStyle(
-                                              fontSize:
-                                                  media.size.height * 0.013,
-                                              color: MyTheme.shoptextcolor2,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                ),
+                      )
+                    : Container(),
               ),
               SizedBox(
                 height: 50,

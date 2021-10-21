@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/models/restaurant_list.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/Shop_page.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -9,8 +10,9 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class Aboutlocation extends StatelessWidget {
+  final RestaurantModel restaurantModel = Get.arguments;
   static const id = "/aboutlocation";
-  const Aboutlocation({Key? key}) : super(key: key);
+  Aboutlocation({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,10 @@ class Aboutlocation extends StatelessWidget {
             height: size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/ready.png"),
+                image: (restaurantModel.bio.first.food1 == ""
+                        ? AssetImage("assets/images/ready.png")
+                        : NetworkImage(restaurantModel.bio.first.food1))
+                    as ImageProvider,
                 fit: BoxFit.cover,
               ),
             ),
@@ -34,9 +39,9 @@ class Aboutlocation extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: DraggableScrollableSheet(
-              maxChildSize: 0.7,
+              maxChildSize: size.height > 800 ? 0.9 : 0.6,
               minChildSize: 0.5,
-              initialChildSize: 0.6,
+              initialChildSize: size.height > 800 ? 0.6 : 0.5,
               builder:
                   (BuildContext contex, ScrollController scrollcontroller) {
                 return Container(
@@ -70,7 +75,7 @@ class Aboutlocation extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Sloppy Joe Burgers",
+                              Text(restaurantModel.resName,
                                   style: GoogleFonts.nunito(
                                     textStyle: TextStyle(
                                       fontSize: 25,
@@ -190,11 +195,13 @@ class Aboutlocation extends StatelessWidget {
                               height: 15.93,
                               width: 15.13,
                               child: Image(
-                                image: AssetImage('assets/images/Spoon.png'),
+                                image: AssetImage('assets/images/spoon.png'),
                               ),
                             ),
                             Text(
-                              "  20 mins serving time",
+                              restaurantModel.bio.first.servingTime == ""
+                                  ? "Undefined Serving time"
+                                  : restaurantModel.bio.first.servingTime,
                               style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,

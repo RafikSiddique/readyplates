@@ -2,26 +2,25 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-class Restaurant {
-  int id;
-  String resName;
-  dynamic address;
-  List<Bio> bio;
-
-  Restaurant({
+class RestaurantModel {
+  final int id;
+  final String resName;
+  final String? address;
+  final List<Bio> bio;
+  RestaurantModel({
     required this.id,
     required this.resName,
     required this.address,
     required this.bio,
   });
 
-  Restaurant copyWith({
+  RestaurantModel copyWith({
     int? id,
     String? resName,
-    dynamic address,
+    String? address,
     List<Bio>? bio,
   }) {
-    return Restaurant(
+    return RestaurantModel(
       id: id ?? this.id,
       resName: resName ?? this.resName,
       address: address ?? this.address,
@@ -32,36 +31,38 @@ class Restaurant {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'resName': resName,
+      'res_name': resName,
       'address': address,
       'bio': bio.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory Restaurant.fromMap(Map<String, dynamic> map) {
-    return Restaurant(
-      id: map['id'],
-      resName: map['resName'],
+  factory RestaurantModel.fromMap(Map<String, dynamic> map) {
+    return RestaurantModel(
+      id: map['id']?.toInt(),
+      resName: map['res_name'],
       address: map['address'],
-      bio: List<Bio>.from(map['bio']?.map((x) => Bio.fromMap(x))),
+      bio: map['bio'].length == 0
+          ? [Bio(servingTime: "", food1: "")]
+          : List<Bio>.from(map['bio']?.map((x) => Bio.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Restaurant.fromJson(String source) =>
-      Restaurant.fromMap(json.decode(source));
+  factory RestaurantModel.fromJson(String source) =>
+      RestaurantModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Restaurant(id: $id, resName: $resName, address: $address, bio: $bio)';
+    return 'RestaurantModel(id: $id, res_name: $resName, address: $address, bio: $bio)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Restaurant &&
+    return other is RestaurantModel &&
         other.id == id &&
         other.resName == resName &&
         other.address == address &&
@@ -75,15 +76,53 @@ class Restaurant {
 }
 
 class Bio {
+  final String servingTime;
+  final String food1;
   Bio({
     required this.servingTime,
     required this.food1,
   });
 
-  String servingTime;
-  String food1;
+  Bio copyWith({
+    String? servingTime,
+    String? food1,
+  }) {
+    return Bio(
+      servingTime: servingTime ?? this.servingTime,
+      food1: food1 ?? this.food1,
+    );
+  }
 
-  toMap() {}
+  Map<String, dynamic> toMap() {
+    return {
+      'serving_time': servingTime,
+      'food1': food1,
+    };
+  }
 
-  static fromMap(x) {}
+  factory Bio.fromMap(Map<String, dynamic> map) {
+    return Bio(
+      servingTime: map['serving_time'],
+      food1: map['food1'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Bio.fromJson(String source) => Bio.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Bio(serving_time: $servingTime, food1: $food1)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Bio &&
+        other.servingTime == servingTime &&
+        other.food1 == food1;
+  }
+
+  @override
+  int get hashCode => servingTime.hashCode ^ food1.hashCode;
 }
