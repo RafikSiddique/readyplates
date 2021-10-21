@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/src/login/screens/signuppage.dart';
-import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/readyplates.dart';
 
 class OnbordingPage extends StatelessWidget {
@@ -57,7 +56,6 @@ class OnbordingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
-    Navigator.pushNamed(context, ImagePage.id);
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(
@@ -72,7 +70,9 @@ class OnbordingPage extends StatelessWidget {
                 Padding(
                     padding: EdgeInsets.only(
                         left: 42, right: 42, top: media.viewPadding.top + 5),
-                    child: ReadyPlatesText()),
+                    child: Hero( 
+                      tag: "rp",
+                      child: ReadyPlatesText())),
                 Column(
                   children: [
                     Container(
@@ -90,22 +90,6 @@ class OnbordingPage extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    /*     SizedBox(
-                      height: 54,
-                      width: 343,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white.withOpacity(0.2),
-                          ),
-                          onPressed: () {
-                            
-                          },
-                          child: Text('LOGIN',
-                              style: TextStyle(
-                                fontSize: 17,
-                              ))),
-                    ), */
-                    //SizedBox(height: 10),
                     Container(
                       height: 54,
                       //  width: 343,
@@ -121,29 +105,6 @@ class OnbordingPage extends StatelessWidget {
                             color: Colors.white.withOpacity(0.5), width: 1.5),
                       ),
                     ),
-                    /* SizedBox(
-                      height: 54,
-                      width: 343,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color.fromRGBO(34, 40, 49, 0.2),
-                            side: BorderSide(
-                                width: 1.5,
-                                color: Color.fromRGBO(255, 255, 255, 0.5)),
-                          ),
-                          onPressed: () {
-                            
-                          },
-                          child: ClipRect(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                              child: Text('SIGN UP',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                  )),
-                            ),
-                          )),
-                    ), */
                     SizedBox(
                       height: 25,
                     ),

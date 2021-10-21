@@ -63,7 +63,8 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var media = MediaQuery.of(context);
+    var size = media.size;
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,
@@ -98,6 +99,28 @@ class _MapPageState extends State<MapPage> {
               ),
               pin(),
             ],
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: TextField(
+                  controller: TextEditingController(),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: "Search Any Location",
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      )),
+                ),
+              ),
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,

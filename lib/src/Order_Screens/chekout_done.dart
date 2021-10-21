@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/widgets/buuton.dart';
 
 class Chekoutdone extends StatelessWidget {
   static const id = "/chekoutdone";
@@ -20,10 +22,8 @@ class Chekoutdone extends StatelessWidget {
           body: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 134,
-                ),
                 Text("We are waiting for you",
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
@@ -51,6 +51,26 @@ class Chekoutdone extends StatelessWidget {
                     image: AssetImage('assets/images/chekoutdone1.png'),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Elevated(
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  text: "Pay Now",
+                  onTap: () {
+                    Get.toNamed(PaymentPage.id);
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Elevated(
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  text: "Pay Later",
+                  onTap: () {
+                    Get.offAllNamed(LandingPage.id);
+                  },
+                )
               ],
             ),
           )),
