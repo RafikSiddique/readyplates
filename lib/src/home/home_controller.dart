@@ -1,9 +1,13 @@
 import 'dart:math';
 
 import 'package:get/get.dart';
-import 'package:readyplates/modals/foog_item_model.dart';
+import 'package:readyplates/models/foog_item_model.dart';
+import 'package:readyplates/src/home/home_sevices.dart';
+import 'package:readyplates/utils/shared_preference_helper.dart';
 
 class HomeController extends GetxController {
+  final SharedPreferenceHelper sfHelper = Get.find();
+  final HomeServices homeService = HomeServices();
   RxInt currentIndex = 0.obs;
   final List<FoodItemModel> foodItems = List.generate(
       20,
@@ -33,6 +37,8 @@ class HomeController extends GetxController {
     "Tell a Friend",
     "Profile"
   ];
+
+  get homeServices => null;
 
   void onPageChange(int index) {
     currentIndex.value = index;

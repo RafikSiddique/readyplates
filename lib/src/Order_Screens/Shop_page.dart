@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/modals/cart_model.dart';
+import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
