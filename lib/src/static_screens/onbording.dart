@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:readyplates/src/login/screens/imagepage.dart';
+// import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/widgets/readyplates.dart';
@@ -70,9 +70,7 @@ class OnbordingPage extends StatelessWidget {
                 Padding(
                     padding: EdgeInsets.only(
                         left: 42, right: 42, top: media.viewPadding.top + 5),
-                    child: Hero( 
-                      tag: "rp",
-                      child: ReadyPlatesText())),
+                    child: Hero(tag: "rp", child: ReadyPlatesText())),
                 Column(
                   children: [
                     Container(

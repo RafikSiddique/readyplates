@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
-import 'package:readyplates/src/Order_Screens/Order_cancel_page.dart';
+import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';

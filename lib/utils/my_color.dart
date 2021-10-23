@@ -14,6 +14,7 @@ class MyTheme {
   static Color hinttextColor = Color(0xff979797).withOpacity(0.7);
 
   static Color hinttextchangeColor = Color(0xff2F2E41).withOpacity(0.7);
+  static Color hinttextchangeColors = Color(0xff2F2E41);
 
   static Color bottomtextColor = Color(0xff6E6D7A);
 
@@ -33,7 +34,7 @@ class MyTheme {
 
   static Color dividermiddletext = Color(0xff4E535A);
 
-  static Color buttonbackgroundcolor = Color(0xffF2F2F2);
+  static Color buttonbackgroundcolor = Color(0xffF2F2F4);
 
   static Color textformtextcolor = Color(0xff374151);
 

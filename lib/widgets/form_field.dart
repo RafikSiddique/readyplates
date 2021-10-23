@@ -115,7 +115,18 @@ class AppFormField extends StatelessWidget {
                     right: 14,
                     bottom: 14,
                   ),
-                  suffixIcon: suffixIcon,
+                  // suffixIcon: suffixIcon,
+                  suffixIcon: isPassword
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              obSecureText = !obSecureText;
+                            });
+                          },
+                          icon:
+                              Icon(obSecureText ? Icons.lock : Icons.lock_open))
+                      : null,
+
                   hintStyle: TextStyle(
                     fontSize: hintfontSize,
                     fontFamily: 'Inter-Regular',

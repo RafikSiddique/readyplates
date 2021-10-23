@@ -8,4 +8,6 @@ class ApiService {
   Uri get registerUri => accounts('register/');
   Uri get image => accounts('image/');
   Uri restaurantList() => Uri.parse(baseUri + 'restaurants/get/');
+  Uri addToCart(String id) => Uri.parse(baseUri + 'restaurants/cart/$id');
+  Uri cartList() => Uri.parse(baseUri + 'restaurants/cart/');
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/src/Order_Screens/Orderpage.dart';
+import 'package:readyplates/src/order/screen/Orderpage.dart';
 import 'package:readyplates/src/Order_Screens/Shop_page.dart';
 import 'package:readyplates/src/Order_Screens/about_location.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
