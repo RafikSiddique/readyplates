@@ -4,10 +4,12 @@ class ApiService {
   };
   final String baseUri = "http://202.53.174.5:8000/";
   Uri accounts(String path) => Uri.parse(baseUri + "accounts/" + path);
+  Uri restaurants(String path) => Uri.parse(baseUri + "restaurants/" + path);
   Uri get loginUri => accounts('login/');
   Uri get registerUri => accounts('register/');
   Uri get image => accounts('image/');
-  Uri restaurantList() => Uri.parse(baseUri + 'restaurants/get/');
-  Uri addToCart(String id) => Uri.parse(baseUri + 'restaurants/cart/$id');
-  Uri cartList() => Uri.parse(baseUri + 'restaurants/cart/');
+  Uri menuList(String id) => restaurants('menulist/$id/');
+  Uri get restaurantList => restaurants('get/');
+  Uri get addToCart => restaurants('cart/');
+  Uri cartList(String id) => restaurants('cart/$id/');
 }

@@ -6,22 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/edit_button.dart';
 
-class ShopPage extends StatefulWidget {
+class ShopPage extends StatelessWidget {
   static const id = "/shopPage";
-  ShopPage({Key? key}) : super(key: key);
-
-  @override
-  State<ShopPage> createState() => _ShopPageState();
-}
-
-class _ShopPageState extends State<ShopPage> {
   final controller = Get.find<HomeController>();
-
+  final orderController = Get.find<OrderController>();
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
@@ -37,7 +31,7 @@ class _ShopPageState extends State<ShopPage> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, MapPage.id);
+              Get.back();
             }),
         centerTitle: true,
         title: Text(
@@ -52,7 +46,6 @@ class _ShopPageState extends State<ShopPage> {
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
@@ -112,170 +105,182 @@ class _ShopPageState extends State<ShopPage> {
               SizedBox(
                 height: 12,
               ),
-              ...controller.foodItems
-                  .map(
-                    (e) => Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      margin: EdgeInsets.all(7),
-                      elevation: 4,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox.square(
-                              dimension: size.width * 0.27,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Stack(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.topCenter,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          "assets/images/image1.png",
-                                          // getUrl(e.image1),
-                                          fit: BoxFit.cover,
-                                          height: size.width * 0.22,
-                                          width: size.width * 0.22,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: cartItems.any(
-                                                (el) => el.id.value == e.id)
-                                            ? Obx(() => IncDecButton(
-                                                  text: cartItems
-                                                      .firstWhere((element) =>
-                                                          element.id.value ==
-                                                          e.id)
-                                                      .quantity
-                                                      .value
-                                                      .toString(),
-                                                  widthFraction: .18,
-                                                  onIncrement: () {
-                                                    cartItems
-                                                        .firstWhere((element) =>
-                                                            element.id.value ==
-                                                            e.id)
-                                                        .quantity++;
-                                                  },
-                                                  onDecrement: () {
-                                                    if (cartItems
-                                                            .firstWhere(
-                                                                (element) =>
-                                                                    element.id
-                                                                        .value ==
-                                                                    e.id)
-                                                            .quantity
-                                                            .value ==
-                                                        1) {
-                                                      cartItems.removeWhere(
-                                                          (element) =>
-                                                              element
-                                                                  .id.value ==
-                                                              e.id);
-                                                      setState(() {});
-                                                    } else {
-                                                      cartItems
-                                                          .firstWhere(
-                                                              (element) =>
-                                                                  element.id
-                                                                      .value ==
-                                                                  e.id)
-                                                          .quantity--;
-                                                    }
-                                                  },
-                                                ))
-                                            : AddButton(
-                                                widthFraction: 0.18,
-                                                onTap: () {
-                                                  cartItems.add(CartModel(
-                                                      id: e.id.obs,
-                                                      quantity: 1.obs));
-                                                  setState(() {});
-                                                },
-                                              ))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: SizedBox(
-                                height: size.width * 0.25,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Text(
-                                        e.name,
-                                        style: GoogleFonts.montserrat(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: size.width * 0.05),
-                                      ),
-                                    ),
-                                    Text(
-                                      e.description,
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: size.width * 0.03),
-                                    ),
-                                    Spacer(),
-                                    Row(
+              Obx(() => controller.foodItems.isEmpty
+                  ? Container(
+                      alignment: Alignment.center,
+                      child: Text("No Food Item in the menu"),
+                    )
+                  : controller.foodItems.first.id == -1
+                      ? Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        )
+                      : ListView(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          children: controller.foodItems
+                              .map(
+                                (e) => Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  margin: EdgeInsets.all(7),
+                                  elevation: 4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
-                                        Image.asset((e.diet_type == "Veg"
-                                            ? "assets/images/veg.png"
-                                            : "assets/images/nonveg.png")),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        ...List.generate(
-                                          double.parse(e.spice_level).toInt(),
-                                          (index) => Image.asset(
-                                            'assets/images/spice.png',
-                                            color: index == 0
-                                                ? MyTheme
-                                                    .shoppageimgcolor //Color(0xff25A244)
-                                                : null,
+                                        SizedBox.square(
+                                          dimension: size.width * 0.27,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Stack(
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    child: Image.asset(
+                                                      "assets/images/image1.png",
+                                                      // getUrl(e.image1),
+                                                      fit: BoxFit.cover,
+                                                      height: size.width * 0.22,
+                                                      width: size.width * 0.22,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    child: orderController
+                                                            .cartItems
+                                                            .any((el) =>
+                                                                el.id.value ==
+                                                                e.id)
+                                                        ? IncDecButton(
+                                                            text: orderController
+                                                                .getCartItem(
+                                                                    e.id)
+                                                                .quantity,
+                                                            widthFraction: .18,
+                                                            onIncrement: () {
+                                                              orderController
+                                                                  .increment(
+                                                                      e.id);
+                                                            },
+                                                            onDecrement: () {
+                                                              orderController
+                                                                  .decrement(
+                                                                      e.id);
+                                                            },
+                                                          )
+                                                        : AddButton(
+                                                            widthFraction: 0.18,
+                                                            onTap: () {
+                                                              orderController
+                                                                  .cartItems
+                                                                  .add(CartModel(
+                                                                      id: e.id
+                                                                          .obs,
+                                                                      quantity:
+                                                                          1.obs));
+                                                            },
+                                                          ))
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                        Spacer(),
-                                        Text(
-                                          e.cost,
-                                          style: TextStyle(
-                                            fontFamily: 'Inter-Bold',
-                                            fontSize: size.width * 0.04,
-                                            fontWeight: FontWeight.w500,
+                                        Expanded(
+                                          child: SizedBox(
+                                            height: size.width * 0.25,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  child: Text(
+                                                    e.name,
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize:
+                                                                size.width *
+                                                                    0.05),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  e.description,
+                                                  style: GoogleFonts.montserrat(
+                                                      fontSize:
+                                                          size.width * 0.03),
+                                                ),
+                                                Spacer(),
+                                                Row(
+                                                  children: [
+                                                    Image.asset((e.diet_type ==
+                                                            "Veg"
+                                                        ? "assets/images/veg.png"
+                                                        : "assets/images/nonveg.png")),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    ...List.generate(
+                                                      double.parse(
+                                                              e.spice_level)
+                                                          .toInt(),
+                                                      (index) => Image.asset(
+                                                        'assets/images/spice.png',
+                                                        color: index == 0
+                                                            ? MyTheme
+                                                                .shoppageimgcolor //Color(0xff25A244)
+                                                            : null,
+                                                      ),
+                                                    ),
+                                                    Spacer(),
+                                                    Text(
+                                                      e.cost,
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'Inter-Bold',
+                                                        fontSize:
+                                                            size.width * 0.04,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 20,
-                                        )
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                  .toList(),
+                              )
+                              .toList(),
+                        )),
               Elevated(
                 text: "Proceed to Booking",
                 width: double.infinity,
-                backgroundColor: cartItems.isEmpty
+                backgroundColor: orderController.cartItems.isEmpty
                     ? MyTheme.hinttextColor
                     : MyTheme.buttonbackgroundColor,
                 onTap: () {
-                  if (cartItems.isEmpty) {
+                  if (orderController.cartItems.isEmpty) {
                     Get.snackbar("Please add an Item",
                         "At least add 1 Item to proceed to booking");
                   } else {

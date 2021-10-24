@@ -13,7 +13,7 @@ class FoodItemModel {
   final String other_serving_cost;
   final String spice_level;
   final String cost;
-  final String restaurant;
+  final int restaurant;
   FoodItemModel({
     required this.id,
     required this.name,
@@ -43,7 +43,7 @@ class FoodItemModel {
     String? other_serving_cost,
     String? spice_level,
     String? cost,
-    String? restaurant,
+    int? restaurant,
   }) {
     return FoodItemModel(
       id: id ?? this.id,

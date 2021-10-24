@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/home/screens/profile_page.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/src/order/screen/Order_option.dart';
 import 'package:readyplates/src/order/screen/Orderpage.dart';
@@ -28,9 +29,9 @@ import 'src/login/screens/loginpage.dart';
 import 'src/login/screens/signuppage.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(SharedPreferenceHelper());
   Get.put(AuthController());
-  Get.put(HomeController());
   runApp(MyApp());
 }
 
@@ -43,13 +44,9 @@ class MyApp extends StatelessWidget {
           popupMenuTheme: PopupMenuThemeData(
             enableFeedback: true,
           ),
-          dividerColor: MyTheme.orderbordercolor), //Color(0xffBBBBB6)),
+          dividerColor: MyTheme.orderbordercolor),
       debugShowCheckedModeBanner: false,
-      // home: InitializeApp(),
-
-      //initialRoute: ShopScreen.id,
       home: InitializeApp(),
-      //initialRoute: InitializeApp(), //MyRoutes.orderPage,
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
@@ -99,6 +96,8 @@ class _InitializeAppState extends State<InitializeApp>
       if (!isLoggedIn) {
         Get.offAllNamed(OnbordingPage.id);
       } else {
+        Get.put(HomeController());
+        Get.put(OrderController());
         Get.offAllNamed(LandingPage.id);
       }
     } catch (e) {

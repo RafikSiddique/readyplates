@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/restaurant_list.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/Shop_page.dart';
+import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
@@ -372,6 +374,11 @@ class Aboutlocation extends StatelessWidget {
                             text: 'Proceed to Menu',
                             width: MediaQuery.of(context).size.width,
                             onTap: () {
+                              final controller = Get.find<HomeController>();
+                              controller.foodItems =
+                                  [controller.defaultItem].obs;
+                              controller
+                                  .getFoodItems(restaurantModel.id.toString());
                               Get.toNamed(ShopPage.id);
                             },
                           ),

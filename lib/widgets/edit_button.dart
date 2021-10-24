@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddButton extends StatelessWidget {
   final double widthFraction;
@@ -53,7 +54,7 @@ class AddButton extends StatelessWidget {
 }
 
 class IncDecButton extends StatelessWidget {
-  final String text;
+  final RxInt text;
   final double widthFraction;
   final Function() onIncrement;
   final Function() onDecrement;
@@ -80,7 +81,9 @@ class IncDecButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: onDecrement,
+              onTap: () {
+                onDecrement();
+              },
               child: Card(
                 margin: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
@@ -105,18 +108,23 @@ class IncDecButton extends StatelessWidget {
                   child: child,
                 );
               },
-              child: Text(
-                text.toUpperCase(),
-                key: ValueKey(text),
-                style: TextStyle(
-                  fontSize: 15,
-                  fontFamily: 'Inter',
-                  color: Color(0xffFF6E42),
+              child: Obx(
+                () => Text(
+                  text.value.toString(),
+                  key: ValueKey(text),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'Inter',
+                    color: Color(0xffFF6E42),
+                  ),
                 ),
               ),
+              key: ValueKey(text),
             ),
             InkWell(
-              onTap: onIncrement,
+              onTap: () {
+                onIncrement();
+              },
               child: Card(
                 margin: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(

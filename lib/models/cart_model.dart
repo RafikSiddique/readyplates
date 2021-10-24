@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-List<CartModel> cartItems = [];
-
 class CartModel {
   RxInt id;
   RxInt quantity;
@@ -11,7 +9,6 @@ class CartModel {
     required this.id,
     required this.quantity,
   });
-
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,8 +19,8 @@ class CartModel {
 
   factory CartModel.fromMap(Map<String, dynamic> map) {
     return CartModel(
-      id: map['id'],
-      quantity: map['quantity'],
+      id: RxInt(map['id']),
+      quantity: RxInt(map['quantity']),
     );
   }
 
