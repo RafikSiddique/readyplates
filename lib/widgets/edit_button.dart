@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class AddButton extends StatelessWidget {
   final double widthFraction;
@@ -163,7 +164,8 @@ class EditButton extends StatelessWidget {
         margin: EdgeInsets.zero,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-        color: Color(0xffFFF0F3),
+        // color: Color(0xffFFF0F3),
+        color: MyTheme.appbackcolor,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(6),
@@ -173,18 +175,15 @@ class EditButton extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/edit.png',
-                  height: 16,
-                  width: 16,
-                ),
+                Image.asset('assets/images/edit.png',
+                    height: 16, width: 16, color: MyTheme.bottomtextColor),
                 Text(
                   'EDIT',
                   style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'Inter',
-                    color: Color(0xffFF6E42),
-                  ),
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      //color: Color(0xffFF6E42),
+                      color: MyTheme.bottomtextColor),
                 )
               ],
             ),

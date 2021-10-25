@@ -5,10 +5,15 @@ import 'package:get/get.dart';
 class CartModel {
   RxInt id;
   RxInt quantity;
+
   CartModel({
     required this.id,
     required this.quantity,
   });
+
+  get menu => null;
+
+  get restaurant => null;
 
   Map<String, dynamic> toMap() {
     return {

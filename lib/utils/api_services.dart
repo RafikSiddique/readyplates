@@ -12,4 +12,9 @@ class ApiService {
   Uri get restaurantList => restaurants('get/');
   Uri get addToCart => restaurants('cart/');
   Uri cartList(String id) => restaurants('cart/$id/');
+
+  Uri orderList(String id) => restaurants('orders/$id'); //get
+
+  Uri get ordersapi => restaurants("orders/"); //post
+
 }

@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
           dividerColor: MyTheme.orderbordercolor),
       debugShowCheckedModeBanner: false,
       home: InitializeApp(),
+      //initialRoute: ProfilePage.id,
       routes: {
         OnbordingPage.id: (context) => OnbordingPage(),
         LoginPage.id: (context) => LoginPage(),
