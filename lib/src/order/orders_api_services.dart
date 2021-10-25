@@ -17,7 +17,7 @@ class Orderservices extends ApiService {
       Response response = await post(addToCart,
           body: jsonEncode(
             {
-              'user': "8",
+              'user': user,
               'food_item': food_item,
               'count': count,
             },
