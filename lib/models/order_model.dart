@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:get/get.dart';
-
 class OrderModel {
   String user;
   String restaurant;
@@ -9,8 +6,8 @@ class OrderModel {
   String name;
   double price;
   int quantity;
-  int no_of_table;
-  int no_of_people;
+  int noOfTable;
+  int noOfPeople;
   double time;
 
   double tax;
@@ -21,8 +18,8 @@ class OrderModel {
     required this.name,
     required this.price,
     required this.quantity,
-    required this.no_of_table,
-    required this.no_of_people,
+    required this.noOfTable,
+    required this.noOfPeople,
     required this.time,
     required this.tax,
   });
@@ -34,8 +31,8 @@ class OrderModel {
     String? name,
     double? price,
     int? quantity,
-    int? no_of_table,
-    int? no_of_people,
+    int? noOfTable,
+    int? noOfPeople,
     double? time,
     double? tax,
   }) {
@@ -46,8 +43,8 @@ class OrderModel {
       name: name ?? this.name,
       price: price ?? this.price,
       quantity: quantity ?? this.quantity,
-      no_of_table: no_of_table ?? this.no_of_table,
-      no_of_people: no_of_people ?? this.no_of_people,
+      noOfTable: noOfTable ?? this.noOfTable,
+      noOfPeople: noOfPeople ?? this.noOfPeople,
       time: time ?? this.time,
       tax: tax ?? this.tax,
     );
@@ -61,8 +58,8 @@ class OrderModel {
       'name': name,
       'price': price,
       'quantity': quantity,
-      'no_of_table': no_of_table,
-      'no_of_people': no_of_people,
+      'no_of_table': noOfTable,
+      'no_of_people': noOfPeople,
       'time': time,
       'tax': tax,
     };
@@ -76,8 +73,8 @@ class OrderModel {
       name: map['name'],
       price: map['price'],
       quantity: map['quantity'],
-      no_of_table: map['no_of_table'],
-      no_of_people: map['no_of_people'],
+      noOfTable: map['no_of_table'],
+      noOfPeople: map['no_of_people'],
       time: map['time'],
       tax: map['tax'],
     );
@@ -90,7 +87,7 @@ class OrderModel {
 
   @override
   String toString() {
-    return 'OrderModel(user: $user, restaurant: $restaurant, menu: $menu, name: $name, price: $price, quantity: $quantity, no_of_table: $no_of_table, no_of_people: $no_of_people, time: $time, tax: $tax)';
+    return 'OrderModel(user: $user, restaurant: $restaurant, menu: $menu, name: $name, price: $price, quantity: $quantity, no_of_table: $noOfTable, no_of_people: $noOfPeople, time: $time, tax: $tax)';
   }
 
   @override
@@ -104,8 +101,8 @@ class OrderModel {
         other.name == name &&
         other.price == price &&
         other.quantity == quantity &&
-        other.no_of_table == no_of_table &&
-        other.no_of_people == no_of_people &&
+        other.noOfTable == noOfTable &&
+        other.noOfPeople == noOfPeople &&
         other.time == time &&
         other.tax == tax;
   }
@@ -118,8 +115,8 @@ class OrderModel {
         name.hashCode ^
         price.hashCode ^
         quantity.hashCode ^
-        no_of_table.hashCode ^
-        no_of_people.hashCode ^
+        noOfTable.hashCode ^
+        noOfPeople.hashCode ^
         time.hashCode ^
         tax.hashCode;
   }

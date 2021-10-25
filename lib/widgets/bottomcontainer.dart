@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:readyplates/src/Order_Screens/Shop_page.dart';
 import 'package:readyplates/src/Order_Screens/chekout_done.dart';
 import 'package:readyplates/utils/my_color.dart';
-import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 import 'package:readyplates/widgets/imagewidget.dart';

@@ -11,12 +11,12 @@ class FoodItemModel {
   final String description;
   final String image1;
   final String image2;
-  final String diet_type;
+  final String dietType;
   final String category;
-  final String std_serving_size;
-  final String other_serving_size;
-  final String other_serving_cost;
-  final String spice_level;
+  final String stdServingSize;
+  final String otherServingSize;
+  final String otherServingCost;
+  final String spiceLevel;
   final String cost;
   final int restaurant;
   FoodItemModel({
@@ -25,12 +25,12 @@ class FoodItemModel {
     required this.description,
     required this.image1,
     required this.image2,
-    required this.diet_type,
+    required this.dietType,
     required this.category,
-    required this.std_serving_size,
-    required this.other_serving_size,
-    required this.other_serving_cost,
-    required this.spice_level,
+    required this.stdServingSize,
+    required this.otherServingSize,
+    required this.otherServingCost,
+    required this.spiceLevel,
     required this.cost,
     required this.restaurant,
   });
@@ -41,12 +41,12 @@ class FoodItemModel {
     String? description,
     String? image1,
     String? image2,
-    String? diet_type,
+    String? dietType,
     String? category,
-    String? std_serving_size,
-    String? other_serving_size,
-    String? other_serving_cost,
-    String? spice_level,
+    String? stdServingSize,
+    String? otherServingSize,
+    String? otherServingCost,
+    String? spiceLevel,
     String? cost,
     int? restaurant,
   }) {
@@ -56,12 +56,12 @@ class FoodItemModel {
       description: description ?? this.description,
       image1: image1 ?? this.image1,
       image2: image2 ?? this.image2,
-      diet_type: diet_type ?? this.diet_type,
+      dietType: dietType ?? this.dietType,
       category: category ?? this.category,
-      std_serving_size: std_serving_size ?? this.std_serving_size,
-      other_serving_size: other_serving_size ?? this.other_serving_size,
-      other_serving_cost: other_serving_cost ?? this.other_serving_cost,
-      spice_level: spice_level ?? this.spice_level,
+      stdServingSize: stdServingSize ?? this.stdServingSize,
+      otherServingSize: otherServingSize ?? this.otherServingSize,
+      otherServingCost: otherServingCost ?? this.otherServingCost,
+      spiceLevel: spiceLevel ?? this.spiceLevel,
       cost: cost ?? this.cost,
       restaurant: restaurant ?? this.restaurant,
     );
@@ -74,12 +74,12 @@ class FoodItemModel {
       'description': description,
       'image1': image1,
       'image2': image2,
-      'diet_type': diet_type,
+      'diet_type': dietType,
       'category': category,
-      'std_serving_size': std_serving_size,
-      'other_serving_size': other_serving_size,
-      'other_serving_cost': other_serving_cost,
-      'spice_level': spice_level,
+      'std_serving_size': stdServingSize,
+      'other_serving_size': otherServingSize,
+      'other_serving_cost': otherServingCost,
+      'spice_level': spiceLevel,
       'cost': cost,
       'restaurant': restaurant,
     };
@@ -92,12 +92,12 @@ class FoodItemModel {
       description: map['description'],
       image1: getUrl(map['image1']),
       image2: getUrl(map['image2']),
-      diet_type: map['diet_type'],
+      dietType: map['diet_type'],
       category: map['category'],
-      std_serving_size: map['std_serving_size'],
-      other_serving_size: map['other_serving_size'],
-      other_serving_cost: map['other_serving_cost'],
-      spice_level: map['spice_level'],
+      stdServingSize: map['std_serving_size'],
+      otherServingSize: map['other_serving_size'],
+      otherServingCost: map['other_serving_cost'],
+      spiceLevel: map['spice_level'],
       cost: map['cost'],
       restaurant: map['restaurant'],
     );
@@ -110,7 +110,7 @@ class FoodItemModel {
 
   @override
   String toString() {
-    return 'FoodItemModel(id: $id, name: $name, description: $description, image1: $image1, image2: $image2, diet_type: $diet_type, category: $category, std_serving_size: $std_serving_size, other_serving_size: $other_serving_size, other_serving_cost: $other_serving_cost, spice_level: $spice_level, cost: $cost, restaurant: $restaurant)';
+    return 'FoodItemModel(id: $id, name: $name, description: $description, image1: $image1, image2: $image2, diet_type: $dietType, category: $category, std_serving_size: $stdServingSize, other_serving_size: $otherServingSize, other_serving_cost: $otherServingCost, spice_level: $spiceLevel, cost: $cost, restaurant: $restaurant)';
   }
 
   @override
@@ -123,12 +123,12 @@ class FoodItemModel {
         other.description == description &&
         other.image1 == image1 &&
         other.image2 == image2 &&
-        other.diet_type == diet_type &&
+        other.dietType == dietType &&
         other.category == category &&
-        other.std_serving_size == std_serving_size &&
-        other.other_serving_size == other_serving_size &&
-        other.other_serving_cost == other_serving_cost &&
-        other.spice_level == spice_level &&
+        other.stdServingSize == stdServingSize &&
+        other.otherServingSize == otherServingSize &&
+        other.otherServingCost == otherServingCost &&
+        other.spiceLevel == spiceLevel &&
         other.cost == cost &&
         other.restaurant == restaurant;
   }
@@ -140,12 +140,12 @@ class FoodItemModel {
         description.hashCode ^
         image1.hashCode ^
         image2.hashCode ^
-        diet_type.hashCode ^
+        dietType.hashCode ^
         category.hashCode ^
-        std_serving_size.hashCode ^
-        other_serving_size.hashCode ^
-        other_serving_cost.hashCode ^
-        spice_level.hashCode ^
+        stdServingSize.hashCode ^
+        otherServingSize.hashCode ^
+        otherServingCost.hashCode ^
+        spiceLevel.hashCode ^
         cost.hashCode ^
         restaurant.hashCode;
   }

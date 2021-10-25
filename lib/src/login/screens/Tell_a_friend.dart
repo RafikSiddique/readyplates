@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
-import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:share_plus/share_plus.dart';
 

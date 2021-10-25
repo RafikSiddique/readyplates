@@ -6,7 +6,6 @@ import 'package:readyplates/src/Order_Screens/about_location.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/utils/my_color.dart';
-import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class OrderOption extends StatelessWidget {

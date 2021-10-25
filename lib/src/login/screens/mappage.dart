@@ -5,10 +5,8 @@ import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
-import 'package:readyplates/utils/routes.dart';
 
 class MapPage extends StatefulWidget {
   static const id = "/map";

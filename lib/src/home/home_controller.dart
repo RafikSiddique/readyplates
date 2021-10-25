@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:get/get.dart';
-import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/foog_item_model.dart';
 import 'package:readyplates/models/restaurant_list.dart';
 import 'package:readyplates/src/home/home_sevices.dart';
@@ -30,12 +27,12 @@ class HomeController extends GetxController {
         description: "description",
         image1: "image1",
         image2: "image2",
-        diet_type: "diet_type",
+        dietType: "diet_type",
         category: "category",
-        std_serving_size: "std_serving_size",
-        other_serving_size: "other_serving_size",
-        other_serving_cost: "other_serving_cost",
-        spice_level: "spice_level",
+        stdServingSize: "std_serving_size",
+        otherServingSize: "other_serving_size",
+        otherServingCost: "other_serving_cost",
+        spiceLevel: "spice_level",
         cost: "cost",
         restaurant: 0)
   ].obs;
@@ -46,12 +43,12 @@ class HomeController extends GetxController {
       description: "description",
       image1: "image1",
       image2: "image2",
-      diet_type: "diet_type",
+      dietType: "diet_type",
       category: "category",
-      std_serving_size: "std_serving_size",
-      other_serving_size: "other_serving_size",
-      other_serving_cost: "other_serving_cost",
-      spice_level: "spice_level",
+      stdServingSize: "std_serving_size",
+      otherServingSize: "other_serving_size",
+      otherServingCost: "other_serving_cost",
+      spiceLevel: "spice_level",
       cost: "cost",
       restaurant: 0);
 

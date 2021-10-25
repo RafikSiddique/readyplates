@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
-import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -230,7 +228,7 @@ class ShopPage extends StatelessWidget {
                                                 Spacer(),
                                                 Row(
                                                   children: [
-                                                    Image.asset((e.diet_type ==
+                                                    Image.asset((e.dietType ==
                                                             "Veg"
                                                         ? "assets/images/veg.png"
                                                         : "assets/images/nonveg.png")),
@@ -239,7 +237,7 @@ class ShopPage extends StatelessWidget {
                                                     ),
                                                     ...List.generate(
                                                       double.parse(
-                                                              e.spice_level)
+                                                              e.spiceLevel)
                                                           .toInt(),
                                                       (index) => Image.asset(
                                                         'assets/images/spice.png',

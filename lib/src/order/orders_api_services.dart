@@ -12,7 +12,7 @@ class Orderservices extends ApiService {
 
   Future<void> addToCartApi(
     String user,
-    String food_item,
+    String food,
     String count,
   ) async {
     try {
@@ -20,7 +20,7 @@ class Orderservices extends ApiService {
           body: jsonEncode(
             {
               'user': user,
-              'food_item': food_item,
+              'food_item': food,
               'count': count,
             },
           ),
@@ -85,7 +85,7 @@ class Orderservices extends ApiService {
       if (response.statusCode == 201) {
         List<dynamic> data = jsonDecode(response.body);
         List<OrderModel> orderItems =
-            data.map((e) => OrderModel.fromMap(e)).toList(); //TODO :
+            data.map((e) => OrderModel.fromMap(e)).toList();
         return orderItems;
       } else if (response.statusCode != 404) {
         return <OrderModel>[];

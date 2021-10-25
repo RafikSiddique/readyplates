@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/src/Order_Screens/about_location.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/widgets/restaurant_card.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
@@ -23,7 +20,7 @@ class ShopScreen extends StatelessWidget {
     'Fast Food',
     'Chinese',
   ];
-  List<String> categroyImg = [
+  final List<String> categroyImg = [
     'assets/images/drinks.png',
     'assets/images/burger.png',
     'assets/images/pizza.png',

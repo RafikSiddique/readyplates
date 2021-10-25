@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readyplates/src/order/screen/Order_option.dart';
 import 'package:readyplates/src/Order_Screens/Payment_page.dart';
-import 'package:readyplates/utils/routes.dart';
-
-// import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class ImagewidgetPage extends StatelessWidget {
   final String imagePath;
