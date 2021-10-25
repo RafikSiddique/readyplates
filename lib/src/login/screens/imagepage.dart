@@ -11,6 +11,7 @@ import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/widgets/buuton.dart';
 
 class ImagePage extends StatefulWidget {
   static const id = "/image";
@@ -39,6 +40,7 @@ class _ImagePageState extends State<ImagePage> {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -67,170 +69,101 @@ class _ImagePageState extends State<ImagePage> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            // color: Color(0xffE5E5E5),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  SizedBox(height: 92),
-
-                  Container(
-                      height: 200,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(230)),
-                        // color: Colors.black,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(230)),
+                  // color: Colors.black,
+                ),
+                child: image != null
+                    ? ClipOval(
+                        child: Image.file(image!,
+                            height: 160, width: 160, fit: BoxFit.cover))
+                    : Image.asset("assets/images/imageman.png")),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                child: Text(
+                    (authController.fNamController.text +
+                            " " +
+                            authController.lNameController.text)
+                        .toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: 'Montserrat',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w500,
+                      color: Color(
+                        0xff4E5156,
                       ),
-                      child: image != null
-                          ? ClipOval(
-                              child: Image.file(image!,
-                                  height: 160, width: 160, fit: BoxFit.cover))
-                          : Image.asset("assets/images/imageman.png")),
-
-                  // Center(
-                  //   child: Container(
-                  //     width: 235,
-                  //     height: 200,
-                  //     child: Image.asset("assets/images/imageman.png"),
-                  //   ),
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 7),
-                    child: Center(
-                      child: Text(
-                          (authController.fNamController.text +
-                                  " " +
-                                  authController.lNameController.text)
-                              .toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: 'Montserrat',
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                            color: Color(
-                              0xff4E5156,
-                            ),
-                          )),
-                    ),
-                  ),
-                  SizedBox(height: 84),
-                  Container(
-                    height: 54,
-                    decoration: BoxDecoration(
-                      color: MyTheme.boxdecoration2,
-                      //color: Color(0xffF4F4F4),
-                      border: Border.all(
-                        width: 1,
-                        color: MyTheme.buttonbackgroundColor,
-                        // color: Color(0xff222831),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    //  margin: EdgeInsets.only(left: 16, right: 16),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                        ),
-                        onPressed: () => pickImage(ImageSource.camera),
-
-                        // {
-                        //   //Navigator.pushNamed(context, MyRoutes.SignupPage);
-                        // },
-                        child: Text('Open Camera',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontFamily: 'Inter-Regular',
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w500,
-                              color: MyTheme.buttonbackgroundColor,
-                            ))),
-                  ),
-                  SizedBox(height: 8),
-                  Container(
-                    height: 54,
-                    decoration: BoxDecoration(
-                      color: Color(0xffF4F4F4),
-                      border: Border.all(
-                        width: 1,
-                        color: MyTheme.buttonbackgroundColor,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    // margin: EdgeInsets.only(left: 16, right: 16),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                        ),
-                        onPressed: () => pickImage(ImageSource.gallery),
-                        child: Text('Upload from Gallery',
-                            style: TextStyle(
-                              fontFamily: 'Inter-Regular',
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontSize: 17,
-                            ))),
-                  ),
-                  SizedBox(
-                    height: 63,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      bool isLocationEnabled =
-                          await Geolocator.isLocationServiceEnabled();
-                      if (isLocationEnabled) {
-                        LocationPermission permission =
-                            await Geolocator.requestPermission();
-
-                        if (permission == LocationPermission.denied ||
-                            permission == LocationPermission.deniedForever) {
-                          await Geolocator.openAppSettings();
-                        } else {
-                          Position position =
-                              await Geolocator.getCurrentPosition();
-                          Get.toNamed(MapPage.id);
-                        }
-                      } else {
-                        await Geolocator.openLocationSettings();
-                      }
-                    },
-                    child: Material(
-                      type: MaterialType.transparency,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Skip for Now",
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                                color: MyTheme.skiptextcolor,
-                                // color: Color(0xff4E5156),
-                              )),
-                          IconButton(
-                              iconSize: 14.83,
-                              icon: FaIcon(
-                                FontAwesomeIcons.chevronRight,
-                                color: Colors.black,
-                              ),
-                              onPressed: null),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                    )),
               ),
             ),
-          ),
+            Elevated(
+                width: media.size.width / 1.3,
+                text: "Open Camera",
+                onTap: () => pickImage(ImageSource.camera),
+                borderColor: MyTheme.buttonbackgroundColor,
+                backgroundColor: Colors.white),
+            SizedBox(height: 8),
+            Elevated(
+              width: media.size.width / 1.3,
+              text: "Upload from gallery",
+              onTap: () => pickImage(ImageSource.gallery),
+            ),
+            SizedBox(
+              height: media.size.height * 0.12,
+            ),
+            InkWell(
+              onTap: () async {
+                bool isLocationEnabled =
+                    await Geolocator.isLocationServiceEnabled();
+                if (isLocationEnabled) {
+                  LocationPermission permission =
+                      await Geolocator.requestPermission();
+
+                  if (permission == LocationPermission.denied ||
+                      permission == LocationPermission.deniedForever) {
+                    await Geolocator.openAppSettings();
+                  } else {
+                    Position position = await Geolocator.getCurrentPosition();
+                    Get.toNamed(MapPage.id);
+                  }
+                } else {
+                  await Geolocator.openLocationSettings();
+                }
+              },
+              child: Material(
+                type: MaterialType.transparency,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Skip for Now",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          color: MyTheme.skiptextcolor,
+                          // color: Color(0xff4E5156),
+                        )),
+                    IconButton(
+                        iconSize: 14.83,
+                        icon: FaIcon(
+                          FontAwesomeIcons.chevronRight,
+                          color: Colors.black,
+                        ),
+                        onPressed: null),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ));
   }
 }

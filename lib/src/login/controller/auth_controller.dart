@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 // import 'package:readyplates/pages/shop_screen.dart';
 // import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/src/login/services/auth_service.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 
 class AuthController extends GetxController {
@@ -32,14 +34,13 @@ class AuthController extends GetxController {
   RxBool isNumber = false.obs;
 
   void onLooseFocus() {
-    if (!userNameFocus.hasFocus) {
-      if (usernameController.text.contains(RegExp('[a-zA-Z]+'))) {
-        isNumber.value = false;
-        print(isNumber.value);
-      } else {
-        isNumber.value = true;
-        print(isNumber.value);
-      }
+    if (usernameController.text.isEmpty ||
+        usernameController.text.contains(RegExp('[a-zA-Z]+'))) {
+      isNumber.value = false;
+      print(isNumber.value);
+    } else {
+      isNumber.value = true;
+      print(isNumber.value);
     }
   }
 
@@ -60,6 +61,7 @@ class AuthController extends GetxController {
     userNameFocus = FocusNode();
     otpFields = List.generate(6, (index) => FocusNode());
     otpText = List.generate(6, (index) => TextEditingController());
+    usernameController.addListener(onLooseFocus);
     userNameFocus.addListener(onLooseFocus);
     super.onInit();
   }
@@ -77,6 +79,8 @@ class AuthController extends GetxController {
       if (implicit) {
         Get.toNamed(ImagePage.id);
       } else {
+        Get.put(HomeController());
+        Get.put(OrderController());
         Get.toNamed(LandingPage.id);
         sfHelper.setLoggedIn(true);
       }
@@ -87,6 +91,8 @@ class AuthController extends GetxController {
 
   void gotoHome() {
     sfHelper.setLoggedIn(true);
+    Get.put(HomeController());
+    Get.put(OrderController());
     Get.offAllNamed(LandingPage.id);
   }
 

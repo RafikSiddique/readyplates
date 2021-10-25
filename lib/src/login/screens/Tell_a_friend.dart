@@ -99,7 +99,7 @@ class Tellafriend extends StatelessWidget {
                       ),
                       onPressed: () {
                         Share.share(
-                            "Hello, ${Get.find<AuthController>().fNamController} is inviting you to join");
+                            "Hello, ${Get.find<AuthController>().fNamController.text} is inviting you to join");
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,

@@ -92,31 +92,6 @@ class AddtoorderPage extends StatelessWidget {
                     SizedBox(
                       height: 7,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("EXTRAS :",
-                            style: TextStyle(
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                color: Color(0xff393E46))),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        TextwidgetPage(
-                          text: "Cheese",
-                          color: Color(0xff393E46),
-                          fontWeight: FontWeight.w400,
-                        ),
-                        Spacer(),
-                        TextwidgetPage(
-                            text: "1 X \$ 0.5",
-                            color: Color(0xff393E46),
-                            fontWeight: FontWeight.w500),
-                      ],
-                    ),
                     SizedBox(
                       height: 7,
                     ),

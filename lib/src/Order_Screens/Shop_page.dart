@@ -146,12 +146,16 @@ class ShopPage extends StatelessWidget {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    child: Image.asset(
-                                                      "assets/images/image1.png",
-                                                      // getUrl(e.image1),
+                                                    child: Image.network(
+                                                      e.image1,
                                                       fit: BoxFit.cover,
                                                       height: size.width * 0.22,
                                                       width: size.width * 0.22,
+                                                      errorBuilder: (context,
+                                                          error, stackTrace) {
+                                                        return Image.asset(
+                                                            "assets/images/burger.png");
+                                                      },
                                                     ),
                                                   ),
                                                 ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -6,15 +7,14 @@ import 'package:readyplates/models/restaurant_list.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/Shop_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
-import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class Aboutlocation extends StatelessWidget {
-  final RestaurantModel restaurantModel = Get.arguments;
+  final RestaurantModel restaurantModel;
   static const id = "/aboutlocation";
-  Aboutlocation({Key? key}) : super(key: key);
+  Aboutlocation({Key? key, required this.restaurantModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -406,5 +406,10 @@ class Aboutlocation extends StatelessWidget {
         ),
       ],
     ));
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<RestaurantModel>('restaurantModel', restaurantModel));
   }
 }

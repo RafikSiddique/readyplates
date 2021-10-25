@@ -1,5 +1,10 @@
 import 'dart:convert';
 
+String getUrl(String url) {
+  // // http://202.53.174.5:8000/
+  return "http://202.53.174.5:8000" + url;
+}
+
 class FoodItemModel {
   final int id;
   final String name;
@@ -85,8 +90,8 @@ class FoodItemModel {
       id: map['id']?.toInt(),
       name: map['name'],
       description: map['description'],
-      image1: map['image1'],
-      image2: map['image2'],
+      image1: getUrl(map['image1']),
+      image2: getUrl(map['image2']),
       diet_type: map['diet_type'],
       category: map['category'],
       std_serving_size: map['std_serving_size'],

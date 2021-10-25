@@ -68,23 +68,7 @@ class Orderservices extends ApiService {
       ) async {
     try {
       Response response = await post(ordersapi,
-          body: ordermodel.toJson(),
-
-          // body: jsonEncode(
-          //   {
-          //     // 'user': user,
-          //     // 'restaurant': restaurant,
-          //     // 'menu': menu,
-          //     // 'name': name,
-          //     // 'price': price,
-          //     // 'quantity': quantity,
-          //     // 'no_of_table': no_of_table,
-          //     // 'no_of_people': no_of_people,
-          //     // 'time': time,
-          //     // 'tax': tax,
-          //   },
-          // ),
-          headers: contentTypeJsonHeader);
+          body: ordermodel.toJson(), headers: contentTypeJsonHeader);
       if (response.statusCode != 201) {
         throw AppException(code: response.statusCode, message: response.body);
       }
@@ -114,48 +98,3 @@ class Orderservices extends ApiService {
     }
   }
 }
-
-
-//  Future<List<FoodItemModel>> getMenu(String id) async {
-//     try {
-//       Response response = await get(
-//         menuList(id),
-//       );
-
-//       print(response.body);
-//       if (response.statusCode == 200) {
-//         List<dynamic> list = jsonDecode(response.body);
-
-//         List<FoodItemModel> foodItems =
-//             list.map((e) => FoodItemModel.fromMap(e)).toList();
-//         print(foodItems);
-//         return foodItems;
-//       } else {
-//         throw AppException(
-//             code: response.statusCode, message: response.reasonPhrase);
-//       }
-//     } catch (e) {
-//       rethrow;
-//     }
-//   }
-// }
-
-
-// Method:GET
-// Endpoint:BASE_URL/restaurants/orders/user_id
-
-// Here user_id is the id of user for whim u want to get the orders
-
-
-// Method:POST
-// Endpoint:BASE_URL/restaurants/orders/
-// Fields :user,(User ID)
-// restaurant,	(Restaurant ID)
-// menu,(Menu ID)
-// name,(Food Item name)
-// price,(Food Item Price)
-// quantity,(Count of Food Item ordered)
-// no_of_table,(no of tables required)
-// no_of_people,(No of peoples)
-// time,(Expected time)
-// tax(Taxex)
