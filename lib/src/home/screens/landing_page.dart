@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:readyplates/pages/shop_screen.dart';
+import 'package:readyplates/src/home/screens/restaurant_list.dart';
 import 'package:readyplates/src/order/screen/Orderpage.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/profile_page.dart';

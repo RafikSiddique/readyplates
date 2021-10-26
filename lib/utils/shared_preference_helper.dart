@@ -22,8 +22,10 @@ class SharedPreferenceHelper {
   }
 
   Future<bool> setUserId(String id) async {
+    print("Setting user Id.....");
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool success = await sharedPreferences.setString(_userId, id);
+    print("User id succesfully set");
     return success;
   }
 

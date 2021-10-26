@@ -17,11 +17,41 @@ class OrderController extends GetxController {
 
   RxList<OrderModel> orderItems = <OrderModel>[].obs;
 
+  RxInt numberOfPeople = 1.obs;
+  RxInt numberOfTable = 1.obs;
+
   void onInit() {
     getCart();
     getorder();
     super.onInit();
   }
+
+  List<String> months() => [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+  final List<String> weekDays = [
+    "Monday",
+    "Tuesday",
+    "Wednessday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  Rx<DateTime> selectedDate = DateTime.now().obs;
 
   Future<void> getCart() async {
     try {

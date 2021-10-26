@@ -5,61 +5,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
-class BookingDetails extends StatefulWidget {
+class BookingDetails extends GetView<OrderController> {
+  final RestaurantModel restaurantModel;
   static const id = "/bookingsettings";
-  BookingDetails({Key? key}) : super(key: key);
 
-  @override
-  _BookingDetailsState createState() => _BookingDetailsState();
-}
-
-class _BookingDetailsState extends State<BookingDetails> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  BookingDetails(this.restaurantModel);
 
   Text weekText(String text) {
     return Text(text);
   }
-
-  List<int> days(int length) => List.generate(length, (index) => index + 1);
-  List<MonthModel> months() => [
-        MonthModel(text: "January", days: days(31)),
-        MonthModel(
-          text: "February",
-          days: days(DateTime.now().year % 4 == 0 ? 29 : 28),
-        ),
-        MonthModel(text: "March", days: days(31)),
-        MonthModel(text: "April", days: days(30)),
-        MonthModel(text: "May", days: days(31)),
-        MonthModel(text: "June", days: days(30)),
-        MonthModel(text: "July", days: days(31)),
-        MonthModel(text: "August", days: days(31)),
-        MonthModel(text: "September", days: days(30)),
-        MonthModel(text: "October", days: days(31)),
-        MonthModel(text: "November", days: days(30)),
-        MonthModel(text: "December", days: days(31)),
-      ];
-
-  DateTime selectedDate = DateTime.now();
-
-  List<String> weekDays = [
-    "Monday",
-    "Tuesday",
-    "Wednessday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
-  int numberOfPeople = 1;
-  int numberOfTable = 1;
 
   Widget numberChange(bool val, Size size) {
     return Column(
@@ -70,34 +30,35 @@ class _BookingDetailsState extends State<BookingDetails> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: size.width * 0.3,
-              alignment: Alignment.centerLeft,
-              child: Text(
-                val ? numberOfPeople.toString() : numberOfTable.toString(),
-                style: GoogleFonts.nunito(
-                    fontWeight: FontWeight.w500,
-                    color: MyTheme.dividermiddletext,
-                    fontSize: 20),
-              ),
-            ),
+            Obx(() => Container(
+                  width: size.width * 0.3,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    val
+                        ? controller.numberOfPeople.value.toString()
+                        : controller.numberOfTable.value.toString(),
+                    style: GoogleFonts.nunito(
+                        fontWeight: FontWeight.w500,
+                        color: MyTheme.dividermiddletext,
+                        fontSize: 20),
+                  ),
+                )),
             Spacer(),
             InkWell(
               onTap: () {
                 if (val) {
-                  if (numberOfPeople != 1) {
-                    numberOfPeople--;
+                  if (controller.numberOfPeople.value != 1) {
+                    controller.numberOfPeople--;
                   } else {
                     Get.snackbar("Error", "There should be atleast one person");
                   }
                 } else {
-                  if (numberOfTable != 1) {
-                    numberOfTable--;
+                  if (controller.numberOfTable.value != 1) {
+                    controller.numberOfTable--;
                   } else {
                     Get.snackbar("Error", "There should be atleast one table");
                   }
                 }
-                setState(() {});
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -110,12 +71,10 @@ class _BookingDetailsState extends State<BookingDetails> {
             InkWell(
                 onTap: () {
                   if (val) {
-                    numberOfPeople++;
+                    controller.numberOfPeople++;
                   } else {
-                    numberOfTable++;
+                    controller.numberOfTable++;
                   }
-
-                  setState(() {});
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -160,113 +119,118 @@ class _BookingDetailsState extends State<BookingDetails> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Card(
-                  color: Colors.transparent,
-                  margin: EdgeInsets.zero,
-                  elevation: 0,
-                  child: InkWell(
-                    onTap: () async {
-                      selectedDate = await showDatePicker(
-                              context: context,
-                              initialDate: selectedDate,
-                              firstDate: DateTime.now(),
-                              lastDate:
-                                  DateTime(DateTime.now().year, 12, 31)) ??
-                          DateTime.now();
-                      setState(() {});
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          selectedDate.day.toString(),
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 40,
-                            color: MyTheme.borderchangeColor,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 7,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              months()[selectedDate.month - 1].text +
-                                  " " +
-                                  selectedDate.year.toString(),
-                              style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Text(
-                              weekDays[selectedDate.weekday - 1],
-                              style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Spacer(),
-                Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  child: InkWell(
-                    onTap: () async {
-                      TimeOfDay? tod = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay(
-                              hour: selectedDate.hour,
-                              minute: selectedDate.minute));
-                      if (tod != null) {
-                        selectedDate = DateTime(
-                            selectedDate.year,
-                            selectedDate.month,
-                            selectedDate.day,
-                            tod.hour,
-                            tod.minute);
-                        setState(() {});
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+            Obx(
+              () => Row(
+                children: [
+                  Card(
+                    color: Colors.transparent,
+                    margin: EdgeInsets.zero,
+                    elevation: 0,
+                    child: InkWell(
+                      onTap: () async {
+                        controller.selectedDate.value = await showDatePicker(
+                                context: context,
+                                initialDate: controller.selectedDate.value,
+                                firstDate: DateTime.now(),
+                                lastDate:
+                                    DateTime(DateTime.now().year, 12, 31)) ??
+                            DateTime.now();
+                      },
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/images/clock.png',
-                            color: MyTheme.borderchangeColor,
-                            height: 25,
+                          Text(
+                            controller.selectedDate.value.day.toString(),
+                            style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 40,
+                              color: MyTheme.borderchangeColor,
+                            ),
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 7,
                           ),
-                          Container(
-                            padding: EdgeInsets.all(4),
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                  borderRadius: BorderRadius.circular(6)),
-                            ),
-                            child: Text(
-                                DateFormat("hh:mm a").format(selectedDate),
-                                style: GoogleFonts.inter(fontSize: 20)),
-                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                controller.months()[
+                                        controller.selectedDate.value.month -
+                                            1] +
+                                    " " +
+                                    controller.selectedDate.value.year
+                                        .toString(),
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                controller.weekDays[
+                                    controller.selectedDate.value.weekday - 1],
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15,
+                                ),
+                              )
+                            ],
+                          )
                         ],
                       ),
                     ),
                   ),
-                )
-              ],
+                  Spacer(),
+                  Card(
+                    color: Colors.transparent,
+                    elevation: 0,
+                    child: InkWell(
+                      onTap: () async {
+                        TimeOfDay? tod = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay(
+                                hour: controller.selectedDate.value.hour,
+                                minute: controller.selectedDate.value.minute));
+                        if (tod != null) {
+                          controller.selectedDate.value = DateTime(
+                              controller.selectedDate.value.year,
+                              controller.selectedDate.value.month,
+                              controller.selectedDate.value.day,
+                              tod.hour,
+                              tod.minute);
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/clock.png',
+                              color: MyTheme.borderchangeColor,
+                              height: 25,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(4),
+                              decoration: ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color: Colors.black,
+                                    ),
+                                    borderRadius: BorderRadius.circular(6)),
+                              ),
+                              child: Text(
+                                  DateFormat("hh:mm a")
+                                      .format(controller.selectedDate.value),
+                                  style: GoogleFonts.inter(fontSize: 20)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             Divider(
               endIndent: size.width * 0.02,
@@ -284,7 +248,7 @@ class _BookingDetailsState extends State<BookingDetails> {
               ),
             ),
             Text(
-              "Sloppy Joe Burgers",
+              restaurantModel.resName,
               style: GoogleFonts.nunito(
                   fontWeight: FontWeight.w500,
                   color: MyTheme.bookingtextcolor,
@@ -301,77 +265,10 @@ class _BookingDetailsState extends State<BookingDetails> {
               text: "Confirm",
               width: double.infinity,
               onTap: () {
-                Get.toNamed(BurgersupportingPage.id);
+                Get.toNamed(BurgersupportingPage.id,
+                    arguments: restaurantModel);
               },
             ),
-            /*    Container(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          if (currentIndex == 0) {
-                            currentIndex = months().length - 1;
-                          } else {
-                            currentIndex--;
-                          }
-                          setState(() {});
-                        },
-                        child: Icon(
-                          FontAwesomeIcons.chevronLeft,
-                          size: 15,
-                        ),
-                      ),
-                      Container(
-                        width: size.width * 0.3,
-                        alignment: Alignment.center,
-                        child: Text(
-                          months()[currentIndex].text,
-                          style: GoogleFonts.nunito(
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                          onTap: () {
-                            if (currentIndex == 11) {
-                              currentIndex = 0;
-                            } else {
-                              currentIndex++;
-                            }
-                            setState(() {});
-                          },
-                          child: Icon(
-                            FontAwesomeIcons.chevronRight,
-                            size: 15,
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      weekText("S"),
-                      weekText("M"),
-                      weekText("T"),
-                      weekText("W"),
-                      weekText("T"),
-                      weekText("F"),
-                      weekText("S"),
-                      weekText(getMonthStarting().toString())
-                    ],
-                  ),
-                  PageView(
-                    children: months()[currentIndex].days,
-                  )
-                ],
-              ),
-            ), */
           ],
         ),
       ),

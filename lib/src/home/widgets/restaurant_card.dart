@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/models/restaurant_list.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/about_location.dart';
 import 'package:readyplates/utils/my_color.dart';
 
@@ -37,7 +37,7 @@ class RestaurantCard extends StatelessWidget {
         type: MaterialType.transparency,
         child: InkWell(
           onTap: () {
-            Get.toNamed(Aboutlocation.id, arguments: restaurantModel);
+            Get.toNamed(RestaurantDetails.id, arguments: restaurantModel);
           },
           child: Padding(
             padding: EdgeInsets.all(media.size.width * 0.025),

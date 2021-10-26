@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:readyplates/models/restaurant_list.dart';
-import 'package:readyplates/pages/shop_screen.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/index.dart';
@@ -26,19 +25,25 @@ class Routes {
             );
           case ImagePage.id:
             return ImagePage();
-          case Aboutlocation.id:
+          case RestaurantDetails.id:
             var args = settings.arguments;
-            return Aboutlocation(
+            return RestaurantDetails(
               restaurantModel: args as RestaurantModel,
             );
           case Chekoutdone.id:
             return Chekoutdone();
           case OrderPage.id:
             return OrderPage();
-          case ShopPage.id:
-            return ShopPage();
+          case MenuPage.id:
+            final RestaurantModel args = settings.arguments as RestaurantModel;
+            return MenuPage(
+              restaurantModel: args,
+            );
           case BurgersupportingPage.id:
-            return BurgersupportingPage();
+            final RestaurantModel args = settings.arguments as RestaurantModel;
+            return BurgersupportingPage(
+              restaurantModel: args,
+            );
           case QrCode.id:
             return QrCode();
           case OrderCancelledPage.id:
@@ -54,7 +59,8 @@ class Routes {
           case LandingPage.id:
             return LandingPage();
           case BookingDetails.id:
-            return BookingDetails();
+            final RestaurantModel args = settings.arguments as RestaurantModel;
+            return BookingDetails(args);
           default:
             return OnbordingPage();
         }

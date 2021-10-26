@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:readyplates/models/cart_model.dart';
 
 class ShooppymacPage extends StatelessWidget {
-  const ShooppymacPage({Key? key}) : super(key: key);
+  final CartModel cartModel;
+  const ShooppymacPage({Key? key, required this.cartModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -14,10 +18,11 @@ class ShooppymacPage extends StatelessWidget {
             height: 64,
             width: 64,
           ),
-          SizedBox(
+          Spacer(),
+          /* SizedBox(
             width: 10,
-          ),
-          Text("1 X",
+          ), */
+          /*         Text("1 X",
               style: TextStyle(
                   fontFamily: "Inter",
                   fontWeight: FontWeight.w500,
@@ -26,7 +31,7 @@ class ShooppymacPage extends StatelessWidget {
                   color: Color(0xff222831))),
           SizedBox(
             width: 11,
-          ),
+          ), */
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,9 +56,7 @@ class ShooppymacPage extends StatelessWidget {
                       color: Color(0xff4E535A))),
             ],
           ),
-          SizedBox(
-            width: 48,
-          ),
+          Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             // mainAxisAlignment: MainAxisAlignment.end,

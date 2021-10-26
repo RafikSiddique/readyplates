@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/order/screen/Orderpage.dart';
-import 'package:readyplates/src/Order_Screens/Shop_page.dart';
+import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/Order_Screens/about_location.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
@@ -248,7 +248,7 @@ class OrderOption extends StatelessWidget {
                       color: Color(0xff393E46))),
               icon: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, ShopPage.id);
+                  Navigator.pushNamed(context, MenuPage.id);
                 },
                 child: Container(
                   child: Image.asset(
@@ -332,7 +332,7 @@ class OrderOption extends StatelessWidget {
                       color: Color(0xff393E46))),
               icon: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, Aboutlocation.id);
+                  Navigator.pushNamed(context, RestaurantDetails.id);
                 },
                 child: Image.asset(
                   'assets/images/BottomBar5.png',

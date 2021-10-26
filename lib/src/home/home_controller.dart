@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:readyplates/models/foog_item_model.dart';
-import 'package:readyplates/models/restaurant_list.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_sevices.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';

@@ -47,21 +47,7 @@ class AddtoorderPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 14,
-                    ),
-                    ShooppymacPage(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Divider(
-                      thickness: 2,
-                      color: Color(0xffE4E4E4),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ShooppymacPage(),
+                    
                     SizedBox(
                       height: 10,
                     ),

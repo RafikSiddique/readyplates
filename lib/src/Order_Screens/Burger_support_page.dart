@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
+import 'package:intl/intl.dart';
+import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/bottom_container.dart';
 import 'package:readyplates/widgets/bottomcontainer.dart';
@@ -6,9 +10,11 @@ import 'package:readyplates/widgets/bottomcontainer.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:readyplates/widgets/shoppy_mac.dart';
 
-class BurgersupportingPage extends StatelessWidget {
+class BurgersupportingPage extends GetView<OrderController> {
+  final RestaurantModel restaurantModel;
   static const id = "/burgersupportingPage";
-  const BurgersupportingPage({Key? key}) : super(key: key);
+  const BurgersupportingPage({Key? key, required this.restaurantModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,22 +55,8 @@ class BurgersupportingPage extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 14,
-                  ),
-                  ShooppymacPage(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Divider(
-                    thickness: 2,
-                    color: MyTheme.devidercolor,
-                    // color: Color(0xffE4E4E4),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ShooppymacPage(),
+                  ...controller.cartItems
+                      .map((element) => ShooppymacPage(cartModel: element)),
                   SizedBox(
                     height: 10,
                   ),
@@ -95,32 +87,6 @@ class BurgersupportingPage extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 7,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("EXTRAS :",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            color: MyTheme.appbartextColor,
-                          )),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      TextwidgetPage(
-                        text: "Cheese",
-                        color: MyTheme.appbartextColor,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      Spacer(),
-                      TextwidgetPage(
-                          text: "1 X \$ 0.5",
-                          color: MyTheme.appbartextColor,
-                          fontWeight: FontWeight.w500),
-                    ],
                   ),
                   SizedBox(
                     height: 7,
@@ -210,7 +176,9 @@ class BurgersupportingPage extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                          "Sloppy Joe Burgers, Kondhwa Budruk,Parge,\nNagar,Pune,411048",
+                          restaurantModel.resName +
+                              ", " +
+                              (restaurantModel.address ?? ""),
                           style: TextStyle(
                             fontFamily: "Inter",
                             fontWeight: FontWeight.normal,
@@ -235,7 +203,18 @@ class BurgersupportingPage extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                          "Sunday, 25th, September 2021, 10:00 AM \nPAX: 6 Tables X 2",
+                          controller.weekDays[
+                                  controller.selectedDate.value.weekday - 1] +
+                              ", " +
+                              controller.selectedDate.value.day.toString() +
+                              " " +
+                              controller.months()[
+                                  controller.selectedDate.value.month - 1] +
+                              " " +
+                              DateFormat("hh:mm a")
+                                  .format(controller.selectedDate.value) +
+                              "\n" +
+                              "PAX: ${controller.numberOfPeople} Tables X ${controller.numberOfTable}",
                           style: TextStyle(
                             fontFamily: "Inter",
                             fontWeight: FontWeight.normal,

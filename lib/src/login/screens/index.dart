@@ -1,5 +1,4 @@
 export 'add_to_order.dart';
-export 'homecontroller.dart';
 export 'imagepage.dart';
 export 'loginpage.dart';
 export 'mappage.dart';

@@ -3,4 +3,4 @@ export 'Burger_support_page.dart';
 export 'chekout_done.dart';
 export 'Payment_page.dart';
 export 'QrCode.dart';
-export 'Shop_page.dart';
+export 'menu_page.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:readyplates/models/foog_item_model.dart';
-import 'package:readyplates/models/restaurant_list.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/exception.dart';
 

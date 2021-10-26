@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:readyplates/src/Order_Screens/Shop_page.dart';
+import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/Order_Screens/chekout_done.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
@@ -60,7 +60,7 @@ class Bottomcontainer extends StatelessWidget {
                 text: "Add Items",
                 borderColor: MyTheme.bottomcontainercolor,
                 onTap: () {
-                  Get.toNamed(ShopPage.id);
+                  Get.toNamed(MenuPage.id);
                 },
                 width: size.width * 0.45,
                 padding: EdgeInsets.all(15),

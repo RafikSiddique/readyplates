@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
@@ -10,10 +11,13 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/edit_button.dart';
 
-class ShopPage extends StatelessWidget {
-  static const id = "/shopPage";
+class MenuPage extends StatelessWidget {
+  static const id = "/menupage";
+  final RestaurantModel restaurantModel;
   final controller = Get.find<HomeController>();
   final orderController = Get.find<OrderController>();
+
+  MenuPage({Key? key, required this.restaurantModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
@@ -33,7 +37,7 @@ class ShopPage extends StatelessWidget {
             }),
         centerTitle: true,
         title: Text(
-          'Sloppy Joe Burgers',
+          restaurantModel.resName,
           style: TextStyle(
             fontSize: 17,
             color: MyTheme.appbartextColor,
@@ -236,8 +240,7 @@ class ShopPage extends StatelessWidget {
                                                       width: 10,
                                                     ),
                                                     ...List.generate(
-                                                      double.parse(
-                                                              e.spiceLevel)
+                                                      double.parse(e.spiceLevel)
                                                           .toInt(),
                                                       (index) => Image.asset(
                                                         'assets/images/spice.png',
@@ -286,7 +289,7 @@ class ShopPage extends StatelessWidget {
                     Get.snackbar("Please add an Item",
                         "At least add 1 Item to proceed to booking");
                   } else {
-                    Get.toNamed(BookingDetails.id);
+                    Get.toNamed(BookingDetails.id, arguments: restaurantModel);
                   }
                 },
               ),
