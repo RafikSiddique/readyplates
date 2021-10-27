@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/index.dart';
@@ -50,6 +51,8 @@ class Routes {
             return OrderCancelledPage();
           case PaymentPage.id:
             return PaymentPage();
+          case FeedbackPage.id: //add feedbackpage
+            return FeedbackPage();
           case OrderOption.id:
             return OrderOption();
           case Tellafriend.id:
