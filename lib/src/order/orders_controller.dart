@@ -7,6 +7,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 
@@ -91,24 +92,24 @@ class OrderController extends GetxController {
   }
 
   //post
-  Future<void> order(OrderModel orderModel) async {
+  Future<void> order() async {
     try {
-      //String id = await sfHelper.getUserId();
+      String id = await sfHelper.getUserId();
+      OrderModel ordermodels = OrderModel(
+        user: id,
+        restaurant: 'restaurant',
+        menu: 'menu',
+        name: 'name',
+        price: 20,
+        quantity: 1,
+        noOfTable: 1,
+        noOfPeople: 2,
+        time: 10.00,
+        tax: 10.00,
+      );
 
-      await services.orderapi(orderModel
-
-          // orderModel.user,
-          // orderModel.restaurant,
-          // orderModel.menu,
-          // orderModel.name,
-          // orderModel.price,
-          // orderModel.quantity,
-          // orderModel.no_of_table,
-          // orderModel.no_of_people,
-          // orderModel.time,
-          // orderModel.tax
-
-          );
+      await services.orderapi(ordermodels);
+      Get.toNamed(Chekoutdone.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

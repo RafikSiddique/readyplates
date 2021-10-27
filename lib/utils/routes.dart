@@ -42,6 +42,7 @@ class Routes {
             );
           case BurgersupportingPage.id:
             final RestaurantModel args = settings.arguments as RestaurantModel;
+
             return BurgersupportingPage(
               restaurantModel: args,
             );
