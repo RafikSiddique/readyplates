@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
@@ -84,7 +85,7 @@ class OrderPage extends StatelessWidget {
                   // Get.to(() => BurgersupportingPage());
                 },
                 text: "Edit Order",
-                path: 'assets/images/NotePencil.png',
+                path: Assets.notePencil,
                 color: MyTheme.orderpopupcolor,
               )),
           PopupMenuDivider(
@@ -98,7 +99,7 @@ class OrderPage extends StatelessWidget {
                 onTap: () {
                   Get.to(() => OrderCancelledPage());
                 },
-                path: 'assets/images/CheckCircle.png',
+                path: Assets.checkCircle,
                 text: "Cancel Order",
                 color: MyTheme.orderpopupcolor,
                 //color: Color(0xffF88020),
@@ -234,7 +235,7 @@ class OrderPage extends StatelessWidget {
                         height: 180,
                         width: 180,
                         child: Image(
-                          image: AssetImage('assets/images/QRCODE.png'),
+                          image: AssetImage(Assets.qrCode),
                         ),
                       ),
                       SizedBox(

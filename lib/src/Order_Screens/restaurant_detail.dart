@@ -7,6 +7,8 @@ import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
@@ -31,7 +33,7 @@ class RestaurantDetails extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: (restaurantModel.bio.first.food1 == ""
-                        ? AssetImage("assets/images/ready.png")
+                        ? AssetImage(Assets.ready)
                         : NetworkImage(restaurantModel.bio.first.food1))
                     as ImageProvider,
                 fit: BoxFit.cover,
@@ -102,7 +104,7 @@ class RestaurantDetails extends StatelessWidget {
                                 height: 13.6,
                                 width: 13.6,
                                 child: Image(
-                                  image: AssetImage('assets/images/clock.png'),
+                                  image: AssetImage(Assets.clock),
                                 ),
                               ),
                               SizedBox(
@@ -140,8 +142,7 @@ class RestaurantDetails extends StatelessWidget {
                                 height: 14,
                                 width: 11,
                                 child: Image(
-                                  image: AssetImage(
-                                      'assets/images/pinroundmap.png'),
+                                  image: AssetImage(Assets.pinroundmap),
                                 ),
                               ),
                               SizedBox(
@@ -198,7 +199,7 @@ class RestaurantDetails extends StatelessWidget {
                               height: 15.93,
                               width: 15.13,
                               child: Image(
-                                image: AssetImage('assets/images/spoon.png'),
+                                image: AssetImage(Assets.spoon),
                               ),
                             ),
                             Text(
@@ -234,8 +235,10 @@ class RestaurantDetails extends StatelessWidget {
                                   height: 78,
                                   // width: 94,
                                   child: Image(
-                                      image: AssetImage(
-                                          'assets/images/gallery1.png')),
+                                    image: AssetImage(
+                                      Assets.gallery[0],
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 6,
@@ -244,8 +247,7 @@ class RestaurantDetails extends StatelessWidget {
                                   height: 78,
                                   // width: 94,
                                   child: Image(
-                                      image: AssetImage(
-                                          'assets/images/gallery2.png')),
+                                      image: AssetImage(Assets.gallery[1])),
                                 ),
                                 SizedBox(
                                   width: 6,
@@ -254,8 +256,7 @@ class RestaurantDetails extends StatelessWidget {
                                   height: 78,
                                   // width: 94,
                                   child: Image(
-                                      image: AssetImage(
-                                          'assets/images/gallery1.png')),
+                                      image: AssetImage(Assets.gallery[2])),
                                 ),
                                 SizedBox(
                                   width: 6,
@@ -264,8 +265,7 @@ class RestaurantDetails extends StatelessWidget {
                                   height: 78,
                                   // width: 94,
                                   child: Image(
-                                      image: AssetImage(
-                                          'assets/images/gallery2.png')),
+                                      image: AssetImage(Assets.gallery[1])),
                                 )
                               ],
                             ),
@@ -286,7 +286,7 @@ class RestaurantDetails extends StatelessWidget {
                               height: 13.6,
                               width: 13.6,
                               child: Image(
-                                image: AssetImage('assets/images/clock.png'),
+                                image: AssetImage(Assets.clock),
                               ),
                             ),
                           ]),
@@ -344,8 +344,7 @@ class RestaurantDetails extends StatelessWidget {
                                       height: 24,
                                       width: 56,
                                       child: Image(
-                                        image: AssetImage(
-                                            'assets/images/lessbutton.png'),
+                                        image: AssetImage(Assets.lessbutton),
                                       ),
                                     ),
                                   ),
@@ -380,6 +379,7 @@ class RestaurantDetails extends StatelessWidget {
                                   [controller.defaultItem].obs;
                               controller
                                   .getFoodItems(restaurantModel.id.toString());
+                              Get.find<OrderController>().getCart();
                               Get.toNamed(MenuPage.id,
                                   arguments: restaurantModel);
                             },

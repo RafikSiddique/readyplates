@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class OrderCancelledPage extends StatelessWidget {
@@ -42,7 +43,7 @@ class OrderCancelledPage extends StatelessWidget {
             Container(
               width: 235.2,
               height: 298.38,
-              child: Image(image: AssetImage('assets/images/canceloder.png')),
+              child: Image(image: AssetImage(Assets.canceloder)),
             ),
           ],
         ),

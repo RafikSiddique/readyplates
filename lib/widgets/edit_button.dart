@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class AddButton extends StatelessWidget {
@@ -33,7 +34,7 @@ class AddButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/addpng.png',
+                  Assets.add,
                   height: 16,
                   width: 16,
                 ),
@@ -176,7 +177,7 @@ class EditButton extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/edit.png',
+                Image.asset(Assets.edit,
                     height: 16, width: 16, color: MyTheme.bottomtextColor),
                 Text(
                   'EDIT',

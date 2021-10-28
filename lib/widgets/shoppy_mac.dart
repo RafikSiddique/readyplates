@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readyplates/models/cart_model.dart';
+import 'package:readyplates/utils/assets.dart';
 
 class ShooppymacPage extends StatelessWidget {
   final CartModel cartModel;
@@ -14,7 +15,7 @@ class ShooppymacPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.asset(
-            "assets/images/Burger1.png",
+            Assets.categoryBurger2,
             height: 64,
             width: 64,
           ),
@@ -96,7 +97,7 @@ class ShooppymacPage extends StatelessWidget {
                 height: 24,
               ),
               Image.asset(
-                "assets/images/deletbutton.png",
+                Assets.delete,
                 height: 16,
                 width: 16,
               ),

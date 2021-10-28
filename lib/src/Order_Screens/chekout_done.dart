@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -48,7 +49,7 @@ class Chekoutdone extends StatelessWidget {
                 Container(
                   height: 276,
                   child: Image(
-                    image: AssetImage('assets/images/chekoutdone1.png'),
+                    image: AssetImage(Assets.checkOutDone),
                   ),
                 ),
                 SizedBox(

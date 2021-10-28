@@ -10,21 +10,11 @@ import 'package:readyplates/utils/shared_preference_helper.dart';
 class Orderservices extends ApiService {
   SharedPreferenceHelper sharedPreferenceHelper = SharedPreferenceHelper();
 
-  Future<void> addToCartApi(
-    String user,
-    String food,
-    String count,
-  ) async {
+  Future<void> addToCartApi(CartModel cartModel) async {
     try {
       Response response = await post(addToCart,
-          body: jsonEncode(
-            {
-              'user': user,
-              'food_item': food,
-              'count': count,
-            },
-          ),
-          headers: contentTypeJsonHeader);
+          body: cartModel.toJson(), headers: contentTypeJsonHeader);
+      print(response.body);
       if (response.statusCode != 201) {
         throw AppException(code: response.statusCode, message: response.body);
       }
@@ -33,19 +23,23 @@ class Orderservices extends ApiService {
     }
   }
 
-  Future<List<CartModel>> getCart(String id) async {
+  Future<List<CartApiModel>> getCart(String id) async {
     try {
       print('object');
       Response response =
           await get(cartList(id), headers: contentTypeJsonHeader);
       print(response.body);
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         List<dynamic> data = jsonDecode(response.body);
-        List<CartModel> cartItems =
-            data.map((e) => CartModel.fromMap(e)).toList();
-        return cartItems;
+        if (data.isNotEmpty) {
+          List<CartApiModel> cartItems =
+              data.map((e) => CartApiModel.fromMap(e)).toList();
+          return cartItems;
+        } else {
+          return <CartApiModel>[];
+        }
       } else if (response.statusCode != 404) {
-        return <CartModel>[];
+        return <CartApiModel>[];
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);

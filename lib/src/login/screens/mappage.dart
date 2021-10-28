@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class MapPage extends StatefulWidget {
@@ -144,7 +145,7 @@ class _MapPageState extends State<MapPage> {
                     child: Container(
                         padding: EdgeInsets.all(4),
                         margin: EdgeInsets.all(8),
-                        child: Image.asset('assets/images/Locationset.png')),
+                        child: Image.asset(Assets.locationset)),
                   ),
                 ),
               ),
@@ -197,7 +198,7 @@ class _MapPageState extends State<MapPage> {
                                 Container(
                                   width: 16,
                                   height: 20.13,
-                                  child: Image.asset('assets/images/gps.png'),
+                                  child: Icon(Icons.location_on),
                                 ),
                               ],
                             ),

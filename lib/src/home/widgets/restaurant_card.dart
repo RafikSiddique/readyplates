@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/restaurant_model.dart';
-import 'package:readyplates/src/Order_Screens/about_location.dart';
+import 'package:readyplates/src/Order_Screens/restaurant_detail.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -51,6 +52,7 @@ class RestaurantCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: restaurantModel.bio.first.food1 == ""
+<<<<<<< HEAD
                       ? Image.asset(
                           "assets/images/burger.png",
                           fit: BoxFit.fill,
@@ -59,6 +61,10 @@ class RestaurantCard extends StatelessWidget {
                           restaurantModel.bio.first.food1,
                           fit: BoxFit.fill,
                         ),
+=======
+                      ? Image.asset(Assets.categoryBurger)
+                      : Image.network(restaurantModel.bio.first.food1),
+>>>>>>> 85e2b550cb60b4184daae60cd89e06fbb0373192
                 ),
                 SizedBox(
                   width: 10,
@@ -103,7 +109,7 @@ class RestaurantCard extends StatelessWidget {
                           Container(
                             width: media.size.height * 0.013,
                             height: media.size.height * 0.013,
-                            child: Image.asset('assets/images/star.png'),
+                            child: Image.asset(Assets.star),
                           ),
                           SizedBox(
                             width: 3,
@@ -134,7 +140,7 @@ class RestaurantCard extends StatelessWidget {
                           Container(
                             width: media.size.height * 0.013,
                             height: media.size.height * 0.013,
-                            child: Image.asset('assets/images/tag.png'),
+                            child: Image.asset(Assets.tag),
                           ),
                           SizedBox(
                             width: 5,
