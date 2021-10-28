@@ -22,6 +22,7 @@ class AuthController extends GetxController {
   late TextEditingController mobController;
   late TextEditingController password2Controller;
   late TextEditingController dobController;
+  late TextEditingController feedback;
 
   late FocusNode userNameFocus;
 
@@ -58,7 +59,10 @@ class AuthController extends GetxController {
     mobController = TextEditingController();
     password2Controller = TextEditingController();
     dobController = TextEditingController();
+    feedback = TextEditingController();
+
     userNameFocus = FocusNode();
+
     otpFields = List.generate(6, (index) => FocusNode());
     otpText = List.generate(6, (index) => TextEditingController());
     usernameController.addListener(onLooseFocus);

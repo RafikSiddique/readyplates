@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class Elevated extends StatelessWidget {
   final double fontSize;
@@ -48,6 +49,64 @@ class Elevated extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CustomElevated extends StatelessWidget {
+  final double fontSize;
+  final String text;
+  final FontWeight fontWeight;
+  final void Function()? onTap;
+  //final double width;
+  //final double height = 28;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  // final EdgeInsets padding;
+  final Color? color;
+  const CustomElevated({
+    Key? key,
+    required this.fontSize,
+    required this.text,
+    required this.fontWeight,
+    this.onTap,
+    //required this.width,
+    this.backgroundColor,
+    this.borderColor,
+    //required this.padding,
+    this.color,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //width: width,
+      height: 28,
+      width: 60,
+      decoration: BoxDecoration(
+        border:
+            Border.all(width: 1, color: MyTheme.borderColor //Color(0xffFF8400),
+                ),
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+      ),
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text,
+            style: GoogleFonts.inter(
+              fontWeight: fontWeight,
+              color: color,
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.star_border_outlined),
+            iconSize: 10,
+            color: MyTheme.borderColor,
+            onPressed: onTap,
+          ),
+        ],
       ),
     );
   }

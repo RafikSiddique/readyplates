@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:readyplates/widgets/bottomcontainer.dart';
 
 import 'package:readyplates/widgets/imagewidget.dart';
-import 'package:readyplates/widgets/shoppy_mac.dart';
 
 class AddtoorderPage extends StatelessWidget {
   const AddtoorderPage({Key? key}) : super(key: key);
@@ -47,7 +46,6 @@ class AddtoorderPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Column(
                   children: [
-                    
                     SizedBox(
                       height: 10,
                     ),

@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/Order_Screens/chekout_done.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 import 'package:readyplates/widgets/imagewidget.dart';
 
-class Bottomcontainer extends StatelessWidget {
+class Bottomcontainer extends StatefulWidget {
   const Bottomcontainer({Key? key}) : super(key: key);
 
+  @override
+  State<Bottomcontainer> createState() => _BottomcontainerState();
+}
+
+class _BottomcontainerState extends State<Bottomcontainer> {
+  final controller = Get.find<OrderController>();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -80,7 +87,9 @@ class Bottomcontainer extends StatelessWidget {
                 width: size.width * 0.45,
                 text: "Book",
                 onTap: () {
-                  Get.toNamed(Chekoutdone.id);
+                  Get.toNamed(
+                    Chekoutdone.id,
+                  );
                 },
               ),
 

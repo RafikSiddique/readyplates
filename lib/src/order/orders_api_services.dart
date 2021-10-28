@@ -25,6 +25,7 @@ class Orderservices extends ApiService {
 
   Future<List<CartApiModel>> getCart(String id) async {
     try {
+      print('object');
       Response response =
           await get(cartList(id), headers: contentTypeJsonHeader);
       print(response.body);
@@ -48,18 +49,7 @@ class Orderservices extends ApiService {
     }
   }
 
-  Future<void> orderapi(OrderModel ordermodel
-      // String user,
-      // String restaurant,
-      // String menu,
-      // String name,
-      // double price,
-      // int quantity,
-      // int no_of_table,
-      // int no_of_people,
-      // double time,
-      // double tax,
-      ) async {
+  Future<void> orderapi(OrderModel ordermodel) async {
     try {
       Response response = await post(ordersapi,
           body: ordermodel.toJson(), headers: contentTypeJsonHeader);

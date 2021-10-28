@@ -13,9 +13,12 @@ import 'package:readyplates/widgets/shoppy_mac.dart';
 
 class BurgersupportingPage extends GetView<OrderController> {
   final RestaurantModel restaurantModel;
+
   static const id = "/burgersupportingPage";
-  const BurgersupportingPage({Key? key, required this.restaurantModel})
-      : super(key: key);
+  const BurgersupportingPage({
+    Key? key,
+    required this.restaurantModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -170,18 +173,22 @@ class BurgersupportingPage extends GetView<OrderController> {
                       SizedBox(
                         width: 10,
                       ),
-                      Text(
-                          restaurantModel.resName +
-                              ", " +
-                              (restaurantModel.address ?? ""),
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontWeight: FontWeight.normal,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            // color: Color(0xff4E535A)
-                            color: MyTheme.dividermiddletext,
-                          )),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Text(
+                            restaurantModel.resName +
+                                ", " +
+                                (restaurantModel.address ?? ""),
+                            style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              fontFamily: "Inter",
+                              fontWeight: FontWeight.normal,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 13,
+                              // color: Color(0xff4E535A)
+                              color: MyTheme.dividermiddletext,
+                            )),
+                      ),
                     ],
                   ),
                   SizedBox(
