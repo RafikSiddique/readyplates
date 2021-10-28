@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:readyplates/utils/assets.dart';
 
 class ReadyPlatesText extends StatelessWidget {
   const ReadyPlatesText({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class ReadyPlatesText extends StatelessWidget {
                 // width: 40,
                 height: 35,
                 child: Image.asset(
-                  "assets/images/spoon.png",
+                  Assets.spoon,
                   fit: BoxFit.cover,
                 ),
               ),

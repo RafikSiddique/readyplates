@@ -7,6 +7,7 @@ import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/edit_button.dart';
@@ -155,8 +156,8 @@ class MenuPage extends StatelessWidget {
                                                       width: size.width * 0.22,
                                                       errorBuilder: (context,
                                                           error, stackTrace) {
-                                                        return Image.asset(
-                                                            "assets/images/burger.png");
+                                                        return Image.asset(Assets
+                                                            .categoryBurger);
                                                       },
                                                     ),
                                                   ),
@@ -167,35 +168,62 @@ class MenuPage extends StatelessWidget {
                                                     child: orderController
                                                             .cartItems
                                                             .any((el) =>
-                                                                el.id.value ==
-                                                                e.id)
+                                                                el.foodItem
+                                                                        .value ==
+                                                                    e.id &&
+                                                                el.restaurant ==
+                                                                    restaurantModel
+                                                                        .id)
                                                         ? IncDecButton(
                                                             text: orderController
                                                                 .getCartItem(
-                                                                    e.id)
-                                                                .quantity,
+                                                                    e.id,
+                                                                    restaurantModel
+                                                                        .id)
+                                                                .foodQuantity,
                                                             widthFraction: .18,
                                                             onIncrement: () {
                                                               orderController
                                                                   .increment(
-                                                                      e.id);
+                                                                      e.id,
+                                                                      restaurantModel
+                                                                          .id);
                                                             },
                                                             onDecrement: () {
                                                               orderController
                                                                   .decrement(
-                                                                      e.id);
+                                                                      e.id,
+                                                                      restaurantModel
+                                                                          .id);
                                                             },
                                                           )
                                                         : AddButton(
                                                             widthFraction: 0.18,
                                                             onTap: () {
+                                                              CartModel cartModel = CartModel(
+                                                                  foodItem:
+                                                                      e.id.obs,
+                                                                  foodName:
+                                                                      e.name,
+                                                                  foodImage:
+                                                                      e.image1,
+                                                                  foodPrice:
+                                                                      double.parse(e
+                                                                              .cost)
+                                                                          .obs,
+                                                                  restaurant:
+                                                                      restaurantModel
+                                                                          .id,
+                                                                  user: "",
+                                                                  foodQuantity:
+                                                                      1.obs);
                                                               orderController
                                                                   .cartItems
-                                                                  .add(CartModel(
-                                                                      id: e.id
-                                                                          .obs,
-                                                                      quantity:
-                                                                          1.obs));
+                                                                  .add(
+                                                                      cartModel);
+                                                              orderController
+                                                                  .cart(
+                                                                      cartModel);
                                                             },
                                                           ))
                                               ],
@@ -232,10 +260,10 @@ class MenuPage extends StatelessWidget {
                                                 Spacer(),
                                                 Row(
                                                   children: [
-                                                    Image.asset((e.dietType ==
-                                                            "Veg"
-                                                        ? "assets/images/veg.png"
-                                                        : "assets/images/nonveg.png")),
+                                                    Image.asset(
+                                                        (e.dietType == "Veg"
+                                                            ? Assets.veg
+                                                            : Assets.nonveg)),
                                                     SizedBox(
                                                       width: 10,
                                                     ),
@@ -243,7 +271,7 @@ class MenuPage extends StatelessWidget {
                                                       double.parse(e.spiceLevel)
                                                           .toInt(),
                                                       (index) => Image.asset(
-                                                        'assets/images/spice.png',
+                                                        Assets.spice,
                                                         color: index == 0
                                                             ? MyTheme
                                                                 .shoppageimgcolor //Color(0xff25A244)

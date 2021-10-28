@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:share_plus/share_plus.dart';
@@ -53,7 +54,7 @@ class Tellafriend extends StatelessWidget {
                   //   height: 144,
                   // ),
                   ImagewidgetPage(
-                    imagePath: "assets/images/option.png",
+                    imagePath: Assets.option,
                     height: 219,
                     width: 260,
                   ),
@@ -105,7 +106,7 @@ class Tellafriend extends StatelessWidget {
                         children: <Widget>[
                           Container(
                               child: Image.asset(
-                                  "assets/images/ShareNetwork.png",
+                                  Assets.shareNetwork,
                                   height: 30,
                                   width: 33,
                                   fit: BoxFit.cover)),
@@ -128,22 +129,6 @@ class Tellafriend extends StatelessWidget {
                     ),
                   ),
 
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     ImagewidgetPage(
-                  //       imagePath: "assets/images/ShareNetwork.png",
-                  //       height: 25,
-                  //       width: 25,
-                  //     ),
-                  //     ElevatedwidgetPage(
-                  //         height: 50,
-                  //         width: 151,
-                  //         backgroundColor: Color(0xffE5E5E5),
-                  //         text: 'SHARE',
-                  //         color: Colors.black)
-                  //   ],
-                  // )
                 ],
               ),
             ),

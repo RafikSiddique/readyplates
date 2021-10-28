@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/readyplates.dart';
@@ -27,7 +28,7 @@ class LoginPage extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/ready.png"),
+              image: AssetImage(Assets.ready),
               fit: BoxFit.cover,
             ),
           ),
@@ -267,8 +268,7 @@ class LoginPage extends StatelessWidget {
                                 Container(
                                   width: 26.42,
                                   height: 27,
-                                  child:
-                                      Image.asset('assets/images/google.png'),
+                                  child: Image.asset(Assets.google),
                                 ),
                                 SizedBox(
                                   width: 10,

@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -84,7 +85,7 @@ class _ImagePageState extends State<ImagePage> {
                     ? ClipOval(
                         child: Image.file(image!,
                             height: 160, width: 160, fit: BoxFit.cover))
-                    : Image.asset("assets/images/imageman.png")),
+                    : Image.asset(Assets.imageMan)),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Center(

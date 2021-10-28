@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/form_field.dart';
@@ -65,7 +66,7 @@ class PaymentPage extends StatelessWidget {
                 ),
                 icon: Container(
                   height: 31,
-                  child: Image(image: AssetImage("assets/images/paypal.png")),
+                  child: Image(image: AssetImage(Assets.paypal)),
                 ),
                 onPressed: () {},
               ),

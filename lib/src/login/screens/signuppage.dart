@@ -5,6 +5,7 @@ import 'package:readyplates/models/signup.dart';
 
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
@@ -649,7 +650,7 @@ class _SignupPageState extends State<SignupPage> {
                                     height: 21.5,
                                     width: 20,
                                     child: Image.asset(
-                                        "assets/images/google.png")),
+                                        Assets.google)),
                               ),
                               Padding(
                                 padding:
@@ -687,7 +688,7 @@ class _SignupPageState extends State<SignupPage> {
                                 padding: const EdgeInsets.only(
                                     top: 10, bottom: 10, right: 9),
                                 child: Container(
-                                    child: Image.asset("assets/images/fbb.png",
+                                    child: Image.asset(Assets.fbb,
                                         height: 30,
                                         width: 33,
                                         fit: BoxFit.cover)),

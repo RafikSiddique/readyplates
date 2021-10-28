@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class QrCode extends StatelessWidget {
@@ -39,7 +40,7 @@ class QrCode extends StatelessWidget {
                 child: Container(
                   height: 276,
                   child: Image(
-                    image: AssetImage('assets/images/GreenChek.png'),
+                    image: AssetImage(Assets.greenCheck),
                   ),
                 ),
               ),

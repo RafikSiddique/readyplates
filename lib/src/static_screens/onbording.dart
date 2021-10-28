@@ -10,6 +10,7 @@ import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:readyplates/widgets/readyplates.dart';
 
@@ -74,7 +75,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/readyplates.jpg"),
+                image: AssetImage(Assets.onboardingBg),
                 fit: BoxFit.cover,
               ),
             ),
@@ -89,7 +90,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/images/spoon.png',
+                        Assets.spoon,
                         width: MediaQuery.of(context).size.width * 0.6,
                       ),
                       RichText(

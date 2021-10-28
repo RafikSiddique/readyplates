@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/src/order/screen/Orderpage.dart';
-import 'package:readyplates/src/Order_Screens/menu_page.dart';
-import 'package:readyplates/src/Order_Screens/about_location.dart';
-import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
-import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -233,115 +228,6 @@ class OrderOption extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: 0,
-          // iconSize: 20.0,
-          items: [
-            BottomNavigationBarItem(
-              // ignore: deprecated_member_use
-              title: Text('Home',
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.normal,
-                      fontSize: 13,
-                      color: Color(0xff393E46))),
-              icon: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, MenuPage.id);
-                },
-                child: Container(
-                  child: Image.asset(
-                    "assets/images/BottomBar1.png",
-                    height: 20,
-                    width: 20,
-                  ),
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              // ignore: deprecated_member_use
-              title: Text('Location',
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.normal,
-                      fontSize: 13,
-                      color: Color(0xff393E46))),
-              icon: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, MapPage.id);
-                },
-                child: Container(
-                  child: Image.asset(
-                    'assets/images/BottomBar2.png',
-                    height: 16,
-                    width: 16,
-                  ),
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              // ignore: deprecated_member_use
-              title: Text('Orders',
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.normal,
-                      fontSize: 13,
-                      color: Color(0xff00ADB5))),
-              icon: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, OrderPage.id);
-                },
-                child: Container(
-                  child: Image.asset(
-                    'assets/images/BottomBar3.png',
-                    height: 16,
-                    width: 16,
-                  ),
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              // ignore: deprecated_member_use
-              title: Text('Tell a Friend',
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.normal,
-                      fontSize: 13,
-                      color: Color(0xff393E46))),
-              icon: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, Tellafriend.id);
-                },
-                child: Container(
-                  child: Image.asset(
-                    'assets/images/BottomBar4.png',
-                    height: 20,
-                    width: 20,
-                  ),
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              // ignore: deprecated_member_use
-              title: Text('Profile',
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.normal,
-                      fontSize: 13,
-                      color: Color(0xff393E46))),
-              icon: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, RestaurantDetails.id);
-                },
-                child: Image.asset(
-                  'assets/images/BottomBar5.png',
-                  height: 16,
-                  width: 16,
-                ),
-              ),
-            ),
-          ]),
     );
   }
 }

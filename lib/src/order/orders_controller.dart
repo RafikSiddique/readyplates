@@ -56,35 +56,49 @@ class OrderController extends GetxController {
   Future<void> getCart() async {
     try {
       String id = await sfHelper.getUserId();
-      cartItems.value = await services.getCart(id);
+      List<CartApiModel> listOfApi = await services.getCart(id);
+      List<CartModel> models = listOfApi
+          .map((e) => CartModel(
+              user: id,
+              foodItem: e.foodItem.id.obs,
+              foodName: e.foodItem.name,
+              foodQuantity: e.foodQuantity.obs,
+              foodImage: e.foodImage,
+              foodPrice: e.foodPrice.obs,
+              restaurant: e.restaurant))
+          .toList();
+      cartItems.value = models;
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
   }
 
-  void increment(int id) async {
-    getCartItem(id).quantity++;
-    await cart(getCartItem(id));
+  void increment(int id, int resId) async {
+    getCartItem(id, resId).foodQuantity++;
+    await cart(getCartItem(id, resId));
   }
 
-  void decrement(int id) async {
-    if (getCartItem(id).quantity.value > 1) {
-      getCartItem(id).quantity--;
-      await cart(getCartItem(id));
-    } else
-      cartItems.remove(getCartItem(id));
-    await cart(getCartItem(id));
+  void decrement(int id, int resId) async {
+    if (getCartItem(id, resId).foodQuantity.value > 1) {
+      getCartItem(id, resId).foodQuantity--;
+      await cart(getCartItem(id, resId));
+    } else {
+      CartModel item = getCartItem(id, resId);
+      item.foodQuantity = 0.obs;
+      cartItems.remove(item);
+      await cart(item);
+    }
   }
 
-  CartModel getCartItem(int id) {
-    return cartItems.firstWhere((element) => element.id.value == id);
+  CartModel getCartItem(int id, int resId) {
+    return cartItems.firstWhere((element) => element.foodItem.value == id);
   }
 
   Future<void> cart(CartModel cartModel) async {
     try {
       String id = await sfHelper.getUserId();
-      await services.addToCartApi(
-          id, cartModel.id.string, cartModel.quantity.string);
+      cartModel.user = id;
+      await services.addToCartApi(cartModel);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -93,22 +107,7 @@ class OrderController extends GetxController {
   //post
   Future<void> order(OrderModel orderModel) async {
     try {
-      //String id = await sfHelper.getUserId();
-
-      await services.orderapi(orderModel
-
-          // orderModel.user,
-          // orderModel.restaurant,
-          // orderModel.menu,
-          // orderModel.name,
-          // orderModel.price,
-          // orderModel.quantity,
-          // orderModel.no_of_table,
-          // orderModel.no_of_people,
-          // orderModel.time,
-          // orderModel.tax
-
-          );
+      await services.orderapi(orderModel);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

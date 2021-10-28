@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/widgets/restaurant_card.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class ShopScreen extends StatelessWidget {
@@ -21,14 +22,14 @@ class ShopScreen extends StatelessWidget {
     'Chinese',
   ];
   final List<String> categroyImg = [
-    'assets/images/drinks.png',
-    'assets/images/burger.png',
-    'assets/images/pizza.png',
-    'assets/images/seafood.png',
-    'assets/images/steak.png',
-    'assets/images/burger2.png',
-    'assets/images/fastfood.png',
-    'assets/images/chinese.png',
+    Assets.categoryDrinks,
+    Assets.categoryBurger,
+    Assets.categoryPizza,
+    Assets.categorySeafood,
+    Assets.categorySteak,
+    Assets.categoryBurger2,
+    Assets.categoryFastfood,
+    Assets.categoryChinese,
   ];
 
   final HomeController controller = Get.find();
@@ -162,7 +163,7 @@ class ShopScreen extends StatelessWidget {
                       Container(
                         width: 11,
                         height: 11,
-                        child: Image.asset('assets/images/location.png'),
+                        child: Image.asset(Assets.location),
                       ),
                       SizedBox(
                         width: 5,

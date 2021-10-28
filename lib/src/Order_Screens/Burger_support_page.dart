@@ -3,6 +3,7 @@ import 'package:get/state_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/bottom_container.dart';
 import 'package:readyplates/widgets/bottomcontainer.dart';
@@ -161,17 +162,11 @@ class BurgersupportingPage extends GetView<OrderController> {
                   Row(
                     children: [
                       ImagewidgetPage(
-                        imagePath: "assets/images/ForkKnife.png",
+                        imagePath: Assets.forkKnife,
                         height: 25,
                         width: 25,
                       ),
 
-                      // Image.asset(
-                      //   "assets/images/ForkKnife.png",
-                      //   height: 25,
-                      //   width: 25,
-                      //   color: Color(0xff4E535A),
-                      // ),
                       SizedBox(
                         width: 10,
                       ),
@@ -195,7 +190,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                   Row(
                     children: [
                       ImagewidgetPage(
-                        imagePath: "assets/images/clock.png",
+                        imagePath: Assets.clock,
                         height: 25,
                         width: 25,
                       ),

@@ -97,8 +97,8 @@ class FoodItemModel {
       stdServingSize: map['std_serving_size'],
       otherServingSize: map['other_serving_size'],
       otherServingCost: map['other_serving_cost'],
-      spiceLevel: map['spice_level'],
-      cost: map['cost'],
+      spiceLevel: map['spice_level'] ?? "1.0",
+      cost: map['cost'] ?? "20",
       restaurant: map['restaurant'],
     );
   }
