@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/widgets/edit_button.dart';
 
 @override
@@ -31,17 +32,14 @@ class ProfileListTile extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 11.0),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontFamily: 'Inter',
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: -0.2,
-                  color: Color(0xff6C757D),
-                ),
-              ),
+              child: Text(title,
+                  style: GoogleFonts.inter(
+                    fontSize: 15,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.2,
+                    color: Color(0xff6C757D),
+                  )),
             ),
             EditButton(onTap: onTap)
           ],

@@ -42,7 +42,7 @@ class AddButton extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontFamily: 'Inter',
-                    color: Color(0xffFF6E42),
+                    color: MyTheme.editbuttontextColor, // Color(0xffFF6E42),
                   ),
                 )
               ],
@@ -91,13 +91,13 @@ class IncDecButton extends StatelessWidget {
                   borderRadius:
                       BorderRadius.horizontal(left: Radius.circular(6)),
                   side: BorderSide(
-                    color: Color(0xffFF6E42),
+                    color: MyTheme.editbuttontextColor,
                   ),
                 ),
-                color: Color(0xffFBBEBE).withOpacity(0.5),
+                color: MyTheme.addremovebuttoncolor, //Color(0xffFDDEDE),
                 child: Icon(
                   Icons.remove,
-                  color: Color(0xffFF6E42),
+                  color: MyTheme.editbuttontextColor,
                 ),
               ),
             ),
@@ -116,7 +116,7 @@ class IncDecButton extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Inter',
-                    color: Color(0xffFF6E42),
+                    color: MyTheme.editbuttontextColor,
                   ),
                 ),
               ),
@@ -132,13 +132,13 @@ class IncDecButton extends StatelessWidget {
                   borderRadius:
                       BorderRadius.horizontal(right: Radius.circular(6)),
                   side: BorderSide(
-                    color: Color(0xffFF6E42),
+                    color: MyTheme.editbuttontextColor,
                   ),
                 ),
-                color: Color(0xffFBBEBE).withOpacity(0.5),
+                color: MyTheme.addremovebuttoncolor, //Color(0xffFDDEDE),
                 child: Icon(
                   Icons.add,
-                  color: Color(0xffFF6E42),
+                  color: MyTheme.editbuttontextColor,
                 ),
               ),
             ),
@@ -158,6 +158,7 @@ class EditButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Container(
       width: size.width * widthFraction,
       child: Card(
@@ -165,7 +166,7 @@ class EditButton extends StatelessWidget {
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         // color: Color(0xffFFF0F3),
-        color: MyTheme.appbackcolor,
+        color: MyTheme.appbackcolor, //Colors.white, //appbackcolor,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(6),

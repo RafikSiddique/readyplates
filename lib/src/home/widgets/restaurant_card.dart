@@ -45,14 +45,20 @@ class RestaurantCard extends StatelessWidget {
               children: [
                 Container(
                   // color: Colors.blue,
-                  width: media.size.height * 0.09,
-                  height: media.size.height * 0.09,
+                  width: media.size.height * 0.11,
+                  height: media.size.height * 0.11,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: restaurantModel.bio.first.food1 == ""
-                      ? Image.asset("assets/images/burger.png")
-                      : Image.network(restaurantModel.bio.first.food1),
+                      ? Image.asset(
+                          "assets/images/burger.png",
+                          fit: BoxFit.fill,
+                        )
+                      : Image.network(
+                          restaurantModel.bio.first.food1,
+                          fit: BoxFit.fill,
+                        ),
                 ),
                 SizedBox(
                   width: 10,
@@ -69,6 +75,9 @@ class RestaurantCard extends StatelessWidget {
                             color: Colors.black,
                             fontWeight: FontWeight.w600),
                       ),
+                      SizedBox(
+                        height: 8,
+                      ),
                       Text(
                         "Restaurent Description",
                         style: GoogleFonts.montserrat(
@@ -76,12 +85,18 @@ class RestaurantCard extends StatelessWidget {
                           color: MyTheme.shoptextcolor2,
                         ),
                       ),
+                      SizedBox(
+                        height: 3,
+                      ),
                       Text(
                         restaurantModel.address ?? "",
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
                           color: MyTheme.shoptextcolor2,
                         ),
+                      ),
+                      SizedBox(
+                        height: 4,
                       ),
                       Row(
                         children: [
@@ -94,7 +109,8 @@ class RestaurantCard extends StatelessWidget {
                             width: 3,
                           ),
                           Text(
-                            restaurantModel.bio.first.servingTime,
+                            // restaurantModel.bio.first.servingTime,
+                            "4",
                             style: TextStyle(
                               fontSize: media.size.height * 0.013,
                               //color: Color(0xff767B91),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/home/home_controller.dart';
@@ -37,6 +38,7 @@ class ShopScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -76,7 +78,7 @@ class ShopScreen extends StatelessWidget {
                   height: 47,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(4.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                       color: MyTheme.hinttextColor,
                     ),
@@ -112,6 +114,43 @@ class ShopScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 17,
+                ),
+                child: Container(
+                  width: 342,
+                  height: 14,
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 11,
+                        height: 11,
+                        child: Image.asset('assets/images/location1.png'),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        '32nd Street, Long Beach, San Francisco',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontFamily: "Inter",
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          color: MyTheme.appbartextColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                height: 27,
+              ),
+
               Container(
                 //height: MediaQuery.of(context).size.height * 0.2,
                 child: GridView.count(
@@ -132,8 +171,8 @@ class ShopScreen extends StatelessWidget {
                               color: MyTheme.shopboxcolor,
                               borderRadius: BorderRadius.circular(11),
                             ),
-                            height: media.size.height * 0.06,
-                            width: media.size.height * 0.06,
+                            height: media.size.height * 0.08,
+                            width: media.size.height * 0.08,
                             alignment: Alignment.center,
                             padding: EdgeInsets.all(8),
                             child: Image.asset(
@@ -143,46 +182,55 @@ class ShopScreen extends StatelessWidget {
                               width: MediaQuery.of(context).size.height * 0.035,
                             ),
                           ),
-                          Text(category[i])
+                          SizedBox(
+                            height: 1,
+                          ),
+                          Text(
+                            category[i],
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 10,
+                                color: Colors.black),
+                          )
                         ],
                       )
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 17,
-                ),
-                child: Container(
-                  width: 342,
-                  height: 14,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 11,
-                        height: 11,
-                        child: Image.asset('assets/images/location.png'),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '32nd Street, Long Beach, San Francisco',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: MyTheme.appbartextColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(
+              //     left: 16,
+              //     right: 17,
+              //   ),
+              //   child: Container(
+              //     width: 342,
+              //     height: 14,
+              //     child: Row(
+              //       children: [
+              //         Container(
+              //           width: 11,
+              //           height: 11,
+              //           child: Image.asset('assets/images/location.png'),
+              //         ),
+              //         SizedBox(
+              //           width: 5,
+              //         ),
+              //         Text(
+              //           '32nd Street, Long Beach, San Francisco',
+              //           style: TextStyle(
+              //             fontSize: 10,
+              //             color: MyTheme.appbartextColor,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
               SizedBox(
-                height: 18,
-              ),
-              SizedBox(
-                height: 48,
+                height: 27,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16),

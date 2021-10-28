@@ -71,4 +71,6 @@ class MyTheme {
   static Color orderoptionbuttoncolor = Color(0xff44C4A1);
 
   static Color mapboxdecorationcolor = Color(0xff5D5E5F);
+
+  static Color addremovebuttoncolor = Color(0xffFDDEDE);
 }

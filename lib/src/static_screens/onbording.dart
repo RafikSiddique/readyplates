@@ -132,7 +132,6 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                         Container(
                           margin: EdgeInsets.only(left: 16, right: 16),
                           height: 54,
-                          //width: 343,
                           width: MediaQuery.of(context).size.width,
                           child: button(
                               onTap: () {

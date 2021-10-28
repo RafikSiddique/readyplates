@@ -52,25 +52,38 @@ class Chekoutdone extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 60,
                 ),
-                Elevated(
-                  width: MediaQuery.of(context).size.width / 2.5,
-                  text: "Pay Now",
-                  onTap: () {
-                    Get.toNamed(PaymentPage.id);
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Elevated(
+                    backgroundColor: Colors.white,
+                    borderColor: Colors.black,
+                    width: MediaQuery.of(context).size.width,
+                    text: "Pay Later",
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    onTap: () {
+                      Get.offAllNamed(LandingPage.id);
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                Elevated(
-                  width: MediaQuery.of(context).size.width / 2.5,
-                  text: "Pay Later",
-                  onTap: () {
-                    Get.offAllNamed(LandingPage.id);
-                  },
-                )
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Elevated(
+                    width: MediaQuery.of(context).size.width,
+                    text: "Pay Now",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                    onTap: () {
+                      Get.toNamed(PaymentPage.id);
+                    },
+                  ),
+                ),
               ],
             ),
           )),

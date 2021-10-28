@@ -383,7 +383,7 @@ class OrderPage extends StatelessWidget {
                       SizedBox(height: 20),
                       Elevated(
                         text: " Order Again",
-                        width: 272,
+                        width: MediaQuery.of(context).size.width,
                         onTap: () {},
                       ),
                       SizedBox(height: 0),
