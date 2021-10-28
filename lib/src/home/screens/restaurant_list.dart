@@ -200,7 +200,6 @@ class ShopScreen extends StatelessWidget {
                   ],
                 ),
               ),
-<<<<<<< HEAD
               // Padding(
               //   padding: const EdgeInsets.only(
               //     left: 16,
@@ -231,40 +230,6 @@ class ShopScreen extends StatelessWidget {
               //   ),
               // ),
 
-=======
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 17,
-                ),
-                child: Container(
-                  width: 342,
-                  height: 14,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 11,
-                        height: 11,
-                        child: Image.asset(Assets.location),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '32nd Street, Long Beach, San Francisco',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: MyTheme.appbartextColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 18,
-              ),
->>>>>>> 85e2b550cb60b4184daae60cd89e06fbb0373192
               SizedBox(
                 height: 27,
               ),
