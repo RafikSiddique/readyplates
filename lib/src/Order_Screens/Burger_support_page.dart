@@ -231,7 +231,7 @@ class BurgersupportingPage extends GetView<OrderController> {
             ),
           ),
           Spacer(),
-          Bottomcontainer(),
+          Bottomcontainer(restaurantModel: restaurantModel,),
         ],
       ),
     );
