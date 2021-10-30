@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/signup.dart';
 
 import 'package:readyplates/src/login/controller/auth_controller.dart';
@@ -52,7 +53,6 @@ class _SignupPageState extends State<SignupPage> {
               fontWeight: FontWeight.w500,
               fontStyle: FontStyle.normal,
               fontSize: 17,
-              letterSpacing: -0.226667,
               color: MyTheme.appbartextColor,
             ),
           ),
@@ -102,8 +102,7 @@ class _SignupPageState extends State<SignupPage> {
                   //         fontStyle: FontStyle.normal,
                   //         fontWeight: FontWeight.w500,
                   //         fontSize: 15,
-                  //         letterSpacing: -0.264706,
-                  //         color: MyTheme.hinttextColor,
+                  //                       //         color: MyTheme.hinttextColor,
                   //         //color: Color(0xff979797).withOpacity(0.7),
                   //       ),
                   //       // labelText: "First Name",
@@ -147,8 +146,7 @@ class _SignupPageState extends State<SignupPage> {
                   //         fontStyle: FontStyle.normal,
                   //         fontWeight: FontWeight.w500,
                   //         fontSize: 15,
-                  //         letterSpacing: -0.264706,
-                  //         color: MyTheme.hinttextColor,
+                  //                       //         color: MyTheme.hinttextColor,
                   //         //color: Color(0xff979797).withOpacity(0.7),
                   //       ),
                   //       border: OutlineInputBorder(
@@ -176,14 +174,13 @@ class _SignupPageState extends State<SignupPage> {
                   //     )),
                   SizedBox(height: 19),
                   Text("Gender",
-                      style: TextStyle(
+                      style: GoogleFonts.inter(
                         fontSize: 13,
-                        fontFamily: 'Inter',
+                        color: MyTheme.hinttextchangeColors,
+                        //color: Color(0xff2F2E41),
+                        // fontFamily: 'Inter',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
-                        color: MyTheme.hinttextchangeColors,
-                        // color: Color(0xff2F2E41),
-                        letterSpacing: -0.229412,
                       )),
                   SizedBox(height: 5),
 
@@ -208,24 +205,22 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          // borderRadius: BorderRadius.all(
-                          //   Radius.circular(6.0),
-                          // ),
-                        ),
-                        hintText: 'Gender',
-                        contentPadding:
-                            EdgeInsets.only(left: 14, top: 14, bottom: 14),
-                        hintStyle: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: -0.264706,
-                          color: MyTheme.hinttextColor,
-                          //color: Color(0xff979797).withOpacity(0.7),
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            // borderRadius: BorderRadius.all(
+                            //   Radius.circular(6.0),
+                            // ),
+                          ),
+                          hintText: 'Gender',
+                          contentPadding:
+                              EdgeInsets.only(left: 14, top: 14, bottom: 14),
+                          hintStyle: GoogleFonts.inter(
+                            fontSize: 15,
+                            color: MyTheme.hinttextColor,
+                            //color: Color(0xff979797).withOpacity(0.7),
+                            // fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                          )),
                       items: controller.items
                           .map(
                               (e) => DropdownMenuItem(child: Text(e), value: e))
@@ -239,14 +234,13 @@ class _SignupPageState extends State<SignupPage> {
 
                   SizedBox(height: 19),
                   Text("Date of Birth",
-                      style: TextStyle(
+                      style: GoogleFonts.inter(
                         fontSize: 13,
                         color: MyTheme.hinttextchangeColors,
                         //color: Color(0xff2F2E41),
-                        fontFamily: 'Inter',
+                        // fontFamily: 'Inter',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
-                        letterSpacing: -0.229412,
                       )),
                   SizedBox(height: 5),
                   Container(
@@ -276,14 +270,12 @@ class _SignupPageState extends State<SignupPage> {
                           top: 14,
                           bottom: 14,
                         ),
-                        hintStyle: TextStyle(
-                          fontFamily: 'Inter',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
+                        hintStyle: GoogleFonts.inter(
                           fontSize: 15,
-                          letterSpacing: -0.264706,
                           color: MyTheme.hinttextColor,
                           //color: Color(0xff979797).withOpacity(0.7),
+                          // fontFamily: 'Inter',
+                          fontWeight: FontWeight.w500,
                         ),
                         // labelText: "dd/mm/yyyy",
                         border: OutlineInputBorder(
@@ -298,6 +290,9 @@ class _SignupPageState extends State<SignupPage> {
 
                   AppFormField(
                     toptext: 'Email ID',
+                    // fontSize: 13,
+                    // //fontWeight: FontWeight.w500,
+                    // fontFamily: 'Inter-Regular',
                     controller: controller.usernameController,
                     hintText: 'username@aol.com',
                   ),
@@ -310,8 +305,7 @@ class _SignupPageState extends State<SignupPage> {
                   //       fontFamily: 'Inter',
                   //       fontStyle: FontStyle.normal,
                   //       fontWeight: FontWeight.w500,
-                  //       letterSpacing: -0.229412,
-                  //     )),
+                  //                     //     )),
                   // SizedBox(height: 5),
                   // Container(
                   //   width: MediaQuery.of(context).size.width,
@@ -340,8 +334,7 @@ class _SignupPageState extends State<SignupPage> {
                   //         fontStyle: FontStyle.normal,
                   //         fontWeight: FontWeight.w500,
                   //         fontSize: 15,
-                  //         letterSpacing: -0.264706,
-                  //         color: MyTheme.hinttextColor,
+                  //                       //         color: MyTheme.hinttextColor,
                   //         //color: Color(0xff979797).withOpacity(0.7),
                   //       ),
                   //     ),
@@ -363,8 +356,7 @@ class _SignupPageState extends State<SignupPage> {
                   //     fontFamily: 'Inter',
                   //     fontStyle: FontStyle.normal,
                   //     fontWeight: FontWeight.w500,
-                  //     letterSpacing: -0.229412,
-                  //   ),
+                  //                   //   ),
                   // ),
                   // SizedBox(height: 5),
                   // Container(
@@ -381,8 +373,7 @@ class _SignupPageState extends State<SignupPage> {
                   //       ),
                   //       hintStyle: TextStyle(
                   //         fontSize: 15,
-                  //         letterSpacing: -0.264706,
-                  //         color: MyTheme.hinttextColor,
+                  //                       //         color: MyTheme.hinttextColor,
                   //         // color: Color(0xff979797).withOpacity(0.7),
                   //       ),
                   //       //labelText: "923944543",
@@ -414,8 +405,7 @@ class _SignupPageState extends State<SignupPage> {
                   //       fontFamily: 'Inter',
                   //       fontStyle: FontStyle.normal,
                   //       fontWeight: FontWeight.w500,
-                  //       letterSpacing: -0.229412,
-                  //     )),
+                  //                     //     )),
                   // SizedBox(height: 5),
                   // Container(
                   //   height: 45,
@@ -441,8 +431,7 @@ class _SignupPageState extends State<SignupPage> {
                   //       ),
                   //       hintStyle: TextStyle(
                   //         fontSize: 15,
-                  //         letterSpacing: -0.264706,
-                  //         //color: Color(0xff2F2E41).withOpacity(0.7),
+                  //                       //         //color: Color(0xff2F2E41).withOpacity(0.7),
                   //         color: MyTheme.hinttextchangeColor,
                   //       ),
 
@@ -476,8 +465,7 @@ class _SignupPageState extends State<SignupPage> {
                   //       fontStyle: FontStyle.normal,
                   //       fontWeight: FontWeight.w500,
 
-                  //       letterSpacing: -0.229412,
-                  //       //fontSize: 13,
+                  //                     //       //fontSize: 13,
                   //       // color: Color(0xff2F2E41),
                   //     )),
                   // SizedBox(
@@ -509,8 +497,7 @@ class _SignupPageState extends State<SignupPage> {
                   //       ),
                   //       hintStyle: TextStyle(
                   //         fontSize: 15,
-                  //         letterSpacing: -0.264706,
-                  //         // color: Color(0xff2F2E41).withOpacity(0.7),
+                  //                       //         // color: Color(0xff2F2E41).withOpacity(0.7),
                   //         color: MyTheme.hinttextchangeColor,
                   //       ),
 
@@ -535,8 +522,7 @@ class _SignupPageState extends State<SignupPage> {
                   //         fontFamily: 'Poppins',
                   //         fontStyle: FontStyle.normal,
                   //         fontWeight: FontWeight.normal,
-                  //         letterSpacing: -0.229412,
-                  //       )),
+                  //                       //       )),
                   // ),
                   // SizedBox(height: 1),
                   Row(
@@ -553,14 +539,13 @@ class _SignupPageState extends State<SignupPage> {
                         },
                       ),
                       Text('I have a referral code',
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
                             fontSize: 13,
                             color: MyTheme.checkboxtextcolor,
                             // color: Color(0xff3C3B4D),
-                            fontFamily: 'Inter',
+                            //fontFamily: 'Inter',
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w500,
-                            letterSpacing: -0.229412,
                           )),
                     ],
                   ),
@@ -582,17 +567,15 @@ class _SignupPageState extends State<SignupPage> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: Center(
-                        child: Text(
-                          'CONTINUE',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontFamily: 'Inter-Regular',
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white, //(0xffE5E5E5),
-                          ),
-                        ),
+                        child: Text('CONTINUE',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
+                              fontSize: 17,
+                              //fontFamily: 'Inter-Regular',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white, //(0xffE5E5E5),
+                            )),
                       ),
                     ),
                   ),
@@ -605,17 +588,15 @@ class _SignupPageState extends State<SignupPage> {
                       thickness: 2,
                       color: MyTheme.devidercolor,
                     )),
-                    Text(
-                      "OR",
-                      style: TextStyle(
-                        color: MyTheme.dividermiddletext,
-                        //color: Color(0xff4E535A),
-                        fontSize: 13,
-                        fontFamily: 'Inter-Regular',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
+                    Text("OR",
+                        style: GoogleFonts.inter(
+                          color: MyTheme.dividermiddletext,
+                          //color: Color(0xff4E535A),
+                          fontSize: 13,
+                          // fontFamily: 'Inter-Regular',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.normal,
+                        )),
                     Expanded(
                         child: Divider(
                       indent: 44,
@@ -632,11 +613,11 @@ class _SignupPageState extends State<SignupPage> {
                       Container(
                         //width: 164,
                         height: 45,
-                        color: MyTheme.buttonbackgroundcolor,
+                        color: MyTheme.buttonbackgroundcolor1,
                         // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromRGBO(34, 40, 49, 0.2),
+                            primary: MyTheme.checkboxcolor,
                             side: BorderSide(
                                 width: 1.5, color: MyTheme.checkboxcolor),
                           ),
@@ -649,16 +630,15 @@ class _SignupPageState extends State<SignupPage> {
                                 child: Container(
                                     height: 21.5,
                                     width: 20,
-                                    child: Image.asset(
-                                        Assets.google)),
+                                    child: Image.asset(Assets.google)),
                               ),
                               Padding(
                                 padding:
                                     const EdgeInsets.only(top: 19, left: 4),
                                 child: Text("Continue with google!",
-                                    style: TextStyle(
+                                    style: GoogleFonts.inter(
                                       fontSize: 10,
-                                      fontFamily: 'Inter',
+                                      //fontFamily: 'Inter',
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w400,
                                       color: MyTheme.bottomtextColorsignup,
@@ -668,14 +648,18 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        width: 1,
+                      ),
                       Container(
                         //width: 164,
                         height: 45,
-                        color: MyTheme.buttonbackgroundcolor,
+                        //color: MyTheme.checkboxcolor, //buttonbackgroundcolor1,
                         // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromRGBO(34, 40, 49, 0.2),
+                            primary:
+                                MyTheme.checkboxcolor, // Color(0xffB9B9B9),
                             side: BorderSide(
                               width: 1.5,
                               color: MyTheme.checkboxcolor,
@@ -698,9 +682,9 @@ class _SignupPageState extends State<SignupPage> {
                                   top: 19,
                                 ),
                                 child: Text("Continue with facebook!",
-                                    style: TextStyle(
+                                    style: GoogleFonts.inter(
                                       fontSize: 10,
-                                      fontFamily: 'Inter',
+                                      //fontFamily: 'Inter',
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w400,
                                       //color: Color(0xff505056),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyTheme {
+  static Color backgroundcolor = Color(0xffF5F5F5);
   static Color appbackcolor = Color(0xffEFEFEF);
 
   static Color iconColor = Color(0xff000000);
@@ -34,7 +35,7 @@ class MyTheme {
 
   static Color dividermiddletext = Color(0xff4E535A);
 
-  static Color buttonbackgroundcolor = Color(0xffF2F2F4);
+  static Color buttonbackgroundcolor1 = Color(0xffF2F2F4);
 
   static Color textformtextcolor = Color(0xff374151);
 

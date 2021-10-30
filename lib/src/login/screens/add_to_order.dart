@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 import 'package:readyplates/widgets/bottomcontainer.dart';
 
@@ -16,17 +18,15 @@ class AddtoorderPage extends StatelessWidget {
         backgroundColor: Color(0xffE5E5E5),
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          'Edit Order',
-          style: TextStyle(
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w500,
-            fontStyle: FontStyle.normal,
-            fontSize: 17,
-            letterSpacing: -0.226667,
-            color: Color(0xff393E46),
-          ),
-        ),
+        title: Text('Edit Order',
+            style: GoogleFonts.inter(
+              //fontFamily: 'Inter',
+              fontWeight: FontWeight.w500,
+              fontStyle: FontStyle.normal,
+              fontSize: 17,
+              letterSpacing: -0.226667,
+              color: MyTheme.appbartextColor, //Color(0xff393E46),
+            )),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -39,7 +39,7 @@ class AddtoorderPage extends StatelessWidget {
             child: Container(
               height: 310,
               decoration: BoxDecoration(
-                color: Color(0xffFFFFFF),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Padding(
@@ -51,7 +51,8 @@ class AddtoorderPage extends StatelessWidget {
                     ),
                     Divider(
                       thickness: 2,
-                      color: Color(0xffE4E4E4),
+                      color: MyTheme.devidercolor,
+                      // color: Color(0xffE4E4E4),
                     ),
                     SizedBox(
                       height: 10,
@@ -60,15 +61,16 @@ class AddtoorderPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("TOTAL :",
-                            style: TextStyle(
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                color: Color(0xff393E46))),
+                            style: GoogleFonts.inter(
+                              // fontFamily: "Inter",
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 13,
+                              color: MyTheme.appbartextColor,
+                            )),
                         TextwidgetPage(
                           text: "\$ 24.0",
-                          color: Color(0xff393E46),
+                          color: MyTheme.appbartextColor,
                           fontWeight: FontWeight.w500,
                         ),
                       ],
@@ -83,24 +85,25 @@ class AddtoorderPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("TAX ",
-                            style: TextStyle(
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                color: Color(0xff393E46))),
+                            style: GoogleFonts.inter(
+                              //fontFamily: "Inter",
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 13,
+                              color: MyTheme.appbartextColor,
+                            )),
                         SizedBox(
                           width: 48,
                         ),
                         TextwidgetPage(
                           text: "CGST",
-                          color: Color(0xff4E535A),
+                          color: MyTheme.dividermiddletext,
                           fontWeight: FontWeight.w400,
                         ),
                         Spacer(),
                         TextwidgetPage(
                           text: "\$ 0.5",
-                          color: Color(0xff393E46),
+                          color: MyTheme.appbartextColor,
                           fontWeight: FontWeight.w500,
                         ),
                       ],
@@ -116,13 +119,13 @@ class AddtoorderPage extends StatelessWidget {
                         ),
                         TextwidgetPage(
                           text: "IGST",
-                          color: Color(0xff4E535A),
+                          color: MyTheme.dividermiddletext, //Color(0xff4E535A),
                           fontWeight: FontWeight.w400,
                         ),
                         Spacer(),
                         TextwidgetPage(
                           text: "\$ 0.5",
-                          color: Color(0xff393E46),
+                          color: MyTheme.appbartextColor,
                           fontWeight: FontWeight.w500,
                         ),
                       ],

@@ -279,17 +279,14 @@ class MenuPage extends StatelessWidget {
                                                       ),
                                                     ),
                                                     Spacer(),
-                                                    Text(
-                                                      e.cost,
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'Inter-Bold',
-                                                        fontSize:
-                                                            size.width * 0.04,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
+                                                    Text(e.cost,
+                                                        style:
+                                                            GoogleFonts.inter(
+                                                          fontSize:
+                                                              size.width * 0.04,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        )),
                                                     SizedBox(
                                                       width: 20,
                                                     )

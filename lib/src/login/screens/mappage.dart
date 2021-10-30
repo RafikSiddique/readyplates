@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/assets.dart';
@@ -105,7 +106,7 @@ class _MapPageState extends State<MapPage> {
               padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
               child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(10)),
                 child: TextField(
                   controller: TextEditingController(),
                   decoration: InputDecoration(
@@ -168,15 +169,11 @@ class _MapPageState extends State<MapPage> {
                             ),
                             Text(
                                 "Hello Omar ${authController.fNamController.text}!",
-                                style: TextStyle(
+                                style: GoogleFonts.inter(
                                   fontSize: 13,
-                                  fontFamily: 'Inter',
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal,
                                   color: MyTheme.dividermiddletext,
-                                  // color: Color(0xff4E535A),dividermiddletext
-
-                                  //color: Color.fromRGBO(78, 83, 90, 0.8),
                                 )),
                             SizedBox(
                               height: 4,
@@ -184,13 +181,11 @@ class _MapPageState extends State<MapPage> {
                             Row(
                               children: [
                                 Text("Confirm your Location",
-                                    style: TextStyle(
+                                    style: GoogleFonts.inter(
                                       fontSize: 20,
-                                      fontFamily: 'Inter',
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.bold,
                                       color: MyTheme.buttonbackgroundColor,
-                                      //color: Color(0xff222831),
                                     )),
                                 SizedBox(
                                   width: 6,
@@ -206,9 +201,9 @@ class _MapPageState extends State<MapPage> {
                               height: 15,
                             ),
                             Text("NEARBY",
-                                style: TextStyle(
+                                style: GoogleFonts.inter(
                                   fontSize: 10,
-                                  fontFamily: 'Inter',
+
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500,
                                   color: MyTheme.dividermiddletext,
@@ -264,8 +259,7 @@ class _MapPageState extends State<MapPage> {
                                     authController.gotoHome();
                                   },
                                   child: Text('NEXT',
-                                      style: TextStyle(
-                                        fontFamily: 'Inter',
+                                      style: GoogleFonts.inter(
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: -0.1,

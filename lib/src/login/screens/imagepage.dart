@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -58,17 +59,13 @@ class _ImagePageState extends State<ImagePage> {
                 Get.back();
               }),
           centerTitle: true,
-          title: Text(
-            'Add Profile Pic',
-            style: TextStyle(
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w500,
-              fontSize: 17,
-              letterSpacing: -0.226667,
-              color: MyTheme.appbartextColor,
-              //color: Color(0xff393E46),
-            ),
-          ),
+          title: Text('Add Profile Pic',
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w500,
+                fontSize: 17,
+                letterSpacing: -0.226667,
+                color: MyTheme.appbartextColor,
+              )),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,28 +91,38 @@ class _ImagePageState extends State<ImagePage> {
                             " " +
                             authController.lNameController.text)
                         .toUpperCase(),
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 15,
-                      fontFamily: 'Montserrat',
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w500,
-                      color: Color(
-                        0xff4E5156,
-                      ),
+                      color: MyTheme.skiptextcolor,
                     )),
               ),
             ),
-            Elevated(
-                width: media.size.width / 1.3,
-                text: "Open Camera",
-                onTap: () => pickImage(ImageSource.camera),
-                borderColor: MyTheme.buttonbackgroundColor,
-                backgroundColor: Colors.white),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Elevated(
+                  //  width: media.size.width / 1.3,
+                  width: MediaQuery.of(context).size.width,
+                  text: "Open Camera",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 17,
+                  color: MyTheme.buttonbackgroundColor,
+                  onTap: () => pickImage(ImageSource.camera),
+                  borderColor: MyTheme.buttonbackgroundColor,
+                  backgroundColor: Colors.white),
+            ),
             SizedBox(height: 8),
-            Elevated(
-              width: media.size.width / 1.3,
-              text: "Upload from gallery",
-              onTap: () => pickImage(ImageSource.gallery),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Elevated(
+                // width: media.size.width / 1.3,
+                width: MediaQuery.of(context).size.width,
+                text: "Upload from gallery", fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontSize: 17, //color: Colors.white,
+                onTap: () => pickImage(ImageSource.gallery),
+              ),
             ),
             SizedBox(
               height: media.size.height * 0.12,
@@ -145,13 +152,11 @@ class _ImagePageState extends State<ImagePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Skip for Now",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
+                        style: GoogleFonts.poppins(
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                           color: MyTheme.skiptextcolor,
-                          // color: Color(0xff4E5156),
                         )),
                     IconButton(
                         iconSize: 14.83,

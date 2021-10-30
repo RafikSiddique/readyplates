@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 // ignore: must_be_immutable
@@ -38,8 +39,8 @@ class AppFormField extends StatelessWidget {
     this.matchVerification = false,
     this.isRequired = true,
     this.fontSize = 13,
-    this.hintfontSize = 12,
-    this.fontFamily = 'Inter-Bold',
+    this.hintfontSize = 15,
+    this.fontFamily = 'Inter-Regular',
     this.fontWeight = FontWeight.w500,
     required this.toptext,
     this.inputType = TextInputType.text,
@@ -61,7 +62,15 @@ class AppFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (toptext != "") Text(toptext),
+          if (toptext != "")
+            Text(
+              toptext,
+              style: GoogleFonts.inter(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.normal,
+                  color: MyTheme.hinttextchangeColors),
+            ),
           if (toptext != "")
             SizedBox(
               height: 5,
@@ -104,41 +113,44 @@ class AppFormField extends StatelessWidget {
                 textAlign: TextAlign.left,
                 keyboardType: inputType,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: borderRadius,
-                  ),
-                  hintText: hintText,
-                  contentPadding: EdgeInsets.only(
-                    left: 14,
-                    top: 14,
-                    right: 14,
-                    bottom: 14,
-                  ),
-                  // suffixIcon: suffixIcon,
-                  suffixIcon: isPassword
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              obSecureText = !obSecureText;
-                            });
-                          },
-                          icon:
-                              Icon(obSecureText ? Icons.lock : Icons.lock_open))
-                      : null,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: borderRadius,
+                    ),
+                    hintText: hintText,
+                    contentPadding: EdgeInsets.only(
+                      left: 14,
+                      top: 14,
+                      right: 14,
+                      bottom: 14,
+                    ),
+                    // suffixIcon: suffixIcon,
+                    suffixIcon: isPassword
+                        ? IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obSecureText = !obSecureText;
+                              });
+                            },
+                            icon: Icon(
+                                obSecureText ? Icons.lock : Icons.lock_open))
+                        : null,
+                    hintStyle: GoogleFonts.inter(
+                      fontSize: hintfontSize,
+                      //  fontFamily: 'Inter-Regular',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w500,
+                      //letterSpacing: -0.26,
+                      color: MyTheme.hinttextColor,
+                    )
 
-                  hintStyle: TextStyle(
-                    fontSize: hintfontSize,
-                    fontFamily: 'Inter-Regular',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -0.26,
-                    color: MyTheme.hinttextColor,
-                    // // color: controller.text != ''
-                    //     ? MyTheme.hinttextchangeColor
-                    //     : MyTheme.hinttextColor,
-                  ),
-                ),
+                    // TextStyle(
+
+                    //   // // color: controller.text != ''
+                    //   //     ? MyTheme.hinttextchangeColor
+                    //   //     : MyTheme.hinttextColor,
+                    // ),
+                    ),
               ),
             );
           }),
@@ -147,17 +159,15 @@ class AppFormField extends StatelessWidget {
               height: 3,
             ),
           if (bottomText != null)
-            Text(
-              bottomText!,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 9,
-                fontFamily: 'Poppins',
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.normal,
-                color: MyTheme.bottomtextColor,
-              ),
-            ),
+            Text(bottomText!,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: 9,
+                  // fontFamily: 'Poppins',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.normal,
+                  color: MyTheme.bottomtextColor,
+                )),
         ],
       ),
     );

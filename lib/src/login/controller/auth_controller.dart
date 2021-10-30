@@ -63,8 +63,8 @@ class AuthController extends GetxController {
 
     userNameFocus = FocusNode();
 
-    otpFields = List.generate(6, (index) => FocusNode());
-    otpText = List.generate(6, (index) => TextEditingController());
+    otpFields = List.generate(4, (index) => FocusNode());
+    otpText = List.generate(4, (index) => TextEditingController());
     usernameController.addListener(onLooseFocus);
     userNameFocus.addListener(onLooseFocus);
     super.onInit();

@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
-class OrderOption extends StatelessWidget {
-  static const id = "/OrderOption";
-  const OrderOption({Key? key}) : super(key: key);
+class OrderOption2 extends StatelessWidget {
+  static const id = "/OrderOption2";
+  const OrderOption2({Key? key}) : super(key: key);
 
   Widget buildContainer() {
     return InkWell(
@@ -103,7 +103,7 @@ class OrderOption extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("1 x",
+                        Text("2 x",
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
                                   fontSize: 17,
@@ -124,7 +124,7 @@ class OrderOption extends StatelessWidget {
                               ),
                             )),
                         Spacer(),
-                        Text("\$12.00",
+                        Text("\$24.00",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
                                 fontSize: 15,
@@ -141,7 +141,7 @@ class OrderOption extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("1 x",
+                        Text("2 x",
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
                                   fontSize: 17,
@@ -162,7 +162,7 @@ class OrderOption extends StatelessWidget {
                               ),
                             )),
                         Spacer(),
-                        Text("\$3.00",
+                        Text("\$6.00",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
                                 fontSize: 15,
@@ -203,7 +203,7 @@ class OrderOption extends StatelessWidget {
                         Text("Sloppy Joe, Kondhwa",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: FontWeight.normal,
                                 fontStyle: FontStyle.normal,
                                 color: MyTheme.buttonbackgroundColor,
@@ -212,8 +212,8 @@ class OrderOption extends StatelessWidget {
                         Text("25th Sep",
                             style: GoogleFonts.nunito(
                               textStyle: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
                                 fontStyle: FontStyle.normal,
                                 color: MyTheme.buttonbackgroundColor,
                               ),
@@ -224,14 +224,13 @@ class OrderOption extends StatelessWidget {
                       height: 16,
                     ),
                     Elevated(
-                      text: "Modify Order ",
+                      text: "Pay at Restaurant",
                       fontSize: 17,
                       fontWeight: FontWeight.w500,
-                      color: MyTheme.orderoptionbuttoncolor,
+                      color: MyTheme.buttonbackgroundColor,
                       width: MediaQuery.of(context).size.width,
                       onTap: () {},
-                      borderColor:
-                          MyTheme.orderoptionbuttoncolor, // Color(0xff222831),
+                      borderColor: Colors.black, // Color(0xff222831),
                       backgroundColor: Colors.white,
                     ),
                     SizedBox(
@@ -239,14 +238,14 @@ class OrderOption extends StatelessWidget {
                     ),
                     Container(
                       child: Elevated(
-                        text: " Complete Order",
+                        text: " Pay via App",
                         fontSize: 17,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                         color: Colors.white,
                         width: MediaQuery.of(context).size.width,
                         onTap: () {},
-                        borderColor: MyTheme.orderoptionbuttoncolor,
-                        backgroundColor: MyTheme.orderoptionbuttoncolor,
+                        borderColor: MyTheme.buttonbackgroundColor,
+                        backgroundColor: MyTheme.buttonbackgroundColor,
                       ),
                     ),
                     SizedBox(height: 0),

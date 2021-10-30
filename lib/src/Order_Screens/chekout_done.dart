@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
+import 'package:readyplates/src/order/screen/paymentsucessful.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
@@ -66,7 +67,8 @@ class Chekoutdone extends StatelessWidget {
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                     onTap: () {
-                      Get.offAllNamed(LandingPage.id);
+                      // Get.offAllNamed(LandingPage.id);
+                      Get.offAllNamed(PaymentsucessfulPage.id);
                     },
                   ),
                 ),

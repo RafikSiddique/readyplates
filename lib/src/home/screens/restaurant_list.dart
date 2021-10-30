@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/widgets/restaurant_card.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
@@ -101,13 +102,13 @@ class ShopScreen extends StatelessWidget {
                             color: Colors.black,
                           ),
                           onPressed: () {}),
-                      Text(
-                        'Search',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: MyTheme.appbartextColor,
-                        ),
-                      ),
+                      Text('Search',
+                          style: GoogleFonts.inter(
+                            fontSize: 15.0,
+                            color: MyTheme.appbartextColor,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.normal,
+                          )),
                     ],
                   ),
                 ),
@@ -133,16 +134,14 @@ class ShopScreen extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text(
-                        '32nd Street, Long Beach, San Francisco',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontFamily: "Inter",
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
-                          color: MyTheme.appbartextColor,
-                        ),
-                      ),
+                      Text('32nd Street, Long Beach, San Francisco',
+                          style: GoogleFonts.inter(
+                            fontSize: 10,
+                            // fontFamily: "Inter",
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500,
+                            color: MyTheme.appbartextColor,
+                          )),
                     ],
                   ),
                 ),
@@ -186,15 +185,13 @@ class ShopScreen extends StatelessWidget {
                           SizedBox(
                             height: 1,
                           ),
-                          Text(
-                            category[i],
-                            style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 10,
-                                color: Colors.black),
-                          )
+                          Text(category[i],
+                              style: GoogleFonts.montserrat(
+                                  // fontFamily: "Montserrat",
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 10,
+                                  color: Colors.black))
                         ],
                       )
                   ],
@@ -235,7 +232,14 @@ class ShopScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16),
-                child: Text('Near Me'),
+                child: Text(
+                  'Near Me',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 15,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
               ),
               Obx(
                 () => controller.restaurants.isNotEmpty &&

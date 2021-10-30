@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/utils/assets.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class ShooppymacPage extends StatelessWidget {
   final CartModel cartModel;
@@ -41,11 +43,12 @@ class ShooppymacPage extends StatelessWidget {
               // ),
               Text("Sloppy Mac",
                   style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.normal,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 15,
-                      color: Color(0xff393E46))),
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.normal,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 15,
+                    color: MyTheme.appbartextColor,
+                  )),
               SizedBox(
                 height: 5,
               ),
@@ -65,32 +68,34 @@ class ShooppymacPage extends StatelessWidget {
               Row(
                 children: [
                   Text("-",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.normal,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 20,
-                          color: Color(0xff393E46))),
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.normal,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20,
+                        color: MyTheme.appbartextColor,
+                      )),
                   SizedBox(
                     width: 18,
                   ),
                   Text("1",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.normal,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16,
-                          color: Color(0xff393E46))),
+                      style: GoogleFonts.inter(
+                        //fontFamily: "Inter",
+                        fontWeight: FontWeight.normal,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16,
+                        color: MyTheme.appbartextColor,
+                      )),
                   SizedBox(
                     width: 16,
                   ),
                   Text("+",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.normal,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16,
-                          color: Color(0xff393E46))),
+                      style: GoogleFonts.inter(
+                        //fontFamily: "Inter",
+                        fontWeight: FontWeight.normal,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16,
+                        color: MyTheme.appbartextColor,
+                      )),
                 ],
               ),
               SizedBox(

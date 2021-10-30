@@ -14,6 +14,7 @@ class Assets {
   static const String imageMan = "$imagesUri/imageman.png";
   static const String ready = "$imagesUri/ready.png";
   static const String canceloder = "$imagesUri/canceloder.png";
+  static const String paymentsucess = "$imagesUri/paymentsucess.png";
   static const String checkCircle = "$imagesUri/CheckCircle.png";
   static const String notePencil = "$imagesUri/NotePencil.png";
   static const String clock = "$imagesUri/clock.png";
