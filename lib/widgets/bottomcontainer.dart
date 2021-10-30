@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/Order_Screens/chekout_done.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
@@ -9,7 +10,9 @@ import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 
 class Bottomcontainer extends StatefulWidget {
-  const Bottomcontainer({Key? key}) : super(key: key);
+  final RestaurantModel restaurantModel;
+  const Bottomcontainer({Key? key, required this.restaurantModel})
+      : super(key: key);
 
   @override
   State<Bottomcontainer> createState() => _BottomcontainerState();
@@ -67,7 +70,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                 text: "Add Items",
                 borderColor: MyTheme.bottomcontainercolor,
                 onTap: () {
-                  Get.toNamed(MenuPage.id);
+                  Get.toNamed(MenuPage.id, arguments: widget.restaurantModel);
                 },
                 width: size.width * 0.45,
                 padding: EdgeInsets.all(15),
@@ -87,9 +90,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                 width: size.width * 0.45,
                 text: "Book",
                 onTap: () {
-                  Get.toNamed(
-                    Chekoutdone.id,
-                  );
+                  Get.find<OrderController>().order(widget.restaurantModel);
                 },
               ),
 

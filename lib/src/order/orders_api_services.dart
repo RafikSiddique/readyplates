@@ -61,18 +61,18 @@ class Orderservices extends ApiService {
     }
   }
 
-  Future<List<OrderModel>> getorder(String id) async {
+  Future<List<OrderModelApi>> getorder(String id) async {
     try {
       Response response =
           await get(orderList(id), headers: contentTypeJsonHeader);
       print(response.body);
       if (response.statusCode == 201) {
         List<dynamic> data = jsonDecode(response.body);
-        List<OrderModel> orderItems =
-            data.map((e) => OrderModel.fromMap(e)).toList();
+        List<OrderModelApi> orderItems =
+            data.map((e) => OrderModelApi.fromMap(e)).toList();
         return orderItems;
       } else if (response.statusCode != 404) {
-        return <OrderModel>[];
+        return <OrderModelApi>[];
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);

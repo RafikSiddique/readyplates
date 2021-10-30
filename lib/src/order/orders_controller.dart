@@ -7,6 +7,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -15,8 +16,8 @@ class OrderController extends GetxController {
   final Orderservices services = Orderservices();
   final SharedPreferenceHelper sfHelper = Get.find();
   RxList<CartModel> cartItems = <CartModel>[].obs;
-
-  RxList<OrderModel> orderItems = <OrderModel>[].obs;
+  RxList<CartApiModel> cartApiItems = <CartApiModel>[].obs;
+  RxList<OrderModelApi> orderItems = <OrderModelApi>[].obs;
 
   RxInt numberOfPeople = 1.obs;
   RxInt numberOfTable = 1.obs;
@@ -79,10 +80,17 @@ class OrderController extends GetxController {
     await cart(getCartItem(id, resId));
   }
 
-  void decrement(int id, int resId) async {
-    if (getCartItem(id, resId).foodQuantity.value > 1) {
-      getCartItem(id, resId).foodQuantity--;
-      await cart(getCartItem(id, resId));
+  void decrement(int id, int resId, [bool isRemoval = false]) async {
+    if (!isRemoval) {
+      if (getCartItem(id, resId).foodQuantity.value > 1) {
+        getCartItem(id, resId).foodQuantity--;
+        await cart(getCartItem(id, resId));
+      } else {
+        CartModel item = getCartItem(id, resId);
+        item.foodQuantity = 0.obs;
+        cartItems.remove(item);
+        await cart(item);
+      }
     } else {
       CartModel item = getCartItem(id, resId);
       item.foodQuantity = 0.obs;
@@ -105,24 +113,25 @@ class OrderController extends GetxController {
     }
   }
 
-  //post
-  Future<void> order() async {
+  Future<void> order(RestaurantModel restaurantModel) async {
     try {
       String id = await sfHelper.getUserId();
-      OrderModel ordermodels = OrderModel(
-        user: id,
-        restaurant: 'restaurant',
-        menu: 'menu',
-        name: 'name',
-        price: 20,
-        quantity: 1,
-        noOfTable: 1,
-        noOfPeople: 2,
-        time: 10.00,
-        tax: 10.00,
-      );
-
-      await services.orderapi(ordermodels);
+      OrderModel orderModel = OrderModel(
+          user: int.parse(id),
+          restaurant: restaurantModel.id,
+          orderitems: cartItems
+              .map((element) => OrderFoodItem(
+                  id: element.foodItem.value,
+                  count: element.foodQuantity.value,
+                  price: element.foodPrice.value))
+              .toList(),
+          noOfPeople: numberOfPeople.value,
+          noOfTable: numberOfTable.value,
+          tax: 50,
+          totalprice: 50,
+          date: "date",
+          time: "time");
+      await services.orderapi(orderModel);
       Get.toNamed(Chekoutdone.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
