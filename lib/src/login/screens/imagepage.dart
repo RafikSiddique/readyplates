@@ -133,7 +133,7 @@ class _ImagePageState extends State<ImagePage> {
             ),
             InkWell(
               onTap: () async {
-                bool isLocationEnabled =
+                /* bool isLocationEnabled =
                     await Geolocator.isLocationServiceEnabled();
                 if (isLocationEnabled) {
                   LocationPermission permission =
@@ -145,10 +145,12 @@ class _ImagePageState extends State<ImagePage> {
                   } else {
                     Position position = await Geolocator.getCurrentPosition();
                     Get.toNamed(MapPage.id);
-                  }
+                  } */
+                Get.toNamed(MapPage.id);
+/*                   
                 } else {
                   await Geolocator.openLocationSettings();
-                }
+                } */
               },
               child: Material(
                 type: MaterialType.transparency,

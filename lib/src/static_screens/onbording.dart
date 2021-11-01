@@ -90,7 +90,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        Assets.spoon,
+                        Assets.logo,
                         width: MediaQuery.of(context).size.width * 0.6,
                       ),
                       RichText(

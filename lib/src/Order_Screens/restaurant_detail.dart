@@ -406,6 +406,14 @@ class RestaurantDetails extends StatelessWidget {
                 );
               }),
         ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_back)),
+        )
       ],
     ));
   }

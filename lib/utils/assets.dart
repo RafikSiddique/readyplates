@@ -21,7 +21,7 @@ class Assets {
   static const String camera = "$imagesUri/camera.png";
   static List<String> gallery =
       List.generate(4, (index) => "$imagesUri/gallery${index + 1}.png");
-  static const String spoon = "$imagesUri/spoon.png";
+  static const String spoon = "$imagesUri/spoon-crossed.png";
   static const String locationset = "$imagesUri/Locationset.png";
   static const String veg = "$imagesUri/veg.png";
   static const String nonveg = "$imagesUri/nonveg.png";
@@ -42,4 +42,6 @@ class Assets {
   static const String shareNetwork = "$imagesUri/ShareNetwork.png";
   static const String option = "$imagesUri/option.png";
   static const String fbb = "$imagesUri/fbb.png";
+
+  static const String logo = "$imagesUri/spoon.png";
 }
