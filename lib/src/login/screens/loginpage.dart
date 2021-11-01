@@ -95,11 +95,14 @@ class LoginPage extends StatelessWidget {
                             Spacer(
                               flex: 2,
                             ),
-                            Text("Login",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: MyTheme.appbartextColor,
-                                )),
+                            Text(
+                              "Login",
+                              style: GoogleFonts.inter(
+                                fontSize: 17,
+                                color: MyTheme.appbartextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                             Spacer(
                               flex: 3,
                             ),

@@ -14,9 +14,11 @@ class Assets {
   static const String imageMan = "$imagesUri/imageman.png";
   static const String ready = "$imagesUri/ready.png";
   static const String canceloder = "$imagesUri/canceloder.png";
+  static const String paymentsucess = "$imagesUri/paymentsucess.png";
   static const String checkCircle = "$imagesUri/CheckCircle.png";
   static const String notePencil = "$imagesUri/NotePencil.png";
   static const String clock = "$imagesUri/clock.png";
+  static const String camera = "$imagesUri/camera.png";
   static List<String> gallery =
       List.generate(4, (index) => "$imagesUri/gallery${index + 1}.png");
   static const String spoon = "$imagesUri/spoon.png";

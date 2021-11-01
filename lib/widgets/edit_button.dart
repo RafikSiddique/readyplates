@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
@@ -38,14 +39,12 @@ class AddButton extends StatelessWidget {
                   height: 16,
                   width: 16,
                 ),
-                Text(
-                  text.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'Inter',
-                    color: MyTheme.editbuttontextColor, // Color(0xffFF6E42),
-                  ),
-                )
+                Text(text.toUpperCase(),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      // fontFamily: 'Inter',
+                      color: MyTheme.editbuttontextColor,
+                    ))
               ],
             ),
           ),
@@ -111,15 +110,13 @@ class IncDecButton extends StatelessWidget {
                 );
               },
               child: Obx(
-                () => Text(
-                  text.value.toString(),
-                  key: ValueKey(text),
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: 'Inter',
-                    color: MyTheme.editbuttontextColor,
-                  ),
-                ),
+                () => Text(text.value.toString(),
+                    key: ValueKey(text),
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      //fontFamily: 'Inter',
+                      color: MyTheme.editbuttontextColor,
+                    )),
               ),
               key: ValueKey(text),
             ),
@@ -179,14 +176,12 @@ class EditButton extends StatelessWidget {
               children: [
                 Image.asset(Assets.edit,
                     height: 16, width: 16, color: MyTheme.bottomtextColor),
-                Text(
-                  'EDIT',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Inter',
-                      //color: Color(0xffFF6E42),
-                      color: MyTheme.bottomtextColor),
-                )
+                Text('EDIT',
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        // fontFamily: 'Inter',
+                        //color: Color(0xffFF6E42),
+                        color: MyTheme.bottomtextColor))
               ],
             ),
           ),

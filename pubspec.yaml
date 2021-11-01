@@ -37,6 +37,9 @@ dependencies:
   intl: ^0.17.0
   share_plus: ^3.0.4
   shared_preferences: ^2.0.8
+  pin_entry_text_field: ^0.1.4
+  smooth_star_rating_null_safety: ^1.0.4+2
+  
 
 dev_dependencies:
   flutter_test:

@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import 'package:readyplates/models/foog_item_model.dart';
-
 class CartModel {
   String user;
   RxInt foodItem;

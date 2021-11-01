@@ -36,7 +36,7 @@ class Tellafriend extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: Container(
-                height: 500,
+                height: MediaQuery.of(context).size.height * 0.8,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   color: Colors.white,
@@ -52,7 +52,7 @@ class Tellafriend extends StatelessWidget {
                     ImagewidgetPage(
                       imagePath: Assets.option,
                       height: 219,
-                      width: 260,
+                      width: MediaQuery.of(context).size.width,
                     ),
 
                     SizedBox(
@@ -67,13 +67,17 @@ class Tellafriend extends StatelessWidget {
                     SizedBox(
                       height: 8,
                     ),
-                    Text(
-                        "Show us some love. Share the app with your\n     friends and relatives and help us grow",
-                        style: GoogleFonts.inter(
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            fontStyle: FontStyle.normal,
-                            color: MyTheme.bottomtextColor)),
+                    Container(
+                      width: 256,
+                      child: Text(
+                          "Show us some love. Share the app with your friends and relatives and help us grow",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              fontStyle: FontStyle.normal,
+                              color: MyTheme.bottomtextColor)),
+                    ),
                     SizedBox(
                       height: 36,
                     ),
@@ -119,58 +123,58 @@ class Tellafriend extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "Show us some love. Share the app with your\n     friends and relatives and help us grow",
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.normal,
-                          fontStyle: FontStyle.normal,
-                          color: MyTheme.bottomtextColor),
-                    ),
-                    SizedBox(
-                      height: 36,
-                    ),
-                    SizedBox(
-                      width: 151,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: MyTheme.appbackcolor, //Color(0xffEFEFEF),
-                          //side: BorderSide(
-                          //  width: 1.5, color: Color(0xffB9B9B9)),
-                        ),
-                        onPressed: () {
-                          Share.share(
-                              "Hello, ${Get.find<AuthController>().fNamController.text} is inviting you to join");
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                                child: Image.asset(Assets.shareNetwork,
-                                    height: 30, width: 33, fit: BoxFit.cover)),
-                            SizedBox(
-                              width: 6,
-                            ),
-                            Center(
-                              child: Text("SHARE",
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontFamily: 'Nunito',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.normal,
-                                    color: MyTheme.appbartextColor,
-                                    //color: Color(0xff505056),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
+                    // SizedBox(
+                    //   height: 8,
+                    // ),
+                    //   Text(
+                    //     "Show us some love. Share the app with your\n     friends and relatives and help us grow",
+                    //     style: TextStyle(
+                    //         fontSize: 12,
+                    //         fontFamily: 'Inter',
+                    //         fontWeight: FontWeight.normal,
+                    //         fontStyle: FontStyle.normal,
+                    //         color: MyTheme.bottomtextColor),
+                    //   ),
+                    //   SizedBox(
+                    //     height: 36,
+                    //   ),
+                    //   SizedBox(
+                    //     width: 151,
+                    //     height: 50,
+                    //     child: ElevatedButton(
+                    //       style: ElevatedButton.styleFrom(
+                    //         primary: MyTheme.appbackcolor, //Color(0xffEFEFEF),
+                    //         //side: BorderSide(
+                    //         //  width: 1.5, color: Color(0xffB9B9B9)),
+                    //       ),
+                    //       onPressed: () {
+                    //         Share.share(
+                    //             "Hello, ${Get.find<AuthController>().fNamController.text} is inviting you to join");
+                    //       },
+                    //       child: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.start,
+                    //         children: <Widget>[
+                    //           Container(
+                    //               child: Image.asset(Assets.shareNetwork,
+                    //                   height: 30, width: 33, fit: BoxFit.cover)),
+                    //           SizedBox(
+                    //             width: 6,
+                    //           ),
+                    //           Center(
+                    //             child: Text("SHARE",
+                    //                 style: TextStyle(
+                    //                   fontSize: 19,
+                    //                   fontFamily: 'Nunito',
+                    //                   fontStyle: FontStyle.normal,
+                    //                   fontWeight: FontWeight.normal,
+                    //                   color: MyTheme.appbartextColor,
+                    //                   //color: Color(0xff505056),
+                    //                 )),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   )
                   ],
                 ),
               ),

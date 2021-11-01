@@ -5,6 +5,8 @@ import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/src/order/screen/index.dart';
+import 'package:readyplates/src/order/screen/order_option2.dart';
+import 'package:readyplates/src/order/screen/paymentsucessful.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 
 class Routes {
@@ -52,10 +54,17 @@ class Routes {
             return OrderCancelledPage();
           case PaymentPage.id:
             return PaymentPage();
+
+          case PaymentsucessfulPage.id:
+            return PaymentsucessfulPage();
+
           case FeedbackPage.id: //add feedbackpage
             return FeedbackPage();
           case OrderOption.id:
             return OrderOption();
+
+          case OrderOption2.id:
+            return OrderOption2();
           case Tellafriend.id:
             return Tellafriend();
           case ProfilePage.id:

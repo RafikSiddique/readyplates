@@ -107,7 +107,6 @@ class ShooppymacPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    
                     controller.decrement(
                         cartModel.foodItem.value, cartModel.restaurant);
                   },
