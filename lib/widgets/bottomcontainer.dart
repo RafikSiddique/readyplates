@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
-import 'package:readyplates/src/Order_Screens/chekout_done.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';

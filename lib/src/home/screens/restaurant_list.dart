@@ -40,9 +40,9 @@ class ShopScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.appbackcolor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.appbackcolor,
         elevation: 0,
         leading: IconButton(
             iconSize: 14.83,

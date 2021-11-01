@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -243,7 +246,9 @@ class OrderOption2 extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                         width: MediaQuery.of(context).size.width,
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAllNamed(FeedbackPage.id);
+                        },
                         borderColor: MyTheme.buttonbackgroundColor,
                         backgroundColor: MyTheme.buttonbackgroundColor,
                       ),

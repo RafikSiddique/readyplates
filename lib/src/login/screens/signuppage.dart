@@ -617,7 +617,7 @@ class _SignupPageState extends State<SignupPage> {
                         // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: MyTheme.checkboxcolor,
+                            primary: MyTheme.buttonbackgroundcolor1,
                             side: BorderSide(
                                 width: 1.5, color: MyTheme.checkboxcolor),
                           ),
@@ -658,8 +658,8 @@ class _SignupPageState extends State<SignupPage> {
                         // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary:
-                                MyTheme.checkboxcolor, // Color(0xffB9B9B9),
+                            primary: MyTheme
+                                .buttonbackgroundcolor1, //checkboxcolor, // Color(0xffB9B9B9),
                             side: BorderSide(
                               width: 1.5,
                               color: MyTheme.checkboxcolor,

@@ -72,17 +72,18 @@ class _ImagePageState extends State<ImagePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                height: 200,
-                width: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(230)),
-                  // color: Colors.black,
-                ),
-                child: image != null
-                    ? ClipOval(
-                        child: Image.file(image!,
-                            height: 160, width: 160, fit: BoxFit.cover))
-                    : Image.asset(Assets.imageMan)),
+              height: 200,
+              width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(230)),
+                // color: Colors.black,
+              ),
+              child: image != null
+                  ? ClipOval(
+                      child: Image.file(image!,
+                          height: 160, width: 160, fit: BoxFit.cover))
+                  : Image.asset(Assets.imageMan),
+            ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Center(
@@ -98,6 +99,9 @@ class _ImagePageState extends State<ImagePage> {
                       color: MyTheme.skiptextcolor,
                     )),
               ),
+            ),
+            SizedBox(
+              height: 84,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
@@ -148,24 +152,26 @@ class _ImagePageState extends State<ImagePage> {
               },
               child: Material(
                 type: MaterialType.transparency,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Skip for Now",
-                        style: GoogleFonts.poppins(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          color: MyTheme.skiptextcolor,
-                        )),
-                    IconButton(
-                        iconSize: 14.83,
-                        icon: FaIcon(
-                          FontAwesomeIcons.chevronRight,
-                          color: Colors.black,
-                        ),
-                        onPressed: null),
-                  ],
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Skip for Now",
+                          style: GoogleFonts.poppins(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            color: MyTheme.skiptextcolor,
+                          )),
+                      IconButton(
+                          iconSize: 14.83,
+                          icon: FaIcon(
+                            FontAwesomeIcons.chevronRight,
+                            color: Colors.black,
+                          ),
+                          onPressed: null),
+                    ],
+                  ),
                 ),
               ),
             ),
