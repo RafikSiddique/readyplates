@@ -105,7 +105,6 @@ class OrderModelApi {
     required this.restaurant,
   });
 
-
   OrderModelApi copyWith({
     int? id,
     List<OrderFoodItemApi>? orderitems,
@@ -141,7 +140,7 @@ class OrderModelApi {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'orderitems': orderitems?.map((x) => x.toMap())?.toList(),
+      'orderitems': orderitems.map((x) => x.toMap()).toList(),
       'created_on': created_on.millisecondsSinceEpoch,
       'totalPrice': totalPrice,
       'no_of_people': no_of_people,
@@ -159,9 +158,10 @@ class OrderModelApi {
   factory OrderModelApi.fromMap(Map<String, dynamic> map) {
     return OrderModelApi(
       id: map['id'],
-      orderitems: List<OrderFoodItemApi>.from(map['orderitems']?.map((x) => OrderFoodItemApi.fromMap(x))),
-      created_on: DateTime.fromMillisecondsSinceEpoch(map['created_on']),
-      totalPrice: map['totalPrice'],
+      orderitems: List<OrderFoodItemApi>.from(
+          map['orderitems']?.map((x) => OrderFoodItemApi.fromMap(x))),
+      created_on: DateTime.parse(map['created_on']),
+      totalPrice: map['totalprice'],
       no_of_people: map['no_of_people'],
       no_of_table: map['no_of_table'],
       date: map['date'],
@@ -176,7 +176,8 @@ class OrderModelApi {
 
   String toJson() => json.encode(toMap());
 
-  factory OrderModelApi.fromJson(String source) => OrderModelApi.fromMap(json.decode(source));
+  factory OrderModelApi.fromJson(String source) =>
+      OrderModelApi.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -186,38 +187,38 @@ class OrderModelApi {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is OrderModelApi &&
-      other.id == id &&
-      listEquals(other.orderitems, orderitems) &&
-      other.created_on == created_on &&
-      other.totalPrice == totalPrice &&
-      other.no_of_people == no_of_people &&
-      other.no_of_table == no_of_table &&
-      other.date == date &&
-      other.time == time &&
-      other.tax == tax &&
-      other.status == status &&
-      other.pin == pin &&
-      other.user == user &&
-      other.restaurant == restaurant;
+        other.id == id &&
+        listEquals(other.orderitems, orderitems) &&
+        other.created_on == created_on &&
+        other.totalPrice == totalPrice &&
+        other.no_of_people == no_of_people &&
+        other.no_of_table == no_of_table &&
+        other.date == date &&
+        other.time == time &&
+        other.tax == tax &&
+        other.status == status &&
+        other.pin == pin &&
+        other.user == user &&
+        other.restaurant == restaurant;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      orderitems.hashCode ^
-      created_on.hashCode ^
-      totalPrice.hashCode ^
-      no_of_people.hashCode ^
-      no_of_table.hashCode ^
-      date.hashCode ^
-      time.hashCode ^
-      tax.hashCode ^
-      status.hashCode ^
-      pin.hashCode ^
-      user.hashCode ^
-      restaurant.hashCode;
+        orderitems.hashCode ^
+        created_on.hashCode ^
+        totalPrice.hashCode ^
+        no_of_people.hashCode ^
+        no_of_table.hashCode ^
+        date.hashCode ^
+        time.hashCode ^
+        tax.hashCode ^
+        status.hashCode ^
+        pin.hashCode ^
+        user.hashCode ^
+        restaurant.hashCode;
   }
 }
 
@@ -261,7 +262,7 @@ class OrderFoodItem {
 class OrderFoodItemApi {
   int id;
   MenuFromApi menu;
-  int price;
+  String price;
   int quantity;
   OrderFoodItemApi({
     required this.id,
@@ -303,19 +304,6 @@ class OrderFoodItemApi {
     return id.hashCode ^ menu.hashCode ^ price.hashCode ^ quantity.hashCode;
   }
 
-  OrderFoodItemApi copyWith({
-    int? id,
-    MenuFromApi? menu,
-    int? price,
-    int? quantity,
-  }) {
-    return OrderFoodItemApi(
-      id: id ?? this.id,
-      menu: menu ?? this.menu,
-      price: price ?? this.price,
-      quantity: quantity ?? this.quantity,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {

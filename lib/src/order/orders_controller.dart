@@ -1,5 +1,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -22,9 +23,16 @@ class OrderController extends GetxController {
   RxInt numberOfPeople = 1.obs;
   RxInt numberOfTable = 1.obs;
 
+  late List<FocusNode> otpFields;
+
+  late List<TextEditingController> otpText;
+
+  RxString otp = "".obs;
   void onInit() {
     getCart();
     getorder();
+    otpFields = List.generate(6, (index) => FocusNode());
+    otpText = List.generate(6, (index) => TextEditingController());
     super.onInit();
   }
 
