@@ -131,7 +131,8 @@ class OrderController extends GetxController {
           totalprice: 50,
           date: "date",
           time: "time");
-      await services.orderapi(orderModel);
+      OrderModelApi orderModelApi = await services.orderapi(orderModel);
+      print(orderModelApi);
       Get.toNamed(Chekoutdone.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());

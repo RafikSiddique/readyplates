@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -48,9 +49,10 @@ class PopUpMenuWidget extends StatelessWidget {
   }
 }
 
-class OrderPage extends StatelessWidget {
+class OrderPage extends GetView {
   static const id = "/orderPage";
-  const OrderPage({Key? key}) : super(key: key);
+  OrderPage({Key? key}) : super(key: key);
+  final controller = Get.find<OrderController>();
 
   void showTextMenu({
     required TapDownDetails details,
@@ -69,7 +71,6 @@ class OrderPage extends StatelessWidget {
               bottomRight: Radius.circular(10)),
           side: BorderSide(
             color: MyTheme.orderbordercolor,
-            //color: Color(0xffBBBBB6),
           ),
         ),
         useRootNavigator: false,
@@ -112,6 +113,7 @@ class OrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

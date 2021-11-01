@@ -49,12 +49,26 @@ class Orderservices extends ApiService {
     }
   }
 
-  Future<void> orderapi(OrderModel ordermodel) async {
+  Future<OrderModelApi> orderapi(OrderModel ordermodel) async {
     try {
-      Response response = await post(ordersapi,
-          body: ordermodel.toJson(), headers: contentTypeJsonHeader);
+      Request request = Request(
+        'POST',
+        ordersapi,
+      );
+
+      request.headers.addAll({'Content-Type': 'application/json'});
+      request.body = ordermodel.toJson();
+      print(request.body);
+      print(request.headers);
+      print(request.url);
+      StreamedResponse response = await request.send();
       if (response.statusCode != 201) {
-        throw AppException(code: response.statusCode, message: response.body);
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      } else {
+        String data = await response.stream.bytesToString();
+        print(data);
+        return OrderModelApi.fromJson(data);
       }
     } catch (a) {
       rethrow;
