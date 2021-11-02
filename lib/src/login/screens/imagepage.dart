@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
@@ -154,26 +154,24 @@ class _ImagePageState extends State<ImagePage> {
               },
               child: Material(
                 type: MaterialType.transparency,
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Skip for Now",
-                          style: GoogleFonts.poppins(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                            color: MyTheme.skiptextcolor,
-                          )),
-                      IconButton(
-                          iconSize: 14.83,
-                          icon: FaIcon(
-                            FontAwesomeIcons.chevronRight,
-                            color: Colors.black,
-                          ),
-                          onPressed: null),
-                    ],
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Skip for Now",
+                        style: GoogleFonts.poppins(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          color: MyTheme.skiptextcolor,
+                        )),
+                    IconButton(
+                        iconSize: 14.83,
+                        icon: FaIcon(
+                          FontAwesomeIcons.chevronRight,
+                          color: Colors.black,
+                        ),
+                        onPressed: null),
+                  ],
                 ),
               ),
             ),
