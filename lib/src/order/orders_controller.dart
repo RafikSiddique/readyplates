@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:intl/intl.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
@@ -126,6 +127,7 @@ class OrderController extends GetxController {
       String id = await sfHelper.getUserId();
       OrderModel orderModel = OrderModel(
           user: int.parse(id),
+          orderState: OrderState.placed,
           restaurant: restaurantModel.id,
           orderitems: cartItems
               .map((element) => OrderFoodItem(
@@ -137,8 +139,10 @@ class OrderController extends GetxController {
           noOfTable: numberOfTable.value,
           tax: 50,
           totalprice: 50,
-          date: "date",
-          time: "time");
+          date:
+              DateFormat(DateFormat.YEAR_MONTH_DAY).format(selectedDate.value),
+          time:
+              DateFormat(DateFormat.HOUR24_MINUTE).format(selectedDate.value));
       OrderModelApi orderModelApi = await services.orderapi(orderModel);
       print(orderModelApi);
       Get.toNamed(Chekoutdone.id);

@@ -21,7 +21,7 @@ class ReadyPlatesText extends StatelessWidget {
                 // width: 40,
                 height: 35,
                 child: Image.asset(
-                  Assets.spoon,
+                  Assets.logo,
                   fit: BoxFit.cover,
                 ),
               ),

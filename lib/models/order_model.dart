@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+enum OrderState { placed, inProgress, completed }
+
 class OrderModel {
   int user;
   int restaurant;
@@ -12,11 +14,13 @@ class OrderModel {
   int totalprice;
   String date;
   String time;
+  OrderState orderState;
   OrderModel({
     required this.user,
     required this.restaurant,
     required this.orderitems,
     required this.noOfPeople,
+    required this.orderState,
     required this.noOfTable,
     required this.tax,
     required this.totalprice,
@@ -31,6 +35,7 @@ class OrderModel {
       'orderitems': orderitems.map((x) => x.toMap()).toList(),
       'no_of_people': noOfPeople,
       'no_of_table': noOfTable,
+      'status': orderState.index.toString(),
       'tax': tax,
       'totalprice': totalprice,
       'date': date,
@@ -85,7 +90,7 @@ class OrderModelApi {
   String date;
   String time;
   String tax;
-  String? status;
+  OrderState status;
   int pin;
   int user;
   int restaurant;
@@ -99,61 +104,11 @@ class OrderModelApi {
     required this.date,
     required this.time,
     required this.tax,
-    this.status,
+    required this.status,
     required this.pin,
     required this.user,
     required this.restaurant,
   });
-
-  OrderModelApi copyWith({
-    int? id,
-    List<OrderFoodItemApi>? orderitems,
-    DateTime? created_on,
-    String? totalPrice,
-    int? no_of_people,
-    int? no_of_table,
-    String? date,
-    String? time,
-    String? tax,
-    String? status,
-    int? pin,
-    int? user,
-    int? restaurant,
-  }) {
-    return OrderModelApi(
-      id: id ?? this.id,
-      orderitems: orderitems ?? this.orderitems,
-      created_on: created_on ?? this.created_on,
-      totalPrice: totalPrice ?? this.totalPrice,
-      no_of_people: no_of_people ?? this.no_of_people,
-      no_of_table: no_of_table ?? this.no_of_table,
-      date: date ?? this.date,
-      time: time ?? this.time,
-      tax: tax ?? this.tax,
-      status: status ?? this.status,
-      pin: pin ?? this.pin,
-      user: user ?? this.user,
-      restaurant: restaurant ?? this.restaurant,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'orderitems': orderitems.map((x) => x.toMap()).toList(),
-      'created_on': created_on.millisecondsSinceEpoch,
-      'totalPrice': totalPrice,
-      'no_of_people': no_of_people,
-      'no_of_table': no_of_table,
-      'date': date,
-      'time': time,
-      'tax': tax,
-      'status': status,
-      'pin': pin,
-      'user': user,
-      'restaurant': restaurant,
-    };
-  }
 
   factory OrderModelApi.fromMap(Map<String, dynamic> map) {
     return OrderModelApi(
@@ -167,14 +122,13 @@ class OrderModelApi {
       date: map['date'],
       time: map['time'],
       tax: map['tax'],
-      status: map['status'] != null ? map['status'] : null,
+      status: OrderState.values[int.parse(map["status"])],
       pin: map['pin'],
       user: map['user'],
       restaurant: map['restaurant'],
     );
   }
 
-  String toJson() => json.encode(toMap());
 
   factory OrderModelApi.fromJson(String source) =>
       OrderModelApi.fromMap(json.decode(source));
@@ -303,7 +257,6 @@ class OrderFoodItemApi {
   int get hashCode {
     return id.hashCode ^ menu.hashCode ^ price.hashCode ^ quantity.hashCode;
   }
-
 
   Map<String, dynamic> toMap() {
     return {
