@@ -5,11 +5,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/widgets/buuton.dart';
 
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
@@ -82,13 +84,22 @@ class _FeedbackPageState extends State<FeedbackPage> {
             SizedBox(
               height: 9,
             ),
-            SmoothStarRating(
-              //color: Colors.red,
-
-              starCount: 5,
-              size: 30,
-              spacing: 22,
-              borderColor: Color(0xffFFD000),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SmoothStarRating(
+                  starCount: 5,
+                  size: 30,
+                  spacing: 22,
+                  borderColor: Color(0xffFFD000),
+                ),
+                Text("Excellent",
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xff6E6D7A))),
+              ],
             ),
 
             // CustomElevated(
@@ -109,13 +120,22 @@ class _FeedbackPageState extends State<FeedbackPage> {
             SizedBox(
               height: 9,
             ),
-            SmoothStarRating(
-              //color: Colors.red,
-
-              starCount: 5,
-              size: 30,
-              spacing: 22,
-              borderColor: Color(0xffFFD000),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SmoothStarRating(
+                  starCount: 5,
+                  size: 30,
+                  spacing: 22,
+                  borderColor: Color(0xffFFD000),
+                ),
+                Text("Poor",
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xff6E6D7A))),
+              ],
             ),
             // CustomElevated(
             //   text: '1',
@@ -136,13 +156,22 @@ class _FeedbackPageState extends State<FeedbackPage> {
             SizedBox(
               height: 9,
             ),
-            SmoothStarRating(
-              //color: Colors.red,
-
-              starCount: 5,
-              size: 30,
-              spacing: 22,
-              borderColor: Color(0xffFFD000),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SmoothStarRating(
+                  starCount: 5,
+                  size: 30,
+                  spacing: 22,
+                  borderColor: Color(0xffFFD000),
+                ),
+                Text("Good",
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xff6E6D7A))),
+              ],
             ),
             // CustomElevated(
             //   text: '1',
@@ -163,14 +192,22 @@ class _FeedbackPageState extends State<FeedbackPage> {
             SizedBox(
               height: 9,
             ),
-            SmoothStarRating(
-              //color: Colors.red,
-
-              starCount: 5,
-
-              size: 30,
-              spacing: 22,
-              borderColor: Color(0xffFFD000),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SmoothStarRating(
+                  starCount: 5,
+                  size: 30,
+                  spacing: 22,
+                  borderColor: Color(0xffFFD000),
+                ),
+                Text("Average",
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xff6E6D7A))),
+              ],
             ),
             // CustomElevated(
             //   text: '1',
@@ -185,7 +222,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
             ),
             AppFormFields(
               toptext: '',
-              hintText: 'Tell us more about your overall experience',
+              hintText: 'Tell us more about your overall experience.',
+              fontFamily: "Inter-Regular",
               fontSize: 12,
               fontWeight: FontWeight.normal,
               controller: controller.feedback,
@@ -194,12 +232,59 @@ class _FeedbackPageState extends State<FeedbackPage> {
               height: 17,
             ),
             Container(
-              height: 228,
-              width: MediaQuery.of(context).size.width,
-              color: MyTheme.appbackcolor,
-              child: image != null
-                  ? Image.file(image!, width: 82, height: 64, fit: BoxFit.cover)
-                  : Image.asset(Assets.camera),
+                height: 228,
+                width: MediaQuery.of(context).size.width,
+                color: MyTheme.appbackcolor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 40,
+                      child: image != null
+                          ? Image.file(
+                              image!,
+                            )
+                          : Image.asset(Assets.camera),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 12),
+                      ),
+                      onPressed: () => pickImage(ImageSource.gallery),
+                      child: const Text(
+                        'Add Image',
+                        style: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontFamily: "Inter-Regular",
+                          //color: MyTheme.forgetpasslogintext,
+                          color: Color(0xff979797),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+            SizedBox(
+              height: 17,
+            ),
+            Elevated(
+              text: "Post Feedback", fontSize: 17,
+              fontWeight: FontWeight.w700, color: Color(0xffE5E5E5),
+              width: double.infinity,
+              backgroundColor:
+                  MyTheme.buttonbackgroundcolor3, //Color(0xff7A7E83),
+              // backgroundColor: orderController.cartItems.isEmpty
+              //     ? MyTheme.hinttextColor
+              //     : MyTheme.buttonbackgroundColor,
+              onTap: () {
+                // if (orderController.cartItems.isEmpty) {
+                //   Get.snackbar("Please add an Item",
+                //       "At least add 1 Item to proceed to booking");
+                // } else {
+                //   Get.toNamed(BookingDetails.id, arguments: restaurantModel);
+                // }
+              },
             ),
           ],
         ),

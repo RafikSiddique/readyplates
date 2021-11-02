@@ -308,13 +308,15 @@ class AppFormFields extends StatelessWidget {
                                 obSecureText ? Icons.lock : Icons.lock_open))
                         : null,
                     hintStyle: GoogleFonts.inter(
-                      fontSize: hintfontSize,
-                      //  fontFamily: 'Inter-Regular',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500,
-                      //letterSpacing: -0.26,
-                      color: Color(0xffB7B7B7),
-                    )
+                        fontSize: hintfontSize,
+                        // decoration: ,
+
+                        //  fontFamily: 'Inter-Regular',
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w500,
+                        //letterSpacing: -0.26,
+                        color: MyTheme.appbartextColor //Color(0xffB7B7B7),
+                        )
 
                     // TextStyle(
 
