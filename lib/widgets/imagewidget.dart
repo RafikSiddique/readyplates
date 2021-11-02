@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readyplates/src/order/screen/Order_option.dart';
 import 'package:readyplates/src/Order_Screens/Payment_page.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class ImagewidgetPage extends StatelessWidget {
   final String imagePath;
@@ -57,7 +58,7 @@ class TextwidgetPage extends StatelessWidget {
           fontWeight: fontWeight,
           fontStyle: FontStyle.normal,
           fontSize: 13,
-          color: Color(0xff393E46)),
+          color: MyTheme.appbartextColor),
     );
   }
 }

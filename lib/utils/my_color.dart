@@ -5,6 +5,7 @@ class MyTheme {
   static Color appbackcolor = Color(0xffEFEFEF);
 
   static Color iconColor = Color(0xff000000);
+  static Color buttonbackgroundcolor3 = Color(0xff7A7E83);
 
   static Color appbartextColor = Color(0xff393E46);
 
@@ -42,6 +43,7 @@ class MyTheme {
   static Color buttontextlogin = Color(0xff222222);
 
   static Color forgetpasslogintext = Color(0xff32B768);
+  static Color feedbackhintcolor = Color(0xffB7B7B7);
 
   static Color boxdecoration = Color(0xff32B768);
 

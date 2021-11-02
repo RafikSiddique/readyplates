@@ -525,19 +525,25 @@ class _SignupPageState extends State<SignupPage> {
                   //                       //       )),
                   // ),
                   // SizedBox(height: 1),
+                  SizedBox(height: 15),
                   Row(
-                    //mainAxisAlignment: MainAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Checkbox(
-                        value: _checkbox,
-                        checkColor: MyTheme.checkboxcolor,
-                        onChanged: (value) {
-                          setState(() {
-                            _checkbox = !_checkbox;
-                          });
-                        },
+                      ConstrainedBox(
+                        constraints:
+                            BoxConstraints(maxHeight: 19, maxWidth: 19),
+                        child: Checkbox(
+                          value: _checkbox,
+                          checkColor: MyTheme.checkboxcolor,
+                          onChanged: (value) {
+                            setState(() {
+                              _checkbox = !_checkbox;
+                            });
+                          },
+                        ),
                       ),
+                      SizedBox(width: 5),
                       Text('I have a referral code',
                           style: GoogleFonts.inter(
                             fontSize: 13,
@@ -549,7 +555,7 @@ class _SignupPageState extends State<SignupPage> {
                           )),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   InkWell(
                     onTap: () async {
                       formKey.currentState!.save();
@@ -611,7 +617,7 @@ class _SignupPageState extends State<SignupPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        //width: 164,
+                        width: 164,
                         height: 45,
                         color: MyTheme.buttonbackgroundcolor1,
                         // color: Color(0xffF2F2F2),
@@ -622,37 +628,33 @@ class _SignupPageState extends State<SignupPage> {
                                 width: 1.5, color: MyTheme.checkboxcolor),
                           ),
                           onPressed: () {},
-                          child: Wrap(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 13, bottom: 14, right: 9),
-                                child: Container(
-                                    height: 21.5,
-                                    width: 20,
-                                    child: Image.asset(Assets.google)),
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                  height: 21.5,
+                                  width: 20,
+                                  child: Image.asset(Assets.google)),
+                              SizedBox(
+                                width: 8,
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 19, left: 4),
-                                child: Text("Continue with google!",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 10,
-                                      //fontFamily: 'Inter',
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w400,
-                                      color: MyTheme.bottomtextColorsignup,
-                                    )),
-                              ),
+                              Text("Continue with google!",
+                                  style: GoogleFonts.inter(
+                                    fontSize: 10,
+                                    //fontFamily: 'Inter',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400,
+                                    color: MyTheme.bottomtextColorsignup,
+                                  )),
                             ],
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: 1,
+                        width: 16,
                       ),
                       Container(
-                        //width: 164,
+                        width: 164,
                         height: 45,
                         //color: MyTheme.checkboxcolor, //buttonbackgroundcolor1,
                         // color: Color(0xffF2F2F2),
@@ -666,31 +668,26 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                           ),
                           onPressed: () {},
-                          child: Wrap(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, bottom: 10, right: 9),
-                                child: Container(
-                                    child: Image.asset(Assets.fbb,
-                                        height: 30,
-                                        width: 33,
-                                        fit: BoxFit.cover)),
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  child: Image.asset(Assets.fbb,
+                                      height: 28,
+                                      width: 28,
+                                      fit: BoxFit.cover)),
+                              SizedBox(
+                                width: 2,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 19,
-                                ),
-                                child: Text("Continue with facebook!",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 10,
-                                      //fontFamily: 'Inter',
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w400,
-                                      //color: Color(0xff505056),
-                                      color: MyTheme.bottomtextColorsignup,
-                                    )),
-                              ),
+                              Text("Continue with facebook",
+                                  style: GoogleFonts.inter(
+                                    fontSize: 9,
+                                    //fontFamily: 'Inter',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400,
+                                    //color: Color(0xff505056),
+                                    color: MyTheme.bottomtextColorsignup,
+                                  )),
                             ],
                           ),
                         ),

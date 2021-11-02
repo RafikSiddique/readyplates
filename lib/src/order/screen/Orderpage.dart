@@ -1,4 +1,4 @@
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -607,13 +607,15 @@ class OrderPage extends GetView<OrderController> {
                                                           .otpFields[i + 1]
                                                           .requestFocus();
                                                     } else {
-                                                      if(controller.otp.value == element.pin.toString())
-                                                      {
-                                                        
-                                                      }
-                                                      else{
-                                                        Get.snackbar("Incorrect OTP", "Enter correct OTP");
-                                                      }/*                controller.otp.value !=
+                                                      if (controller
+                                                              .otp.value ==
+                                                          element.pin
+                                                              .toString()) {
+                                                      } else {
+                                                        Get.snackbar(
+                                                            "Incorrect OTP",
+                                                            "Enter correct OTP");
+                                                      } /*                controller.otp.value !=
                                                             element.pin
                                                                 .toString();
                                                         Get.snackbar(

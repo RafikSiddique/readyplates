@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: OnbordingPage(),
-      // initialRoute: BookingDetails.id,
+      // initialRoute: FeedbackPage.id,
       onGenerateRoute: Routes.onGenerateRoute,
     );
   }

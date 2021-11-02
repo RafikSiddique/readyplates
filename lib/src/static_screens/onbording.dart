@@ -4,6 +4,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 // import 'package:readyplates/src/login/screens/imagepage.dart';
@@ -96,10 +97,8 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                       RichText(
                         text: TextSpan(
                             text: 'READY',
-                            style: TextStyle(
+                            style: GoogleFonts.montserrat(
                               fontSize: 30,
-                              letterSpacing: -0.0769231,
-                              fontFamily: 'Montserrat',
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(255, 255, 255, 0.9),
@@ -107,10 +106,10 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                             children: [
                               TextSpan(
                                 text: ' Plates'.toUpperCase(),
-                                style: TextStyle(
+                                style: GoogleFonts.montserrat(
                                   fontSize: 30,
-                                  fontFamily: 'Montserrat',
-                                  letterSpacing: -0.0769231,
+                                  //fontFamily: 'Montserrat',
+
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal,
                                   color: Color.fromRGBO(255, 255, 255, 0.9),
@@ -133,13 +132,17 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                         Container(
                           margin: EdgeInsets.only(left: 16, right: 16),
                           height: 54,
+                          decoration: BoxDecoration(
+                            color: Color(0xffEFEFEF).withOpacity(0.25),
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
                           width: MediaQuery.of(context).size.width,
                           child: button(
                               onTap: () {
                                 Navigator.pushNamed(context, LoginPage.id);
                               },
                               text: "LOGIN",
-                              color: Colors.white.withOpacity(0.35)),
+                              color: Color(0xffEFEFEF).withOpacity(0.25)),
                         ),
                         SizedBox(
                           height: 20,
@@ -154,10 +157,8 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                               Navigator.pushNamed(context, SignupPage.id);
                             },
                             text: "SIGN UP",
-                            textColor: Colors.white,
-                            border: Border.all(
-                                color: Colors.white.withOpacity(0.5),
-                                width: 1.5),
+                            textColor: Color(0xffFFFFFF),
+                            border: Border.all(color: Colors.white, width: 1.5),
                           ),
                         ),
                         SizedBox(
