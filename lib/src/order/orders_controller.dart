@@ -28,6 +28,13 @@ class OrderController extends GetxController {
 
   late List<TextEditingController> otpText;
 
+  bool anyPrevious() {
+    bool prev = orderItems.any((element) {
+      return element.status != OrderState.placed;
+    });
+    return prev;
+  }
+
   RxString otp = "".obs;
   void onInit() {
     getCart();

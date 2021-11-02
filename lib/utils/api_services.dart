@@ -13,7 +13,6 @@ class ApiService {
 
   Uri orderList(String id) => restaurants('order/$id'); //get
 
-  Uri get ordersapi => restaurants("order/"); //post
+  Uri get ordersapi => restaurants("order/");
 
 }
-// http://202.53.174.5:8000/restaurants/orders/

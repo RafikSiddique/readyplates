@@ -35,7 +35,7 @@ class OrderModel {
       'orderitems': orderitems.map((x) => x.toMap()).toList(),
       'no_of_people': noOfPeople,
       'no_of_table': noOfTable,
-      'status': orderState.index.toString(),
+      'status': orderState.index,
       'tax': tax,
       'totalprice': totalprice,
       'date': date,
@@ -122,13 +122,12 @@ class OrderModelApi {
       date: map['date'],
       time: map['time'],
       tax: map['tax'],
-      status: OrderState.values[int.parse(map["status"])],
+      status: OrderState.values[map["status"]],
       pin: map['pin'],
       user: map['user'],
       restaurant: map['restaurant'],
     );
   }
-
 
   factory OrderModelApi.fromJson(String source) =>
       OrderModelApi.fromMap(json.decode(source));
