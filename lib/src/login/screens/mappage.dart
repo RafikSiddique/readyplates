@@ -276,7 +276,11 @@ class _MapPageState extends State<MapPage> {
                                       borderRadius: BorderRadius.circular(7),
                                     ),
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
+                                    await authController.setAddress(
+                                        latLng.latitude,
+                                        latLng.longitude,
+                                        authController.address.value);
                                     authController.gotoHome();
                                   },
                                   child: Text('NEXT',

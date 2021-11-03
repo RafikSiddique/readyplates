@@ -35,8 +35,6 @@ class Routes {
             );
           case Chekoutdone.id:
             return Chekoutdone();
-          case OrderPage.id:
-            return OrderPage();
           case MenuPage.id:
             final RestaurantModel args = settings.arguments as RestaurantModel;
             return MenuPage(
@@ -44,7 +42,6 @@ class Routes {
             );
           case BurgersupportingPage.id:
             final RestaurantModel args = settings.arguments as RestaurantModel;
-
             return BurgersupportingPage(
               restaurantModel: args,
             );

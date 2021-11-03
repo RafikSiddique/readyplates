@@ -77,6 +77,7 @@ class AppFormField extends StatelessWidget {
             ),
           StatefulBuilder(builder: (context, setState) {
             return Container(
+              height: MediaQuery.of(context).size.height * 0.05,
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1,
@@ -120,7 +121,7 @@ class AppFormField extends StatelessWidget {
                     hintText: hintText,
                     contentPadding: EdgeInsets.only(
                       left: 14,
-                      top: 14,
+                      top: 5,
                       right: 14,
                       bottom: 14,
                     ),
@@ -159,15 +160,18 @@ class AppFormField extends StatelessWidget {
               height: 3,
             ),
           if (bottomText != null)
-            Text(bottomText!,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                  fontSize: 9,
-                  // fontFamily: 'Poppins',
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.normal,
-                  color: MyTheme.bottomtextColor,
-                )),
+            Padding(
+              padding: const EdgeInsets.only(left: 4.0),
+              child: Text(bottomText!,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    fontSize: 9,
+                    // fontFamily: 'Poppins',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.normal,
+                    color: MyTheme.bottomtextColor,
+                  )),
+            ),
         ],
       ),
     );

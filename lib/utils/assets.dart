@@ -19,8 +19,8 @@ class Assets {
   static const String notePencil = "$imagesUri/NotePencil.png";
   static const String clock = "$imagesUri/clock.png";
   static const String camera = "$imagesUri/camera.png";
-  static List<String> gallery =
-      List.generate(4, (index) => "$imagesUri/gallery${index + 1}.png");
+  static List<String> gallery = List.generate(
+      4, (index) => "$imagesUri/gallery${index == 3 ? 1 : index + 1}.png");
   static const String spoon = "$imagesUri/spoon-crossed.png";
   static const String locationset = "$imagesUri/Locationset.png";
   static const String veg = "$imagesUri/veg.png";
@@ -44,4 +44,5 @@ class Assets {
   static const String fbb = "$imagesUri/fbb.png";
 
   static const String logo = "$imagesUri/spoon.png";
+  static const String tag2 = "$imagesUri/tag2.png";
 }

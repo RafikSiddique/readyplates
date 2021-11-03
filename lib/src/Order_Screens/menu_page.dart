@@ -188,9 +188,7 @@ class MenuPage extends StatelessWidget {
                                                         ? IncDecButton(
                                                             text: orderController
                                                                 .getCartItem(
-                                                                    e.id,
-                                                                    restaurantModel
-                                                                        .id)
+                                                                    e.id)
                                                                 .foodQuantity,
                                                             widthFraction: .18,
                                                             onIncrement: () {
@@ -211,30 +209,59 @@ class MenuPage extends StatelessWidget {
                                                         : AddButton(
                                                             widthFraction: 0.18,
                                                             onTap: () {
-                                                              CartModel cartModel = CartModel(
-                                                                  foodItem:
-                                                                      e.id.obs,
-                                                                  foodName:
-                                                                      e.name,
-                                                                  foodImage:
-                                                                      e.image1,
-                                                                  foodPrice:
-                                                                      double.parse(e
-                                                                              .cost)
-                                                                          .obs,
-                                                                  restaurant:
-                                                                      restaurantModel
-                                                                          .id,
-                                                                  user: "",
-                                                                  foodQuantity:
-                                                                      1.obs);
-                                                              orderController
+                                                              if (orderController
                                                                   .cartItems
-                                                                  .add(
-                                                                      cartModel);
-                                                              orderController
-                                                                  .cart(
-                                                                      cartModel);
+                                                                  .any((element) =>
+                                                                      element
+                                                                          .restaurant !=
+                                                                      restaurantModel
+                                                                          .id)) {
+                                                                Get.showSnackbar(
+                                                                    GetBar(
+                                                                  title:
+                                                                      "Error",
+                                                                  message:
+                                                                      "Sorry you cannot add items from 2 Restaurant",
+                                                                  isDismissible:
+                                                                      true,
+                                                                  mainButton:
+                                                                      TextButton(
+                                                                    onPressed:
+                                                                        () async {
+                                                                      await orderController
+                                                                          .removeAllFromRes(
+                                                                              restaurantModel.id);
+                                                                      Get.back();
+                                                                    },
+                                                                    child: Text(
+                                                                        "Remove all from other restaurants"),
+                                                                  ),
+                                                                ));
+                                                              } else {
+                                                                CartModel cartModel = CartModel(
+                                                                    foodItem: e
+                                                                        .id.obs,
+                                                                    foodName:
+                                                                        e.name,
+                                                                    foodImage: e
+                                                                        .image1,
+                                                                    foodPrice:
+                                                                        double.parse(e.cost)
+                                                                            .obs,
+                                                                    restaurant:
+                                                                        restaurantModel
+                                                                            .id,
+                                                                    user: "",
+                                                                    foodQuantity:
+                                                                        1.obs);
+                                                                orderController
+                                                                    .cartItems
+                                                                    .add(
+                                                                        cartModel);
+                                                                orderController
+                                                                    .cart(
+                                                                        cartModel);
+                                                              }
                                                             },
                                                           ))
                                               ],
@@ -290,7 +317,7 @@ class MenuPage extends StatelessWidget {
                                                       ),
                                                     ),
                                                     Spacer(),
-                                                    Text(e.cost,
+                                                    Text("\$ " + e.cost,
                                                         style:
                                                             GoogleFonts.inter(
                                                           fontSize:

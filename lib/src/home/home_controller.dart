@@ -9,6 +9,9 @@ class HomeController extends GetxController {
   final SharedPreferenceHelper sfHelper = Get.find();
   final HomeServices homeService = HomeServices();
 
+  double lat = 0;
+  double lon = 0;
+  RxString address = "".obs;
   RxList<RestaurantModel> restaurants = <RestaurantModel>[
     RestaurantModel(id: -1, resName: "", address: null, bio: [])
   ].obs;
@@ -56,7 +59,17 @@ class HomeController extends GetxController {
   void onInit() {
     getRestaurants();
     Get.put(OrderController());
+    sfHelper.getAddress().then((value) => address.value = value);
+    sfHelper.getLat().then((value) => lat = value);
+    sfHelper.getLon().then((value) => lon = value);
     super.onInit();
+  }
+
+  void search(String q) async {
+    await getRestaurants();
+    restaurants.value = restaurants
+        .where((p0) => p0.resName.toLowerCase().contains(q.toLowerCase()))
+        .toList();
   }
 
   Future<void> getFoodItems(String id) async {
@@ -91,8 +104,6 @@ class HomeController extends GetxController {
               : restaurants;
     }
   }
-
-  
 
   void onPageChange(int index) {
     currentIndex.value = index;

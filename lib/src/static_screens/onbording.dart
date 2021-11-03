@@ -71,6 +71,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     var media = MediaQuery.of(context);
     return Scaffold(
         body: Container(
@@ -127,23 +128,55 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                         child: Hero(tag: "rp", child: ReadyPlatesText())),
                     Column(
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 16, right: 16),
-                          height: 54,
-                          decoration: BoxDecoration(
-                            color: Color(0xffEFEFEF).withOpacity(0.25),
-                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 16,
+                            right: 16,
                           ),
-                          width: MediaQuery.of(context).size.width,
-                          child: button(
-                              onTap: () {
-                                Navigator.pushNamed(context, LoginPage.id);
-                              },
-                              text: "LOGIN",
-                              color: Color(0xffEFEFEF).withOpacity(0.25)),
+                          child: Hero(
+                            tag: "login",
+                            child: Material(
+                              type: MaterialType.transparency,
+                              child: InkWell(
+                                onTap: () {
+                                  Get.toNamed(LoginPage.id);
+                                },
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(6)),
+                                  child: Container(
+                                    width: size.width,
+                                    height: 54,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Color(0xffFFFFFF).withOpacity(0.30),
+                                    ),
+                                    child: Center(
+                                      child: BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                          sigmaX: 10,
+                                          sigmaY: 10,
+                                        ),
+                                        child: Text(
+                                          'LOGIN',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.inter(
+                                            fontSize: 17,
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff222831),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Container(
                           height: 54,
@@ -156,7 +189,10 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                             },
                             text: "SIGN UP",
                             textColor: Color(0xffFFFFFF),
-                            border: Border.all(color: Colors.white, width: 1.5),
+                            border: Border.all(
+                              color: Color(0XffD0D0D0).withOpacity(0.6),
+                              width: 1.5,
+                            ),
                           ),
                         ),
                         SizedBox(

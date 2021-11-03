@@ -15,4 +15,7 @@ class ApiService {
 
   Uri get ordersapi => restaurants("order/");
 
+  Uri get updateStatusUrl => restaurants('updatestatus/');
+
+
 }

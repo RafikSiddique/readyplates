@@ -40,9 +40,9 @@ class ShopScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: MyTheme.appbackcolor,
+      backgroundColor: MyTheme.backgroundcolor,
       appBar: AppBar(
-        backgroundColor: MyTheme.appbackcolor,
+        backgroundColor: MyTheme.backgroundcolor,
         elevation: 0,
         leading: IconButton(
             iconSize: 14.83,
@@ -72,18 +72,33 @@ class ShopScreen extends StatelessWidget {
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                ),
-                child: Container(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                  ),
+                  child: TextField(
+                    onChanged: (value) {
+                      controller.search(value);
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: MyTheme.hinttextColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.search),
+                        hintText: "Search"),
+                  ) /* Container(
                   height: 47,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                      color: MyTheme.hinttextColor,
-                    ),
+                    // border: Border.all(
+                    //   color: MyTheme.hinttextColor,
+                    // ),
                     boxShadow: [
                       BoxShadow(
                         color: Color.fromRGBO(230, 230, 230, 0.547886),
@@ -95,13 +110,12 @@ class ShopScreen extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      IconButton(
-                          iconSize: 16,
-                          icon: FaIcon(
+                      
+                           FaIcon(
                             FontAwesomeIcons.search,
                             color: Colors.black,
                           ),
-                          onPressed: () {}),
+                          ,
                       Text('Search',
                           style: GoogleFonts.inter(
                             fontSize: 15.0,
@@ -111,39 +125,33 @@ class ShopScreen extends StatelessWidget {
                           )),
                     ],
                   ),
-                ),
-              ),
+                ), */
+                  ),
               SizedBox(
                 height: 5,
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 16,
+                  left: 20,
                   right: 17,
                 ),
-                child: Container(
-                  width: 342,
-                  height: 14,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 11,
-                        height: 11,
-                        child: Image.asset('assets/images/location1.png'),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text('32nd Street, Long Beach, San Francisco',
-                          style: GoogleFonts.inter(
-                            fontSize: 10,
-                            // fontFamily: "Inter",
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                            color: MyTheme.appbartextColor,
-                          )),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.gps_fixed,
+                      size: 15,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(controller.address.value,
+                        style: GoogleFonts.inter(
+                          fontSize: 10,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          color: MyTheme.appbartextColor,
+                        )),
+                  ],
                 ),
               ),
 
@@ -154,6 +162,7 @@ class ShopScreen extends StatelessWidget {
               Container(
                 //height: MediaQuery.of(context).size.height * 0.2,
                 child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   crossAxisCount: 4,
                   mainAxisSpacing: 0,
@@ -168,7 +177,7 @@ class ShopScreen extends StatelessWidget {
                           Container(
                             decoration: BoxDecoration(
                               //color: Color(0xffFCEBCD),
-                              color: MyTheme.shopboxcolor,
+                              color: MyTheme.shopboxcolor.withOpacity(1),
                               borderRadius: BorderRadius.circular(11),
                             ),
                             height: media.size.height * 0.08,
@@ -178,19 +187,19 @@ class ShopScreen extends StatelessWidget {
                             child: Image.asset(
                               categroyImg[i],
                               height:
-                                  MediaQuery.of(context).size.height * 0.035,
-                              width: MediaQuery.of(context).size.height * 0.035,
+                                  MediaQuery.of(context).size.height * 0.038,
+                              width: MediaQuery.of(context).size.height * 0.038,
                             ),
                           ),
                           SizedBox(
-                            height: 1,
+                            height: 2,
                           ),
                           Text(category[i],
                               style: GoogleFonts.montserrat(
                                   // fontFamily: "Montserrat",
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal,
-                                  fontSize: 10,
+                                  fontSize: 13,
                                   color: Colors.black))
                         ],
                       )
@@ -237,7 +246,7 @@ class ShopScreen extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                       fontSize: 15,
                       fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       color: Colors.black),
                 ),
               ),
@@ -245,7 +254,7 @@ class ShopScreen extends StatelessWidget {
                 () => controller.restaurants.isNotEmpty &&
                         controller.restaurants.first.id != -1
                     ? Container(
-                        color: Colors.white,
+                        color: MyTheme.backgroundcolor,
                         child: Column(
                           children: controller.restaurants
                               .map((element) =>
@@ -256,7 +265,7 @@ class ShopScreen extends StatelessWidget {
                     : Container(),
               ),
               SizedBox(
-                height: 50,
+                height: 20,
               )
             ],
           ),

@@ -83,7 +83,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                             color: MyTheme.appbartextColor,
                           )),
                       TextwidgetPage(
-                        text: "\$ 24.0",
+                        text: "\$ " + controller.calclateTotal().toString(),
                         color: MyTheme.appbartextColor,
                         fontWeight: FontWeight.w500,
                       ),
@@ -144,13 +144,6 @@ class BurgersupportingPage extends GetView<OrderController> {
                         color: MyTheme.appbartextColor,
                         fontWeight: FontWeight.w500,
                       ),
-                      // Text("\$ 0.5",
-                      //     style: TextStyle(
-                      //         fontFamily: "Inter",
-                      //         fontWeight: FontWeight.normal,
-                      //         fontStyle: FontStyle.normal,
-                      //         fontSize: 13,
-                      //         color: Color(0xff393E46))),
                     ],
                   ),
                   SizedBox(
@@ -169,7 +162,6 @@ class BurgersupportingPage extends GetView<OrderController> {
                         height: 25,
                         width: 25,
                       ),
-
                       SizedBox(
                         width: 10,
                       ),
@@ -231,7 +223,9 @@ class BurgersupportingPage extends GetView<OrderController> {
             ),
           ),
           Spacer(),
-          Bottomcontainer(restaurantModel: restaurantModel,),
+          Bottomcontainer(
+            restaurantModel: restaurantModel,
+          ),
         ],
       ),
     );

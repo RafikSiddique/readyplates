@@ -28,9 +28,25 @@ class OrderController extends GetxController {
 
   late List<TextEditingController> otpText;
 
+  bool anyInprogress() {
+    bool prev = orderItems.any((element) {
+      return element.status == OrderState.placed;
+    });
+    return prev;
+  }
+
+  double calclateTotal() {
+    double total = 0;
+    for (var item in cartItems) {
+      total += item.foodQuantity.value * item.foodPrice.value;
+    }
+    return total;
+  }
+
   bool anyPrevious() {
     bool prev = orderItems.any((element) {
-      return element.status != OrderState.placed;
+      return element.status != OrderState.placed &&
+          element.status != OrderState.inProgress;
     });
     return prev;
   }
@@ -39,8 +55,8 @@ class OrderController extends GetxController {
   void onInit() {
     getCart();
     getorder();
-    otpFields = List.generate(6, (index) => FocusNode());
-    otpText = List.generate(6, (index) => TextEditingController());
+    otpFields = List.generate(4, (index) => FocusNode());
+    otpText = List.generate(4, (index) => TextEditingController());
     super.onInit();
   }
 
@@ -92,30 +108,30 @@ class OrderController extends GetxController {
   }
 
   void increment(int id, int resId) async {
-    getCartItem(id, resId).foodQuantity++;
-    await cart(getCartItem(id, resId));
+    getCartItem(id).foodQuantity++;
+    await cart(getCartItem(id));
   }
 
   void decrement(int id, int resId, [bool isRemoval = false]) async {
     if (!isRemoval) {
-      if (getCartItem(id, resId).foodQuantity.value > 1) {
-        getCartItem(id, resId).foodQuantity--;
-        await cart(getCartItem(id, resId));
+      if (getCartItem(id).foodQuantity.value > 1) {
+        getCartItem(id).foodQuantity--;
+        await cart(getCartItem(id));
       } else {
-        CartModel item = getCartItem(id, resId);
+        CartModel item = getCartItem(id);
         item.foodQuantity = 0.obs;
         cartItems.remove(item);
         await cart(item);
       }
     } else {
-      CartModel item = getCartItem(id, resId);
+      CartModel item = getCartItem(id);
       item.foodQuantity = 0.obs;
       cartItems.remove(item);
       await cart(item);
     }
   }
 
-  CartModel getCartItem(int id, int resId) {
+  CartModel getCartItem(int id) {
     return cartItems.firstWhere((element) => element.foodItem.value == id);
   }
 
@@ -124,6 +140,22 @@ class OrderController extends GetxController {
       String id = await sfHelper.getUserId();
       cartModel.user = id;
       await services.addToCartApi(cartModel);
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> removeAllFromRes(int resId) async {
+    try {
+      String id = await sfHelper.getUserId();
+      List<CartModel> cartL =
+          cartItems.where((p0) => p0.restaurant != resId).toList();
+      cartL.forEach((element) {
+        element.user = id;
+        element.foodQuantity = 0.obs;
+        cart(element);
+        cartItems.remove(getCartItem(element.foodItem.value));
+      });
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -152,6 +184,14 @@ class OrderController extends GetxController {
               DateFormat(DateFormat.HOUR24_MINUTE).format(selectedDate.value));
       OrderModelApi orderModelApi = await services.orderapi(orderModel);
       print(orderModelApi);
+      await getorder();
+      cartApiItems.clear();
+      cartItems.forEach((element) {
+        element.foodQuantity.value = 0;
+        element.user = id;
+        cart(element);
+        cartItems.remove(getCartItem(element.foodItem.value));
+      });
       Get.toNamed(Chekoutdone.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -163,6 +203,15 @@ class OrderController extends GetxController {
     try {
       String id = await sfHelper.getUserId();
       orderItems.value = await services.getorder(id);
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> updateStatus(int id, int status) async {
+    try {
+      await services.updateStatus(id, status);
+      await getorder();
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
