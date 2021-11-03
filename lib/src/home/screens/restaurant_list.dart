@@ -40,9 +40,9 @@ class ShopScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: MyTheme.appbackcolor,
+      backgroundColor: MyTheme.backgroundcolor,
       appBar: AppBar(
-        backgroundColor: MyTheme.appbackcolor,
+        backgroundColor: MyTheme.backgroundcolor,
         elevation: 0,
         leading: IconButton(
             iconSize: 14.83,
@@ -96,9 +96,9 @@ class ShopScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                      color: MyTheme.hinttextColor,
-                    ),
+                    // border: Border.all(
+                    //   color: MyTheme.hinttextColor,
+                    // ),
                     boxShadow: [
                       BoxShadow(
                         color: Color.fromRGBO(230, 230, 230, 0.547886),
@@ -132,7 +132,7 @@ class ShopScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 16,
+                  left: 20,
                   right: 17,
                 ),
                 child: Row(
@@ -177,7 +177,7 @@ class ShopScreen extends StatelessWidget {
                           Container(
                             decoration: BoxDecoration(
                               //color: Color(0xffFCEBCD),
-                              color: MyTheme.shopboxcolor,
+                              color: MyTheme.shopboxcolor.withOpacity(1),
                               borderRadius: BorderRadius.circular(11),
                             ),
                             height: media.size.height * 0.08,
@@ -187,19 +187,19 @@ class ShopScreen extends StatelessWidget {
                             child: Image.asset(
                               categroyImg[i],
                               height:
-                                  MediaQuery.of(context).size.height * 0.035,
-                              width: MediaQuery.of(context).size.height * 0.035,
+                                  MediaQuery.of(context).size.height * 0.038,
+                              width: MediaQuery.of(context).size.height * 0.038,
                             ),
                           ),
                           SizedBox(
-                            height: 1,
+                            height: 2,
                           ),
                           Text(category[i],
                               style: GoogleFonts.montserrat(
                                   // fontFamily: "Montserrat",
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal,
-                                  fontSize: 10,
+                                  fontSize: 13,
                                   color: Colors.black))
                         ],
                       )
@@ -246,7 +246,7 @@ class ShopScreen extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                       fontSize: 15,
                       fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       color: Colors.black),
                 ),
               ),
@@ -254,7 +254,7 @@ class ShopScreen extends StatelessWidget {
                 () => controller.restaurants.isNotEmpty &&
                         controller.restaurants.first.id != -1
                     ? Container(
-                        color: Colors.white,
+                        color: MyTheme.backgroundcolor,
                         child: Column(
                           children: controller.restaurants
                               .map((element) =>
@@ -265,7 +265,7 @@ class ShopScreen extends StatelessWidget {
                     : Container(),
               ),
               SizedBox(
-                height: 50,
+                height: 20,
               )
             ],
           ),

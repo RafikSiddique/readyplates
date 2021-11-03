@@ -44,4 +44,5 @@ class Assets {
   static const String fbb = "$imagesUri/fbb.png";
 
   static const String logo = "$imagesUri/spoon.png";
+  static const String tag2 = "$imagesUri/tag2.png";
 }

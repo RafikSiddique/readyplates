@@ -27,7 +27,7 @@ class RestaurantCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.25),
+            color: Color.fromRGBO(188, 202, 224, 0.45),
             offset: Offset(0, 2),
             blurRadius: 4,
             spreadRadius: 0,
@@ -68,15 +68,16 @@ class RestaurantCard extends StatelessWidget {
                         style: GoogleFonts.montserrat(
                             fontSize: media.size.height * 0.022,
                             color: Colors.black,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w500),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 6,
                       ),
                       Text(
                         "Restaurent Description",
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
+                          fontWeight: FontWeight.w300,
                           color: MyTheme.shoptextcolor2,
                         ),
                       ),
@@ -87,6 +88,7 @@ class RestaurantCard extends StatelessWidget {
                         restaurantModel.address ?? "",
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
+                          fontWeight: FontWeight.w300,
                           color: MyTheme.shoptextcolor2,
                         ),
                       ),
@@ -114,6 +116,9 @@ class RestaurantCard extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 4,
+                      ),
                       Container(
                         width: (media.size.width - media.size.height * 0.18),
                         margin: EdgeInsets.symmetric(vertical: 3),
@@ -124,12 +129,15 @@ class RestaurantCard extends StatelessWidget {
                           height: 1,
                         ),
                       ),
+                      SizedBox(
+                        height: 4,
+                      ),
                       Row(
                         children: [
                           Container(
-                            width: media.size.height * 0.013,
-                            height: media.size.height * 0.013,
-                            child: Image.asset(Assets.tag),
+                            width: media.size.height * 0.018,
+                            height: media.size.height * 0.018,
+                            child: Image.asset(Assets.tag2),
                           ),
                           SizedBox(
                             width: 5,
