@@ -36,24 +36,30 @@ class _SignupPageState extends State<SignupPage> {
           toolbarHeight: 44,
           backgroundColor: Colors.white, //(0xffE5E5E5),
           elevation: 0,
-          leading: IconButton(
-              iconSize: 14.83,
-              icon: FaIcon(
-                FontAwesomeIcons.chevronLeft,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Get.toNamed(LoginPage.id);
-              }),
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: IconButton(
+                iconSize: 14.83,
+                icon: FaIcon(
+                  FontAwesomeIcons.chevronLeft,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Get.toNamed(LoginPage.id);
+                }),
+          ),
           centerTitle: true,
-          title: Text(
-            'User Information',
-            style: TextStyle(
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w500,
-              fontStyle: FontStyle.normal,
-              fontSize: 17,
-              color: MyTheme.appbartextColor,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              'User Information',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.normal,
+                fontSize: 17,
+                color: MyTheme.appbartextColor,
+              ),
             ),
           ),
         ),
@@ -62,9 +68,8 @@ class _SignupPageState extends State<SignupPage> {
           child: Form(
             key: formKey,
             child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
+              padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppFormField(
@@ -77,7 +82,9 @@ class _SignupPageState extends State<SignupPage> {
                         bottomLeft: const Radius.circular(0),
                         bottomRight: const Radius.circular(0.0)),
                   ),
-
+                  SizedBox(
+                    height: 2,
+                  ),
                   // Text("Name",
                   //     style: TextStyle(
                   //         fontSize: 13,
@@ -132,6 +139,7 @@ class _SignupPageState extends State<SignupPage> {
                     bottomText:
                         'Make sure it matches the name on your government ID',
                   ),
+
                   // Container(
                   //   height: 45,
                   //   width: MediaQuery.of(context).size.width,
@@ -535,7 +543,10 @@ class _SignupPageState extends State<SignupPage> {
                             BoxConstraints(maxHeight: 19, maxWidth: 19),
                         child: Checkbox(
                           value: _checkbox,
-                          checkColor: MyTheme.checkboxcolor,
+                          checkColor: Color(0xffADB5BD),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                           onChanged: (value) {
                             setState(() {
                               _checkbox = !_checkbox;
@@ -585,12 +596,12 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Row(children: <Widget>[
                     Expanded(
                         child: Divider(
                       // indent: 16,
-                      endIndent: 46,
+                      endIndent: 44,
                       thickness: 2,
                       color: MyTheme.devidercolor,
                     )),
@@ -598,7 +609,7 @@ class _SignupPageState extends State<SignupPage> {
                         style: GoogleFonts.inter(
                           color: MyTheme.dividermiddletext,
                           //color: Color(0xff4E535A),
-                          fontSize: 13,
+                          fontSize: 17,
                           // fontFamily: 'Inter-Regular',
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.normal,
@@ -617,15 +628,18 @@ class _SignupPageState extends State<SignupPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        width: 164,
+                        width: MediaQuery.of(context).size.width * 0.43,
                         height: 45,
                         color: MyTheme.buttonbackgroundcolor1,
                         // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6))),
                             primary: MyTheme.buttonbackgroundcolor1,
                             side: BorderSide(
-                                width: 1.5, color: MyTheme.checkboxcolor),
+                                width: 1.5, color: Color(0xffADB5BD)),
                           ),
                           onPressed: () {},
                           child: Row(
@@ -640,7 +654,7 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                               Text("Continue with google!",
                                   style: GoogleFonts.inter(
-                                    fontSize: 10,
+                                    fontSize: 11,
                                     //fontFamily: 'Inter',
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w400,
@@ -654,17 +668,24 @@ class _SignupPageState extends State<SignupPage> {
                         width: 16,
                       ),
                       Container(
-                        width: 164,
+                        width: MediaQuery.of(context).size.width * 0.43,
                         height: 45,
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(4),
+                        // ),
                         //color: MyTheme.checkboxcolor, //buttonbackgroundcolor1,
                         // color: Color(0xffF2F2F2),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6))),
+
                             primary: MyTheme
                                 .buttonbackgroundcolor1, //checkboxcolor, // Color(0xffB9B9B9),
                             side: BorderSide(
                               width: 1.5,
-                              color: MyTheme.checkboxcolor,
+                              color: Color(0xffADB5BD),
                             ),
                           ),
                           onPressed: () {},
@@ -681,7 +702,7 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                               Text("Continue with facebook",
                                   style: GoogleFonts.inter(
-                                    fontSize: 9,
+                                    fontSize: 11,
                                     //fontFamily: 'Inter',
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w400,

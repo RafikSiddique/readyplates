@@ -74,23 +74,24 @@ class LoginPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
                           height: 30,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            IconButton(
-                              icon: const Icon(
-                                Icons.chevron_left,
-                              ),
-                              //color: Color(0xff393E46),
-                              color: Colors.black,
-                              onPressed: () {
+                            InkWell(
+                              onTap: () {
                                 Get.back();
                               },
+                              child: Container(
+                                width: 8,
+                                height: 14,
+                                child: Image.asset(
+                                  'assets/images/Path.png',
+                                ),
+                              ),
                             ),
                             Spacer(
                               flex: 2,
@@ -100,14 +101,42 @@ class LoginPage extends StatelessWidget {
                               style: GoogleFonts.inter(
                                 fontSize: 17,
                                 color: MyTheme.appbartextColor,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.23,
                               ),
                             ),
                             Spacer(
-                              flex: 3,
-                            ),
+                              flex: 2,
+                            )
                           ],
                         ),
+                        // Row(
+                        //   children: [
+                        //     IconButton(
+                        //       icon: Icon(
+                        //         Icons.chevron_left,
+                        //       ),
+                        //       color: Colors.black,
+                        //       onPressed: () {
+                        //         Get.back();
+                        //       },
+                        //     ),
+                        //     Spacer(
+                        //       flex: 2,
+                        //     ),
+                        //     Text(
+                        //       "Login",
+                        //       style: GoogleFonts.inter(
+                        //         fontSize: 17,
+                        //         color: MyTheme.appbartextColor,
+                        //         fontWeight: FontWeight.w500,
+                        //       ),
+                        //     ),
+                        //     Spacer(
+                        //       flex: 3,
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(height: size.height * 0.03),
                         AppFormField(
                             toptext: "Email address / Mobile Number",
@@ -212,7 +241,7 @@ class LoginPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 20),
                         InkWell(
                           onTap: () async {
                             _formKey.currentState!.save();
@@ -295,7 +324,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 25,
                         ),
                       ],
                     ),

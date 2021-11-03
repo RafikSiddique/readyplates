@@ -34,8 +34,6 @@ class ReadyPlatesText extends StatelessWidget {
                       text: 'READY',
                       style: GoogleFonts.montserrat(
                         fontSize: 30,
-
-                        // fontFamily: 'Montserrat',
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.bold,
                         color: Color.fromRGBO(255, 255, 255, 0.9),
@@ -45,10 +43,8 @@ class ReadyPlatesText extends StatelessWidget {
                           text: ' Plates'.toUpperCase(),
                           style: GoogleFonts.montserrat(
                             fontSize: 30,
-
-                            // fontFamily: 'Montserrat',
                             fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                             color: Color.fromRGBO(255, 255, 255, 0.9),
                           ),
                         ),
