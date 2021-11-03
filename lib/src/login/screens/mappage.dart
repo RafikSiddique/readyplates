@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -86,6 +87,11 @@ class _MapPageState extends State<MapPage> {
                           address.region.toString() +
                           ", " +
                           address.postal.toString();
+                  if (widget.isHome) {
+                    await authController.setAddress(latLng.latitude,
+                        latLng.longitude, authController.address.value);
+                    Get.find<HomeController>().getAddress();
+                  }
                 },
                 onMapCreated: (controller) {
                   this.controller = controller;
@@ -131,8 +137,7 @@ class _MapPageState extends State<MapPage> {
                 shape: CircleBorder(),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyTheme.mapboxdecorationcolor,
-                      //color: Color(0xff5D5E5F).withOpacity(0.2),
+                      color: Color(0xff5D5E5F).withOpacity(0.2),
                       shape: BoxShape.circle),
                   // padding: const EdgeInsets.all(8.0),
                   margin: EdgeInsets.all(8),

@@ -91,42 +91,7 @@ class ShopScreen extends StatelessWidget {
                         fillColor: Colors.white,
                         prefixIcon: Icon(Icons.search),
                         hintText: "Search"),
-                  ) /* Container(
-                  height: 47,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0),
-                    // border: Border.all(
-                    //   color: MyTheme.hinttextColor,
-                    // ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromRGBO(230, 230, 230, 0.547886),
-                        offset: Offset(0, 2),
-                        blurRadius: 4,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      
-                           FaIcon(
-                            FontAwesomeIcons.search,
-                            color: Colors.black,
-                          ),
-                          ,
-                      Text('Search',
-                          style: GoogleFonts.inter(
-                            fontSize: 15.0,
-                            color: MyTheme.appbartextColor,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.normal,
-                          )),
-                    ],
-                  ),
-                ), */
-                  ),
+                  )),
               SizedBox(
                 height: 5,
               ),

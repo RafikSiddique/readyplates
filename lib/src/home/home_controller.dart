@@ -59,10 +59,14 @@ class HomeController extends GetxController {
   void onInit() {
     getRestaurants();
     Get.put(OrderController());
+
+    super.onInit();
+  }
+
+  void getAddress() {
     sfHelper.getAddress().then((value) => address.value = value);
     sfHelper.getLat().then((value) => lat = value);
     sfHelper.getLon().then((value) => lon = value);
-    super.onInit();
   }
 
   void search(String q) async {
