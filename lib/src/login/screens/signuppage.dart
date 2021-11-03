@@ -558,7 +558,7 @@ class _SignupPageState extends State<SignupPage> {
                       Text('I have a referral code',
                           style: GoogleFonts.inter(
                             fontSize: 13,
-                            color: MyTheme.checkboxtextcolor,
+                            color: MyTheme.checkboxcolor,
                             // color: Color(0xff3C3B4D),
                             //fontFamily: 'Inter',
                             fontStyle: FontStyle.normal,

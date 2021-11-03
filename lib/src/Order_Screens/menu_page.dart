@@ -24,8 +24,9 @@ class MenuPage extends StatelessWidget {
     var media = MediaQuery.of(context);
     Size size = media.size;
     return Scaffold(
+      backgroundColor: MyTheme.backgroundcolor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.backgroundcolor,
         elevation: 0,
         leading: IconButton(
             iconSize: 14.83,
@@ -59,9 +60,9 @@ class MenuPage extends StatelessWidget {
                 height: 47,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(4.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   border: Border.all(
-                    color: MyTheme.hinttextColor,
+                    color: MyTheme.appbackgroundColor,
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -74,20 +75,30 @@ class MenuPage extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    IconButton(
-                        iconSize: 16,
-                        icon: FaIcon(
-                          FontAwesomeIcons.search,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {}),
-                    Text(
-                      'Search',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: MyTheme.appbartextColor,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Icon(
+                        Icons.search,
+                        size: 30,
+                        color: Colors.grey,
                       ),
                     ),
+                    // IconButton(
+                    //     iconSize: 16,
+                    //     icon: FaIcon(
+                    //       FontAwesomeIcons.search,
+                    //       color: MyTheme.buttonbackgroundColor,
+                    //     ),
+                    //     onPressed: () {}),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text('Search',
+                        style: GoogleFonts.inter(
+                            fontSize: 15.0,
+                            color: MyTheme.appbartextColor,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500)),
                   ],
                 ),
               ),
@@ -101,7 +112,7 @@ class MenuPage extends StatelessWidget {
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.normal,
-                    color: MyTheme.dividermiddletext,
+                    color: MyTheme.appbartextColor,
                   ),
                 ),
               ),
@@ -330,6 +341,9 @@ class MenuPage extends StatelessWidget {
                               )
                               .toList(),
                         )),
+              SizedBox(
+                height: 17,
+              ),
               Elevated(
                 text: "Proceed to Booking",
                 width: double.infinity,
