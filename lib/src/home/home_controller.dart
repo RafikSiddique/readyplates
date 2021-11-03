@@ -57,9 +57,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    getAddress();
     getRestaurants();
     Get.put(OrderController());
-
     super.onInit();
   }
 
@@ -99,6 +99,9 @@ class HomeController extends GetxController {
 
   Future<void> getRestaurants() async {
     try {
+      if (lat != 0 && lon != 0) {
+        homeService.getRestaurantWithSort(lat, lon);
+      }
       restaurants.value = await homeService.getResDetail();
     } catch (e) {
       restaurants.value = restaurants.isEmpty

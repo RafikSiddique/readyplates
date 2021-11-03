@@ -344,21 +344,22 @@ class MenuPage extends StatelessWidget {
               SizedBox(
                 height: 17,
               ),
-              Elevated(
-                text: "Proceed to Booking",
-                width: double.infinity,
-                backgroundColor: orderController.cartItems.isEmpty
-                    ? MyTheme.hinttextColor
-                    : MyTheme.buttonbackgroundColor,
-                onTap: () {
-                  if (orderController.cartItems.isEmpty) {
-                    Get.snackbar("Please add an Item",
-                        "At least add 1 Item to proceed to booking");
-                  } else {
-                    Get.toNamed(BookingDetails.id, arguments: restaurantModel);
-                  }
-                },
-              ),
+              Obx(() => Elevated(
+                    text: "Proceed to Booking",
+                    width: double.infinity,
+                    backgroundColor: orderController.cartItems.isEmpty
+                        ? MyTheme.hinttextColor
+                        : MyTheme.buttonbackgroundColor,
+                    onTap: () {
+                      if (orderController.cartItems.isEmpty) {
+                        Get.snackbar("Please add an Item",
+                            "At least add 1 Item to proceed to booking");
+                      } else {
+                        Get.toNamed(BookingDetails.id,
+                            arguments: restaurantModel);
+                      }
+                    },
+                  )),
               SizedBox(
                 height: 20,
               )

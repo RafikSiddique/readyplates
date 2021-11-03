@@ -8,6 +8,8 @@ class ApiService {
   Uri get image => accounts('image/');
   Uri menuList(String id) => restaurants('menulist/$id/');
   Uri get restaurantList => restaurants('get/');
+  Uri get restList => restaurants('restlist/');
+
   Uri get addToCart => restaurants('cart/');
   Uri cartList(String id) => restaurants('cart/$id');
 

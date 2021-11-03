@@ -5,12 +5,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/restaurant_model.dart';
-import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/widgets/back_gesture_diable.dart';
 // import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -435,25 +435,6 @@ class FullImage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class WillNotPopOnGesture extends StatelessWidget {
-  final Widget child;
-  const WillNotPopOnGesture({Key? key, required this.child}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      child: child,
-      onWillPop: () async {
-        if (Navigator.of(context).userGestureInProgress) {
-          return false;
-        } else {
-          return true;
-        }
-      },
     );
   }
 }

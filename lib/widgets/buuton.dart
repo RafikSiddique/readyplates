@@ -12,12 +12,14 @@ class Elevated extends StatelessWidget {
   final Color? borderColor;
   final EdgeInsets padding;
   final Color? color;
+  final bool infoFilled;
   Elevated({
     Key? key,
     required this.text,
     this.color,
     this.width,
     required this.onTap,
+    this.infoFilled = false,
     this.backgroundColor = const Color(0xff222831),
     this.borderColor,
     this.padding = const EdgeInsets.symmetric(vertical: 20.0),

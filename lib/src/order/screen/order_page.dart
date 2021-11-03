@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
-import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
+import 'package:readyplates/src/order/screen/order_cancel_page.dart';
 import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:readyplates/src/order/screen/Order_option.dart';
+import 'package:readyplates/src/order/screen/order_option.dart';
 import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/utils/my_color.dart';
 

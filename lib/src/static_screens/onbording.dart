@@ -180,12 +180,11 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                         ),
                         Container(
                           height: 54,
-                          //  width: 343,
                           margin: EdgeInsets.only(left: 16, right: 16),
                           width: MediaQuery.of(context).size.width,
                           child: button(
                             onTap: () {
-                              Navigator.pushNamed(context, SignupPage.id);
+                              Get.toNamed(SignupPage.id);
                             },
                             text: "SIGN UP",
                             textColor: Color(0xffFFFFFF),

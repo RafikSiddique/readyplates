@@ -63,7 +63,7 @@ class OrderWidget extends StatelessWidget {
           width: Get.width,
           text: "Edit Order",
           onTap: () {
-            Get.to(() => OrderOption2());
+            //Get.to(() => OrderOption2());
           },
         );
       case OrderState.completed:
@@ -72,7 +72,7 @@ class OrderWidget extends StatelessWidget {
           width: Get.width,
           text: " Order Again",
           onTap: () {
-            Get.to(() => OrderOption2());
+         //   Get.to(() => OrderOption2());
           },
         );
       default:
@@ -80,7 +80,7 @@ class OrderWidget extends StatelessWidget {
           width: Get.width,
           text: "Order Again",
           onTap: () {
-            Get.to(() => OrderOption2());
+          //  Get.to(() => OrderOption2());
           },
         );
     }
