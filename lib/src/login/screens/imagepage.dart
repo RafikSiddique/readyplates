@@ -164,8 +164,11 @@ class _ImagePageState extends State<ImagePage> {
                           fontSize: 15,
                           color: MyTheme.skiptextcolor,
                         )),
+                    // SizedBox(
+                    //   width: 5,
+                    // ),
                     IconButton(
-                        iconSize: 14.83,
+                        iconSize: 12.83,
                         icon: FaIcon(
                           FontAwesomeIcons.chevronRight,
                           color: Colors.black,

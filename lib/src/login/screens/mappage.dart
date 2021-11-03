@@ -100,24 +100,36 @@ class _MapPageState extends State<MapPage> {
               pin(),
             ],
           ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                child: TextField(
-                  controller: TextEditingController(),
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      hintText: "Search Any Location",
-                      suffixIcon: Icon(
-                        Icons.search,
-                        color: Colors.grey,
-                      )),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
+                child: Container(
+                  height: 54,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextField(
+                      // textAlign: TextAlign.center,
+                      controller: TextEditingController(),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          hintText: "Search Any Location",
+                          contentPadding:
+                              const EdgeInsets.only(top: 27, left: 10),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                            ),
+                          )),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -167,8 +179,7 @@ class _MapPageState extends State<MapPage> {
                             SizedBox(
                               height: 13,
                             ),
-                            Text(
-                                "Hello Omar ${authController.fNamController.text}!",
+                            Text("Hello ${authController.fNamController.text}!",
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontStyle: FontStyle.normal,
@@ -242,6 +253,16 @@ class _MapPageState extends State<MapPage> {
                                   ),
                                 ],
                               ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Divider(
+                              // indent: 16,
+                              //// endIndent: 16,
+                              thickness: 2,
+                              color: MyTheme.devidercolor,
+                              //  color: Color(0xffD8D8D8),
                             ),
                             SizedBox(
                               height: 10,

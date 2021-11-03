@@ -108,8 +108,6 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                                 text: ' Plates'.toUpperCase(),
                                 style: GoogleFonts.montserrat(
                                   fontSize: 30,
-                                  //fontFamily: 'Montserrat',
-
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal,
                                   color: Color.fromRGBO(255, 255, 255, 0.9),

@@ -533,21 +533,23 @@ class _SignupPageState extends State<SignupPage> {
                       ConstrainedBox(
                         constraints:
                             BoxConstraints(maxHeight: 19, maxWidth: 19),
-                        child: Checkbox(
-                          value: _checkbox,
-                          checkColor: MyTheme.checkboxcolor,
-                          onChanged: (value) {
-                            setState(() {
-                              _checkbox = !_checkbox;
-                            });
-                          },
+                        child: Container(
+                          child: Checkbox(
+                            value: _checkbox,
+                            checkColor: MyTheme.checkboxcolor,
+                            onChanged: (value) {
+                              setState(() {
+                                _checkbox = !_checkbox;
+                              });
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(width: 5),
                       Text('I have a referral code',
                           style: GoogleFonts.inter(
                             fontSize: 13,
-                            color: MyTheme.checkboxtextcolor,
+                            color: MyTheme.checkboxcolor,
                             // color: Color(0xff3C3B4D),
                             //fontFamily: 'Inter',
                             fontStyle: FontStyle.normal,

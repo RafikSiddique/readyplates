@@ -54,8 +54,8 @@ class RestaurantDetails extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(36.0),
-                      topRight: Radius.circular(36.0),
+                      topLeft: Radius.circular(15.0),
+                      topRight: Radius.circular(15.0),
                       bottomLeft: Radius.zero,
                       bottomRight: Radius.zero,
                     ),
@@ -77,6 +77,9 @@ class RestaurantDetails extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          SizedBox(
+                            height: 15,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -84,7 +87,7 @@ class RestaurantDetails extends StatelessWidget {
                                   style: GoogleFonts.nunito(
                                     textStyle: TextStyle(
                                       fontSize: 25,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                       color: MyTheme.appbartextColor,
                                     ),
@@ -184,6 +187,9 @@ class RestaurantDetails extends StatelessWidget {
                             style: GoogleFonts.inter(
                                 fontSize: 17, fontWeight: FontWeight.w400),
                           ),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Text(
                             "Founded in 1954, Burger King is the second largest fast food hamburger chain in the world. The original Home of the Whopper, our commitment to premium ingredients, signature recipes, and family-friendly dining experiences is what has defined our brand for more than 50 successful years",
                             style: GoogleFonts.inter(
@@ -202,6 +208,9 @@ class RestaurantDetails extends StatelessWidget {
                                 image: AssetImage(Assets.spoon),
                               ),
                             ),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Text(
                               restaurantModel.bio.first.servingTime == ""
                                   ? "Undefined Serving time"
@@ -212,6 +221,15 @@ class RestaurantDetails extends StatelessWidget {
                                   fontStyle: FontStyle.normal,
                                   color: MyTheme.dividermiddletext),
                             ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Text("mins serving time",
+                                style: GoogleFonts.inter(
+                                    fontSize: 13,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color(0xff71757B)))
                           ]),
                           SizedBox(
                             height: 24,
