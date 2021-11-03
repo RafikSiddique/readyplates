@@ -76,4 +76,15 @@ class MyTheme {
   static Color mapboxdecorationcolor = Color(0xff5D5E5F);
 
   static Color addremovebuttoncolor = Color(0xffFDDEDE);
+  static Color ratingfillColor = Color(0xffFFD000);
+
+  static Color containerColor = Color(0xffEFEFEF);
+  static Color imgtextColor = Color(0xff979797);
+  static Color buttonColor = Color(0xff7A7E83);
+
+  static Color buttonchangeColor = Color(0xff222831);
+
+  static Color buttontextColor = Color(0xffE5E5E5);
+  static Color buttontextchangeColor = Color(0xffFFFFFF);
+  static Color text3Color = Color(0xff393E46);
 }

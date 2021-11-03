@@ -52,14 +52,18 @@ class OrderController extends GetxController {
   }
 
   RxString otp = "".obs;
+  late TextEditingController feedback;
   void onInit() {
     getCart();
     getorder();
     otpFields = List.generate(4, (index) => FocusNode());
     otpText = List.generate(4, (index) => TextEditingController());
+    feedback = TextEditingController();
     super.onInit();
   }
-
+void clearController(){
+   feedback.clear();
+}
   List<String> months() => [
         "January",
         "February",
