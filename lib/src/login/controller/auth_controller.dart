@@ -49,6 +49,12 @@ class AuthController extends GetxController {
     return await sfHelper.getLoggedIn();
   }
 
+  Future<void> setAddress(double lat, double long, String add) async {
+    await sfHelper.setLat(lat);
+    await sfHelper.setLon(long);
+    await sfHelper.setAddress(add);
+  }
+
   @override
   void onInit() {
     sfHelper.getLoggedIn();

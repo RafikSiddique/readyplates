@@ -25,7 +25,9 @@ class LandingPage extends StatelessWidget {
           isHome: true,
         );
       case 2:
-        return OrderPage();
+        return OrderPage(() {
+          controller.onPageChange(0);
+        });
       case 3:
         return Tellafriend();
       case 4:

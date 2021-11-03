@@ -72,11 +72,26 @@ class ShopScreen extends StatelessWidget {
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                ),
-                child: Container(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                  ),
+                  child: TextField(
+                    onChanged: (value) {
+                      controller.search(value);
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: MyTheme.hinttextColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.search),
+                        hintText: "Search"),
+                  ) /* Container(
                   height: 47,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -95,13 +110,12 @@ class ShopScreen extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      IconButton(
-                          iconSize: 16,
-                          icon: FaIcon(
+                      
+                           FaIcon(
                             FontAwesomeIcons.search,
                             color: Colors.black,
                           ),
-                          onPressed: () {}),
+                          ,
                       Text('Search',
                           style: GoogleFonts.inter(
                             fontSize: 15.0,
@@ -111,8 +125,8 @@ class ShopScreen extends StatelessWidget {
                           )),
                     ],
                   ),
-                ),
-              ),
+                ), */
+                  ),
               SizedBox(
                 height: 5,
               ),
@@ -121,29 +135,23 @@ class ShopScreen extends StatelessWidget {
                   left: 16,
                   right: 17,
                 ),
-                child: Container(
-                  width: 342,
-                  height: 14,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 11,
-                        height: 11,
-                        child: Image.asset('assets/images/location1.png'),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text('32nd Street, Long Beach, San Francisco',
-                          style: GoogleFonts.inter(
-                            fontSize: 10,
-                            // fontFamily: "Inter",
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                            color: MyTheme.appbartextColor,
-                          )),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.gps_fixed,
+                      size: 15,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(controller.address.value,
+                        style: GoogleFonts.inter(
+                          fontSize: 10,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          color: MyTheme.appbartextColor,
+                        )),
+                  ],
                 ),
               ),
 
@@ -154,6 +162,7 @@ class ShopScreen extends StatelessWidget {
               Container(
                 //height: MediaQuery.of(context).size.height * 0.2,
                 child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   crossAxisCount: 4,
                   mainAxisSpacing: 0,

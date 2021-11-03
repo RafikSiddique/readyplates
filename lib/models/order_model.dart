@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-enum OrderState { placed, inProgress, completed }
+enum OrderState { placed, inProgress, completed, cancelled }
 
 class OrderModel {
   int user;
@@ -92,8 +92,8 @@ class OrderModelApi {
   String tax;
   OrderState status;
   int pin;
-  int user;
-  int restaurant;
+  UserFromApi user;
+  OrderApiRestaurant restaurant;
   OrderModelApi({
     required this.id,
     required this.orderitems,
@@ -124,8 +124,8 @@ class OrderModelApi {
       tax: map['tax'],
       status: OrderState.values[map["status"]],
       pin: map['pin'],
-      user: map['user'],
-      restaurant: map['restaurant'],
+      user: UserFromApi.fromMap(map['user']),
+      restaurant: OrderApiRestaurant.fromMap(map['restaurant']),
     );
   }
 
@@ -318,4 +318,111 @@ class MenuFromApi {
 
   @override
   int get hashCode => id.hashCode ^ name.hashCode;
+}
+
+class OrderApiRestaurant {
+  String res_name;
+  int id;
+  OrderApiRestaurant({
+    required this.res_name,
+    required this.id,
+  });
+
+  OrderApiRestaurant copyWith({
+    String? res_name,
+    int? id,
+  }) {
+    return OrderApiRestaurant(
+      res_name: res_name ?? this.res_name,
+      id: id ?? this.id,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'res_name': res_name,
+      'id': id,
+    };
+  }
+
+  factory OrderApiRestaurant.fromMap(Map<String, dynamic> map) {
+    return OrderApiRestaurant(
+      res_name: map['res_name'],
+      id: map['id'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory OrderApiRestaurant.fromJson(String source) =>
+      OrderApiRestaurant.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'OrderApiRestaurant(res_name: $res_name, id: $id)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is OrderApiRestaurant &&
+        other.res_name == res_name &&
+        other.id == id;
+  }
+
+  @override
+  int get hashCode => res_name.hashCode ^ id.hashCode;
+}
+
+class UserFromApi {
+  String first_name;
+  String last_name;
+  UserFromApi({
+    required this.first_name,
+    required this.last_name,
+  });
+
+  UserFromApi copyWith({
+    String? first_name,
+    String? last_name,
+  }) {
+    return UserFromApi(
+      first_name: first_name ?? this.first_name,
+      last_name: last_name ?? this.last_name,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'first_name': first_name,
+      'last_name': last_name,
+    };
+  }
+
+  factory UserFromApi.fromMap(Map<String, dynamic> map) {
+    return UserFromApi(
+      first_name: map['first_name'],
+      last_name: map['last_name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserFromApi.fromJson(String source) =>
+      UserFromApi.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'UserFromApi(first_name: $first_name, last_name: $last_name)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is UserFromApi &&
+        other.first_name == first_name &&
+        other.last_name == last_name;
+  }
+
+  @override
+  int get hashCode => first_name.hashCode ^ last_name.hashCode;
 }

@@ -5,6 +5,9 @@ class SharedPreferenceHelper {
   final String _token = "token";
   final String _isLoggedIn = "loggedin";
   final String _userId = "userId";
+  final String _address = "address";
+  final String _latitude = "lat";
+  final String _longitude = "lon";
 
   Future<bool> setUserToken(String token) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -53,4 +56,53 @@ class SharedPreferenceHelper {
       return success;
     }
   }
+
+  Future<bool> setAddress(String address) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    bool success = await sharedPreferences.setString(_address, address);
+    return success;
+  }
+
+  Future<String> getAddress() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? add = sharedPreferences.getString(_address);
+    if (add != null) {
+      return add;
+    } else {
+      return "";
+    }
+  }
+
+    Future<bool> setLat(double lat) async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      bool success = await preferences.setDouble(_latitude, lat);
+      return success;
+    }
+
+    Future<double> getLat() async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      double? data = preferences.getDouble(_latitude);
+      if (data != null)
+        return data;
+      else {
+        throw AppException(code: 0, message: "Unknown Coords");
+      }
+    }
+
+    Future<bool> setLon(double lon) async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      bool success = await preferences.setDouble(_longitude, lon);
+      return success;
+    }
+
+    Future<double> getLon() async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      double? data = preferences.getDouble(_longitude);
+      if (data != null)
+        return data;
+      else {
+        throw AppException(code: 0, message: "Unknown Coords");
+      }
+    }
+  
 }

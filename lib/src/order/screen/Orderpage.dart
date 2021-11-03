@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/src/order/screen/order_option2.dart';
@@ -12,6 +14,7 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
+import 'package:readyplates/widgets/order_widget.dart';
 
 class PopUpMenuWidget extends StatelessWidget {
   final Function() onTap;
@@ -55,12 +58,13 @@ class PopUpMenuWidget extends StatelessWidget {
 }
 
 class OrderPage extends GetView<OrderController> {
-  static const id = "/orderPage";
-  OrderPage({Key? key}) : super(key: key);
+  final Function() goToShopping;
+  OrderPage(this.goToShopping, {Key? key}) : super(key: key);
 
   void showTextMenu({
     required TapDownDetails details,
     required BuildContext context,
+    required int orderId,
   }) {
     final RenderBox overlay = context.findRenderObject() as RenderBox;
 
@@ -87,7 +91,7 @@ class OrderPage extends GetView<OrderController> {
               onTap: null,
               child: PopUpMenuWidget(
                 onTap: () {
-                  //Get.to(() => BurgersupportingPage());
+                  //Get.to(() => BurgersupportingPage(restaurantModel: re));
                   // Get.to(() => OrderOption());
                 },
                 text: "Edit Order",
@@ -102,7 +106,8 @@ class OrderPage extends GetView<OrderController> {
               padding: EdgeInsets.zero,
               onTap: null,
               child: PopUpMenuWidget(
-                onTap: () {
+                onTap: () async {
+                  await controller.updateStatus(orderId, 3);
                   Get.to(() => OrderCancelledPage());
                 },
                 path: Assets.checkCircle,
@@ -143,303 +148,128 @@ class OrderPage extends GetView<OrderController> {
             leading: Container(),
             automaticallyImplyLeading: false,
           ),
-          body: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Obx(() => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          body: controller.orderItems.length == 0
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("ACTIVE",
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.normal,
-                                color: MyTheme.dividermiddletext),
-                          )),
-                      ListView(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        children: controller.orderItems
-                            .where((p0) => p0.status == OrderState.placed)
-                            .map(
-                              (element) => Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                ),
-                                margin: EdgeInsets.symmetric(vertical: 5),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 5),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 13),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(width: 10),
-                                            Text("Order #${element.id}",
-                                                style: GoogleFonts.inter(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      color: MyTheme
-                                                          .dividermiddletext),
-                                                )),
-                                            GestureDetector(
-                                                onTapDown: (details) {
-                                                  showTextMenu(
-                                                      details: details,
-                                                      context: context);
-                                                },
-                                                child: Icon(Icons.more_horiz)),
-                                          ]),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    ListView(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      children: element.orderitems
-                                          .map(
-                                            (e) => Row(
-                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text("${e.quantity} x",
-                                                    style: GoogleFonts.inter(
-                                                      textStyle: TextStyle(
-                                                          fontSize: 17,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          color: MyTheme
-                                                              .buttonbackgroundColor),
-                                                    )),
-                                                SizedBox(
-                                                  width: 9,
-                                                ),
-                                                Text(e.menu.name,
-                                                    style: GoogleFonts.inter(
-                                                      textStyle: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          color: MyTheme
-                                                              .dividermiddletext),
-                                                    )),
-                                                Spacer(),
-                                                Text("\$${e.price}",
-                                                    style: GoogleFonts.nunito(
-                                                      textStyle: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          color: MyTheme
-                                                              .dividermiddletext),
-                                                    ))
-                                              ],
-                                            ),
-                                          )
-                                          .toList(),
-                                    ),
-
-                                    // Container(
-                                    //   height: 180,
-                                    //   width: 180,
-
-                                    //   // child: Image(
-                                    //   //   image: AssetImage(Assets.qrCode),
-                                    //   // ),
-                                    // ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Table Reservation",
-                                            style: GoogleFonts.inter(
-                                              textStyle: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle: FontStyle.normal,
-                                                  // color: Color(0xff222831),
-                                                  color: MyTheme
-                                                      .buttonbackgroundColor),
-                                            )),
-                                        Text("10:00 AM", //TODO: No of Tables
-                                            style: GoogleFonts.nunito(
-                                              textStyle: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle: FontStyle.normal,
-                                                  color: MyTheme
-                                                      .buttonbackgroundColor),
-                                            ))
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(element.restaurant.toString(),
-                                            style: GoogleFonts.nunito(
-                                              textStyle: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontStyle: FontStyle.normal,
-                                                  color: MyTheme
-                                                      .buttonbackgroundColor),
-                                            )),
-                                        Text(
-                                            element.date +
-                                                element.time +
-                                                "25th Sep",
-                                            style: GoogleFonts.nunito(
-                                              textStyle: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontStyle: FontStyle.normal,
-                                                  color: MyTheme
-                                                      .buttonbackgroundColor),
-                                            ))
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 14,
-                                    ),
-                                    Container(
-                                      width: 285,
-                                      child: Text(
-                                        "Report at the restaurant and share PIN to initiate order",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.inter(
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 17,
-                                            color: MyTheme.borderchangeColor),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 14,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        for (var i = 0;
-                                            i < controller.otpFields.length;
-                                            i++)
-                                          Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                  border: Border.all(
-                                                    color: Color(0xff00ADB5),
-                                                  )),
-                                              width: 40,
-                                              height: 50,
-                                              alignment: Alignment.center,
-                                              margin: EdgeInsets.all(8),
-                                              child: Text(
-                                                element.pin.toString()[i],
-                                                style: GoogleFonts.montserrat(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ))
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                            .toList(),
+                      Icon(
+                        Icons.shopping_cart_outlined,
+                        size: MediaQuery.of(context).size.width * 0.2,
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
-                      if (controller.anyPrevious())
-                        Text(
-                          "PREVIOUS COMPLETED ORDERS ",
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.normal,
-                                color: MyTheme.dividermiddletext),
-                          ),
+                      Text(
+                        "No Orders at the moment",
+                        style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 20,
                         ),
-                      SizedBox(
-                        height: 10,
                       ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          children: controller.orderItems
-                              .where((p0) => p0.status != OrderState.placed)
-                              .map(
-                                (e) => Container(
-                                  margin: EdgeInsets.symmetric(vertical: 5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 10),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 13),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              // Container(width: 0),
-                                              Spacer(),
-                                              Text("Order #${e.id}",
-                                                  style: GoogleFonts.inter(
-                                                    textStyle: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        color: MyTheme
-                                                            .dividermiddletext),
-                                                  )),
-                                              Spacer(),
-                                              Icon(Icons.more_horiz)
-                                            ]),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      ListView(
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Elevated(
+                          width: MediaQuery.of(context).size.width,
+                          text: "Order Now",
+                          onTap: () {
+                            goToShopping();
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Obx(
+                      () => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (controller.orderItems.any(
+                              (element) => element.status == OrderState.placed))
+                            Text("ACTIVE",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FontStyle.normal,
+                                      color: MyTheme.dividermiddletext),
+                                )),
+                          ListView(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            children: controller.orderItems
+                                .where((p0) => p0.status == OrderState.placed)
+                                .map((element) => OrderWidget(
+                                          e: element,
+                                          showMenu: (details) {
+                                            showTextMenu(
+                                                details: details,
+                                                context: context,
+                                                orderId: element.id);
+                                          },
+                                        ) /* Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                    ),
+                                    margin: EdgeInsets.symmetric(vertical: 5),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 5),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 13),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(width: 10),
+                                                Text("Order #${element.id}",
+                                                    style: GoogleFonts.inter(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          color: MyTheme
+                                                              .dividermiddletext),
+                                                    )),
+                                                GestureDetector(
+                                                    onTapDown: (details) {
+                                                      showTextMenu(
+                                                        details: details,
+                                                        context: context,
+                                                        orderId: element.id,
+                                                      );
+                                                    },
+                                                    child:
+                                                        Icon(Icons.more_horiz)),
+                                              ]),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        ListView(
                                           shrinkWrap: true,
                                           physics:
                                               NeverScrollableScrollPhysics(),
-                                          children: e.orderitems
+                                          children: element.orderitems
                                               .map(
                                                 (e) => Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    Text("${e.quantity}x",
+                                                    Text("${e.quantity} x",
                                                         style:
                                                             GoogleFonts.inter(
                                                           textStyle: TextStyle(
@@ -488,78 +318,217 @@ class OrderPage extends GetView<OrderController> {
                                                   ],
                                                 ),
                                               )
-                                              .toList()),
-                                      SizedBox(
-                                        height: 9,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Table Reservation",
-                                              style: GoogleFonts.inter(
-                                                textStyle: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle: FontStyle.normal,
-                                                    // color: Color(0xff222831),
-                                                    color: MyTheme
-                                                        .buttonbackgroundColor),
-                                              )),
-                                          Text("10:00 AM",
-                                              style: GoogleFonts.nunito(
-                                                textStyle: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle: FontStyle.normal,
-                                                    color: MyTheme
-                                                        .buttonbackgroundColor),
-                                              ))
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Sloppy Joe, Kondhwa",
-                                              style: GoogleFonts.nunito(
-                                                textStyle: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontStyle: FontStyle.normal,
-                                                    color: MyTheme
-                                                        .buttonbackgroundColor),
-                                              )),
-                                          Text("25th Sep",
-                                              style: GoogleFonts.nunito(
-                                                textStyle: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontStyle: FontStyle.normal,
-                                                    color: MyTheme
-                                                        .buttonbackgroundColor),
-                                              ))
-                                        ],
-                                      ),
-                                      SizedBox(height: 16),
-                                      Elevated(
-                                        text: " Order Again",
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        onTap: () {
-                                          Get.to(() => OrderOption2());
+                                              .toList(),
+                                        ),
+
+                                        // Container(
+                                        //   height: 180,
+                                        //   width: 180,
+
+                                        //   // child: Image(
+                                        //   //   image: AssetImage(Assets.qrCode),
+                                        //   // ),
+                                        // ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Table Reservation",
+                                                style: GoogleFonts.inter(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      // color: Color(0xff222831),
+                                                      color: MyTheme
+                                                          .buttonbackgroundColor),
+                                                )),
+                                            Text(element.no_of_table.toString(),
+                                                style: GoogleFonts.nunito(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color: MyTheme
+                                                          .buttonbackgroundColor),
+                                                ))
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(element.restaurant.res_name,
+                                                style: GoogleFonts.nunito(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color: MyTheme
+                                                          .buttonbackgroundColor),
+                                                )),
+                                            Text(
+                                                controller.weekDays[
+                                                        controller.selectedDate
+                                                                .value.weekday -
+                                                            1] +
+                                                    ", " +
+                                                    controller
+                                                        .selectedDate.value.day
+                                                        .toString() +
+                                                    " " +
+                                                    controller.months()[
+                                                        controller.selectedDate
+                                                                .value.month -
+                                                            1] +
+                                                    " " +
+                                                    DateFormat("hh:mm a")
+                                                        .format(controller
+                                                            .selectedDate
+                                                            .value),
+                                                style: GoogleFonts.nunito(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      color: MyTheme
+                                                          .buttonbackgroundColor),
+                                                ))
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 14,
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            "Report at the restaurant and share PIN to initiate order",
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.inter(
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 17,
+                                                color:
+                                                    MyTheme.borderchangeColor),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 14,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            for (var i = 0;
+                                                i < controller.otpFields.length;
+                                                i++)
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                      border: Border.all(
+                                                        color:
+                                                            Color(0xff00ADB5),
+                                                      )),
+                                                  width: 40,
+                                                  height: 50,
+                                                  alignment: Alignment.center,
+                                                  margin: EdgeInsets.all(8),
+                                                  child: Text(
+                                                    element.pin.toString()[i],
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                  ))
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ), */
+                                    )
+                                .toList(),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          if (controller.anyInprogress())
+                            Text(
+                              "In progress".toUpperCase(),
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    color: MyTheme.dividermiddletext),
+                              ),
+                            ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ListView(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              children: controller.orderItems
+                                  .where((p0) =>
+                                      p0.status == OrderState.inProgress)
+                                  .map((e) => OrderWidget(
+                                        e: e,
+                                        showMenu: (p0) {
+                                          showTextMenu(
+                                              details: p0,
+                                              context: context,
+                                              orderId: e.id);
                                         },
-                                      ),
-                                      SizedBox(height: 0),
-                                    ],
-                                  ),
-                                ),
-                              )
-                              .toList()),
-                    ],
-                  )),
-            ),
-          ),
+                                      ))
+                                  .toList()),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          if (controller.anyPrevious())
+                            Text(
+                              "PREVIOUS COMPLETED ORDERS ",
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    color: MyTheme.dividermiddletext),
+                              ),
+                            ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ListView(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              children: controller.orderItems
+                                  .where((p0) =>
+                                      p0.status != OrderState.placed &&
+                                      p0.status != OrderState.inProgress)
+                                  .map((e) => OrderWidget(
+                                        e: e,
+                                        showMenu: (p0) {},
+                                      ))
+                                  .toList()),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
         );
       },
     );

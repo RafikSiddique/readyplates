@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -230,45 +231,28 @@ class RestaurantDetails extends StatelessWidget {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children: [
-                                Container(
-                                  height: 78,
-                                  // width: 94,
-                                  child: Image(
-                                    image: AssetImage(
-                                      Assets.gallery[0],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 6,
-                                ),
-                                Container(
-                                  height: 78,
-                                  // width: 94,
-                                  child: Image(
-                                      image: AssetImage(Assets.gallery[1])),
-                                ),
-                                SizedBox(
-                                  width: 6,
-                                ),
-                                Container(
-                                  height: 78,
-                                  // width: 94,
-                                  child: Image(
-                                      image: AssetImage(Assets.gallery[2])),
-                                ),
-                                SizedBox(
-                                  width: 6,
-                                ),
-                                Container(
-                                  height: 78,
-                                  // width: 94,
-                                  child: Image(
-                                      image: AssetImage(Assets.gallery[1])),
-                                )
-                              ],
-                            ),
+                                children: Assets.gallery
+                                    .map((e) => GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                CupertinoPageRoute(
+                                                    builder: (c) =>
+                                                        FullImage(path: e)));
+                                          },
+                                          child: Hero(
+                                            tag: e,
+                                            child: Material(
+                                              type: MaterialType.transparency,
+                                              child: Container(
+                                                margin: EdgeInsets.all(4),
+                                                height: 70,
+                                                child: Image.asset(e),
+                                              ),
+                                            ),
+                                          ),
+                                        ))
+                                    .toList()),
                           ),
                           SizedBox(
                             height: 24,
@@ -393,7 +377,7 @@ class RestaurantDetails extends StatelessWidget {
                             backgroundColor: Colors.white,
                             borderColor: MyTheme.buttonbackgroundColor,
                             onTap: () {
-                              Get.toNamed(BurgersupportingPage.id);
+                              Get.back();
                             },
                           ),
                           SizedBox(
@@ -417,11 +401,32 @@ class RestaurantDetails extends StatelessWidget {
       ],
     ));
   }
+}
+
+class FullImage extends StatelessWidget {
+  final String path;
+  const FullImage({Key? key, required this.path}) : super(key: key);
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<RestaurantModel>(
-        'restaurantModel', restaurantModel));
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Hero(
+        tag: path,
+        child: Material(
+          type: MaterialType.transparency,
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            alignment: Alignment.center,
+            child: Image.asset(
+              path,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
