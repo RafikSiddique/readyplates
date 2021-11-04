@@ -13,7 +13,33 @@ class HomeController extends GetxController {
   double lon = 0;
   RxString address = "".obs;
   RxList<RestaurantModel> restaurants = <RestaurantModel>[
-    RestaurantModel(id: -1, resName: "", address: null, bio: [])
+    RestaurantModel(
+        id: -1,
+        resName: "",
+        address: "",
+        bio: [],
+        completed_till: 0,
+        end_time: "",
+        fssai_expiry: "",
+        fssai_image: "",
+        fssai_status: "",
+        gstin_num: "",
+        gstin_image: "",
+        gstin_present: "",
+        kyc_image: "",
+        latitude: "",
+        longitude: "",
+        open_days: "",
+        own_mobile: "",
+        own_name: "",
+        poc: "",
+        poc_number: "",
+        postal_code: "",
+        res_city: "",
+        start_time: "",
+        type_of_estd: "",
+        types_of_cusine: "",
+        user: 0)
   ].obs;
 
   RxInt currentIndex = 0.obs;
@@ -58,15 +84,16 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getAddress();
-    getRestaurants();
+
     Get.put(OrderController());
+    getRestaurants();
     super.onInit();
   }
 
-  void getAddress() {
-    sfHelper.getAddress().then((value) => address.value = value);
-    sfHelper.getLat().then((value) => lat = value);
-    sfHelper.getLon().then((value) => lon = value);
+  void getAddress() async {
+    address.value = await sfHelper.getAddress();
+    lat = await sfHelper.getLat();
+    lon = await sfHelper.getLon();
   }
 
   void search(String q) async {
@@ -100,15 +127,19 @@ class HomeController extends GetxController {
   Future<void> getRestaurants() async {
     try {
       if (lat != 0 && lon != 0) {
-        homeService.getRestaurantWithSort(lat, lon);
+        restaurants.value = await homeService.getRestaurantWithSort(lat, lon);
+      } else {
+        restaurants.value = await homeService.getResDetail();
       }
-      restaurants.value = await homeService.getResDetail();
     } catch (e) {
+      restaurants.value = await homeService.getResDetail();
       restaurants.value = restaurants.isEmpty
           ? []
           : restaurants.first.id == -1
               ? []
               : restaurants;
+
+      Get.snackbar("", e.toString());
     }
   }
 

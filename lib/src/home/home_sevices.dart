@@ -13,8 +13,10 @@ class HomeServices extends ApiService {
       print(response.body);
       if (response.statusCode == 200) {
         List<dynamic> getList = jsonDecode(response.body);
-        List<RestaurantModel> resDetail =
-            getList.map((value) => RestaurantModel.fromMap(value)).toList();
+        List<RestaurantModel> resDetail = getList
+            .map((value) => RestaurantModel.fromMap(value))
+            .where((e) => e.bio.isNotEmpty)
+            .toList();
         print(resDetail);
         return resDetail;
       } else {
@@ -27,19 +29,22 @@ class HomeServices extends ApiService {
     }
   }
 
-  Future<List<dynamic>> getRestaurantWithSort(double lat, double lon) async {
+  Future<List<RestaurantModel>> getRestaurantWithSort(
+      double lat, double lon) async {
     try {
       Response response = await post(restList,
+          headers: contentTypeJsonHeader,
           body: jsonEncode({'latitude': lat, 'longitude': lon}));
-
       print(response.body);
       if (response.statusCode == 200) {
         List<dynamic> getList = jsonDecode(response.body);
-        /*    List<RestaurantModel> resDetail =
-            getList.map((value) => RestaurantModel.fromMap(value)).toList(); */
+        List<RestaurantModel> resDetail = getList
+            .map((value) => RestaurantModel.fromMap(value))
+            .where((e) => e.bio.isNotEmpty)
+            .toList();
         //   print(resDetail);
         print(getList);
-        return getList;
+        return resDetail;
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);

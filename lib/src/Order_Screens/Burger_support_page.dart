@@ -36,8 +36,6 @@ class BurgersupportingPage extends GetView<OrderController> {
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             fontSize: 17,
-            letterSpacing: -0.226667,
-            //color: Color(0xff393E46),
             color: MyTheme.appbartextColor,
           ),
         ),
@@ -67,6 +65,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                   SizedBox(
                     height: 11,
                   ),
+<<<<<<< HEAD
                   Padding(
                     padding: const EdgeInsets.only(left: 8, right: 9),
                     child: Row(
@@ -87,6 +86,25 @@ class BurgersupportingPage extends GetView<OrderController> {
                         ),
                       ],
                     ),
+=======
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("TOTAL :",
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            color: MyTheme.appbartextColor,
+                          )),
+                      Obx(() => TextwidgetPage(
+                            text: "\$ " + controller.total.value.toString(),
+                            color: MyTheme.appbartextColor,
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ],
+>>>>>>> 78f3a9a67d7d3cfd0118b1ab4ea70df19855f421
                   ),
                   SizedBox(
                     height: 7,
@@ -127,6 +145,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                   SizedBox(
                     height: 7,
                   ),
+<<<<<<< HEAD
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Row(
@@ -148,6 +167,26 @@ class BurgersupportingPage extends GetView<OrderController> {
                         ),
                       ],
                     ),
+=======
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 78,
+                      ),
+                      TextwidgetPage(
+                        text: "IGST",
+                        color: MyTheme.dividermiddletext,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      Spacer(),
+                      TextwidgetPage(
+                        text: "\$ 0.5",
+                        color: MyTheme.appbartextColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ],
+>>>>>>> 78f3a9a67d7d3cfd0118b1ab4ea70df19855f421
                   ),
                   SizedBox(
                     height: 10,
@@ -173,7 +212,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                         child: Text(
                             restaurantModel.resName +
                                 ", " +
-                                (restaurantModel.address ?? ""),
+                                (restaurantModel.address),
                             style: TextStyle(
                               overflow: TextOverflow.ellipsis,
                               fontFamily: "Inter",
