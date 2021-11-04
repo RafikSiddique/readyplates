@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/bio.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
@@ -224,12 +227,16 @@ class RestaurantDetails extends StatelessWidget {
                                 image: AssetImage(Assets.spoon),
                               ),
                             ),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Text(
                               restaurantModel.bio.first.servingTime == ""
                                   ? "Undefined Serving time"
-                                  : restaurantModel.bio.first.servingTime,
+                                  : restaurantModel.bio.first.servingTime +
+                                      " Minutes",
                               style: GoogleFonts.inter(
-                                  fontSize: 13,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
                                   color: MyTheme.dividermiddletext),
@@ -238,13 +245,79 @@ class RestaurantDetails extends StatelessWidget {
                           SizedBox(
                             height: 24,
                           ),
-                          Text(
-                            "Gallery",
-                            style: GoogleFonts.inter(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                color: MyTheme.dividermiddletext),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Gallery",
+                                style: GoogleFonts.inter(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    color: MyTheme.dividermiddletext),
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      isDismissible: true,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(10))),
+                                      context: context,
+                                      builder: (context) {
+                                        return Card(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                      top:
+                                                          Radius.circular(10))),
+                                          child: GridView.count(
+                                              physics: BouncingScrollPhysics(),
+                                              crossAxisCount: 3,
+                                              crossAxisSpacing: 5,
+                                              children: [
+                                                for (var i = 0;
+                                                    i < images.length;
+                                                    i++)
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.pushNamed(
+                                                          context, FullImage.id,
+                                                          arguments: [
+                                                            images[i],
+                                                            i + 99
+                                                          ]);
+                                                    },
+                                                    child: Hero(
+                                                      tag: i + 99,
+                                                      child: Material(
+                                                        type: MaterialType
+                                                            .transparency,
+                                                        child: SizedBox.square(
+                                                          dimension:
+                                                              media.size.width *
+                                                                  0.25,
+                                                          child: Image.network(
+                                                            images[i],
+                                                            errorBuilder:
+                                                                (context, error,
+                                                                    stackTrace) {
+                                                              return Image
+                                                                  .asset(Assets
+                                                                      .categoryBurger);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                              ]),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Text("View All"))
+                            ],
                           ),
                           SizedBox(
                             height: 9,
@@ -425,6 +498,7 @@ class RestaurantDetails extends StatelessWidget {
 }
 
 class FullImage extends StatelessWidget {
+  static const id = "/full";
   final String path;
   final int heroTag;
   const FullImage({Key? key, required this.path, required this.heroTag})

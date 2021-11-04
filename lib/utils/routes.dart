@@ -17,6 +17,9 @@ class Routes {
         builder: (context) => WillNotPopOnGesture(
               child: () {
                 switch (settings.name) {
+                  case FullImage.id:
+                    List<dynamic> args = settings.arguments as List;
+                    return FullImage(path: args[0], heroTag: args[1]);
                   case OnbordingPage.id:
                     return OnbordingPage();
                   case LoginPage.id:
