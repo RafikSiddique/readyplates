@@ -14,8 +14,6 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
-import 'package:readyplates/widgets/back_gesture_diable.dart';
-// import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class RestaurantDetails extends StatelessWidget {
@@ -47,6 +45,7 @@ class RestaurantDetails extends StatelessWidget {
       bio.cv19prec3,
       bio.cv19prec4
     ];
+    
     return Scaffold(
         body: Stack(
       children: [

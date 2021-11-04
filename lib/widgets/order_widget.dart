@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -68,12 +69,26 @@ class OrderWidget extends StatelessWidget {
         );
       case OrderState.completed:
       case OrderState.cancelled:
-        return Elevated(
-          width: Get.width,
-          text: " Order Again",
-          onTap: () {
-            //   Get.to(() => OrderOption2());
-          },
+        return Column(
+          children: [
+            Elevated(
+              width: Get.width,
+              text: "Order Again",
+              onTap: () {
+                //   Get.to(() => OrderOption2());
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Elevated(
+              width: Get.width,
+              text: "Give Feedback",
+              onTap: () {
+                Get.toNamed(FeedbackPage.id);
+              },
+            ),
+          ],
         );
       default:
         return Elevated(

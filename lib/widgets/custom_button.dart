@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:readyplates_restaurants/utils/my_color.dart';
 
@@ -65,4 +65,4 @@ class CustomButton extends StatelessWidget {
       ),
     );
   }
-}
+} */

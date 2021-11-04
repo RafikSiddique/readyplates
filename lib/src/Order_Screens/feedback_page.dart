@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/custom_button.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/text_widget.dart';
@@ -387,15 +388,19 @@ class _FeedbackPageState extends State<FeedbackPage> {
               SizedBox(
                 height: 16,
               ),
-              CustomButton(
-                onTap: () {},
-                buttonbackgroundColor: (ratingText == '' ||
+              Elevated(
+                width: Get.width,
+                onTap: () {
+                  //TODO API Call
+                  Get.back();
+                },
+                backgroundColor: (ratingText == '' ||
                         controller.feedback.text.isEmpty ||
-                        image!.path.isEmpty)
+                        (image?.path != null && image?.path != ""))
                     ? MyTheme.buttonColor
                     : MyTheme.buttonchangeColor,
                 text: 'Post Feedback',
-                buttontextColor: controller.feedback.text.isEmpty
+                borderColor: controller.feedback.text.isEmpty
                     ? MyTheme.buttontextColor
                     : MyTheme.buttontextchangeColor,
                 fontWeight: FontWeight.bold,

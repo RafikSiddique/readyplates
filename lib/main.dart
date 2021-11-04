@@ -13,7 +13,6 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(SharedPreferenceHelper());
   Get.put(AuthController());
-  Get.put(OrderController());
   runApp(MyApp());
 }
 
@@ -34,8 +33,7 @@ class MyApp extends StatelessWidget {
         dividerColor: MyTheme.orderbordercolor,
       ),
       debugShowCheckedModeBanner: false,
-      // home: OnbordingPage(),
-      initialRoute: FeedbackPage.id,
+      home: OnbordingPage(),
       onGenerateRoute: Routes.onGenerateRoute,
     );
   }
