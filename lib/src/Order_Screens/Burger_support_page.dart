@@ -65,28 +65,9 @@ class BurgersupportingPage extends GetView<OrderController> {
                   SizedBox(
                     height: 11,
                   ),
-<<<<<<< HEAD
                   Padding(
                     padding: const EdgeInsets.only(left: 8, right: 9),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("TOTAL :",
-                            style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: MyTheme.appbartextColor,
-                            )),
-                        TextwidgetPage(
-                          text: "\$ " + controller.calclateTotal().toString(),
-                          color: MyTheme.appbartextColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ],
-                    ),
-=======
+                    child: 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -103,12 +84,8 @@ class BurgersupportingPage extends GetView<OrderController> {
                             color: MyTheme.appbartextColor,
                             fontWeight: FontWeight.w500,
                           )),
-                    ],
->>>>>>> 78f3a9a67d7d3cfd0118b1ab4ea70df19855f421
-                  ),
-                  SizedBox(
-                    height: 7,
-                  ),
+                    ],)),
+
                   SizedBox(
                     height: 7,
                   ),
@@ -145,29 +122,6 @@ class BurgersupportingPage extends GetView<OrderController> {
                   SizedBox(
                     height: 7,
                   ),
-<<<<<<< HEAD
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 85,
-                        ),
-                        TextwidgetPage(
-                          text: "IGST",
-                          color: MyTheme.devidercolor,
-                          fontWeight: FontWeight.normal,
-                        ),
-                        Spacer(),
-                        TextwidgetPage(
-                          text: "\$ 0.5",
-                          color: MyTheme.appbartextColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ],
-                    ),
-=======
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -186,7 +140,6 @@ class BurgersupportingPage extends GetView<OrderController> {
                         fontWeight: FontWeight.w500,
                       ),
                     ],
->>>>>>> 78f3a9a67d7d3cfd0118b1ab4ea70df19855f421
                   ),
                   SizedBox(
                     height: 10,
