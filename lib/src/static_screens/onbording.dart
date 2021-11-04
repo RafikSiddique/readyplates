@@ -210,6 +210,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
     try {
       SharedPreferenceHelper sfHelper = SharedPreferenceHelper();
       bool isLoggedIn = await sfHelper.getLoggedIn();
+      print(isLoggedIn);
       if (!isLoggedIn) {
         await Future.delayed(Duration(milliseconds: 1000));
         controller.animateToPage(1,

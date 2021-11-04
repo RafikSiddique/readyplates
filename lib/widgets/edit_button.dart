@@ -150,7 +150,16 @@ class IncDecButton extends StatelessWidget {
 class EditButton extends StatelessWidget {
   final double widthFraction;
   final void Function() onTap;
-  const EditButton({Key? key, required this.onTap, this.widthFraction = 0.2})
+  final Color? color;
+  final String? text;
+  final IconData? icon;
+  const EditButton(
+      {Key? key,
+      required this.onTap,
+      this.widthFraction = 0.2,
+      this.text,
+      this.icon,
+      this.color})
       : super(key: key);
 
   @override
@@ -174,14 +183,23 @@ class EditButton extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(Assets.edit,
-                    height: 16, width: 16, color: MyTheme.bottomtextColor),
-                Text('EDIT',
+                if (icon == null)
+                  Image.asset(Assets.edit,
+                      height: 16,
+                      width: 16,
+                      color: color ?? MyTheme.bottomtextColor)
+                else
+                  Icon(
+                    icon,
+                    color: color ?? MyTheme.bottomtextColor,
+                    size: 14,
+                  ),
+                Text(text?.toUpperCase() ?? 'EDIT',
                     style: GoogleFonts.inter(
                         fontSize: 12,
                         // fontFamily: 'Inter',
                         //color: Color(0xffFF6E42),
-                        color: MyTheme.bottomtextColor))
+                        color: color ?? MyTheme.bottomtextColor))
               ],
             ),
           ),

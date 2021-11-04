@@ -10,6 +10,7 @@ import 'package:readyplates/src/home/screens/landing_page.dart';
 // import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/src/login/services/auth_service.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 
 class AuthController extends GetxController {
@@ -91,7 +92,7 @@ class AuthController extends GetxController {
       } else {
         Get.put(HomeController());
         Get.put(OrderController());
-        Get.toNamed(LandingPage.id);
+        Get.to(MapPage.id);
         sfHelper.setLoggedIn(true);
       }
     } catch (e) {
@@ -136,4 +137,15 @@ class AuthController extends GetxController {
 
   RxString gender = 'Male'.obs;
   final items = ['Male', 'Female'];
+
+  void logout() {
+    sfHelper.setLon(0);
+    sfHelper.setLat(0);
+    sfHelper.setAddress("");
+    sfHelper.setLoggedIn(false);
+    sfHelper.setUserId("");
+    Get.find<OrderController>().dispose();
+    Get.offAllNamed(OnbordingPage.id);
+    Get.find<HomeController>().dispose();
+  }
 }

@@ -15,7 +15,12 @@ import 'package:readyplates/widgets/edit_button.dart';
 class ProfileListTile extends StatelessWidget {
   final String title;
   final void Function() onTap;
-  const ProfileListTile({Key? key, required this.title, required this.onTap})
+  final bool isLogout;
+  const ProfileListTile(
+      {Key? key,
+      required this.title,
+      required this.onTap,
+      this.isLogout = false})
       : super(key: key);
 
   @override
@@ -41,7 +46,11 @@ class ProfileListTile extends StatelessWidget {
                     color: Color(0xff6C757D),
                   )),
             ),
-            EditButton(onTap: onTap)
+            EditButton(
+                onTap: onTap,
+                color: isLogout ? Colors.red : null,
+                text: isLogout ? "Exit" : null,
+                icon: isLogout ? Icons.exit_to_app : null)
           ],
         ),
       ),

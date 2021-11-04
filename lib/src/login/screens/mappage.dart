@@ -259,9 +259,6 @@ class _MapPageState extends State<MapPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
                             Divider(
                               // indent: 16,
                               //// endIndent: 16,
