@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class WillNotPopOnGesture extends StatelessWidget {
-  final Widget child;
+  final Widget Function() child;
   const WillNotPopOnGesture({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      child: child,
+      child: child(),
       onWillPop: () async {
         if (Platform.isAndroid) {
           if (Navigator.of(context).userGestureInProgress) {

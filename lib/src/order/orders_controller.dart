@@ -24,6 +24,8 @@ class OrderController extends GetxController {
   RxInt numberOfPeople = 1.obs;
   RxInt numberOfTable = 1.obs;
 
+  RxDouble total = 0.0.obs;
+
   late List<FocusNode> otpFields;
 
   late List<TextEditingController> otpText;
@@ -36,11 +38,11 @@ class OrderController extends GetxController {
   }
 
   double calclateTotal() {
-    double total = 0;
+    total.value = 0;
     for (var item in cartItems) {
-      total += item.foodQuantity.value * item.foodPrice.value;
+      total.value += item.foodQuantity.value * item.foodPrice.value;
     }
-    return total;
+    return total.value;
   }
 
   bool anyPrevious() {
@@ -61,9 +63,11 @@ class OrderController extends GetxController {
     feedback = TextEditingController();
     super.onInit();
   }
-void clearController(){
-   feedback.clear();
-}
+
+  void clearController() {
+    feedback.clear();
+  }
+
   List<String> months() => [
         "January",
         "February",
@@ -133,6 +137,7 @@ void clearController(){
       cartItems.remove(item);
       await cart(item);
     }
+    calclateTotal();
   }
 
   CartModel getCartItem(int id) {
@@ -144,6 +149,7 @@ void clearController(){
       String id = await sfHelper.getUserId();
       cartModel.user = id;
       await services.addToCartApi(cartModel);
+      calclateTotal();
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -154,12 +160,14 @@ void clearController(){
       String id = await sfHelper.getUserId();
       List<CartModel> cartL =
           cartItems.where((p0) => p0.restaurant != resId).toList();
-      cartL.forEach((element) {
+      cartL.forEach((e) {
+        CartModel element = getCartItem(e.foodItem.value);
         element.user = id;
         element.foodQuantity = 0.obs;
         cart(element);
-        cartItems.remove(getCartItem(element.foodItem.value));
       });
+      cartItems.clear();
+      calclateTotal();
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -190,12 +198,15 @@ void clearController(){
       print(orderModelApi);
       await getorder();
       cartApiItems.clear();
-      cartItems.forEach((element) {
+      cartItems.forEach((e) {
+        CartModel element = getCartItem(e.foodItem.value);
         element.foodQuantity.value = 0;
         element.user = id;
         cart(element);
-        cartItems.remove(getCartItem(element.foodItem.value));
       });
+      cartItems.clear();
+      calclateTotal();
+
       Get.toNamed(Chekoutdone.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());

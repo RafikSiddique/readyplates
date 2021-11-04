@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/models/bio.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/restaurant_detail.dart';
 import 'package:readyplates/utils/assets.dart';
@@ -14,6 +15,38 @@ class RestaurantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
+    Bio bio = restaurantModel.bio.length > 0
+        ? restaurantModel.bio.first
+        : Bio(
+            id: 0,
+            description: "",
+            no_of_tables: "",
+            max_table_size: "",
+            cost_for_two: "",
+            servingTime: "",
+            recurring_event_date: "",
+            recur_freq: "",
+            event_start: "",
+            event_end: "",
+            event_desc: "",
+            front_fascia_day: "",
+            front_fascia_night: "",
+            street_view: "",
+            entrance: "",
+            ambience1: "",
+            ambience2: "",
+            ambience3: "",
+            ambience4: "",
+            food1: "",
+            food2: "",
+            food3: "",
+            food4: "",
+            cv19prec1: "",
+            cv19prec2: "",
+            cv19prec3: "",
+            cv19prec4: "",
+            completed_till: 0,
+            user: 0);
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(
@@ -51,9 +84,9 @@ class RestaurantCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: restaurantModel.bio.first.food1 == ""
+                  child: bio.street_view == ""
                       ? Image.asset(Assets.categoryBurger)
-                      : Image.network(restaurantModel.bio.first.food1),
+                      : Image.network(bio.street_view),
                 ),
                 SizedBox(
                   width: 10,
@@ -74,7 +107,7 @@ class RestaurantCard extends StatelessWidget {
                         height: 6,
                       ),
                       Text(
-                        "Restaurent Description",
+                        bio.description,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
                           fontWeight: FontWeight.w300,
@@ -85,7 +118,7 @@ class RestaurantCard extends StatelessWidget {
                         height: 3,
                       ),
                       Text(
-                        restaurantModel.address ?? "",
+                        restaurantModel.address,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
                           fontWeight: FontWeight.w300,

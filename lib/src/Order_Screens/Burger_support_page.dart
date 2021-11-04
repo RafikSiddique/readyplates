@@ -36,8 +36,6 @@ class BurgersupportingPage extends GetView<OrderController> {
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             fontSize: 17,
-            letterSpacing: -0.226667,
-            //color: Color(0xff393E46),
             color: MyTheme.appbartextColor,
           ),
         ),
@@ -82,11 +80,11 @@ class BurgersupportingPage extends GetView<OrderController> {
                             fontSize: 13,
                             color: MyTheme.appbartextColor,
                           )),
-                      TextwidgetPage(
-                        text: "\$ " + controller.calclateTotal().toString(),
-                        color: MyTheme.appbartextColor,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      Obx(() => TextwidgetPage(
+                            text: "\$ " + controller.total.value.toString(),
+                            color: MyTheme.appbartextColor,
+                            fontWeight: FontWeight.w500,
+                          )),
                     ],
                   ),
                   SizedBox(
@@ -131,13 +129,11 @@ class BurgersupportingPage extends GetView<OrderController> {
                       SizedBox(
                         width: 78,
                       ),
-
                       TextwidgetPage(
                         text: "IGST",
                         color: MyTheme.dividermiddletext,
                         fontWeight: FontWeight.w400,
                       ),
-
                       Spacer(),
                       TextwidgetPage(
                         text: "\$ 0.5",
@@ -170,7 +166,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                         child: Text(
                             restaurantModel.resName +
                                 ", " +
-                                (restaurantModel.address ?? ""),
+                                (restaurantModel.address),
                             style: TextStyle(
                               overflow: TextOverflow.ellipsis,
                               fontFamily: "Inter",

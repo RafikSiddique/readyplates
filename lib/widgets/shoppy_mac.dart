@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class ShooppymacPage extends StatelessWidget {
   final CartModel cartModel;
@@ -22,19 +23,21 @@ class ShooppymacPage extends StatelessWidget {
               height: 64,
               width: 64,
             ),
-            Spacer(),
+            Spacer(
+              flex: 1,
+            ),
             SizedBox(
               width: 10,
             ),
-            Text(cartModel.foodQuantity.string,
+            Obx(() => Text(cartModel.foodQuantity.string + ' x ',
                 style: TextStyle(
                     fontFamily: "Inter",
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.normal,
                     fontSize: 17,
-                    color: Color(0xff222831))),
-            SizedBox(
-              width: 11,
+                    color: Color(0xff222831)))),
+            Spacer(
+              flex: 1,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,55 +63,63 @@ class ShooppymacPage extends StatelessWidget {
                         color: Color(0xff4E535A))),
               ],
             ),
-            Spacer(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              // mainAxisAlignment: MainAxisAlignment.end,
+            Spacer(
+              flex: 2,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        if (cartModel.foodQuantity.value != 1)
-                          controller.decrement(
-                              cartModel.foodItem.value, cartModel.restaurant);
-                      },
-                      child: Text("-",
-                          style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.normal,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 20,
-                              color: Color(0xff393E46))),
+                InkWell(
+                  onTap: () {
+                    if (cartModel.foodQuantity.value != 1)
+                      controller.decrement(
+                          cartModel.foodItem.value, cartModel.restaurant);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: MyTheme.borderColor,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    SizedBox(
-                      width: 18,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        controller.increment(
-                            cartModel.foodItem.value, cartModel.restaurant);
-                      },
-                      child: Text("+",
-                          style: TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.normal,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 16,
-                              color: Color(0xff393E46))),
-                    ),
-                  ],
+                    child: Icon(Icons.remove, color: Color(0xff393E46)),
+                  ),
                 ),
                 SizedBox(
-                  height: 24,
+                  width: 20,
                 ),
                 InkWell(
                   onTap: () {
-                    controller.decrement(
+                    controller.increment(
                         cartModel.foodItem.value, cartModel.restaurant);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: MyTheme.borderColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(Icons.add, color: Color(0xff393E46)),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    if (controller.cartItems.length > 1) {
+                      controller.decrement(
+                          cartModel.foodItem.value, cartModel.restaurant, true);
+                    } else {
+                      Get.showSnackbar(GetBar(
+                        title: "Error",
+                        message:
+                            "You should atleast have one item in cart for booking summary",
+                        duration: Duration(seconds: 2),
+                      ));
+                    }
                   },
                   child: Image.asset(
                     Assets.delete,
