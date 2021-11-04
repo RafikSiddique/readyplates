@@ -27,13 +27,13 @@ class OrderWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                     fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
                     fontSize: 17,
                     color: MyTheme.borderchangeColor),
               ),
             ),
             SizedBox(
-              height: 14,
+              height: 5,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +52,7 @@ class OrderWidget extends StatelessWidget {
                       child: Text(
                         e.pin.toString()[i],
                         style: GoogleFonts.montserrat(
-                            fontSize: 18, fontWeight: FontWeight.w600),
+                            fontSize: 25, fontWeight: FontWeight.w600),
                       ))
               ],
             ),
@@ -72,7 +72,7 @@ class OrderWidget extends StatelessWidget {
           width: Get.width,
           text: " Order Again",
           onTap: () {
-         //   Get.to(() => OrderOption2());
+            //   Get.to(() => OrderOption2());
           },
         );
       default:
@@ -80,7 +80,7 @@ class OrderWidget extends StatelessWidget {
           width: Get.width,
           text: "Order Again",
           onTap: () {
-          //  Get.to(() => OrderOption2());
+            //  Get.to(() => OrderOption2());
           },
         );
     }
@@ -90,16 +90,22 @@ class OrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5),
+        margin: EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromRGBO(188, 202, 224, 0.4),
+                blurRadius: 4,
+                offset: Offset(0, 2))
+          ],
           color: Colors.white,
         ),
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 13),
+              padding: const EdgeInsets.only(top: 7),
               child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 // Container(width: 0),
                 Spacer(),
@@ -113,10 +119,9 @@ class OrderWidget extends StatelessWidget {
                     )),
                 Spacer(),
                 GestureDetector(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 2.0, horizontal: 3),
-                      child: Icon(Icons.more_horiz),
+                    child: Icon(
+                      Icons.more_horiz,
+                      size: 25,
                     ),
                     onTapDown: showMenu),
               ]),
@@ -132,10 +137,10 @@ class OrderWidget extends StatelessWidget {
                       (e) => Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("${e.quantity}x",
+                          Text("${e.quantity} x",
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                    fontSize: 17,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
                                     color: MyTheme.buttonbackgroundColor),
@@ -149,16 +154,16 @@ class OrderWidget extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
-                                    color: MyTheme.dividermiddletext),
+                                    color: MyTheme.buttonbackgroundColor),
                               )),
                           Spacer(),
                           Text("\$${e.price}",
                               style: GoogleFonts.nunito(
                                 textStyle: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.normal,
-                                    color: MyTheme.dividermiddletext),
+                                    color: MyTheme.buttonbackgroundColor),
                               ))
                         ],
                       ),

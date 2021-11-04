@@ -26,9 +26,14 @@ class _BottomcontainerState extends State<Bottomcontainer> {
       //  height: 100,
       // height: MediaQuery.of(context).size.height * 0.10,
 
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
+      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(
+          color: Color.fromRGBO(68, 68, 68, 0.22),
+          offset: Offset(0, -2),
+          blurRadius: 20,
+          spreadRadius: 0,
+        )
+      ]),
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +44,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
             height: 11,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -48,7 +53,6 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w500,
                       fontSize: 17,
-                      //  color: Color(0xff222831),
                       color: MyTheme.buttonbackgroundColor,
                     )),
                 Text("\$25.50",
@@ -61,46 +65,49 @@ class _BottomcontainerState extends State<Bottomcontainer> {
             ),
           ),
           SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Elevated(
-                backgroundColor: Colors.white,
-                text: "Add Items",
-                borderColor: MyTheme.bottomcontainercolor,
-                onTap: () {
-                  Get.toNamed(MenuPage.id, arguments: widget.restaurantModel);
-                },
-                width: size.width * 0.45,
-                padding: EdgeInsets.all(15),
-              ),
-              // Outline(
-              //   text: 'Add Items',
-              //   fontFamily: 'Inter',
-              //   fontSize: 15,
-              //   fontWeight: FontWeight.bold,
-              //   width: 185,
-              // ),
-              SizedBox(
-                width: 9,
-              ),
-              Elevated(
-                padding: EdgeInsets.all(15),
-                width: size.width * 0.45,
-                text: "Book",
-                onTap: () {
-                  Get.find<OrderController>().order(widget.restaurantModel);
-                },
-              ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16, left: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Elevated(
+                  backgroundColor: Colors.white,
+                  text: "Add Items",
+                  borderColor: MyTheme.bottomcontainercolor,
+                  onTap: () {
+                    Get.toNamed(MenuPage.id, arguments: widget.restaurantModel);
+                  },
+                  width: size.width * 0.43,
+                  padding: EdgeInsets.all(15),
+                ),
+                // Outline(
+                //   text: 'Add Items',
+                //   fontFamily: 'Inter',
+                //   fontSize: 15,
+                //   fontWeight: FontWeight.bold,
+                //   width: 185,
+                // ),
+                SizedBox(
+                  width: 9,
+                ),
+                Elevated(
+                  width: size.width * 0.43,
+                  padding: EdgeInsets.all(15),
+                  text: "Book",
+                  onTap: () {
+                    Get.find<OrderController>().order(widget.restaurantModel);
+                  },
+                ),
 
-              // Elevated(
-              //   text: "Book",
-              //   fontFamily: 'Inter',
-              //   fontSize: 15,
-              //   fontWeight: FontWeight.w700,
-              //   width: 185,
-              // ),
-            ],
+                // Elevated(
+                //   text: "Book",
+                //   fontFamily: 'Inter',
+                //   fontSize: 15,
+                //   fontWeight: FontWeight.w700,
+                //   width: 185,
+                // ),
+              ],
+            ),
           ),
           SizedBox(
             height: 10,

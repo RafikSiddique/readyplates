@@ -1,15 +1,11 @@
 // import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:readyplates/models/order_model.dart';
-import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
-import 'package:readyplates/src/order/screen/order_cancel_page.dart';
-import 'package:readyplates/src/order/screen/order_option2.dart';
+import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
@@ -142,7 +138,7 @@ class OrderPage extends GetView<OrderController> {
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.normal,
-                    color: MyTheme.dividermiddletext),
+                    color: MyTheme.appbartextColor),
               ),
             ),
             leading: Container(),
@@ -185,7 +181,7 @@ class OrderPage extends GetView<OrderController> {
                   ),
                 )
               : Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  padding: const EdgeInsets.only(top: 12, left: 16, right: 16),
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Obx(
@@ -202,6 +198,9 @@ class OrderPage extends GetView<OrderController> {
                                       fontStyle: FontStyle.normal,
                                       color: MyTheme.dividermiddletext),
                                 )),
+                          SizedBox(
+                            height: 10,
+                          ),
                           ListView(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,

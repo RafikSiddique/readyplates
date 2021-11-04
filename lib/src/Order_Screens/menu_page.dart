@@ -105,19 +105,19 @@ class MenuPage extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              Text(
-                "MAIN COURSE",
-                style: GoogleFonts.inter(
-                  textStyle: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.normal,
-                    color: MyTheme.appbartextColor,
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Text(
+                  "MAIN COURSE",
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                      color: MyTheme.dividermiddletext,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 12,
               ),
               Obx(() => controller.foodItems.isEmpty
                   ? Container(
@@ -136,8 +136,10 @@ class MenuPage extends StatelessWidget {
                                 (e) => Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15)),
-                                  margin: EdgeInsets.all(7),
-                                  elevation: 4,
+                                  shadowColor:
+                                      Color.fromRGBO(188, 202, 224, 0.5),
+                                  margin: EdgeInsets.only(top: 10),
+                                  elevation: 2,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 8.0),
@@ -206,63 +208,90 @@ class MenuPage extends StatelessWidget {
                                                                           .id);
                                                             },
                                                           )
-                                                        : AddButton(
-                                                            widthFraction: 0.18,
-                                                            onTap: () {
-                                                              if (orderController
-                                                                  .cartItems
-                                                                  .any((element) =>
-                                                                      element
-                                                                          .restaurant !=
-                                                                      restaurantModel
-                                                                          .id)) {
-                                                                Get.showSnackbar(
-                                                                    GetBar(
-                                                                  title:
-                                                                      "Error",
-                                                                  message:
-                                                                      "Sorry you cannot add items from 2 Restaurant",
-                                                                  isDismissible:
-                                                                      true,
-                                                                  mainButton:
-                                                                      TextButton(
-                                                                    onPressed:
-                                                                        () async {
-                                                                      await orderController
-                                                                          .removeAllFromRes(
-                                                                              restaurantModel.id);
-                                                                      Get.back();
-                                                                    },
-                                                                    child: Text(
-                                                                        "Remove all from other restaurants"),
-                                                                  ),
-                                                                ));
-                                                              } else {
-                                                                CartModel cartModel = CartModel(
-                                                                    foodItem: e
-                                                                        .id.obs,
-                                                                    foodName:
-                                                                        e.name,
-                                                                    foodImage: e
-                                                                        .image1,
-                                                                    foodPrice:
-                                                                        double.parse(e.cost)
-                                                                            .obs,
-                                                                    restaurant:
-                                                                        restaurantModel
-                                                                            .id,
-                                                                    user: "",
-                                                                    foodQuantity:
-                                                                        1.obs);
-                                                                orderController
+                                                        : Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          0.15),
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 2),
+                                                                  blurRadius: 6,
+                                                                  spreadRadius:
+                                                                      1,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height *
+                                                                0.030,
+                                                            child: AddButton(
+                                                              widthFraction:
+                                                                  0.18,
+                                                              onTap: () {
+                                                                if (orderController
                                                                     .cartItems
-                                                                    .add(
-                                                                        cartModel);
-                                                                orderController
-                                                                    .cart(
-                                                                        cartModel);
-                                                              }
-                                                            },
+                                                                    .any((element) =>
+                                                                        element
+                                                                            .restaurant !=
+                                                                        restaurantModel
+                                                                            .id)) {
+                                                                  Get.showSnackbar(
+                                                                      GetBar(
+                                                                    title:
+                                                                        "Error",
+                                                                    message:
+                                                                        "Sorry you cannot add items from 2 Restaurant",
+                                                                    isDismissible:
+                                                                        true,
+                                                                    mainButton:
+                                                                        TextButton(
+                                                                      onPressed:
+                                                                          () async {
+                                                                        await orderController
+                                                                            .removeAllFromRes(restaurantModel.id);
+                                                                        Get.back();
+                                                                      },
+                                                                      child: Text(
+                                                                          "Remove all from other restaurants"),
+                                                                    ),
+                                                                  ));
+                                                                } else {
+                                                                  CartModel cartModel = CartModel(
+                                                                      foodItem: e
+                                                                          .id
+                                                                          .obs,
+                                                                      foodName: e
+                                                                          .name,
+                                                                      foodImage: e
+                                                                          .image1,
+                                                                      foodPrice:
+                                                                          double.parse(e.cost)
+                                                                              .obs,
+                                                                      restaurant:
+                                                                          restaurantModel
+                                                                              .id,
+                                                                      user: "",
+                                                                      foodQuantity:
+                                                                          1.obs);
+                                                                  orderController
+                                                                      .cartItems
+                                                                      .add(
+                                                                          cartModel);
+                                                                  orderController
+                                                                      .cart(
+                                                                          cartModel);
+                                                                }
+                                                              },
+                                                            ),
                                                           ))
                                               ],
                                             ),
@@ -341,9 +370,7 @@ class MenuPage extends StatelessWidget {
                               )
                               .toList(),
                         )),
-              SizedBox(
-                height: 17,
-              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.025),
               Obx(() => Elevated(
                     text: "Proceed to Booking",
                     width: double.infinity,
@@ -361,7 +388,7 @@ class MenuPage extends StatelessWidget {
                     },
                   )),
               SizedBox(
-                height: 20,
+                height: 17,
               )
             ],
           ),

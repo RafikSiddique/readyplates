@@ -5,7 +5,7 @@ import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
-// import 'package:readyplates/widgets/bottom_container.dart';
+
 import 'package:readyplates/widgets/bottomcontainer.dart';
 
 import 'package:readyplates/widgets/imagewidget.dart';
@@ -23,10 +23,10 @@ class BurgersupportingPage extends GetView<OrderController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, //(0xffE5E5E5),
+      backgroundColor: MyTheme.backgroundcolor,
       appBar: AppBar(
         toolbarHeight: 44,
-        backgroundColor: Colors.white, //(0xffE5E5E5),
+        backgroundColor: MyTheme.backgroundcolor,
         elevation: 0,
         centerTitle: true,
         title: Text(
@@ -46,48 +46,47 @@ class BurgersupportingPage extends GetView<OrderController> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 4,
-          ),
+          // SizedBox(
+          //   height: 4,
+          // ),
           Card(
-            elevation: 5,
+            elevation: 4,
             margin: EdgeInsets.all(15),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6),
             ),
+            shadowColor: Color.fromRGBO(0, 0, 0, 0.25),
+
+            // shadowColor: ,
             child: Padding(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.only(left: 15, top: 14, right: 9),
               child: Column(
                 children: [
                   ...controller.cartItems
                       .map((element) => ShooppymacPage(cartModel: element)),
                   SizedBox(
-                    height: 10,
+                    height: 11,
                   ),
-                  Divider(
-                    thickness: 2,
-                    color: MyTheme.devidercolor,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("TOTAL :",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            color: MyTheme.appbartextColor,
-                          )),
-                      TextwidgetPage(
-                        text: "\$ " + controller.calclateTotal().toString(),
-                        color: MyTheme.appbartextColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 9),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("TOTAL :",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 13,
+                              color: MyTheme.appbartextColor,
+                            )),
+                        TextwidgetPage(
+                          text: "\$ " + controller.calclateTotal().toString(),
+                          color: MyTheme.appbartextColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 7,
@@ -95,56 +94,60 @@ class BurgersupportingPage extends GetView<OrderController> {
                   SizedBox(
                     height: 7,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("TAX ",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            color: MyTheme.appbartextColor,
-                          )),
-                      SizedBox(
-                        width: 48,
-                      ),
-                      TextwidgetPage(
-                        text: "CGST",
-                        color: MyTheme.dividermiddletext,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      Spacer(),
-                      TextwidgetPage(
-                        text: "\$ 0.5",
-                        color: MyTheme.appbartextColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 9),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("TAX ",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 13,
+                              color: MyTheme.appbartextColor,
+                            )),
+                        SizedBox(
+                          width: 48,
+                        ),
+                        TextwidgetPage(
+                          text: "CGST",
+                          color: MyTheme.devidercolor,
+                          fontWeight: FontWeight.normal,
+                        ),
+                        Spacer(),
+                        TextwidgetPage(
+                          text: "\$ 0.5",
+                          color: MyTheme.appbartextColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 7,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 78,
-                      ),
-
-                      TextwidgetPage(
-                        text: "IGST",
-                        color: MyTheme.dividermiddletext,
-                        fontWeight: FontWeight.w400,
-                      ),
-
-                      Spacer(),
-                      TextwidgetPage(
-                        text: "\$ 0.5",
-                        color: MyTheme.appbartextColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 85,
+                        ),
+                        TextwidgetPage(
+                          text: "IGST",
+                          color: MyTheme.devidercolor,
+                          fontWeight: FontWeight.normal,
+                        ),
+                        Spacer(),
+                        TextwidgetPage(
+                          text: "\$ 0.5",
+                          color: MyTheme.appbartextColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -163,7 +166,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                         width: 25,
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 8,
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.6,
@@ -190,11 +193,11 @@ class BurgersupportingPage extends GetView<OrderController> {
                     children: [
                       ImagewidgetPage(
                         imagePath: Assets.clock,
-                        height: 25,
-                        width: 25,
+                        height: 20,
+                        width: 20,
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 12,
                       ),
                       Text(
                           controller.weekDays[
@@ -218,6 +221,9 @@ class BurgersupportingPage extends GetView<OrderController> {
                           )),
                     ],
                   ),
+                  SizedBox(
+                    height: 15,
+                  )
                 ],
               ),
             ),
