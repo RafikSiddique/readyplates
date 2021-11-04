@@ -20,7 +20,7 @@ class FeedbackPage extends StatefulWidget {
 }
 
 class _FeedbackPageState extends State<FeedbackPage> {
- final controller = Get.find<OrderController>();
+  final controller = Get.find<OrderController>();
   File? image;
   Future pickImage(ImageSource source) async {
     final image = await ImagePicker().pickImage(source: source);
@@ -33,6 +33,97 @@ class _FeedbackPageState extends State<FeedbackPage> {
   var rating2 = 0.0;
   var rating3 = 0.0;
   var rating4 = 0.0;
+  List<String> ratingText = [
+    '',
+    'Poor',
+    'Average',
+    'Good',
+    'Very Good',
+    'Excellent'
+  ];
+  stringText(double value) {
+    if (value == 0.0)
+      return ratingText[0];
+    else if (value == 1.0)
+      return ratingText[1];
+    else if (value == 2.0)
+      return ratingText[2];
+    else if (value == 3.0)
+      return ratingText[3];
+    else if (value == 4.0)
+      return ratingText[4];
+    else if (value == 5.0)
+      return ratingText[5];
+    else
+      return ratingText[0];
+  }
+  // stringText1() {
+  //   if (rating1 == 0.0)
+  //     return ratingText[0];
+  //   else if (rating1 == 1.0)
+  //     return ratingText[1];
+  //   else if (rating1 == 2.0)
+  //     return ratingText[2];
+  //   else if (rating1 == 3.0)
+  //     return ratingText[3];
+  //   else if (rating1 == 4.0)
+  //     return ratingText[4];
+  //   else if (rating1 == 5.0)
+  //     return ratingText[5];
+  //   else
+  //     return ratingText[0];
+  // }
+
+  // stringText2() {
+  //   if (rating2 == 0.0)
+  //     return ratingText[0];
+  //   else if (rating2 == 1.0)
+  //     return ratingText[1];
+  //   else if (rating2 == 2.0)
+  //     return ratingText[2];
+  //   else if (rating2 == 3.0)
+  //     return ratingText[3];
+  //   else if (rating2 == 4.0)
+  //     return ratingText[4];
+  //   else if (rating2 == 5.0)
+  //     return ratingText[5];
+  //   else
+  //     return ratingText[0];
+  // }
+
+  // stringText3() {
+  //   if (rating3 == 0.0)
+  //     return ratingText[0];
+  //   else if (rating3 == 1.0)
+  //     return ratingText[1];
+  //   else if (rating3 == 2.0)
+  //     return ratingText[2];
+  //   else if (rating3 == 3.0)
+  //     return ratingText[3];
+  //   else if (rating3 == 4.0)
+  //     return ratingText[4];
+  //   else if (rating3 == 5.0)
+  //     return ratingText[5];
+  //   else
+  //     return ratingText[0];
+  // }
+
+  // stringText4() {
+  //   if (rating4 == 0.0)
+  //     return ratingText[0];
+  //   else if (rating4 == 1.0)
+  //     return ratingText[1];
+  //   else if (rating4 == 2.0)
+  //     return ratingText[2];
+  //   else if (rating4 == 3.0)
+  //     return ratingText[3];
+  //   else if (rating4 == 4.0)
+  //     return ratingText[4];
+  //   else if (rating4 == 5.0)
+  //     return ratingText[5];
+  //   else
+  //     return ratingText[0];
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +161,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
               SizedBox(
                 height: 12,
               ),
-              
               Textwidget(
                 text: 'Rate your overall Experience',
               ),
@@ -98,12 +188,15 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     borderColor: MyTheme.ratingfillColor,
                     color: MyTheme.ratingfillColor,
                   ),
-                  Text('Excellent',
-                      style: GoogleFonts.inter(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xff6E6D7A))),
+                  Text(
+                    stringText(rating1),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xff6E6D7A),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -136,7 +229,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     borderColor: MyTheme.ratingfillColor,
                     color: MyTheme.ratingfillColor,
                   ),
-                  Text("Poor",
+                  Text(stringText(rating2),
                       style: GoogleFonts.inter(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -174,7 +267,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     borderColor: MyTheme.ratingfillColor,
                     color: MyTheme.ratingfillColor,
                   ),
-                  Text("Good",
+                  Text(stringText(rating3),
                       style: GoogleFonts.inter(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -212,25 +305,26 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     borderColor: MyTheme.ratingfillColor,
                     color: MyTheme.ratingfillColor,
                   ),
-                  Text("Average",
-                      style: GoogleFonts.inter(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xff6E6D7A))),
+                  Text(
+                    stringText(rating4),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xff6E6D7A),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
                 height: 17,
               ),
-              AppFormField(
+              AppFormFields(
+                toptext: 'Feedback',
                 hintText: 'Tell us more about your overall experience',
-                fontFamily: "Inter-Regular",
-                fontSize: 12,
-                hintfontSize: 12,
-                fontWeight: FontWeight.normal,
                 controller: controller.feedback,
-                line: 5, toptext: '',
+                hintfontSize: 12,
+                line: 5,
               ),
               SizedBox(
                 height: 17,
@@ -295,7 +389,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
               ),
               CustomButton(
                 onTap: () {},
-                buttonbackgroundColor: controller.feedback.text.isEmpty
+                buttonbackgroundColor: (ratingText == '' ||
+                        controller.feedback.text.isEmpty ||
+                        image!.path.isEmpty)
                     ? MyTheme.buttonColor
                     : MyTheme.buttonchangeColor,
                 text: 'Post Feedback',

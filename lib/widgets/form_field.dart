@@ -252,7 +252,6 @@ class AppFormFields extends StatelessWidget {
             ),
           StatefulBuilder(builder: (context, setState) {
             return Container(
-              height: 92,
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1,
@@ -319,7 +318,7 @@ class AppFormFields extends StatelessWidget {
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
                         //letterSpacing: -0.26,
-                        color: MyTheme.appbartextColor //Color(0xffB7B7B7),
+                        color: MyTheme.hinttextColor //Color(0xffB7B7B7),
                         )
 
                     // TextStyle(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 // import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -11,6 +13,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(SharedPreferenceHelper());
   Get.put(AuthController());
+  Get.put(OrderController());
   runApp(MyApp());
 }
 
@@ -31,8 +34,8 @@ class MyApp extends StatelessWidget {
         dividerColor: MyTheme.orderbordercolor,
       ),
       debugShowCheckedModeBanner: false,
-      home: OnbordingPage(),
-      // initialRoute: FeedbackPage.id,
+      // home: OnbordingPage(),
+      initialRoute: FeedbackPage.id,
       onGenerateRoute: Routes.onGenerateRoute,
     );
   }
