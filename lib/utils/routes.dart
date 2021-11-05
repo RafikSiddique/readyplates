@@ -6,6 +6,7 @@ import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
+import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/src/order/screen/payment_sucessful.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/widgets/back_gesture_diable.dart';
@@ -57,6 +58,10 @@ class Routes {
                     return QrCode();
                   case OrderCancelledPage.id:
                     return OrderCancelledPage();
+
+                  case OrderOption2.id:
+                    return OrderOption2();
+
                   case PaymentPage.id:
                     return PaymentPage();
 

@@ -45,7 +45,7 @@ class RestaurantDetails extends StatelessWidget {
       bio.cv19prec3,
       bio.cv19prec4
     ];
-    
+
     return Scaffold(
         body: Stack(
       children: [
@@ -146,9 +146,10 @@ class RestaurantDetails extends StatelessWidget {
                               SizedBox(
                                 width: 3,
                               ),
-                              Text("(Closes at 10:00 Pm)",
+                              Text("(Closes at ${restaurantModel.end_time})",
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
+                                        //  overflow: TextOverflow.ellipsis,
                                         fontSize: 13,
                                         fontWeight: FontWeight.normal,
                                         fontStyle: FontStyle.normal,
@@ -172,14 +173,18 @@ class RestaurantDetails extends StatelessWidget {
                               SizedBox(
                                 width: 9,
                               ),
-                              Text("Kondhwa Budruk",
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                        fontStyle: FontStyle.normal,
-                                        color: MyTheme.dividermiddletext),
-                                  )),
+                              Container(
+                                width: 200,
+                                child: Text(restaurantModel.address,
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          fontStyle: FontStyle.normal,
+                                          color: MyTheme.dividermiddletext),
+                                    )),
+                              ),
                               SizedBox(
                                 width: 61,
                               ),
@@ -189,7 +194,7 @@ class RestaurantDetails extends StatelessWidget {
                                 color: MyTheme.dividermiddletext,
                               ),
                               Text(
-                                "   15 mins",
+                                "  15 mins",
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       fontSize: 13,
@@ -315,7 +320,14 @@ class RestaurantDetails extends StatelessWidget {
                                       },
                                     );
                                   },
-                                  child: Text("View All"))
+                                  child: Text(
+                                    "View All",
+                                    style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        fontStyle: FontStyle.normal,
+                                        color: MyTheme.dividermiddletext),
+                                  ))
                             ],
                           ),
                           SizedBox(
@@ -376,21 +388,29 @@ class RestaurantDetails extends StatelessWidget {
                               Column(
                                 children: [
                                   Text(
-                                    "MAY",
+                                    bio.recurring_event_date,
                                     style: GoogleFonts.inter(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
                                         color: MyTheme.aboutlocatextcolors),
                                   ),
-                                  Text(
-                                    "12",
-                                    style: GoogleFonts.inter(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FontStyle.normal,
-                                        color: MyTheme.appbartextColor),
-                                  )
+                                  // Text(
+                                  //   "May",
+                                  //   style: GoogleFonts.inter(
+                                  //       fontSize: 13,
+                                  //       fontWeight: FontWeight.w500,
+                                  //       fontStyle: FontStyle.normal,
+                                  //       color: MyTheme.aboutlocatextcolors),
+                                  // ),
+                                  // Text(
+                                  //   "12",
+                                  //   style: GoogleFonts.inter(
+                                  //       fontSize: 15,
+                                  //       fontWeight: FontWeight.w500,
+                                  //       fontStyle: FontStyle.normal,
+                                  //       color: MyTheme.appbartextColor),
+                                  // )
                                 ],
                               ),
                               Column(
@@ -404,7 +424,7 @@ class RestaurantDetails extends StatelessWidget {
                                         color: MyTheme.appbartextColor),
                                   ),
                                   Text(
-                                    "Starts at 6:00 PM",
+                                    "Starts at ${bio.event_start} ",
                                     style: GoogleFonts.inter(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
@@ -433,7 +453,7 @@ class RestaurantDetails extends StatelessWidget {
                             height: 30,
                           ),
                           Text(
-                            "A unique concept of live grill, fabulous buffet menu perfect for large groups. Has this wide variety of smoky dishes and desserts to choose from.",
+                            bio.event_desc,
                             style: GoogleFonts.inter(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,

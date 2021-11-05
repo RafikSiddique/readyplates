@@ -92,7 +92,7 @@ class AuthController extends GetxController {
       } else {
         Get.put(HomeController());
         Get.put(OrderController());
-        Get.to(MapPage.id);
+        Get.toNamed(MapPage.id);
         sfHelper.setLoggedIn(true);
       }
     } catch (e) {
