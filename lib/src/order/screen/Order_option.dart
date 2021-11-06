@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
+import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -64,6 +68,14 @@ class OrderOption extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromRGBO(188, 202, 224, 0.45),
+                    offset: Offset(0, 2),
+                    blurRadius: 4,
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
@@ -244,7 +256,9 @@ class OrderOption extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         width: MediaQuery.of(context).size.width,
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => OrderOption2());
+                        },
                         borderColor: MyTheme.orderoptionbuttoncolor,
                         backgroundColor: MyTheme.orderoptionbuttoncolor,
                       ),

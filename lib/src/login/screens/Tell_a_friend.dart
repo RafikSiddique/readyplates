@@ -30,9 +30,9 @@ class Tellafriend extends StatelessWidget {
         ),
         body: Column(
           children: [
-            SizedBox(
-              height: 3,
-            ),
+            // SizedBox(
+            //   height: 3,
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: Container(
@@ -40,6 +40,14 @@ class Tellafriend extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(188, 202, 224, 0.4),
+                      offset: Offset(0, 2),
+                      blurRadius: 4,
+                      spreadRadius: 0,
+                    ),
+                  ],
                 ),
                 width: MediaQuery.of(context).size.width,
                 //color: Colors.white,

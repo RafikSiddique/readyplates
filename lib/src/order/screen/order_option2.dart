@@ -1,4 +1,4 @@
-/* import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,6 +67,14 @@ class OrderOption2 extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromRGBO(188, 202, 224, 0.45),
+                    offset: Offset(0, 2),
+                    blurRadius: 4,
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
@@ -264,4 +272,3 @@ class OrderOption2 extends StatelessWidget {
     );
   }
 }
- */

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/home/screens/restaurant_list.dart';
+import 'package:readyplates/src/order/screen/Order_option.dart';
 import 'package:readyplates/src/order/screen/order_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/profile_page.dart';
@@ -32,6 +33,13 @@ class LandingPage extends StatelessWidget {
         return Tellafriend();
       case 4:
         return ProfilePage();
+
+      case 5:
+        return OrderOption();
+
+      case 6:
+        return OrderOption2();
+
       default:
         return ShopScreen();
     }
