@@ -103,6 +103,13 @@ class HomeController extends GetxController {
         .toList();
   }
 
+  void searchFoor(String q, String id) async {
+    await getFoodItems(id);
+    foodItems.value = foodItems
+        .where((p0) => p0.name.toLowerCase().contains(q.toLowerCase()))
+        .toList();
+  }
+
   Future<void> getFoodItems(String id) async {
     try {
       foodItems.value = await homeService.getMenu(id);

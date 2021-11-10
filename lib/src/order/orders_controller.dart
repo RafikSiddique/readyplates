@@ -64,6 +64,15 @@ class OrderController extends GetxController {
     super.onInit();
   }
 
+  Future<RestaurantModel> getSingleRestaurant(int id) async {
+    try {
+      RestaurantModel restaurantModel = await services.getRes(id);
+      return restaurantModel;
+    } catch (e) {
+      throw "";
+    }
+  }
+
   void clearController() {
     feedback.clear();
   }

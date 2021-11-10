@@ -3,12 +3,29 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/exception.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 
 class Orderservices extends ApiService {
   SharedPreferenceHelper sharedPreferenceHelper = SharedPreferenceHelper();
+
+  Future<RestaurantModel> getRes(int id) async {
+    try {
+      Response response =
+          await get(singleRestaurantUri(id), headers: contentTypeJsonHeader);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body).first;
+        return RestaurantModel.fromMap(data);
+      } else {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   Future<void> addToCartApi(CartModel cartModel) async {
     try {

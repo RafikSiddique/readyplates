@@ -261,6 +261,8 @@ class RestaurantDetails extends StatelessWidget {
                                     color: MyTheme.dividermiddletext),
                               ),
                               TextButton(
+                                  style: TextButton.styleFrom(
+                                      padding: EdgeInsets.all(4)),
                                   onPressed: () {
                                     showModalBottomSheet(
                                       isDismissible: true,
@@ -331,28 +333,42 @@ class RestaurantDetails extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 9,
+                            height: 4,
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
                             child: Row(children: [
                               for (var i = 0; i < images.length; i++)
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
                                         context,
                                         CupertinoPageRoute(
-                                            builder: (c) => FullImage(
-                                                heroTag: i, path: images[i])));
-                                  },
-                                  child: Hero(
-                                    tag: i,
-                                    child: Material(
-                                      type: MaterialType.transparency,
-                                      child: Container(
-                                        margin: EdgeInsets.all(4),
-                                        height: 70,
-                                        child: Image.network(images[i]),
+                                          builder: (c) => FullImage(
+                                            heroTag: i,
+                                            path: images[i],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Hero(
+                                      tag: i,
+                                      child: Material(
+                                        type: MaterialType.transparency,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Container(
+                                            height: 70,
+                                            child: Image.network(
+                                              images[i],
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -534,11 +550,13 @@ class FullImage extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.center,
-            child: Image.network(
-              path,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.fitWidth,
+            child: InteractiveViewer(
+              child: Image.network(
+                path,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
         ),

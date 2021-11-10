@@ -85,8 +85,13 @@ class RestaurantCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: bio.street_view == ""
-                      ? Image.asset(Assets.categoryBurger)
-                      : Image.network(bio.street_view),
+                      ? Image.asset(
+                          Assets.categoryBurger,
+                        )
+                      : Image.network(
+                          bio.street_view,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 SizedBox(
                   width: 10,

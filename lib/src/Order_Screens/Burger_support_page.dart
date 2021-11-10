@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
@@ -18,7 +20,12 @@ class BurgersupportingPage extends GetView<OrderController> {
   const BurgersupportingPage({
     Key? key,
     required this.restaurantModel,
-  }) : super(key: key);
+    bool isEditing = false,
+    OrderModelApi? orderModelApi,
+  })  : assert(isEditing ? orderModelApi != null : true),
+        super(
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +50,7 @@ class BurgersupportingPage extends GetView<OrderController> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           // SizedBox(
           //   height: 4,
@@ -57,8 +65,9 @@ class BurgersupportingPage extends GetView<OrderController> {
 
             // shadowColor: ,
             child: Padding(
-              padding: EdgeInsets.only(left: 15, top: 14, right: 9),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   ...controller.cartItems
                       .map((element) => ShooppymacPage(cartModel: element)),
@@ -66,35 +75,35 @@ class BurgersupportingPage extends GetView<OrderController> {
                     height: 11,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8, right: 9),
-                    child: 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("TOTAL :",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            color: MyTheme.appbartextColor,
-                          )),
-                      Obx(() => TextwidgetPage(
-                            text: "\$ " + controller.total.value.toString(),
-                            color: MyTheme.appbartextColor,
-                            fontWeight: FontWeight.w500,
-                          )),
-                    ],)),
-
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("TOTAL :",
+                              style: TextStyle(
+                                fontFamily: "Inter",
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 13,
+                                color: MyTheme.appbartextColor,
+                              )),
+                          Obx(() => TextwidgetPage(
+                                text: "\$ " + controller.total.value.toString(),
+                                color: MyTheme.appbartextColor,
+                                fontWeight: FontWeight.w500,
+                              )),
+                        ],
+                      )),
                   SizedBox(
                     height: 7,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8, right: 9),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("TAX ",
+                        Text("Sales Tax: ".toUpperCase(),
                             style: TextStyle(
                               fontFamily: "Inter",
                               fontWeight: FontWeight.bold,
@@ -102,44 +111,20 @@ class BurgersupportingPage extends GetView<OrderController> {
                               fontSize: 13,
                               color: MyTheme.appbartextColor,
                             )),
-                        SizedBox(
-                          width: 48,
-                        ),
-                        TextwidgetPage(
-                          text: "CGST",
-                          color: MyTheme.devidercolor,
-                          fontWeight: FontWeight.normal,
-                        ),
-                        Spacer(),
-                        TextwidgetPage(
-                          text: "\$ 0.5",
-                          color: MyTheme.appbartextColor,
-                          fontWeight: FontWeight.w500,
+                        Text(
+                          "\$ 0.5",
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontStyle: FontStyle.normal,
+                            color: MyTheme.appbartextColor,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   SizedBox(
                     height: 7,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 78,
-                      ),
-                      TextwidgetPage(
-                        text: "IGST",
-                        color: MyTheme.dividermiddletext,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      Spacer(),
-                      TextwidgetPage(
-                        text: "\$ 0.5",
-                        color: MyTheme.appbartextColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ],
                   ),
                   SizedBox(
                     height: 10,

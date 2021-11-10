@@ -19,5 +19,5 @@ class ApiService {
 
   Uri get updateStatusUrl => restaurants('updatestatus/');
 
-
+  Uri singleRestaurantUri(int id) => restaurants('getrestaurant/$id');
 }

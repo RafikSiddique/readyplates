@@ -136,6 +136,10 @@ class BookingDetails extends GetView<OrderController> {
                                 lastDate:
                                     DateTime(DateTime.now().year, 12, 31)) ??
                             DateTime.now();
+                        print(restaurantModel.open_days.toLowerCase());
+                        print(restaurantModel.open_days.contains(controller
+                            .weekDays[controller.selectedDate.value.weekday]
+                            .toLowerCase()));
                       },
                       child: Row(
                         children: [
@@ -191,12 +195,38 @@ class BookingDetails extends GetView<OrderController> {
                                 hour: controller.selectedDate.value.hour,
                                 minute: controller.selectedDate.value.minute));
                         if (tod != null) {
-                          controller.selectedDate.value = DateTime(
-                              controller.selectedDate.value.year,
-                              controller.selectedDate.value.month,
-                              controller.selectedDate.value.day,
-                              tod.hour,
-                              tod.minute);
+                          print(restaurantModel.start_time);
+                          print(restaurantModel.end_time);
+                          List<String> startTimes =
+                              restaurantModel.start_time.split(':');
+                          List<String> endTime =
+                              restaurantModel.end_time.split(':');
+
+                          bool isAfterStart = tod.hour >
+                              (int.parse(startTimes.first) +
+                                  (startTimes.last.toLowerCase().contains('a')
+                                      ? 0
+                                      : 12));
+                          bool isBeforeEnd =
+                              (tod.hour > 12 ? tod.hour - 12 : tod.hour) <
+                                  int.parse(endTime.first) +
+                                      (endTime.last.toLowerCase().contains('a')
+                                          ? 0
+                                          : 12);
+                          print(isBeforeEnd);
+                          print(isAfterStart);
+                          print(tod);
+                          if (isAfterStart && isBeforeEnd) {
+                            controller.selectedDate.value = DateTime(
+                                controller.selectedDate.value.year,
+                                controller.selectedDate.value.month,
+                                controller.selectedDate.value.day,
+                                tod.hour,
+                                tod.minute);
+                          } else {
+                            Get.snackbar("Error",
+                                "Restaurant is closed at the selected time");
+                          }
                         }
                       },
                       child: Padding(

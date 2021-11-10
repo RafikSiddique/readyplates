@@ -34,12 +34,6 @@ class LandingPage extends StatelessWidget {
       case 4:
         return ProfilePage();
 
-      case 5:
-        return OrderOption();
-
-      case 6:
-        return OrderOption2();
-
       default:
         return ShopScreen();
     }

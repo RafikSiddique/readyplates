@@ -65,7 +65,7 @@ class OrderWidget extends StatelessWidget {
           width: Get.width,
           text: "Edit Order",
           onTap: () {
-            //Get.to(() => OrderOption2());
+            
           },
         );
       case OrderState.completed:
@@ -83,7 +83,9 @@ class OrderWidget extends StatelessWidget {
               height: 20,
             ),
             Elevated(
+              backgroundColor: Colors.white,
               width: Get.width,
+              borderColor: Color(0xff222831),
               text: "Give Feedback",
               onTap: () {
                 Get.toNamed(FeedbackPage.id);
