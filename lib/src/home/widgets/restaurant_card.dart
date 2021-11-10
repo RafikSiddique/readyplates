@@ -77,21 +77,23 @@ class RestaurantCard extends StatelessWidget {
             padding: EdgeInsets.all(media.size.width * 0.025),
             child: Row(
               children: [
-                Container(
-                  // color: Colors.blue,
-                  width: media.size.height * 0.13,
-                  height: media.size.height * 0.13,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    child: bio.street_view == ""
+                        ? Image.asset(
+                            Assets.categoryBurger,
+                            width: media.size.height * 0.13,
+                            height: media.size.height * 0.13,
+                          )
+                        : Image.network(
+                            bio.street_view,
+                            fit: BoxFit.cover,
+                            width: media.size.height * 0.13,
+                            height: media.size.height * 0.13,
+                          ),
                   ),
-                  child: bio.street_view == ""
-                      ? Image.asset(
-                          Assets.categoryBurger,
-                        )
-                      : Image.network(
-                          bio.street_view,
-                          fit: BoxFit.cover,
-                        ),
                 ),
                 SizedBox(
                   width: 10,
@@ -113,6 +115,7 @@ class RestaurantCard extends StatelessWidget {
                       ),
                       Text(
                         bio.description,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
                           fontWeight: FontWeight.w300,
@@ -124,6 +127,7 @@ class RestaurantCard extends StatelessWidget {
                       ),
                       Text(
                         restaurantModel.address,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
                           fontWeight: FontWeight.w300,

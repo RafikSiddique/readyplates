@@ -8,7 +8,6 @@ import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
-import 'package:readyplates/widgets/back_gesture_diable.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
 class SignupPage extends StatefulWidget {
@@ -144,8 +143,8 @@ class _SignupPageState extends State<SignupPage> {
                             fontWeight: FontWeight.w500,
                           )),
                       items: controller.items
-                          .map((e) =>
-                              DropdownMenuItem(child: Text(e), value: e))
+                          .map(
+                              (e) => DropdownMenuItem(child: Text(e), value: e))
                           .toList(),
                       onChanged: (newValue) {
                         controller.gender.value =
@@ -336,84 +335,90 @@ class _SignupPageState extends State<SignupPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.43,
-                        height: 45,
-                        color: MyTheme.buttonbackgroundcolor1,
-                        // color: Color(0xffF2F2F2),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(6))),
-                            primary: MyTheme.buttonbackgroundcolor1,
-                            side: BorderSide(
-                                width: 1.5, color: Color(0xffADB5BD)),
-                          ),
-                          onPressed: () {},
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
+                      Expanded(
+                        child: Container(
+                          height: 45,
+                          color: MyTheme.buttonbackgroundcolor1,
+                          // color: Color(0xffF2F2F2),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(6))),
+                              primary: MyTheme.buttonbackgroundcolor1,
+                              side: BorderSide(
+                                  width: 1.5, color: Color(0xffADB5BD)),
+                            ),
+                            onPressed: () {},
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                    child: Image.asset(
+                                  Assets.google,
                                   height: 21.5,
                                   width: 20,
-                                  child: Image.asset(Assets.google)),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text("Continue with google!",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 11,
-                                    //fontFamily: 'Inter',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w400,
-                                    color: MyTheme.bottomtextColorsignup,
-                                  )),
-                            ],
+                                  fit: BoxFit.cover,
+                                )),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text("Continue with google!",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 10,
+                                      //fontFamily: 'Inter',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.normal,
+                                      color: MyTheme.bottomtextColorsignup,
+                                    )),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         width: 16,
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.43,
-                        height: 45,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(6))),
+                      // Spacer(),
+                      Expanded(
+                        child: Container(
+                          // width: MediaQuery.of(context).size.width * 0.43,
+                          height: 45,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(6))),
 
-                            primary: MyTheme
-                                .buttonbackgroundcolor1, //checkboxcolor, // Color(0xffB9B9B9),
-                            side: BorderSide(
-                              width: 1.5,
-                              color: Color(0xffADB5BD),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                  child: Image.asset(Assets.fbb,
-                                      height: 28,
-                                      width: 28,
-                                      fit: BoxFit.cover)),
-                              SizedBox(
-                                width: 2,
+                              primary: MyTheme
+                                  .buttonbackgroundcolor1, //checkboxcolor, // Color(0xffB9B9B9),
+                              side: BorderSide(
+                                width: 1.5,
+                                color: Color(0xffADB5BD),
                               ),
-                              Text("Continue with facebook",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 11,
-                                    //fontFamily: 'Inter',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w400,
-                                    //color: Color(0xff505056),
-                                    color: MyTheme.bottomtextColorsignup,
-                                  )),
-                            ],
+                            ),
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Container(
+                                    child: Image.asset(
+                                  Assets.fbb,
+                                  height: 28,
+                                  width: 28,
+                                  fit: BoxFit.cover,
+                                )),
+                                SizedBox(
+                                  width: 2,
+                                ),
+                                Text("Continue with facebook",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 10,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.normal,
+                                      color: MyTheme.bottomtextColorsignup,
+                                    )),
+                              ],
+                            ),
                           ),
                         ),
                       ),

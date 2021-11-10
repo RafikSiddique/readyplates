@@ -32,7 +32,7 @@ class MenuPage extends StatelessWidget {
             iconSize: 14.83,
             icon: FaIcon(
               FontAwesomeIcons.chevronLeft,
-              color: Colors.black,
+              color: MyTheme.appbartextColor,
             ),
             onPressed: () {
               Get.back();

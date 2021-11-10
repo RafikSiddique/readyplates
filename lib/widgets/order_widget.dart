@@ -6,7 +6,6 @@ import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_option.dart';
-import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -64,9 +63,7 @@ class OrderWidget extends StatelessWidget {
         return Elevated(
           width: Get.width,
           text: "Edit Order",
-          onTap: () {
-            
-          },
+          onTap: () {},
         );
       case OrderState.completed:
       case OrderState.cancelled:

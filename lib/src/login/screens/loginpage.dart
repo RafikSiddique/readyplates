@@ -8,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
-import 'package:readyplates/widgets/back_gesture_diable.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/readyplates.dart';
 
@@ -120,13 +119,14 @@ class LoginPage extends StatelessWidget {
                         SizedBox(height: size.height * 0.010),
                         Obx(() => !controller.isNumber.value
                             ? AppFormField(
+                                isPassword: true,
+                                line: 1,
                                 toptext: "Password",
-                                hintText: "********",
+                                hintText: "****",
                                 controller: controller.passwordController)
                             : Container(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text("OTP"),
                                     Row(
@@ -144,10 +144,8 @@ class LoginPage extends StatelessWidget {
                                               textAlign: TextAlign.center,
                                               style: GoogleFonts.montserrat(
                                                   fontSize: 18,
-                                                  fontWeight:
-                                                      FontWeight.w600),
-                                              controller:
-                                                  controller.otpText[i],
+                                                  fontWeight: FontWeight.w600),
+                                              controller: controller.otpText[i],
                                               textAlignVertical:
                                                   TextAlignVertical.bottom,
                                               focusNode:
@@ -168,8 +166,7 @@ class LoginPage extends StatelessWidget {
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                     width: 1,
-                                                    color:
-                                                        MyTheme.borderColor,
+                                                    color: MyTheme.borderColor,
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -178,19 +175,16 @@ class LoginPage extends StatelessWidget {
                                               ),
                                               onChanged: (value) {
                                                 if (value.length == 1) {
-                                                  controller.otp.value +=
-                                                      value;
+                                                  controller.otp.value += value;
                                                   if (i != 5)
-                                                    controller
-                                                        .otpFields[i + 1]
+                                                    controller.otpFields[i + 1]
                                                         .requestFocus();
                                                 } else {
                                                   if (i != 0) {
                                                     controller.otp.value =
                                                         controller.otp.value
                                                             .substring(0, i);
-                                                    controller
-                                                        .otpFields[i - 1]
+                                                    controller.otpFields[i - 1]
                                                         .requestFocus();
                                                   }
                                                 }

@@ -77,8 +77,8 @@ class RestaurantDetails extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(36.0),
-                      topRight: Radius.circular(36.0),
+                      topLeft: Radius.circular(15.0),
+                      topRight: Radius.circular(15.0),
                       bottomLeft: Radius.zero,
                       bottomRight: Radius.zero,
                     ),
@@ -96,7 +96,8 @@ class RestaurantDetails extends StatelessWidget {
                     physics: BouncingScrollPhysics(),
                     controller: scrollcontroller,
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding:
+                          const EdgeInsets.only(top: 25, left: 16, right: 16),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,14 +109,15 @@ class RestaurantDetails extends StatelessWidget {
                                   style: GoogleFonts.nunito(
                                     textStyle: TextStyle(
                                       fontSize: 25,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                       color: MyTheme.appbartextColor,
                                     ),
                                   )),
                               FaIcon(
                                 FontAwesomeIcons.solidStar,
-                                color: Colors.black,
+                                color: MyTheme.buttonbackgroundColor,
+                                size: 16,
                               )
                             ],
                           ),
@@ -211,17 +213,22 @@ class RestaurantDetails extends StatelessWidget {
                           Text(
                             "About us",
                             style: GoogleFonts.inter(
-                                fontSize: 17, fontWeight: FontWeight.w400),
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                color: MyTheme.buttonbackgroundColor),
+                          ),
+                          SizedBox(
+                            height: 3,
                           ),
                           Text(
                             restaurantModel.bio.first.description,
                             style: GoogleFonts.inter(
                                 fontSize: 13,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.normal,
                                 color: MyTheme.dividermiddletext),
                           ),
                           SizedBox(
-                            height: 25.67,
+                            height: 24,
                           ),
                           Row(children: [
                             Container(
@@ -240,14 +247,14 @@ class RestaurantDetails extends StatelessWidget {
                                   : restaurantModel.bio.first.servingTime +
                                       " Minutes",
                               style: GoogleFonts.inter(
-                                  fontSize: 15,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
                                   color: MyTheme.dividermiddletext),
                             ),
                           ]),
                           SizedBox(
-                            height: 24,
+                            height: 20,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -261,8 +268,6 @@ class RestaurantDetails extends StatelessWidget {
                                     color: MyTheme.dividermiddletext),
                               ),
                               TextButton(
-                                  style: TextButton.styleFrom(
-                                      padding: EdgeInsets.all(4)),
                                   onPressed: () {
                                     showModalBottomSheet(
                                       isDismissible: true,
@@ -276,7 +281,7 @@ class RestaurantDetails extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.vertical(
                                                       top:
-                                                          Radius.circular(10))),
+                                                          Radius.circular(30))),
                                           child: GridView.count(
                                               physics: BouncingScrollPhysics(),
                                               crossAxisCount: 3,
@@ -332,43 +337,30 @@ class RestaurantDetails extends StatelessWidget {
                                   ))
                             ],
                           ),
-                          SizedBox(
-                            height: 4,
-                          ),
+                          // SizedBox(
+                          //   height: 9,
+                          // ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
                             child: Row(children: [
                               for (var i = 0; i < images.length; i++)
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
                                         context,
                                         CupertinoPageRoute(
-                                          builder: (c) => FullImage(
-                                            heroTag: i,
-                                            path: images[i],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Hero(
-                                      tag: i,
-                                      child: Material(
-                                        type: MaterialType.transparency,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Container(
-                                            height: 70,
-                                            child: Image.network(
-                                              images[i],
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
+                                            builder: (c) => FullImage(
+                                                heroTag: i, path: images[i])));
+                                  },
+                                  child: Hero(
+                                    tag: i,
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Container(
+                                        margin:
+                                            EdgeInsets.only(left: 2, right: 2),
+                                        height: 70,
+                                        child: Image.network(images[i]),
                                       ),
                                     ),
                                   ),
@@ -388,45 +380,51 @@ class RestaurantDetails extends StatelessWidget {
                                   color: MyTheme.buttonbackgroundColor),
                             ),
                             Container(
-                              height: 13.6,
-                              width: 13.6,
+                              height: 11.6,
+                              width: 11.6,
                               child: Image(
                                 image: AssetImage(Assets.clock),
                               ),
                             ),
                           ]),
                           SizedBox(
-                            height: 21,
+                            height: 10,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 children: [
-                                  Text(
-                                    bio.recurring_event_date,
-                                    style: GoogleFonts.inter(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FontStyle.normal,
-                                        color: MyTheme.aboutlocatextcolors),
-                                  ),
                                   // Text(
-                                  //   "May",
+                                  //   bio.recurring_event_date,
                                   //   style: GoogleFonts.inter(
                                   //       fontSize: 13,
                                   //       fontWeight: FontWeight.w500,
                                   //       fontStyle: FontStyle.normal,
                                   //       color: MyTheme.aboutlocatextcolors),
                                   // ),
-                                  // Text(
-                                  //   "12",
-                                  //   style: GoogleFonts.inter(
-                                  //       fontSize: 15,
-                                  //       fontWeight: FontWeight.w500,
-                                  //       fontStyle: FontStyle.normal,
-                                  //       color: MyTheme.appbartextColor),
-                                  // )
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15),
+                                    child: Text(
+                                      "MAY",
+                                      style: GoogleFonts.inter(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle: FontStyle.normal,
+                                          color: MyTheme.aboutlocatextcolors),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15),
+                                    child: Text(
+                                      "12",
+                                      style: GoogleFonts.inter(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle: FontStyle.normal,
+                                          color: MyTheme.appbartextColor),
+                                    ),
+                                  )
                                 ],
                               ),
                               Column(
@@ -509,9 +507,9 @@ class RestaurantDetails extends StatelessWidget {
                               Get.back();
                             },
                           ),
-                          SizedBox(
-                            height: 10,
-                          )
+                          // SizedBox(
+                          //   height: 10,
+                          // )
                         ],
                       ),
                     ),
@@ -550,13 +548,11 @@ class FullImage extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.center,
-            child: InteractiveViewer(
-              child: Image.network(
-                path,
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.fitWidth,
-              ),
+            child: Image.network(
+              path,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),
