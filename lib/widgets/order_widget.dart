@@ -6,12 +6,12 @@ import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_option.dart';
-import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class OrderWidget extends StatelessWidget {
   final OrderModelApi e;
+
   final Function(TapDownDetails) showMenu;
   OrderWidget({Key? key, required this.e, required this.showMenu})
       : super(key: key);
@@ -86,7 +86,9 @@ class OrderWidget extends StatelessWidget {
               borderColor: Color(0xff222831),
               text: "Give Feedback",
               onTap: () {
-                Get.toNamed(FeedbackPage.id);
+                Get.to(() => FeedbackPage(
+                      e: e,
+                    ));
               },
             ),
           ],

@@ -1,5 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -11,6 +13,7 @@ import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
+import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 
@@ -54,7 +57,14 @@ class OrderController extends GetxController {
   }
 
   RxString otp = "".obs;
+
+  var rating1 = 0.0;
+  var rating2 = 0.0;
+  var rating3 = 0.0;
+  var rating4 = 0.0;
   late TextEditingController feedback;
+  File? imgs;
+
   void onInit() {
     getCart();
     getorder();
@@ -236,6 +246,25 @@ class OrderController extends GetxController {
     try {
       await services.updateStatus(id, status);
       await getorder();
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> feedbacks(String resId) async {
+    try {
+      String userid = await sfHelper.getUserId();
+      await services.feedbackapi(
+        resId,
+        userid,
+        rating1.toString(),
+        rating2.toString(),
+        rating3.toString(),
+        rating4.toString(),
+        feedback.text,
+        imgs!,
+      );
+      Get.toNamed(Tellafriend.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

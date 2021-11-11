@@ -80,17 +80,20 @@ class BurgersupportingPage extends GetView<OrderController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("TOTAL :",
-                              style: TextStyle(
-                                fontFamily: "Inter",
+                              style: GoogleFonts.inter(
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
                                 color: MyTheme.appbartextColor,
                               )),
-                          Obx(() => TextwidgetPage(
-                                text: "\$ " + controller.total.value.toString(),
-                                color: MyTheme.appbartextColor,
-                                fontWeight: FontWeight.w500,
+                          Obx(() => Text(
+                                "\$ " + controller.total.value.toString(),
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 13,
+                                  color: MyTheme.appbartextColor,
+                                ),
                               )),
                         ],
                       )),
@@ -104,8 +107,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Sales Tax: ".toUpperCase(),
-                            style: TextStyle(
-                              fontFamily: "Inter",
+                            style: GoogleFonts.inter(
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,
                               fontSize: 13,
@@ -114,10 +116,10 @@ class BurgersupportingPage extends GetView<OrderController> {
                         Text(
                           "\$ 0.5",
                           style: GoogleFonts.inter(
-                            fontSize: 12,
-                            fontStyle: FontStyle.normal,
-                            color: MyTheme.appbartextColor,
                             fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            color: MyTheme.appbartextColor,
                           ),
                         ),
                       ],

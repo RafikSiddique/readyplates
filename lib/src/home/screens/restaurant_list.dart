@@ -46,10 +46,8 @@ class ShopScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
             iconSize: 14.83,
-            icon: FaIcon(
-              FontAwesomeIcons.chevronLeft,
-              color: Colors.black,
-            ),
+            icon: FaIcon(FontAwesomeIcons.chevronLeft,
+                color: MyTheme.appbartextColor),
             onPressed: () {
               Navigator.pushNamed(context, MapPage.id);
             }),
@@ -94,7 +92,7 @@ class ShopScreen extends StatelessWidget {
                         hintText: "Search"),
                   )),
               SizedBox(
-                height: 5,
+                height: 8,
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -105,24 +103,29 @@ class ShopScreen extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.gps_fixed,
-                      size: 15,
+                      size: 11,
                     ),
                     SizedBox(
                       width: 5,
                     ),
-                    Text(controller.address.value,
-                        style: GoogleFonts.inter(
-                          fontSize: 10,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
-                          color: MyTheme.appbartextColor,
-                        )),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child:
+                          Text(controller.address.value.capitalize.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.inter(
+                                fontSize: 10,
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500,
+                                color: MyTheme.appbartextColor,
+                              )),
+                    ),
                   ],
                 ),
               ),
 
               SizedBox(
-                height: 27,
+                height: 22,
               ),
 
               Container(
@@ -203,7 +206,7 @@ class ShopScreen extends StatelessWidget {
               // ),
 
               SizedBox(
-                height: 27,
+                height: 22,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:readyplates/models/cart_model.dart';
@@ -118,6 +119,49 @@ class Orderservices extends ApiService {
         return orderItems;
       } else if (response.statusCode != 404) {
         return <OrderModelApi>[];
+      } else {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> feedbackapi(
+    String restaurant,
+    String user,
+    String overall_experience,
+    String taste,
+    String ambience,
+    String serving_time,
+    String feedback,
+    File image,
+  ) async {
+    print('body1');
+    try {
+      print('body2');
+      MultipartRequest request = MultipartRequest('POST', feedbackApi);
+      MultipartFile img = await MultipartFile.fromPath('image', image.path);
+      request.files.addAll([img]);
+      request.fields.addAll({
+        'restaurant': restaurant,
+        'user': user,
+        'overall_experience': overall_experience,
+        'taste': taste,
+        'ambience': ambience,
+        'serving_time': serving_time,
+        'feedback': feedback,
+      });
+      print('body3');
+      StreamedResponse response = await request.send();
+      print('body4');
+      print(response.statusCode);
+      print(response.stream);
+      if (response.statusCode != 201) {
+        print('body5');
+        String body = await response.stream.bytesToString();
+        print(body);
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);

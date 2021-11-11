@@ -102,7 +102,8 @@ class BookingDetails extends GetView<OrderController> {
           },
           child: Icon(
             FontAwesomeIcons.chevronLeft,
-            color: Colors.black,
+            color: MyTheme.appbartextColor,
+            size: 14.83,
           ),
         ),
         centerTitle: true,

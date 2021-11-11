@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/src/home/screens/landing_page.dart';
+import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/src/Order_Screens/feedback_page.dart';
+import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/buuton.dart';
@@ -12,7 +14,9 @@ import 'package:readyplates/widgets/form_field.dart';
 
 class PaymentPage extends StatelessWidget {
   static const id = "/PaymentPage";
-  const PaymentPage({Key? key}) : super(key: key);
+  const PaymentPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -150,16 +154,17 @@ class PaymentPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                          width: 180,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "CVV",
-                              suffixIcon: Icon(Icons.credit_card),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
+                        width: 180,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "CVV",
+                            suffixIcon: Icon(Icons.credit_card),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -263,6 +268,7 @@ class PaymentPage extends StatelessWidget {
                 child: Text("Pay \$ 25.50"),
                 onPressed: () {
                   Get.offAllNamed(LandingPage.id);
+                  // Get.toNamed(FeedbackPage.id);
                 },
               ),
             ],

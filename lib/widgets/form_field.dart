@@ -77,7 +77,6 @@ class AppFormField extends StatelessWidget {
             ),
           StatefulBuilder(builder: (context, setState) {
             return Container(
-              height: MediaQuery.of(context).size.height * 0.05,
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1,
