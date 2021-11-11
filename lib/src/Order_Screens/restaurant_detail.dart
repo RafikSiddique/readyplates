@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -356,11 +354,14 @@ class RestaurantDetails extends StatelessWidget {
                                     tag: i,
                                     child: Material(
                                       type: MaterialType.transparency,
-                                      child: Container(
-                                        margin:
-                                            EdgeInsets.only(left: 2, right: 2),
-                                        height: 70,
-                                        child: Image.network(images[i]),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              left: 2, right: 2),
+                                          height: 70,
+                                          child: Image.network(images[i]),
+                                        ),
                                       ),
                                     ),
                                   ),

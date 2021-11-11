@@ -68,8 +68,9 @@ class Routes {
                   case PaymentsucessfulPage.id:
                     return PaymentsucessfulPage();
 
-                  case FeedbackPage.id: //add feedbackpage
-                    return FeedbackPage();
+                  // case FeedbackPage.id: //add feedbackpage
+
+                  //   return FeedbackPage(e: e.,);
                   case Tellafriend.id:
                     return Tellafriend();
                   case ProfilePage.id:
