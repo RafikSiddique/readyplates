@@ -64,9 +64,7 @@ class OrderWidget extends StatelessWidget {
         return Elevated(
           width: Get.width,
           text: "Edit Order",
-          onTap: () {
-            
-          },
+          onTap: () {},
         );
       case OrderState.completed:
       case OrderState.cancelled:
