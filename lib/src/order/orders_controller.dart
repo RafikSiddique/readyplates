@@ -22,7 +22,9 @@ class OrderController extends GetxController {
   final SharedPreferenceHelper sfHelper = Get.find();
   RxList<CartModel> cartItems = <CartModel>[].obs;
   RxList<CartApiModel> cartApiItems = <CartApiModel>[].obs;
-  RxList<OrderModelApi> orderItems = <OrderModelApi>[].obs;
+  RxList<OrderModelApi> active = <OrderModelApi>[].obs;
+  RxList<OrderModelApi> inProgress = <OrderModelApi>[].obs;
+  RxList<OrderModelApi> ended = <OrderModelApi>[].obs;
 
   RxInt numberOfPeople = 1.obs;
   RxInt numberOfTable = 1.obs;
@@ -33,27 +35,12 @@ class OrderController extends GetxController {
 
   late List<TextEditingController> otpText;
 
-  bool anyInprogress() {
-    bool prev = orderItems.any((element) {
-      return element.status == OrderState.placed;
-    });
-    return prev;
-  }
-
   double calclateTotal() {
     total.value = 0;
     for (var item in cartItems) {
       total.value += item.foodQuantity.value * item.foodPrice.value;
     }
     return total.value;
-  }
-
-  bool anyPrevious() {
-    bool prev = orderItems.any((element) {
-      return element.status != OrderState.placed &&
-          element.status != OrderState.inProgress;
-    });
-    return prev;
   }
 
   RxString otp = "".obs;
@@ -236,7 +223,20 @@ class OrderController extends GetxController {
   Future<void> getorder() async {
     try {
       String id = await sfHelper.getUserId();
-      orderItems.value = await services.getorder(id);
+      final orderList = await services.getorder(id);
+      active.value = orderList
+          .where((element) => element.status == OrderState.placed)
+          .toList();
+      active.sort((a, b) => b.id.compareTo(a.id));
+
+      inProgress.value = orderList
+          .where((element) => element.status == OrderState.inProgress)
+          .toList();
+      inProgress.sort((a, b) => b.id.compareTo(a.id));
+
+      ended.value =
+          orderList.where((element) => element.status.index > 1).toList();
+      ended.sort((a, b) => b.id.compareTo(a.id));
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

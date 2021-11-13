@@ -149,7 +149,9 @@ class OrderPage extends GetView<OrderController> {
             leading: Container(),
             automaticallyImplyLeading: false,
           ),
-          body: controller.orderItems.length == 0
+          body: controller.active.isEmpty &&
+                  controller.inProgress.isEmpty &&
+                  controller.ended.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -193,8 +195,7 @@ class OrderPage extends GetView<OrderController> {
                       () => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (controller.orderItems.any(
-                              (element) => element.status == OrderState.placed))
+                          if (controller.active.isNotEmpty)
                             Text("ACTIVE",
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
@@ -209,8 +210,7 @@ class OrderPage extends GetView<OrderController> {
                           ListView(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            children: controller.orderItems
-                                .where((p0) => p0.status == OrderState.placed)
+                            children: controller.active
                                 .map(
                                   (element) => OrderWidget(
                                     e: element,
@@ -228,7 +228,7 @@ class OrderPage extends GetView<OrderController> {
                           SizedBox(
                             height: 10,
                           ),
-                          if (controller.anyInprogress())
+                          if (controller.inProgress.isNotEmpty)
                             Text(
                               "In progress".toUpperCase(),
                               style: GoogleFonts.inter(
@@ -245,9 +245,7 @@ class OrderPage extends GetView<OrderController> {
                           ListView(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              children: controller.orderItems
-                                  .where((p0) =>
-                                      p0.status == OrderState.inProgress)
+                              children: controller.inProgress
                                   .map((e) => OrderWidget(
                                         e: e,
                                         showMenu: (p0) {
@@ -262,7 +260,7 @@ class OrderPage extends GetView<OrderController> {
                           SizedBox(
                             height: 10,
                           ),
-                          if (controller.anyPrevious())
+                          if (controller.ended.isNotEmpty)
                             Text(
                               "PREVIOUS COMPLETED ORDERS ",
                               style: GoogleFonts.inter(
@@ -279,10 +277,7 @@ class OrderPage extends GetView<OrderController> {
                           ListView(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              children: controller.orderItems
-                                  .where((p0) =>
-                                      p0.status != OrderState.placed &&
-                                      p0.status != OrderState.inProgress)
+                              children: controller.ended
                                   .map((e) => OrderWidget(
                                         e: e,
                                         showMenu: (p0) {},
@@ -298,71 +293,3 @@ class OrderPage extends GetView<OrderController> {
     );
   }
 }
-
-
-/* 
- /* TextField(
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.montserrat(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                                controller:
-                                                    controller.otpText[i],
-                                                textAlignVertical:
-                                                    TextAlignVertical.bottom,
-                                                focusNode:
-                                                    controller.otpFields[i],
-                                                maxLength: 1,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                ],
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                decoration: InputDecoration(
-                                                  counterText: "",
-                                                  hintText: (i + 1).toString(),
-                                                  hintStyle: TextStyle(
-                                                    color: Colors.grey.shade300,
-                                                  ),
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    // borderRadius: BorderRadius.circular(6.0),
-                                                  ),
-                                                ),
-                                                onChanged: (value) {
-                                                  if (value.length == 1) {
-                                                    controller.otp.value +=
-                                                        value;
-                                                    if (i != 5) {
-                                                      controller
-                                                          .otpFields[i + 1]
-                                                          .requestFocus();
-                                                    } else {
-                                                      if (controller
-                                                              .otp.value ==
-                                                          element.pin
-                                                              .toString()) {
-                                                      } else {
-                                                        Get.snackbar(
-                                                            "Incorrect OTP",
-                                                            "Enter correct OTP");
-                                                      } /*                controller.otp.value !=
-                                                            element.pin
-                                                                .toString();
-                                                        Get.snackbar(
-                                                            title, message); */
-                                                    }
-                                                  } else {
-                                                    if (i != 0) {
-                                                      controller.otp.value =
-                                                          controller.otp.value
-                                                              .substring(0, i);
-                                                      controller
-                                                          .otpFields[i - 1]
-                                                          .requestFocus();
-                                                    }
-                                                  }
-                                                },
-                                              ), */ */
