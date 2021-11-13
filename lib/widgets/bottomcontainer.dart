@@ -76,7 +76,12 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   text: "Add Items",
                   borderColor: MyTheme.bottomcontainercolor,
                   onTap: () {
-                    Get.toNamed(MenuPage.id, arguments: widget.restaurantModel);
+                    Get.offAllNamed(
+                      MenuPage.id,
+                      arguments: widget.restaurantModel,
+                      predicate: (route) =>
+                          route.settings.name == RestaurantDetails.id,
+                    );
                   },
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),

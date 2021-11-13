@@ -244,6 +244,31 @@ class MenuPage extends StatelessWidget {
                                                                     await orderController
                                                                         .removeAllFromRes(
                                                                             restaurantModel.id);
+                                                                    CartModel cartModel = CartModel(
+                                                                        foodItem: e
+                                                                            .id
+                                                                            .obs,
+                                                                        foodName: e
+                                                                            .name,
+                                                                        foodImage: e
+                                                                            .image1,
+                                                                        foodPrice:
+                                                                            double.parse(e.cost)
+                                                                                .obs,
+                                                                        restaurant:
+                                                                            restaurantModel
+                                                                                .id,
+                                                                        user:
+                                                                            "",
+                                                                        foodQuantity:
+                                                                            1.obs);
+                                                                    orderController
+                                                                        .cartItems
+                                                                        .add(
+                                                                            cartModel);
+                                                                    orderController
+                                                                        .cart(
+                                                                            cartModel);
                                                                     Get.back();
                                                                   },
                                                                   child: Text(
@@ -299,15 +324,12 @@ class MenuPage extends StatelessWidget {
                                                 e.name,
                                                 textAlign: TextAlign.left,
                                                 style: GoogleFonts.montserrat(
-                                                    fontWeight:
-                                                        FontWeight.w500,
-                                                    fontStyle:
-                                                        FontStyle.normal,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle: FontStyle.normal,
                                                     fontSize: 16,
                                                     color: MyTheme
                                                         .buttonchangeColor),
-                                                overflow:
-                                                    TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                             SizedBox(height: 4),
@@ -396,13 +418,16 @@ class MenuPage extends StatelessWidget {
                 Obx(() => Elevated(
                       text: "Proceed to Booking",
                       width: double.infinity,
-                      backgroundColor: orderController.cartItems.isEmpty
-                          ? MyTheme.hinttextColor
-                          : MyTheme.buttonbackgroundColor,
+                      backgroundColor: orderController.cartItems.any(
+                              (element) =>
+                                  element.restaurant == restaurantModel.id)
+                          ? MyTheme.buttonbackgroundColor
+                          : MyTheme.hinttextColor,
                       onTap: () {
-                        if (orderController.cartItems.isEmpty) {
-                          Get.snackbar("Please add an Item",
-                              "At least add 1 Item to proceed to booking");
+                        if (orderController.cartItems.any((element) =>
+                            element.restaurant != restaurantModel.id)) {
+                          Get.snackbar("Please add an item",
+                              "At least add atleast 1 item from this restaurant to proceed to booking");
                         } else {
                           Get.toNamed(BookingDetails.id,
                               arguments: restaurantModel);

@@ -26,7 +26,9 @@ class LandingPage extends StatelessWidget {
           controller.onPageChange(0);
         });
       case 3:
-        return Tellafriend();
+        return Tellafriend(
+          isHome: true,
+        );
       case 4:
         return ProfilePage();
 

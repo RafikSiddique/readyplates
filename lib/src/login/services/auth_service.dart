@@ -32,6 +32,9 @@ class AuthenticationServices extends ApiService {
         print('User Id is ---->' + id);
         print(response.body);
         return id;
+      } else if (response.statusCode == 500) {
+        throw AppException(
+            code: response.statusCode, message: "Something went wrong");
       } else {
         throw AppException(code: response.statusCode, message: response.body);
       }

@@ -67,9 +67,6 @@ class AuthController extends GetxController {
     password2Controller = TextEditingController();
     dobController = TextEditingController();
     feedback = TextEditingController();
-
-    userNameFocus = FocusNode();
-
     otpFields = List.generate(4, (index) => FocusNode());
     otpText = List.generate(4, (index) => TextEditingController());
     usernameController.addListener(onLooseFocus);
@@ -86,13 +83,20 @@ class AuthController extends GetxController {
     try {
       id = await services.login(
           usernameController.text, passwordController.text);
-      sfHelper.setUserId(id!);
+      await sfHelper.setUserId(id!);
       if (implicit) {
         Get.toNamed(ImagePage.id);
       } else {
-        Get.put(HomeController());
+        final c = Get.put(HomeController());
+        c.currentIndex.value = 0;
         Get.put(OrderController());
         Get.toNamed(MapPage.id);
+        lNameController.clear();
+        fNamController.clear();
+        password2Controller.clear();
+        passwordController.clear();
+        usernameController.clear();
+
         sfHelper.setLoggedIn(true);
       }
     } catch (e) {
@@ -102,7 +106,14 @@ class AuthController extends GetxController {
 
   void gotoHome() {
     sfHelper.setLoggedIn(true);
-    Get.put(HomeController());
+    final c = Get.put(HomeController());
+    c.getAddress();
+    lNameController.clear();
+    fNamController.clear();
+    password2Controller.clear();
+    passwordController.clear();
+    usernameController.clear();
+    c.currentIndex.value = 0;
     Get.put(OrderController());
     Get.offAllNamed(LandingPage.id);
   }

@@ -12,7 +12,8 @@ import 'package:share_plus/share_plus.dart';
 
 class Tellafriend extends StatelessWidget {
   static const id = "/tellafriend";
-  const Tellafriend({Key? key}) : super(key: key);
+  final bool isHome;
+  const Tellafriend({Key? key, this.isHome = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,23 +142,25 @@ class Tellafriend extends StatelessWidget {
                     SizedBox(
                       height: 25,
                     ),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Color(0xff222831)),
-                          elevation: MaterialStateProperty.all(0),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                  side: BorderSide(color: Colors.transparent))),
-                        ),
-                        onPressed: () {
-                          Get.offAllNamed(LandingPage.id);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          child: Icon(Icons.home),
-                        )),
+                    if (!isHome)
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xff222831)),
+                            elevation: MaterialStateProperty.all(0),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                    side:
+                                        BorderSide(color: Colors.transparent))),
+                          ),
+                          onPressed: () {
+                            Get.offAllNamed(LandingPage.id);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15.0),
+                            child: Icon(Icons.home),
+                          )),
                   ],
                 ),
               ),
