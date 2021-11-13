@@ -90,6 +90,14 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  void clear() {
+    address.value = '';
+    lat = 0;
+    lon = 0;
+    restaurants.clear();
+    foodItems.clear();
+  }
+
   void getAddress() async {
     address.value = await sfHelper.getAddress();
     lat = await sfHelper.getLat();

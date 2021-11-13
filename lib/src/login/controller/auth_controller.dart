@@ -59,7 +59,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     sfHelper.getLoggedIn();
-userNameFocus = FocusNode();
+    userNameFocus = FocusNode();
     usernameController = TextEditingController();
     passwordController = TextEditingController();
     fNamController = TextEditingController();
@@ -109,13 +109,13 @@ userNameFocus = FocusNode();
     sfHelper.setLoggedIn(true);
     final c = Get.put(HomeController());
     c.getAddress();
+    Get.put(OrderController());
     lNameController.clear();
     fNamController.clear();
     password2Controller.clear();
     passwordController.clear();
     usernameController.clear();
     c.currentIndex.value = 0;
-    Get.put(OrderController());
     Get.offAllNamed(LandingPage.id);
   }
 
@@ -156,8 +156,9 @@ userNameFocus = FocusNode();
     sfHelper.setAddress("");
     sfHelper.setLoggedIn(false);
     sfHelper.setUserId("");
-    Get.find<OrderController>().dispose();
+    Get.find<OrderController>().clearController();
     Get.offAllNamed(OnbordingPage.id);
-    Get.find<HomeController>().dispose();
+    final c = Get.find<HomeController>();
+    c.clear();
   }
 }
