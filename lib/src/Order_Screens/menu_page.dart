@@ -290,20 +290,45 @@ class MenuPage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
+                                            SizedBox(height: 8),
                                             FittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: Text(
                                                 e.name,
+                                                textAlign: TextAlign.left,
                                                 style: GoogleFonts.montserrat(
                                                     fontWeight: FontWeight.w500,
-                                                    fontSize:
-                                                        size.width * 0.05),
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 16,
+                                                    color: MyTheme
+                                                        .buttonchangeColor),
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            Text(
-                                              e.description,
-                                              style: GoogleFonts.montserrat(
-                                                  fontSize: size.width * 0.03),
+                                            SizedBox(height: 4),
+                                            Container(
+                                              height: 45,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 16),
+                                                child: SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  child: Text(
+                                                    e.description,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.left,
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 9,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                             Spacer(),
                                             Row(
@@ -328,6 +353,7 @@ class MenuPage extends StatelessWidget {
                                                 Spacer(),
                                                 Text("\$ " + e.cost,
                                                     style: GoogleFonts.inter(
+                                                      color: MyTheme.pricecolor,
                                                       fontSize:
                                                           size.width * 0.04,
                                                       fontWeight:
