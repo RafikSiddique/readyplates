@@ -59,6 +59,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     sfHelper.getLoggedIn();
+userNameFocus = FocusNode();
     usernameController = TextEditingController();
     passwordController = TextEditingController();
     fNamController = TextEditingController();
