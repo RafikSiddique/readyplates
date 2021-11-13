@@ -311,6 +311,7 @@ class _MapPageState extends State<MapPage> {
                                         latLng.latitude,
                                         latLng.longitude,
                                         authController.address.value);
+                                    Get.find<HomeController>().getAddress();
                                     authController.gotoHome();
                                   },
                                   child: Text('NEXT',
