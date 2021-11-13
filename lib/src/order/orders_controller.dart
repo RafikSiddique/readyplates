@@ -262,7 +262,7 @@ class OrderController extends GetxController {
         rating3.toString(),
         rating4.toString(),
         feedback.text,
-        imgs!,
+        imgs,
       );
       Get.toNamed(Tellafriend.id);
     } catch (e) {

@@ -26,10 +26,10 @@ class RestaurantDetails extends StatelessWidget {
     Size size = media.size;
     Bio bio = restaurantModel.bio.first;
     List<String> images = [
+      bio.street_view,
       bio.entrance,
       bio.front_fascia_day,
       bio.front_fascia_night,
-      bio.street_view,
       bio.ambience1,
       bio.ambience2,
       bio.ambience3,
@@ -549,11 +549,13 @@ class FullImage extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.center,
-            child: Image.network(
-              path,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.fitWidth,
+            child: InteractiveViewer(
+              child: Image.network(
+                path,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
         ),

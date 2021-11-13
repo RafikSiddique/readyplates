@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -308,9 +309,21 @@ class MenuPage extends StatelessWidget {
                                             Spacer(),
                                             Row(
                                               children: [
-                                                Image.asset((e.dietType == "Veg"
-                                                    ? Assets.veg
-                                                    : Assets.nonveg)),
+                                                e.dietType == "1"
+                                                    ? SvgPicture.asset(
+                                                        "assets/images/vegan.svg",
+                                                        height: 20,
+                                                        width: 20,
+                                                      )
+                                                    : Image.asset(
+                                                        ("assets/images/veg.png"),
+                                                        color: e.dietType ==
+                                                                "2"
+                                                            ? Color(0xffBC580B)
+                                                            : null,
+                                                        height: 20,
+                                                        width: 20,
+                                                      ),
                                                 SizedBox(
                                                   width: 10,
                                                 ),

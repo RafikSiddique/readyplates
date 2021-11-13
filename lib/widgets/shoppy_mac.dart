@@ -16,7 +16,7 @@ class ShooppymacPage extends StatelessWidget {
       () => Column(children: [
         Container(
           padding: EdgeInsets.symmetric(vertical: 10),
-          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.network(
@@ -27,7 +27,7 @@ class ShooppymacPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 10,
+              width: 8,
             ),
             Text(
               cartModel.foodQuantity.string,
@@ -51,10 +51,10 @@ class ShooppymacPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 10,
+              width: 8,
             ),
             Expanded(
-              flex: 2,
+              flex: 6,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -84,9 +84,6 @@ class ShooppymacPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Spacer(
-              flex: 1,
             ),
             Expanded(
               flex: 3,

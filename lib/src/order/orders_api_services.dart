@@ -136,14 +136,16 @@ class Orderservices extends ApiService {
     String ambience,
     String serving_time,
     String feedback,
-    File image,
+    File? image,
   ) async {
     print('body1');
     try {
       print('body2');
       MultipartRequest request = MultipartRequest('POST', feedbackApi);
-      MultipartFile img = await MultipartFile.fromPath('image', image.path);
-      request.files.addAll([img]);
+      if (image != null) {
+        MultipartFile img = await MultipartFile.fromPath('image', image.path);
+        request.files.addAll([img]);
+      }
       request.fields.addAll({
         'restaurant': restaurant,
         'user': user,
@@ -157,8 +159,7 @@ class Orderservices extends ApiService {
       StreamedResponse response = await request.send();
       print('body4');
       print(response.statusCode);
-      print(response.stream);
-      if (response.statusCode != 201) {
+      if (response.statusCode == 201) {
         print('body5');
         String body = await response.stream.bytesToString();
         print(body);
