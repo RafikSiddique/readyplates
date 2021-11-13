@@ -317,7 +317,8 @@ class MenuPage extends StatelessWidget {
                                                       Axis.vertical,
                                                   child: Text(
                                                     e.description,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     textAlign: TextAlign.left,
                                                     style:
                                                         GoogleFonts.montserrat(
@@ -342,8 +343,7 @@ class MenuPage extends StatelessWidget {
                                                       )
                                                     : Image.asset(
                                                         ("assets/images/veg.png"),
-                                                        color: e.dietType ==
-                                                                "2"
+                                                        color: e.dietType == "2"
                                                             ? Color(0xffBC580B)
                                                             : null,
                                                         height: 20,

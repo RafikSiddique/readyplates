@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,8 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/place_search.dart';
+import 'package:uuid/uuid.dart';
 
 class MapPage extends StatefulWidget {
   static const id = "/map";
@@ -117,23 +120,43 @@ class _MapPageState extends State<MapPage> {
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    child: TextField(
-                      // textAlign: TextAlign.center,
-                      controller: TextEditingController(),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          hintText: "Search Any Location",
-                          contentPadding:
-                              const EdgeInsets.only(top: 27, left: 10),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.grey,
+                    child: TypeAheadField<Suggestion>(
+                      itemBuilder: (BuildContext context, itemData) {
+                        return ListTile(
+                          title: Text(itemData.description.toString()),
+                        );
+                      },
+                      onSuggestionSelected: (Suggestion? suggestion) async {
+                        final session = Uuid().v4();
+
+                        Place place = await PlaceApiProvider(session)
+                            .getPlaceDetailFromId(suggestion!.placeId);
+                        controller?.animateCamera(CameraUpdate.newLatLng(
+                            LatLng(place.lat!, place.lang!)));
+                      },
+                      suggestionsCallback: (String pattern) async {
+                        final session = Uuid().v4();
+                        return PlaceApiProvider(session)
+                            .fetchSuggestions(pattern, 'en');
+                      },
+                      textFieldConfiguration: TextFieldConfiguration(
+                        // textAlign: TextAlign.center,
+                        controller: TextEditingController(),
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          )),
+                            hintText: "Search Any Location",
+                            contentPadding:
+                                const EdgeInsets.only(top: 27, left: 10),
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.grey,
+                              ),
+                            )),
+                      ),
                     ),
                   ),
                 ),
