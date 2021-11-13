@@ -166,14 +166,19 @@ class OrderWidget extends StatelessWidget {
                           SizedBox(
                             width: 9,
                           ),
-                          Text(e.menu.name,
-                              style: GoogleFonts.inter(
-                                textStyle: TextStyle(
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Text(e.menu.name,
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
-                                    color: MyTheme.buttonbackgroundColor),
-                              )),
+                                    color: MyTheme.buttonbackgroundColor,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )),
+                          ),
                           Spacer(),
                           Text("\$${e.price}",
                               style: GoogleFonts.nunito(
@@ -209,10 +214,11 @@ class OrderWidget extends StatelessWidget {
                         " People",
                     style: GoogleFonts.nunito(
                       textStyle: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.normal,
-                          color: MyTheme.buttonbackgroundColor),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                        color: MyTheme.buttonbackgroundColor,
+                      ),
                     ))
               ],
             ),
@@ -222,10 +228,12 @@ class OrderWidget extends StatelessWidget {
                 Text(e.restaurant.res_name,
                     style: GoogleFonts.nunito(
                       textStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                          color: MyTheme.buttonbackgroundColor),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        color: MyTheme.buttonbackgroundColor,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     )),
                 Text(
                     e.date +
