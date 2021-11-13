@@ -87,4 +87,6 @@ class MyTheme {
   static Color buttontextColor = Color(0xffE5E5E5);
   static Color buttontextchangeColor = Color(0xffFFFFFF);
   static Color text3Color = Color(0xff393E46);
+  static Color desFont = Color(0xff7F7F7F);
+  static Color pricecolor = Color(0xff595959);
 }
