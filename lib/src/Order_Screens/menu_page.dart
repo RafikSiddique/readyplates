@@ -294,16 +294,23 @@ class MenuPage extends StatelessWidget {
                                             SizedBox(height: 8),
                                             FittedBox(
                                               fit: BoxFit.scaleDown,
-                                              child: Text(
-                                                e.name,
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 16,
-                                                    color: MyTheme
-                                                        .buttonchangeColor),
-                                                overflow: TextOverflow.ellipsis,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 16),
+                                                child: Text(
+                                                  e.name,
+                                                  textAlign: TextAlign.left,
+                                                  style: GoogleFonts.montserrat(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontSize: 16,
+                                                      color: MyTheme
+                                                          .buttonchangeColor),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
                                               ),
                                             ),
                                             SizedBox(height: 4),
@@ -317,8 +324,7 @@ class MenuPage extends StatelessWidget {
                                                       Axis.vertical,
                                                   child: Text(
                                                     e.description,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                    overflow: TextOverflow.clip,
                                                     textAlign: TextAlign.left,
                                                     style:
                                                         GoogleFonts.montserrat(
