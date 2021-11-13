@@ -30,6 +30,22 @@ class _MapPageState extends State<MapPage> {
     73.89262582364269,
   );
 
+  Future<void> setAddress() async {
+    await Future.delayed(Duration(seconds: 1));
+    final address = await geoCode.reverseGeocoding(
+        latitude: latLng.latitude, longitude: latLng.longitude);
+    authController.address.value = address.streetAddress.toString() +
+        ", " +
+        address.region.toString() +
+        ", " +
+        address.postal.toString();
+    if (widget.isHome) {
+      await authController.setAddress(
+          latLng.latitude, latLng.longitude, authController.address.value);
+      Get.find<HomeController>().getAddress();
+    }
+  }
+
   Widget pin() {
     return IgnorePointer(
       child: Center(
@@ -82,23 +98,12 @@ class _MapPageState extends State<MapPage> {
                   zoom: 18,
                 ),
                 onCameraIdle: () async {
-                  final address = await geoCode.reverseGeocoding(
-                      latitude: latLng.latitude, longitude: latLng.longitude);
-                  authController.address.value =
-                      address.streetAddress.toString() +
-                          ", " +
-                          address.region.toString() +
-                          ", " +
-                          address.postal.toString();
-                  if (widget.isHome) {
-                    await authController.setAddress(latLng.latitude,
-                        latLng.longitude, authController.address.value);
-                    Get.find<HomeController>().getAddress();
-                  }
+                  setAddress();
                 },
                 onMapCreated: (controller) {
                   this.controller = controller;
                   completer.complete(this.controller);
+                  setAddress();
                 },
                 onCameraMove: (position) {
                   latLng = position.target;

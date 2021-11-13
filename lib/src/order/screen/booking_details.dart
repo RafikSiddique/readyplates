@@ -202,20 +202,24 @@ class BookingDetails extends GetView<OrderController> {
                               restaurantModel.start_time.split(':');
                           List<String> endTime =
                               restaurantModel.end_time.split(':');
-
-                          bool isAfterStart = tod.hour >
-                              (int.parse(startTimes.first) +
-                                  (startTimes.last.toLowerCase().contains('a')
-                                      ? 0
-                                      : 12));
-                          bool isBeforeEnd =
-                              (tod.hour > 12 ? tod.hour - 12 : tod.hour) <
-                                  int.parse(endTime.first) +
-                                      (endTime.last.toLowerCase().contains('a')
-                                          ? 0
-                                          : 12);
-                          print(isBeforeEnd);
+                          int start = (int.parse(startTimes.first) +
+                              (startTimes.last.toLowerCase().contains('a')
+                                  ? 0
+                                  : startTimes.last.toLowerCase().contains('p')
+                                      ? 12
+                                      : 0));
+                          int end = int.parse(endTime.first) +
+                              (endTime.last.toLowerCase().contains('a')
+                                  ? 0
+                                  : endTime.last.toLowerCase().contains('p')
+                                      ? 12
+                                      : 0);
+                          print(start);
+                          print(end);
+                          bool isAfterStart = tod.hour > start;
+                          bool isBeforeEnd = tod.hour < end;
                           print(isAfterStart);
+                          print(isBeforeEnd);
                           print(tod);
                           if (isAfterStart && isBeforeEnd) {
                             controller.selectedDate.value = DateTime(

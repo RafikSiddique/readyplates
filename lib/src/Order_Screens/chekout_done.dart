@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/order/screen/payment_sucessful.dart';
@@ -9,8 +10,8 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class Chekoutdone extends StatelessWidget {
-  static const id = "/chekoutdone";
-  const Chekoutdone({Key? key}) : super(key: key);
+  final OrderModelApi orderModelApi;
+  const Chekoutdone({Key? key, required this.orderModelApi}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class Chekoutdone extends StatelessWidget {
                       ),
                     )),
                 SizedBox(height: 4),
-                Text("Your order #210403AS is complete ",
+                Text("Your order #${orderModelApi.id} is complete ",
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         fontSize: 15,
@@ -83,7 +84,9 @@ class Chekoutdone extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
                     onTap: () {
-                      Get.toNamed(PaymentPage.id);
+                      Get.to(() => PaymentPage(
+                            orderModelApi: orderModelApi,
+                          ));
                     },
                   ),
                 ),

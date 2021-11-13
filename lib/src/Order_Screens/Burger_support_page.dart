@@ -38,8 +38,7 @@ class BurgersupportingPage extends GetView<OrderController> {
         centerTitle: true,
         title: Text(
           'Booking Summmary',
-          style: TextStyle(
-            fontFamily: 'Inter',
+          style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
             fontSize: 17,
@@ -191,8 +190,8 @@ class BurgersupportingPage extends GetView<OrderController> {
                                   .format(controller.selectedDate.value) +
                               "\n" +
                               "PAX: ${controller.numberOfPeople} Tables X ${controller.numberOfTable}",
-                          style: TextStyle(
-                            fontFamily: "Inter",
+                          style: GoogleFonts.inter(
+                            
                             fontWeight: FontWeight.normal,
                             fontStyle: FontStyle.normal,
                             fontSize: 13,

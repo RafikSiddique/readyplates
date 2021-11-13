@@ -213,7 +213,9 @@ class OrderController extends GetxController {
       cartItems.clear();
       calclateTotal();
 
-      Get.toNamed(Chekoutdone.id);
+      Get.to(() => Chekoutdone(
+            orderModelApi: orderModelApi,
+          ));
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -264,7 +266,13 @@ class OrderController extends GetxController {
         feedback.text,
         imgs,
       );
-      Get.toNamed(Tellafriend.id);
+      rating1 = 0;
+      rating2 = 0;
+      rating3 = 0;
+      rating4 = 0;
+      feedback.clear();
+      imgs = null;
+      Get.offAllNamed(Tellafriend.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

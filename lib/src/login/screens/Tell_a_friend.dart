@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -13,7 +16,11 @@ class Tellafriend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAllNamed(LandingPage.id);
+        return true;
+      },
       child: Scaffold(
         backgroundColor: MyTheme.appbackcolor,
         appBar: AppBar(
@@ -131,58 +138,26 @@ class Tellafriend extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 8,
-                    // ),
-                    //   Text(
-                    //     "Show us some love. Share the app with your\n     friends and relatives and help us grow",
-                    //     style: TextStyle(
-                    //         fontSize: 12,
-                    //         fontFamily: 'Inter',
-                    //         fontWeight: FontWeight.normal,
-                    //         fontStyle: FontStyle.normal,
-                    //         color: MyTheme.bottomtextColor),
-                    //   ),
-                    //   SizedBox(
-                    //     height: 36,
-                    //   ),
-                    //   SizedBox(
-                    //     width: 151,
-                    //     height: 50,
-                    //     child: ElevatedButton(
-                    //       style: ElevatedButton.styleFrom(
-                    //         primary: MyTheme.appbackcolor, //Color(0xffEFEFEF),
-                    //         //side: BorderSide(
-                    //         //  width: 1.5, color: Color(0xffB9B9B9)),
-                    //       ),
-                    //       onPressed: () {
-                    //         Share.share(
-                    //             "Hello, ${Get.find<AuthController>().fNamController.text} is inviting you to join");
-                    //       },
-                    //       child: Row(
-                    //         mainAxisAlignment: MainAxisAlignment.start,
-                    //         children: <Widget>[
-                    //           Container(
-                    //               child: Image.asset(Assets.shareNetwork,
-                    //                   height: 30, width: 33, fit: BoxFit.cover)),
-                    //           SizedBox(
-                    //             width: 6,
-                    //           ),
-                    //           Center(
-                    //             child: Text("SHARE",
-                    //                 style: TextStyle(
-                    //                   fontSize: 19,
-                    //                   fontFamily: 'Nunito',
-                    //                   fontStyle: FontStyle.normal,
-                    //                   fontWeight: FontWeight.normal,
-                    //                   color: MyTheme.appbartextColor,
-                    //                   //color: Color(0xff505056),
-                    //                 )),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   )
+                    SizedBox(
+                      height: 25,
+                    ),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xff222831)),
+                          elevation: MaterialStateProperty.all(0),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6),
+                                  side: BorderSide(color: Colors.transparent))),
+                        ),
+                        onPressed: () {
+                          Get.offAllNamed(LandingPage.id);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                          child: Icon(Icons.home),
+                        )),
                   ],
                 ),
               ),

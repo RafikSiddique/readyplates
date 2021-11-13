@@ -292,25 +292,22 @@ class MenuPage extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             SizedBox(height: 8),
-                                            FittedBox(
-                                              fit: BoxFit.scaleDown,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16),
-                                                child: Text(
-                                                  e.name,
-                                                  textAlign: TextAlign.left,
-                                                  style: GoogleFonts.montserrat(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 16,
-                                                      color: MyTheme
-                                                          .buttonchangeColor),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 16),
+                                              child: Text(
+                                                e.name,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.montserrat(
+                                                    fontWeight:
+                                                        FontWeight.w500,
+                                                    fontStyle:
+                                                        FontStyle.normal,
+                                                    fontSize: 16,
+                                                    color: MyTheme
+                                                        .buttonchangeColor),
+                                                overflow:
+                                                    TextOverflow.ellipsis,
                                               ),
                                             ),
                                             SizedBox(height: 4),

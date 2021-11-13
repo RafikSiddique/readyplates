@@ -13,9 +13,10 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
 class PaymentPage extends StatelessWidget {
-  static const id = "/PaymentPage";
+  final OrderModelApi orderModelApi;
   const PaymentPage({
     Key? key,
+    required this.orderModelApi,
   }) : super(key: key);
 
   @override
@@ -35,9 +36,8 @@ class PaymentPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'Payment',
-          style: TextStyle(
+          style: GoogleFonts.inter(
             fontSize: 17,
-            fontFamily: 'Inter',
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w500,
             color: MyTheme.appbartextColor,
@@ -265,10 +265,9 @@ class PaymentPage extends StatelessWidget {
                   //   color: MyTheme.iconColor,
                   // )
                 ),
-                child: Text("Pay \$ 25.50"),
+                child: Text("Pay \$ ${orderModelApi.totalPrice}"),
                 onPressed: () {
-                  Get.offAllNamed(LandingPage.id);
-                  // Get.toNamed(FeedbackPage.id);
+                  Get.offAll(() => FeedbackPage(e: orderModelApi));
                 },
               ),
             ],

@@ -50,8 +50,7 @@ class _SignupPageState extends State<SignupPage> {
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               'User Information',
-              style: TextStyle(
-                fontFamily: 'Inter',
+              style: GoogleFonts.inter(
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.normal,
                 fontSize: 17,

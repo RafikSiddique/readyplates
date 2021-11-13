@@ -70,6 +70,7 @@ class ElevatedwidgetPage extends StatelessWidget {
   final String text;
   //final Color ;
   final Color color;
+  final Function() onPressed;
   final Color backgroundColor;
 
   const ElevatedwidgetPage({
@@ -79,6 +80,7 @@ class ElevatedwidgetPage extends StatelessWidget {
     required this.backgroundColor,
     required this.text,
     required this.color,
+    required this.onPressed,
     // this.fontSize = 13,
     // this.fontFamily = 'Inter',
     // required this.fontWeight,
@@ -106,7 +108,7 @@ class ElevatedwidgetPage extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, PaymentPage.id);
+            onPressed();
           },
           child: Text(
             text,

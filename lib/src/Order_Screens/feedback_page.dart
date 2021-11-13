@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
@@ -27,11 +29,22 @@ class FeedbackPage extends StatefulWidget {
 class _FeedbackPageState extends State<FeedbackPage> {
   final controller = Get.find<OrderController>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  Future pickImage(ImageSource source) async {
-    final image = await ImagePicker().pickImage(source: source);
-    if (image == null) return;
-    final imageTemporary = File(image.path);
-    setState(() => this.controller.imgs = imageTemporary);
+  Future<void> pickImage({
+    required void Function(File) imageFile,
+  }) async {
+    XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (file != null) {
+      File? croppedFile = await ImageCropper.cropImage(
+        sourcePath: file.path,
+        aspectRatio: CropAspectRatio(ratioX: 4, ratioY: 3),
+        aspectRatioPresets: [CropAspectRatioPreset.square],
+        cropStyle: CropStyle.rectangle,
+      );
+      if (croppedFile != null) {
+        imageFile(croppedFile);
+      }
+    }
   }
 
   List<String> ratingText = [
@@ -61,227 +74,233 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: MyTheme.appbackgroundColor,
-      appBar: AppBar(
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAllNamed(LandingPage.id);
+        return true;
+      },
+      child: Scaffold(
         backgroundColor: MyTheme.appbackgroundColor,
-        elevation: 0,
-        leading: IconButton(
-            iconSize: 14.83,
-            icon: FaIcon(
-              FontAwesomeIcons.chevronLeft,
-              color: MyTheme.iconColor,
+        appBar: AppBar(
+          backgroundColor: MyTheme.appbackgroundColor,
+          elevation: 0,
+          leading: IconButton(
+              iconSize: 14.83,
+              icon: FaIcon(
+                FontAwesomeIcons.chevronLeft,
+                color: MyTheme.iconColor,
+              ),
+              onPressed: () {
+                Get.back();
+              }),
+          centerTitle: true,
+          title: Text(
+            'Feedback',
+            style: GoogleFonts.inter(
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w500,
+              fontSize: 17,
+              color: MyTheme.appbartextColor,
             ),
-            onPressed: () {
-              Get.back();
-            }),
-        centerTitle: true,
-        title: Text(
-          'Feedback',
-          style: GoogleFonts.inter(
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w500,
-            fontSize: 17,
-            color: MyTheme.appbartextColor,
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 12,
-                ),
-                Textwidget(
-                  text: 'Rate your overall Experience',
-                ),
-                SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SmoothStarRating(
-                      rating: controller.rating1,
-                      filledIconData: Icons.star,
-                      halfFilledIconData: Icons.star_half,
-                      defaultIconData: Icons.star_border,
-                      allowHalfRating: false,
-                      onRatingChanged: (value) {
-                        setState(() {
-                          controller.rating1 = value;
-                          value = value;
-                        });
-                      },
-                      starCount: 5,
-                      size: 30,
-                      spacing: 22,
-                      borderColor: MyTheme.ratingfillColor,
-                      color: MyTheme.ratingfillColor,
-                    ),
-                    Text(
-                      stringText(controller.rating1),
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        color: Color(0xff6E6D7A),
+        body: Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16),
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Textwidget(
+                    text: 'Rate your overall Experience',
+                  ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SmoothStarRating(
+                        rating: controller.rating1,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
+                        defaultIconData: Icons.star_border,
+                        allowHalfRating: false,
+                        onRatingChanged: (value) {
+                          setState(() {
+                            controller.rating1 = value;
+                            value = value;
+                          });
+                        },
+                        starCount: 5,
+                        size: 30,
+                        spacing: 22,
+                        borderColor: MyTheme.ratingfillColor,
+                        color: MyTheme.ratingfillColor,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 19,
-                ),
-                Textwidget(
-                  text: 'Rate the taste',
-                ),
-                SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SmoothStarRating(
-                      rating: controller.rating2,
-                      filledIconData: Icons.star,
-                      halfFilledIconData: Icons.star_half,
-                      defaultIconData: Icons.star_border,
-                      allowHalfRating: false,
-                      onRatingChanged: (value) {
-                        setState(() {
-                          controller.rating2 = value;
-                          value = value;
-                        });
-                      },
-                      starCount: 5,
-                      size: 30,
-                      spacing: 22,
-                      borderColor: MyTheme.ratingfillColor,
-                      color: MyTheme.ratingfillColor,
-                    ),
-                    Text(stringText(controller.rating2),
+                      Text(
+                        stringText(controller.rating1),
                         style: GoogleFonts.inter(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            color: Color(0xff6E6D7A))),
-                  ],
-                ),
-                SizedBox(
-                  height: 19,
-                ),
-                Textwidget(
-                  text: 'Rate the ambience',
-                ),
-                SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SmoothStarRating(
-                      rating: controller.rating3,
-                      filledIconData: Icons.star,
-                      halfFilledIconData: Icons.star_half,
-                      defaultIconData: Icons.star_border,
-                      allowHalfRating: false,
-                      onRatingChanged: (value) {
-                        setState(() {
-                          controller.rating3 = value;
-                          value = value;
-                        });
-                      },
-                      starCount: 5,
-                      size: 30,
-                      spacing: 22,
-                      borderColor: MyTheme.ratingfillColor,
-                      color: MyTheme.ratingfillColor,
-                    ),
-                    Text(stringText(controller.rating3),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          color: Color(0xff6E6D7A),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 19,
+                  ),
+                  Textwidget(
+                    text: 'Rate the taste',
+                  ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SmoothStarRating(
+                        rating: controller.rating2,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
+                        defaultIconData: Icons.star_border,
+                        allowHalfRating: false,
+                        onRatingChanged: (value) {
+                          setState(() {
+                            controller.rating2 = value;
+                            value = value;
+                          });
+                        },
+                        starCount: 5,
+                        size: 30,
+                        spacing: 22,
+                        borderColor: MyTheme.ratingfillColor,
+                        color: MyTheme.ratingfillColor,
+                      ),
+                      Text(stringText(controller.rating2),
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              color: Color(0xff6E6D7A))),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 19,
+                  ),
+                  Textwidget(
+                    text: 'Rate the ambience',
+                  ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SmoothStarRating(
+                        rating: controller.rating3,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
+                        defaultIconData: Icons.star_border,
+                        allowHalfRating: false,
+                        onRatingChanged: (value) {
+                          setState(() {
+                            controller.rating3 = value;
+                            value = value;
+                          });
+                        },
+                        starCount: 5,
+                        size: 30,
+                        spacing: 22,
+                        borderColor: MyTheme.ratingfillColor,
+                        color: MyTheme.ratingfillColor,
+                      ),
+                      Text(stringText(controller.rating3),
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              color: Color(0xff6E6D7A))),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 19,
+                  ),
+                  Textwidget(
+                    text: 'Rate the serving time',
+                  ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SmoothStarRating(
+                        rating: controller.rating4,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
+                        defaultIconData: Icons.star_border,
+                        allowHalfRating: false,
+                        onRatingChanged: (value) {
+                          setState(() {
+                            controller.rating4 = value;
+                            value = value;
+                          });
+                        },
+                        starCount: 5,
+                        size: 30,
+                        spacing: 22,
+                        borderColor: MyTheme.ratingfillColor,
+                        color: MyTheme.ratingfillColor,
+                      ),
+                      Text(
+                        stringText(controller.rating4),
                         style: GoogleFonts.inter(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            color: Color(0xff6E6D7A))),
-                  ],
-                ),
-                SizedBox(
-                  height: 19,
-                ),
-                Textwidget(
-                  text: 'Rate the serving time',
-                ),
-                SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SmoothStarRating(
-                      rating: controller.rating4,
-                      filledIconData: Icons.star,
-                      halfFilledIconData: Icons.star_half,
-                      defaultIconData: Icons.star_border,
-                      allowHalfRating: false,
-                      onRatingChanged: (value) {
-                        setState(() {
-                          controller.rating4 = value;
-                          value = value;
-                        });
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          color: Color(0xff6E6D7A),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  AppFormFields(
+                    toptext: 'Feedback',
+                    hintText: 'Tell us more about your overall experience',
+                    controller: controller.feedback,
+                    hintfontSize: 12,
+                    line: 5,
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        pickImage(
+                          imageFile: (p0) {
+                            controller.imgs = p0;
+                            setState(() {});
+                          },
+                        );
                       },
-                      starCount: 5,
-                      size: 30,
-                      spacing: 22,
-                      borderColor: MyTheme.ratingfillColor,
-                      color: MyTheme.ratingfillColor,
-                    ),
-                    Text(
-                      stringText(controller.rating4),
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        color: Color(0xff6E6D7A),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 17,
-                ),
-                AppFormFields(
-                  toptext: 'Feedback',
-                  hintText: 'Tell us more about your overall experience',
-                  controller: controller.feedback,
-                  hintfontSize: 12,
-                  line: 5,
-                ),
-                SizedBox(
-                  height: 17,
-                ),
-                InkWell(
-                    onTap: () {
-                      pickImage(ImageSource.gallery);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: MyTheme.containerColor,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      height: 228,
-                      width: MediaQuery.of(context).size.width,
-                      child: controller.imgs == null
-                          ? Center(
-                              child: InkWell(
-                                onTap: () {
-                                  pickImage(ImageSource.gallery);
-                                },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: MyTheme.containerColor,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        height: 228,
+                        width: MediaQuery.of(context).size.width,
+                        child: controller.imgs == null
+                            ? Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -289,13 +308,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                       height: 40,
                                       width: 40,
                                       child: Image.asset(
-                                          'assets/images/camera.png'),
-                                      //  image != null
-                                      // ?
-                                      //  Image.file(
-                                      //     image!,
-                                      //   )
-                                      //     : Image.asset('assets/images/camera.png'),
+                                        'assets/images/camera.png',
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 3,
@@ -313,39 +328,39 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                     ),
                                   ],
                                 ),
+                              )
+                            : Image.file(
+                                controller.imgs!,
+                                fit: BoxFit.cover,
                               ),
-                            )
-                          : Image.file(
-                              controller.imgs!,
-                              fit: BoxFit.fill,
-                            ),
-                    )),
-                SizedBox(
-                  height: 16,
-                ),
-                Elevated(
-                  width: Get.width,
-                  onTap: () {
-                    formKey.currentState!.save();
-                    if (formKey.currentState!.validate()) ;
-                    controller.feedbacks(widget.e.restaurant.id.toString());
-                  },
-                  backgroundColor: (ratingText == '' ||
-                          controller.feedback.text.isEmpty ||
-                          (controller.imgs?.path != null &&
-                              controller.imgs?.path != ""))
-                      ? MyTheme.buttonColor
-                      : MyTheme.buttonchangeColor,
-                  text: 'Post Feedback',
-                  borderColor: controller.feedback.text.isEmpty
-                      ? MyTheme.buttontextColor
-                      : MyTheme.buttontextchangeColor,
-                  fontWeight: FontWeight.bold,
-                ),
-                SizedBox(
-                  height: 17,
-                ),
-              ],
+                      )),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Elevated(
+                    width: Get.width,
+                    onTap: () {
+                      formKey.currentState!.save();
+                      if (formKey.currentState!.validate()) ;
+                      controller.feedbacks(widget.e.restaurant.id.toString());
+                    },
+                    backgroundColor: (ratingText == '' ||
+                            controller.feedback.text.isEmpty ||
+                            (controller.imgs?.path != null &&
+                                controller.imgs?.path != ""))
+                        ? MyTheme.buttonColor
+                        : MyTheme.buttonchangeColor,
+                    text: 'Post Feedback',
+                    borderColor: controller.feedback.text.isEmpty
+                        ? MyTheme.buttontextColor
+                        : MyTheme.buttontextchangeColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

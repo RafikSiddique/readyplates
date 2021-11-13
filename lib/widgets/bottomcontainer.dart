@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -118,7 +119,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
   }
 }
 
-class Bottomcontainer2 extends StatelessWidget {
+/* class Bottomcontainer2 extends StatelessWidget {
   const Bottomcontainer2({Key? key}) : super(key: key);
 
   @override
@@ -174,6 +175,9 @@ class Bottomcontainer2 extends StatelessWidget {
                 child: ElevatedwidgetPage(
                   backgroundColor: Colors.white,
                   text: 'Add from Menu',
+                  onPressed: () {
+                    //Get.to(() => PaymentPage(orderModelApi: orderModelApi));
+                  },
                   color: MyTheme.bottomcontainercolor,
                   //color: Color(0xffFF8400),
                   height: 44,
@@ -223,3 +227,4 @@ class Bottomcontainer2 extends StatelessWidget {
     );
   }
 }
+ */

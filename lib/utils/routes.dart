@@ -40,8 +40,6 @@ class Routes {
                     return RestaurantDetails(
                       restaurantModel: args as RestaurantModel,
                     );
-                  case Chekoutdone.id:
-                    return Chekoutdone();
                   case MenuPage.id:
                     final RestaurantModel args =
                         settings.arguments as RestaurantModel;
@@ -61,9 +59,6 @@ class Routes {
 
                   case OrderOption2.id:
                     return OrderOption2();
-
-                  case PaymentPage.id:
-                    return PaymentPage();
 
                   case PaymentsucessfulPage.id:
                     return PaymentsucessfulPage();

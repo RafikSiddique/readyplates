@@ -92,8 +92,6 @@ class CustomElevated extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(6)),
       ),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             text,
