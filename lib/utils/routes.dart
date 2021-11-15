@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:readyplates/models/restaurant_model.dart';
-import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
+import 'package:readyplates/src/login/screens/ChangePassword2.dart';
 import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
@@ -67,9 +67,10 @@ class Routes {
 
                   //   return FeedbackPage(e: e.,);
                   case Tellafriend.id:
-                    return Tellafriend(
-                      
-                    );
+                    return Tellafriend();
+                 
+                  case ChangePasswordPage1.id:
+                    return ChangePasswordPage1();
                   case ProfilePage.id:
                     return ProfilePage();
                   case LandingPage.id:

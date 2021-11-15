@@ -16,6 +16,8 @@ class LoginPage extends StatelessWidget {
   final AuthController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
   final ScrollController scrollController = ScrollController();
+  final bool isChangepass;
+  LoginPage({Key? key, this.isChangepass = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,6 @@ class LoginPage extends StatelessWidget {
                   ),
                   border: Border.all(
                     color: MyTheme.hinttextColor,
-                    // color: Color(0xff979797),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -96,7 +97,9 @@ class LoginPage extends StatelessWidget {
                               flex: 2,
                             ),
                             Text(
-                              "Login",
+                              isChangepass == true
+                                  ? 'Change Password'
+                                  : "Login",
                               style: GoogleFonts.inter(
                                 fontSize: 17,
                                 color: MyTheme.appbartextColor,
@@ -196,25 +199,26 @@ class LoginPage extends StatelessWidget {
                                   ],
                                 ),
                               )),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 13),
+                        if (isChangepass != true)
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 13),
+                            ),
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Forget Password",
+                                  style: TextStyle(
+                                      //color: MyTheme.forgetpasslogintext,
+                                      color: Color(0xff32B768),
+                                      fontSize: 14),
+                                ),
+                              ],
+                            ),
                           ),
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Text(
-                                'Forget Password',
-                                style: TextStyle(
-                                    //color: MyTheme.forgetpasslogintext,
-                                    color: Color(0xff32B768),
-                                    fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
                         SizedBox(height: 20),
                         InkWell(
                           onTap: () async {
@@ -236,7 +240,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                'Login',
+                                isChangepass == true ? "Proceed" : "Login",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 17,
@@ -252,51 +256,52 @@ class LoginPage extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Get.toNamed(LoginPage.id);
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 54,
-                            decoration: BoxDecoration(
-                              color: MyTheme.boxdecoration2,
-                              border: Border.all(
-                                  width: 1, color: MyTheme.checkboxcolor
-                                  // color: Color(0xffB9B9B9),
+                        if (isChangepass != true)
+                          InkWell(
+                            onTap: () {
+                              Get.toNamed(LoginPage.id);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 54,
+                              decoration: BoxDecoration(
+                                color: MyTheme.boxdecoration2,
+                                border: Border.all(
+                                    width: 1, color: MyTheme.checkboxcolor
+                                    // color: Color(0xffB9B9B9),
+                                    ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6)),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 26.42,
+                                    height: 27,
+                                    child: Image.asset(Assets.google),
                                   ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 26.42,
-                                  height: 27,
-                                  child: Image.asset(Assets.google),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Center(
-                                  child: Text(
-                                    'Login with Google',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontFamily: 'Inter-Regular',
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w600,
-                                        color: MyTheme.buttontextlogin
-                                        //color: Color(0xff222222),
-                                        ),
+                                  SizedBox(
+                                    width: 10,
                                   ),
-                                ),
-                              ],
+                                  Center(
+                                    child: Text(
+                                      'Login with Google',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontFamily: 'Inter-Regular',
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w600,
+                                          color: MyTheme.buttontextlogin
+                                          //color: Color(0xff222222),
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
                         SizedBox(
                           height: 25,
                         ),

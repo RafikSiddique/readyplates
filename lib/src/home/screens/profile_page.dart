@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:readyplates/src/home/widgets/profile_tile.dart';
 import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/utils/my_color.dart';
 //import 'package:readyplates/widgets/edit_button.dart';
 
@@ -31,7 +32,11 @@ class ProfilePage extends StatelessWidget {
         ),
         body: Column(
           children: [
-            ProfileListTile(title: "Change Password", onTap: () {}),
+            ProfileListTile(
+                title: "Change Password",
+                onTap: () {
+                  Get.to(()=>LoginPage(isChangepass: true,));
+                }),
             ProfileListTile(title: "User Credential", onTap: () {}),
             ProfileListTile(
               title: "Logout",

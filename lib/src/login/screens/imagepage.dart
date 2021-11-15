@@ -125,7 +125,7 @@ class _ImagePageState extends State<ImagePage> {
                 text: "Upload from gallery", fontWeight: FontWeight.w600,
                 color: Colors.white,
                 fontSize: 17, //color: Colors.white,
-                onTap: () async { await pickImage(ImageSource.gallery); Navigayor.pop(context);},
+                onTap: () async { await pickImage(ImageSource.gallery); Navigator.pop(context);},
               ),
             ),
             SizedBox(
