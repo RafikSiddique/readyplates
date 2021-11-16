@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
@@ -15,13 +16,14 @@ import 'package:readyplates/widgets/shoppy_mac.dart';
 
 class BurgersupportingPage extends GetView<OrderController> {
   final RestaurantModel restaurantModel;
-
+  final bool isEditing;
+  final OrderModelApi? orderModelApi;
   static const id = "/burgersupportingPage";
   const BurgersupportingPage({
     Key? key,
     required this.restaurantModel,
-    bool isEditing = false,
-    OrderModelApi? orderModelApi,
+    this.isEditing = false,
+    this.orderModelApi,
   })  : assert(isEditing ? orderModelApi != null : true),
         super(
           key: key,
@@ -68,8 +70,20 @@ class BurgersupportingPage extends GetView<OrderController> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ...controller.cartItems
-                      .map((element) => ShooppymacPage(cartModel: element)),
+                  if (isEditing)
+                    ...orderModelApi!.orderitems.map((e) => ShooppymacPage(
+                          cartApiModel: CartApiModel(
+                              id: 0,
+                              user: orderModelApi!.id,
+                              restaurant: orderModelApi!.restaurant.id,
+                              foodItem: CartFood(id: e.id, name: ""),
+                              foodImage: "e",
+                              foodQuantity: e.quantity,
+                              foodPrice: double.parse(e.price)),
+                        ))
+                  else
+                    ...controller.cartItems
+                        .map((element) => ShooppymacPage(cartModel: element)),
                   SizedBox(
                     height: 11,
                   ),
@@ -191,7 +205,6 @@ class BurgersupportingPage extends GetView<OrderController> {
                               "\n" +
                               "PAX: ${controller.numberOfPeople} Tables X ${controller.numberOfTable}",
                           style: GoogleFonts.inter(
-                            
                             fontWeight: FontWeight.normal,
                             fontStyle: FontStyle.normal,
                             fontSize: 13,

@@ -62,7 +62,7 @@ class OrderPage extends GetView<OrderController> {
   void showTextMenu({
     required TapDownDetails details,
     required BuildContext context,
-    required int orderId,
+    required OrderModelApi orderModel,
     required int restaurantId,
   }) {
     final RenderBox overlay = context.findRenderObject() as RenderBox;
@@ -92,8 +92,11 @@ class OrderPage extends GetView<OrderController> {
                 onTap: () async {
                   RestaurantModel restaurantModel =
                       await controller.getSingleRestaurant(restaurantId);
-                  Get.to(() =>
-                      BurgersupportingPage(restaurantModel: restaurantModel));
+                  Get.to(() => BurgersupportingPage(
+                        restaurantModel: restaurantModel,
+                        isEditing: true,
+                        orderModelApi: orderModel,
+                      ));
                 },
                 text: "Edit Order",
                 path: Assets.notePencil,
@@ -108,7 +111,7 @@ class OrderPage extends GetView<OrderController> {
               onTap: null,
               child: PopUpMenuWidget(
                 onTap: () async {
-                  await controller.updateStatus(orderId, 3);
+                  await controller.updateStatus(orderModel.id, 3);
                   Get.to(() => OrderCancelledPage());
                 },
                 path: Assets.checkCircle,
@@ -219,7 +222,7 @@ class OrderPage extends GetView<OrderController> {
                                           details: details,
                                           context: context,
                                           restaurantId: element.restaurant.id,
-                                          orderId: element.id);
+                                          orderModel: element);
                                     },
                                   ),
                                 )
@@ -253,7 +256,7 @@ class OrderPage extends GetView<OrderController> {
                                               details: p0,
                                               restaurantId: e.restaurant.id,
                                               context: context,
-                                              orderId: e.id);
+                                              orderModel: e);
                                         },
                                       ))
                                   .toList()),

@@ -81,28 +81,30 @@ class AuthController extends GetxController {
   RxString address = "".obs;
 
   String? id;
-  Future<void> login([
-    bool implicit = false,
-  ]) async {
+  Future<void> login(bool changedPassword, {bool implicit = false}) async {
     try {
       id = await services.login(
           usernameController.text, passwordController.text);
       await sfHelper.setUserId(id!);
-      if (implicit) {
-        Get.toNamed(ChangePasswordPage1.id);
-        passwordController.clear();
+      if (!changedPassword) {
+        if (implicit) {
+          Get.toNamed(ImagePage.id);
+        } else {
+          final c = Get.put(HomeController());
+          c.currentIndex.value = 0;
+          c.getRestaurants();
+          Get.put(OrderController());
+          Get.toNamed(MapPage.id);
+          lNameController.clear();
+          fNamController.clear();
+          password2Controller.clear();
+          passwordController.clear();
+          usernameController.clear();
+          sfHelper.setLoggedIn(true);
+        }
       } else {
-        final c = Get.put(HomeController());
-        c.currentIndex.value = 0;
-        c.getRestaurants();
-        Get.put(OrderController());
-        Get.toNamed(MapPage.id);
-        lNameController.clear();
-        fNamController.clear();
-        password2Controller.clear();
         passwordController.clear();
-        usernameController.clear();
-        sfHelper.setLoggedIn(true);
+        Get.toNamed(ChangePasswordPage1.id);
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -117,7 +119,7 @@ class AuthController extends GetxController {
       );
       await sfHelper.setUserId(id[0]);
 
-      Get.offAllNamed(ImagePage.id);
+      //Get.offAllNamed(ImagePage.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -148,7 +150,7 @@ class AuthController extends GetxController {
           gender: gender.value,
           dob: dob.value,
           mobNum: mobController.text);
-      await login(true);
+      await login(false, implicit: true);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

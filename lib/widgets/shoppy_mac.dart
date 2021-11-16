@@ -7,8 +7,25 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class ShooppymacPage extends StatelessWidget {
-  final CartModel cartModel;
-  ShooppymacPage({Key? key, required this.cartModel}) : super(key: key);
+  CartModel? cartModel;
+  final bool isEditing;
+  ShooppymacPage(
+      {Key? key,
+      this.cartModel,
+      CartApiModel? cartApiModel,
+      this.isEditing = false})
+      : super(key: key) {
+    if (cartApiModel != null) {
+      cartModel = CartModel(
+          user: cartApiModel.user.toString(),
+          foodItem: cartApiModel.foodItem.id.obs,
+          foodQuantity: cartApiModel.foodQuantity.obs,
+          foodName: cartApiModel.foodItem.name,
+          foodImage: cartApiModel.foodImage,
+          foodPrice: cartApiModel.foodPrice.obs,
+          restaurant: cartApiModel.restaurant);
+    }
+  }
   final controller = Get.find<OrderController>();
   @override
   Widget build(BuildContext context) {
@@ -20,7 +37,7 @@ class ShooppymacPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.network(
-                cartModel.foodImage,
+                cartModel!.foodImage,
                 height: 64,
                 width: 64,
                 fit: BoxFit.cover,
@@ -30,7 +47,7 @@ class ShooppymacPage extends StatelessWidget {
               width: 8,
             ),
             Text(
-              cartModel.foodQuantity.string,
+              cartModel!.foodQuantity.string,
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.normal,
@@ -59,7 +76,7 @@ class ShooppymacPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    cartModel.foodName,
+                    cartModel!.foodName,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.inter(
@@ -73,7 +90,7 @@ class ShooppymacPage extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "\$ ${cartModel.foodPrice}",
+                    "\$ ${cartModel!.foodPrice}",
                     textAlign: TextAlign.left,
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w500,
@@ -93,9 +110,9 @@ class ShooppymacPage extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      if (cartModel.foodQuantity.value != 1)
+                      if (cartModel!.foodQuantity.value != 1)
                         controller.decrement(
-                            cartModel.foodItem.value, cartModel.restaurant);
+                            cartModel!.foodItem.value, cartModel!.restaurant);
                     },
                     child: Container(
                       padding: EdgeInsets.all(4),
@@ -113,7 +130,7 @@ class ShooppymacPage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       controller.increment(
-                          cartModel.foodItem.value, cartModel.restaurant);
+                          cartModel!.foodItem.value, cartModel!.restaurant);
                     },
                     child: Container(
                       padding: EdgeInsets.all(4),
@@ -130,16 +147,20 @@ class ShooppymacPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      if (controller.cartItems.length > 1) {
-                        controller.decrement(cartModel.foodItem.value,
-                            cartModel.restaurant, true);
+                      if (!isEditing) {
+                        if (controller.cartItems.length > 1) {
+                          controller.decrement(cartModel!.foodItem.value,
+                              cartModel!.restaurant, true);
+                        } else {
+                          Get.showSnackbar(GetBar(
+                            title: "Error",
+                            message:
+                                "You should atleast have one item in cart for booking summary",
+                            duration: Duration(seconds: 2),
+                          ));
+                        }
                       } else {
-                        Get.showSnackbar(GetBar(
-                          title: "Error",
-                          message:
-                              "You should atleast have one item in cart for booking summary",
-                          duration: Duration(seconds: 2),
-                        ));
+                        cartModel!.foodQuantity.value++;
                       }
                     },
                     child: Image.asset(
