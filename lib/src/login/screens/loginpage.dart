@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:readyplates/src/login/controller/auth_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -13,11 +14,15 @@ import 'package:readyplates/widgets/readyplates.dart';
 
 class LoginPage extends StatelessWidget {
   static const id = "/loginpage";
+
   final AuthController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
   final ScrollController scrollController = ScrollController();
   final bool isChangepass;
-  LoginPage({Key? key, this.isChangepass = false}) : super(key: key);
+  LoginPage({
+    Key? key,
+    this.isChangepass = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -223,13 +228,12 @@ class LoginPage extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             _formKey.currentState!.save();
-                            if (_formKey.currentState!.validate())
+                            if (_formKey.currentState!.validate()) {
                               await controller.login(isChangepass);
-
-                            // else {
-                            //   Get.snackbar(
-                            //       "Error", "Please fill all the details");
-                            // }
+                            } else {
+                              Get.snackbar(
+                                  "Error", "Please fill all the details");
+                            }
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,
@@ -269,7 +273,6 @@ class LoginPage extends StatelessWidget {
                                 color: MyTheme.boxdecoration2,
                                 border: Border.all(
                                     width: 1, color: MyTheme.checkboxcolor
-                                    // color: Color(0xffB9B9B9),
                                     ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
