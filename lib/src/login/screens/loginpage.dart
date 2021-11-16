@@ -223,12 +223,13 @@ class LoginPage extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             _formKey.currentState!.save();
-                            if (_formKey.currentState!.validate()) {
-                              controller.login();
-                            } else {
-                              Get.snackbar(
-                                  "Error", "Please fill all the details");
-                            }
+                            if (_formKey.currentState!.validate())
+                              await controller.login(isChangepass);
+
+                            // else {
+                            //   Get.snackbar(
+                            //       "Error", "Please fill all the details");
+                            // }
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,

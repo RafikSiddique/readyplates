@@ -195,8 +195,7 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                           InkWell(
                             onTap: () async {
                               formKey.currentState!.save();
-                              await controller.register();
-                              //Navigator.pushNamed(context, MyRoutes.LoginPage);
+                              await controller.changePassword();
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,

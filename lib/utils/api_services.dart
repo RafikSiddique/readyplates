@@ -2,6 +2,7 @@ class ApiService {
   final contentTypeJsonHeader = {'Content-Type': 'application/json'};
   final String baseUri = "http://202.53.174.5:8000/";
   Uri accounts(String path) => Uri.parse(baseUri + "accounts/" + path);
+
   Uri restaurants(String path) => Uri.parse(baseUri + "restaurants/" + path);
   Uri get loginUri => accounts('login/');
   Uri get registerUri => accounts('register/');
@@ -21,4 +22,5 @@ class ApiService {
 
   Uri singleRestaurantUri(int id) => restaurants('getrestaurant/$id');
   Uri get feedbackApi => restaurants("feedback/");
+    Uri get changePass => accounts("resetpass/");
 }

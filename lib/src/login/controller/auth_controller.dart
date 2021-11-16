@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readyplates/src/Order_Screens/restaurant_detail.dart';
 import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/home/screens/index.dart';
+import 'package:readyplates/src/login/screens/ChangePassword2.dart';
 import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
@@ -80,13 +83,14 @@ class AuthController extends GetxController {
   RxString address = "".obs;
 
   String? id;
-  Future<void> login([bool implicit = false]) async {
+  Future<void> login([bool implicit = false,]) async {
     try {
       id = await services.login(
           usernameController.text, passwordController.text);
       await sfHelper.setUserId(id!);
       if (implicit) {
-        Get.toNamed(ImagePage.id);
+        Get.toNamed(ChangePasswordPage1.id);
+        passwordController.clear();
       } else {
         final c = Get.put(HomeController());
         c.currentIndex.value = 0;
@@ -97,9 +101,22 @@ class AuthController extends GetxController {
         password2Controller.clear();
         passwordController.clear();
         usernameController.clear();
-
         sfHelper.setLoggedIn(true);
       }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> changePassword() async {
+    try {
+      String id = await services.changePassword(
+        usernameController.text,
+        passwordController.text,
+      );
+      await sfHelper.setUserId(id[0]);
+
+      Get.offAllNamed(ImagePage.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:readyplates/utils/exception.dart';
@@ -35,6 +37,35 @@ class AuthenticationServices extends ApiService {
       } else if (response.statusCode == 500) {
         throw AppException(
             code: response.statusCode, message: "Something went wrong");
+      } else {
+        throw AppException(code: response.statusCode, message: response.body);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> changePassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      http.Response response = await post(
+        changePass,
+        body: jsonEncode(
+          {
+            'email': email,
+            'password': password,
+          },
+        ),
+        headers: contentTypeJsonHeader,
+      );
+      if (response.statusCode == 200) {
+        Map resp = json.decode(response.body);
+        print(resp["Success"].toString());
+
+        print(response.body);
+        return resp.toString();
       } else {
         throw AppException(code: response.statusCode, message: response.body);
       }
