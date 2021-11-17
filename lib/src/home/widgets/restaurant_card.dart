@@ -114,7 +114,7 @@ class RestaurantCard extends StatelessWidget {
                         height: 6,
                       ),
                       Text(
-                        bio.description,
+                        restaurantModel.types_of_cusine,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,

@@ -161,7 +161,7 @@ class RestaurantDetails extends StatelessWidget {
                             height: 12,
                           ),
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 height: 14,
@@ -174,11 +174,11 @@ class RestaurantDetails extends StatelessWidget {
                                 width: 9,
                               ),
                               Container(
-                                width: 200,
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 child: Text(restaurantModel.address,
                                     style: GoogleFonts.inter(
                                       textStyle: TextStyle(
-                                          overflow: TextOverflow.ellipsis,
+                                          // overflow: TextOverflow.ellipsis,
                                           fontSize: 13,
                                           fontWeight: FontWeight.w400,
                                           fontStyle: FontStyle.normal,
