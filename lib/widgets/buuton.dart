@@ -111,3 +111,52 @@ class CustomElevated extends StatelessWidget {
     );
   }
 }
+
+class TimeButton extends StatelessWidget {
+  final double fontSize;
+  final String text;
+  final FontWeight fontWeight;
+  final void Function()? onTap;
+
+  final Color? backgroundColor;
+  final Color? borderColor;
+
+  final Color? color;
+  const TimeButton({
+    Key? key,
+    required this.fontSize,
+    required this.text,
+    required this.fontWeight,
+    this.onTap,
+    // required this.width,
+    this.backgroundColor,
+    this.borderColor,
+    this.color,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //width: width,
+      height: 54,
+      width: MediaQuery.of(context).size.width * 0.42,
+      decoration: BoxDecoration(
+        color: MyTheme.timebutton,
+        border: Border.all(width: 1, color: MyTheme.borderColor),
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: GoogleFonts.inter(
+              fontSize: 17,
+              fontWeight: fontWeight,
+              color: color,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -291,11 +291,110 @@ class BookingDetails extends GetView<OrderController> {
                   fontSize: 20),
             ),
             Divider(),
-            numberChange(true, size),
             SizedBox(
               height: 20,
             ),
-            numberChange(false, size),
+            numberChange(true, size),
+            SizedBox(
+              height: 17,
+            ),
+            Text(
+              "Available Slots",
+              style: GoogleFonts.nunito(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.normal),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Icon(
+                FontAwesomeIcons.caretUp,
+                color: MyTheme.bottomtextColor,
+                size: 37,
+              ),
+            ),
+            SizedBox(height: 31),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TimeButton(
+                  fontSize: 15,
+                  text: "10:00 AM",
+                  fontWeight: FontWeight.w600,
+                ),
+                TimeButton(
+                  fontSize: 15,
+                  text: "15:00 AM",
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
+            ),
+            SizedBox(height: 15),
+            Container(
+                height: MediaQuery.of(context).size.height * 0.08,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: MyTheme.timebutton),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 14, top: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.error,
+                        color: Colors.black,
+                      ),
+                      SizedBox(width: 13),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        child: Text(
+                            "At the moment there is time slot available for this date. Please try a different date.",
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.nunito(
+                                fontSize: 15,
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.normal)),
+                      )
+                    ],
+                  ),
+                )),
+            SizedBox(height: 10),
+            Container(
+                height: MediaQuery.of(context).size.height * 0.08,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: MyTheme.timebutton),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 14, top: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.error,
+                        color: Colors.black,
+                      ),
+                      SizedBox(width: 13),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        child: Text(
+                            "Unfortunately, your party is too large to make a reservation. Please lower the number of people.",
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.nunito(
+                                fontSize: 15,
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.normal)),
+                      )
+                    ],
+                  ),
+                )),
+            Align(
+              alignment: Alignment.center,
+              child: Icon(
+                FontAwesomeIcons.caretDown,
+                color: MyTheme.bottomtextColor,
+                size: 37,
+              ),
+            ),
             Spacer(),
             Elevated(
               text: "Confirm",
