@@ -92,6 +92,14 @@ class RestaurantCard extends StatelessWidget {
                             fit: BoxFit.cover,
                             width: media.size.height * 0.13,
                             height: media.size.height * 0.13,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                Assets.categoryBurger,
+                                fit: BoxFit.cover,
+                                width: media.size.height * 0.13,
+                                height: media.size.height * 0.13,
+                              );
+                            },
                           ),
                   ),
                 ),
