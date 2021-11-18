@@ -253,12 +253,13 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> feedbacks(String resId) async {
+  Future<void> feedbacks(String resId, String orderid) async {
     try {
       String userid = await sfHelper.getUserId();
       await services.feedbackapi(
         resId,
         userid,
+        orderid,
         rating1.toString(),
         rating2.toString(),
         rating3.toString(),

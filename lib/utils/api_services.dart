@@ -1,26 +1,31 @@
 class ApiService {
   final contentTypeJsonHeader = {'Content-Type': 'application/json'};
+  // http://202.53.174.5:8000/ global
+  // http://192.168.0.194:5000/ local
   final String baseUri = "http://202.53.174.5:8000/";
-  Uri accounts(String path) => Uri.parse(baseUri + "accounts/" + path);
+  Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);
 
-  Uri restaurants(String path) => Uri.parse(baseUri + "restaurants/" + path);
-  Uri get loginUri => accounts('login/');
-  Uri get registerUri => accounts('register/');
-  Uri get image => accounts('image/');
-  Uri menuList(String id) => restaurants('menulist/$id/');
-  Uri get restaurantList => restaurants('get/');
-  Uri get restList => restaurants('restlist/');
+  // Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);
+  Uri get loginUri => customers('login/');
+  Uri get registerUri => customers('register/');
+  Uri get image => customers('image/');
+  Uri get location => customers('location/');
+  Uri get changePass => customers("resetpass/");
 
-  Uri get addToCart => restaurants('cart/');
-  Uri cartList(String id) => restaurants('cart/$id');
+  Uri menuList(String id) => customers('menulist/$id/');
 
-  Uri orderList(String id) => restaurants('order/$id'); //get
+  Uri get restaurantList => customers('get/');
+  Uri get restList => customers('restlist/');
 
-  Uri get ordersapi => restaurants("order/");
+  Uri get addToCart => customers('cart/');
+  Uri cartList(String id) => customers('cart/$id');
 
-  Uri get updateStatusUrl => restaurants('updatestatus/');
+  Uri orderList(String id) => customers('order/$id');
+  Uri get ordersapi => customers("order/");
 
-  Uri singleRestaurantUri(int id) => restaurants('getrestaurant/$id');
-  Uri get feedbackApi => restaurants("feedback/");
-    Uri get changePass => accounts("resetpass/");
+  Uri get updateStatusUrl => customers('updatestatus/');
+
+  Uri singleRestaurantUri(int id) => customers('getrestaurant/$id');
+
+  Uri get feedbackApi => customers("feedback/");
 }

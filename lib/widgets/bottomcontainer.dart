@@ -7,8 +7,6 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
-import 'package:readyplates/widgets/imagewidget.dart';
-
 class Bottomcontainer extends StatefulWidget {
   final RestaurantModel restaurantModel;
   const Bottomcontainer({Key? key, required this.restaurantModel})

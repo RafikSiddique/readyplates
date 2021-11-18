@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/feedback_page.dart';
-import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/buuton.dart';

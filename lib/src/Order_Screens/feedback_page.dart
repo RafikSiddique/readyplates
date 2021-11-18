@@ -342,7 +342,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     onTap: () {
                       formKey.currentState!.save();
                       if (formKey.currentState!.validate()) ;
-                      controller.feedbacks(widget.e.restaurant.id.toString());
+                      controller.feedbacks(widget.e.restaurant.id.toString(),
+                          widget.e.id.toString());
                     },
                     backgroundColor: (ratingText == '' ||
                             controller.feedback.text.isEmpty ||

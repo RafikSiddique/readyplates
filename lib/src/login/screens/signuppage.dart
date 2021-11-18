@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/models/signup.dart';
 
-import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -22,7 +21,7 @@ class _SignupPageState extends State<SignupPage> {
 
   String? value;
 
-  Signup? abc;
+  // Signup? abc;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -178,6 +177,7 @@ class _SignupPageState extends State<SignupPage> {
                           controller.dobController.text =
                               "${dt.day}/${dt.month}/${dt.year}";
                         }
+                        print(controller.dobController.text);
                       },
                       controller: controller.dobController,
                       decoration: InputDecoration(

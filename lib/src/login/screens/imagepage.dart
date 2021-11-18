@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/src/login/controller/auth_controller.dart';
+import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readyplates/utils/assets.dart';
@@ -125,7 +125,10 @@ class _ImagePageState extends State<ImagePage> {
                 text: "Upload from gallery", fontWeight: FontWeight.w600,
                 color: Colors.white,
                 fontSize: 17, //color: Colors.white,
-                onTap: () async { await pickImage(ImageSource.gallery); Navigator.pop(context);},
+                onTap: () async {
+                  await pickImage(ImageSource.gallery);
+                  Navigator.pop(context);
+                },
               ),
             ),
             SizedBox(

@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:readyplates/src/Order_Screens/restaurant_detail.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
+import 'package:readyplates/src/login/auth_service.dart';
 import 'package:readyplates/src/login/screens/ChangePassword2.dart';
 import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
-import 'package:readyplates/src/login/services/auth_service.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -119,7 +118,7 @@ class AuthController extends GetxController {
       );
       await sfHelper.setUserId(id[0]);
 
-      //Get.offAllNamed(ImagePage.id);
+      Get.offAllNamed(ImagePage.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -148,7 +147,7 @@ class AuthController extends GetxController {
           fName: fNamController.text,
           lName: lNameController.text,
           gender: gender.value,
-          dob: dob.value,
+          dob: dobController.text,
           mobNum: mobController.text);
       await login(false, implicit: true);
     } catch (e) {
