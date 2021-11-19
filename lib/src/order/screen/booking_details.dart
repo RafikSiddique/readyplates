@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,6 +18,7 @@ class BookingDetails extends GetView<OrderController> {
   static const id = "/bookingsettings";
 
   BookingDetails(this.restaurantModel);
+  DateTime now = DateTime.now();
 
   Text weekText(String text) {
     return Text(text);
@@ -91,6 +93,7 @@ class BookingDetails extends GetView<OrderController> {
     );
   }
 
+  DateTime? time;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -189,51 +192,75 @@ class BookingDetails extends GetView<OrderController> {
                     color: Colors.transparent,
                     elevation: 0,
                     child: InkWell(
-                      onTap: () async {
-                        TimeOfDay? tod = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay(
-                                hour: controller.selectedDate.value.hour,
-                                minute: controller.selectedDate.value.minute));
-                        if (tod != null) {
-                          print(restaurantModel.start_time);
-                          print(restaurantModel.end_time);
-                          List<String> startTimes =
-                              restaurantModel.start_time.split(':');
-                          List<String> endTime =
-                              restaurantModel.end_time.split(':');
-                          int start = (int.parse(startTimes.first) +
-                              (startTimes.last.toLowerCase().contains('a')
-                                  ? 0
-                                  : startTimes.last.toLowerCase().contains('p')
-                                      ? 12
-                                      : 0));
-                          int end = int.parse(endTime.first) +
-                              (endTime.last.toLowerCase().contains('a')
-                                  ? 0
-                                  : endTime.last.toLowerCase().contains('p')
-                                      ? 12
-                                      : 0);
-                          print(start);
-                          print(end);
-                          bool isAfterStart = tod.hour > start;
-                          bool isBeforeEnd = tod.hour < end;
-                          print(isAfterStart);
-                          print(isBeforeEnd);
-                          print(tod);
-                          if (isAfterStart && isBeforeEnd) {
-                            controller.selectedDate.value = DateTime(
-                                controller.selectedDate.value.year,
-                                controller.selectedDate.value.month,
-                                controller.selectedDate.value.day,
-                                tod.hour,
-                                tod.minute);
-                          } else {
-                            Get.snackbar("Error",
-                                "Restaurant is closed at the selected time");
-                          }
-                        }
+                      onTap: () {
+                        showCupertinoModalPopup<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return _buildBottomPicker(
+                              CupertinoDatePicker(
+                                onDateTimeChanged: (dateTime) {
+                                  print(dateTime.toString());
+                                  controller.selectedDate.value = dateTime;
+                                },
+                                use24hFormat: false,
+                                initialDateTime: DateTime(
+                                    now.year,
+                                    now.month,
+                                    now.day,
+                                    now.hour,
+                                    (now.minute % 5 * 5).toInt()),
+                                minuteInterval: 15,
+                                mode: CupertinoDatePickerMode.time,
+                              ),
+                            );
+                          },
+                        );
                       },
+                      // () async {
+                      //   TimeOfDay? tod = await showTimePicker(
+                      //       context: context,
+                      //       initialTime: TimeOfDay(
+                      //           hour: controller.selectedDate.value.hour,
+                      //           minute: controller.selectedDate.value.minute));
+                      //   if (tod != null) {
+                      //     print(restaurantModel.start_time);
+                      //     print(restaurantModel.end_time);
+                      //     List<String> startTimes =
+                      //         restaurantModel.start_time.split(':');
+                      //     List<String> endTime =
+                      //         restaurantModel.end_time.split(':');
+                      //     int start = (int.parse(startTimes.first) +
+                      //         (startTimes.last.toLowerCase().contains('a')
+                      //             ? 0
+                      //             : startTimes.last.toLowerCase().contains('p')
+                      //                 ? 12
+                      //                 : 0));
+                      //     int end = int.parse(endTime.first) +
+                      //         (endTime.last.toLowerCase().contains('a')
+                      //             ? 0
+                      //             : endTime.last.toLowerCase().contains('p')
+                      //                 ? 12
+                      //                 : 0);
+                      //     print(start);
+                      //     print(end);
+                      //     bool isAfterStart = tod.hour > start;
+                      //     bool isBeforeEnd = tod.hour < end;
+                      //     print(isAfterStart);
+                      //     print(isBeforeEnd);
+                      //     print(tod);
+                      //     if (isAfterStart && isBeforeEnd) {
+                      //       controller.selectedDate.value = DateTime(
+                      //           controller.selectedDate.value.year,
+                      //           controller.selectedDate.value.month,
+                      //           controller.selectedDate.value.day,
+                      //           tod.hour,
+                      //           tod.minute);
+                      //     } else {
+                      //       Get.snackbar("Error",
+                      //           "Restaurant is closed at the selected time");
+                      //     }
+                      //   }
+                      // },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -409,6 +436,28 @@ class BookingDetails extends GetView<OrderController> {
       ),
     );
   }
+}
+
+Widget _buildBottomPicker(Widget picker) {
+  return Container(
+    height: 250,
+    padding: const EdgeInsets.only(top: 6.0),
+    color: CupertinoColors.white,
+    child: DefaultTextStyle(
+      style: const TextStyle(
+        fontSize: 22.0,
+      ),
+      child: GestureDetector(
+        onTap: () {
+          Get.back();
+        },
+        child: SafeArea(
+          top: false,
+          child: picker,
+        ),
+      ),
+    ),
+  );
 }
 
 class MonthModel {
