@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "621674002284",
+    "project_id": "readyplates-31cb4",
+    "storage_bucket": "readyplates-31cb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621674002284:android:02870c871f39225c9f6549",
+        "android_client_info": {
+          "package_name": "com.fladdra.readyplates"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfxiRI6vsx12PBB-6VsrjbrioHADge8p8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621674002284:android:8932a552828540c49f6549",
+        "android_client_info": {
+          "package_name": "com.fladdra.readyplates.restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfxiRI6vsx12PBB-6VsrjbrioHADge8p8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

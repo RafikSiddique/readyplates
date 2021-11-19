@@ -1,4 +1,4 @@
-package com.example.readyplates
+package com.fladdra.readyplates
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "readyplates")
-set(APPLICATION_ID "com.example.readyplates")
+set(APPLICATION_ID "com.fladdra.readyplates")
 
 cmake_policy(SET CMP0063 NEW)
 
