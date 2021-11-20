@@ -13,6 +13,8 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
+DateTime? globletime;
+
 class BookingDetails extends GetView<OrderController> {
   final RestaurantModel restaurantModel;
   static const id = "/bookingsettings";
@@ -199,8 +201,8 @@ class BookingDetails extends GetView<OrderController> {
                             return _buildBottomPicker(
                               CupertinoDatePicker(
                                 onDateTimeChanged: (dateTime) {
-                                  print(dateTime.toString());
-                                  controller.selectedDate.value = dateTime;
+                                  globletime = dateTime;
+                                  
                                 },
                                 use24hFormat: false,
                                 initialDateTime: DateTime(
@@ -208,7 +210,7 @@ class BookingDetails extends GetView<OrderController> {
                                     now.month,
                                     now.day,
                                     now.hour,
-                                    (now.minute % 5 * 5).toInt()),
+                                    (now.minute % 15 * 15).toInt()),
                                 minuteInterval: 15,
                                 mode: CupertinoDatePickerMode.time,
                               ),
@@ -345,11 +347,13 @@ class BookingDetails extends GetView<OrderController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TimeButton(
+                  borcolor: MyTheme.borderColor,
                   fontSize: 15,
                   text: "10:00 AM",
                   fontWeight: FontWeight.w600,
                 ),
                 TimeButton(
+                  borcolor: MyTheme.borderColor,
                   fontSize: 15,
                   text: "15:00 AM",
                   fontWeight: FontWeight.w600,
@@ -439,22 +443,56 @@ class BookingDetails extends GetView<OrderController> {
 }
 
 Widget _buildBottomPicker(Widget picker) {
+  final controller = Get.find<OrderController>();
+  DateTime? time;
   return Container(
-    height: 250,
+    height: 330,
     padding: const EdgeInsets.only(top: 6.0),
     color: CupertinoColors.white,
     child: DefaultTextStyle(
       style: const TextStyle(
         fontSize: 22.0,
       ),
-      child: GestureDetector(
-        onTap: () {
-          Get.back();
-        },
-        child: SafeArea(
-          top: false,
-          child: picker,
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Container(height: 200, child: picker),
+          SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TimeButton(
+                    borcolor: Colors.white,
+                    onTap: () {
+                      time = globletime;
+                      controller.selectedDate.value = time as DateTime;
+                      Get.back();
+                    },
+                    fontSize: 12,
+                    text: "Done",
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    backgroundColor: Colors.black),
+                TimeButton(
+                  borcolor: Colors.black,
+                  onTap: () {
+                    Get.back();
+                  },
+                  fontSize: 12,
+                  text: "cancel",
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     ),
   );
