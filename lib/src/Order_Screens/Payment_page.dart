@@ -1,6 +1,7 @@
 // import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -83,9 +84,12 @@ class PaymentPage extends StatelessWidget {
                   thickness: 1,
                   color: MyTheme.devidercolor,
                 )),
-                Text(
-                  "Or pay with card",
-                ),
+                Text("Or pay with card",
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: MyTheme.dividermiddletext,
+                    )),
                 Expanded(
                     child: Divider(
                   indent: 10,
@@ -106,11 +110,14 @@ class PaymentPage extends StatelessWidget {
                 height: 16,
               ),
               AppFormField(
+                formatters: [FilteringTextInputFormatter.digitsOnly],
+                inputType: TextInputType.number,
                 toptext: 'Card Information',
                 hintText: '1234 1233 1233 1233',
                 suffixIcon: Icon(
                   Icons.error,
-                  color: Colors.red,
+                  color: MyTheme.errorIcon,
+                  size: 14,
                 ),
                 controller: TextEditingController(),
                 borderRadius: BorderRadius.only(
@@ -138,6 +145,11 @@ class PaymentPage extends StatelessWidget {
                         child: TextFormField(
                           decoration: InputDecoration(
                             hintText: "MM/YY",
+                            hintStyle: GoogleFonts.inter(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.hinttextColor),
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                             ),
@@ -155,9 +167,24 @@ class PaymentPage extends StatelessWidget {
                       Container(
                         width: 180,
                         child: TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "CVV",
-                            suffixIcon: Icon(Icons.credit_card),
+                            hintStyle: GoogleFonts.inter(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.hinttextColor),
+                            suffixIcon: Padding(
+                                padding: const EdgeInsets.only(left: 26),
+                                child: Container(
+                                    height: 12,
+                                    width: 12,
+                                    child: Image.asset(
+                                        "assets/images/creditcard.png"))),
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                             ),
@@ -178,6 +205,19 @@ class PaymentPage extends StatelessWidget {
               ),
               SizedBox(
                 height: 16,
+              ),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Country region",
+                    style: GoogleFonts.inter(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        color: MyTheme.hinttextchangeColors),
+                  )),
+              SizedBox(
+                height: 7,
               ),
               Container(
                 // height: 45,
@@ -237,6 +277,8 @@ class PaymentPage extends StatelessWidget {
                 ),
               ),
               AppFormField(
+                formatters: [FilteringTextInputFormatter.digitsOnly],
+                inputType: TextInputType.number,
                 toptext: '',
                 hintText: 'ZIP',
                 controller: TextEditingController(),

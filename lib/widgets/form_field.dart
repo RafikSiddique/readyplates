@@ -134,7 +134,7 @@ class AppFormField extends StatelessWidget {
                             },
                             icon: Icon(
                                 obSecureText ? Icons.lock : Icons.lock_open))
-                        : null,
+                        : suffixIcon,
                     hintStyle: GoogleFonts.inter(
                       fontSize: hintfontSize,
                       //  fontFamily: 'Inter-Regular',

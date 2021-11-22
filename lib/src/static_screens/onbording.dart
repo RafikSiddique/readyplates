@@ -12,6 +12,7 @@ import 'package:readyplates/src/home/screens/landing_page.dart';
 // import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/src/login/screens/signuppage.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -209,65 +210,65 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
 
   @override
   void afterFirstLayout(BuildContext context) async {
-    Get.to(() => BookingDetails(RestaurantModel(
-        id: 0,
-        bio: [
-          Bio(
-              id: 0,
-              description: "description",
-              no_of_tables: "no_of_tables",
-              max_table_size: "max_table_size",
-              cost_for_two: "cost_for_two",
-              servingTime: "servingTime",
-              recurring_event_date: "recurring_event_date",
-              recur_freq: "recur_freq",
-              event_start: "event_start",
-              event_end: "event_end",
-              event_desc: "event_desc",
-              front_fascia_day: "front_fascia_day",
-              front_fascia_night: "front_fascia_night",
-              street_view: "street_view",
-              entrance: "entrance",
-              ambience1: "ambience1",
-              ambience2: "ambience2",
-              ambience3: "ambience3",
-              ambience4: "ambience4",
-              food1: "food1",
-              food2: "food2",
-              food3: "food3",
-              food4: "food4",
-              cv19prec1: "cv19prec1",
-              cv19prec2: "cv19prec2",
-              cv19prec3: "cv19prec3",
-              cv19prec4: "cv19prec4",
-              completed_till: 4,
-              user: 0)
-        ],
-        resName: "resName",
-        own_name: "own_name",
-        own_mobile: "own_mobile",
-        res_city: "res_city",
-        poc: "poc",
-        poc_number: " poc_number",
-        address: "address",
-        postal_code: "postal_code",
-        latitude: "latitude",
-        longitude: "longitude",
-        gstin_present: "gstin_present",
-        gstin_num: "gstin_num",
-        fssai_status: "fssai_status",
-        fssai_expiry: "fssai_expiry",
-        kyc_image: "kyc_image",
-        gstin_image: "gstin_image",
-        fssai_image: "fssai_image",
-        type_of_estd: "type_of_estd",
-        types_of_cusine: "types_of_cusine",
-        start_time: "09:00am",
-        end_time: "10:00p",
-        open_days: "",
-        completed_till: 4,
-        user: 0)));
-/*     try {
+    // Get.to(() => BookingDetails(RestaurantModel(
+    //     id: 4,
+    //     bio: [
+    //       Bio(
+    //           id: 1,
+    //           description: "description",
+    //           no_of_tables: "no_of_tables",
+    //           max_table_size: "max_table_size",
+    //           cost_for_two: "cost_for_two",
+    //           servingTime: "servingTime",
+    //           recurring_event_date: "recurring_event_date",
+    //           recur_freq: "recur_freq",
+    //           event_start: "event_start",
+    //           event_end: "event_end",
+    //           event_desc: "event_desc",
+    //           front_fascia_day: "front_fascia_day",
+    //           front_fascia_night: "front_fascia_night",
+    //           street_view: "street_view",
+    //           entrance: "entrance",
+    //           ambience1: "ambience1",
+    //           ambience2: "ambience2",
+    //           ambience3: "ambience3",
+    //           ambience4: "ambience4",
+    //           food1: "food1",
+    //           food2: "food2",
+    //           food3: "food3",
+    //           food4: "food4",
+    //           cv19prec1: "cv19prec1",
+    //           cv19prec2: "cv19prec2",
+    //           cv19prec3: "cv19prec3",
+    //           cv19prec4: "cv19prec4",
+    //           completed_till: 4,
+    //           user: 0)
+    //     ],
+    //     resName: "resName",
+    //     own_name: "own_name",
+    //     own_mobile: "own_mobile",
+    //     res_city: "res_city",
+    //     poc: "poc",
+    //     poc_number: " poc_number",
+    //     address: "address",
+    //     postal_code: "postal_code",
+    //     latitude: "latitude",
+    //     longitude: "longitude",
+    //     gstin_present: "gstin_present",
+    //     gstin_num: "gstin_num",
+    //     fssai_status: "fssai_status",
+    //     fssai_expiry: "fssai_expiry",
+    //     kyc_image: "kyc_image",
+    //     gstin_image: "gstin_image",
+    //     fssai_image: "fssai_image",
+    //     type_of_estd: "type_of_estd",
+    //     types_of_cusine: "types_of_cusine",
+    //     start_time: "09:00am",
+    //     end_time: "10:00p",
+    //     open_days: "",
+    //     completed_till: 4,
+    //     user: 0)));
+     try {
       SharedPreferenceHelper sfHelper = SharedPreferenceHelper();
       bool isLoggedIn = await sfHelper.getLoggedIn();
       print(isLoggedIn);
@@ -283,6 +284,6 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
     } catch (e) {
       controller.animateToPage(1,
           duration: Duration(milliseconds: 500), curve: Curves.ease);
-    } */
+    } 
   }
 }
