@@ -68,8 +68,7 @@ class Routes {
                   //   return FeedbackPage(e: e.,);
                   case Tellafriend.id:
                     return Tellafriend();
-                 
-                  case ChangePasswordPage1.id:
+                    case ChangePasswordPage1.id:
                     return ChangePasswordPage1();
                   case ProfilePage.id:
                     return ProfilePage();
