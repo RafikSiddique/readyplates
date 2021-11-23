@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart';
+import 'package:readyplates/utils/api_services.dart';
+import 'package:readyplates/utils/shared_preference_helper.dart';
 
-class FirebaseMessagingService {
+class FirebaseMessagingService extends ApiService {
   int i = 0;
   FirebaseMessagingService() {
     //if (i == 0) {
@@ -95,10 +100,24 @@ class FirebaseMessagingService {
     String? token = await FirebaseMessaging.instance.getToken();
     print(token);
     print("Called");
+    if (token != null) setToken(token);
     return token;
   }
 
-  Future<void> setToken() async {
-    //TODO Set Token
+  Future<void> setToken(String token) async {
+    String userId = await SharedPreferenceHelper().getUserId();
+    try {
+      if (userId != "") {
+        var res = await post(Uri.parse(baseUri + 'restaurants/token/'),
+            headers: contentTypeJsonHeader,
+            body: jsonEncode({
+              'user': userId,
+              'token': token,
+            }));
+        print(res);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

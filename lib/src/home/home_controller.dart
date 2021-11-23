@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:get/get.dart';
 import 'package:readyplates/models/foog_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
@@ -11,6 +13,22 @@ class HomeController extends GetxController {
 
   double lat = 0;
   double lon = 0;
+
+  double getDistanceFromLatLonInKm(double lat2, double lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat); // deg2rad below
+    var dLon = deg2rad(lon2 - lon);
+    var a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(deg2rad(lat)) * cos(deg2rad(lat2)) * sin(dLon / 2) * sin(dLon / 2);
+    var c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+  }
+
+  double deg2rad(deg) {
+    return deg * (pi / 180);
+  }
+
   RxString address = "".obs;
   RxList<RestaurantModel> restaurants = <RestaurantModel>[
     RestaurantModel(
@@ -38,7 +56,7 @@ class HomeController extends GetxController {
         res_city: "",
         start_time: "",
         type_of_estd: "",
-        types_of_cusine: "",
+        types_of_cusine: [],
         user: 0)
   ].obs;
 
@@ -141,11 +159,17 @@ class HomeController extends GetxController {
 
   Future<void> getRestaurants() async {
     try {
-      if (lat != 0 && lon != 0) {
-        restaurants.value = await homeService.getRestaurantWithSort(lat, lon);
-      } else {
+      lat = await sfHelper.getLat();
+      lon = await sfHelper.getLon();
+      //if (lat != 0 && lon != 0) {
+      restaurants.value = await homeService.getRestaurantWithSort(lat, lon);
+      restaurants.sort((a, b) => getDistanceFromLatLonInKm(
+              double.parse(a.latitude), double.parse(a.longitude))
+          .compareTo(getDistanceFromLatLonInKm(
+              double.parse(b.latitude), double.parse(b.longitude))));
+      /* } else {
         restaurants.value = await homeService.getResDetail();
-      }
+      } */
     } catch (e) {
       restaurants.value = await homeService.getResDetail();
       restaurants.value = restaurants.isEmpty

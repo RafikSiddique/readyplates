@@ -25,7 +25,7 @@ class RestaurantModel {
   final String gstin_image;
   final String fssai_image;
   final String type_of_estd;
-  final String types_of_cusine;
+  final List<String> types_of_cusine;
   final String start_time;
   final String end_time;
   final String open_days;
@@ -92,6 +92,8 @@ class RestaurantModel {
   }
 
   factory RestaurantModel.fromMap(Map<String, dynamic> map) {
+    final regExp = new RegExp(r'(?:\[)?(\[[^\]]*?\](?:,?))(?:\])?');
+
     return RestaurantModel(
       id: map['id']?.toInt(),
       bio: List<Bio>.from(map['bio']?.map((x) => Bio.fromMap(x))),
@@ -101,7 +103,7 @@ class RestaurantModel {
       res_city: map['res_city'] ?? "",
       poc: map['poc'] ?? "",
       poc_number: map['poc_number'] ?? "",
-      address: map['address'] ?? "",
+      address: map['address'].toString(),
       postal_code: map['postal_code'] ?? "",
       latitude: map['latitude'] ?? "",
       longitude: map['longitude'] ?? "",
@@ -113,7 +115,14 @@ class RestaurantModel {
       gstin_image: map['gstin_image'] ?? "",
       fssai_image: map['fssai_image'] ?? "",
       type_of_estd: map['type_of_estd'] ?? "",
-      types_of_cusine: map['types_of_cusine'] ?? "",
+      types_of_cusine: map['types_of_cusine'] != null
+          ? List<String>.from(regExp
+              .allMatches(map['types_of_cusine'])
+              .map((m) => m.group(1))
+              .map(
+                  (item) => (item ?? "").replaceAll(new RegExp(r'[\[\],]'), ''))
+              .toList())
+          : [],
       start_time: map['start_time'] ?? "",
       end_time: map['end_time'] ?? "",
       open_days: map['open_days'] ?? "",

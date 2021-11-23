@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/home/screens/category_page.dart';
 import 'package:readyplates/src/home/widgets/restaurant_card.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/utils/assets.dart';
@@ -123,13 +124,10 @@ class ShopScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(
                 height: 22,
               ),
-
               Container(
-                //height: MediaQuery.of(context).size.height * 0.2,
                 child: GridView.count(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -139,72 +137,48 @@ class ShopScreen extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   children: [
                     for (var i = 0; i < category.length; i++)
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              //color: Color(0xffFCEBCD),
-                              color: MyTheme.shopboxcolor.withOpacity(1),
-                              borderRadius: BorderRadius.circular(11),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => CategoryPage(category: category[i]));
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                //color: Color(0xffFCEBCD),
+                                color: MyTheme.shopboxcolor.withOpacity(1),
+                                borderRadius: BorderRadius.circular(11),
+                              ),
+                              height: media.size.height * 0.08,
+                              width: media.size.height * 0.08,
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(8),
+                              child: Image.asset(
+                                categroyImg[i],
+                                height:
+                                    MediaQuery.of(context).size.height * 0.038,
+                                width:
+                                    MediaQuery.of(context).size.height * 0.038,
+                              ),
                             ),
-                            height: media.size.height * 0.08,
-                            width: media.size.height * 0.08,
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.all(8),
-                            child: Image.asset(
-                              categroyImg[i],
-                              height:
-                                  MediaQuery.of(context).size.height * 0.038,
-                              width: MediaQuery.of(context).size.height * 0.038,
+                            SizedBox(
+                              height: 2,
                             ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(category[i],
-                              style: GoogleFonts.montserrat(
-                                  // fontFamily: "Montserrat",
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 13,
-                                  color: Colors.black))
-                        ],
+                            Text(category[i],
+                                style: GoogleFonts.montserrat(
+                                    // fontFamily: "Montserrat",
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Colors.black))
+                          ],
+                        ),
                       )
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.only(
-              //     left: 16,
-              //     right: 17,
-              //   ),
-              //   child: Container(
-              //     width: 342,
-              //     height: 14,
-              //     child: Row(
-              //       children: [
-              //         Container(
-              //           width: 11,
-              //           height: 11,
-              //           child: Image.asset('assets/images/location.png'),
-              //         ),
-              //         SizedBox(
-              //           width: 5,
-              //         ),
-              //         Text(
-              //           '32nd Street, Long Beach, San Francisco',
-              //           style: TextStyle(
-              //             fontSize: 10,
-              //             color: MyTheme.appbartextColor,
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-
               SizedBox(
                 height: 22,
               ),

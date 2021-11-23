@@ -4,10 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/bio.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/restaurant_detail.dart';
+import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
-class RestaurantCard extends StatelessWidget {
+class RestaurantCard extends GetView<HomeController> {
   final RestaurantModel restaurantModel;
   const RestaurantCard({Key? key, required this.restaurantModel})
       : super(key: key);
@@ -122,7 +123,13 @@ class RestaurantCard extends StatelessWidget {
                         height: 6,
                       ),
                       Text(
-                        restaurantModel.types_of_cusine,
+                        restaurantModel.types_of_cusine
+                            .getRange(
+                                0,
+                                restaurantModel.types_of_cusine.length > 3
+                                    ? 3
+                                    : restaurantModel.types_of_cusine.length)
+                            .join(),
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
@@ -134,7 +141,25 @@ class RestaurantCard extends StatelessWidget {
                         height: 3,
                       ),
                       Text(
-                        restaurantModel.address,
+                        restaurantModel.address
+                                .split(' ')
+                                .getRange(
+                                    0,
+                                    restaurantModel.address.split(' ').length <
+                                            2
+                                        ? restaurantModel.address
+                                            .split(' ')
+                                            .length
+                                        : 2)
+                                .map((e) => e)
+                                .join() +
+                            " | " +
+                            controller
+                                .getDistanceFromLatLonInKm(
+                                    double.parse(restaurantModel.latitude),
+                                    double.parse(restaurantModel.longitude))
+                                .toStringAsFixed(2) +
+                            " Kms",
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
