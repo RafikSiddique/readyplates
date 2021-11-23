@@ -14,17 +14,25 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
-class RestaurantDetails extends StatelessWidget {
+class RestaurantDetails extends StatefulWidget {
   final RestaurantModel restaurantModel;
   static const id = "/aboutlocation";
-  RestaurantDetails({Key? key, required this.restaurantModel})
-      : super(key: key);
+  RestaurantDetails({
+    Key? key,
+    required this.restaurantModel,
+  }) : super(key: key);
 
+  @override
+  State<RestaurantDetails> createState() => _RestaurantDetailsState();
+}
+
+class _RestaurantDetailsState extends State<RestaurantDetails> {
+  bool isVisible = false;
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
     Size size = media.size;
-    Bio bio = restaurantModel.bio.first;
+    Bio bio = widget.restaurantModel.bio.first;
     List<String> images = [
       bio.street_view,
       bio.entrance,
@@ -53,9 +61,9 @@ class RestaurantDetails extends StatelessWidget {
             height: size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: (restaurantModel.bio.first.food1 == ""
+                image: (widget.restaurantModel.bio.first.food1 == ""
                         ? AssetImage(Assets.ready)
-                        : NetworkImage(restaurantModel.bio.first.food1))
+                        : NetworkImage(widget.restaurantModel.bio.first.food1))
                     as ImageProvider,
                 fit: BoxFit.cover,
               ),
@@ -103,7 +111,7 @@ class RestaurantDetails extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(restaurantModel.resName,
+                              Text(widget.restaurantModel.resName,
                                   style: GoogleFonts.nunito(
                                     textStyle: TextStyle(
                                       fontSize: 25,
@@ -146,7 +154,8 @@ class RestaurantDetails extends StatelessWidget {
                               SizedBox(
                                 width: 3,
                               ),
-                              Text("(Closes at ${restaurantModel.end_time})",
+                              Text(
+                                  "(Closes at ${widget.restaurantModel.end_time})",
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
                                         //  overflow: TextOverflow.ellipsis,
@@ -175,7 +184,7 @@ class RestaurantDetails extends StatelessWidget {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.4,
-                                child: Text(restaurantModel.address,
+                                child: Text(widget.restaurantModel.address,
                                     style: GoogleFonts.inter(
                                       textStyle: TextStyle(
                                           // overflow: TextOverflow.ellipsis,
@@ -219,7 +228,7 @@ class RestaurantDetails extends StatelessWidget {
                             height: 3,
                           ),
                           Text(
-                            restaurantModel.bio.first.description,
+                            widget.restaurantModel.bio.first.description,
                             style: GoogleFonts.inter(
                                 fontSize: 13,
                                 fontWeight: FontWeight.normal,
@@ -240,9 +249,10 @@ class RestaurantDetails extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              restaurantModel.bio.first.servingTime == ""
+                              widget.restaurantModel.bio.first.servingTime == ""
                                   ? "Undefined Serving time"
-                                  : restaurantModel.bio.first.servingTime +
+                                  : widget.restaurantModel.bio.first
+                                          .servingTime +
                                       " Minutes",
                               style: GoogleFonts.inter(
                                   fontSize: 13,
@@ -451,13 +461,60 @@ class RestaurantDetails extends StatelessWidget {
                               Column(
                                 children: [
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      setState(() {
+                                        isVisible = !isVisible;
+                                      });
+                                    },
                                     child: Container(
                                       height: 24,
                                       width: 56,
-                                      child: Image(
-                                        image: AssetImage(Assets.lessbutton),
-                                      ),
+                                      child: isVisible == false
+                                          ? Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                    color: Color(0xffF94510),
+                                                  )),
+                                              height: 24,
+                                              width: 56,
+                                              child: Center(
+                                                child: Text(
+                                                  'MORE',
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 13,
+                                                    fontStyle: FontStyle.normal,
+                                                    color: Color(0xffF94510),
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ))
+                                          : Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                    color: Color(0xffF94510),
+                                                  )),
+                                              height: 24,
+                                              width: 56,
+                                              child: Center(
+                                                child: Text(
+                                                  'LESS',
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 13,
+                                                    fontStyle: FontStyle.normal,
+                                                    color: Color(0xffF94510),
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                     ),
                                   ),
                                 ],
@@ -467,14 +524,18 @@ class RestaurantDetails extends StatelessWidget {
                           SizedBox(
                             height: 30,
                           ),
-                          Text(
-                            bio.event_desc,
-                            style: GoogleFonts.inter(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                color: Color(0xff71757B)),
+                          Visibility(
+                            visible: isVisible,
+                            child: Text(
+                              bio.event_desc,
+                              style: GoogleFonts.inter(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  color: Color(0xff71757B)),
+                            ),
                           ),
+
                           Divider(
                             thickness: 1,
                             color: Color(0xff71757B),
@@ -489,11 +550,11 @@ class RestaurantDetails extends StatelessWidget {
                               final controller = Get.find<HomeController>();
                               controller.foodItems =
                                   [controller.defaultItem].obs;
-                              controller
-                                  .getFoodItems(restaurantModel.id.toString());
+                              controller.getFoodItems(
+                                  widget.restaurantModel.id.toString());
                               Get.find<OrderController>().getCart();
                               Get.toNamed(MenuPage.id,
-                                  arguments: restaurantModel);
+                                  arguments: widget.restaurantModel);
                             },
                           ),
                           SizedBox(
