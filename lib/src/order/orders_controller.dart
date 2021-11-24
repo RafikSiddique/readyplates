@@ -278,4 +278,13 @@ class OrderController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
+
+  Future<void> tableList(String id) async {
+    try {
+      String id = await sfHelper.getUserId();
+      final tableList = services.tableconfig(id);
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
 }

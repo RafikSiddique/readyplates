@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/models/table_model.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/exception.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -167,6 +170,24 @@ class Orderservices extends ApiService {
         print('body5');
         String body = await response.stream.bytesToString();
         print(body);
+      } else {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<tablemodelapi>> tableconfig(String id) async {
+    try {
+      Response response =
+          await get(orderList(id), headers: contentTypeJsonHeader);
+      if (response.statusCode == 200) {
+        List<dynamic> data = jsonDecode(response.body);
+        List<tablemodelapi> listOfTables =
+            data.map((e) => tablemodelapi.fromMap(e)).toList();
+        return listOfTables;
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);

@@ -172,11 +172,14 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                             height: kToolbarHeight * 0.4,
                           ),
                           AppFormField(
-                              isPassword: true,
-                              line: 1,
-                              toptext: "New Password",
-                              hintText: "** ** **",
-                              controller: controller.passwordController),
+                            isPassword: true,
+                            line: 1,
+                            toptext: "New Password",
+                            hintText: "** ** **",
+                            controller: controller.passwordController,
+                            matchVerification: true,
+                            secondVal: controller.password2Controller,
+                          ),
                           SizedBox(
                             height: kToolbarHeight * 0.4,
                           ),
@@ -188,6 +191,8 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                             controller: controller.password2Controller,
                             line: 1,
                             fontSize: 12,
+                            matchVerification: true,
+                            secondVal: controller.passwordController,
                           ),
                           SizedBox(
                             height: kToolbarHeight * 0.6,

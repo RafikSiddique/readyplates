@@ -6,7 +6,7 @@ class ApiService {
   final String baseUri = "http://202.53.174.5:8000/";
   Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);
 
-  // Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);
+  Uri restaurants(String path) => Uri.parse(baseUri + "restaurants/" + path);
   Uri get loginUri => customers('login/');
   Uri get registerUri => customers('register/');
   Uri get image => customers('image/');
@@ -29,4 +29,6 @@ class ApiService {
   Uri singleRestaurantUri(int id) => customers('getrestaurant/$id');
 
   Uri get feedbackApi => customers("feedback/");
+
+  Uri tableList (String id) => restaurants("availabletable/$id");
 }
