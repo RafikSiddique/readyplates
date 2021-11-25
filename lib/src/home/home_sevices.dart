@@ -64,7 +64,6 @@ class HomeServices extends ApiService {
       print(response.body);
       if (response.statusCode == 200) {
         List<dynamic> list = jsonDecode(response.body);
-
         List<FoodItemModel> foodItems =
             list.map((e) => FoodItemModel.fromMap(e)).toList();
         print(foodItems);

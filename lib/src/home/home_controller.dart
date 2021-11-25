@@ -171,7 +171,7 @@ class HomeController extends GetxController {
         restaurants.value = await homeService.getResDetail();
       } */
     } catch (e) {
-      restaurants.value = await homeService.getResDetail();
+      //restaurants.value = await homeService.getResDetail();
       restaurants.value = restaurants.isEmpty
           ? []
           : restaurants.first.id == -1
