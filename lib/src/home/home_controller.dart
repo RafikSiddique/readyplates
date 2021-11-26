@@ -73,7 +73,6 @@ class HomeController extends GetxController {
         name: "name",
         description: "description",
         image1: "image1",
-        image2: "image2",
         dietType: "diet_type",
         category: "category",
         stdServingSize: "std_serving_size",
@@ -89,7 +88,6 @@ class HomeController extends GetxController {
       name: "name",
       description: "description",
       image1: "image1",
-      image2: "image2",
       dietType: "diet_type",
       category: "category",
       stdServingSize: "std_serving_size",
@@ -181,6 +179,8 @@ class HomeController extends GetxController {
       Get.snackbar("", e.toString());
     }
   }
+
+  
 
   void onPageChange(int index) {
     currentIndex.value = index;

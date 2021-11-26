@@ -117,8 +117,6 @@ class AuthController extends GetxController {
         passwordController.text,
       );
       await sfHelper.setUserId(id[0]);
-
-      Get.offAllNamed(ImagePage.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

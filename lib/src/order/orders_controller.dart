@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/models/table_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
@@ -279,10 +280,32 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> tableList(String id) async {
+  Rx<DateTime> globletime = DateTime.now().obs;
+
+  Future<void> tableList(
+    int resId,
+  ) async {
+    globletime.addListener(GetStream(
+      onListen: () {
+        print(globletime.value);
+      },
+    ));
+
+    DateTime end = globletime.value;
+
     try {
       String id = await sfHelper.getUserId();
-      final tableList = services.tableconfig(id);
+      await services.tableconfig(
+          id,
+          TableModel(
+              restaurant: resId,
+              capacity: numberOfPeople.value,
+              orderdate: DateFormat(DateFormat.YEAR_MONTH_DAY)
+                  .format(selectedDate.value),
+              starttime: DateFormat(DateFormat.HOUR24_MINUTE_SECOND)
+                  .format(globletime.value),
+              endtime: DateFormat(DateFormat.HOUR24_MINUTE_SECOND)
+                  .format(end.add(Duration(minutes: 45)))));
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

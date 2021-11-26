@@ -13,8 +13,6 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
-DateTime? globletime;
-
 class BookingDetails extends GetView<OrderController> {
   final RestaurantModel restaurantModel;
   static const id = "/bookingsettings";
@@ -26,11 +24,11 @@ class BookingDetails extends GetView<OrderController> {
     return Text(text);
   }
 
-  Widget numberChange(bool val, Size size) {
+  Widget numberChange(Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(val ? "Number of People" : "Number of Table"),
+        Text("Number of People"),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,9 +37,7 @@ class BookingDetails extends GetView<OrderController> {
                   width: size.width * 0.3,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    val
-                        ? controller.numberOfPeople.value.toString()
-                        : controller.numberOfTable.value.toString(),
+                    controller.numberOfPeople.value.toString(),
                     style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w500,
                         color: MyTheme.dividermiddletext,
@@ -51,18 +47,10 @@ class BookingDetails extends GetView<OrderController> {
             Spacer(),
             InkWell(
               onTap: () {
-                if (val) {
-                  if (controller.numberOfPeople.value != 1) {
-                    controller.numberOfPeople--;
-                  } else {
-                    Get.snackbar("Error", "There should be atleast one person");
-                  }
+                if (controller.numberOfPeople.value != 1) {
+                  controller.numberOfPeople--;
                 } else {
-                  if (controller.numberOfTable.value != 1) {
-                    controller.numberOfTable--;
-                  } else {
-                    Get.snackbar("Error", "There should be atleast one table");
-                  }
+                  Get.snackbar("Error", "There should be atleast one person");
                 }
               },
               child: Padding(
@@ -75,11 +63,7 @@ class BookingDetails extends GetView<OrderController> {
             ),
             InkWell(
                 onTap: () {
-                  if (val) {
-                    controller.numberOfPeople++;
-                  } else {
-                    controller.numberOfTable++;
-                  }
+                  controller.numberOfPeople++;
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -95,7 +79,62 @@ class BookingDetails extends GetView<OrderController> {
     );
   }
 
-  DateTime? time;
+  Widget _buildBottomPicker(Widget picker) {
+    return Container(
+      height: 330,
+      padding: const EdgeInsets.only(top: 6.0),
+      color: CupertinoColors.white,
+      child: DefaultTextStyle(
+        style: const TextStyle(
+          fontSize: 22.0,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Container(height: 200, child: picker),
+            SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TimeButton(
+                      borcolor: Colors.white,
+                      onTap: () {
+                        controller.globletime.value = tempTime;
+                        controller.tableList(restaurantModel.id);
+                        Get.back();
+                      },
+                      fontSize: 12,
+                      text: "Done",
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.black),
+                  TimeButton(
+                    borcolor: Colors.black,
+                    onTap: () {
+                      Get.back();
+                    },
+                    fontSize: 12,
+                    text: "cancel",
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  DateTime tempTime = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -201,16 +240,16 @@ class BookingDetails extends GetView<OrderController> {
                             return _buildBottomPicker(
                               CupertinoDatePicker(
                                 onDateTimeChanged: (dateTime) {
-                                  globletime = dateTime;
-                                  
+                                  tempTime = dateTime;
                                 },
                                 use24hFormat: false,
                                 initialDateTime: DateTime(
-                                    now.year,
-                                    now.month,
-                                    now.day,
-                                    now.hour,
-                                    (now.minute % 15 * 15).toInt()),
+                                  controller.globletime.value.year,
+                                  controller.globletime.value.month,
+                                  controller.globletime.value.day,
+                                  controller.globletime.value.hour,
+                                  (now.minute % 15 * 15).toInt(),
+                                ),
                                 minuteInterval: 15,
                                 mode: CupertinoDatePickerMode.time,
                               ),
@@ -218,51 +257,6 @@ class BookingDetails extends GetView<OrderController> {
                           },
                         );
                       },
-                      // () async {
-                      //   TimeOfDay? tod = await showTimePicker(
-                      //       context: context,
-                      //       initialTime: TimeOfDay(
-                      //           hour: controller.selectedDate.value.hour,
-                      //           minute: controller.selectedDate.value.minute));
-                      //   if (tod != null) {
-                      //     print(restaurantModel.start_time);
-                      //     print(restaurantModel.end_time);
-                      //     List<String> startTimes =
-                      //         restaurantModel.start_time.split(':');
-                      //     List<String> endTime =
-                      //         restaurantModel.end_time.split(':');
-                      //     int start = (int.parse(startTimes.first) +
-                      //         (startTimes.last.toLowerCase().contains('a')
-                      //             ? 0
-                      //             : startTimes.last.toLowerCase().contains('p')
-                      //                 ? 12
-                      //                 : 0));
-                      //     int end = int.parse(endTime.first) +
-                      //         (endTime.last.toLowerCase().contains('a')
-                      //             ? 0
-                      //             : endTime.last.toLowerCase().contains('p')
-                      //                 ? 12
-                      //                 : 0);
-                      //     print(start);
-                      //     print(end);
-                      //     bool isAfterStart = tod.hour > start;
-                      //     bool isBeforeEnd = tod.hour < end;
-                      //     print(isAfterStart);
-                      //     print(isBeforeEnd);
-                      //     print(tod);
-                      //     if (isAfterStart && isBeforeEnd) {
-                      //       controller.selectedDate.value = DateTime(
-                      //           controller.selectedDate.value.year,
-                      //           controller.selectedDate.value.month,
-                      //           controller.selectedDate.value.day,
-                      //           tod.hour,
-                      //           tod.minute);
-                      //     } else {
-                      //       Get.snackbar("Error",
-                      //           "Restaurant is closed at the selected time");
-                      //     }
-                      //   }
-                      // },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -286,7 +280,7 @@ class BookingDetails extends GetView<OrderController> {
                               ),
                               child: Text(
                                   DateFormat("hh:mm a")
-                                      .format(controller.selectedDate.value),
+                                      .format(controller.globletime.value),
                                   style: GoogleFonts.inter(fontSize: 20)),
                             ),
                           ],
@@ -323,7 +317,7 @@ class BookingDetails extends GetView<OrderController> {
             SizedBox(
               height: 20,
             ),
-            numberChange(true, size),
+            numberChange(size),
             SizedBox(
               height: 17,
             ),
@@ -440,62 +434,6 @@ class BookingDetails extends GetView<OrderController> {
       ),
     );
   }
-}
-
-Widget _buildBottomPicker(Widget picker) {
-  final controller = Get.find<OrderController>();
-  DateTime? time;
-  return Container(
-    height: 330,
-    padding: const EdgeInsets.only(top: 6.0),
-    color: CupertinoColors.white,
-    child: DefaultTextStyle(
-      style: const TextStyle(
-        fontSize: 22.0,
-      ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Container(height: 200, child: picker),
-          SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TimeButton(
-                    borcolor: Colors.white,
-                    onTap: () {
-                      time = globletime;
-                      controller.selectedDate.value = time as DateTime;
-                      Get.back();
-                    },
-                    fontSize: 12,
-                    text: "Done",
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Colors.black),
-                TimeButton(
-                  borcolor: Colors.black,
-                  onTap: () {
-                    Get.back();
-                  },
-                  fontSize: 12,
-                  text: "cancel",
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }
 
 class MonthModel {

@@ -7,7 +7,6 @@ import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/models/table_model.dart';
-import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/exception.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -179,15 +178,16 @@ class Orderservices extends ApiService {
     }
   }
 
-  Future<List<tablemodelapi>> tableconfig(String id) async {
+  Future<List<dynamic>> tableconfig(String id, TableModel tableModel) async {
     try {
-      Response response =
-          await get(orderList(id), headers: contentTypeJsonHeader);
+      Response response = await post(tableList,
+          headers: contentTypeJsonHeader, body: tableModel.toJson());
       if (response.statusCode == 200) {
         List<dynamic> data = jsonDecode(response.body);
-        List<tablemodelapi> listOfTables =
-            data.map((e) => tablemodelapi.fromMap(e)).toList();
-        return listOfTables;
+        print(data);
+/*         List<TableModelapi> listOfTables =
+            data.map((e) => TableModelapi.fromMap(e)).toList(); */
+        return data;
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);
