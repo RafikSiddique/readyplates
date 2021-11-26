@@ -18,7 +18,9 @@ class Orderservices extends ApiService {
     try {
       Response response =
           await get(singleRestaurantUri(id), headers: contentTypeJsonHeader);
+      print(response.request);
       if (response.statusCode == 200) {
+        print(response.request);
         Map<String, dynamic> data = jsonDecode(response.body).first;
         return RestaurantModel.fromMap(data);
       } else {

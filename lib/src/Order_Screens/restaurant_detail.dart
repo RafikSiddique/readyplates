@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:readyplates/models/bio.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
@@ -417,7 +418,8 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      "MAY",
+                                      DateFormat("MMMM").format(DateTime.parse(
+                                          bio.recurring_event_date)),
                                       style: GoogleFonts.inter(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500,
@@ -428,7 +430,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      "12",
+                                      // bio.recurring_event_date,
+                                      DateFormat("d").format(DateTime.parse(
+                                          bio.recurring_event_date)),
                                       style: GoogleFonts.inter(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
