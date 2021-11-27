@@ -106,7 +106,7 @@ class BookingDetails extends GetView<OrderController> {
                       borcolor: Colors.white,
                       onTap: () {
                         controller.globletime.value = tempTime;
-                        controller.tableList(restaurantModel.id);
+                        // controller.tableList(restaurantModel.id);
                         Get.back();
                       },
                       fontSize: 12,

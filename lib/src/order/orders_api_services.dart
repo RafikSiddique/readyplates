@@ -180,22 +180,22 @@ class Orderservices extends ApiService {
     }
   }
 
-  Future<List<dynamic>> tableconfig(String id, TableModel tableModel) async {
-    try {
-      Response response = await post(tableList,
-          headers: contentTypeJsonHeader, body: tableModel.toJson());
-      if (response.statusCode == 200) {
-        List<dynamic> data = jsonDecode(response.body);
-        print(data);
-/*         List<TableModelapi> listOfTables =
-            data.map((e) => TableModelapi.fromMap(e)).toList(); */
-        return data;
-      } else {
-        throw AppException(
-            code: response.statusCode, message: response.reasonPhrase);
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
+//   Future<List<dynamic>> tableconfig(String id, TableModel tableModel) async {
+//     try {
+//       Response response = await post(tableList,
+//           headers: contentTypeJsonHeader, body: tableModel.toJson());
+//       if (response.statusCode == 200) {
+//         List<dynamic> data = jsonDecode(response.body);
+//         print(data);
+// /*         List<TableModelapi> listOfTables =
+//             data.map((e) => TableModelapi.fromMap(e)).toList(); */
+//         return data;
+//       } else {
+//         throw AppException(
+//             code: response.statusCode, message: response.reasonPhrase);
+//       }
+//     } catch (e) {
+//       rethrow;
+//     }
+//   }
 }

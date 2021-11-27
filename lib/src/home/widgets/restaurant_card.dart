@@ -173,22 +173,31 @@ class RestaurantCard extends GetView<HomeController> {
                       Row(
                         children: [
                           Container(
-                            width: media.size.height * 0.013,
-                            height: media.size.height * 0.013,
+                            width: media.size.height * 0.012,
+                            height: media.size.height * 0.012,
                             child: Image.asset(Assets.star),
                           ),
                           SizedBox(
                             width: 3,
                           ),
-                          Text(
-                            // restaurantModel.bio.first.servingTime,
-                            "4",
-                            style: TextStyle(
-                              fontSize: media.size.height * 0.013,
-                              //color: Color(0xff767B91),
-                              color: MyTheme.shoptextcolor,
-                            ),
-                          ),
+                          // Text(
+                          //   // restaurantModel.bio.first.servingTime,
+                          //   "4",
+                          //   style: TextStyle(
+                          //     fontSize: media.size.height * 0.013,
+                          //     //color: Color(0xff767B91),
+                          //     color: MyTheme.shoptextcolor,
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   width: 9,
+                          // ),
+                          Text(" 4.3 | Serving Time : ${bio.servingTime} mins ",
+                              style: GoogleFonts.montserrat(
+                                  color: MyTheme.shoptextcolor.withOpacity(0.8),
+                                  fontSize: 9,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w600))
                         ],
                       ),
                       SizedBox(
@@ -218,12 +227,13 @@ class RestaurantCard extends GetView<HomeController> {
                             width: 5,
                           ),
                           Text(
-                            "",
-                            style: TextStyle(
-                              fontSize: media.size.height * 0.013,
-                              color: MyTheme.shoptextcolor2,
-                            ),
-                          ),
+                          "30% off upto \$25",
+                              style: GoogleFonts.montserrat(
+                                  color: MyTheme.shoptextcolor.withOpacity(0.8),
+                                  fontSize: 11,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.normal))
+                          
                         ],
                       ),
                     ],
