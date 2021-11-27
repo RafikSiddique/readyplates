@@ -81,6 +81,7 @@ class Orderservices extends ApiService {
       request.headers.addAll({'Content-Type': 'application/json'});
       request.body = ordermodel.toJson();
       StreamedResponse response = await request.send();
+      print(await response.stream.bytesToString());
       if (response.statusCode != 201) {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);
@@ -143,9 +144,7 @@ class Orderservices extends ApiService {
     String feedback,
     File? image,
   ) async {
-    print('body1');
     try {
-      print('body2');
       MultipartRequest request = MultipartRequest('POST', feedbackApi);
       if (image != null) {
         MultipartFile img = await MultipartFile.fromPath('image', image.path);
