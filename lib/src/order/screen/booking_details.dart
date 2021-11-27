@@ -321,7 +321,7 @@ class BookingDetails extends GetView<OrderController> {
             SizedBox(
               height: 17,
             ),
-            Text(
+      /*       Text(
               "Available Slots",
               style: GoogleFonts.nunito(
                   fontSize: 17,
@@ -419,7 +419,7 @@ class BookingDetails extends GetView<OrderController> {
                 color: MyTheme.bottomtextColor,
                 size: 37,
               ),
-            ),
+            ), */
             Spacer(),
             Elevated(
               text: "Confirm",
