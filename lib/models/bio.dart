@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:readyplates/models/foog_item_model.dart';
+
 class Bio {
   final int id;
   final String description;
@@ -109,22 +111,22 @@ class Bio {
       event_start: map['event_start'] ?? "",
       event_end: map['event_end'] ?? "",
       event_desc: map['event_desc'] ?? "",
-      front_fascia_day: map['front_fascia_day'] ?? "",
-      front_fascia_night: map['front_fascia_night'] ?? "",
-      street_view: map['street_view'] ?? "",
-      entrance: map['entrance'] ?? "",
-      ambience1: map['ambience1'] ?? "",
-      ambience2: map['ambience2'] ?? "",
-      ambience3: map['ambience3'] ?? "",
-      ambience4: map['ambience4'] ?? "",
-      food1: map['food1'] ?? "",
-      food2: map['food2'] ?? "",
-      food3: map['food3'] ?? "",
-      food4: map['food4'] ?? "",
-      cv19prec1: map['cv19prec1'] ?? "",
-      cv19prec2: map['cv19prec2'] ?? "",
-      cv19prec3: map['cv19prec3'] ?? "",
-      cv19prec4: map['cv19prec4'] ?? "",
+      front_fascia_day: getUrl(map['front_fascia_day'] ?? ""),
+      front_fascia_night: getUrl(map['front_fascia_night'] ?? ""),
+      street_view: getUrl(map['street_view'] ?? ""),
+      entrance: getUrl(map['entrance'] ?? ""),
+      ambience1: getUrl(map['ambience1'] ?? ""),
+      ambience2: getUrl(map['ambience2'] ?? ""),
+      ambience3: getUrl(map['ambience3'] ?? ""),
+      ambience4: getUrl(map['ambience4'] ?? ""),
+      food1: getUrl(map['food1'] ?? ""),
+      food2: getUrl(map['food2'] ?? ""),
+      food3: getUrl(map['food3'] ?? ""),
+      food4: getUrl(map['food4'] ?? ""),
+      cv19prec1: getUrl(map['cv19prec1'] ?? ""),
+      cv19prec2: getUrl(map['cv19prec2'] ?? ""),
+      cv19prec3: getUrl(map['cv19prec3'] ?? ""),
+      cv19prec4: getUrl(map['cv19prec4'] ?? ""),
       completed_till: map['completed_till']?.toInt(),
       user: map['user']?.toInt(),
     );

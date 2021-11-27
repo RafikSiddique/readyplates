@@ -407,14 +407,6 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                             children: [
                               Column(
                                 children: [
-                                  // Text(
-                                  //   bio.recurring_event_date,
-                                  //   style: GoogleFonts.inter(
-                                  //       fontSize: 13,
-                                  //       fontWeight: FontWeight.w500,
-                                  //       fontStyle: FontStyle.normal,
-                                  //       color: MyTheme.aboutlocatextcolors),
-                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(

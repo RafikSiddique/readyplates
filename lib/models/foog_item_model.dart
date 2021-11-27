@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 String getUrl(String url) {
-  // // http://202.53.174.5:8000/
-  return "http://202.53.174.5:8000" + url;
+  // http://202.53.174.5:8000/
+  //https://readyplates.herokuapp.com/
+  return "https://readyplates.herokuapp.com" + url;
 }
 
 class FoodItemModel {
