@@ -130,7 +130,10 @@ class HomeController extends GetxController {
   void search(String q) async {
     await getRestaurants();
     restaurants.value = restaurants
-        .where((p0) => p0.resName.toLowerCase().contains(q.toLowerCase()))
+        .where((p0) =>
+            p0.resName.toLowerCase().contains(q.toLowerCase()) ||
+            p0.address.toLowerCase().contains(q.toLowerCase()) ||
+            p0.types_of_cusine.join().contains(q.toLowerCase()))
         .toList();
   }
 
