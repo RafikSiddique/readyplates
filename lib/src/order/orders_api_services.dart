@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
-import 'package:readyplates/models/table_model.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/exception.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';

@@ -13,7 +13,6 @@ import 'package:intl/intl.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
-import 'package:readyplates/models/table_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
@@ -28,6 +27,7 @@ class OrderController extends GetxController {
   RxList<OrderModelApi> inProgress = <OrderModelApi>[].obs;
   RxList<OrderModelApi> ended = <OrderModelApi>[].obs;
 
+  RxList<OrderEditModel> orderEdit = <OrderEditModel>[].obs;
   RxInt numberOfPeople = 1.obs;
   RxInt numberOfTable = 1.obs;
 
@@ -37,10 +37,16 @@ class OrderController extends GetxController {
 
   late List<TextEditingController> otpText;
 
-  double calclateTotal() {
+  double calclateTotal([bool isEdit = false]) {
     total.value = 0;
-    for (var item in cartItems) {
-      total.value += item.foodPrice.value;
+    if (isEdit) {
+      for (var item in orderEdit) {
+        total.value += item.foodPrice.value;
+      }
+    } else {
+      for (var item in cartItems) {
+        total.value += item.foodPrice.value;
+      }
     }
     return total.value;
   }
@@ -137,6 +143,32 @@ class OrderController extends GetxController {
     cart(getCartItem(id));
   }
 
+  void decrementEdit(int id, [bool isRemoval = false]) {
+    if (!isRemoval) {
+      if (geteditItem(id).foodQuantity.value > 1) {
+        OrderEditModel cartModel = geteditItem(id);
+        geteditItem(id).foodPrice.value -= roundUptoDigits(
+            cartModel.foodPrice.value / cartModel.foodQuantity.value);
+        geteditItem(id).foodQuantity--;
+      } else {
+        OrderEditModel item = geteditItem(id);
+        orderEdit.remove(item);
+      }
+    } else {
+      OrderEditModel item = geteditItem(id);
+      orderEdit.remove(item);
+    }
+    calclateTotal(true);
+  }
+
+  void incrementEdit(int id) {
+    OrderEditModel cartModel = geteditItem(id);
+    geteditItem(id).foodPrice.value += roundUptoDigits(
+        cartModel.foodPrice.value / cartModel.foodQuantity.value);
+    geteditItem(id).foodQuantity++;
+    calclateTotal(true);
+  }
+
   void decrement(int id, int resId, [bool isRemoval = false]) async {
     if (!isRemoval) {
       if (getCartItem(id).foodQuantity.value > 1) {
@@ -167,6 +199,10 @@ class OrderController extends GetxController {
 
   CartModel getCartItem(int id) {
     return cartItems.firstWhere((element) => element.foodItem.value == id);
+  }
+
+  OrderEditModel geteditItem(int id) {
+    return orderEdit.firstWhere((element) => element.foodItem.value == id);
   }
 
   Future<void> cart(CartModel cartModel) async {

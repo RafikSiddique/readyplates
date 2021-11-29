@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
@@ -10,6 +11,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:readyplates/widgets/order_widget.dart';
@@ -92,10 +94,23 @@ class OrderPage extends GetView<OrderController> {
                 onTap: () async {
                   RestaurantModel restaurantModel =
                       await controller.getSingleRestaurant(restaurantId);
+                  //  String userId = await SharedPreferenceHelper().getUserId();
+                  controller.orderEdit.value = orderModel.orderitems
+                      .map((e) => OrderEditModel(
+                          foodName: e.menu.name,
+                          id: e.id,
+                          foodItem: RxInt(e.menu.id),
+                          foodQuantity: RxInt(e.quantity),
+                          foodPrice: RxDouble(double.parse(e.price)),
+                          restaurant: orderModel.restaurant.id,
+                          foodImage: e.menu.image1,
+                          isUpdated: false))
+                      .toList();
+                  controller.calclateTotal(true);
+
                   Get.to(() => BurgersupportingPage(
                         restaurantModel: restaurantModel,
                         isEditing: true,
-                        orderModelApi: orderModel,
                       ));
                 },
                 text: "Edit Order",

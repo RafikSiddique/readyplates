@@ -1,9 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/auth_controller.dart';
-import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/fcm_service.dart';
 import 'package:readyplates/utils/my_color.dart';

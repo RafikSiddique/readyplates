@@ -12,14 +12,16 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/edit_button.dart';
+import 'package:readyplates/widgets/food_item_card.dart';
 
 class MenuPage extends StatelessWidget {
   static const id = "/menupage";
   final RestaurantModel restaurantModel;
   final controller = Get.find<HomeController>();
   final orderController = Get.find<OrderController>();
-
-  MenuPage({Key? key, required this.restaurantModel}) : super(key: key);
+  final bool isEditing;
+  MenuPage({Key? key, required this.restaurantModel, this.isEditing = false})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context);
@@ -128,290 +130,14 @@ class MenuPage extends StatelessWidget {
                     child: ListView(
                       physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
-                      children: controller.foodItems
-                          .map(
-                            (e) => Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              shadowColor: Color.fromRGBO(188, 202, 224, 0.5),
-                              margin: EdgeInsets.only(top: 10),
-                              elevation: 2,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox.square(
-                                      dimension: size.width * 0.27,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Stack(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topCenter,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.network(
-                                                  e.image1,
-                                                  fit: BoxFit.cover,
-                                                  height: size.width * 0.22,
-                                                  width: size.width * 0.22,
-                                                  errorBuilder: (context, error,
-                                                      stackTrace) {
-                                                    return Image.asset(
-                                                        Assets.categoryBurger);
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                child: orderController.cartItems
-                                                        .any((el) =>
-                                                            el.foodItem.value ==
-                                                                e.id &&
-                                                            el.restaurant ==
-                                                                restaurantModel
-                                                                    .id)
-                                                    ? IncDecButton(
-                                                        text: orderController
-                                                            .getCartItem(e.id)
-                                                            .foodQuantity,
-                                                        widthFraction: .18,
-                                                        onIncrement: () {
-                                                          orderController
-                                                              .increment(
-                                                                  e.id,
-                                                                  restaurantModel
-                                                                      .id);
-                                                        },
-                                                        onDecrement: () {
-                                                          orderController
-                                                              .decrement(
-                                                                  e.id,
-                                                                  restaurantModel
-                                                                      .id);
-                                                        },
-                                                      )
-                                                    : Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      0,
-                                                                      0,
-                                                                      0,
-                                                                      0.15),
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                              blurRadius: 6,
-                                                              spreadRadius: 1,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.030,
-                                                        child: AddButton(
-                                                          widthFraction: 0.18,
-                                                          onTap: () {
-                                                            if (orderController
-                                                                .cartItems
-                                                                .any((element) =>
-                                                                    element
-                                                                        .restaurant !=
-                                                                    restaurantModel
-                                                                        .id)) {
-                                                              Get.showSnackbar(
-                                                                  GetBar(
-                                                                title: "Error",
-                                                                message:
-                                                                    "Sorry you cannot add items from 2 Restaurant",
-                                                                isDismissible:
-                                                                    true,
-                                                                mainButton:
-                                                                    TextButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    await orderController
-                                                                        .removeAllFromRes(
-                                                                            restaurantModel.id);
-                                                                    CartModel cartModel = CartModel(
-                                                                        foodItem: e
-                                                                            .id
-                                                                            .obs,
-                                                                        foodName: e
-                                                                            .name,
-                                                                        foodImage: e
-                                                                            .image1,
-                                                                        foodPrice:
-                                                                            double.parse(e.cost)
-                                                                                .obs,
-                                                                        restaurant:
-                                                                            restaurantModel
-                                                                                .id,
-                                                                        user:
-                                                                            "",
-                                                                        foodQuantity:
-                                                                            1.obs);
-                                                                    orderController
-                                                                        .cartItems
-                                                                        .add(
-                                                                            cartModel);
-                                                                    orderController
-                                                                        .cart(
-                                                                            cartModel);
-                                                                    Get.back();
-                                                                  },
-                                                                  child: Text(
-                                                                      "Remove all from other restaurants"),
-                                                                ),
-                                                              ));
-                                                            } else {
-                                                              CartModel cartModel = CartModel(
-                                                                  foodItem:
-                                                                      e.id.obs,
-                                                                  foodName:
-                                                                      e.name,
-                                                                  foodImage:
-                                                                      e.image1,
-                                                                  foodPrice:
-                                                                      double.parse(e
-                                                                              .cost)
-                                                                          .obs,
-                                                                  restaurant:
-                                                                      restaurantModel
-                                                                          .id,
-                                                                  user: "",
-                                                                  foodQuantity:
-                                                                      1.obs);
-                                                              orderController
-                                                                  .cartItems
-                                                                  .add(
-                                                                      cartModel);
-                                                              orderController
-                                                                  .cart(
-                                                                      cartModel);
-                                                            }
-                                                          },
-                                                        ),
-                                                      ))
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        height: size.width * 0.25,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(height: 8),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 16),
-                                              child: Text(
-                                                e.name,
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.montserrat(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 16,
-                                                    color: MyTheme
-                                                        .buttonchangeColor),
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            SizedBox(height: 4),
-                                            Container(
-                                              height: 45,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  child: Text(
-                                                    e.description,
-                                                    overflow: TextOverflow.clip,
-                                                    textAlign: TextAlign.left,
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontSize: 9,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Spacer(),
-                                            Row(
-                                              children: [
-                                                e.dietType == "1"
-                                                    ? SvgPicture.asset(
-                                                        "assets/images/vegan.svg",
-                                                        height: 20,
-                                                        width: 20,
-                                                      )
-                                                    : Image.asset(
-                                                        ("assets/images/veg.png"),
-                                                        color: e.dietType == "2"
-                                                            ? Color(0xffBC580B)
-                                                            : null,
-                                                        height: 20,
-                                                        width: 20,
-                                                      ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                ...List.generate(
-                                                  double.parse(e.spiceLevel)
-                                                      .toInt(),
-                                                  (index) => Image.asset(
-                                                    Assets.spice,
-                                                    color: index == 0
-                                                        ? MyTheme
-                                                            .shoppageimgcolor //Color(0xff25A244)
-                                                        : null,
-                                                  ),
-                                                ),
-                                                Spacer(),
-                                                Text("\$ " + e.cost,
-                                                    style: GoogleFonts.inter(
-                                                      color: MyTheme.pricecolor,
-                                                      fontSize:
-                                                          size.width * 0.04,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    )),
-                                                SizedBox(
-                                                  width: 20,
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
+                      children: controller.foodItems.map(
+                        (e) {
+                          return FoodItemCard(
+                              restaurantModel: restaurantModel,
+                              isEditing: isEditing,
+                              foodItemModel: e);
+                        },
+                      ).toList(),
                     ),
                   ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.025),
@@ -429,8 +155,8 @@ class MenuPage extends StatelessWidget {
                           Get.snackbar("Please add an item",
                               "At least add atleast 1 item from this restaurant to proceed to booking");
                         } else {
-                          Get.toNamed(BookingDetails.id,
-                              arguments: restaurantModel);
+                          Get.to(
+                              () => BookingDetails(restaurantModel, isEditing));
                         }
                       },
                     )),

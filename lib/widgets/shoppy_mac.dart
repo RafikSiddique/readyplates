@@ -8,24 +8,11 @@ import 'package:readyplates/utils/my_color.dart';
 
 class ShooppymacPage extends StatelessWidget {
   CartModel? cartModel;
+  OrderEditModel? orderEditModel;
   final bool isEditing;
   ShooppymacPage(
-      {Key? key,
-      this.cartModel,
-      CartApiModel? cartApiModel,
-      this.isEditing = false})
-      : super(key: key) {
-    if (cartApiModel != null) {
-      cartModel = CartModel(
-          user: cartApiModel.user.toString(),
-          foodItem: cartApiModel.foodItem.id.obs,
-          foodQuantity: cartApiModel.foodQuantity.obs,
-          foodName: cartApiModel.foodItem.name,
-          foodImage: cartApiModel.foodImage,
-          foodPrice: cartApiModel.foodPrice.obs,
-          restaurant: cartApiModel.restaurant);
-    }
-  }
+      {Key? key, this.cartModel, this.orderEditModel, this.isEditing = false})
+      : super(key: key);
   final controller = Get.find<OrderController>();
   @override
   Widget build(BuildContext context) {
@@ -37,17 +24,22 @@ class ShooppymacPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.network(
-                cartModel!.foodImage,
+                isEditing ? orderEditModel!.foodImage : cartModel!.foodImage,
                 height: 64,
                 width: 64,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container();
+                },
               ),
             ),
             SizedBox(
               width: 8,
             ),
             Text(
-              cartModel!.foodQuantity.string,
+              isEditing
+                  ? orderEditModel!.foodQuantity.string
+                  : cartModel!.foodQuantity.string,
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.normal,
@@ -76,7 +68,7 @@ class ShooppymacPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    cartModel!.foodName,
+                    isEditing ? orderEditModel!.foodName : cartModel!.foodName,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.inter(
@@ -90,7 +82,9 @@ class ShooppymacPage extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "\$ ${(cartModel!.foodPrice.value / cartModel!.foodQuantity.value).toStringAsFixed(2)}",
+                    isEditing
+                        ? "\$ ${(orderEditModel!.foodPrice.value / orderEditModel!.foodQuantity.value).toStringAsFixed(2)}"
+                        : "\$ ${(cartModel!.foodPrice.value / cartModel!.foodQuantity.value).toStringAsFixed(2)}",
                     textAlign: TextAlign.left,
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w500,
@@ -110,9 +104,15 @@ class ShooppymacPage extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      if (cartModel!.foodQuantity.value != 1)
-                        controller.decrement(
-                            cartModel!.foodItem.value, cartModel!.restaurant);
+                      if (!isEditing) {
+                        if (cartModel!.foodQuantity.value != 1)
+                          controller.decrement(
+                              cartModel!.foodItem.value, cartModel!.restaurant);
+                      } else {
+                        print("decrement");
+                        controller
+                            .decrementEdit(orderEditModel!.foodItem.value);
+                      }
                     },
                     child: Container(
                       padding: EdgeInsets.all(4),
@@ -129,8 +129,12 @@ class ShooppymacPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      controller.increment(
-                          cartModel!.foodItem.value, cartModel!.restaurant);
+                      if (!isEditing)
+                        controller.increment(
+                            cartModel!.foodItem.value, cartModel!.restaurant);
+                      else
+                        controller
+                            .incrementEdit(orderEditModel!.foodItem.value);
                     },
                     child: Container(
                       padding: EdgeInsets.all(4),

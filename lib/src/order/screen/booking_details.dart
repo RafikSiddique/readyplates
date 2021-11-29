@@ -15,9 +15,8 @@ import 'package:readyplates/widgets/buuton.dart';
 
 class BookingDetails extends GetView<OrderController> {
   final RestaurantModel restaurantModel;
-  static const id = "/bookingsettings";
-
-  BookingDetails(this.restaurantModel);
+  final bool isEditing;
+  BookingDetails(this.restaurantModel, this.isEditing);
   DateTime now = DateTime.now();
 
   Text weekText(String text) {
@@ -425,8 +424,8 @@ class BookingDetails extends GetView<OrderController> {
               text: "Confirm",
               width: double.infinity,
               onTap: () {
-                Get.toNamed(BurgersupportingPage.id,
-                    arguments: restaurantModel);
+                Get.to(() => BurgersupportingPage(
+                    restaurantModel: restaurantModel, isEditing: isEditing));
               },
             ),
           ],

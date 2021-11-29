@@ -272,8 +272,10 @@ class OrderFoodItemApi {
 class MenuFromApi {
   int id;
   String name;
+  String image1;
   MenuFromApi({
     required this.id,
+    required this.image1,
     required this.name,
   });
 
@@ -283,6 +285,7 @@ class MenuFromApi {
   }) {
     return MenuFromApi(
       id: id ?? this.id,
+      image1: image1,
       name: name ?? this.name,
     );
   }
@@ -296,6 +299,7 @@ class MenuFromApi {
 
   factory MenuFromApi.fromMap(Map<String, dynamic> map) {
     return MenuFromApi(
+      image1: map['image1'] ?? "",
       id: map['id'],
       name: map['name'],
     );

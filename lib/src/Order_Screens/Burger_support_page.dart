@@ -2,30 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:readyplates/models/cart_model.dart';
-import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
-
 import 'package:readyplates/widgets/bottomcontainer.dart';
-
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:readyplates/widgets/shoppy_mac.dart';
 
 class BurgersupportingPage extends GetView<OrderController> {
   final RestaurantModel restaurantModel;
   final bool isEditing;
-  final OrderModelApi? orderModelApi;
-  static const id = "/burgersupportingPage";
   const BurgersupportingPage({
     Key? key,
     required this.restaurantModel,
-    this.isEditing = false,
-    this.orderModelApi,
-  })  : assert(isEditing ? orderModelApi != null : true),
-        super(
+    required this.isEditing,
+  }) : super(
           key: key,
         );
 
@@ -53,9 +45,6 @@ class BurgersupportingPage extends GetView<OrderController> {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // SizedBox(
-          //   height: 4,
-          // ),
           Card(
             elevation: 4,
             margin: EdgeInsets.all(15),
@@ -71,19 +60,15 @@ class BurgersupportingPage extends GetView<OrderController> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (isEditing)
-                    ...orderModelApi!.orderitems.map((e) => ShooppymacPage(
-                          cartApiModel: CartApiModel(
-                              id: 0,
-                              user: orderModelApi!.id,
-                              restaurant: orderModelApi!.restaurant.id,
-                              foodItem: CartFood(id: e.id, name: ""),
-                              foodImage: "e",
-                              foodQuantity: e.quantity,
-                              foodPrice: double.parse(e.price)),
+                    ...controller.orderEdit.map((element) => ShooppymacPage(
+                          isEditing: true,
+                          orderEditModel: element,
                         ))
                   else
-                    ...controller.cartItems
-                        .map((element) => ShooppymacPage(cartModel: element)),
+                    ...controller.cartItems.map((element) => ShooppymacPage(
+                          cartModel: element,
+                          isEditing: isEditing,
+                        )),
                   SizedBox(
                     height: 11,
                   ),
@@ -223,6 +208,7 @@ class BurgersupportingPage extends GetView<OrderController> {
           Spacer(),
           Bottomcontainer(
             restaurantModel: restaurantModel,
+            isEditing: isEditing,
           ),
         ],
       ),

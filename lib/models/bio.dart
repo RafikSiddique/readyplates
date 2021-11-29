@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:readyplates/models/foog_item_model.dart';
+import 'package:readyplates/models/food_item_model.dart';
 
 class Bio {
   final int id;

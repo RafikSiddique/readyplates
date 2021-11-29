@@ -3,6 +3,39 @@ import 'dart:math';
 
 import 'package:get/get.dart';
 
+class OrderEditModel {
+  int id;
+  RxInt foodItem;
+  RxInt foodQuantity;
+  String foodImage;
+  RxDouble foodPrice;
+  int restaurant;
+  String foodName;
+  bool isUpdated;
+  OrderEditModel({
+    required this.foodName,
+    required this.id,
+    required this.foodItem,
+    required this.foodQuantity,
+    required this.foodPrice,
+    required this.restaurant,
+    required this.foodImage,
+    required this.isUpdated,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'menu': foodItem,
+      'quantity': foodQuantity.value,
+      'price': foodPrice.value,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
+
+}
+
 class CartModel {
   String user;
   RxInt foodItem;
@@ -37,22 +70,7 @@ class CartModel {
     };
   }
 
-/*   factory CartModel.fromMap(Map<String, dynamic> map) {
-    return CartModel(
-      user: map['user'],
-      foodItem: RxInt(map['food_item']),
-      foodQuantity: RxInt(map['food_quantity']),
-      foodImage: map['food_image'],
-      foodPrice: RxDouble(map['food_price']),
-      restaurant: map['restaurant'],
-      foodName: "",
-    );
-  } */
-
   String toJson() => json.encode(toMap());
-
-/*   factory CartModel.fromJson(String source) =>
-      CartModel.fromMap(json.decode(source)); */
 
   @override
   String toString() {

@@ -3,13 +3,17 @@ import 'package:get/get.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
+import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class Bottomcontainer extends StatefulWidget {
   final RestaurantModel restaurantModel;
-  const Bottomcontainer({Key? key, required this.restaurantModel})
+  final bool isEditing;
+  const Bottomcontainer(
+      {Key? key, required this.restaurantModel, required this.isEditing})
       : super(key: key);
 
   @override
@@ -74,12 +78,26 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   text: "Add Items",
                   borderColor: MyTheme.bottomcontainercolor,
                   onTap: () {
-                    Get.offAllNamed(
-                      MenuPage.id,
-                      arguments: widget.restaurantModel,
-                      predicate: (route) =>
-                          route.settings.name == RestaurantDetails.id,
-                    );
+                    Get.find<HomeController>()
+                        .getFoodItems(widget.restaurantModel.id.toString());
+                    if (widget.isEditing) {
+                      Get.to(
+                        () => MenuPage(
+                          restaurantModel: widget.restaurantModel,
+                          isEditing: true,
+                        ),
+                      );
+                    } else {
+                      Get.offUntil(
+                        MaterialPageRoute(
+                          builder: (context) => MenuPage(
+                            restaurantModel: widget.restaurantModel,
+                            isEditing: false,
+                          ),
+                        ),
+                        (route) => route.settings.name == RestaurantDetails.id,
+                      );
+                    }
                   },
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),

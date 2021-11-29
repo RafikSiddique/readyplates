@@ -46,12 +46,7 @@ class Routes {
                     return MenuPage(
                       restaurantModel: args,
                     );
-                  case BurgersupportingPage.id:
-                    final RestaurantModel args =
-                        settings.arguments as RestaurantModel;
-                    return BurgersupportingPage(
-                      restaurantModel: args,
-                    );
+             
                   case QrCode.id:
                     return QrCode();
                   case OrderCancelledPage.id:
@@ -74,10 +69,7 @@ class Routes {
                     return ProfilePage();
                   case LandingPage.id:
                     return LandingPage();
-                  case BookingDetails.id:
-                    final RestaurantModel args =
-                        settings.arguments as RestaurantModel;
-                    return BookingDetails(args);
+    
                   default:
                     return OnbordingPage();
                 }

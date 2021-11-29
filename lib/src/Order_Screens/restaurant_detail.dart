@@ -575,13 +575,15 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                 );
               }),
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(Icons.arrow_back)),
+        SafeArea(
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(Icons.arrow_back)),
+          ),
         )
       ],
     ));
