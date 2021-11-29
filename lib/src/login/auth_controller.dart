@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/auth_service.dart';
@@ -34,6 +36,8 @@ class AuthController extends GetxController {
   RxString otp = "".obs;
 
   RxBool isNumber = false.obs;
+
+  LatLng? latLng;
 
   void onLooseFocus() {
     if (usernameController.text.isEmpty ||
@@ -157,7 +161,21 @@ class AuthController extends GetxController {
     try {
       bool success = await services.uploadImage(file);
       if (success) {
-        Get.toNamed(MapPage.id);
+        bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+        if (isLocationEnabled) {
+          LocationPermission permission = await Geolocator.requestPermission();
+
+          if (permission == LocationPermission.denied ||
+              permission == LocationPermission.deniedForever) {
+            await Geolocator.openAppSettings();
+          } else {
+            Position position = await Geolocator.getCurrentPosition();
+            latLng = LatLng(position.latitude, position.longitude);
+            Get.toNamed(MapPage.id);
+          }
+        } else {
+          await Geolocator.openLocationSettings();
+        }
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());

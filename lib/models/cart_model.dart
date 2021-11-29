@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:get/get.dart';
 
@@ -20,13 +21,18 @@ class CartModel {
     required this.restaurant,
   });
 
+  double roundUptoDigits(double number, [int digits = 2]) {
+    double mod = pow(10.0, digits) as double;
+    return ((number * mod).round().toDouble() / mod);
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'user': user,
       'food_item': foodItem.value,
       'food_quantity': foodQuantity.value,
       'food_image': foodImage,
-      'food_price': foodPrice.value,
+      'food_price': roundUptoDigits(foodPrice.value),
       'restaurant': restaurant,
     };
   }
@@ -103,7 +109,7 @@ class CartApiModel {
       foodItem: CartFood.fromMap(map['food_item']),
       foodImage: map['food_image'],
       foodQuantity: map['food_quantity'],
-      foodPrice: map['food_price'].toDouble(),
+      foodPrice: double.parse(map['food_price'].toString()),
     );
   }
 

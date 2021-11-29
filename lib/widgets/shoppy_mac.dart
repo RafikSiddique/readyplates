@@ -90,7 +90,7 @@ class ShooppymacPage extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "\$ ${cartModel!.foodPrice}",
+                    "\$ ${(cartModel!.foodPrice.value / cartModel!.foodQuantity.value).toStringAsFixed(2)}",
                     textAlign: TextAlign.left,
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w500,

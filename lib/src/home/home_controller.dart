@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:get/get.dart';
@@ -28,6 +29,8 @@ class HomeController extends GetxController {
   double deg2rad(deg) {
     return deg * (pi / 180);
   }
+
+  Timer? timer;
 
   RxString address = "".obs;
   RxList<RestaurantModel> restaurants = <RestaurantModel>[
@@ -180,9 +183,25 @@ class HomeController extends GetxController {
     }
   }
 
-  
-
   void onPageChange(int index) {
+    if (index == 0) {
+      timer?.cancel();
+      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+        await getRestaurants();
+        print("Restaurant Fetch");
+        this.timer = timer;
+      });
+    } else if (index == 2) {
+      timer?.cancel();
+
+      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+        await Get.find<OrderController>().getorder();
+        print("Order Get");
+        this.timer = timer;
+      });
+    } else {
+      timer?.cancel();
+    }
     currentIndex.value = index;
   }
 }

@@ -100,7 +100,8 @@ class BurgersupportingPage extends GetView<OrderController> {
                                 color: MyTheme.appbartextColor,
                               )),
                           Obx(() => Text(
-                                "\$ " + controller.total.value.toString(),
+                                "\$ " +
+                                    controller.total.value.toStringAsFixed(2),
                                 style: GoogleFonts.inter(
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,

@@ -54,7 +54,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                       fontSize: 17,
                       color: MyTheme.buttonbackgroundColor,
                     )),
-                Obx(() => Text("\$" + controller.total.value.toString(),
+                Obx(() => Text("\$" + controller.total.value.toStringAsFixed(2),
                     style: TextStyle(
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w500,

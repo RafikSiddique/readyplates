@@ -1,6 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter/cupertino.dart';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +40,7 @@ class OrderController extends GetxController {
   double calclateTotal() {
     total.value = 0;
     for (var item in cartItems) {
-      total.value += item.foodQuantity.value * item.foodPrice.value;
+      total.value += item.foodPrice.value;
     }
     return total.value;
   }
@@ -122,29 +123,46 @@ class OrderController extends GetxController {
     }
   }
 
+  double roundUptoDigits(double number, [int digits = 2]) {
+    double mod = pow(10.0, digits) as double;
+    return ((number * mod).round().toDouble() / mod);
+  }
+
   void increment(int id, int resId) async {
+    CartModel cartModel = getCartItem(id);
+    getCartItem(id).foodPrice.value += roundUptoDigits(
+        cartModel.foodPrice.value / cartModel.foodQuantity.value);
     getCartItem(id).foodQuantity++;
-    await cart(getCartItem(id));
+    calclateTotal();
+    cart(getCartItem(id));
   }
 
   void decrement(int id, int resId, [bool isRemoval = false]) async {
     if (!isRemoval) {
       if (getCartItem(id).foodQuantity.value > 1) {
+        CartModel cartModel = getCartItem(id);
+        getCartItem(id).foodPrice.value -= roundUptoDigits(
+            cartModel.foodPrice.value / cartModel.foodQuantity.value);
         getCartItem(id).foodQuantity--;
+        calclateTotal();
+
         await cart(getCartItem(id));
       } else {
         CartModel item = getCartItem(id);
         item.foodQuantity = 0.obs;
         cartItems.remove(item);
+        calclateTotal();
+
         await cart(item);
       }
     } else {
       CartModel item = getCartItem(id);
       item.foodQuantity = 0.obs;
       cartItems.remove(item);
+      calclateTotal();
+
       await cart(item);
     }
-    calclateTotal();
   }
 
   CartModel getCartItem(int id) {

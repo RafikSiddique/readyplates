@@ -5,9 +5,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 // import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -136,7 +138,7 @@ class _ImagePageState extends State<ImagePage> {
             ),
             InkWell(
               onTap: () async {
-                /* bool isLocationEnabled =
+                bool isLocationEnabled =
                     await Geolocator.isLocationServiceEnabled();
                 if (isLocationEnabled) {
                   LocationPermission permission =
@@ -147,13 +149,13 @@ class _ImagePageState extends State<ImagePage> {
                     await Geolocator.openAppSettings();
                   } else {
                     Position position = await Geolocator.getCurrentPosition();
+                    authController.latLng =
+                        LatLng(position.latitude, position.longitude);
                     Get.toNamed(MapPage.id);
-                  } */
-                Get.toNamed(MapPage.id);
-/*                   
+                  }
                 } else {
                   await Geolocator.openLocationSettings();
-                } */
+                }
               },
               child: Material(
                 type: MaterialType.transparency,

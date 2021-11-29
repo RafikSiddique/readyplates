@@ -248,7 +248,7 @@ class BookingDetails extends GetView<OrderController> {
                                   controller.globletime.value.month,
                                   controller.globletime.value.day,
                                   controller.globletime.value.hour,
-                                  (now.minute % 15 * 15).toInt(),
+                                  0,
                                 ),
                                 minuteInterval: 15,
                                 mode: CupertinoDatePickerMode.time,
@@ -321,7 +321,7 @@ class BookingDetails extends GetView<OrderController> {
             SizedBox(
               height: 17,
             ),
-      /*       Text(
+            /*       Text(
               "Available Slots",
               style: GoogleFonts.nunito(
                   fontSize: 17,
