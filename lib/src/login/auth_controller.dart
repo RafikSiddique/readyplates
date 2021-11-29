@@ -14,6 +14,7 @@ import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   final AuthenticationServices services = AuthenticationServices();
@@ -36,8 +37,6 @@ class AuthController extends GetxController {
   RxString otp = "".obs;
 
   RxBool isNumber = false.obs;
-
-  LatLng? latLng;
 
   void onLooseFocus() {
     if (usernameController.text.isEmpty ||
@@ -97,7 +96,25 @@ class AuthController extends GetxController {
           c.currentIndex.value = 0;
           c.getRestaurants();
           Get.put(OrderController());
-          Get.toNamed(MapPage.id);
+          bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+          if (isLocationEnabled) {
+            LocationPermission permission =
+                await Geolocator.requestPermission();
+
+            if (permission == LocationPermission.denied ||
+                permission == LocationPermission.deniedForever) {
+              await Geolocator.openAppSettings();
+            } else {
+              Position position = await Geolocator.getCurrentPosition();
+              LatLng latLng = LatLng(position.latitude, position.longitude);
+              Get.to(() => MapPage(
+                    isHome: false,
+                    latLng: latLng,
+                  ));
+            }
+          } else {
+            await Geolocator.openLocationSettings();
+          }
           lNameController.clear();
           fNamController.clear();
           password2Controller.clear();
@@ -170,8 +187,11 @@ class AuthController extends GetxController {
             await Geolocator.openAppSettings();
           } else {
             Position position = await Geolocator.getCurrentPosition();
-            latLng = LatLng(position.latitude, position.longitude);
-            Get.toNamed(MapPage.id);
+            LatLng latLng = LatLng(position.latitude, position.longitude);
+            Get.to(() => MapPage(
+                  isHome: false,
+                  latLng: latLng,
+                ));
           }
         } else {
           await Geolocator.openLocationSettings();
@@ -185,12 +205,8 @@ class AuthController extends GetxController {
   RxString gender = 'Male'.obs;
   final items = ['Male', 'Female'];
 
-  void logout() {
-    sfHelper.setLon(0);
-    sfHelper.setLat(0);
-    sfHelper.setAddress("");
-    sfHelper.setLoggedIn(false);
-    sfHelper.setUserId("");
+  void logout() async {
+    (await SharedPreferences.getInstance()).clear();
     Get.find<OrderController>().clearController();
     Get.offAllNamed(OnbordingPage.id);
     final c = Get.find<HomeController>();

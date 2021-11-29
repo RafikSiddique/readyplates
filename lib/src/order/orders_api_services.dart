@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart';
 import 'package:readyplates/models/cart_model.dart';
-import 'package:readyplates/models/foog_item_model.dart';
+import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/utils/api_services.dart';
@@ -94,21 +94,41 @@ class Orderservices extends ApiService {
   }
 
   //
-  Future<List<FoodItemModel>> editOrder(
-      String id, OrderModel ordermodel) async {
+  Future<void> patchOrder(OrderEditModel orderItems) async {
     try {
       var headers = {'Content-Type': 'application/json'};
       Request request = Request('PATCH', ordersapi);
       request.body = json.encode({
-        "id": id,
-        "orderitems": ordermodel.toJson(),
+        "id": orderItems.orderId,
+        "orderitems": [orderItems.toJson()],
       });
       request.headers.addAll(headers);
 
       StreamedResponse response = await request.send();
+      print(await response.stream.bytesToString());
       if (response.statusCode == 200) {
-        String data = await response.stream.bytesToString();
-        return <FoodItemModel>[];
+      } else {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> putOrder(OrderEditModel orderItems) async {
+    try {
+      var headers = {'Content-Type': 'application/json'};
+      Request request = Request('PUT', ordersapi);
+      request.body = json.encode({
+        "id": orderItems.orderId,
+        "orderitems": [orderItems.toJsonPut()],
+      });
+      request.headers.addAll(headers);
+
+      StreamedResponse response = await request.send();
+      print(await response.stream.bytesToString());
+      if (response.statusCode == 200) {
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/category_page.dart';
 import 'package:readyplates/src/home/widgets/restaurant_card.dart';
@@ -49,8 +51,26 @@ class ShopScreen extends StatelessWidget {
             iconSize: 14.83,
             icon: FaIcon(FontAwesomeIcons.chevronLeft,
                 color: MyTheme.appbartextColor),
-            onPressed: () {
-              Navigator.pushNamed(context, MapPage.id);
+            onPressed: () async {
+              bool isLocationEnabled =
+                  await Geolocator.isLocationServiceEnabled();
+              if (isLocationEnabled) {
+                LocationPermission permission =
+                    await Geolocator.requestPermission();
+                if (permission == LocationPermission.denied ||
+                    permission == LocationPermission.deniedForever) {
+                  await Geolocator.openAppSettings();
+                } else {
+                  Position position = await Geolocator.getCurrentPosition();
+                  LatLng latLng = LatLng(position.latitude, position.longitude);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MapPage(isHome: false, latLng: latLng),
+                      ));
+                }
+              }
             }),
         centerTitle: true,
         title: Text(
@@ -205,7 +225,18 @@ class ShopScreen extends StatelessWidget {
                               .toList(),
                         ),
                       )
-                    : Container(),
+                    : controller.restaurants.isNotEmpty &&
+                            controller.restaurants.first.id == -1
+                        ? Center(child: CircularProgressIndicator.adaptive())
+                        : Container(
+                            padding: EdgeInsets.only(top: Get.height * 0.1),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "No Nearby restaurants found",
+                              textScaleFactor: 1.5,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
               ),
               SizedBox(
                 height: 20,

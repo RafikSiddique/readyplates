@@ -115,9 +115,13 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                 Elevated(
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),
-                  text: "Book",
+                  text: widget.isEditing ? "Confirm" : "Book",
                   onTap: () {
-                    Get.find<OrderController>().order(widget.restaurantModel);
+                    if (widget.isEditing) {
+                      Get.find<OrderController>().editOrders();
+                    } else {
+                      Get.find<OrderController>().order(widget.restaurantModel);
+                    }
                   },
                 ),
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
+import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -24,7 +25,9 @@ class ShooppymacPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.network(
-                isEditing ? orderEditModel!.foodImage : cartModel!.foodImage,
+                isEditing
+                    ? getUrl(orderEditModel!.foodImage)
+                    : cartModel!.foodImage,
                 height: 64,
                 width: 64,
                 fit: BoxFit.cover,

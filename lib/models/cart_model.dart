@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 class OrderEditModel {
   int id;
+  int orderId;
   RxInt foodItem;
   RxInt foodQuantity;
   String foodImage;
@@ -13,6 +14,7 @@ class OrderEditModel {
   String foodName;
   bool isUpdated;
   OrderEditModel({
+    required this.orderId,
     required this.foodName,
     required this.id,
     required this.foodItem,
@@ -26,14 +28,22 @@ class OrderEditModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'menu': foodItem,
+      'menu': foodItem.value,
+      'quantity': foodQuantity.value,
+      'price': foodPrice.value,
+    };
+  }
+
+  Map<String, dynamic> toPut() {
+    return {
+      'menu': foodItem.value,
       'quantity': foodQuantity.value,
       'price': foodPrice.value,
     };
   }
 
   String toJson() => json.encode(toMap());
-
+  String toJsonPut() => json.encode(toPut());
 }
 
 class CartModel {

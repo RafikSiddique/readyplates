@@ -14,6 +14,8 @@ import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
+import 'package:readyplates/src/home/home_controller.dart';
+import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -335,11 +337,17 @@ class OrderController extends GetxController {
   }
 
   //
-  Future<void> editOrders(
-    String orderid,
-  ) async {
+  Future<void> editOrders() async {
     try {
-      await services.editOrder(orderid, ordermodel);
+      orderEdit.forEach((element) async {
+        if (element.id == -1) {
+          await services.putOrder(element);
+        } else {
+          await services.patchOrder(element);
+        }
+      });
+      Get.offAllNamed(LandingPage.id);
+      Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

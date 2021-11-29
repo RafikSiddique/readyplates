@@ -15,10 +15,9 @@ import 'package:readyplates/utils/place_search.dart';
 import 'package:uuid/uuid.dart';
 
 class MapPage extends StatefulWidget {
-  static const id = "/map";
   final bool isHome;
-
-  MapPage({required this.isHome});
+  final LatLng latLng;
+  MapPage({required this.isHome, required this.latLng});
   @override
   State<MapPage> createState() => _MapPageState();
 }
@@ -26,11 +25,10 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   final AuthController authController = Get.find();
 
-  late LatLng latLng = authController.latLng!;
+  late LatLng latLng = widget.latLng;
 
   Future<void> setAddress() async {
     await Future.delayed(Duration(seconds: 1));
-    authController.latLng = this.latLng;
     final address = await geoCode.reverseGeocoding(
         latitude: latLng.latitude, longitude: latLng.longitude);
     authController.address.value = address.streetAddress.toString() +

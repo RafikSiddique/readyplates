@@ -98,6 +98,7 @@ class OrderPage extends GetView<OrderController> {
                   controller.orderEdit.value = orderModel.orderitems
                       .map((e) => OrderEditModel(
                           foodName: e.menu.name,
+                          orderId: orderModel.id,
                           id: e.id,
                           foodItem: RxInt(e.menu.id),
                           foodQuantity: RxInt(e.quantity),

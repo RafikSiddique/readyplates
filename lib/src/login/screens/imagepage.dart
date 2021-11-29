@@ -149,9 +149,9 @@ class _ImagePageState extends State<ImagePage> {
                     await Geolocator.openAppSettings();
                   } else {
                     Position position = await Geolocator.getCurrentPosition();
-                    authController.latLng =
+                    LatLng latLng =
                         LatLng(position.latitude, position.longitude);
-                    Get.toNamed(MapPage.id);
+                    Get.to(() => MapPage(isHome: false, latLng: latLng));
                   }
                 } else {
                   await Geolocator.openLocationSettings();

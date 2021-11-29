@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_sevices.dart';
@@ -14,6 +16,8 @@ class HomeController extends GetxController {
 
   double lat = 0;
   double lon = 0;
+
+  Rx<LatLng> position = LatLng(0, 0).obs;
 
   double getDistanceFromLatLonInKm(double lat2, double lon2) {
     var R = 6371; // Radius of the earth in km

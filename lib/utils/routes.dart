@@ -29,10 +29,7 @@ class Routes {
                     return SignupPage();
                   case ShopScreen.id:
                     return ShopScreen();
-                  case MapPage.id:
-                    return MapPage(
-                      isHome: false,
-                    );
+
                   case ImagePage.id:
                     return ImagePage();
                   case RestaurantDetails.id:
@@ -46,7 +43,7 @@ class Routes {
                     return MenuPage(
                       restaurantModel: args,
                     );
-             
+
                   case QrCode.id:
                     return QrCode();
                   case OrderCancelledPage.id:
@@ -58,18 +55,15 @@ class Routes {
                   case PaymentsucessfulPage.id:
                     return PaymentsucessfulPage();
 
-                  // case FeedbackPage.id: //add feedbackpage
-
-                  //   return FeedbackPage(e: e.,);
                   case Tellafriend.id:
                     return Tellafriend();
-                    case ChangePasswordPage1.id:
+                  case ChangePasswordPage1.id:
                     return ChangePasswordPage1();
                   case ProfilePage.id:
                     return ProfilePage();
                   case LandingPage.id:
                     return LandingPage();
-    
+
                   default:
                     return OnbordingPage();
                 }
