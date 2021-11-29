@@ -334,6 +334,18 @@ class OrderController extends GetxController {
     }
   }
 
+  //
+  Future<void> editOrders(
+    String orderid,
+  ) async {
+    try {
+      await services.editOrder(orderid, ordermodel);
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+//
   Rx<DateTime> globletime = DateTime.now().obs;
 
   // Future<void> tableList(
