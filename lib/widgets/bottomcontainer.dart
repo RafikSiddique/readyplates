@@ -12,8 +12,12 @@ import 'package:readyplates/widgets/buuton.dart';
 class Bottomcontainer extends StatefulWidget {
   final RestaurantModel restaurantModel;
   final bool isEditing;
+  final Function() setState;
   const Bottomcontainer(
-      {Key? key, required this.restaurantModel, required this.isEditing})
+      {Key? key,
+      required this.setState,
+      required this.restaurantModel,
+      required this.isEditing})
       : super(key: key);
 
   @override
@@ -81,14 +85,19 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                     Get.find<HomeController>()
                         .getFoodItems(widget.restaurantModel.id.toString());
                     if (widget.isEditing) {
-                      Get.to(
-                        () => MenuPage(
-                          restaurantModel: widget.restaurantModel,
-                          isEditing: true,
-                        ),
-                      );
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MenuPage(
+                              restaurantModel: widget.restaurantModel,
+                              isEditing: true,
+                            ),
+                          )).then((value) => setState(() {
+                            widget.setState();
+                          }));
                     } else {
-                      Get.offUntil(
+                      Navigator.pushAndRemoveUntil(
+                        context,
                         MaterialPageRoute(
                           builder: (context) => MenuPage(
                             restaurantModel: widget.restaurantModel,

@@ -106,6 +106,15 @@ class BookingDetails extends GetView<OrderController> {
                       onTap: () {
                         controller.globletime.value = tempTime;
                         // controller.tableList(restaurantModel.id);
+                        var dt = controller.selectedDate.value;
+                        controller.selectedDate.value = DateTime(
+                            dt.year,
+                            dt.month,
+                            dt.day,
+                            tempTime.hour,
+                            tempTime.minute,
+                            tempTime.second);
+
                         Get.back();
                       },
                       fontSize: 12,
@@ -173,13 +182,20 @@ class BookingDetails extends GetView<OrderController> {
                     elevation: 0,
                     child: InkWell(
                       onTap: () async {
-                        controller.selectedDate.value = await showDatePicker(
+                        DateTime dt = await showDatePicker(
                                 context: context,
                                 initialDate: controller.selectedDate.value,
                                 firstDate: DateTime.now(),
                                 lastDate:
                                     DateTime(DateTime.now().year, 12, 31)) ??
                             DateTime.now();
+                        controller.selectedDate.value = DateTime(
+                            dt.year,
+                            dt.month,
+                            dt.day,
+                            controller.globletime.value.hour,
+                            controller.globletime.value.minute,
+                            controller.globletime.value.second);
                         print(restaurantModel.open_days.toLowerCase());
                         print(restaurantModel.open_days.contains(controller
                             .weekDays[controller.selectedDate.value.weekday]

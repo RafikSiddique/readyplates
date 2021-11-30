@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart';
 import 'package:readyplates/models/cart_model.dart';
-import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/utils/api_services.dart';
@@ -75,9 +74,9 @@ class Orderservices extends ApiService {
         'POST',
         ordersapi,
       );
-
+      String body = ordermodel.toJson();
       request.headers.addAll({'Content-Type': 'application/json'});
-      request.body = ordermodel.toJson();
+      request.body = body;
       StreamedResponse response = await request.send();
       if (response.statusCode != 201) {
         print(await response.stream.bytesToString());
@@ -100,7 +99,7 @@ class Orderservices extends ApiService {
       Request request = Request('PATCH', ordersapi);
       request.body = json.encode({
         "id": orderItems.orderId,
-        "orderitems": [orderItems.toJson()],
+        "orderitems": [orderItems.toMap()],
       });
       request.headers.addAll(headers);
 
@@ -122,10 +121,9 @@ class Orderservices extends ApiService {
       Request request = Request('PUT', ordersapi);
       request.body = json.encode({
         "id": orderItems.orderId,
-        "orderitems": [orderItems.toJsonPut()],
+        "orderitems": [orderItems.toPut()],
       });
       request.headers.addAll(headers);
-
       StreamedResponse response = await request.send();
       print(await response.stream.bytesToString());
       if (response.statusCode == 200) {

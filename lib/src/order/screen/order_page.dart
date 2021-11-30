@@ -89,9 +89,76 @@ class OrderPage extends GetView<OrderController> {
         items: <PopupMenuEntry>[
           PopupMenuItem(
               height: 20,
-              onTap: null,
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    content: SizedBox.square(
+                      dimension: Get.width * 0.4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox.square(
+                              dimension: 100,
+                              child: CircularProgressIndicator.adaptive(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    MyTheme.borderchangeColor),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+                RestaurantModel restaurantModel =
+                    await controller.getSingleRestaurant(restaurantId);
+                //  String userId = await SharedPreferenceHelper().getUserId();
+                controller.orderEdit.value = orderModel.orderitems
+                    .map((e) => OrderEditModel(
+                        foodName: e.menu.name,
+                        orderId: orderModel.id,
+                        id: e.id,
+                        foodItem: RxInt(e.menu.id),
+                        foodQuantity: RxInt(e.quantity),
+                        foodPrice: RxDouble(double.parse(e.price)),
+                        restaurant: orderModel.restaurant.id,
+                        foodImage: e.menu.image1,
+                        isUpdated: false))
+                    .toList();
+                controller.calclateTotal(true);
+                Get.back();
+                Get.to(() => BurgersupportingPage(
+                      restaurantModel: restaurantModel,
+                      isEditing: true,
+                      orderModelApi: orderModel,
+                    ));
+              },
               child: PopUpMenuWidget(
                 onTap: () async {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      content: SizedBox.square(
+                        dimension: Get.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox.square(
+                                dimension: 100,
+                                child: CircularProgressIndicator.adaptive(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      MyTheme.borderchangeColor),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
                   RestaurantModel restaurantModel =
                       await controller.getSingleRestaurant(restaurantId);
                   //  String userId = await SharedPreferenceHelper().getUserId();
@@ -108,10 +175,11 @@ class OrderPage extends GetView<OrderController> {
                           isUpdated: false))
                       .toList();
                   controller.calclateTotal(true);
-
+                  Get.back();
                   Get.to(() => BurgersupportingPage(
                         restaurantModel: restaurantModel,
                         isEditing: true,
+                        orderModelApi: orderModel,
                       ));
                 },
                 text: "Edit Order",

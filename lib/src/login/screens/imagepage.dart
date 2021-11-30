@@ -129,7 +129,6 @@ class _ImagePageState extends State<ImagePage> {
                 fontSize: 17, //color: Colors.white,
                 onTap: () async {
                   await pickImage(ImageSource.gallery);
-                  Navigator.pop(context);
                 },
               ),
             ),

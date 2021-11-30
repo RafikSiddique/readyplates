@@ -30,7 +30,7 @@ class OrderEditModel {
       'id': id,
       'menu': foodItem.value,
       'quantity': foodQuantity.value,
-      'price': foodPrice.value,
+      'price': roundUptoDigits(foodPrice.value),
     };
   }
 
@@ -38,8 +38,13 @@ class OrderEditModel {
     return {
       'menu': foodItem.value,
       'quantity': foodQuantity.value,
-      'price': foodPrice.value,
+      'price': roundUptoDigits(foodPrice.value),
     };
+  }
+
+  double roundUptoDigits(double number, [int digits = 2]) {
+    double mod = pow(10.0, digits) as double;
+    return ((number * mod).round().toDouble() / mod);
   }
 
   String toJson() => json.encode(toMap());

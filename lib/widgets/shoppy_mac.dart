@@ -113,8 +113,9 @@ class ShooppymacPage extends StatelessWidget {
                               cartModel!.foodItem.value, cartModel!.restaurant);
                       } else {
                         print("decrement");
-                        controller
-                            .decrementEdit(orderEditModel!.foodItem.value);
+                        if (orderEditModel!.foodQuantity.value != 1)
+                          controller
+                              .decrementEdit(orderEditModel!.foodItem.value);
                       }
                     },
                     child: Container(

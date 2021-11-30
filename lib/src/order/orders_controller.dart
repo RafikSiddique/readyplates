@@ -346,6 +346,7 @@ class OrderController extends GetxController {
           await services.patchOrder(element);
         }
       });
+      await getorder();
       Get.offAllNamed(LandingPage.id);
       Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {

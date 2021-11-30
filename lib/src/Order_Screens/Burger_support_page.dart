@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
@@ -10,11 +12,13 @@ import 'package:readyplates/widgets/bottomcontainer.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:readyplates/widgets/shoppy_mac.dart';
 
-class BurgersupportingPage extends GetView<OrderController> {
+class BurgersupportingPage extends StatefulWidget {
   final RestaurantModel restaurantModel;
   final bool isEditing;
-  const BurgersupportingPage({
+  final OrderModelApi? orderModelApi;
+  BurgersupportingPage({
     Key? key,
+    this.orderModelApi,
     required this.restaurantModel,
     required this.isEditing,
   }) : super(
@@ -22,7 +26,28 @@ class BurgersupportingPage extends GetView<OrderController> {
         );
 
   @override
+  State<BurgersupportingPage> createState() => _BurgersupportingPageState();
+}
+
+class _BurgersupportingPageState extends State<BurgersupportingPage> {
+  final OrderController controller = Get.find();
+
+  @override
   Widget build(BuildContext context) {
+    DateTime dt = DateTime.now();
+    if (widget.isEditing) {
+      dt = DateTime(
+          int.parse(widget.orderModelApi!.date.split(' ').last),
+          (controller
+                  .months()
+                  .indexOf(widget.orderModelApi!.date.split(' ').first) +
+              1),
+          int.parse(widget.orderModelApi!.date.split(' ')[1].split(',').first),
+          int.parse(widget.orderModelApi!.time.split(":").first),
+          int.parse(widget.orderModelApi!.time.split(":").last));
+
+      print(dt);
+    }
     return Scaffold(
       backgroundColor: MyTheme.backgroundcolor,
       appBar: AppBar(
@@ -59,7 +84,7 @@ class BurgersupportingPage extends GetView<OrderController> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (isEditing)
+                  if (widget.isEditing)
                     ...controller.orderEdit.map((element) => ShooppymacPage(
                           isEditing: true,
                           orderEditModel: element,
@@ -67,7 +92,7 @@ class BurgersupportingPage extends GetView<OrderController> {
                   else
                     ...controller.cartItems.map((element) => ShooppymacPage(
                           cartModel: element,
-                          isEditing: isEditing,
+                          isEditing: widget.isEditing,
                         )),
                   SizedBox(
                     height: 11,
@@ -149,9 +174,9 @@ class BurgersupportingPage extends GetView<OrderController> {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.6,
                         child: Text(
-                            restaurantModel.resName +
+                            widget.restaurantModel.resName +
                                 ", " +
-                                (restaurantModel.address),
+                                (widget.restaurantModel.address),
                             style: TextStyle(
                               overflow: TextOverflow.ellipsis,
                               fontFamily: "Inter",
@@ -177,25 +202,36 @@ class BurgersupportingPage extends GetView<OrderController> {
                       SizedBox(
                         width: 12,
                       ),
-                      Text(
-                          controller.weekDays[
-                                  controller.selectedDate.value.weekday - 1] +
-                              ", " +
-                              controller.selectedDate.value.day.toString() +
-                              " " +
-                              controller.months()[
-                                  controller.selectedDate.value.month - 1] +
-                              " " +
-                              DateFormat("hh:mm a")
-                                  .format(controller.selectedDate.value) +
-                              "\n" +
-                              "PAX: ${controller.numberOfPeople} Tables X ${controller.numberOfTable}",
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.normal,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            color: MyTheme.dividermiddletext,
-                          )),
+                      widget.isEditing
+                          ? Text(DateFormat(DateFormat.WEEKDAY +
+                                      ", " +
+                                      DateFormat.DAY +
+                                      " " +
+                                      DateFormat.MONTH +
+                                      " " +
+                                      "hh:mm")
+                                  .format(dt) +
+                              "\nPAX: ${widget.orderModelApi!.no_of_people} Tables X ${widget.orderModelApi!.no_of_table}")
+                          : Text(
+                              controller.weekDays[
+                                      controller.selectedDate.value.weekday -
+                                          1] +
+                                  ", " +
+                                  controller.selectedDate.value.day.toString() +
+                                  " " +
+                                  controller.months()[
+                                      controller.selectedDate.value.month - 1] +
+                                  " " +
+                                  DateFormat("hh:mm a")
+                                      .format(controller.selectedDate.value) +
+                                  "\n" +
+                                  "PAX: ${controller.numberOfPeople} Tables X ${controller.numberOfTable}",
+                              style: GoogleFonts.inter(
+                                fontWeight: FontWeight.normal,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 13,
+                                color: MyTheme.dividermiddletext,
+                              )),
                     ],
                   ),
                   SizedBox(
@@ -207,8 +243,11 @@ class BurgersupportingPage extends GetView<OrderController> {
           ),
           Spacer(),
           Bottomcontainer(
-            restaurantModel: restaurantModel,
-            isEditing: isEditing,
+            restaurantModel: widget.restaurantModel,
+            isEditing: widget.isEditing,
+            setState: () {
+              setState(() {});
+            },
           ),
         ],
       ),

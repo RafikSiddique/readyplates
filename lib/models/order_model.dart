@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
@@ -11,7 +12,7 @@ class OrderModel {
   int noOfPeople;
   int noOfTable;
   int tax;
-  int totalprice;
+  double totalprice;
   String date;
   String time;
   OrderState orderState;
@@ -37,10 +38,15 @@ class OrderModel {
       'no_of_table': noOfTable,
       'status': orderState.index,
       'tax': tax,
-      'totalprice': totalprice,
+      'totalprice': roundUptoDigits(totalprice),
       'date': date,
       'time': time,
     };
+  }
+
+  double roundUptoDigits(double number, [int digits = 2]) {
+    double mod = pow(10.0, digits) as double;
+    return ((number * mod).round().toDouble() / mod);
   }
 
   String toJson() => json.encode(toMap());
@@ -189,8 +195,13 @@ class OrderFoodItem {
     return {
       'menu': id,
       'quantity': count,
-      'price': price,
+      'price': roundUptoDigits(price),
     };
+  }
+
+  double roundUptoDigits(double number, [int digits = 2]) {
+    double mod = pow(10.0, digits) as double;
+    return ((number * mod).round().toDouble() / mod);
   }
 
   String toJson() => json.encode(toMap());
