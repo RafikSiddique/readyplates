@@ -192,9 +192,9 @@ class OrderController extends GetxController {
     } else {
       CartModel item = getCartItem(id);
       item.foodQuantity = 0.obs;
+      item.foodPrice = 0.0.obs;
       cartItems.remove(item);
       calclateTotal();
-
       await cart(item);
     }
   }
@@ -211,6 +211,7 @@ class OrderController extends GetxController {
     try {
       String id = await sfHelper.getUserId();
       cartModel.user = id;
+
       await services.addToCartApi(cartModel);
       calclateTotal();
     } catch (e) {

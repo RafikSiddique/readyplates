@@ -159,7 +159,7 @@ class Orderservices extends ApiService {
       Response response =
           await get(orderList(id), headers: contentTypeJsonHeader);
       print(response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && jsonDecode(response.body) is List) {
         List<dynamic> data = jsonDecode(response.body);
         List<OrderModelApi> orderItems =
             data.map((e) => OrderModelApi.fromMap(e)).toList();

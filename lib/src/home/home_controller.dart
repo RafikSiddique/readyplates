@@ -133,7 +133,7 @@ class HomeController extends GetxController {
         .where((p0) =>
             p0.resName.toLowerCase().contains(q.toLowerCase()) ||
             p0.address.toLowerCase().contains(q.toLowerCase()) ||
-            p0.types_of_cusine.join().contains(q.toLowerCase()))
+            p0.types_of_cusine.join().toLowerCase().contains(q.toLowerCase()))
         .toList();
   }
 
@@ -193,7 +193,7 @@ class HomeController extends GetxController {
   void onPageChange(int index) {
     if (index == 0) {
       timer?.cancel();
-      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      timer = Timer.periodic(Duration(seconds: 1), (timer) async {
         await getRestaurants();
         print("Restaurant Fetch");
         this.timer = timer;
@@ -201,7 +201,7 @@ class HomeController extends GetxController {
     } else if (index == 2) {
       timer?.cancel();
 
-      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      timer = Timer.periodic(Duration(seconds: 2), (timer) async {
         await Get.find<OrderController>().getorder();
         print("Order Get");
         this.timer = timer;

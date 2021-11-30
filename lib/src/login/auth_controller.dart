@@ -82,6 +82,24 @@ class AuthController extends GetxController {
 
   RxString address = "".obs;
 
+  Future<bool> getPermission() async {
+    bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+    if (isLocationEnabled) {
+      LocationPermission permission = await Geolocator.requestPermission();
+
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        await Geolocator.openAppSettings();
+        return getPermission();
+      } else {
+        return true;
+      }
+    } else {
+      await Geolocator.openLocationSettings();
+      return getPermission();
+    }
+  }
+
   String? id;
   Future<void> login(bool changedPassword, {bool implicit = false}) async {
     try {
@@ -96,24 +114,21 @@ class AuthController extends GetxController {
           c.currentIndex.value = 0;
           c.getRestaurants();
           Get.put(OrderController());
-          bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-          if (isLocationEnabled) {
-            LocationPermission permission =
-                await Geolocator.requestPermission();
-
-            if (permission == LocationPermission.denied ||
-                permission == LocationPermission.deniedForever) {
-              await Geolocator.openAppSettings();
-            } else {
-              Position position = await Geolocator.getCurrentPosition();
-              LatLng latLng = LatLng(position.latitude, position.longitude);
-              Get.to(() => MapPage(
-                    isHome: false,
-                    latLng: latLng,
-                  ));
-            }
+          bool permitted = await getPermission();
+          if (permitted) {
+            Position position = await Geolocator.getCurrentPosition();
+            LatLng latLng = LatLng(position.latitude, position.longitude);
+            Get.to(() => MapPage(
+                  isHome: false,
+                  latLng: latLng,
+                ));
           } else {
-            await Geolocator.openLocationSettings();
+            LatLng latLng = LatLng(20.708391858928152, -156.32455678019107);
+
+            Get.to(() => MapPage(
+                  isHome: false,
+                  latLng: latLng,
+                ));
           }
           lNameController.clear();
           fNamController.clear();
@@ -178,23 +193,21 @@ class AuthController extends GetxController {
     try {
       bool success = await services.uploadImage(file);
       if (success) {
-        bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-        if (isLocationEnabled) {
-          LocationPermission permission = await Geolocator.requestPermission();
-
-          if (permission == LocationPermission.denied ||
-              permission == LocationPermission.deniedForever) {
-            await Geolocator.openAppSettings();
-          } else {
-            Position position = await Geolocator.getCurrentPosition();
-            LatLng latLng = LatLng(position.latitude, position.longitude);
-            Get.to(() => MapPage(
-                  isHome: false,
-                  latLng: latLng,
-                ));
-          }
+        bool permitted = await getPermission();
+        if (permitted) {
+          Position position = await Geolocator.getCurrentPosition();
+          LatLng latLng = LatLng(position.latitude, position.longitude);
+          Get.to(() => MapPage(
+                isHome: false,
+                latLng: latLng,
+              ));
         } else {
-          await Geolocator.openLocationSettings();
+          LatLng latLng = LatLng(20.708391858928152, -156.32455678019107);
+
+          Get.to(() => MapPage(
+                isHome: false,
+                latLng: latLng,
+              ));
         }
       }
     } catch (e) {

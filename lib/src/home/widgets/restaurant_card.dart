@@ -48,6 +48,14 @@ class RestaurantCard extends GetView<HomeController> {
             cv19prec4: "",
             completed_till: 0,
             user: 0);
+
+    String toc = restaurantModel.types_of_cusine
+        .getRange(
+            0,
+            restaurantModel.types_of_cusine.length > 3
+                ? 3
+                : restaurantModel.types_of_cusine.length)
+        .join(", ");
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(
@@ -123,13 +131,7 @@ class RestaurantCard extends GetView<HomeController> {
                         height: 6,
                       ),
                       Text(
-                        restaurantModel.types_of_cusine
-                            .getRange(
-                                0,
-                                restaurantModel.types_of_cusine.length > 3
-                                    ? 3
-                                    : restaurantModel.types_of_cusine.length)
-                            .join(),
+                        toc,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
@@ -226,14 +228,12 @@ class RestaurantCard extends GetView<HomeController> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                          "30% off upto \$25",
+                          Text("30% off upto \$25",
                               style: GoogleFonts.montserrat(
                                   color: MyTheme.shoptextcolor.withOpacity(0.8),
                                   fontSize: 11,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal))
-                          
                         ],
                       ),
                     ],

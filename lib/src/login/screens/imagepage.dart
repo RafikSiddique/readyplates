@@ -137,23 +137,22 @@ class _ImagePageState extends State<ImagePage> {
             ),
             InkWell(
               onTap: () async {
-                bool isLocationEnabled =
-                    await Geolocator.isLocationServiceEnabled();
+                bool isLocationEnabled = await authController.getPermission();
                 if (isLocationEnabled) {
-                  LocationPermission permission =
-                      await Geolocator.requestPermission();
-
-                  if (permission == LocationPermission.denied ||
-                      permission == LocationPermission.deniedForever) {
-                    await Geolocator.openAppSettings();
-                  } else {
-                    Position position = await Geolocator.getCurrentPosition();
-                    LatLng latLng =
-                        LatLng(position.latitude, position.longitude);
-                    Get.to(() => MapPage(isHome: false, latLng: latLng));
-                  }
+                  Position position = await Geolocator.getCurrentPosition();
+                  LatLng latLng = LatLng(position.latitude, position.longitude);
+                  Get.to(() => MapPage(
+                        isHome: false,
+                        latLng: latLng,
+                      ));
                 } else {
-                  await Geolocator.openLocationSettings();
+                  LatLng latLng =
+                      LatLng(20.708391858928152, -156.32455678019107);
+
+                  Get.to(() => MapPage(
+                        isHome: false,
+                        latLng: latLng,
+                      ));
                 }
               },
               child: Material(
