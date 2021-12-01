@@ -4,7 +4,6 @@ import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
-import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';

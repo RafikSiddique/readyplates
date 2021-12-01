@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/auth_controller.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/place_search.dart';
@@ -304,6 +305,8 @@ class _MapPageState extends State<MapPage> {
                                     ),
                                   ),
                                   onPressed: () async {
+                                    Get.put(HomeController());
+                                    Get.put(OrderController());
                                     await authController.setAddress(
                                         latLng.latitude,
                                         latLng.longitude,

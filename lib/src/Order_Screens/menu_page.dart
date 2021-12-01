@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
-import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
-import 'package:readyplates/widgets/edit_button.dart';
 import 'package:readyplates/widgets/food_item_card.dart';
 
 class MenuPage extends StatelessWidget {
