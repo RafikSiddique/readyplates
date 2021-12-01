@@ -110,9 +110,6 @@ class AuthController extends GetxController {
         if (implicit) {
           Get.toNamed(ImagePage.id);
         } else {
-          final c = Get.put(HomeController());
-          c.currentIndex.value = 0;
-          c.getRestaurants();
           Get.put(OrderController());
           bool permitted = await getPermission();
           if (permitted) {
@@ -130,6 +127,7 @@ class AuthController extends GetxController {
                   latLng: latLng,
                 ));
           }
+
           lNameController.clear();
           fNamController.clear();
           password2Controller.clear();
@@ -148,11 +146,11 @@ class AuthController extends GetxController {
 
   Future<void> changePassword() async {
     try {
-      String id = await services.changePassword(
+      await services.changePassword(
         usernameController.text,
         passwordController.text,
       );
-      await sfHelper.setUserId(id[0]);
+      Get.offAllNamed(LandingPage.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -160,8 +158,10 @@ class AuthController extends GetxController {
 
   void gotoHome() {
     sfHelper.setLoggedIn(true);
-    final c = Get.put(HomeController());
+    final c = Get.find<HomeController>();
     c.getAddress();
+    c.getRestaurants();
+
     Get.put(OrderController());
     lNameController.clear();
     fNamController.clear();
@@ -169,6 +169,7 @@ class AuthController extends GetxController {
     passwordController.clear();
     usernameController.clear();
     c.currentIndex.value = 0;
+    c.onPageChange(c.currentIndex.value);
     Get.offAllNamed(LandingPage.id);
   }
 

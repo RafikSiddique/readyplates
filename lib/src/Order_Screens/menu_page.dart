@@ -153,13 +153,19 @@ class MenuPage extends StatelessWidget {
                         if (isEditing) {
                           Get.back();
                         } else {
-                          if (orderController.cartItems.any((element) =>
-                              element.restaurant != restaurantModel.id)) {
+                          bool check = orderController.cartItems.any(
+                              (element) =>
+                                  element.restaurant == restaurantModel.id);
+                          if (!check) {
                             Get.snackbar("Please add an item",
                                 "At least add atleast 1 item from this restaurant to proceed to booking");
                           } else {
-                            Get.to(() =>
-                                BookingDetails(restaurantModel, isEditing));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BookingDetails(
+                                      restaurantModel, isEditing),
+                                ));
                           }
                         }
                       },

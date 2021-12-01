@@ -107,7 +107,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getAddress();
-
     Get.put(OrderController());
     getRestaurants();
     super.onInit();
@@ -170,7 +169,11 @@ class HomeController extends GetxController {
       lat = await sfHelper.getLat();
       lon = await sfHelper.getLon();
       //if (lat != 0 && lon != 0) {
-      restaurants.value = await homeService.getRestaurantWithSort(lat, lon);
+      List<RestaurantModel> res =
+          await homeService.getRestaurantWithSort(lat, lon);
+      if (res.isNotEmpty) {
+        restaurants.value = res;
+      }
       restaurants.sort((a, b) => getDistanceFromLatLonInKm(
               double.parse(a.latitude), double.parse(a.longitude))
           .compareTo(getDistanceFromLatLonInKm(
@@ -193,7 +196,7 @@ class HomeController extends GetxController {
   void onPageChange(int index) {
     if (index == 0) {
       timer?.cancel();
-      timer = Timer.periodic(Duration(seconds: 1), (timer) async {
+      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
         await getRestaurants();
         print("Restaurant Fetch");
         this.timer = timer;
@@ -201,7 +204,7 @@ class HomeController extends GetxController {
     } else if (index == 2) {
       timer?.cancel();
 
-      timer = Timer.periodic(Duration(seconds: 2), (timer) async {
+      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
         await Get.find<OrderController>().getorder();
         print("Order Get");
         this.timer = timer;

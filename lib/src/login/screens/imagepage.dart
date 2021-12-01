@@ -34,7 +34,29 @@ class _ImagePageState extends State<ImagePage> {
       final imageTemporary = File(image.path);
 
       setState(() => this.image = imageTemporary);
-      Get.find<AuthController>().uploadImage(imageTemporary);
+      Get.dialog(
+        AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          content: SizedBox.square(
+            dimension: Get.width * 0.4,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox.square(
+                    dimension: 100,
+                    child: CircularProgressIndicator.adaptive(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          MyTheme.borderchangeColor),
+                    )),
+                Text("Uplaoding Image")
+              ],
+            ),
+          ),
+        ),
+      );
+      await Get.find<AuthController>().uploadImage(imageTemporary);
     } on PlatformException catch (e) {
       print('object: $e');
     }

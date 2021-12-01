@@ -26,7 +26,7 @@ class _MapPageState extends State<MapPage> {
   final AuthController authController = Get.find();
 
   late LatLng latLng = widget.latLng;
-
+  final homeController = Get.put(HomeController());
   Future<void> setAddress() async {
     await Future.delayed(Duration(seconds: 1));
     final address = await geoCode.reverseGeocoding(
@@ -39,7 +39,7 @@ class _MapPageState extends State<MapPage> {
     if (widget.isHome) {
       await authController.setAddress(
           latLng.latitude, latLng.longitude, authController.address.value);
-      Get.find<HomeController>().getAddress();
+      homeController.getAddress();
     }
   }
 

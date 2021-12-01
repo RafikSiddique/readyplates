@@ -440,8 +440,13 @@ class BookingDetails extends GetView<OrderController> {
               text: "Confirm",
               width: double.infinity,
               onTap: () {
-                Get.to(() => BurgersupportingPage(
-                    restaurantModel: restaurantModel, isEditing: isEditing));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BurgersupportingPage(
+                          restaurantModel: restaurantModel,
+                          isEditing: isEditing),
+                    ));
               },
             ),
           ],
