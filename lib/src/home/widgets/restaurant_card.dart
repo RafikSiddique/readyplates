@@ -206,7 +206,7 @@ class RestaurantCard extends GetView<HomeController> {
                           Text(" 4.3 | Serving Time : ${bio.servingTime} mins ",
                               style: GoogleFonts.montserrat(
                                   color: MyTheme.shoptextcolor.withOpacity(0.8),
-                                  fontSize: 9,
+                                  fontSize: media.size.height * 0.013,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w600))
                         ],
@@ -240,7 +240,7 @@ class RestaurantCard extends GetView<HomeController> {
                           Text("30% off upto \$25",
                               style: GoogleFonts.montserrat(
                                   color: MyTheme.shoptextcolor.withOpacity(0.8),
-                                  fontSize: 11,
+                                  fontSize: media.size.height * 0.013,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.normal))
                         ],
