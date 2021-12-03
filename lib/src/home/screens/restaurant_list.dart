@@ -215,14 +215,39 @@ class ShopScreen extends StatelessWidget {
                   height: 22,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: Text(
-                    'Near Me',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 15,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black),
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Near Me',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 15,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                            child: Row(
+                          children: [
+                            Text(
+                              'Clear Filters',
+                              style: GoogleFonts.nunito(
+                                  fontSize: 15,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
+                            Icon(
+                              Icons.clear,
+                              size: 15,
+                            ),
+                          ],
+                        )),
+                      )
+                    ],
                   ),
                 ),
                 Obx(
