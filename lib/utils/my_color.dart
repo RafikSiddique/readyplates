@@ -91,4 +91,5 @@ class MyTheme {
   static Color pricecolor = Color(0xff595959);
   static Color timebutton = Color(0xffE4E4E4);
   static Color errorIcon = Color(0xffFF7976);
+  static Color backcolor = Color(0xffFFD9C1);
 }
