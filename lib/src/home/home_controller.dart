@@ -12,7 +12,7 @@ import 'package:readyplates/utils/shared_preference_helper.dart';
 class HomeController extends GetxController {
   final SharedPreferenceHelper sfHelper = Get.find();
   final HomeServices homeService = HomeServices();
-
+  RxString selectedCategory = "".obs;
   double lat = 0;
   double lon = 0;
 

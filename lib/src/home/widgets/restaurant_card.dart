@@ -130,8 +130,17 @@ class RestaurantCard extends GetView<HomeController> {
                       SizedBox(
                         height: 6,
                       ),
-                      Text(
-                        toc,
+                      Text.rich(
+                        TextSpan(
+                            children: restaurantModel.types_of_cusine
+                                .getRange(
+                                    0,
+                                    restaurantModel.types_of_cusine.length > 3
+                                        ? 3
+                                        : restaurantModel
+                                            .types_of_cusine.length)
+                                .map((e) => TextSpan(text: e + ", "))
+                                .toList()),
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
