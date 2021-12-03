@@ -42,7 +42,6 @@ class HomeServices extends ApiService {
             .map((value) => RestaurantModel.fromMap(value))
             .where((e) => e.bio.isNotEmpty)
             .toList();
-        //   print(resDetail);
         print(getList);
         return resDetail;
       } else {
