@@ -161,8 +161,31 @@ class _ImagePageState extends State<ImagePage> {
               onTap: () async {
                 bool isLocationEnabled = await authController.getPermission();
                 if (isLocationEnabled) {
+                  Get.dialog(
+                    AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      content: SizedBox.square(
+                        dimension: Get.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox.square(
+                                dimension: 100,
+                                child: CircularProgressIndicator.adaptive(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      MyTheme.borderchangeColor),
+                                )),
+                            Text("Loading...")
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
                   Position position = await Geolocator.getCurrentPosition();
                   LatLng latLng = LatLng(position.latitude, position.longitude);
+
                   Get.to(() => MapPage(
                         isHome: false,
                         latLng: latLng,
