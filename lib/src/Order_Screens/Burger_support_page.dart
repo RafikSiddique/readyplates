@@ -211,7 +211,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                                       " " +
                                       "hh:mm")
                                   .format(dt) +
-                              "\nPAX: ${widget.orderModelApi!.no_of_people} Tables X ${widget.orderModelApi!.no_of_table}")
+                              "\nPAX: ${widget.orderModelApi!.no_of_people} Tables X ${widget.orderModelApi!.table}")
                           : Text(
                               controller.weekDays[
                                       controller.selectedDate.value.weekday -
