@@ -78,6 +78,8 @@ class Orderservices extends ApiService {
       request.headers.addAll({'Content-Type': 'application/json'});
       request.body = body;
       StreamedResponse response = await request.send();
+      print(response);
+      print(response.statusCode);
       if (response.statusCode != 201) {
         print(await response.stream.bytesToString());
         throw AppException(
@@ -158,7 +160,9 @@ class Orderservices extends ApiService {
     try {
       Response response =
           await get(orderList(id), headers: contentTypeJsonHeader);
+
       print(response.body);
+      print(response.statusCode);
       if (response.statusCode == 200 && jsonDecode(response.body) is List) {
         List<dynamic> data = jsonDecode(response.body);
         List<OrderModelApi> orderItems =

@@ -10,7 +10,7 @@ class OrderModel {
   int restaurant;
   List<OrderFoodItem> orderitems;
   int noOfPeople;
-  int noOfTable;
+  int table;
   int tax;
   double totalprice;
   String date;
@@ -22,7 +22,7 @@ class OrderModel {
     required this.orderitems,
     required this.noOfPeople,
     required this.orderState,
-    required this.noOfTable,
+    required this.table,
     required this.tax,
     required this.totalprice,
     required this.date,
@@ -35,7 +35,7 @@ class OrderModel {
       'restaurant': restaurant,
       'orderitems': orderitems.map((x) => x.toMap()).toList(),
       'no_of_people': noOfPeople,
-      'no_of_table': noOfTable,
+      'table': table,
       'status': orderState.index,
       'tax': tax,
       'totalprice': roundUptoDigits(totalprice),
@@ -53,7 +53,7 @@ class OrderModel {
 
   @override
   String toString() {
-    return 'OrderModel(user: $user, restaurant: $restaurant, orderitems: $orderitems, no_of_people: $noOfPeople, no_of_table: $noOfTable, tax: $tax, totalprice: $totalprice, date: $date, time: $time)';
+    return 'OrderModel(user: $user, restaurant: $restaurant, orderitems: $orderitems, no_of_people: $noOfPeople, table: $table, tax: $tax, totalprice: $totalprice, date: $date, time: $time)';
   }
 
   @override
@@ -65,7 +65,7 @@ class OrderModel {
         other.restaurant == restaurant &&
         listEquals(other.orderitems, orderitems) &&
         other.noOfPeople == noOfPeople &&
-        other.noOfTable == noOfTable &&
+        other.table == table &&
         other.tax == tax &&
         other.totalprice == totalprice &&
         other.date == date &&
@@ -78,7 +78,7 @@ class OrderModel {
         restaurant.hashCode ^
         orderitems.hashCode ^
         noOfPeople.hashCode ^
-        noOfTable.hashCode ^
+        table.hashCode ^
         tax.hashCode ^
         totalprice.hashCode ^
         date.hashCode ^
@@ -92,7 +92,7 @@ class OrderModelApi {
   DateTime created_on;
   String totalPrice;
   int no_of_people;
-  int no_of_table;
+  int table;
   String date;
   String time;
   String tax;
@@ -106,7 +106,7 @@ class OrderModelApi {
     required this.created_on,
     required this.totalPrice,
     required this.no_of_people,
-    required this.no_of_table,
+    required this.table,
     required this.date,
     required this.time,
     required this.tax,
@@ -124,7 +124,7 @@ class OrderModelApi {
       created_on: DateTime.parse(map['created_on']),
       totalPrice: map['totalprice'],
       no_of_people: map['no_of_people'],
-      no_of_table: map['no_of_table'],
+      table: map['table'],
       date: map['date'],
       time: map['time'],
       tax: map['tax'],
@@ -140,7 +140,7 @@ class OrderModelApi {
 
   @override
   String toString() {
-    return 'OrderModelApi(id: $id, orderitems: $orderitems, created_on: $created_on, totalPrice: $totalPrice, no_of_people: $no_of_people, no_of_table: $no_of_table, date: $date, time: $time, tax: $tax, status: $status, pin: $pin, user: $user, restaurant: $restaurant)';
+    return 'OrderModelApi(id: $id, orderitems: $orderitems, created_on: $created_on, totalPrice: $totalPrice, no_of_people: $no_of_people, table: $table, date: $date, time: $time, tax: $tax, status: $status, pin: $pin, user: $user, restaurant: $restaurant)';
   }
 
   @override
@@ -153,7 +153,7 @@ class OrderModelApi {
         other.created_on == created_on &&
         other.totalPrice == totalPrice &&
         other.no_of_people == no_of_people &&
-        other.no_of_table == no_of_table &&
+        other.table == table &&
         other.date == date &&
         other.time == time &&
         other.tax == tax &&
@@ -170,7 +170,7 @@ class OrderModelApi {
         created_on.hashCode ^
         totalPrice.hashCode ^
         no_of_people.hashCode ^
-        no_of_table.hashCode ^
+        table.hashCode ^
         date.hashCode ^
         time.hashCode ^
         tax.hashCode ^

@@ -208,7 +208,7 @@ class OrderWidget extends StatelessWidget {
                           color: MyTheme.buttonbackgroundColor),
                     )),
                 Text(
-                    e.no_of_table.toString() +
+                    e.table.toString() +
                         " x Table for " +
                         e.no_of_people.toString() +
                         " People",

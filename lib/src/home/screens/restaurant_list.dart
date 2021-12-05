@@ -12,20 +12,26 @@ import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
-class ShopScreen extends StatelessWidget {
+class ShopScreen extends StatefulWidget {
   static const id = "/shop";
   ShopScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ShopScreen> createState() => _ShopScreenState();
+}
+
+class _ShopScreenState extends State<ShopScreen> {
   final List<String> category = [
     'Drinks',
     'Burger',
     'Pizza',
     'Seafood',
     'Steak',
-    'Burger',
+    'Hawaiian',
     'Fast Food',
     'Chinese',
   ];
+
   final List<String> categroyImg = [
     Assets.categoryDrinks,
     Assets.categoryBurger,
@@ -172,6 +178,9 @@ class ShopScreen extends StatelessWidget {
                           onTap: () {
                             controller.selectedCategory.value = category[i];
                             //   Get.to(() => CategoryPage(category: category[i]));
+                            setState(() {
+                              controller.selectedCategory.value = category[i];
+                            });
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -179,8 +188,24 @@ class ShopScreen extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
+                                  boxShadow:
+                                      controller.selectedCategory.value ==
+                                              category[i]
+                                          ? [
+                                              BoxShadow(
+                                                  spreadRadius: 0.5,
+                                                  blurRadius: 15,
+                                                  offset: Offset(0, 2),
+                                                  color: Color.fromRGBO(
+                                                      255, 110, 66, 1))
+                                            ]
+                                          : [],
                                   //color: Color(0xffFCEBCD),
-                                  color: MyTheme.shopboxcolor.withOpacity(1),
+                                  color: controller.selectedCategory.value ==
+                                          category[i]
+                                      ? MyTheme.backcolor.withOpacity(1)
+                                      : MyTheme.shopboxcolor,
+
                                   borderRadius: BorderRadius.circular(11),
                                 ),
                                 height: media.size.height * 0.08,

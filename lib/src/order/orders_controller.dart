@@ -251,7 +251,7 @@ class OrderController extends GetxController {
                   price: element.foodPrice.value))
               .toList(),
           noOfPeople: numberOfPeople.value,
-          noOfTable: numberOfTable.value,
+          table: numberOfTable.value,
           tax: 50,
           totalprice: 50,
           date:
