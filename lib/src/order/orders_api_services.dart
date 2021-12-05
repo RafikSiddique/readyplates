@@ -87,7 +87,7 @@ class Orderservices extends ApiService {
       } else {
         String data = await response.stream.bytesToString();
         print(data);
-        return OrderModelApi.fromJson(data);
+        return OrderModelApi.fromMap(jsonDecode(data)['data']);
       }
     } catch (a) {
       rethrow;

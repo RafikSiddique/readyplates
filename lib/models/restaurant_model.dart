@@ -122,12 +122,18 @@ class RestaurantModel {
       fssai_image: map['fssai_image'] ?? "",
       type_of_estd: map['type_of_estd'] ?? "",
       types_of_cusine: map['types_of_cusine'] != null
-          ? List<String>.from(regExp
+          ? List<String>.from(map['types_of_cusine']
+              .toString()
+              .substring(1, map['types_of_cusine'].toString().length - 1)
+              .split(',')
+              .map((e) => e
+                  .trim()
+                  .trimRight()
+                  .trimLeft())) /* regExp
               .allMatches(map['types_of_cusine'])
-              .map((m) => m.group(1))
               .map(
-                  (item) => (item ?? "").replaceAll(new RegExp(r'[\[\],]'), ''))
-              .toList())
+                  (item) => (item ?? "").replaceAll(new RegExp(r'[\[\],]'), '')) */
+          // .toList())
           : [],
       start_time: map['start_time'] ?? "",
       end_time: map['end_time'] ?? "",

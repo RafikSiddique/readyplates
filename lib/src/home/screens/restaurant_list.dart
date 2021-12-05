@@ -178,48 +178,51 @@ class _ShopScreenState extends State<ShopScreen> {
                           onTap: () {
                             controller.selectedCategory.value = category[i];
                             //   Get.to(() => CategoryPage(category: category[i]));
-                            setState(() {
-                              controller.selectedCategory.value = category[i];
-                            });
+
+                            controller.selectedCategory.value = category[i];
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  boxShadow:
-                                      controller.selectedCategory.value ==
-                                              category[i]
-                                          ? [
-                                              BoxShadow(
-                                                  spreadRadius: 0.5,
-                                                  blurRadius: 15,
-                                                  offset: Offset(0, 2),
-                                                  color: Color.fromRGBO(
-                                                      255, 110, 66, 1))
-                                            ]
-                                          : [],
-                                  //color: Color(0xffFCEBCD),
-                                  color: controller.selectedCategory.value ==
-                                          category[i]
-                                      ? MyTheme.backcolor.withOpacity(1)
-                                      : MyTheme.shopboxcolor,
+                              Obx(() => AnimatedContainer(
+                                    duration: Duration(milliseconds: 300),
+                                    decoration: BoxDecoration(
+                                      boxShadow:
+                                          controller.selectedCategory.value ==
+                                                  category[i]
+                                              ? [
+                                                  BoxShadow(
+                                                      spreadRadius: 0.5,
+                                                      blurRadius: 15,
+                                                      offset: Offset(0, 2),
+                                                      color: Color.fromRGBO(
+                                                          255, 110, 66, 1))
+                                                ]
+                                              : [],
+                                      //color: Color(0xffFCEBCD),
+                                      color:
+                                          controller.selectedCategory.value ==
+                                                  category[i]
+                                              ? MyTheme.backcolor.withOpacity(1)
+                                              : MyTheme.shopboxcolor,
 
-                                  borderRadius: BorderRadius.circular(11),
-                                ),
-                                height: media.size.height * 0.08,
-                                width: media.size.height * 0.08,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(8),
-                                child: Image.asset(
-                                  categroyImg[i],
-                                  height: MediaQuery.of(context).size.height *
-                                      0.038,
-                                  width: MediaQuery.of(context).size.height *
-                                      0.038,
-                                ),
-                              ),
+                                      borderRadius: BorderRadius.circular(11),
+                                    ),
+                                    height: media.size.height * 0.08,
+                                    width: media.size.height * 0.08,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(8),
+                                    child: Image.asset(
+                                      categroyImg[i],
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.038,
+                                      width:
+                                          MediaQuery.of(context).size.height *
+                                              0.038,
+                                    ),
+                                  )),
                               SizedBox(
                                 height: 2,
                               ),
@@ -285,7 +288,7 @@ class _ShopScreenState extends State<ShopScreen> {
                           ? Container(
                               color: MyTheme.backgroundcolor,
                               child: Column(
-                                  children: controller.selectedCategory.value !=
+                                  children: controller.selectedCategory.value ==
                                           ""
                                       ? controller.restaurants
                                           .map((element) => RestaurantCard(
