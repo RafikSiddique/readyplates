@@ -165,10 +165,7 @@ class RestaurantCard extends GetView<HomeController> {
                                 .map((e) => e)
                                 .join() +
                             " | " +
-                            controller
-                                .getDistanceFromLatLonInKm(
-                                    double.parse(restaurantModel.latitude),
-                                    double.parse(restaurantModel.longitude))
+                            double.parse(restaurantModel.address2)
                                 .toStringAsFixed(2) +
                             " Kms",
                         overflow: TextOverflow.ellipsis,

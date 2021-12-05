@@ -40,6 +40,8 @@ class HomeController extends GetxController {
     RestaurantModel(
         id: -1,
         resName: "",
+        address2: "",
+        overall_experience: "",
         address: "",
         bio: [],
         completed_till: 0,

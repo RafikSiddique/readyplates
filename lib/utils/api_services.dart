@@ -2,8 +2,11 @@ class ApiService {
   final contentTypeJsonHeader = {'Content-Type': 'application/json'};
   // http://202.53.174.5:8000/ global
   // http://192.168.29.31:5500/ local
-  // https://readyplates.herokuapp.com/ Heroku
-  final String baseUri = "http://202.53.174.5:8000/";
+  final String baseUrlheroku = 'https://readyplates.herokuapp.com';
+  final String baseUrlLive = "http://202.53.174.5:8000";
+  String get baseUri => baseUrlLive + "/";
+  String get baseUriImage => baseUrlLive;
+
   Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);
 
   Uri restaurants(String path) => Uri.parse(baseUri + "restaurants/" + path);

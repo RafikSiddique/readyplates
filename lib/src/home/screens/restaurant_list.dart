@@ -227,26 +227,30 @@ class ShopScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: Colors.black),
                       ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                            child: Row(
-                          children: [
-                            Text(
-                              'Clear Filters',
-                              style: GoogleFonts.nunito(
-                                  fontSize: 15,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black),
-                            ),
-                            Icon(
-                              Icons.clear,
-                              size: 15,
-                            ),
-                          ],
-                        )),
-                      )
+                      Obx(() => controller.selectedCategory.value.isNotEmpty
+                          ? InkWell(
+                              onTap: () {
+                                controller.selectedCategory.value = "";
+                              },
+                              child: Container(
+                                  child: Row(
+                                children: [
+                                  Text(
+                                    'Clear Filters',
+                                    style: GoogleFonts.nunito(
+                                        fontSize: 15,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
+                                  ),
+                                  Icon(
+                                    Icons.clear,
+                                    size: 15,
+                                  ),
+                                ],
+                              )),
+                            )
+                          : Container())
                     ],
                   ),
                 ),

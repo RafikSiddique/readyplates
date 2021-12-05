@@ -14,6 +14,8 @@ class RestaurantModel {
   final String poc;
   final String poc_number;
   final String address;
+  final String address2;
+  final String overall_experience;
   final String postal_code;
   final String latitude;
   final String longitude;
@@ -32,6 +34,8 @@ class RestaurantModel {
   final int completed_till;
   final int user;
   RestaurantModel({
+    required this.address2,
+    required this.overall_experience,
     required this.id,
     required this.bio,
     required this.resName,
@@ -98,6 +102,8 @@ class RestaurantModel {
       id: map['id']?.toInt(),
       bio: List<Bio>.from(map['bio']?.map((x) => Bio.fromMap(x))),
       resName: map['res_name'] ?? "",
+      address2: (map['address2'] ?? "0").toString(),
+      overall_experience: map['overall_experience'].toString(),
       own_name: map['own_name'] ?? "",
       own_mobile: map['own_mobile'] ?? "",
       res_city: map['res_city'] ?? "",

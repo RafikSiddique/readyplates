@@ -32,12 +32,18 @@ class HomeServices extends ApiService {
   Future<List<RestaurantModel>> getRestaurantWithSort(
       double lat, double lon) async {
     try {
-      Response response = await post(restList,
+      print(lat);
+      print(lon);
+      MultipartRequest request = MultipartRequest('POST', restList);
+      request.fields.addAll({'latitude': "$lat", 'longitude': "$lon"});
+      /* Response response = await post(restList,
           headers: contentTypeJsonHeader,
-          body: jsonEncode({'latitude': lat, 'longitude': lon}));
-      print(response.body);
+          body: jsonEncode({'latitude': lat, 'longitude': lon})); */
+      StreamedResponse response = await request.send();
+
       if (response.statusCode == 200) {
-        List<dynamic> getList = jsonDecode(response.body);
+        String body = await response.stream.bytesToString();
+        List<dynamic> getList = jsonDecode(body);
         List<RestaurantModel> resDetail = getList
             .map((value) => RestaurantModel.fromMap(value))
             .where((e) => e.bio.isNotEmpty)

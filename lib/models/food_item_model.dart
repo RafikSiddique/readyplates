@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:readyplates/utils/api_services.dart';
+
 String getUrl(String url) {
-  // http://202.53.174.5:8000/
-  //https://readyplates.herokuapp.com/
-  return !url.contains('http') ? "http://202.53.174.5:8000" + url : url;
+  return !url.contains('http') ? ApiService().baseUriImage + url : url;
 }
 
 class FoodItemModel {
