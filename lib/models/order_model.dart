@@ -10,7 +10,7 @@ class OrderModel {
   int restaurant;
   List<OrderFoodItem> orderitems;
   int noOfPeople;
-  int table;
+  int? table;
   int tax;
   double totalprice;
   String date;
@@ -92,7 +92,7 @@ class OrderModelApi {
   DateTime created_on;
   String totalPrice;
   int no_of_people;
-  int table;
+  int? table;
   String date;
   String time;
   String tax;
