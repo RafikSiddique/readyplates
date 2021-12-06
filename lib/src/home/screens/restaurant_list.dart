@@ -23,7 +23,7 @@ class ShopScreen extends StatefulWidget {
 class _ShopScreenState extends State<ShopScreen> {
   final List<String> category = [
     'Drinks',
-    'Burger',
+    'Burgers',
     'Pizza',
     'Seafood',
     'Steak',

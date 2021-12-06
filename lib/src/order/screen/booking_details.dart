@@ -182,6 +182,52 @@ class BookingDetails extends GetView<OrderController> {
                     elevation: 0,
                     child: InkWell(
                       onTap: () async {
+                        //TODO: Time Validation
+                        // TimeOfDay? tod = await showTimePicker(
+                        //     context: context,
+                        //     initialTime: TimeOfDay(
+                        //         hour: controller.selectedDate.value.hour,
+                        //         minute: controller.selectedDate.value.minute));
+                        // if (tod != null) {
+                        //   print(restaurantModel.start_time);
+                        //   print(restaurantModel.end_time);
+                        //   List<String> startTimes =
+                        //       restaurantModel.start_time.split(':');
+                        //   List<String> endTime =
+                        //       restaurantModel.end_time.split(':');
+                        //   int start = (int.parse(startTimes.first) +
+                        //       (startTimes.last.toLowerCase().contains('a')
+                        //           ? 0
+                        //           : startTimes.last.toLowerCase().contains('p')
+                        //               ? 12
+                        //               : 0));
+                        //   int end = int.parse(endTime.first) +
+                        //       (endTime.last.toLowerCase().contains('a')
+                        //           ? 0
+                        //           : endTime.last.toLowerCase().contains('p')
+                        //               ? 12
+                        //               : 0);
+                        //   print(start);
+                        //   print(end);
+                        //   bool isAfterStart = tod.hour > start;
+                        //   bool isBeforeEnd = tod.hour < end;
+                        //   print(isAfterStart);
+                        //   print(isBeforeEnd);
+                        //   print(tod);
+                        //   if (isAfterStart && isBeforeEnd) {
+                        //     controller.selectedDate.value = DateTime(
+                        //         controller.selectedDate.value.year,
+                        //         controller.selectedDate.value.month,
+                        //         controller.selectedDate.value.day,
+                        //         tod.hour,
+                        //         tod.minute);
+                        //   } else {
+                        //     Get.snackbar("Error",
+                        //         "Restaurant is closed at the selected time");
+                        //   }
+                        // }
+
+                        //
                         DateTime dt = await showDatePicker(
                                 context: context,
                                 initialDate: controller.selectedDate.value,

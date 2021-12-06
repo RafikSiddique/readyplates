@@ -200,7 +200,8 @@ class RestaurantCard extends GetView<HomeController> {
                           // SizedBox(
                           //   width: 9,
                           // ),
-                          Text(" 4.3 | Serving Time : ${bio.servingTime} mins ",
+                          Text(
+                              "${restaurantModel.overall_experience} | Serving Time : ${bio.servingTime} mins ",
                               style: GoogleFonts.montserrat(
                                   color: MyTheme.shoptextcolor.withOpacity(0.8),
                                   fontSize: media.size.height * 0.013,
