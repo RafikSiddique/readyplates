@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
@@ -9,6 +12,14 @@ class OrderCancelledPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer(Duration(seconds: 2), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LandingPage(),
+          ),
+          (route) => false);
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
