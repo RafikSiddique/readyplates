@@ -34,6 +34,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
     var media = MediaQuery.of(context);
     Size size = media.size;
     Bio bio = widget.restaurantModel.bio.first;
+    print(bio.recurring_event_date);
+    DateTime eventDate = DateTime.parse(bio.recurring_event_date);
+    print(eventDate);
     List<String> images = [
       bio.street_view,
       bio.entrance,
@@ -301,12 +304,16 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                                     i++)
                                                   GestureDetector(
                                                     onTap: () {
-                                                      Navigator.pushNamed(
-                                                          context, FullImage.id,
-                                                          arguments: [
-                                                            images[i],
-                                                            i + 99
-                                                          ]);
+                                                      Navigator.push(
+                                                          context,
+                                                          CupertinoPageRoute(
+                                                              builder: (c) =>
+                                                                  FullImage(
+                                                                    imageModel:
+                                                                        ImageModel(
+                                                                            i,
+                                                                            images),
+                                                                  )));
                                                     },
                                                     child: Hero(
                                                       tag: i + 99,
@@ -359,10 +366,12 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                         context,
                                         CupertinoPageRoute(
                                             builder: (c) => FullImage(
-                                                heroTag: i, path: images[i])));
+                                                  imageModel:
+                                                      ImageModel(i, images),
+                                                )));
                                   },
                                   child: Hero(
-                                    tag: i,
+                                    tag: images[i],
                                     child: Material(
                                       type: MaterialType.transparency,
                                       child: ClipRRect(
@@ -410,9 +419,8 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      DateFormat("MMMM").add_jm().format(
-                                          DateTime.parse(
-                                              bio.recurring_event_date)),
+                                      DateFormat(DateFormat.ABBR_MONTH)
+                                          .format(eventDate),
                                       style: GoogleFonts.inter(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500,
@@ -423,9 +431,8 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      DateFormat("MMMM").add_jm().format(
-                                          DateTime.parse(
-                                              bio.recurring_event_date)),
+                                      DateFormat(DateFormat.DAY)
+                                          .format(eventDate),
                                       style: GoogleFonts.inter(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
@@ -591,35 +598,88 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
   }
 }
 
-class FullImage extends StatelessWidget {
-  static const id = "/full";
-  final String path;
-  final int heroTag;
-  const FullImage({Key? key, required this.path, required this.heroTag})
-      : super(key: key);
+class ImageModel {
+  final int currentIndex;
+  final List<String> images;
+
+  ImageModel(this.currentIndex, this.images);
+}
+
+class FullImage extends StatefulWidget {
+  final ImageModel imageModel;
+  const FullImage({Key? key, required this.imageModel}) : super(key: key);
+
+  @override
+  State<FullImage> createState() => _FullImageState();
+}
+
+class _FullImageState extends State<FullImage> {
+  PageController get pageController =>
+      PageController(initialPage: widget.imageModel.currentIndex);
+
+  late int currentIndex = widget.imageModel.currentIndex;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Hero(
-        tag: heroTag,
-        child: Material(
-          type: MaterialType.transparency,
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            alignment: Alignment.center,
-            child: InteractiveViewer(
-              child: Image.network(
-                path,
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
+        body: Column(
+      children: [
+        Expanded(
+          child: PageView(
+            onPageChanged: (value) {
+              setState(() {
+                currentIndex = value;
+              });
+            },
+            controller: pageController,
+            children: widget.imageModel.images
+                .map(
+                  (e) => Hero(
+                    tag: e,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        child: InteractiveViewer(
+                          child: Image.network(
+                            e,
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
           ),
         ),
-      ),
-    );
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: List.generate(
+                widget.imageModel.images.length,
+                (index) => AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      height: 7,
+                      width: index == this.currentIndex ? 15 : 7,
+                      margin: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          color: index == this.currentIndex
+                              ? Colors.grey
+                              : Color(0xffE0E0E0),
+                          borderRadius: BorderRadius.circular(10)),
+                    )),
+          ),
+        ),
+        SizedBox.square(
+          dimension: 10,
+        )
+      ],
+    ));
   }
 }

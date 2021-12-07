@@ -78,6 +78,48 @@ class BookingDetails extends GetView<OrderController> {
     );
   }
 
+  bool checkTime() {
+    List<String> startTimes = restaurantModel.start_time.split(':');
+    List<String> endTime = restaurantModel.end_time.split(':');
+    int start = (int.parse(startTimes.first) +
+        (startTimes.last.toLowerCase().contains('a')
+            ? 0
+            : startTimes.last.toLowerCase().contains('p')
+                ? 12
+                : 0));
+    int end = int.parse(endTime.first) +
+        (endTime.last.toLowerCase().contains('a')
+            ? 0
+            : endTime.last.toLowerCase().contains('p')
+                ? 12
+                : 0);
+    int startMin = int.parse(startTimes.last.split(' ').first);
+    int endMin = int.parse(endTime.last.split(' ').first);
+    print("$start:$startMin");
+    print("$end:$endMin");
+    print(tempTime);
+    bool isMinuteAfter =
+        tempTime.hour == start ? startMin <= tempTime.minute : true;
+    if (tempTime.hour == start) {
+      print(startMin);
+      print(tempTime.minute);
+      print(startMin <= tempTime.minute);
+    }
+    print("Is Minute After Start");
+    print(isMinuteAfter);
+    bool isMinuteBefore =
+        tempTime.hour == end ? endMin >= tempTime.minute : true;
+    print("Is Minute Before End");
+    print(isMinuteBefore);
+    bool isAfterStart = tempTime.hour >= start && isMinuteAfter;
+    bool isBeforeEnd = tempTime.hour <= end && isMinuteBefore;
+    print("Is After");
+    print(isAfterStart);
+    print("Is Before");
+    print(isBeforeEnd);
+    return isAfterStart && isBeforeEnd;
+  }
+
   Widget _buildBottomPicker(Widget picker) {
     return Container(
       height: 330,
@@ -104,17 +146,20 @@ class BookingDetails extends GetView<OrderController> {
                   TimeButton(
                     borcolor: Colors.white,
                     onTap: () {
-                      controller.globletime.value = tempTime;
-                      // controller.tableList(restaurantModel.id);
-                      var dt = controller.selectedDate.value;
-                      controller.selectedDate.value = DateTime(
-                          dt.year,
-                          dt.month,
-                          dt.day,
-                          tempTime.hour,
-                          tempTime.minute,
-                          tempTime.second);
-
+                      if (checkTime()) {
+                        controller.globletime.value = tempTime;
+                        var dt = controller.selectedDate.value;
+                        controller.selectedDate.value = DateTime(
+                            dt.year,
+                            dt.month,
+                            dt.day,
+                            tempTime.hour,
+                            tempTime.minute,
+                            tempTime.second);
+                      } else {
+                        print("Failed");
+                        print(tempTime);
+                      }
                       Get.back();
                     },
                     fontSize: 12,
@@ -183,52 +228,6 @@ class BookingDetails extends GetView<OrderController> {
                     elevation: 0,
                     child: InkWell(
                       onTap: () async {
-                        //TODO: Time Validation
-                        // TimeOfDay? tod = await showTimePicker(
-                        //     context: context,
-                        //     initialTime: TimeOfDay(
-                        //         hour: controller.selectedDate.value.hour,
-                        //         minute: controller.selectedDate.value.minute));
-                        // if (tod != null) {
-                        //   print(restaurantModel.start_time);
-                        //   print(restaurantModel.end_time);
-                        //   List<String> startTimes =
-                        //       restaurantModel.start_time.split(':');
-                        //   List<String> endTime =
-                        //       restaurantModel.end_time.split(':');
-                        //   int start = (int.parse(startTimes.first) +
-                        //       (startTimes.last.toLowerCase().contains('a')
-                        //           ? 0
-                        //           : startTimes.last.toLowerCase().contains('p')
-                        //               ? 12
-                        //               : 0));
-                        //   int end = int.parse(endTime.first) +
-                        //       (endTime.last.toLowerCase().contains('a')
-                        //           ? 0
-                        //           : endTime.last.toLowerCase().contains('p')
-                        //               ? 12
-                        //               : 0);
-                        //   print(start);
-                        //   print(end);
-                        //   bool isAfterStart = tod.hour > start;
-                        //   bool isBeforeEnd = tod.hour < end;
-                        //   print(isAfterStart);
-                        //   print(isBeforeEnd);
-                        //   print(tod);
-                        //   if (isAfterStart && isBeforeEnd) {
-                        //     controller.selectedDate.value = DateTime(
-                        //         controller.selectedDate.value.year,
-                        //         controller.selectedDate.value.month,
-                        //         controller.selectedDate.value.day,
-                        //         tod.hour,
-                        //         tod.minute);
-                        //   } else {
-                        //     Get.snackbar("Error",
-                        //         "Restaurant is closed at the selected time");
-                        //   }
-                        // }
-
-                        //
                         DateTime dt = await showDatePicker(
                                 context: context,
                                 initialDate: controller.selectedDate.value,
@@ -236,17 +235,28 @@ class BookingDetails extends GetView<OrderController> {
                                 lastDate:
                                     DateTime(DateTime.now().year, 12, 31)) ??
                             DateTime.now();
-                        controller.selectedDate.value = DateTime(
-                            dt.year,
-                            dt.month,
-                            dt.day,
-                            controller.globletime.value.hour,
-                            controller.globletime.value.minute,
-                            controller.globletime.value.second);
-                        print(restaurantModel.open_days.toLowerCase());
-                        print(restaurantModel.open_days.contains(controller
-                            .weekDays[controller.selectedDate.value.weekday]
-                            .toLowerCase()));
+
+                        print(restaurantModel.open_days);
+                        if (restaurantModel.open_days.any((element) =>
+                            element.toLowerCase() ==
+                            DateFormat(DateFormat.WEEKDAY)
+                                .format(dt)
+                                .toLowerCase())) {
+                          print("Success");
+                          print("Selected Day: " +
+                              DateFormat(DateFormat.WEEKDAY).format(dt));
+                          controller.selectedDate.value = DateTime(
+                              dt.year,
+                              dt.month,
+                              dt.day,
+                              controller.globletime.value.hour,
+                              controller.globletime.value.minute,
+                              controller.globletime.value.second);
+                        } else {
+                          print("Failed");
+                          print("Selected Day: " +
+                              DateFormat(DateFormat.WEEKDAY).format(dt));
+                        }
                       },
                       child: Row(
                         children: [
@@ -487,13 +497,27 @@ class BookingDetails extends GetView<OrderController> {
               text: "Confirm",
               width: double.infinity,
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BurgersupportingPage(
-                          restaurantModel: restaurantModel,
-                          isEditing: isEditing),
-                    ));
+                if (restaurantModel.open_days.any((element) =>
+                        element.toLowerCase() ==
+                        DateFormat(DateFormat.WEEKDAY)
+                            .format(controller.selectedDate.value)
+                            .toLowerCase()) &&
+                    checkTime()) {
+                  print("success");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BurgersupportingPage(
+                            restaurantModel: restaurantModel,
+                            isEditing: isEditing),
+                      ));
+                } else {
+                  Get.showSnackbar(GetBar(
+                    title: "Closed",
+                    message: "The restaurant is closed at selected time",
+                    duration: Duration(seconds: 2),
+                  ));
+                }
               },
             ),
           ],

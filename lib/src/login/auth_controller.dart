@@ -119,13 +119,7 @@ class AuthController extends GetxController {
                   isHome: false,
                   latLng: latLng,
                 ));
-          } else {
-            LatLng latLng = LatLng(20.708391858928152, -156.32455678019107);
-
-            Get.to(() => MapPage(
-                  isHome: false,
-                  latLng: latLng,
-                ));
+   
           }
 
           lNameController.clear();

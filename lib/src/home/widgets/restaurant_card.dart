@@ -80,6 +80,7 @@ class RestaurantCard extends GetView<HomeController> {
         type: MaterialType.transparency,
         child: InkWell(
           onTap: () {
+            Get.find<HomeController>().timer?.cancel();
             Get.toNamed(RestaurantDetails.id, arguments: restaurantModel);
           },
           child: Padding(
@@ -201,7 +202,11 @@ class RestaurantCard extends GetView<HomeController> {
                           //   width: 9,
                           // ),
                           Text(
-                              "${restaurantModel.overall_experience} | Serving Time : ${bio.servingTime} mins ",
+                              (restaurantModel.overall_experience == "0"
+                                      ? "--"
+                                      : restaurantModel.overall_experience
+                                          .toString()) +
+                                  " | Serving Time : ${bio.servingTime} mins ",
                               style: GoogleFonts.montserrat(
                                   color: MyTheme.shoptextcolor.withOpacity(0.8),
                                   fontSize: media.size.height * 0.013,

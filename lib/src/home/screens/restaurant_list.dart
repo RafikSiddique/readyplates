@@ -175,10 +175,11 @@ class _ShopScreenState extends State<ShopScreen> {
                       for (var i = 0; i < category.length; i++)
                         InkWell(
                           onTap: () {
-                            controller.selectedCategory.value = category[i];
-                            //   Get.to(() => CategoryPage(category: category[i]));
-
-                            controller.selectedCategory.value = category[i];
+                            if (controller.selectedCategory.value ==
+                                category[i])
+                              controller.selectedCategory.value = "";
+                            else
+                              controller.selectedCategory.value = category[i];
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

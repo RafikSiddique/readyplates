@@ -30,7 +30,7 @@ class RestaurantModel {
   final List<String> types_of_cusine;
   final String start_time;
   final String end_time;
-  final String open_days;
+  final List<String> open_days;
   final int completed_till;
   final int user;
   RestaurantModel({
@@ -96,8 +96,6 @@ class RestaurantModel {
   }
 
   factory RestaurantModel.fromMap(Map<String, dynamic> map) {
-    final regExp = new RegExp(r'(?:\[)?(\[[^\]]*?\](?:,?))(?:\])?');
-
     return RestaurantModel(
       id: map['id']?.toInt(),
       bio: List<Bio>.from(map['bio']?.map((x) => Bio.fromMap(x))),
@@ -129,15 +127,18 @@ class RestaurantModel {
               .map((e) => e
                   .trim()
                   .trimRight()
-                  .trimLeft())) /* regExp
-              .allMatches(map['types_of_cusine'])
-              .map(
-                  (item) => (item ?? "").replaceAll(new RegExp(r'[\[\],]'), '')) */
-          // .toList())
+                  .trimLeft())) 
           : [],
       start_time: map['start_time'] ?? "",
       end_time: map['end_time'] ?? "",
-      open_days: map['open_days'] ?? "",
+      open_days:map['open_days'] != null ? List<String>.from(map['open_days'] 
+              .toString()
+              .substring(1, map['open_days'] .toString().length - 1)
+              .split(',')
+              .map((e) => e
+                  .trim()
+                  .trimRight()
+                  .trimLeft()))  :[],
       completed_till: map['completed_till']?.toInt(),
       user: map['user']?.toInt(),
     );

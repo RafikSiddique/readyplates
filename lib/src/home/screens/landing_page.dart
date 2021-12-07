@@ -17,7 +17,8 @@ class LandingPage extends StatelessWidget {
 
   Future<void> getPosition() async {
     Position position = (await Geolocator.getCurrentPosition());
-    controller.position.value = LatLng(position.latitude, position.longitude);
+    controller.lat.value = position.latitude;
+    controller.lon.value = position.longitude;
   }
 
   Widget getBody() {
@@ -26,8 +27,7 @@ class LandingPage extends StatelessWidget {
         return ShopScreen();
       case 1:
         return Obx(() {
-          if (controller.position.value.latitude != 0 &&
-              controller.position.value.longitude != 0) {
+          if (controller.lat.value == 0 && controller.lon.value == 0) {
             getPosition();
             return Center(
               child: CircularProgressIndicator.adaptive(),
@@ -35,7 +35,7 @@ class LandingPage extends StatelessWidget {
           } else {
             return MapPage(
               isHome: true,
-              latLng: controller.position.value,
+              latLng: LatLng(controller.lat.value, controller.lon.value),
             );
           }
         });

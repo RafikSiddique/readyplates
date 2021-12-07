@@ -13,17 +13,18 @@ class HomeController extends GetxController {
   final SharedPreferenceHelper sfHelper = Get.find();
   final HomeServices homeService = HomeServices();
   RxString selectedCategory = "".obs;
-  double lat = 0;
-  double lon = 0;
-
-  Rx<LatLng> position = LatLng(0, 0).obs;
+  RxDouble lat = 0.0.obs;
+  RxDouble lon = 0.0.obs;
 
   double getDistanceFromLatLonInKm(double lat2, double lon2) {
     var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2 - lat); // deg2rad below
-    var dLon = deg2rad(lon2 - lon);
+    var dLat = deg2rad(lat2 - lat.value); // deg2rad below
+    var dLon = deg2rad(lon2 - lon.value);
     var a = sin(dLat / 2) * sin(dLat / 2) +
-        cos(deg2rad(lat)) * cos(deg2rad(lat2)) * sin(dLon / 2) * sin(dLon / 2);
+        cos(deg2rad(lat.value)) *
+            cos(deg2rad(lat2)) *
+            sin(dLon / 2) *
+            sin(dLon / 2);
     var c = 2 * atan2(sqrt(a), sqrt(1 - a));
     var d = R * c; // Distance in km
     return d;
@@ -55,7 +56,7 @@ class HomeController extends GetxController {
         kyc_image: "",
         latitude: "",
         longitude: "",
-        open_days: "",
+        open_days: [],
         own_mobile: "",
         own_name: "",
         poc: "",
@@ -115,16 +116,16 @@ class HomeController extends GetxController {
 
   void clear() {
     address.value = '';
-    lat = 0;
-    lon = 0;
+    lat.value = 0;
+    lon.value = 0;
     restaurants.clear();
     foodItems.clear();
   }
 
   void getAddress() async {
     address.value = await sfHelper.getAddress();
-    lat = await sfHelper.getLat();
-    lon = await sfHelper.getLon();
+    lat.value = await sfHelper.getLat();
+    lon.value = await sfHelper.getLon();
   }
 
   void search(String q) async {
@@ -167,18 +168,25 @@ class HomeController extends GetxController {
 
   Future<void> getRestaurants() async {
     try {
-      lat = await sfHelper.getLat();
-      lon = await sfHelper.getLon();
+      lat.value = await sfHelper.getLat();
+      print("Get Lat");
+      lon.value = await sfHelper.getLon();
+      print("Get Lon");
       //if (lat != 0 && lon != 0) {
       List<RestaurantModel> res =
-          await homeService.getRestaurantWithSort(lat, lon);
+          await homeService.getRestaurantWithSort(lat.value, lon.value);
+      print("Got res");
+      ;
       if (res.isNotEmpty) {
+        print("Res Not Empty");
         restaurants.value = res;
       }
+      print("Sorting res");
       restaurants.sort((a, b) => getDistanceFromLatLonInKm(
               double.parse(a.latitude), double.parse(a.longitude))
           .compareTo(getDistanceFromLatLonInKm(
               double.parse(b.latitude), double.parse(b.longitude))));
+      print("Res Sorted");
       /* } else {
         restaurants.value = await homeService.getResDetail();
       } */

@@ -126,9 +126,18 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   text: widget.isEditing ? "Confirm" : "Book",
                   onTap: () {
                     if (widget.isEditing) {
-                      Get.find<OrderController>().editOrders();
+                      if (controller.orderEdit.isNotEmpty)
+                        Get.find<OrderController>().editOrders();
+                      else
+                        Get.snackbar("Error",
+                            "Please add atleast one item to complete the order");
                     } else {
-                      Get.find<OrderController>().order(widget.restaurantModel);
+                      if (controller.cartItems.isNotEmpty)
+                        Get.find<OrderController>()
+                            .order(widget.restaurantModel);
+                      else
+                        Get.snackbar("Error",
+                            "Please add atleast one item to complete the order");
                     }
                   },
                 ),

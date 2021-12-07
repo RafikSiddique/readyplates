@@ -6,6 +6,7 @@ import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_geocoding/google_geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/login/auth_controller.dart';
@@ -25,22 +26,47 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   final AuthController authController = Get.find();
+  String googleApiKey = "AIzaSyDR2to-aBls8N4Wqa4xt3Et5vk2GkVF2Do";
 
   late LatLng latLng = widget.latLng;
   final homeController = Get.put(HomeController());
+  late GoogleGeocoding _geoCoding = GoogleGeocoding(googleApiKey);
   Future<void> setAddress() async {
-    await Future.delayed(Duration(seconds: 1));
-    final address = await geoCode.reverseGeocoding(
-        latitude: latLng.latitude, longitude: latLng.longitude);
-    authController.address.value = address.streetAddress.toString() +
-        ", " +
-        address.region.toString() +
-        ", " +
-        address.postal.toString();
-    if (widget.isHome) {
-      await authController.setAddress(
-          latLng.latitude, latLng.longitude, authController.address.value);
-      homeController.getAddress();
+    GeocodingResponse? results = await _geoCoding.geocoding
+        .getReverse(LatLon(latLng.latitude, latLng.longitude));
+    if (results != null) {
+      GeocodingResult res = results.results![0];
+      String? currentAddress = res.formattedAddress;
+      if (currentAddress == null) {
+        final address = await geoCode.reverseGeocoding(
+            latitude: latLng.latitude, longitude: latLng.longitude);
+        authController.address.value = address.streetAddress.toString() +
+            ", " +
+            address.region.toString() +
+            ", " +
+            address.postal.toString();
+      } else {
+        authController.address.value = currentAddress;
+      }
+
+      if (widget.isHome) {
+        await authController.setAddress(
+            latLng.latitude, latLng.longitude, authController.address.value);
+        homeController.getAddress();
+      }
+    } else {
+      final address = await geoCode.reverseGeocoding(
+          latitude: latLng.latitude, longitude: latLng.longitude);
+      authController.address.value = address.streetAddress.toString() +
+          ", " +
+          address.region.toString() +
+          ", " +
+          address.postal.toString();
+      if (widget.isHome) {
+        await authController.setAddress(
+            latLng.latitude, latLng.longitude, authController.address.value);
+        homeController.getAddress();
+      }
     }
   }
 
@@ -278,6 +304,10 @@ class _MapPageState extends State<MapPage> {
                                     icon: const Icon(Icons.done),
                                     color: MyTheme.borderchangeColor,
                                     onPressed: () {
+                                      if (widget.isHome) {
+                                        setAddress();
+                                        homeController.onPageChange(0);
+                                      }
                                       // Navigator.pushNamed(
                                       //     context, MyRoutes.OnbordingPage);borderchangeColor
                                     },
