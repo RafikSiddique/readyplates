@@ -134,7 +134,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                     } else {
                       if (controller.cartItems.isNotEmpty)
                         Get.find<OrderController>()
-                            .order(widget.restaurantModel);
+                            .order(widget.restaurantModel, false);
                       else
                         Get.snackbar("Error",
                             "Please add atleast one item to complete the order");

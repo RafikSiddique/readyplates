@@ -1,25 +1,30 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
+import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/feedback_page.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_option.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class OrderWidget extends StatelessWidget {
-  final OrderModelApi e;
+  final OrderModelApi orderModel;
 
   final Function(TapDownDetails) showMenu;
-  OrderWidget({Key? key, required this.e, required this.showMenu})
+  OrderWidget({Key? key, required this.orderModel, required this.showMenu})
       : super(key: key);
 
   final OrderController controller = Get.find();
 
-  Widget bottomWidget() {
-    switch (e.status) {
+  Widget bottomWidget(BuildContext context) {
+    switch (orderModel.status) {
       case OrderState.placed:
         return Column(
           children: [
@@ -52,7 +57,7 @@ class OrderWidget extends StatelessWidget {
                       alignment: Alignment.center,
                       margin: EdgeInsets.all(8),
                       child: Text(
-                        e.pin.toString()[i],
+                        orderModel.pin.toString()[i],
                         style: GoogleFonts.montserrat(
                             fontSize: 25, fontWeight: FontWeight.w600),
                       ))
@@ -61,13 +66,98 @@ class OrderWidget extends StatelessWidget {
           ],
         );
       case OrderState.inProgress:
+        return Column(
+          children: [
+            Elevated(
+              width: Get.width,
+              text: "Modify Order",
+              onTap: () async {
+                Get.dialog(
+                  AlertDialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    content: SizedBox.square(
+                      dimension: Get.width * 0.4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox.square(
+                              dimension: 100,
+                              child: CircularProgressIndicator.adaptive(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    MyTheme.borderchangeColor),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+                RestaurantModel restaurantModel = await controller
+                    .getSingleRestaurant(orderModel.restaurant.id);
+                //  String userId = await SharedPreferenceHelper().getUserId();
+                controller.orderId = orderModel.id;
+
+                controller.orderEdit.value = orderModel.orderitems
+                    .map((e) => OrderEditModel(
+                        foodName: e.menu.name,
+                        orderId: orderModel.id,
+                        id: e.id,
+                        foodItem: RxInt(e.menu.id),
+                        foodQuantity: RxInt(e.quantity),
+                        foodPrice: RxDouble(double.parse(e.price)),
+                        restaurant: orderModel.restaurant.id,
+                        foodImage: e.menu.image1,
+                        isUpdated: false))
+                    .toList();
+                controller.calclateTotal(true);
+                Get.back();
+                Get.to(() => BurgersupportingPage(
+                      restaurantModel: restaurantModel,
+                      isEditing: true,
+                      orderModelApi: orderModel,
+                    ));
+              },
+              backgroundColor: Colors.white,
+              color: Color(0xff44C4A1),
+              borderColor: Color(0xff44C4A1),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Elevated(
+              backgroundColor: Color(0xff44C4A1),
+              text: "Complete Order",
+              onTap: () {
+                if (orderModel.payment == "0") {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => PaymentPage(
+                          orderModelApi: orderModel,
+                          isOrderComplete: true,
+                        ),
+                      ));
+                } else {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => FeedbackPage(e: orderModel),
+                      ));
+                }
+              },
+              width: Get.width,
+            ),
+          ],
+        );
+      case OrderState.cancelled:
         return Elevated(
+          text: "Cancelled",
+          backgroundColor: MyTheme.buttonColor,
           width: Get.width,
-          text: "Edit Order",
           onTap: () {},
         );
       case OrderState.completed:
-      case OrderState.cancelled:
         return Column(
           children: [
             Elevated(
@@ -87,7 +177,7 @@ class OrderWidget extends StatelessWidget {
               text: "Give Feedback",
               onTap: () {
                 Get.to(() => FeedbackPage(
-                      e: e,
+                      e: orderModel,
                     ));
               },
             ),
@@ -127,7 +217,7 @@ class OrderWidget extends StatelessWidget {
               child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 // Container(width: 0),
                 Spacer(),
-                Text("Order #${e.id}",
+                Text("Order #${orderModel.id}",
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                           fontSize: 15,
@@ -150,7 +240,7 @@ class OrderWidget extends StatelessWidget {
             ListView(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                children: e.orderitems
+                children: orderModel.orderitems
                     .map(
                       (e) => Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,9 +298,9 @@ class OrderWidget extends StatelessWidget {
                           color: MyTheme.buttonbackgroundColor),
                     )),
                 Text(
-                    e.table.toString() +
+                    orderModel.table.toString() +
                         " x Table for " +
-                        e.no_of_people.toString() +
+                        orderModel.no_of_people.toString() +
                         " People",
                     style: GoogleFonts.nunito(
                       textStyle: TextStyle(
@@ -225,7 +315,7 @@ class OrderWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(e.restaurant.res_name,
+                Text(orderModel.restaurant.res_name,
                     style: GoogleFonts.nunito(
                       textStyle: TextStyle(
                         fontSize: 14,
@@ -236,14 +326,14 @@ class OrderWidget extends StatelessWidget {
                       ),
                     )),
                 Text(
-                    e.date +
+                    orderModel.date +
                         " " +
                         DateFormat(DateFormat.HOUR_MINUTE).format(DateTime(
                             2021,
                             01,
                             01,
-                            int.parse(e.time.split(':').first),
-                            int.parse(e.time.split(':').last))),
+                            int.parse(orderModel.time.split(':').first),
+                            int.parse(orderModel.time.split(':').last))),
                     style: GoogleFonts.nunito(
                       textStyle: TextStyle(
                           fontSize: 14,
@@ -254,7 +344,7 @@ class OrderWidget extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16),
-            bottomWidget(),
+            bottomWidget(context),
             SizedBox(height: 0),
           ],
         ),

@@ -156,6 +156,23 @@ class Orderservices extends ApiService {
     }
   }
 
+  Future<void> updatePayment(int id, int status) async {
+    try {
+      var request = MultipartRequest('PUT', updateStatusUrl);
+      request.fields.addAll({
+        'id': id.toString(),
+        'payment': status.toString(),
+      });
+      var response = await request.send();
+      if (response.statusCode != 202) {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<OrderModelApi>> getorder(String id) async {
     try {
       Response response =

@@ -15,8 +15,10 @@ class OrderModel {
   double totalprice;
   String date;
   String time;
+  String payment;
   OrderState orderState;
   OrderModel({
+    required this.payment,
     required this.user,
     required this.restaurant,
     required this.orderitems,
@@ -33,6 +35,7 @@ class OrderModel {
     return {
       'user': user,
       'restaurant': restaurant,
+      'payment': payment,
       'orderitems': orderitems.map((x) => x.toMap()).toList(),
       'no_of_people': noOfPeople,
       'table': table,
@@ -55,35 +58,6 @@ class OrderModel {
   String toString() {
     return 'OrderModel(user: $user, restaurant: $restaurant, orderitems: $orderitems, no_of_people: $noOfPeople, table: $table, tax: $tax, totalprice: $totalprice, date: $date, time: $time)';
   }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is OrderModel &&
-        other.user == user &&
-        other.restaurant == restaurant &&
-        listEquals(other.orderitems, orderitems) &&
-        other.noOfPeople == noOfPeople &&
-        other.table == table &&
-        other.tax == tax &&
-        other.totalprice == totalprice &&
-        other.date == date &&
-        other.time == time;
-  }
-
-  @override
-  int get hashCode {
-    return user.hashCode ^
-        restaurant.hashCode ^
-        orderitems.hashCode ^
-        noOfPeople.hashCode ^
-        table.hashCode ^
-        tax.hashCode ^
-        totalprice.hashCode ^
-        date.hashCode ^
-        time.hashCode;
-  }
 }
 
 class OrderModelApi {
@@ -97,6 +71,7 @@ class OrderModelApi {
   String time;
   String tax;
   OrderState status;
+  String payment;
   int pin;
   UserFromApi user;
   OrderApiRestaurant restaurant;
@@ -110,6 +85,7 @@ class OrderModelApi {
     required this.date,
     required this.time,
     required this.tax,
+    required this.payment,
     required this.status,
     required this.pin,
     required this.user,
@@ -119,6 +95,7 @@ class OrderModelApi {
   factory OrderModelApi.fromMap(Map<String, dynamic> map) {
     return OrderModelApi(
       id: map['id'],
+      payment: map["payment"] ?? "0",
       orderitems: List<OrderFoodItemApi>.from(
           map['orderitems']?.map((x) => OrderFoodItemApi.fromMap(x))),
       created_on: DateTime.parse(map['created_on']),

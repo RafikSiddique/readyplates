@@ -35,6 +35,8 @@ class OrderController extends GetxController {
 
   RxDouble total = 0.0.obs;
 
+  int orderId = -1;
+
   late List<FocusNode> otpFields;
 
   late List<TextEditingController> otpText;
@@ -237,10 +239,11 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> order(RestaurantModel restaurantModel) async {
+  Future<void> orderWithoutPayment(RestaurantModel restaurantModel) async {
     try {
       String id = await sfHelper.getUserId();
       OrderModel orderModel = OrderModel(
+          payment: "",
           user: int.parse(id),
           orderState: OrderState.placed,
           restaurant: restaurantModel.id,
@@ -273,6 +276,52 @@ class OrderController extends GetxController {
 
       Get.to(() => Chekoutdone(
             orderModelApi: orderModelApi,
+            isComplete: false,
+          ));
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> order(
+      RestaurantModel restaurantModel, bool isPaymentComplete) async {
+    try {
+      String id = await sfHelper.getUserId();
+      OrderModel orderModel = OrderModel(
+          user: int.parse(id),
+          payment: isPaymentComplete ? "1" : "0",
+          orderState: OrderState.placed,
+          restaurant: restaurantModel.id,
+          orderitems: cartItems
+              .map((element) => OrderFoodItem(
+                  id: element.foodItem.value,
+                  count: element.foodQuantity.value,
+                  price: element.foodPrice.value))
+              .toList(),
+          noOfPeople: numberOfPeople.value,
+          table: numberOfTable.value,
+          tax: 50,
+          totalprice: 50,
+          date:
+              DateFormat(DateFormat.YEAR_MONTH_DAY).format(selectedDate.value),
+          time:
+              DateFormat(DateFormat.HOUR24_MINUTE).format(selectedDate.value));
+      OrderModelApi orderModelApi = await services.orderapi(orderModel);
+      print(orderModelApi);
+      await getorder();
+      cartApiItems.clear();
+      cartItems.forEach((e) {
+        CartModel element = getCartItem(e.foodItem.value);
+        element.foodQuantity.value = 0;
+        element.user = id;
+        cart(element);
+      });
+      cartItems.clear();
+      calclateTotal();
+
+      Get.to(() => Chekoutdone(
+            orderModelApi: orderModelApi,
+            isComplete: false,
           ));
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -305,6 +354,15 @@ class OrderController extends GetxController {
   Future<void> updateStatus(int id, int status) async {
     try {
       await services.updateStatus(id, status);
+      await getorder();
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> updatePayment(int id, int status) async {
+    try {
+      await services.updatePayment(id, status);
       await getorder();
     } catch (e) {
       Get.snackbar("Error", e.toString());

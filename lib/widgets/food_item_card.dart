@@ -167,32 +167,25 @@ class FoodItemCard extends GetView<OrderController> {
                                             orderController.cart(cartModel);
                                           }
                                         } else {
-                                          if (orderController
-                                              .orderEdit.isNotEmpty) {
-                                            OrderEditModel orderEditModel =
-                                                OrderEditModel(
-                                                    foodName:
-                                                        foodItemModel.name,
-                                                    orderId: orderController
-                                                        .orderEdit
-                                                        .first
-                                                        .orderId,
-                                                    id: -1,
-                                                    foodItem:
-                                                        foodItemModel.id.obs,
-                                                    foodQuantity: 1.obs,
-                                                    foodPrice: RxDouble(
-                                                        double.parse(
-                                                            foodItemModel
-                                                                .cost)),
-                                                    restaurant:
-                                                        restaurantModel.id,
-                                                    foodImage:
-                                                        foodItemModel.image1,
-                                                    isUpdated: false);
-                                            orderController.orderEdit
-                                                .add(orderEditModel);
-                                          }
+                                          OrderEditModel orderEditModel =
+                                              OrderEditModel(
+                                                  foodName: foodItemModel.name,
+                                                  orderId:
+                                                      orderController.orderId,
+                                                  id: -1,
+                                                  foodItem:
+                                                      foodItemModel.id.obs,
+                                                  foodQuantity: 1.obs,
+                                                  foodPrice: RxDouble(
+                                                      double.parse(
+                                                          foodItemModel.cost)),
+                                                  restaurant:
+                                                      restaurantModel.id,
+                                                  foodImage:
+                                                      foodItemModel.image1,
+                                                  isUpdated: false);
+                                          orderController.orderEdit
+                                              .add(orderEditModel);
                                         }
                                       },
                                     ),

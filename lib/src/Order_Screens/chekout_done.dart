@@ -12,7 +12,8 @@ import 'package:readyplates/widgets/buuton.dart';
 
 class Chekoutdone extends StatelessWidget {
   final OrderModelApi orderModelApi;
-  const Chekoutdone({Key? key, required this.orderModelApi}) : super(key: key);
+  final bool isComplete;
+  const Chekoutdone({Key? key, required this.orderModelApi, required this.isComplete}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +73,6 @@ class Chekoutdone extends StatelessWidget {
                     onTap: () {
                       Get.offAllNamed(LandingPage.id);
                       controller.currentIndex.value = 2;
-                      // Get.offAll(OrderPage(() {
-                      //   controller.onPageChange(0);
-                      // }));
                     },
                   ),
                 ),
@@ -91,6 +89,7 @@ class Chekoutdone extends StatelessWidget {
                     onTap: () {
                       Get.to(() => PaymentPage(
                             orderModelApi: orderModelApi,
+                            isOrderComplete: isComplete,
                           ));
                     },
                   ),

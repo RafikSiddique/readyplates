@@ -114,6 +114,7 @@ class OrderPage extends GetView<OrderController> {
                 RestaurantModel restaurantModel =
                     await controller.getSingleRestaurant(restaurantId);
                 //  String userId = await SharedPreferenceHelper().getUserId();
+                controller.orderId = orderModel.id;
                 controller.orderEdit.value = orderModel.orderitems
                     .map((e) => OrderEditModel(
                         foodName: e.menu.name,
@@ -161,6 +162,8 @@ class OrderPage extends GetView<OrderController> {
                   RestaurantModel restaurantModel =
                       await controller.getSingleRestaurant(restaurantId);
                   //  String userId = await SharedPreferenceHelper().getUserId();
+                  controller.orderId = orderModel.id;
+
                   controller.orderEdit.value = orderModel.orderitems
                       .map((e) => OrderEditModel(
                           foodName: e.menu.name,
@@ -299,7 +302,7 @@ class OrderPage extends GetView<OrderController> {
                             children: controller.active
                                 .map(
                                   (element) => OrderWidget(
-                                    e: element,
+                                    orderModel: element,
                                     showMenu: (details) {
                                       showTextMenu(
                                           details: details,
@@ -333,7 +336,7 @@ class OrderPage extends GetView<OrderController> {
                               physics: NeverScrollableScrollPhysics(),
                               children: controller.inProgress
                                   .map((e) => OrderWidget(
-                                        e: e,
+                                        orderModel: e,
                                         showMenu: (p0) {
                                           showTextMenu(
                                               details: p0,
@@ -365,7 +368,7 @@ class OrderPage extends GetView<OrderController> {
                               physics: NeverScrollableScrollPhysics(),
                               children: controller.ended
                                   .map((e) => OrderWidget(
-                                        e: e,
+                                        orderModel: e,
                                         showMenu: (p0) {},
                                       ))
                                   .toList()),
