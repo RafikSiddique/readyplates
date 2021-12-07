@@ -102,35 +102,36 @@ class BookingDetails extends GetView<OrderController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TimeButton(
-                      borcolor: Colors.white,
-                      onTap: () {
-                        controller.globletime.value = tempTime;
-                        // controller.tableList(restaurantModel.id);
-                        var dt = controller.selectedDate.value;
-                        controller.selectedDate.value = DateTime(
-                            dt.year,
-                            dt.month,
-                            dt.day,
-                            tempTime.hour,
-                            tempTime.minute,
-                            tempTime.second);
+                    borcolor: Colors.white,
+                    onTap: () {
+                      controller.globletime.value = tempTime;
+                      // controller.tableList(restaurantModel.id);
+                      var dt = controller.selectedDate.value;
+                      controller.selectedDate.value = DateTime(
+                          dt.year,
+                          dt.month,
+                          dt.day,
+                          tempTime.hour,
+                          tempTime.minute,
+                          tempTime.second);
 
-                        Get.back();
-                      },
-                      fontSize: 12,
-                      text: "Done",
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      backgroundColor: Colors.black),
+                      Get.back();
+                    },
+                    fontSize: 12,
+                    text: "Done",
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    backgroundColor: Colors.black,
+                  ),
                   TimeButton(
                     borcolor: Colors.black,
                     onTap: () {
                       Get.back();
                     },
                     fontSize: 12,
-                    text: "cancel",
+                    text: "Cancel",
                     color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                   ),
                 ],
               ),

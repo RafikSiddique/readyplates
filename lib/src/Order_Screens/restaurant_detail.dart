@@ -410,8 +410,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      DateFormat("MMMM").format(DateTime.parse(
-                                          bio.recurring_event_date)),
+                                      DateFormat("MMMM").add_jm().format(
+                                          DateTime.parse(
+                                              bio.recurring_event_date)),
                                       style: GoogleFonts.inter(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500,
@@ -422,9 +423,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      // bio.recurring_event_date,
-                                      DateFormat("d").format(DateTime.parse(
-                                          bio.recurring_event_date)),
+                                      DateFormat("MMMM").add_jm().format(
+                                          DateTime.parse(
+                                              bio.recurring_event_date)),
                                       style: GoogleFonts.inter(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
