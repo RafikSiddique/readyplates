@@ -209,7 +209,7 @@ class _MapPageState extends State<MapPage> {
                     onTap: () async {
                       Position position = await Geolocator.getCurrentPosition();
                       latLng = LatLng(position.latitude, position.longitude);
-                      controller!.animateCamera(CameraUpdate.newLatLng(latLng));
+                      controller?.animateCamera(CameraUpdate.newLatLng(latLng));
                     },
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
