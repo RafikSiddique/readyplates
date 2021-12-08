@@ -163,7 +163,12 @@ class MenuPage extends StatelessWidget {
                             : MyTheme.hinttextColor,
                         onTap: () {
                           if (isEditing) {
-                            Get.back();
+                            if (orderController.orderEdit.isEmpty) {
+                              Get.snackbar("Please add an item",
+                                  "At least add atleast 1 item from this restaurant to proceed to booking");
+                            } else {
+                              Get.back();
+                            }
                           } else {
                             bool check = orderController.cartItems.any(
                                 (element) =>
