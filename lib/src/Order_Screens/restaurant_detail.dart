@@ -116,25 +116,16 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(widget.restaurantModel.resName,
-                                  style: GoogleFonts.nunito(
-                                    textStyle: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                      color: MyTheme.appbartextColor,
-                                    ),
-                                  )),
-                              FaIcon(
-                                FontAwesomeIcons.solidStar,
-                                color: MyTheme.buttonbackgroundColor,
-                                size: 16,
-                              )
-                            ],
-                          ),
+                          Text(widget.restaurantModel.resName,
+                              style: GoogleFonts.nunito(
+                                textStyle: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.normal,
+                                  color: MyTheme.appbartextColor,
+                                ),
+                              )),
+
                           SizedBox(
                             height: 5,
                           ),
@@ -454,25 +445,13 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   )
                                 ],
                               ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "All you can eat Buffet",
-                                    style: GoogleFonts.inter(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FontStyle.normal,
-                                        color: MyTheme.appbartextColor),
-                                  ),
-                                  Text(
-                                    "Starts at ${bio.event_start} ",
-                                    style: GoogleFonts.inter(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FontStyle.normal,
-                                        color: MyTheme.appbartextColor),
-                                  )
-                                ],
+                              Text(
+                                "Starts at ${bio.event_start} ",
+                                style: GoogleFonts.inter(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    color: MyTheme.appbartextColor),
                               ),
                               Column(
                                 children: [

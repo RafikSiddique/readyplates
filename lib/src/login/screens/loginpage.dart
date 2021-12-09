@@ -204,25 +204,22 @@ class LoginPage extends StatelessWidget {
                                   ],
                                 ),
                               )),
+                        SizedBox(
+                          height: 3,
+                        ),
                         if (isChangepass != true)
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 13),
-                            ),
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  "Forget Password",
-                                  style: TextStyle(
-                                      //color: MyTheme.forgetpasslogintext,
-                                      color: Color(0xff32B768),
-                                      fontSize: 14),
-                                ),
-                              ],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("Forget Password?",
+                                  style: GoogleFonts.inter(
+                                    fontSize: 14,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff32B768),
+                                  )),
+                            ],
                           ),
                         SizedBox(height: 20),
                         InkWell(
@@ -260,54 +257,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
-                        ),
-                        if (isChangepass != true)
-                          InkWell(
-                            onTap: () {
-                              Get.toNamed(LoginPage.id);
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 54,
-                              decoration: BoxDecoration(
-                                color: MyTheme.boxdecoration2,
-                                border: Border.all(
-                                    width: 1, color: MyTheme.checkboxcolor),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(6)),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 26.42,
-                                    height: 27,
-                                    child: Image.asset(Assets.google),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Login with Google',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontFamily: 'Inter-Regular',
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w600,
-                                          color: MyTheme.buttontextlogin
-                                          //color: Color(0xff222222),
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        SizedBox(
-                          height: 25,
+                          height: 16,
                         ),
                       ],
                     ),

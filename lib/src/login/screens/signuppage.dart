@@ -215,7 +215,8 @@ class _SignupPageState extends State<SignupPage> {
                   AppFormField(
                     toptext: 'Mobile',
                     controller: controller.mobController,
-                    hintText: '923944543',
+                    hintText: '+1 808 569 2700',
+                    inputType: TextInputType.phone,
                   ),
                   SizedBox(height: 19),
                   AppFormField(
@@ -240,39 +241,39 @@ class _SignupPageState extends State<SignupPage> {
                     bottomText: 'Please re-enter password',
                     line: 1,
                   ),
-                  SizedBox(height: 15),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ConstrainedBox(
-                        constraints:
-                            BoxConstraints(maxHeight: 19, maxWidth: 19),
-                        child: Checkbox(
-                          value: _checkbox,
-                          checkColor: Color(0xffADB5BD),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              _checkbox = !_checkbox;
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 5),
-                      Text('I have a referral code',
-                          style: GoogleFonts.inter(
-                            fontSize: 13,
-                            color: MyTheme.checkboxcolor,
-                            // color: Color(0xff3C3B4D),
-                            //fontFamily: 'Inter',
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                          )),
-                    ],
-                  ),
+                  // SizedBox(height: 15),
+                  // Row(
+                  //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   // crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     ConstrainedBox(
+                  //       constraints:
+                  //           BoxConstraints(maxHeight: 19, maxWidth: 19),
+                  //       child: Checkbox(
+                  //         value: _checkbox,
+                  //         checkColor: Color(0xffADB5BD),
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(4),
+                  //         ),
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             _checkbox = !_checkbox;
+                  //           });
+                  //         },
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 5),
+                  //     Text('I have a referral code',
+                  //         style: GoogleFonts.inter(
+                  //           fontSize: 13,
+                  //           color: MyTheme.checkboxcolor,
+                  //           // color: Color(0xff3C3B4D),
+                  //           //fontFamily: 'Inter',
+                  //           fontStyle: FontStyle.normal,
+                  //           fontWeight: FontWeight.w500,
+                  //         )),
+                  //   ],
+                  // ),
                   SizedBox(height: 20),
                   InkWell(
                     onTap: () async {
@@ -303,127 +304,127 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15),
-                  Row(children: <Widget>[
-                    Expanded(
-                        child: Divider(
-                      // indent: 16,
-                      endIndent: 44,
-                      thickness: 2,
-                      color: MyTheme.devidercolor,
-                    )),
-                    Text("OR",
-                        style: GoogleFonts.inter(
-                          color: MyTheme.dividermiddletext,
-                          //color: Color(0xff4E535A),
-                          fontSize: 17,
-                          // fontFamily: 'Inter-Regular',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.normal,
-                        )),
-                    Expanded(
-                        child: Divider(
-                      indent: 44,
-                      // endIndent: 20,
-                      thickness: 2,
-                      color: MyTheme.devidercolor,
-                      //  color: Color(0xffD8D8D8),
-                    )),
-                  ]),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 45,
-                          color: MyTheme.buttonbackgroundcolor1,
-                          // color: Color(0xffF2F2F2),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6))),
-                              primary: MyTheme.buttonbackgroundcolor1,
-                              side: BorderSide(
-                                  width: 1.5, color: Color(0xffADB5BD)),
-                            ),
-                            onPressed: () {},
-                            child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                    child: Image.asset(
-                                  Assets.google,
-                                  height: 21.5,
-                                  width: 20,
-                                  fit: BoxFit.cover,
-                                )),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text("Continue with google!",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 10,
-                                      //fontFamily: 'Inter',
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.normal,
-                                      color: MyTheme.bottomtextColorsignup,
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      // Spacer(),
-                      Expanded(
-                        child: Container(
-                          // width: MediaQuery.of(context).size.width * 0.43,
-                          height: 45,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6))),
+                  // SizedBox(height: 15),
+                  // Row(children: <Widget>[
+                  //   Expanded(
+                  //       child: Divider(
+                  //     // indent: 16,
+                  //     endIndent: 44,
+                  //     thickness: 2,
+                  //     color: MyTheme.devidercolor,
+                  //   )),
+                  //   Text("OR",
+                  //       style: GoogleFonts.inter(
+                  //         color: MyTheme.dividermiddletext,
+                  //         //color: Color(0xff4E535A),
+                  //         fontSize: 17,
+                  //         // fontFamily: 'Inter-Regular',
+                  //         fontStyle: FontStyle.normal,
+                  //         fontWeight: FontWeight.normal,
+                  //       )),
+                  //   Expanded(
+                  //       child: Divider(
+                  //     indent: 44,
+                  //     // endIndent: 20,
+                  //     thickness: 2,
+                  //     color: MyTheme.devidercolor,
+                  //     //  color: Color(0xffD8D8D8),
+                  //   )),
+                  // ]),
+                  // SizedBox(height: 15),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     Expanded(
+                  //       child: Container(
+                  //         height: 45,
+                  //         color: MyTheme.buttonbackgroundcolor1,
+                  //         // color: Color(0xffF2F2F2),
+                  //         child: ElevatedButton(
+                  //           style: ElevatedButton.styleFrom(
+                  //             shape: RoundedRectangleBorder(
+                  //                 borderRadius:
+                  //                     BorderRadius.all(Radius.circular(6))),
+                  //             primary: MyTheme.buttonbackgroundcolor1,
+                  //             side: BorderSide(
+                  //                 width: 1.5, color: Color(0xffADB5BD)),
+                  //           ),
+                  //           onPressed: () {},
+                  //           child: Row(
+                  //             // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //             children: [
+                  //               Container(
+                  //                   child: Image.asset(
+                  //                 Assets.google,
+                  //                 height: 21.5,
+                  //                 width: 20,
+                  //                 fit: BoxFit.cover,
+                  //               )),
+                  //               SizedBox(
+                  //                 width: 8,
+                  //               ),
+                  //               Text("Continue with google!",
+                  //                   style: GoogleFonts.inter(
+                  //                     fontSize: 10,
+                  //                     //fontFamily: 'Inter',
+                  //                     fontStyle: FontStyle.normal,
+                  //                     fontWeight: FontWeight.normal,
+                  //                     color: MyTheme.bottomtextColorsignup,
+                  //                   )),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     SizedBox(
+                  //       width: 16,
+                  //     ),
+                  //     // Spacer(),
+                  //     Expanded(
+                  //       child: Container(
+                  //         // width: MediaQuery.of(context).size.width * 0.43,
+                  //         height: 45,
+                  //         child: ElevatedButton(
+                  //           style: ElevatedButton.styleFrom(
+                  //             shape: RoundedRectangleBorder(
+                  //                 borderRadius:
+                  //                     BorderRadius.all(Radius.circular(6))),
 
-                              primary: MyTheme
-                                  .buttonbackgroundcolor1, //checkboxcolor, // Color(0xffB9B9B9),
-                              side: BorderSide(
-                                width: 1.5,
-                                color: Color(0xffADB5BD),
-                              ),
-                            ),
-                            onPressed: () {},
-                            child: Row(
-                              children: [
-                                Container(
-                                    child: Image.asset(
-                                  Assets.fbb,
-                                  height: 28,
-                                  width: 28,
-                                  fit: BoxFit.cover,
-                                )),
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text("Continue with facebook",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 10,
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.normal,
-                                      color: MyTheme.bottomtextColorsignup,
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
+                  //             primary: MyTheme
+                  //                 .buttonbackgroundcolor1, //checkboxcolor, // Color(0xffB9B9B9),
+                  //             side: BorderSide(
+                  //               width: 1.5,
+                  //               color: Color(0xffADB5BD),
+                  //             ),
+                  //           ),
+                  //           onPressed: () {},
+                  //           child: Row(
+                  //             children: [
+                  //               Container(
+                  //                   child: Image.asset(
+                  //                 Assets.fbb,
+                  //                 height: 28,
+                  //                 width: 28,
+                  //                 fit: BoxFit.cover,
+                  //               )),
+                  //               SizedBox(
+                  //                 width: 2,
+                  //               ),
+                  //               Text("Continue with facebook",
+                  //                   style: GoogleFonts.inter(
+                  //                     fontSize: 10,
+                  //                     fontStyle: FontStyle.normal,
+                  //                     fontWeight: FontWeight.normal,
+                  //                     color: MyTheme.bottomtextColorsignup,
+                  //                   )),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(height: 16),
                 ],
               ),
             ),
