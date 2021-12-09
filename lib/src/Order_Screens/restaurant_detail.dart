@@ -203,15 +203,23 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                     )),
                               ),
                               SizedBox(
-                                width: 61,
+                                width: 51,
                               ),
-                              FaIcon(
-                                FontAwesomeIcons.walking,
-                                size: 11,
-                                color: MyTheme.dividermiddletext,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 2),
+                                child: FaIcon(
+                                  FontAwesomeIcons.walking,
+                                  size: 11,
+                                  color: MyTheme.dividermiddletext,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 9,
                               ),
                               Text(
-                                "  15 mins",
+                                double.parse(widget.restaurantModel.address2)
+                                        .toStringAsFixed(2) +
+                                    " Kms",
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       fontSize: 13,
