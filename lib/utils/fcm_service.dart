@@ -34,6 +34,7 @@ class FirebaseMessagingService extends ApiService {
       'Ready Plates',
       priority: Priority.max,
       importance: Importance.max,
+      enableVibration: true,
       playSound: true,
     );
     NotificationDetails notificationDetails =
@@ -78,12 +79,8 @@ class FirebaseMessagingService extends ApiService {
         FlutterLocalNotificationsPlugin();
 
     AndroidNotificationChannel androidNotificationChannel =
-        AndroidNotificationChannel(
-      'ReadyPlates',
-      'Ready Plates',
-      playSound: true,
-      importance: Importance.max,
-    );
+        AndroidNotificationChannel('ReadyPlates', 'Ready Plates',
+            playSound: true, importance: Importance.max, enableVibration: true);
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()

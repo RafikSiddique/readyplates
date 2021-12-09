@@ -9,6 +9,7 @@ import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
+import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/Order_option.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -20,8 +21,7 @@ class OrderWidget extends StatelessWidget {
   final Function(TapDownDetails) showMenu;
   OrderWidget({Key? key, required this.orderModel, required this.showMenu})
       : super(key: key);
-
-  final OrderController controller = Get.find();
+  OrderController controller = Get.find();
 
   Widget bottomWidget(BuildContext context) {
     switch (orderModel.status) {
@@ -163,8 +163,26 @@ class OrderWidget extends StatelessWidget {
             Elevated(
               width: Get.width,
               text: "Order Again",
-              onTap: () {
-                Get.to(() => OrderOption());
+              onTap: () async {
+                orderModel.orderitems.forEach((e) {
+                  controller.cartItems.add(CartModel(
+                      user: "",
+                      foodItem: e.menu.id.obs,
+                      foodQuantity: e.quantity.obs,
+                      foodName: e.menu.name,
+                      foodImage: e.menu.image1,
+                      foodPrice: double.parse(e.price).obs,
+                      restaurant: orderModel.restaurant.id));
+                });
+                RestaurantModel restaurantModel = await controller
+                    .getSingleRestaurant(orderModel.restaurant.id);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BurgersupportingPage(
+                          restaurantModel: restaurantModel, isEditing: false),
+                    ),
+                    (route) => route.settings.name == LandingPage.id);
               },
             ),
             SizedBox(
@@ -187,8 +205,26 @@ class OrderWidget extends StatelessWidget {
         return Elevated(
           width: Get.width,
           text: "Order Again",
-          onTap: () {
-            //  Get.to(() => OrderOption2());
+          onTap: () async {
+            orderModel.orderitems.forEach((e) {
+              controller.cartItems.add(CartModel(
+                  user: "",
+                  foodItem: e.menu.id.obs,
+                  foodQuantity: e.quantity.obs,
+                  foodName: e.menu.name,
+                  foodImage: e.menu.image1,
+                  foodPrice: double.parse(e.price).obs,
+                  restaurant: orderModel.restaurant.id));
+            });
+            RestaurantModel restaurantModel =
+                await controller.getSingleRestaurant(orderModel.restaurant.id);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BurgersupportingPage(
+                      restaurantModel: restaurantModel, isEditing: false),
+                ),
+                (route) => route.settings.name == LandingPage.id);
           },
         );
     }
