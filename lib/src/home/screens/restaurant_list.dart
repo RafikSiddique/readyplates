@@ -42,7 +42,7 @@ class _ShopScreenState extends State<ShopScreen> {
     Assets.categoryChinese,
   ];
 
-  final HomeController controller = Get.find();
+  final HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

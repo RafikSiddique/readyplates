@@ -27,10 +27,10 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   final AuthController authController = Get.find();
   String googleApiKey = "AIzaSyDR2to-aBls8N4Wqa4xt3Et5vk2GkVF2Do";
+  late GoogleGeocoding _geoCoding = GoogleGeocoding(googleApiKey);
 
   late LatLng latLng = widget.latLng;
   final homeController = Get.put(HomeController());
-  late GoogleGeocoding _geoCoding = GoogleGeocoding(googleApiKey);
   Future<void> setAddress() async {
     GeocodingResponse? results = await _geoCoding.geocoding
         .getReverse(LatLon(latLng.latitude, latLng.longitude));
@@ -145,7 +145,7 @@ class _MapPageState extends State<MapPage> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
                 child: Container(
-                  height: 54,
+                height: 54,
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),

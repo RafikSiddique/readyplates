@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_sevices.dart';
@@ -17,8 +15,8 @@ class HomeController extends GetxController {
   RxDouble lon = 0.0.obs;
 
   double getDistanceFromLatLonInKm(double lat2, double lon2) {
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2 - lat.value); // deg2rad below
+    var R = 6371;
+    var dLat = deg2rad(lat2 - lat.value);
     var dLon = deg2rad(lon2 - lon.value);
     var a = sin(dLat / 2) * sin(dLat / 2) +
         cos(deg2rad(lat.value)) *
@@ -26,7 +24,7 @@ class HomeController extends GetxController {
             sin(dLon / 2) *
             sin(dLon / 2);
     var c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    var d = R * c; // Distance in km
+    var d = R * c;
     return d;
   }
 
@@ -110,7 +108,6 @@ class HomeController extends GetxController {
   void onInit() {
     getAddress();
     Get.put(OrderController());
-    getRestaurants();
     super.onInit();
   }
 
@@ -149,11 +146,9 @@ class HomeController extends GetxController {
     try {
       foodItems.value = await homeService.getMenu(id);
     } catch (e) {
-      foodItems.value = foodItems.length != 0
-          ? foodItems.first.id == -1
-              ? []
-              : foodItems
-          : [];
+      if (foodItems.isNotEmpty && foodItems.first.id == -1) {
+        foodItems.clear();
+      }
       Get.snackbar("Error", e.toString());
     }
   }
@@ -172,7 +167,6 @@ class HomeController extends GetxController {
       print("Get Lat");
       lon.value = await sfHelper.getLon();
       print("Get Lon");
-      //if (lat != 0 && lon != 0) {
       List<RestaurantModel> res =
           await homeService.getRestaurantWithSort(lat.value, lon.value);
       print("Got res");
@@ -187,17 +181,10 @@ class HomeController extends GetxController {
           .compareTo(getDistanceFromLatLonInKm(
               double.parse(b.latitude), double.parse(b.longitude))));
       print("Res Sorted");
-      /* } else {
-        restaurants.value = await homeService.getResDetail();
-      } */
     } catch (e) {
-      //restaurants.value = await homeService.getResDetail();
-      restaurants.value = restaurants.isEmpty
-          ? []
-          : restaurants.first.id == -1
-              ? []
-              : restaurants;
-
+      if (restaurants.isNotEmpty && restaurants.first.id == -1) {
+        restaurants.clear();
+      }
       Get.snackbar("", e.toString());
     }
   }
@@ -212,7 +199,6 @@ class HomeController extends GetxController {
       });
     } else if (index == 2) {
       timer?.cancel();
-
       timer = Timer.periodic(Duration(seconds: 3), (timer) async {
         await Get.find<OrderController>().getorder();
         print("Order Get");
