@@ -185,27 +185,29 @@ class HomeController extends GetxController {
       if (restaurants.isNotEmpty && restaurants.first.id == -1) {
         restaurants.clear();
       }
-      Get.snackbar("", e.toString());
+      timer?.cancel();
+      Get.showSnackbar(GetBar(
+        title: "Server Error",
+        message: "Something went wrong",
+        duration: Duration(seconds: 1),
+      ));
     }
   }
 
   void onPageChange(int index) {
+    timer?.cancel();
     if (index == 0) {
-      timer?.cancel();
       timer = Timer.periodic(Duration(seconds: 3), (timer) async {
         await getRestaurants();
         print("Restaurant Fetch");
         this.timer = timer;
       });
     } else if (index == 2) {
-      timer?.cancel();
       timer = Timer.periodic(Duration(seconds: 3), (timer) async {
         await Get.find<OrderController>().getorder();
         print("Order Get");
         this.timer = timer;
       });
-    } else {
-      timer?.cancel();
     }
     currentIndex.value = index;
   }

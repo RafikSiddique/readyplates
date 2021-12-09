@@ -256,13 +256,13 @@ class OrderController extends GetxController {
           noOfPeople: numberOfPeople.value,
           table: null,
           tax: 50,
-          totalprice: 50,
+          totalprice: calclateTotal(),
           date:
               DateFormat(DateFormat.YEAR_MONTH_DAY).format(selectedDate.value),
           time:
               DateFormat(DateFormat.HOUR24_MINUTE).format(selectedDate.value));
       OrderModelApi orderModelApi = await services.orderapi(orderModel);
-      print(orderModelApi);
+
       await getorder();
       cartApiItems.clear();
       cartItems.forEach((e) {
@@ -284,12 +284,12 @@ class OrderController extends GetxController {
   }
 
   Future<void> order(
-      RestaurantModel restaurantModel, bool isPaymentComplete) async {
+      RestaurantModel restaurantModel) async {
     try {
       String id = await sfHelper.getUserId();
       OrderModel orderModel = OrderModel(
           user: int.parse(id),
-          payment: isPaymentComplete ? "1" : "0",
+          payment: "",
           orderState: OrderState.placed,
           restaurant: restaurantModel.id,
           orderitems: cartItems
@@ -299,9 +299,9 @@ class OrderController extends GetxController {
                   price: element.foodPrice.value))
               .toList(),
           noOfPeople: numberOfPeople.value,
-          table: numberOfTable.value,
+          table: null,
           tax: 50,
-          totalprice: 50,
+          totalprice: calclateTotal(),
           date:
               DateFormat(DateFormat.YEAR_MONTH_DAY).format(selectedDate.value),
           time:
