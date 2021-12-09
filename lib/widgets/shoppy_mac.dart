@@ -8,11 +8,16 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 class ShooppymacPage extends StatelessWidget {
+  final void Function() setStae;
   CartModel? cartModel;
   OrderEditModel? orderEditModel;
   final bool isEditing;
   ShooppymacPage(
-      {Key? key, this.cartModel, this.orderEditModel, this.isEditing = false})
+      {Key? key,
+      this.cartModel,
+      this.orderEditModel,
+      this.isEditing = false,
+      required this.setStae})
       : super(key: key);
   final controller = Get.find<OrderController>();
   @override
@@ -159,6 +164,7 @@ class ShooppymacPage extends StatelessWidget {
                         if (controller.cartItems.length > 1) {
                           controller.decrement(cartModel!.foodItem.value,
                               cartModel!.restaurant, true);
+                          setStae();
                         } else {
                           Get.showSnackbar(GetBar(
                             title: "Error",

@@ -86,11 +86,17 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                 children: [
                   if (widget.isEditing)
                     ...controller.orderEdit.map((element) => ShooppymacPage(
+                          setStae: () {
+                            setState(() {});
+                          },
                           isEditing: true,
                           orderEditModel: element,
                         ))
                   else
                     ...controller.cartItems.map((element) => ShooppymacPage(
+                          setStae: () {
+                            setState(() {});
+                          },
                           cartModel: element,
                           isEditing: widget.isEditing,
                         )),
