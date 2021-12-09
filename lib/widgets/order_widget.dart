@@ -298,8 +298,10 @@ class OrderWidget extends StatelessWidget {
                           color: MyTheme.buttonbackgroundColor),
                     )),
                 Text(
-                    orderModel.table.toString() +
-                        " x Table for " +
+                    (orderModel.table != null
+                            ? orderModel.table.toString()
+                            : "Awaiting table from restaurant") +
+                        " Table for " +
                         orderModel.no_of_people.toString() +
                         " People",
                     style: GoogleFonts.nunito(

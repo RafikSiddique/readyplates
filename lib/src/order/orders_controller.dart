@@ -31,7 +31,7 @@ class OrderController extends GetxController {
 
   RxList<OrderEditModel> orderEdit = <OrderEditModel>[].obs;
   RxInt numberOfPeople = 1.obs;
-  RxInt numberOfTable = 1.obs;
+  
 
   RxDouble total = 0.0.obs;
 
