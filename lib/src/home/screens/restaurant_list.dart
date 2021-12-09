@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -26,9 +25,9 @@ class _ShopScreenState extends State<ShopScreen> {
     'Pizza',
     'Seafood',
     'Steak',
-    'Hawaiian',
+    'Barbeque',
     'Fast Food',
-    'Chinese',
+    'Hawaiian',
   ];
 
   final List<String> categroyImg = [
