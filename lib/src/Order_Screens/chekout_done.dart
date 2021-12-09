@@ -5,6 +5,7 @@ import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
+import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/order_page.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -13,7 +14,9 @@ import 'package:readyplates/widgets/buuton.dart';
 class Chekoutdone extends StatelessWidget {
   final OrderModelApi orderModelApi;
   final bool isComplete;
-  const Chekoutdone({Key? key, required this.orderModelApi, required this.isComplete}) : super(key: key);
+  const Chekoutdone(
+      {Key? key, required this.orderModelApi, required this.isComplete})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,9 @@ class Chekoutdone extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
-                    onTap: () {
+                    onTap: () async {
+                      await Get.find<OrderController>()
+                          .updatePayment(orderModelApi.id, 0);
                       Get.offAllNamed(LandingPage.id);
                       controller.currentIndex.value = 2;
                     },

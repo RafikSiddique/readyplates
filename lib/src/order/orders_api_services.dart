@@ -78,7 +78,6 @@ class Orderservices extends ApiService {
       request.headers.addAll({'Content-Type': 'application/json'});
       request.body = body;
       StreamedResponse response = await request.send();
-      print(response);
       print(response.statusCode);
       if (response.statusCode != 201) {
         print(await response.stream.bytesToString());

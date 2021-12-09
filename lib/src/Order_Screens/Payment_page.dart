@@ -270,14 +270,7 @@ class PaymentPage extends StatelessWidget {
                         child: Text("United State"), value: "United State"),
                     DropdownMenuItem(child: Text("India"), value: "India"),
                   ],
-                  onChanged: (newValue) {
-                    // setState(() {
-                    // controller.rescity = newValue.toString();
-
-                    // print(newValue);
-                    // },
-                    // );
-                  },
+                  onChanged: (newValue) {},
                 ),
               ),
               AppFormField(
