@@ -174,7 +174,17 @@ class ShooppymacPage extends StatelessWidget {
                           ));
                         }
                       } else {
-                        cartModel!.foodQuantity.value++;
+                        if (controller.orderEdit.length > 1) {
+                          controller.orderEdit.remove(orderEditModel!);
+                          setStae();
+                        } else {
+                          Get.showSnackbar(GetBar(
+                            title: "Error",
+                            message:
+                                "You should atleast have one item in cart for booking summary",
+                            duration: Duration(seconds: 2),
+                          ));
+                        }
                       }
                     },
                     child: Image.asset(

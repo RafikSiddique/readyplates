@@ -246,7 +246,7 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> orderWithoutPayment(RestaurantModel restaurantModel) async {
+/*   Future<void> orderWithoutPayment(RestaurantModel restaurantModel) async {
     try {
       String id = await sfHelper.getUserId();
       OrderModel orderModel = OrderModel(
@@ -288,7 +288,7 @@ class OrderController extends GetxController {
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
-  }
+  } */
 
   Future<void> order(RestaurantModel restaurantModel) async {
     try {
@@ -296,6 +296,7 @@ class OrderController extends GetxController {
       OrderModel orderModel = OrderModel(
           user: int.parse(id),
           payment: "",
+          feedbackstat: "",
           orderState: OrderState.placed,
           restaurant: restaurantModel.id,
           orderitems: cartItems
@@ -366,9 +367,19 @@ class OrderController extends GetxController {
     }
   }
 
+  Future<void> updateFeedback(String id, int feedback) async {
+    try {
+      await services.updateFeedback(id, feedback);
+      await getorder();
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
   Future<void> updatePayment(int id, int status) async {
     try {
       await services.updatePayment(id, status);
+    
       await getorder();
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -389,6 +400,7 @@ class OrderController extends GetxController {
         feedback.text,
         imgs,
       );
+      await updateFeedback(orderid, 1);
       rating1 = 0;
       rating2 = 0;
       rating3 = 0;

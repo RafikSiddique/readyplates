@@ -30,9 +30,7 @@ class Orderservices extends ApiService {
     }
   }
 
-
-
-    Future<List<TableModel>> getAvailableTable(String id) async {
+  Future<List<TableModel>> getAvailableTable(String id) async {
     try {
       Response response = await get(
         availableTable(id),
@@ -169,6 +167,23 @@ class Orderservices extends ApiService {
       request.fields.addAll({
         'id': id.toString(),
         'status': status.toString(),
+      });
+      var response = await request.send();
+      if (response.statusCode != 202) {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateFeedback(String id, int status) async {
+    try {
+      var request = MultipartRequest('PUT', updateStatusUrl);
+      request.fields.addAll({
+        'id': id.toString(),
+        'feedbackstat': status.toString(),
       });
       var response = await request.send();
       if (response.statusCode != 202) {

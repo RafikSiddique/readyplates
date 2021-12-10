@@ -119,7 +119,6 @@ class AuthController extends GetxController {
                   isHome: false,
                   latLng: latLng,
                 ));
-   
           }
 
           lNameController.clear();
@@ -153,8 +152,6 @@ class AuthController extends GetxController {
   void gotoHome() {
     sfHelper.setLoggedIn(true);
     final c = Get.find<HomeController>();
-    c.getAddress();
-    c.getRestaurants();
 
     Get.put(OrderController());
     lNameController.clear();
@@ -163,7 +160,8 @@ class AuthController extends GetxController {
     passwordController.clear();
     usernameController.clear();
     c.currentIndex.value = 0;
-    c.onPageChange(c.currentIndex.value);
+    c.getAddress();
+    c.getRestaurants();
     Get.offAllNamed(LandingPage.id);
   }
 

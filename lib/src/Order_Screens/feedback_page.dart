@@ -16,9 +16,11 @@ import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.da
 
 class FeedbackPage extends StatefulWidget {
   final OrderModelApi e;
+  final bool isComplete;
   static const id = "/feedback";
   const FeedbackPage({
     Key? key,
+    required this.isComplete,
     required this.e,
   }) : super(key: key);
 
@@ -341,9 +343,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     width: Get.width,
                     onTap: () {
                       formKey.currentState!.save();
-                      if (formKey.currentState!.validate()) ;
+
                       controller.feedbacks(widget.e.restaurant.id.toString(),
                           widget.e.id.toString());
+                      if (widget.isComplete) {
+                        controller.updateStatus(widget.e.id, 2);
+                      }
                     },
                     backgroundColor: (ratingText == '' ||
                             controller.feedback.text.isEmpty ||

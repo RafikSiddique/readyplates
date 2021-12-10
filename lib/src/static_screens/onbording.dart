@@ -272,8 +272,10 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
         controller.animateToPage(1,
             duration: Duration(milliseconds: 500), curve: Curves.ease);
       } else {
-        Get.put(HomeController());
+        final c = Get.put(HomeController());
         Get.put(OrderController());
+        c.getAddress();
+        c.getRestaurants();
         Get.offAllNamed(LandingPage.id);
       }
     } catch (e) {

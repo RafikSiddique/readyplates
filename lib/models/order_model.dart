@@ -16,10 +16,12 @@ class OrderModel {
   String date;
   String time;
   String payment;
+  String feedbackstat;
   OrderState orderState;
   OrderModel({
     required this.payment,
     required this.user,
+    required this.feedbackstat,
     required this.restaurant,
     required this.orderitems,
     required this.noOfPeople,
@@ -39,6 +41,7 @@ class OrderModel {
       'orderitems': orderitems.map((x) => x.toMap()).toList(),
       'no_of_people': noOfPeople,
       'table': table,
+      'feedbackstat': feedbackstat,
       'status': orderState.index,
       'tax': tax,
       'totalprice': roundUptoDigits(totalprice),
@@ -69,6 +72,8 @@ class OrderModelApi {
   int? table;
   String date;
   String time;
+  String feedbackstat;
+
   String tax;
   OrderState status;
   String payment;
@@ -81,6 +86,7 @@ class OrderModelApi {
     required this.created_on,
     required this.totalPrice,
     required this.no_of_people,
+    required this.feedbackstat,
     required this.table,
     required this.date,
     required this.time,
@@ -103,6 +109,7 @@ class OrderModelApi {
       no_of_people: map['no_of_people'],
       table: map['table'],
       date: map['date'],
+      feedbackstat: map['feedbackstat'] ?? "",
       time: map['time'],
       tax: map['tax'],
       status: OrderState.values[map["status"]],

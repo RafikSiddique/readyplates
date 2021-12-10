@@ -308,7 +308,12 @@ class PaymentPage extends StatelessWidget {
                   Get.find<OrderController>()
                       .updatePayment(orderModelApi.id, 1);
                   if (isOrderComplete) {
-                    Get.offAll(() => FeedbackPage(e: orderModelApi));
+                    Get.find<OrderController>()
+                        .updateStatus(orderModelApi.id, 2);
+                    Get.offAll(() => FeedbackPage(
+                          e: orderModelApi,
+                          isComplete: true,
+                        ));
                   } else {
                     Navigator.pushNamedAndRemoveUntil(
                         context, LandingPage.id, (route) => false);

@@ -29,7 +29,6 @@ class _BottomcontainerState extends State<Bottomcontainer> {
     var size = MediaQuery.of(context).size;
     return Container(
       //  height: 100,
-      height: MediaQuery.of(context).size.height * 0.18,
 
       decoration: BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
@@ -42,7 +41,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           SizedBox(

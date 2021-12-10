@@ -137,11 +137,18 @@ class OrderWidget extends StatelessWidget {
                         ),
                       ));
                 } else {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => FeedbackPage(e: orderModel),
-                      ));
+                  if (orderModel.feedbackstat == "") {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => FeedbackPage(
+                            e: orderModel,
+                            isComplete: true,
+                          ),
+                        ));
+                  } else {
+                    controller.updateStatus(orderModel.id, 2);
+                  }
                 }
               },
               width: Get.width,
@@ -189,12 +196,22 @@ class OrderWidget extends StatelessWidget {
             Elevated(
               backgroundColor: Colors.white,
               width: Get.width,
-              borderColor: Color(0xff222831),
+              borderColor: orderModel.feedbackstat != ""
+                  ? MyTheme.buttonColor
+                  : Color(0xff222831),
               text: "Give Feedback",
               onTap: () {
-                Get.to(() => FeedbackPage(
-                      e: orderModel,
-                    ));
+                if (orderModel.feedbackstat == "") {
+                  Get.to(() => FeedbackPage(
+                        e: orderModel,
+                        isComplete: false,
+                      ));
+                } else {
+                  Get.showSnackbar(GetBar(
+                    message: "Feedback Already Provided",
+                    duration: Duration(seconds: 1),
+                  ));
+                }
               },
             ),
           ],
@@ -338,7 +355,8 @@ class OrderWidget extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data != null) {
                         return Text(
-                            snapshot.data.toString() +
+                            "Table" +
+                                snapshot.data.toString() +
                                 " Table for " +
                                 orderModel.no_of_people.toString() +
                                 " People",

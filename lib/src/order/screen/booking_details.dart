@@ -506,7 +506,7 @@ class BookingDetails extends GetView<OrderController> {
                   print("success");
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
+                      CupertinoPageRoute(
                         builder: (context) => BurgersupportingPage(
                             restaurantModel: restaurantModel,
                             isEditing: isEditing),

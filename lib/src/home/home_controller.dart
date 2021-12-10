@@ -181,6 +181,7 @@ class HomeController extends GetxController {
           .compareTo(getDistanceFromLatLonInKm(
               double.parse(b.latitude), double.parse(b.longitude))));
       print("Res Sorted");
+      update();
     } catch (e) {
       if (restaurants.isNotEmpty && restaurants.first.id == -1) {
         restaurants.clear();

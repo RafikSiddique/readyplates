@@ -87,8 +87,8 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                     children: [
                       if (widget.isEditing)
                         Container(
-                          height: 200,
                           child: ListView(
+                            shrinkWrap: true,
                             physics: BouncingScrollPhysics(),
                             children: [
                               ...controller.orderEdit
@@ -104,8 +104,8 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                         )
                       else
                         Container(
-                          height: 200,
                           child: ListView(
+                            shrinkWrap: true,
                             physics: BouncingScrollPhysics(),
                             children: [
                               ...controller.cartItems
