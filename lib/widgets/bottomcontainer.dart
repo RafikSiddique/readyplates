@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
-import 'package:readyplates/src/Order_Screens/menu_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -30,7 +29,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
     var size = MediaQuery.of(context).size;
     return Container(
       //  height: 100,
-      // height: MediaQuery.of(context).size.height * 0.10,
+      height: MediaQuery.of(context).size.height * 0.18,
 
       decoration: BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(

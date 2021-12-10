@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
-import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
@@ -16,7 +15,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  bool _checkbox = false;
+  // bool _checkbox = false;
   final controller = Get.find<AuthController>();
 
   String? value;

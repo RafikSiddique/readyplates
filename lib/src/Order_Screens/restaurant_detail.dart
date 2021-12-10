@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -38,7 +37,6 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
     String month = dates[1].length == 1 ? "0${dates[1]}" : dates[1];
     String day = dates[2].length == 1 ? "0${dates[2]}" : dates[2];
 
-    
     DateTime eventDate = DateTime.parse(dates[0] + month + day);
     print(eventDate);
     List<String> images = [

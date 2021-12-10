@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -264,7 +263,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
     //     open_days: "",
     //     completed_till: 4,
     //     user: 0)));
-     try {
+    try {
       SharedPreferenceHelper sfHelper = SharedPreferenceHelper();
       bool isLoggedIn = await sfHelper.getLoggedIn();
       print(isLoggedIn);
@@ -280,6 +279,6 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
     } catch (e) {
       controller.animateToPage(1,
           duration: Duration(milliseconds: 500), curve: Curves.ease);
-    } 
+    }
   }
 }

@@ -21,8 +21,8 @@ class MenuPage extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context);
-    Size size = media.size;
+    // var media = MediaQuery.of(context);
+    // Size size = media.size;
     return WillPopScope(
       onWillPop: () async {
         if (isEditing) {

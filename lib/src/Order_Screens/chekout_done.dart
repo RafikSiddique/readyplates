@@ -6,7 +6,6 @@ import 'package:readyplates/src/Order_Screens/Payment_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
-import 'package:readyplates/src/order/screen/order_page.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
