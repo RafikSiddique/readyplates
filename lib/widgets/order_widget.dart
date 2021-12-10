@@ -355,9 +355,9 @@ class OrderWidget extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data != null) {
                         return Text(
-                            "Table" +
+                            "Table " +
                                 snapshot.data.toString() +
-                                " Table for " +
+                                ", " +
                                 orderModel.no_of_people.toString() +
                                 " People",
                             style: GoogleFonts.nunito(
@@ -373,11 +373,7 @@ class OrderWidget extends StatelessWidget {
                     },
                   )
                 else
-                  Text(
-                      "Awaiting table from restaurant" +
-                          " Table for " +
-                          orderModel.no_of_people.toString() +
-                          " People",
+                  Text("Awaiting table from restaurant",
                       style: GoogleFonts.nunito(
                         textStyle: TextStyle(
                           fontSize: 15,

@@ -514,7 +514,8 @@ class BookingDetails extends GetView<OrderController> {
                 } else {
                   Get.showSnackbar(GetBar(
                     title: "Closed",
-                    message: "The restaurant is closed at selected time",
+                    message:
+                        "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
                     duration: Duration(seconds: 2),
                   ));
                 }

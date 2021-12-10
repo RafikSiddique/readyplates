@@ -33,8 +33,8 @@ class ShooppymacPage extends StatelessWidget {
                 isEditing
                     ? getUrl(orderEditModel!.foodImage)
                     : cartModel!.foodImage,
-                height: 64,
-                width: 64,
+                height: Get.width * 0.17,
+                width: Get.width * 0.17,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container();
@@ -130,7 +130,11 @@ class ShooppymacPage extends StatelessWidget {
                         color: MyTheme.borderColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Icon(Icons.remove, color: Color(0xff393E46)),
+                      child: Icon(
+                        Icons.remove,
+                        color: Color(0xff393E46),
+                        size: Get.width * 0.05,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -152,7 +156,11 @@ class ShooppymacPage extends StatelessWidget {
                         color: MyTheme.borderColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Icon(Icons.add, color: Color(0xff393E46)),
+                      child: Icon(
+                        Icons.add,
+                        color: Color(0xff393E46),
+                        size: Get.width * 0.05,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -189,8 +197,8 @@ class ShooppymacPage extends StatelessWidget {
                     },
                     child: Image.asset(
                       Assets.delete,
-                      height: 16,
-                      width: 16,
+                      height: Get.width * 0.05,
+                      width: Get.width * 0.05,
                     ),
                   ),
                 ],

@@ -42,7 +42,8 @@ class Tellafriend extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.8,
+                height: (MediaQuery.of(context).size.height * 0.85) -
+                    kBottomNavigationBarHeight,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   color: Colors.white,
@@ -65,7 +66,7 @@ class Tellafriend extends StatelessWidget {
                     // ),
                     ImagewidgetPage(
                       imagePath: Assets.option,
-                      height: 219,
+                      height: Get.height * 0.25,
                       width: MediaQuery.of(context).size.width,
                     ),
 
@@ -81,8 +82,8 @@ class Tellafriend extends StatelessWidget {
                     SizedBox(
                       height: 8,
                     ),
-                    Container(
-                      width: 256,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
                           "Show us some love. Share the app with your friends and relatives and help us grow",
                           textAlign: TextAlign.center,
