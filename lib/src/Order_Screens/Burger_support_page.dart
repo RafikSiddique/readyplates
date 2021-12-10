@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/order_model.dart';
@@ -75,15 +74,14 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                   EdgeInsets.only(bottom: kBottomNavigationBarHeight * 1.2),
               child: Card(
                 elevation: 4,
-                margin: EdgeInsets.all(15),
+                margin: EdgeInsets.all(Get.width * 0.025),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(6),
                 ),
                 shadowColor: Color.fromRGBO(0, 0, 0, 0.25),
-
-                // shadowColor: ,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 8, horizontal: Get.width * 0.02),
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Column(

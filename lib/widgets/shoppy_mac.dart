@@ -105,7 +105,7 @@ class ShooppymacPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -134,7 +134,7 @@ class ShooppymacPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: Get.width * 0.013,
                   ),
                   InkWell(
                     onTap: () {
@@ -156,7 +156,7 @@ class ShooppymacPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 15,
+                    width: Get.width * 0.018,
                   ),
                   InkWell(
                     onTap: () {
