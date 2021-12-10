@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/models/table_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
@@ -31,7 +32,6 @@ class OrderController extends GetxController {
 
   RxList<OrderEditModel> orderEdit = <OrderEditModel>[].obs;
   RxInt numberOfPeople = 1.obs;
-  
 
   RxDouble total = 0.0.obs;
 
@@ -53,6 +53,17 @@ class OrderController extends GetxController {
       }
     }
     return total.value;
+  }
+
+  Future<int> getAvailableTables(String id, int tableId) async {
+    try {
+      List<TableModel> tables = await services.getAvailableTable(id);
+      int tableNo = tables.indexWhere((element) => element.id == tableId);
+      return tableNo + 1;
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+      return -1;
+    }
   }
 
   RxString otp = "".obs;
@@ -283,8 +294,7 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> order(
-      RestaurantModel restaurantModel) async {
+  Future<void> order(RestaurantModel restaurantModel) async {
     try {
       String id = await sfHelper.getUserId();
       OrderModel orderModel = OrderModel(

@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/models/table_model.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/exception.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -20,6 +21,30 @@ class Orderservices extends ApiService {
         print(response.request);
         Map<String, dynamic> data = jsonDecode(response.body).first;
         return RestaurantModel.fromMap(data);
+      } else {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
+
+    Future<List<TableModel>> getAvailableTable(String id) async {
+    try {
+      Response response = await get(
+        availableTable(id),
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> list = (jsonDecode(response.body) as Map)['data'];
+
+        List<TableModel> tables =
+            list.map((e) => TableModel.fromMap(e)).toList();
+        print(tables);
+        return tables;
       } else {
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);

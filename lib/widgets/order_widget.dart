@@ -333,21 +333,43 @@ class OrderWidget extends StatelessWidget {
                           // color: Color(0xff222831),
                           color: MyTheme.buttonbackgroundColor),
                     )),
-                Text(
-                    (orderModel.table != null
-                            ? orderModel.table.toString()
-                            : "Awaiting table from restaurant") +
-                        " Table for " +
-                        orderModel.no_of_people.toString() +
-                        " People",
-                    style: GoogleFonts.nunito(
-                      textStyle: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                        color: MyTheme.buttonbackgroundColor,
-                      ),
-                    ))
+                if (orderModel.table != null)
+                  FutureBuilder<int>(
+                    future: controller.getAvailableTables(
+                        orderModel.restaurant.id.toString(), orderModel.table!),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData && snapshot.data != null) {
+                        return Text(
+                            snapshot.data.toString() +
+                                " Table for " +
+                                orderModel.no_of_people.toString() +
+                                " People",
+                            style: GoogleFonts.nunito(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                color: MyTheme.buttonbackgroundColor,
+                              ),
+                            ));
+                      }
+                      return Container();
+                    },
+                  )
+                else
+                  Text(
+                      "Awaiting table from restaurant" +
+                          " Table for " +
+                          orderModel.no_of_people.toString() +
+                          " People",
+                      style: GoogleFonts.nunito(
+                        textStyle: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.normal,
+                          color: MyTheme.buttonbackgroundColor,
+                        ),
+                      ))
               ],
             ),
             Row(

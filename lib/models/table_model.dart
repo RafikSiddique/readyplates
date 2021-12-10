@@ -1,153 +1,75 @@
-// import 'dart:convert';
+import 'dart:convert';
 
+class TableModel {
+  final int id;
+  final int capacity;
+  final bool available;
+  final int restaurant;
+  TableModel({
+    required this.id,
+    required this.capacity,
+    required this.available,
+    required this.restaurant,
+  });
 
-// class TableModel {
-//   int restaurant;
-//   int capacity;
-//   String orderdate;
-//   String starttime;
-//   String endtime;
+  TableModel copyWith({
+    int? id,
+    int? capacity,
+    bool? available,
+    int? restaurant,
+  }) {
+    return TableModel(
+      id: id ?? this.id,
+      capacity: capacity ?? this.capacity,
+      available: available ?? this.available,
+      restaurant: restaurant ?? this.restaurant,
+    );
+  }
 
-//   TableModel({
-//     required this.restaurant,
-//     required this.capacity,
-//     required this.orderdate,
-//     required this.starttime,
-//     required this.endtime,
-//   });
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'capacity': capacity,
+      'available': available,
+      'restaurant': restaurant,
+    };
+  }
 
+  factory TableModel.fromMap(Map<String, dynamic> map) {
+    return TableModel(
+      id: map['id'],
+      capacity: map['capacity'],
+      available: map['available'],
+      restaurant: map['restaurant'],
+    );
+  }
 
+  String toJson() => json.encode(toMap());
 
-//   Map<String, dynamic> toMap() {
-//     return {
-//       'restaurant': restaurant,
-//       'capacity': capacity,
-//       'orderdate': orderdate,
-//       'starttime': starttime,
-//       'endtime': endtime,
-//     };
-//   }
+  factory TableModel.fromJson(String source) =>
+      TableModel.fromMap(json.decode(source));
 
-//   factory TableModel.fromMap(Map<String, dynamic> map) {
-//     return TableModel(
-//       restaurant: map['restaurant'],
-//       capacity: map['capacity'],
-//       orderdate: map['orderdate'],
-//       starttime: map['starttime'],
-//       endtime: map['endtime'],
-//     );
-//   }
+  @override
+  String toString() {
+    return 'TableModel(id: $id, capacity: $capacity, available: $available, restaurant: $restaurant)';
+  }
 
-//   String toJson() => json.encode(toMap());
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-//   factory TableModel.fromJson(String source) => TableModel.fromMap(json.decode(source));
+    return other is TableModel &&
+        other.id == id &&
+        other.capacity == capacity &&
+        other.available == available &&
+        other.restaurant == restaurant;
+  }
 
-//   @override
-//   String toString() {
-//     return 'tablemodelapi(restaurant: $restaurant, capacity: $capacity, orderdate: $orderdate, starttime: $starttime, endtime: $endtime)';
-//   }
-
-//   @override
-//   bool operator ==(Object other) {
-//     if (identical(this, other)) return true;
-  
-//     return other is TableModelapi &&
-//       other.restaurant == restaurant &&
-//       other.capacity == capacity &&
-//       other.orderdate == orderdate &&
-//       other.starttime == starttime &&
-//       other.endtime == endtime;
-//   }
-
-//   @override
-//   int get hashCode {
-//     return restaurant.hashCode ^
-//       capacity.hashCode ^
-//       orderdate.hashCode ^
-//       starttime.hashCode ^
-//       endtime.hashCode;
-//   }
-// }
-
-
-// class TableModelapi {
-//   int restaurant;
-//   int capacity;
-//   int orderdate;
-//   String starttime;
-//   String endtime;
-
-//   TableModelapi({
-//     required this.restaurant,
-//     required this.capacity,
-//     required this.orderdate,
-//     required this.starttime,
-//     required this.endtime,
-//   });
-
-//   TableModelapi copyWith({
-//     int? restaurant,
-//     int? capacity,
-//     int? orderdate,
-//     String? starttime,
-//     String? endtime,
-//   }) {
-//     return TableModelapi(
-//       restaurant: restaurant ?? this.restaurant,
-//       capacity: capacity ?? this.capacity,
-//       orderdate: orderdate ?? this.orderdate,
-//       starttime: starttime ?? this.starttime,
-//       endtime: endtime ?? this.endtime,
-//     );
-//   }
-
-//   Map<String, dynamic> toMap() {
-//     return {
-//       'restaurant': restaurant,
-//       'capacity': capacity,
-//       'orderdate': orderdate,
-//       'starttime': starttime,
-//       'endtime': endtime,
-//     };
-//   }
-
-//   factory TableModelapi.fromMap(Map<String, dynamic> map) {
-//     return TableModelapi(
-//       restaurant: map['restaurant'],
-//       capacity: map['capacity'],
-//       orderdate: map['orderdate'],
-//       starttime: map['starttime'],
-//       endtime: map['endtime'],
-//     );
-//   }
-
-//   String toJson() => json.encode(toMap());
-
-//   factory TableModelapi.fromJson(String source) => TableModelapi.fromMap(json.decode(source));
-
-//   @override
-//   String toString() {
-//     return 'tablemodelapi(restaurant: $restaurant, capacity: $capacity, orderdate: $orderdate, starttime: $starttime, endtime: $endtime)';
-//   }
-
-//   @override
-//   bool operator ==(Object other) {
-//     if (identical(this, other)) return true;
-  
-//     return other is TableModelapi &&
-//       other.restaurant == restaurant &&
-//       other.capacity == capacity &&
-//       other.orderdate == orderdate &&
-//       other.starttime == starttime &&
-//       other.endtime == endtime;
-//   }
-
-//   @override
-//   int get hashCode {
-//     return restaurant.hashCode ^
-//       capacity.hashCode ^
-//       orderdate.hashCode ^
-//       starttime.hashCode ^
-//       endtime.hashCode;
-//   }
-// }
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        capacity.hashCode ^
+        available.hashCode ^
+        restaurant.hashCode;
+  }
+}
