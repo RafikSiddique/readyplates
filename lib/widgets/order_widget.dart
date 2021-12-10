@@ -127,7 +127,7 @@ class OrderWidget extends StatelessWidget {
               backgroundColor: Color(0xff44C4A1),
               text: "Complete Order",
               onTap: () {
-                if (orderModel.payment == "0") {
+                if (orderModel.payment == "0" || orderModel.payment == "") {
                   Navigator.push(
                       context,
                       CupertinoPageRoute(
