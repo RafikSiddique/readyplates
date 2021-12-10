@@ -108,6 +108,22 @@ class HomeController extends GetxController {
   void onInit() {
     getAddress();
     Get.put(OrderController());
+    getRestaurants();
+    restaurants.addListener(GetStream(
+      onListen: () {
+        if (restaurants.isEmpty) {
+          print('Empty');
+        } else {
+          if (restaurants.first.id == -1) {
+            print(
+                "--------------------------------------1-------------------------------");
+          } else {
+            print('Successs');
+            print(restaurants);
+          }
+        }
+      },
+    ));
     super.onInit();
   }
 
@@ -163,6 +179,7 @@ class HomeController extends GetxController {
 
   Future<void> getRestaurants() async {
     try {
+      getAddress();
       lat.value = await sfHelper.getLat();
       print("Get Lat");
       lon.value = await sfHelper.getLon();
@@ -181,6 +198,13 @@ class HomeController extends GetxController {
           .compareTo(getDistanceFromLatLonInKm(
               double.parse(b.latitude), double.parse(b.longitude))));
       print("Res Sorted");
+      if (timer == null && currentIndex == 0) {
+        timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+          await getRestaurants();
+          print("Restaurant Fetch");
+          this.timer = timer;
+        });
+      }
       update();
     } catch (e) {
       if (restaurants.isNotEmpty && restaurants.first.id == -1) {

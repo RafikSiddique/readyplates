@@ -145,7 +145,7 @@ class _MapPageState extends State<MapPage> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
                 child: Container(
-                height: 54,
+                  height: 54,
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
@@ -335,12 +335,14 @@ class _MapPageState extends State<MapPage> {
                                     ),
                                   ),
                                   onPressed: () async {
-                                    Get.put(HomeController());
+                                    final c = Get.put(HomeController());
                                     Get.put(OrderController());
                                     await authController.setAddress(
                                         latLng.latitude,
                                         latLng.longitude,
                                         authController.address.value);
+                                    c.getAddress();
+                                    c.getRestaurants();
                                     authController.gotoHome();
                                   },
                                   child: Text('NEXT',

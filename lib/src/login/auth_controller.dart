@@ -110,6 +110,7 @@ class AuthController extends GetxController {
         if (implicit) {
           Get.toNamed(ImagePage.id);
         } else {
+          
           Get.put(OrderController());
           bool permitted = await getPermission();
           if (permitted) {

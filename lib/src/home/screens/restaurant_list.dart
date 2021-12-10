@@ -281,43 +281,51 @@ class _ShopScreenState extends State<ShopScreen> {
                     ],
                   ),
                 ),
-                Obx(
-                  () => controller.restaurants.isNotEmpty
-                      ? controller.restaurants.first.id != -1
-                          ? Container(
-                              color: MyTheme.backgroundcolor,
-                              child: Column(
-                                  children: controller.selectedCategory.value ==
-                                          ""
-                                      ? controller.restaurants
-                                          .map((element) => RestaurantCard(
-                                              restaurantModel: element))
-                                          .toList()
-                                      : controller.restaurants.any((element) =>
-                                              element.types_of_cusine.any((element) =>
-                                                  element.toLowerCase() ==
-                                                  controller.selectedCategory.value
-                                                      .toLowerCase()))
+                GetBuilder<HomeController>(
+                  builder: (controller) {
+                    return Obx(
+                      () => controller.restaurants.isNotEmpty
+                          ? controller.restaurants.first.id != -1
+                              ? Container(
+                                  color: MyTheme.backgroundcolor,
+                                  child: Column(
+                                      children: controller
+                                                  .selectedCategory.value ==
+                                              ""
                                           ? controller.restaurants
-                                              .where((element) => element.types_of_cusine
-                                                  .any((element) =>
-                                                      element.toLowerCase() ==
-                                                      controller.selectedCategory.value
-                                                          .toLowerCase()))
-                                              .map((element) => RestaurantCard(restaurantModel: element))
+                                              .map((element) => RestaurantCard(
+                                                  restaurantModel: element))
                                               .toList()
-                                          : [Container()]),
-                            )
-                          : Center(child: CircularProgressIndicator.adaptive())
-                      : Container(
-                          padding: EdgeInsets.only(top: Get.height * 0.1),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "No Nearby restaurants found",
-                            textScaleFactor: 1.5,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                                          : controller.restaurants.any(
+                                                  (element) => element
+                                                      .types_of_cusine
+                                                      .any((element) =>
+                                                          element.toLowerCase() ==
+                                                          controller
+                                                              .selectedCategory
+                                                              .value
+                                                              .toLowerCase()))
+                                              ? controller.restaurants
+                                                  .where((element) => element
+                                                      .types_of_cusine
+                                                      .any((element) => element.toLowerCase() == controller.selectedCategory.value.toLowerCase()))
+                                                  .map((element) => RestaurantCard(restaurantModel: element))
+                                                  .toList()
+                                              : [Container()]),
+                                )
+                              : Center(
+                                  child: CircularProgressIndicator.adaptive())
+                          : Container(
+                              padding: EdgeInsets.only(top: Get.height * 0.1),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "No Nearby restaurants found",
+                                textScaleFactor: 1.5,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                    );
+                  },
                 ),
                 SizedBox(
                   height: 20,
