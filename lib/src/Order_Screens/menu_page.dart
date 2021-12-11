@@ -117,7 +117,7 @@ class MenuPage extends StatelessWidget {
                   SizedBox(
                     height: 12,
                   ),
-                  Padding(
+                  /*             Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
                       "MAIN COURSE",
@@ -130,7 +130,7 @@ class MenuPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
+                  ), */
                   if (controller.foodItems.isEmpty)
                     Container(
                       alignment: Alignment.center,
@@ -141,42 +141,41 @@ class MenuPage extends StatelessWidget {
                       child: CircularProgressIndicator.adaptive(),
                     )
                   else
-                    Expanded(
-                      child: ListView(
-                        physics: BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (var i = 0; i < categories.length; i++)
-                                if (controller.foodItems
-                                    .any((p0) => p0.category == categories[i]))
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),     //TODO: Format this text
-                                                                   child: Text(
-                                                                        categories[i].toUpperCase(),
-                          style: GoogleFonts.inter(
-                            fontSize: 15,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                            color: MyTheme.text3Color,
-                          ),
-                                                                   ),
+                    for (var i = 0; i < categories.length; i++)
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (controller.foodItems
+                                .any((p0) => p0.category == categories[i]))
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Text(
+                                  categories[i].toUpperCase(),
+                                  style: GoogleFonts.inter(
+                                    fontSize: 15,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyTheme.text3Color,
                                   ),
-                              ...controller.foodItems.map(
-                                (e) {
-                                  return FoodItemCard(
-                                      restaurantModel: restaurantModel,
-                                      isEditing: isEditing,
-                                      foodItemModel: e);
-                                },
-                              ).toList(),
-                            ],
-                          )
-                        ],
+                                ),
+                              ),
+                            ListView(
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                children: controller.foodItems
+                                    .where((p0) => p0.category == categories[i])
+                                    .map(
+                                  (e) {
+                                    return FoodItemCard(
+                                        restaurantModel: restaurantModel,
+                                        isEditing: isEditing,
+                                        foodItemModel: e);
+                                  },
+                                ).toList()),
+                          ],
+                        ),
                       ),
-                    ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Obx(() => Elevated(
                         text: "Proceed to Booking",
