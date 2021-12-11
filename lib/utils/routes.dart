@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
@@ -12,7 +13,7 @@ import 'package:readyplates/widgets/back_gesture_diable.dart';
 
 class Routes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    return MaterialPageRoute(
+    return CupertinoPageRoute(
         settings: settings,
         builder: (context) => WillNotPopOnGesture(
               child: () {

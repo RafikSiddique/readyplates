@@ -10,6 +10,7 @@ import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
@@ -183,7 +184,7 @@ class OrderWidget extends StatelessWidget {
                     .getSingleRestaurant(orderModel.restaurant.id);
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                       builder: (context) => BurgersupportingPage(
                           restaurantModel: restaurantModel, isEditing: false),
                     ),
@@ -233,11 +234,13 @@ class OrderWidget extends StatelessWidget {
             });
             RestaurantModel restaurantModel =
                 await controller.getSingleRestaurant(orderModel.restaurant.id);
+            controller.selectedDate.value = DateTime.now();
+            controller.numberOfPeople.value = 1;
+            controller.globletime.value = DateTime.now();
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => BurgersupportingPage(
-                      restaurantModel: restaurantModel, isEditing: false),
+                CupertinoPageRoute(
+                  builder: (context) => BookingDetails(restaurantModel, false),
                 ),
                 (route) => route.settings.name == LandingPage.id);
           },

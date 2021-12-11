@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -177,9 +178,13 @@ class MenuPage extends StatelessWidget {
                               Get.snackbar("Please add an item",
                                   "At least add atleast 1 item from this restaurant to proceed to booking");
                             } else {
+                              orderController.selectedDate.value =
+                                  DateTime.now();
+                              orderController.numberOfPeople.value = 1;
+                              orderController.globletime.value = DateTime.now();
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                     builder: (context) => BookingDetails(
                                         restaurantModel, isEditing),
                                   ));

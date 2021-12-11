@@ -317,15 +317,14 @@ class OrderController extends GetxController {
       print(orderModelApi);
       await getorder();
       cartApiItems.clear();
-      cartItems.forEach((e) {
+      cartItems.forEach((e) async {
         CartModel element = getCartItem(e.foodItem.value);
         element.foodQuantity.value = 0;
         element.user = id;
-        cart(element);
+        await cart(element);
       });
       cartItems.clear();
       calclateTotal();
-
       Get.to(() => Chekoutdone(
             orderModelApi: orderModelApi,
             isComplete: false,
@@ -379,7 +378,7 @@ class OrderController extends GetxController {
   Future<void> updatePayment(int id, int status) async {
     try {
       await services.updatePayment(id, status);
-    
+
       await getorder();
     } catch (e) {
       Get.snackbar("Error", e.toString());

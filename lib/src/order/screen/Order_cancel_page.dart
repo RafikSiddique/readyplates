@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/home/screens/index.dart';
@@ -15,7 +16,7 @@ class OrderCancelledPage extends StatelessWidget {
     Timer(Duration(seconds: 2), () {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
+          CupertinoPageRoute(
             builder: (context) => LandingPage(),
           ),
           (route) => false);

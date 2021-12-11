@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -80,7 +81,7 @@ class _ShopScreenState extends State<ShopScreen> {
                         LatLng(position.latitude, position.longitude);
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) =>
                               MapPage(isHome: false, latLng: latLng),
                         ));
