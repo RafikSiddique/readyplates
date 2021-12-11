@@ -161,17 +161,23 @@ class AuthController extends GetxController {
     usernameController.clear();
     c.currentIndex.value = 0;
     String s = await c.getAddress();
+    print("Initial Address");
     print(s);
     if (s == "") {
+      print("Address Was empty");
       await setAddress(lat, lon, address);
       await c.getAddress();
       c.address.value = address;
       c.lat.value = lat;
       c.lon.value = lon;
+      print("Fetched Address");
+
       print(c.address);
       c.getRestaurants();
       Get.offAllNamed(LandingPage.id);
     } else {
+      print("Address Was not empty");
+
       c.address.value = address;
       c.lat.value = lat;
       c.lon.value = lon;
