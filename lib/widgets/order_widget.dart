@@ -191,7 +191,7 @@ class OrderWidget extends StatelessWidget {
               },
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Elevated(
               backgroundColor: Colors.white,
