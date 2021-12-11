@@ -21,7 +21,7 @@ class MenuPage extends StatelessWidget {
   MenuPage({Key? key, required this.restaurantModel, this.isEditing = false})
       : super(key: key);
 
-  List<String> categories = ["Starter", "Main Course", "Desserts", "Slides"];
+  List<String> categories = ["Starter", "Main Course", "Desserts", "Sides"];
 
   @override
   Widget build(BuildContext context) {
@@ -117,20 +117,20 @@ class MenuPage extends StatelessWidget {
                   SizedBox(
                     height: 12,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Text(
-                      "MAIN COURSE",
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          color: MyTheme.dividermiddletext,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 10.0),
+                  //   child: Text(
+                  //     "MAIN COURSE",
+                  //     style: GoogleFonts.inter(
+                  //       textStyle: TextStyle(
+                  //         fontSize: 13,
+                  //         fontWeight: FontWeight.w500,
+                  //         fontStyle: FontStyle.normal,
+                  //         color: MyTheme.dividermiddletext,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   if (controller.foodItems.isEmpty)
                     Container(
                       alignment: Alignment.center,
@@ -153,16 +153,17 @@ class MenuPage extends StatelessWidget {
                                 if (controller.foodItems
                                     .any((p0) => p0.category == categories[i]))
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),     //TODO: Format this text
-                                                                   child: Text(
-                                                                        categories[i].toUpperCase(),
-                          style: GoogleFonts.inter(
-                            fontSize: 15,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500,
-                            color: MyTheme.text3Color,
-                          ),
-                                                                   ),
+                                    padding: const EdgeInsets.only(
+                                        left: 6.0, top: 16),
+                                    child: Text(
+                                      categories[i].toUpperCase(),
+                                      style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyTheme.text3Color,
+                                      ),
+                                    ),
                                   ),
                               ...controller.foodItems.map(
                                 (e) {
