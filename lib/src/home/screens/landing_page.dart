@@ -3,16 +3,21 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/screens/restaurant_list.dart';
+import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/src/order/screen/order_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/profile_page.dart';
 import 'package:readyplates/src/home/widgets/bottom_navigation_bar.dart';
-import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
-import 'package:readyplates/src/login/screens/mappage.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   static const id = "/landingPage";
   LandingPage({Key? key}) : super(key: key);
+
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   final controller = Get.find<HomeController>();
 
   Future<void> getPosition() async {
@@ -54,6 +59,14 @@ class LandingPage extends StatelessWidget {
       default:
         return ShopScreen();
     }
+  }
+
+  @override
+  void initState() {
+    if (mounted) {
+      setState(() {});
+    }
+    super.initState();
   }
 
   @override
