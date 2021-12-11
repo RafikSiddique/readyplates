@@ -135,10 +135,11 @@ class HomeController extends GetxController {
     foodItems.clear();
   }
 
-  void getAddress() async {
+  Future<String> getAddress() async {
     address.value = await sfHelper.getAddress();
     lat.value = await sfHelper.getLat();
     lon.value = await sfHelper.getLon();
+    return address.value;
   }
 
   void search(String q) async {

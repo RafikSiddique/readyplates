@@ -343,7 +343,10 @@ class _MapPageState extends State<MapPage> {
                                         authController.address.value);
                                     c.getAddress();
                                     c.getRestaurants();
-                                    authController.gotoHome();
+                                    authController.gotoHome(
+                                        latLng.latitude,
+                                        latLng.longitude,
+                                        authController.address.value);
                                   },
                                   child: Text('NEXT',
                                       style: GoogleFonts.inter(
