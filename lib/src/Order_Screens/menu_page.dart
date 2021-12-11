@@ -154,7 +154,15 @@ class MenuPage extends StatelessWidget {
                                     .any((p0) => p0.category == categories[i]))
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10.0),     //TODO: Format this text
-                                                                   child: Text(categories[i]),
+                                                                   child: Text(
+                                                                        categories[i].toUpperCase(),
+                          style: GoogleFonts.inter(
+                            fontSize: 15,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500,
+                            color: MyTheme.text3Color,
+                          ),
+                                                                   ),
                                   ),
                               ...controller.foodItems.map(
                                 (e) {
