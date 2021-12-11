@@ -21,7 +21,7 @@ class MenuPage extends StatelessWidget {
   MenuPage({Key? key, required this.restaurantModel, this.isEditing = false})
       : super(key: key);
 
-  List<String> categories = ["Starter", "Main Course", "Desserts", "Slides"];
+  List<String> categories = ["Starter", "Main Course", "Desserts", "Sides"];
 
   @override
   Widget build(BuildContext context) {
@@ -141,41 +141,49 @@ class MenuPage extends StatelessWidget {
                       child: CircularProgressIndicator.adaptive(),
                     )
                   else
-                    for (var i = 0; i < categories.length; i++)
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (controller.foodItems
-                                .any((p0) => p0.category == categories[i]))
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: Text(
-                                  categories[i].toUpperCase(),
-                                  style: GoogleFonts.inter(
-                                    fontSize: 15,
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyTheme.text3Color,
+                    Expanded(
+                        child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          for (var i = 0; i < categories.length; i++)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (controller.foodItems
+                                    .any((p0) => p0.category == categories[i]))
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, top: 15),
+                                    child: Text(
+                                      categories[i].toUpperCase(),
+                                      style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyTheme.text3Color,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ListView(
-                                physics: BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                children: controller.foodItems
-                                    .where((p0) => p0.category == categories[i])
-                                    .map(
-                                  (e) {
-                                    return FoodItemCard(
-                                        restaurantModel: restaurantModel,
-                                        isEditing: isEditing,
-                                        foodItemModel: e);
-                                  },
-                                ).toList()),
-                          ],
-                        ),
+                                ListView(
+                                    physics: BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    children: controller.foodItems
+                                        .where((p0) =>
+                                            p0.category == categories[i])
+                                        .map(
+                                      (e) {
+                                        return FoodItemCard(
+                                            restaurantModel: restaurantModel,
+                                            isEditing: isEditing,
+                                            foodItemModel: e);
+                                      },
+                                    ).toList()),
+                              ],
+                            ),
+                        ],
                       ),
+                    )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Obx(() => Elevated(
                         text: "Proceed to Booking",
