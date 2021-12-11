@@ -20,6 +20,9 @@ class MenuPage extends StatelessWidget {
   final bool isEditing;
   MenuPage({Key? key, required this.restaurantModel, this.isEditing = false})
       : super(key: key);
+
+  List<String> categories = ["Starter", "Main Course", "Desserts", "Slides"];
+
   @override
   Widget build(BuildContext context) {
     // var media = MediaQuery.of(context);
@@ -142,14 +145,27 @@ class MenuPage extends StatelessWidget {
                       child: ListView(
                         physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
-                        children: controller.foodItems.map(
-                          (e) {
-                            return FoodItemCard(
-                                restaurantModel: restaurantModel,
-                                isEditing: isEditing,
-                                foodItemModel: e);
-                          },
-                        ).toList(),
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              for (var i = 0; i < categories.length; i++)
+                                if (controller.foodItems
+                                    .any((p0) => p0.category == categories[i]))
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),                                    child: Text(categories[i]),
+                                  ),
+                              ...controller.foodItems.map(
+                                (e) {
+                                  return FoodItemCard(
+                                      restaurantModel: restaurantModel,
+                                      isEditing: isEditing,
+                                      foodItemModel: e);
+                                },
+                              ).toList(),
+                            ],
+                          )
+                        ],
                       ),
                     ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
