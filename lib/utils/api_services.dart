@@ -30,7 +30,7 @@ class ApiService {
   Uri orderList(String id) => customers('order/$id');
   Uri get ordersapi => customers("order/");
 
-  Uri get updateStatusUrl => customers('updatestatus/');
+  Uri get updateStatusUrl => restaurants('updatestatus/');
 
   Uri singleRestaurantUri(int id) => customers('getrestaurant/$id');
 

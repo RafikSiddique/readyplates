@@ -351,9 +351,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                       }
                     },
                     backgroundColor: (ratingText == '' ||
-                            controller.feedback.text.isEmpty ||
-                            (controller.imgs?.path != null &&
-                                controller.imgs?.path != ""))
+                            controller.feedback.text.isEmpty &&
+                                controller.imgs?.path != null)
                         ? MyTheme.buttonColor
                         : MyTheme.buttonchangeColor,
                     text: 'Post Feedback',
