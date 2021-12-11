@@ -503,6 +503,7 @@ class BookingDetails extends GetView<OrderController> {
                             .format(controller.selectedDate.value)
                             .toLowerCase()) &&
                     checkTime()) {
+                  controller.calclateTotal(isEditing);
                   print("success");
                   Navigator.push(
                       context,

@@ -93,6 +93,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                             physics: NeverScrollableScrollPhysics(),
                             children: [
                               ...controller.orderEdit
+                                  .where((p0) => p0.foodQuantity.value != 0)
                                   .map((element) => ShooppymacPage(
                                         setStae: () {
                                           setState(() {});

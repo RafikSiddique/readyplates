@@ -183,7 +183,8 @@ class ShooppymacPage extends StatelessWidget {
                         }
                       } else {
                         if (controller.orderEdit.length > 1) {
-                          controller.orderEdit.remove(orderEditModel!);
+                          int v = controller.orderEdit.indexOf(orderEditModel!);
+                          controller.orderEdit[v].foodQuantity.value = 0;
                           setStae();
                         } else {
                           Get.showSnackbar(GetBar(

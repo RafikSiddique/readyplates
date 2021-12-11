@@ -101,13 +101,14 @@ class Orderservices extends ApiService {
       request.headers.addAll({'Content-Type': 'application/json'});
       request.body = body;
       StreamedResponse response = await request.send();
+      String b = await response.stream.bytesToString();
+      print(b);
       print(response.statusCode);
       if (response.statusCode != 201) {
-        print(await response.stream.bytesToString());
         throw AppException(
             code: response.statusCode, message: response.reasonPhrase);
       } else {
-        String data = await response.stream.bytesToString();
+        String data = b;
         print(data);
         return OrderModelApi.fromMap(jsonDecode(data)['data']);
       }
@@ -198,10 +199,8 @@ class Orderservices extends ApiService {
   Future<void> updatePayment(int id, int status) async {
     try {
       var request = MultipartRequest('PUT', updateStatusUrl);
-      request.fields.addAll({
-        'id': id.toString(),
-        'payment': status.toString(),
-      });
+      request.fields.addAll(
+          {'id': id.toString(), 'payment': status.toString(), 'table': ''});
       var response = await request.send();
       if (response.statusCode != 202) {
         throw AppException(

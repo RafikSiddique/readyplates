@@ -266,7 +266,9 @@ class OrderWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 7),
               child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                // Container(width: 0),
+                if (orderModel.status == OrderState.inProgress ||
+                    orderModel.status == OrderState.placed)
+                  Container(width: 20),
                 Spacer(),
                 Text("Order #${orderModel.id}",
                     style: GoogleFonts.inter(
@@ -277,12 +279,14 @@ class OrderWidget extends StatelessWidget {
                           color: MyTheme.dividermiddletext),
                     )),
                 Spacer(),
-                GestureDetector(
-                    child: Icon(
-                      Icons.more_horiz,
-                      size: 25,
-                    ),
-                    onTapDown: showMenu),
+                if (orderModel.status == OrderState.inProgress ||
+                    orderModel.status == OrderState.placed)
+                  GestureDetector(
+                      child: Icon(
+                        Icons.more_horiz,
+                        size: 25,
+                      ),
+                      onTapDown: showMenu),
               ]),
             ),
             SizedBox(
@@ -373,7 +377,7 @@ class OrderWidget extends StatelessWidget {
                     },
                   )
                 else
-                  Text("Awaiting table from restaurant",
+                  Text(" ",
                       style: GoogleFonts.nunito(
                         textStyle: TextStyle(
                           fontSize: 15,
