@@ -16,10 +16,12 @@ import 'package:readyplates/widgets/buuton.dart';
 
 class RestaurantDetails extends StatefulWidget {
   final RestaurantModel restaurantModel;
-  static const id = "/aboutlocation";
+  // static const id = "/aboutlocation";
+  final HomeController controller;
   RestaurantDetails({
     Key? key,
     required this.restaurantModel,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -540,10 +542,10 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                             text: 'Proceed to Menu',
                             width: MediaQuery.of(context).size.width,
                             onTap: () {
-                              final controller = Get.find<HomeController>();
-                              controller.foodItems =
-                                  [controller.defaultItem].obs;
-                              controller.getFoodItems(
+                              // final controller = Get.find<HomeController>();
+                              widget.controller.foodItems =
+                                  [widget.controller.defaultItem].obs;
+                              widget.controller.getFoodItems(
                                   widget.restaurantModel.id.toString());
                               Get.find<OrderController>().getCart();
                               Get.toNamed(MenuPage.id,

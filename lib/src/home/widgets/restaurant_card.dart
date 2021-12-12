@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,8 @@ import 'package:readyplates/utils/my_color.dart';
 class RestaurantCard extends GetView<HomeController> {
   final RestaurantModel restaurantModel;
   final HomeController controller;
-  const RestaurantCard({Key? key, required this.restaurantModel, required this.controller})
+  const RestaurantCard(
+      {Key? key, required this.restaurantModel, required this.controller})
       : super(key: key);
 
   @override
@@ -82,7 +84,16 @@ class RestaurantCard extends GetView<HomeController> {
         child: InkWell(
           onTap: () {
             controller.timer?.cancel();
-            Get.toNamed(RestaurantDetails.id, arguments: restaurantModel);
+            CupertinoPageRoute(
+                settings: RouteSettings(name: 'details'),
+                builder: (context) => RestaurantDetails(
+                      restaurantModel: restaurantModel,
+                      controller: controller,
+                    ));
+            // Get.to(() => RestaurantDetails(
+            //       restaurantModel: restaurantModel,
+            //       controller: controller,
+            //     ));
           },
           child: Padding(
             padding: EdgeInsets.all(media.size.width * 0.025),

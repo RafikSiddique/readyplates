@@ -28,11 +28,11 @@ class Routes {
 
                   case ImagePage.id:
                     return ImagePage();
-                  case RestaurantDetails.id:
-                    var args = settings.arguments;
-                    return RestaurantDetails(
-                      restaurantModel: args as RestaurantModel,
-                    );
+                  // case RestaurantDetails.id:
+                  //   var args = settings.arguments;
+                  //   return RestaurantDetails(
+                  //     restaurantModel: args as RestaurantModel, controller: null,
+                  //   );
                   case MenuPage.id:
                     final RestaurantModel args =
                         settings.arguments as RestaurantModel;
