@@ -102,7 +102,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                             isEditing: false,
                           ),
                         ),
-                        (route) => route.settings.name == RestaurantDetails,
+                        (route) => route.settings.name == 'details',
                       );
                     }
                   },
