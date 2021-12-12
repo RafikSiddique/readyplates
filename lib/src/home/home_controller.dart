@@ -180,11 +180,8 @@ class HomeController extends GetxController {
 
   Future<void> getRestaurants() async {
     try {
-      getAddress();
-      lat.value = await sfHelper.getLat();
-      print("Get Lat");
-      lon.value = await sfHelper.getLon();
-      print("Get Lon");
+      await getAddress();
+
       List<RestaurantModel> res =
           await homeService.getRestaurantWithSort(lat.value, lon.value);
       print("Got res");
@@ -194,10 +191,8 @@ class HomeController extends GetxController {
         restaurants.value = res;
       }
       print("Sorting res");
-      restaurants.sort((a, b) => getDistanceFromLatLonInKm(
-              double.parse(a.latitude), double.parse(a.longitude))
-          .compareTo(getDistanceFromLatLonInKm(
-              double.parse(b.latitude), double.parse(b.longitude))));
+      restaurants.sort((a, b) =>
+          double.parse(a.address2).compareTo(double.parse(b.address2)));
       print("Res Sorted");
       if (timer == null && currentIndex == 0) {
         timer = Timer.periodic(Duration(seconds: 3), (timer) async {

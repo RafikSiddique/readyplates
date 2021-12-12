@@ -10,7 +10,8 @@ import 'package:readyplates/utils/my_color.dart';
 
 class RestaurantCard extends GetView<HomeController> {
   final RestaurantModel restaurantModel;
-  const RestaurantCard({Key? key, required this.restaurantModel})
+  final HomeController controller;
+  const RestaurantCard({Key? key, required this.restaurantModel, required this.controller})
       : super(key: key);
 
   @override
@@ -80,7 +81,7 @@ class RestaurantCard extends GetView<HomeController> {
         type: MaterialType.transparency,
         child: InkWell(
           onTap: () {
-            Get.find<HomeController>().timer?.cancel();
+            controller.timer?.cancel();
             Get.toNamed(RestaurantDetails.id, arguments: restaurantModel);
           },
           child: Padding(

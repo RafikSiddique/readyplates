@@ -42,7 +42,13 @@ class _ShopScreenState extends State<ShopScreen> {
     Assets.categoryChinese,
   ];
 
-  final HomeController controller = Get.put(HomeController());
+  final HomeController controller = Get.find();
+
+  @override
+  void initState() {
+    if (mounted) setState(() {});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,15 +153,14 @@ class _ShopScreenState extends State<ShopScreen> {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.8,
-                        child:
-                            Text(controller.address.value.capitalize.toString(),
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.inter(
-                                  fontSize: 10,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyTheme.appbartextColor,
-                                )),
+                        child: Text(controller.address.value.toUpperCase(),
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.inter(
+                              fontSize: 10,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w500,
+                              color: MyTheme.appbartextColor,
+                            )),
                       ),
                     ],
                   ),
@@ -295,6 +300,7 @@ class _ShopScreenState extends State<ShopScreen> {
                                               ""
                                           ? controller.restaurants
                                               .map((element) => RestaurantCard(
+                                                  controller: controller,
                                                   restaurantModel: element))
                                               .toList()
                                           : controller.restaurants.any(
@@ -310,7 +316,7 @@ class _ShopScreenState extends State<ShopScreen> {
                                                   .where((element) => element
                                                       .types_of_cusine
                                                       .any((element) => element.toLowerCase() == controller.selectedCategory.value.toLowerCase()))
-                                                  .map((element) => RestaurantCard(restaurantModel: element))
+                                                  .map((element) => RestaurantCard(controller: controller, restaurantModel: element))
                                                   .toList()
                                               : [Container()]),
                                 )
