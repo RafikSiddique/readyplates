@@ -240,19 +240,31 @@ class LoginPage extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(6)),
                             ),
-                            child: Center(
-                              child: Text(
-                                isChangepass == true ? "Proceed" : "Login",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontFamily: 'Inter-Regular',
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
+                            child: Obx(() => controller.isLoading.value
+                                ? Center(
+                                    child: SizedBox(
+                                        height: 40,
+                                        width: 40,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2,
+                                        )),
+                                  )
+                                : Center(
+                                    child: Text(
+                                      isChangepass == true
+                                          ? "Proceed"
+                                          : "Login",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontFamily: 'Inter-Regular',
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )),
                           ),
                         ),
                         SizedBox(

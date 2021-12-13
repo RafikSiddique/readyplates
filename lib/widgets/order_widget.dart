@@ -22,6 +22,57 @@ class OrderWidget extends StatelessWidget {
       : super(key: key);
   OrderController controller = Get.find();
 
+  Future<void> editOrder(BuildContext context) async {
+    Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        content: SizedBox.square(
+          dimension: Get.width * 0.4,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox.square(
+                  dimension: 100,
+                  child: CircularProgressIndicator.adaptive(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        MyTheme.borderchangeColor),
+                  )),
+            ],
+          ),
+        ),
+      ),
+    );
+    RestaurantModel restaurantModel =
+        await controller.getSingleRestaurant(orderModel.restaurant.id);
+
+    controller.orderId = orderModel.id;
+
+    controller.orderEdit.value = orderModel.orderitems
+        .map((e) => OrderEditModel(
+            foodName: e.menu.name,
+            orderId: orderModel.id,
+            id: e.id,
+            foodItem: RxInt(e.menu.id),
+            foodQuantity: RxInt(e.quantity),
+            foodPrice: RxDouble(double.parse(e.price)),
+            restaurant: orderModel.restaurant.id,
+            foodImage: e.menu.image1,
+            isUpdated: false))
+        .toList();
+    controller.calclateTotal(true);
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => BurgersupportingPage(
+            restaurantModel: restaurantModel,
+            isEditing: true,
+            orderModelApi: orderModel,
+          ),
+        ));
+  }
+
   Widget bottomWidget(BuildContext context) {
     switch (orderModel.status) {
       case OrderState.placed:
@@ -71,51 +122,7 @@ class OrderWidget extends StatelessWidget {
               width: Get.width,
               text: "Modify Order",
               onTap: () async {
-                Get.dialog(
-                  AlertDialog(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    content: SizedBox.square(
-                      dimension: Get.width * 0.4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox.square(
-                              dimension: 100,
-                              child: CircularProgressIndicator.adaptive(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    MyTheme.borderchangeColor),
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-                RestaurantModel restaurantModel = await controller
-                    .getSingleRestaurant(orderModel.restaurant.id);
-                //  String userId = await SharedPreferenceHelper().getUserId();
-                controller.orderId = orderModel.id;
-
-                controller.orderEdit.value = orderModel.orderitems
-                    .map((e) => OrderEditModel(
-                        foodName: e.menu.name,
-                        orderId: orderModel.id,
-                        id: e.id,
-                        foodItem: RxInt(e.menu.id),
-                        foodQuantity: RxInt(e.quantity),
-                        foodPrice: RxDouble(double.parse(e.price)),
-                        restaurant: orderModel.restaurant.id,
-                        foodImage: e.menu.image1,
-                        isUpdated: false))
-                    .toList();
-                controller.calclateTotal(true);
-                Get.back();
-                Get.to(() => BurgersupportingPage(
-                      restaurantModel: restaurantModel,
-                      isEditing: true,
-                      orderModelApi: orderModel,
-                    ));
+                editOrder(context);
               },
               backgroundColor: Colors.white,
               color: Color(0xff44C4A1),

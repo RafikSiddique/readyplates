@@ -17,12 +17,19 @@ import 'package:readyplates/widgets/buuton.dart';
 class RestaurantDetails extends StatefulWidget {
   final RestaurantModel restaurantModel;
   // static const id = "/aboutlocation";
-  final HomeController controller;
+  late HomeController controller;
   RestaurantDetails({
     Key? key,
     required this.restaurantModel,
-    required this.controller,
-  }) : super(key: key);
+    //required this.controller,
+  }) : super(key: key) {
+    bool isReg = Get.isRegistered<HomeController>();
+    if (!isReg) {
+      controller = Get.put(HomeController());
+    } else {
+      controller = Get.find<HomeController>();
+    }
+  }
 
   @override
   State<RestaurantDetails> createState() => _RestaurantDetailsState();
@@ -548,8 +555,13 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               widget.controller.getFoodItems(
                                   widget.restaurantModel.id.toString());
                               Get.find<OrderController>().getCart();
-                              Get.toNamed(MenuPage.id,
-                                  arguments: widget.restaurantModel);
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => MenuPage(
+                                        restaurantModel:
+                                            widget.restaurantModel),
+                                  ));
                             },
                           ),
                           SizedBox(

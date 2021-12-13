@@ -33,13 +33,13 @@ class Routes {
                   //   return RestaurantDetails(
                   //     restaurantModel: args as RestaurantModel, controller: null,
                   //   );
-                  case MenuPage.id:
+           /*        case MenuPage.id:
                     final RestaurantModel args =
                         settings.arguments as RestaurantModel;
                     return MenuPage(
                       restaurantModel: args,
                     );
-
+ */
                   case QrCode.id:
                     return QrCode();
                   case OrderCancelledPage.id:

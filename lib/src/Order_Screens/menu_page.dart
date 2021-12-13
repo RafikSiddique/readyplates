@@ -15,11 +15,18 @@ import 'package:readyplates/widgets/food_item_card.dart';
 class MenuPage extends StatelessWidget {
   static const id = "/menupage";
   final RestaurantModel restaurantModel;
-  final controller = Get.find<HomeController>();
+  late HomeController controller;
   final orderController = Get.find<OrderController>();
   final bool isEditing;
   MenuPage({Key? key, required this.restaurantModel, this.isEditing = false})
-      : super(key: key);
+      : super(key: key) {
+    bool isReg = Get.isRegistered<HomeController>();
+    if (!isReg) {
+      controller = Get.put(HomeController());
+    } else {
+      controller = Get.find<HomeController>();
+    }
+  }
 
   List<String> categories = ["Starter", "Main Course", "Desserts", "Sides"];
 

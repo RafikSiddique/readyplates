@@ -84,12 +84,14 @@ class RestaurantCard extends GetView<HomeController> {
         child: InkWell(
           onTap: () {
             controller.timer?.cancel();
-            CupertinoPageRoute(
-                settings: RouteSettings(name: 'details'),
-                builder: (context) => RestaurantDetails(
-                      restaurantModel: restaurantModel,
-                      controller: controller,
-                    ));
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                    settings: RouteSettings(name: 'details'),
+                    builder: (context) => RestaurantDetails(
+                          restaurantModel: restaurantModel,
+                        )));
+
             // Get.to(() => RestaurantDetails(
             //       restaurantModel: restaurantModel,
             //       controller: controller,

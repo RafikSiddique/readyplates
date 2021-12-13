@@ -82,6 +82,8 @@ class AuthController extends GetxController {
 
   RxString address = "".obs;
 
+  RxBool isLoading = false.obs;
+
   Future<bool> getPermission() async {
     bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
     if (isLocationEnabled) {
@@ -103,6 +105,7 @@ class AuthController extends GetxController {
   String? id;
   Future<void> login(bool changedPassword, {bool implicit = false}) async {
     try {
+      isLoading.value = true;
       id = await services.login(
           usernameController.text, passwordController.text);
       await sfHelper.setUserId(id!);
@@ -132,6 +135,8 @@ class AuthController extends GetxController {
         passwordController.clear();
         Get.toNamed(ChangePasswordPage1.id);
       }
+      isLoading.value = false;
+
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

@@ -79,8 +79,8 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   backgroundColor: Colors.white,
                   text: "Add Items",
                   borderColor: MyTheme.bottomcontainercolor,
-                  onTap: () {
-                    Get.find<HomeController>()
+                  onTap: () async {
+                    await Get.find<HomeController>()
                         .getFoodItems(widget.restaurantModel.id.toString());
                     if (widget.isEditing) {
                       Navigator.push(
@@ -116,7 +116,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),
                   text: widget.isEditing ? "Confirm" : "Book",
-                  onTap: () {
+                  onTap: () async {
                     if (widget.isEditing) {
                       if (controller.orderEdit.isNotEmpty)
                         Get.find<OrderController>().editOrders();
@@ -124,10 +124,10 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                         Get.snackbar("Error",
                             "Please add atleast one item to complete the order");
                     } else {
-                      if (controller.cartItems.isNotEmpty)
-                        Get.find<OrderController>()
+                      if (controller.cartItems.isNotEmpty) {
+                        await Get.find<OrderController>()
                             .order(widget.restaurantModel);
-                      else
+                      } else
                         Get.snackbar("Error",
                             "Please add atleast one item to complete the order");
                     }
