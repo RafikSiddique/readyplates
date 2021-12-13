@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>621674002284-8aa0809pakjrp46lu6h6k91taofv83nj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.621674002284-8aa0809pakjrp46lu6h6k91taofv83nj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDWQgSZkt4qjj7beavsp2QV6CV7_YUnwMU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>621674002284</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fladdra.readyplates</string>
+	<key>PROJECT_ID</key>
+	<string>readyplates-31cb4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>readyplates-31cb4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:621674002284:ios:26fc0cfaac7cf2c29f6549</string>
+</dict>
+</plist>

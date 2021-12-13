@@ -89,8 +89,10 @@ class AuthController extends GetxController {
     if (isLocationEnabled) {
       LocationPermission permission = await Geolocator.requestPermission();
 
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied) {
+        GeolocatorPlatform.instance.requestPermission();
+        return getPermission();
+      } else if (permission == LocationPermission.deniedForever) {
         await Geolocator.openAppSettings();
         return getPermission();
       } else {
@@ -136,7 +138,6 @@ class AuthController extends GetxController {
         Get.toNamed(ChangePasswordPage1.id);
       }
       isLoading.value = false;
-
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

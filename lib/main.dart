@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Ready Plates',
       theme: ThemeData(
         popupMenuTheme: PopupMenuThemeData(
           enableFeedback: true,
