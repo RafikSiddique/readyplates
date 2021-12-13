@@ -315,7 +315,6 @@ class OrderController extends GetxController {
               DateFormat(DateFormat.HOUR24_MINUTE).format(selectedDate.value));
       OrderModelApi orderModelApi = await services.orderapi(orderModel);
       print(orderModelApi);
-      await getorder();
       cartApiItems.clear();
       cartItems.forEach((e) async {
         CartModel element = getCartItem(e.foodItem.value);
@@ -325,6 +324,7 @@ class OrderController extends GetxController {
       });
       cartItems.clear();
       calclateTotal();
+      getorder();
       Get.to(() => Chekoutdone(
             orderModelApi: orderModelApi,
             isComplete: false,
