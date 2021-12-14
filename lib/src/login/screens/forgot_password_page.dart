@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
@@ -28,7 +29,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/loginimg.png'),
+                image: AssetImage(Assets.ready),
                 fit: BoxFit.cover,
               ),
             ),
@@ -170,6 +171,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                   onTap: () async {
                                     formKey.currentState!.save();
                                     if (formKey.currentState!.validate()) ;
+                                    await controller.forgotPassword();
                                   },
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,

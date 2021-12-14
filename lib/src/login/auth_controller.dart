@@ -106,34 +106,37 @@ class AuthController extends GetxController {
   }
 
   String? id;
-  Future<void> login(bool changedPassword, {bool implicit = false}) async {
+  Future<void> login(
+    bool changedPassword,
+  ) async {
     try {
       isLoading.value = true;
       id = await services.login(
           usernameController.text, passwordController.text);
       await sfHelper.setUserId(id!);
       if (!changedPassword) {
-        if (implicit) {
-          Get.toNamed(ImagePage.id);
-        } else {
-          Get.put(OrderController());
-          bool permitted = await getPermission();
-          if (permitted) {
-            Position position = await Geolocator.getCurrentPosition();
-            LatLng latLng = LatLng(position.latitude, position.longitude);
-            Get.to(() => MapPage(
-                  isHome: false,
-                  latLng: latLng,
-                ));
-          }
+        // if (implicit) {
+        //   // Get.toNamed(ImagePage.id);
+        // } else {
 
-          lNameController.clear();
-          fNamController.clear();
-          password2Controller.clear();
-          passwordController.clear();
-          usernameController.clear();
-          sfHelper.setLoggedIn(true);
+        Get.put(OrderController());
+        bool permitted = await getPermission();
+        if (permitted) {
+          Position position = await Geolocator.getCurrentPosition();
+          LatLng latLng = LatLng(position.latitude, position.longitude);
+          Get.to(() => MapPage(
+                isHome: false,
+                latLng: latLng,
+              ));
         }
+
+        lNameController.clear();
+        fNamController.clear();
+        password2Controller.clear();
+        passwordController.clear();
+        usernameController.clear();
+        sfHelper.setLoggedIn(true);
+        // }
       } else {
         passwordController.clear();
         Get.toNamed(ChangePasswordPage1.id);
@@ -216,7 +219,9 @@ class AuthController extends GetxController {
           gender: gender.value,
           dob: dobController.text,
           mobNum: mobController.text);
-      await login(false, implicit: true);
+      await login(
+        false,
+      );
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

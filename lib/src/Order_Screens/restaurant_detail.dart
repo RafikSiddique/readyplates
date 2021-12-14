@@ -429,8 +429,10 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      DateFormat(DateFormat.ABBR_MONTH)
-                                          .format(eventDate),
+                                      bio.event_desc == ""
+                                          ? "--"
+                                          : DateFormat(DateFormat.ABBR_MONTH)
+                                              .format(eventDate),
                                       style: GoogleFonts.inter(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500,
@@ -441,8 +443,10 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      DateFormat(DateFormat.DAY)
-                                          .format(eventDate),
+                                      bio.event_desc == ""
+                                          ? "--"
+                                          : DateFormat(DateFormat.DAY)
+                                              .format(eventDate),
                                       style: GoogleFonts.inter(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
@@ -453,7 +457,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                 ],
                               ),
                               Text(
-                                "Starts at ${bio.event_start} ",
+                                bio.event_desc == ""
+                                    ? "No upcoming events"
+                                    : "Starts at ${bio.event_start} ",
                                 style: GoogleFonts.inter(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
@@ -529,7 +535,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                           Visibility(
                             visible: isVisible,
                             child: Text(
-                              bio.event_desc,
+                              bio.event_desc == "" ? "" : bio.event_desc,
                               style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,

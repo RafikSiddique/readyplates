@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/login/screens/ChangePassword2.dart';
+import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 import '../auth_controller.dart';
@@ -28,7 +30,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/loginimg.png'),
+                image: AssetImage(Assets.ready),
                 fit: BoxFit.cover,
               ),
             ),
@@ -227,6 +229,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                   onTap: () async {
                                     formKey.currentState!.save();
                                     if (formKey.currentState!.validate()) ;
+                                    Get.toNamed(ChangePasswordPage1.id);
                                   },
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
