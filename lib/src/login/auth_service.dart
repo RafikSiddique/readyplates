@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:readyplates/utils/exception.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 
+String respOtp = '';
+
 class AuthenticationServices extends ApiService {
   SharedPreferenceHelper sharedPreferenceHelper = SharedPreferenceHelper();
   Future<String> login(
@@ -65,6 +67,34 @@ class AuthenticationServices extends ApiService {
 
         print(response.body);
         return resp.toString();
+      } else {
+        throw AppException(code: response.statusCode, message: response.body);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> forgotPassword(
+    String email,
+  ) async {
+    try {
+      Response response = await post(
+        forgotUri,
+        body: jsonEncode(
+          {
+            'email': email,
+          },
+        ),
+        headers: contentTypeJsonHeader,
+      );
+
+      if (response.statusCode == 200) {
+        Map resp = json.decode(response.body);
+        respOtp = resp["OTP"].toString();
+        print("${respOtp} bvc");
+
+        print(response.body);
       } else {
         throw AppException(code: response.statusCode, message: response.body);
       }

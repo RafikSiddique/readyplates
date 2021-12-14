@@ -11,6 +11,7 @@ import 'package:readyplates/src/login/screens/ChangePassword2.dart';
 import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
+import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
@@ -150,6 +151,17 @@ class AuthController extends GetxController {
         passwordController.text,
       );
       Get.offAllNamed(LandingPage.id);
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> forgotPassword() async {
+    try {
+      await services.forgotPassword(
+        usernameController.text,
+      );
+      Get.toNamed(VerifyOtpPage.id);
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }

@@ -92,4 +92,5 @@ class MyTheme {
   static Color timebutton = Color(0xffE4E4E4);
   static Color errorIcon = Color(0xffFF7976);
   static Color backcolor = Color(0xffFFD9C1);
+  static Color chevrondowncolor = Color(0xff797979);
 }
