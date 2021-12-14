@@ -37,7 +37,6 @@ class ProfilePage extends StatelessWidget {
                 onTap: () {
                   Get.to(() => LoginPage(isChangepass: true));
                 }),
-            ProfileListTile(title: "User Credential", onTap: () {}),
             ProfileListTile(
               title: "Logout",
               onTap: () {
