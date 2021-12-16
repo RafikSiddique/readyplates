@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:readyplates/utils/exception.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+
+String respOtp = '';
 
 class AuthenticationServices extends ApiService {
   SharedPreferenceHelper sharedPreferenceHelper = SharedPreferenceHelper();
@@ -73,28 +74,56 @@ class AuthenticationServices extends ApiService {
     }
   }
 
-  Future<bool> uploadImage(File file) async {
+  Future<void> forgotPassword(
+    String email,
+  ) async {
     try {
-      String id = await sharedPreferenceHelper.getUserId();
-      http.MultipartRequest request = http.MultipartRequest('POST', image);
-      request.fields.addAll({"id": id});
-      http.MultipartFile multipartFile =
-          await http.MultipartFile.fromPath('image', file.path);
-      request.files.add(multipartFile);
-      http.StreamedResponse response = await request.send();
+      Response response = await post(
+        forgotUri,
+        body: jsonEncode(
+          {
+            'email': email,
+          },
+        ),
+        headers: contentTypeJsonHeader,
+      );
+
       if (response.statusCode == 200) {
-        print("success");
-        String body = await response.stream.bytesToString();
-        print(body);
-        return true;
+        Map resp = json.decode(response.body);
+        respOtp = resp["OTP"].toString();
+        print("${respOtp} You OTP");
+
+        print(response.body);
       } else {
-        throw AppException(
-            code: response.statusCode, message: response.reasonPhrase);
+        throw AppException(code: response.statusCode, message: response.body);
       }
     } catch (e) {
       rethrow;
     }
   }
+//
+  // Future<bool> uploadImage(File file) async {
+  //   try {
+  //     String id = await sharedPreferenceHelper.getUserId();
+  //     http.MultipartRequest request = http.MultipartRequest('POST', image);
+  //     request.fields.addAll({"id": id});
+  //     http.MultipartFile multipartFile =
+  //         await http.MultipartFile.fromPath('image', file.path);
+  //     request.files.add(multipartFile);
+  //     http.StreamedResponse response = await request.send();
+  //     if (response.statusCode == 200) {
+  //       print("success");
+  //       String body = await response.stream.bytesToString();
+  //       print(body);
+  //       return true;
+  //     } else {
+  //       throw AppException(
+  //           code: response.statusCode, message: response.reasonPhrase);
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   Future<dynamic> register({
     required String email,

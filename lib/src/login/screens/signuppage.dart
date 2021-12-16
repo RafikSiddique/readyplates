@@ -277,7 +277,8 @@ class _SignupPageState extends State<SignupPage> {
                   InkWell(
                     onTap: () async {
                       formKey.currentState!.save();
-                      await controller.register();
+                      if (formKey.currentState!.validate())
+                        await controller.register();
                       //Navigator.pushNamed(context, MyRoutes.LoginPage);
                     },
                     child: Container(

@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/ChangePassword2.dart';
+import 'package:readyplates/src/login/screens/forgot_password_page.dart';
 import 'package:readyplates/src/login/screens/index.dart';
+import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/src/order/screen/payment_sucessful.dart';
@@ -23,17 +24,21 @@ class Routes {
                     return LoginPage();
                   case SignupPage.id:
                     return SignupPage();
+                  case ForgotPasswordPage.id:
+                    return ForgotPasswordPage();
+                  case VerifyOtpPage.id:
+                    return VerifyOtpPage();
                   case ShopScreen.id:
                     return ShopScreen();
 
-                  case ImagePage.id:
-                    return ImagePage();
+                  // case ImagePage.id:
+                  //   return ImagePage();
                   // case RestaurantDetails.id:
                   //   var args = settings.arguments;
                   //   return RestaurantDetails(
                   //     restaurantModel: args as RestaurantModel, controller: null,
                   //   );
-           /*        case MenuPage.id:
+                  /*        case MenuPage.id:
                     final RestaurantModel args =
                         settings.arguments as RestaurantModel;
                     return MenuPage(

@@ -11,6 +11,9 @@ class ApiService {
   Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);
 
   Uri restaurants(String path) => Uri.parse(baseUri + "restaurants/" + path);
+
+  Uri accounts(String url) => Uri.parse(baseUri + "accounts/" + url);
+
   Uri availableTable(String id) => restaurants('table/$id');
 
   Uri get loginUri => customers('login/');
@@ -18,6 +21,7 @@ class ApiService {
   Uri get image => customers('image/');
   Uri get location => customers('location/');
   Uri get changePass => customers("resetpass/");
+  Uri get forgotUri => accounts('forgotpass/');
 
   Uri menuList(String id) => customers('menulist/$id/');
 

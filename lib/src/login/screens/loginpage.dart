@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:readyplates/src/login/auth_controller.dart';
+import 'package:readyplates/src/login/screens/forgot_password_page.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
@@ -207,26 +208,30 @@ class LoginPage extends StatelessWidget {
                           height: 3,
                         ),
                         if (isChangepass != true)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text("Forget Password?",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 14,
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xff32B768),
-                                  )),
-                            ],
+                          InkWell(
+                            onTap: () {
+                              Get.toNamed(ForgotPasswordPage.id);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text("Forget Password?",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xff32B768),
+                                    )),
+                              ],
+                            ),
                           ),
                         SizedBox(height: 20),
                         InkWell(
                           onTap: () async {
                             _formKey.currentState!.save();
                             if (_formKey.currentState!.validate()) {
-                              await controller.login(isChangepass,
-                                  implicit: false);
+                              await controller.login(isChangepass);
                             } else {
                               Get.snackbar(
                                   "Error", "Please fill all the details");
