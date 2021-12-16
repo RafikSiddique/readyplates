@@ -21,16 +21,20 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>For map</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>For Map</string>
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
 		<key>wantAccurateLocation</key>
 		<string>For Map</string>
 	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>For Map</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To enable map</string>
 	<key>UILaunchStoryboardName</key>
