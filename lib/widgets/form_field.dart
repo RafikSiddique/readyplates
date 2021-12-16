@@ -55,6 +55,12 @@ class AppFormField extends StatelessWidget {
         super(key: key);
 
   bool obSecureText = true;
+  bool validateStructure(String password) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(password);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +107,18 @@ class AppFormField extends StatelessWidget {
                     if (isRequired) {
                       return "This Field is required";
                     }
-                  } else {
-                    if (matchVerification) {
-                      if (value != secondVal!.text) {
-                        return "The $toptext does not match";
-                      }
+                  }
+                  if (isPassword) {
+                    if (!validateStructure(value!)) {
+                      return 'Password should contains atleast 8 characters \n(Caps, Small & Special Characters)';
                     }
                   }
+                  if (matchVerification) {
+                    if (value != secondVal!.text) {
+                      return "The $toptext does not match";
+                    }
+                  }
+
                   if (validator != null) return validator!(value);
                 },
                 textAlign: TextAlign.left,
