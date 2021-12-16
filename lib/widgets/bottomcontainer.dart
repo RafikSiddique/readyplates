@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -137,7 +139,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: Platform.isIOS? 20 : 10,
           )
         ],
       ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -582,9 +584,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               Get.back();
                             },
                           ),
-                          // SizedBox(
-                          //   height: 10,
-                          // )
+                        if(Platform.isIOS) SizedBox(
+                            height: 20,
+                         )
                         ],
                       ),
                     ),
@@ -686,7 +688,7 @@ class _FullImageState extends State<FullImage> {
           ),
         ),
         SizedBox.square(
-          dimension: 10,
+          dimension : 10,
         )
       ],
     ));

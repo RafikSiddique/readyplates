@@ -393,130 +393,52 @@ class BookingDetails extends GetView<OrderController> {
             SizedBox(
               height: 17,
             ),
-            /*       Text(
-              "Available Slots",
-              style: GoogleFonts.nunito(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Icon(
-                FontAwesomeIcons.caretUp,
-                color: MyTheme.bottomtextColor,
-                size: 37,
-              ),
-            ),
-            SizedBox(height: 31),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TimeButton(
-                  borcolor: MyTheme.borderColor,
-                  fontSize: 15,
-                  text: "10:00 AM",
-                  fontWeight: FontWeight.w600,
-                ),
-                TimeButton(
-                  borcolor: MyTheme.borderColor,
-                  fontSize: 15,
-                  text: "15:00 AM",
-                  fontWeight: FontWeight.w600,
-                ),
-              ],
-            ),
-            SizedBox(height: 15),
-            Container(
-                height: MediaQuery.of(context).size.height * 0.08,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: MyTheme.timebutton),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 14, top: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.error,
-                        color: Colors.black,
-                      ),
-                      SizedBox(width: 13),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: Text(
-                            "At the moment there is time slot available for this date. Please try a different date.",
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.nunito(
-                                fontSize: 15,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.normal)),
-                      )
-                    ],
-                  ),
-                )),
-            SizedBox(height: 10),
-            Container(
-                height: MediaQuery.of(context).size.height * 0.08,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: MyTheme.timebutton),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 14, top: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.error,
-                        color: Colors.black,
-                      ),
-                      SizedBox(width: 13),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: Text(
-                            "Unfortunately, your party is too large to make a reservation. Please lower the number of people.",
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.nunito(
-                                fontSize: 15,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.normal)),
-                      )
-                    ],
-                  ),
-                )),
-            Align(
-              alignment: Alignment.center,
-              child: Icon(
-                FontAwesomeIcons.caretDown,
-                color: MyTheme.bottomtextColor,
-                size: 37,
-              ),
-            ), */
             Spacer(),
             Elevated(
               text: "Confirm",
               width: double.infinity,
               onTap: () {
-                if (restaurantModel.open_days.any((element) =>
-                        element.toLowerCase() ==
-                        DateFormat(DateFormat.WEEKDAY)
-                            .format(controller.selectedDate.value)
-                            .toLowerCase()) &&
-                    checkTime()) {
-                  controller.calclateTotal(isEditing);
-                  print("success");
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => BurgersupportingPage(
-                            restaurantModel: restaurantModel,
-                            isEditing: isEditing),
-                      ));
+                DateTime selectedDate = controller.selectedDate.value;
+                DateTime selectedTime = controller.globletime.value;
+                DateTime overallTime = DateTime(
+                    selectedDate.year,
+                    selectedDate.month,
+                    selectedDate.day,
+                    selectedTime.hour,
+                    selectedTime.minute,
+                    selectedTime.second);
+                bool isAfterCurrent = overallTime.isAfter(DateTime.now());
+                print(isAfterCurrent);
+                print(overallTime);
+                print(DateTime.now());
+                if (isAfterCurrent) {
+                  if (restaurantModel.open_days.any((element) =>
+                          element.toLowerCase() ==
+                          DateFormat(DateFormat.WEEKDAY)
+                              .format(controller.selectedDate.value)
+                              .toLowerCase()) &&
+                      checkTime()) {
+                    controller.calclateTotal(isEditing);
+                    print("success");
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => BurgersupportingPage(
+                              restaurantModel: restaurantModel,
+                              isEditing: isEditing),
+                        ));
+                  } else {
+                    Get.showSnackbar(GetBar(
+                      title: "Closed",
+                      message:
+                          "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
+                      duration: Duration(seconds: 2),
+                    ));
+                  }
                 } else {
                   Get.showSnackbar(GetBar(
                     title: "Closed",
-                    message:
-                        "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
+                    message: "Please select a time after current time",
                     duration: Duration(seconds: 2),
                   ));
                 }

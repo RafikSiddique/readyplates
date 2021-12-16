@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -121,23 +123,10 @@ class MenuPage extends StatelessWidget {
                               borderSide: BorderSide.none, gapPadding: 2)),
                     ),
                   ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  /*             Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Text(
-                      "MAIN COURSE",
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          color: MyTheme.dividermiddletext,
-                        ),
-                      ),
+                  if (Platform.isAndroid)
+                    SizedBox(
+                      height: 12,
                     ),
-                  ), */
                   if (controller.foodItems.isEmpty)
                     Container(
                       alignment: Alignment.center,
@@ -160,8 +149,8 @@ class MenuPage extends StatelessWidget {
                                 if (controller.foodItems
                                     .any((p0) => p0.category == categories[i]))
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0, top: 15),
+                                    padding:
+                                        EdgeInsets.only(left: 10.0, top: 15),
                                     child: Text(
                                       categories[i].toUpperCase(),
                                       style: GoogleFonts.inter(
@@ -173,6 +162,9 @@ class MenuPage extends StatelessWidget {
                                     ),
                                   ),
                                 ListView(
+                                    padding: Platform.isAndroid
+                                        ? null
+                                        : EdgeInsets.zero,
                                     physics: BouncingScrollPhysics(),
                                     shrinkWrap: true,
                                     children: controller.foodItems

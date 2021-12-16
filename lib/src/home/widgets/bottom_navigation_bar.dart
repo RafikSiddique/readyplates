@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/src/home/home_controller.dart';
@@ -9,10 +11,9 @@ class AppNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context);
     return Obx(
       () => Container(
-        height: 60,
+        height: Platform.isIOS ? 90 : 60,
         decoration: BoxDecoration(
           boxShadow: <BoxShadow>[
             BoxShadow(
@@ -33,8 +34,8 @@ class AppNavigationBar extends StatelessWidget {
               BottomNavigationBarItem(
                   icon: Image.asset(
                     controller.bottomBarIcons[i],
-                    height: media.size.width / 18,
-                    width: media.size.width / 18,
+                    height: 20,
+                    width: 20,
                     color: controller.currentIndex.value == i
                         ? Color(0xff00ADB5)
                         : null,
