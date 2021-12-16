@@ -8,7 +8,6 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/auth_service.dart';
 import 'package:readyplates/src/login/screens/ChangePassword2.dart';
-import 'package:readyplates/src/login/screens/imagepage.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/screens/otp_verify_page.dart';
@@ -112,7 +111,7 @@ class AuthController extends GetxController {
     try {
       isLoading.value = true;
       id = await services.login(
-          usernameController.text, passwordController.text);
+          usernameController.text.toLowerCase(), passwordController.text);
       await sfHelper.setUserId(id!);
       if (!changedPassword) {
         // if (implicit) {
@@ -150,8 +149,8 @@ class AuthController extends GetxController {
   Future<void> changePassword() async {
     try {
       await services.changePassword(
-        usernameController.text,
         passwordController.text,
+        password2Controller.text,
       );
       Get.offAllNamed(LandingPage.id);
     } catch (e) {
@@ -211,7 +210,7 @@ class AuthController extends GetxController {
   Future<void> register() async {
     try {
       await services.register(
-          email: usernameController.text,
+          email: usernameController.text.toLowerCase(),
           password: passwordController.text,
           password2: password2Controller.text,
           fName: fNamController.text,
@@ -227,31 +226,31 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> uploadImage(File file) async {
-    try {
-      bool success = await services.uploadImage(file);
-      if (success) {
-        bool permitted = await getPermission();
-        if (permitted) {
-          Position position = await Geolocator.getCurrentPosition();
-          LatLng latLng = LatLng(position.latitude, position.longitude);
-          Get.to(() => MapPage(
-                isHome: false,
-                latLng: latLng,
-              ));
-        } else {
-          LatLng latLng = LatLng(20.708391858928152, -156.32455678019107);
+  // Future<void> uploadImage(File file) async {
+  //   try {
+  //     bool success = await services.uploadImage(file);
+  //     if (success) {
+  //       bool permitted = await getPermission();
+  //       if (permitted) {
+  //         Position position = await Geolocator.getCurrentPosition();
+  //         LatLng latLng = LatLng(position.latitude, position.longitude);
+  //         Get.to(() => MapPage(
+  //               isHome: false,
+  //               latLng: latLng,
+  //             ));
+  //       } else {
+  //         LatLng latLng = LatLng(20.708391858928152, -156.32455678019107);
 
-          Get.to(() => MapPage(
-                isHome: false,
-                latLng: latLng,
-              ));
-        }
-      }
-    } catch (e) {
-      Get.snackbar("Error", e.toString());
-    }
-  }
+  //         Get.to(() => MapPage(
+  //               isHome: false,
+  //               latLng: latLng,
+  //             ));
+  //       }
+  //     }
+  //   } catch (e) {
+  //     Get.snackbar("Error", e.toString());
+  //   }
+  // }
 
   RxString gender = 'Male'.obs;
   final items = ['Male', 'Female'];

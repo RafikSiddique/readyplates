@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/ChangePassword2.dart';

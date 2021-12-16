@@ -92,7 +92,7 @@ class AuthenticationServices extends ApiService {
       if (response.statusCode == 200) {
         Map resp = json.decode(response.body);
         respOtp = resp["OTP"].toString();
-        print("${respOtp} bvc");
+        print("${respOtp} You OTP");
 
         print(response.body);
       } else {
@@ -102,29 +102,29 @@ class AuthenticationServices extends ApiService {
       rethrow;
     }
   }
-
-  Future<bool> uploadImage(File file) async {
-    try {
-      String id = await sharedPreferenceHelper.getUserId();
-      http.MultipartRequest request = http.MultipartRequest('POST', image);
-      request.fields.addAll({"id": id});
-      http.MultipartFile multipartFile =
-          await http.MultipartFile.fromPath('image', file.path);
-      request.files.add(multipartFile);
-      http.StreamedResponse response = await request.send();
-      if (response.statusCode == 200) {
-        print("success");
-        String body = await response.stream.bytesToString();
-        print(body);
-        return true;
-      } else {
-        throw AppException(
-            code: response.statusCode, message: response.reasonPhrase);
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
+//
+  // Future<bool> uploadImage(File file) async {
+  //   try {
+  //     String id = await sharedPreferenceHelper.getUserId();
+  //     http.MultipartRequest request = http.MultipartRequest('POST', image);
+  //     request.fields.addAll({"id": id});
+  //     http.MultipartFile multipartFile =
+  //         await http.MultipartFile.fromPath('image', file.path);
+  //     request.files.add(multipartFile);
+  //     http.StreamedResponse response = await request.send();
+  //     if (response.statusCode == 200) {
+  //       print("success");
+  //       String body = await response.stream.bytesToString();
+  //       print(body);
+  //       return true;
+  //     } else {
+  //       throw AppException(
+  //           code: response.statusCode, message: response.reasonPhrase);
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   Future<dynamic> register({
     required String email,
