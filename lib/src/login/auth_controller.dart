@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -161,7 +159,7 @@ class AuthController extends GetxController {
   Future<void> forgotPassword() async {
     try {
       await services.forgotPassword(
-        usernameController.text,
+        usernameController.text.toLowerCase(),
       );
       Get.toNamed(VerifyOtpPage.id);
     } catch (e) {
