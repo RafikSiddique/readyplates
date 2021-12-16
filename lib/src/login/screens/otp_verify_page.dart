@@ -8,6 +8,7 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 
 import '../auth_controller.dart';
+import '../auth_service.dart';
 
 class VerifyOtpPage extends StatefulWidget {
   static const id = "/verifyotp";
@@ -174,11 +175,11 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                           SizedBox(
                             height: 10,
                           ),
-                          Row(
+                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               for (var i = 0;
-                                  i < controller.otpFields.length;
+                                  i < controller.otpField.length;
                                   i++)
                                 Container(
                                   width: 40,
@@ -189,9 +190,9 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                     style: GoogleFonts.montserrat(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
-                                    controller: controller.otpText[i],
+                                    controller: controller.otpNumber[i],
                                     textAlignVertical: TextAlignVertical.bottom,
-                                    focusNode: controller.otpFields[i],
+                                    focusNode: controller.otpField[i],
                                     maxLength: 1,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
@@ -215,31 +216,77 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                     onChanged: (value) {
                                       print(value);
                                       j = i;
+                                      print(controller.otpNumber[i]);
+                                      if (value.length == 1) {
+                                        controller.otpNum += value;
+                                        if (i < 3) {
+                                          controller.otpField[i + 1]
+                                              .requestFocus();
+                                        } else {
+                                          if (respOtp ==
+                                              controller.otpNumber[i]) {
+                                            controller.otpVerification.value =
+                                                controller.otpVerified;
+                                          } else {
+                                            controller.otpVerification.value =
+                                                controller.incorrect;
+                                          }
+                                        }
+                                      } else {
+                                        if (i != 0) {
+                                          controller.otpNum =
+                                              controller.otpNum.substring(0, i);
+                                          controller.otpFields[i - 1]
+                                              .requestFocus();
+                                        } else {
+                                          controller.otpNum = "";
+                                        }
+                                      }
                                     },
                                   ),
                                 )
                             ],
                           ),
+                          Obx(() => controller.otpVerification.value != ""
+                              ? SizedBox(
+                                  height: 8,
+                                )
+                              : Container()),
+                          Obx(() => Align(
+                                alignment: Alignment.center,
+                                child: Text(controller.otpVerification.value,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.normal,
+                                      color: controller.otpVerification.value ==
+                                              controller.otpVerified
+                                          ? MyTheme.borderchangeColor
+                                          : Colors.red,
+                                    )),
+                              )),
                           SizedBox(
                             height: kToolbarHeight * 0.4,
                           ),
                           AnimatedBuilder(
                               animation: Listenable.merge([
-                                controller.otpText[j],
+                                controller.otpNumber[j],
                               ]),
                               builder: (context, child) {
                                 return InkWell(
                                   onTap: () async {
-                                    formKey.currentState!.save();
-                                    if (formKey.currentState!.validate()) ;
-                                    Get.toNamed(ChangePasswordPage1.id);
+                                    if (controller.otpVerification.value ==
+                                        controller.otpVerified) {
+                                      Get.toNamed(ChangePasswordPage1.id);
+                                    }
                                   },
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
                                     height: 54,
                                     decoration: BoxDecoration(
                                       color:
-                                          (controller.otpText[j].text.isEmpty)
+                                          (controller.otpNumber[j].text.isEmpty)
                                               ? MyTheme.imgtextColor
                                               : MyTheme.buttonchangeColor,
                                       borderRadius:
@@ -255,7 +302,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w600,
                                           color: (controller
-                                                  .otpText[j].text.isEmpty)
+                                                  .otpNumber[j].text.isEmpty)
                                               ? MyTheme.buttontextchangeColor
                                               : MyTheme.buttontextchangeColor,
                                         ),

@@ -56,6 +56,14 @@ class AuthController extends GetxController {
     await sfHelper.setLon(long);
     await sfHelper.setAddress(add);
   }
+  late List<TextEditingController> otpNumber;
+  String otpNum = '';
+  late List<FocusNode> otpField;
+
+  RxString otpVerification = "".obs;
+
+  String otpVerified = "OTP Verified";
+  String incorrect = "Incorrect OTP";
 
   @override
   void onInit() {
@@ -71,6 +79,8 @@ class AuthController extends GetxController {
     feedback = TextEditingController();
     otpFields = List.generate(4, (index) => FocusNode());
     otpText = List.generate(4, (index) => TextEditingController());
+    otpField = List.generate(6, (index) => FocusNode());
+    otpNumber = List.generate(6, (index) => TextEditingController());
     usernameController.addListener(onLooseFocus);
     userNameFocus.addListener(onLooseFocus);
     super.onInit();
