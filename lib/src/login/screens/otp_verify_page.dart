@@ -20,7 +20,7 @@ class VerifyOtpPage extends StatefulWidget {
 class _VerifyOtpPageState extends State<VerifyOtpPage> {
   final controller = Get.find<AuthController>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  int j = 0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -212,7 +212,10 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                             BorderRadius.circular(6.0),
                                       ),
                                     ),
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      print(value);
+                                      j = i;
+                                    },
                                   ),
                                 )
                             ],
@@ -222,7 +225,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                           ),
                           AnimatedBuilder(
                               animation: Listenable.merge([
-                                // controller.otpText[i],
+                                controller.otpText[j],
                               ]),
                               builder: (context, child) {
                                 return InkWell(
@@ -235,7 +238,10 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                     width: MediaQuery.of(context).size.width,
                                     height: 54,
                                     decoration: BoxDecoration(
-                                      color: MyTheme.buttonbackgroundColor,
+                                      color:
+                                          (controller.otpText[j].text.isEmpty)
+                                              ? MyTheme.imgtextColor
+                                              : MyTheme.buttonchangeColor,
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(6)),
                                     ),
@@ -248,7 +254,10 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                           fontFamily: 'Inter-Regular',
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.white,
+                                          color: (controller
+                                                  .otpText[j].text.isEmpty)
+                                              ? MyTheme.buttontextchangeColor
+                                              : MyTheme.buttontextchangeColor,
                                         ),
                                       ),
                                     ),

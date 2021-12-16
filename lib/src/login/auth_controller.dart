@@ -147,8 +147,8 @@ class AuthController extends GetxController {
   Future<void> changePassword() async {
     try {
       await services.changePassword(
+        usernameController.text.toLowerCase(),
         passwordController.text,
-        password2Controller.text,
       );
       Get.offAllNamed(LandingPage.id);
     } catch (e) {
