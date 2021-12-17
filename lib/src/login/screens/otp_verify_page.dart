@@ -215,7 +215,10 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                     ),
                                     onChanged: (value) {
                                       print(value);
-                                      j = i;
+                                      print(
+                                          '${controller.otp} type otp isssssssssssssss');
+                                      print(
+                                          '${respOtp} respOtp otp isssssssssssssss');
                                       print(controller.otpNumber[i]);
                                       if (value.length == 1) {
                                         controller.otpNum += value;
@@ -223,8 +226,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                           controller.otpField[i + 1]
                                               .requestFocus();
                                         } else {
-                                          if (respOtp ==
-                                              controller.otpNumber[i]) {
+                                          if (respOtp == controller.otpNum) {
                                             controller.otpVerification.value =
                                                 controller.otpVerified;
                                           } else {
