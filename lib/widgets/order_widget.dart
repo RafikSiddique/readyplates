@@ -192,8 +192,8 @@ class OrderWidget extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => BurgersupportingPage(
-                          restaurantModel: restaurantModel, isEditing: false),
+                      builder: (context) =>
+                          BookingDetails(restaurantModel, false),
                     ),
                     (route) => route.settings.name == LandingPage.id);
               },
