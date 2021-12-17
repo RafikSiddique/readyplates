@@ -175,14 +175,14 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                           SizedBox(
                             height: 10,
                           ),
-                         Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               for (var i = 0;
                                   i < controller.otpField.length;
                                   i++)
                                 Container(
-                                  width: 40,
+                                  width: 38,
                                   height: 50,
                                   margin: EdgeInsets.all(8),
                                   child: TextField(
@@ -219,7 +219,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                       print(controller.otpNumber[i]);
                                       if (value.length == 1) {
                                         controller.otpNum += value;
-                                        if (i < 3) {
+                                        if (i < 5) {
                                           controller.otpField[i + 1]
                                               .requestFocus();
                                         } else {
