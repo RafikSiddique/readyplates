@@ -29,6 +29,13 @@
             {
               "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "621674002284-8aa0809pakjrp46lu6h6k91taofv83nj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fladdra.readyplates"
+              }
             }
           ]
         }
@@ -58,6 +65,13 @@
             {
               "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "621674002284-8aa0809pakjrp46lu6h6k91taofv83nj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fladdra.readyplates"
+              }
             }
           ]
         }
