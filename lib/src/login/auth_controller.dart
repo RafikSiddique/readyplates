@@ -170,6 +170,9 @@ class AuthController extends GetxController {
       } else {
         usernameController.clear();
         passwordController.clear();
+        for (var i = 0; i < otpNumber.length; i++) {
+          otpNumber[i].clear();
+        }
         Get.toNamed(LoginPage.id);
       }
     } catch (e) {
@@ -278,6 +281,7 @@ class AuthController extends GetxController {
     (await SharedPreferences.getInstance()).clear();
     Get.find<OrderController>().clearController();
     Get.offAllNamed(OnbordingPage.id);
+    uid = '';
     final c = Get.find<HomeController>();
     c.clear();
   }
