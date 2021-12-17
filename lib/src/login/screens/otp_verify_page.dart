@@ -238,7 +238,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                         if (i != 0) {
                                           controller.otpNum =
                                               controller.otpNum.substring(0, i);
-                                          controller.otpFields[i - 1]
+                                          controller.otpField[i - 1]
                                               .requestFocus();
                                         } else {
                                           controller.otpNum = "";
