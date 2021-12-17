@@ -156,11 +156,15 @@ class BookingDetails extends GetView<OrderController> {
                             tempTime.hour,
                             tempTime.minute,
                             tempTime.second);
+                        Get.back();
                       } else {
-                        print("Failed");
-                        print(tempTime);
+                        Get.back();
+                        Get.showSnackbar(GetBar(
+                          duration: Duration(seconds: 2),
+                          message:
+                              "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
+                        ));
                       }
-                      Get.back();
                     },
                     fontSize: 12,
                     text: "Done",
