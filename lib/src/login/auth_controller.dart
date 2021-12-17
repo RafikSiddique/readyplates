@@ -6,6 +6,7 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/auth_service.dart';
 import 'package:readyplates/src/login/screens/ChangePassword2.dart';
+import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/screens/otp_verify_page.dart';
@@ -13,6 +14,8 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+String uid = '';
 
 class AuthController extends GetxController {
   final AuthenticationServices services = AuthenticationServices();
@@ -56,6 +59,7 @@ class AuthController extends GetxController {
     await sfHelper.setLon(long);
     await sfHelper.setAddress(add);
   }
+
   late List<TextEditingController> otpNumber;
   String otpNum = '';
   late List<FocusNode> otpField;
@@ -121,6 +125,7 @@ class AuthController extends GetxController {
       id = await services.login(
           usernameController.text.toLowerCase(), passwordController.text);
       await sfHelper.setUserId(id!);
+      uid = id!;
       if (!changedPassword) {
         // if (implicit) {
         //   // Get.toNamed(ImagePage.id);
@@ -160,7 +165,12 @@ class AuthController extends GetxController {
         usernameController.text.toLowerCase(),
         passwordController.text,
       );
-      Get.offAllNamed(LandingPage.id);
+      if (uid != '') {
+        Get.put(HomeController());
+        Get.offAllNamed(LandingPage.id);
+      } else {
+        Get.toNamed(LoginPage.id);
+      }
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
