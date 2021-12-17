@@ -7,7 +7,6 @@ import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/auth_service.dart';
 import 'package:readyplates/src/login/screens/ChangePassword2.dart';
 import 'package:readyplates/src/login/screens/index.dart';
-import 'package:readyplates/src/login/screens/mappage.dart';
 import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
@@ -169,6 +168,8 @@ class AuthController extends GetxController {
         Get.put(HomeController());
         Get.offAllNamed(LandingPage.id);
       } else {
+        usernameController.clear();
+        passwordController.clear();
         Get.toNamed(LoginPage.id);
       }
     } catch (e) {

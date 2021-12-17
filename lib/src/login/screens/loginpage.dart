@@ -212,18 +212,20 @@ class LoginPage extends StatelessWidget {
                             onTap: () {
                               Get.toNamed(ForgotPasswordPage.id);
                             },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text("Forget Password?",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xff32B768),
-                                    )),
-                              ],
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text("Forget Password?",
+                                      style: GoogleFonts.inter(
+                                        fontSize: 14,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xff32B768),
+                                      )),
+                                ],
+                              ),
                             ),
                           ),
                         SizedBox(height: 20),
