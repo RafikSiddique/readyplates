@@ -170,9 +170,12 @@ class AuthController extends GetxController {
       } else {
         usernameController.clear();
         passwordController.clear();
+        password2Controller.clear();
         for (var i = 0; i < otpNumber.length; i++) {
           otpNumber[i].clear();
         }
+        otpVerification = "".obs;
+        otpNum = '';
         Get.toNamed(LoginPage.id);
       }
     } catch (e) {

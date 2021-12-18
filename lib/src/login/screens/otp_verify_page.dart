@@ -130,13 +130,13 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Hero(
-                                    tag: "Forgot Password",
+                                    tag: "OTP Verification",
                                     child: Card(
                                       elevation: 0,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          "Forgot Password",
+                                          "OTP Verification",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.inter(
                                             fontSize: 17,
