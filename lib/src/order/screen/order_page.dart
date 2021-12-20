@@ -144,7 +144,6 @@ class OrderPage extends GetView<OrderController> {
               },
               child: PopUpMenuWidget(
                 onTap: () async {
-                  controller.calclateTotal(true);
                   editOrder(context, orderModel);
                 },
                 text: "Edit Order",

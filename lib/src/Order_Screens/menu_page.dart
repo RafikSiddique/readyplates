@@ -195,6 +195,7 @@ class MenuPage extends StatelessWidget {
                             : MyTheme.hinttextColor,
                         onTap: () {
                           if (isEditing) {
+                            orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {
                               Get.snackbar("Please add an item",
                                   "At least add atleast 1 item from this restaurant to proceed to booking");

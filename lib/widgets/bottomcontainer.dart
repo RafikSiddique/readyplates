@@ -84,6 +84,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   onTap: () async {
                     await Get.find<HomeController>()
                         .getFoodItems(widget.restaurantModel.id.toString());
+
                     if (widget.isEditing) {
                       Navigator.push(
                           context,
@@ -139,7 +140,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
             ),
           ),
           SizedBox(
-            height: Platform.isIOS? 20 : 10,
+            height: Platform.isIOS ? 20 : 10,
           )
         ],
       ),

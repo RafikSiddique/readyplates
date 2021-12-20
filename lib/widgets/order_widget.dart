@@ -122,7 +122,6 @@ class OrderWidget extends StatelessWidget {
               width: Get.width,
               text: "Modify Order",
               onTap: () async {
-                controller.calclateTotal(true);
                 editOrder(context);
               },
               backgroundColor: Colors.white,
