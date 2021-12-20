@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:readyplates/models/food_item_model.dart';
 
 enum OrderState { placed, inProgress, completed, cancelled }
 
@@ -294,8 +295,8 @@ class MenuFromApi {
 
   factory MenuFromApi.fromMap(Map<String, dynamic> map) {
     return MenuFromApi(
-      image1: map['image1'] ?? "",
-      id: map['id'],
+      image1: getUrl(map['image1']??"") ,
+            id: map['id'],
       name: map['name'],
     );
   }
