@@ -178,6 +178,7 @@ class OrderWidget extends StatelessWidget {
               width: Get.width,
               text: "Order Again",
               onTap: () async {
+                controller.cartItems.clear();
                 orderModel.orderitems.forEach((e) {
                   controller.cartItems.add(CartModel(
                       user: "",
@@ -187,6 +188,7 @@ class OrderWidget extends StatelessWidget {
                       foodImage: e.menu.image1,
                       foodPrice: double.parse(e.price).obs,
                       restaurant: orderModel.restaurant.id));
+                  print('menu image 11111111111 ${e.menu.image1}');
                 });
                 RestaurantModel restaurantModel = await controller
                     .getSingleRestaurant(orderModel.restaurant.id);
