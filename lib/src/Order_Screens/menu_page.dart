@@ -216,14 +216,15 @@ class _MenuPageState extends State<MenuPage> {
                         onTap: () async {
                           if (widget.isEditing) {
                             orderController.calclateTotal(true);
-                            if (orderController.orderEdit.isEmpty ||
-                                orderController.orderEdit.where(
-                                        (p0) => p0.foodQuantity.value == 0) ==
-                                    orderController.orderEdit.length) {
+                            if (orderController.orderEdit.isEmpty) {
                               Get.snackbar("Please add an item",
                                   "At least add atleast 1 item from this restaurant to proceed to booking");
-                            } else {
+                            } else if (orderController.orderEdit.any(
+                                (element) => element.foodQuantity.value > 0)) {
                               Get.back();
+                            } else {
+                              Get.snackbar("Please add an item",
+                                  "At least add atleast 1 item from this restaurant to proceed to booking");
                             }
                           } else {
                             orderController.calclateTotal();

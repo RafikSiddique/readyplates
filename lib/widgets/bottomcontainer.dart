@@ -123,7 +123,9 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   text: widget.isEditing ? "Confirm" : "Book",
                   onTap: () async {
                     if (widget.isEditing) {
-                      if (controller.orderEdit.isNotEmpty)
+                      if (controller.orderEdit.isNotEmpty &&
+                          controller.orderEdit
+                              .any((element) => element.foodQuantity.value > 0))
                         Get.find<OrderController>().editOrders();
                       else
                         Get.snackbar("Error",
