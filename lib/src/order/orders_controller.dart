@@ -165,11 +165,15 @@ class OrderController extends GetxController {
         geteditItem(id).foodQuantity--;
       } else {
         OrderEditModel item = geteditItem(id);
-        orderEdit.remove(item);
+        int v = orderEdit.indexOf(item);
+        orderEdit[v].foodQuantity.value = 0;
+        calclateTotal(true);
       }
     } else {
       OrderEditModel item = geteditItem(id);
-      orderEdit.remove(item);
+      int v = orderEdit.indexOf(item);
+      orderEdit[v].foodQuantity.value = 0;
+      calclateTotal(true);
     }
     calclateTotal(true);
   }
@@ -247,50 +251,6 @@ class OrderController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
-
-/*   Future<void> orderWithoutPayment(RestaurantModel restaurantModel) async {
-    try {
-      String id = await sfHelper.getUserId();
-      OrderModel orderModel = OrderModel(
-          payment: "",
-          user: int.parse(id),
-          orderState: OrderState.placed,
-          restaurant: restaurantModel.id,
-          orderitems: cartItems
-              .map((element) => OrderFoodItem(
-                  id: element.foodItem.value,
-                  count: element.foodQuantity.value,
-                  price: element.foodPrice.value))
-              .toList(),
-          noOfPeople: numberOfPeople.value,
-          table: null,
-          tax: 50,
-          totalprice: calclateTotal(),
-          date:
-              DateFormat(DateFormat.YEAR_MONTH_DAY).format(selectedDate.value),
-          time:
-              DateFormat(DateFormat.HOUR24_MINUTE).format(selectedDate.value));
-      OrderModelApi orderModelApi = await services.orderapi(orderModel);
-
-      await getorder();
-      cartApiItems.clear();
-      cartItems.forEach((e) {
-        CartModel element = getCartItem(e.foodItem.value);
-        element.foodQuantity.value = 0;
-        element.user = id;
-        cart(element);
-      });
-      cartItems.clear();
-      calclateTotal();
-
-      Get.to(() => Chekoutdone(
-            orderModelApi: orderModelApi,
-            isComplete: false,
-          ));
-    } catch (e) {
-      Get.snackbar("Error", e.toString());
-    }
-  } */
 
   Future<void> order(RestaurantModel restaurantModel) async {
     try {
@@ -434,33 +394,4 @@ class OrderController extends GetxController {
 
 //
   Rx<DateTime> globletime = DateTime.now().obs;
-
-  // Future<void> tableList(
-  //   int resId,
-  // ) async {
-  //   globletime.addListener(GetStream(
-  //     onListen: () {
-  //       print(globletime.value);
-  //     },
-  //   ));
-
-  //   DateTime end = globletime.value;
-
-  //   try {
-  //     String id = await sfHelper.getUserId();
-  //     await services.tableconfig(
-  //         id,
-  //         TableModel(
-  //             restaurant: resId,
-  //             capacity: numberOfPeople.value,
-  //             orderdate: DateFormat(DateFormat.YEAR_MONTH_DAY)
-  //                 .format(selectedDate.value),
-  //             starttime: DateFormat(DateFormat.HOUR24_MINUTE_SECOND)
-  //                 .format(globletime.value),
-  //             endtime: DateFormat(DateFormat.HOUR24_MINUTE_SECOND)
-  //                 .format(end.add(Duration(minutes: 45)))));
-  //   } catch (e) {
-  //     Get.snackbar("Error", e.toString());
-  //   }
-  // }
 }
