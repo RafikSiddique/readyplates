@@ -131,6 +131,7 @@ class AuthController extends GetxController {
         // } else {
 
         Get.put(OrderController());
+        Get.put(HomeController());
         bool permitted = await getPermission();
         if (permitted) {
           Position position = await Geolocator.getCurrentPosition();
