@@ -92,6 +92,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                             builder: (context) => MenuPage(
                               restaurantModel: widget.restaurantModel,
                               isEditing: true,
+                              isAddItem: true,
                             ),
                           )).then((value) => setState(() {
                             widget.setState();
@@ -103,6 +104,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                           builder: (context) => MenuPage(
                             restaurantModel: widget.restaurantModel,
                             isEditing: false,
+                            isAddItem: true,
                           ),
                         ),
                         (route) => route.settings.name == 'details',

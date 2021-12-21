@@ -41,7 +41,9 @@ class OrderController extends GetxController {
     total.value = 0;
     if (isEdit) {
       for (var item in orderEdit) {
-        total.value += item.foodPrice.value;
+        if (item.foodQuantity.value != 0) {
+          total.value += item.foodPrice.value;
+        }
       }
     } else {
       for (var item in cartItems) {

@@ -109,21 +109,7 @@ class HomeController extends GetxController {
     getAddress();
     Get.put(OrderController());
     getRestaurants();
-    restaurants.addListener(GetStream(
-      onListen: () {
-        if (restaurants.isEmpty) {
-          print('Empty');
-        } else {
-          if (restaurants.first.id == -1) {
-            print(
-                "--------------------------------------1-------------------------------");
-          } else {
-            print('Successs');
-            print(restaurants);
-          }
-        }
-      },
-    ));
+    onPageChange(currentIndex.value);
     super.onInit();
   }
 
@@ -224,7 +210,7 @@ class HomeController extends GetxController {
         this.timer = timer;
       });
     } else if (index == 2) {
-      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      timer = Timer.periodic(Duration(seconds: 1), (timer) async {
         await Get.find<OrderController>().getorder();
         print("Order Get");
         this.timer = timer;

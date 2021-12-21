@@ -277,6 +277,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
               restaurantModel: widget.restaurantModel,
               isEditing: widget.isEditing,
               setState: () {
+                controller.calclateTotal(widget.isEditing);
                 setState(() {});
               },
             ),

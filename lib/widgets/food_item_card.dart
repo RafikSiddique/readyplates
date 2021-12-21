@@ -63,7 +63,8 @@ class FoodItemCard extends GetView<OrderController> {
                             child: (isEditing
                                     ? orderController.orderEdit.any((el) =>
                                         el.foodItem == foodItemModel.id &&
-                                        el.restaurant == restaurantModel.id)
+                                        el.restaurant == restaurantModel.id &&
+                                        el.foodQuantity.value != 0)
                                     : orderController.cartItems.any((el) =>
                                         el.foodItem.value == foodItemModel.id &&
                                         el.restaurant == restaurantModel.id))
@@ -86,10 +87,10 @@ class FoodItemCard extends GetView<OrderController> {
                                             restaurantModel.id);
                                     },
                                     onDecrement: () {
-                                      if (isEditing)
+                                      if (isEditing) {
                                         orderController
                                             .decrementEdit(foodItemModel.id);
-                                      else
+                                      } else
                                         orderController.decrement(
                                             foodItemModel.id,
                                             restaurantModel.id);
@@ -167,25 +168,44 @@ class FoodItemCard extends GetView<OrderController> {
                                             orderController.cart(cartModel);
                                           }
                                         } else {
-                                          OrderEditModel orderEditModel =
-                                              OrderEditModel(
-                                                  foodName: foodItemModel.name,
-                                                  orderId:
-                                                      orderController.orderId,
-                                                  id: -1,
-                                                  foodItem:
-                                                      foodItemModel.id.obs,
-                                                  foodQuantity: 1.obs,
-                                                  foodPrice: RxDouble(
-                                                      double.parse(
-                                                          foodItemModel.cost)),
-                                                  restaurant:
-                                                      restaurantModel.id,
-                                                  foodImage:
-                                                      foodItemModel.image1,
-                                                  isUpdated: false);
-                                          orderController.orderEdit
-                                              .add(orderEditModel);
+                                          if (orderController.orderEdit.any(
+                                              (el) =>
+                                                  el.foodItem ==
+                                                      foodItemModel.id &&
+                                                  el.restaurant ==
+                                                      restaurantModel.id &&
+                                                  el.foodQuantity.value == 0)) {
+                                            orderController.orderEdit
+                                                .firstWhere((el) =>
+                                                    el.foodItem ==
+                                                        foodItemModel.id &&
+                                                    el.restaurant ==
+                                                        restaurantModel.id)
+                                                .foodQuantity
+                                                .value++;
+                                          } else {
+                                            OrderEditModel orderEditModel =
+                                                OrderEditModel(
+                                                    foodName:
+                                                        foodItemModel.name,
+                                                    orderId:
+                                                        orderController.orderId,
+                                                    id: -1,
+                                                    foodItem:
+                                                        foodItemModel.id.obs,
+                                                    foodQuantity: 1.obs,
+                                                    foodPrice: RxDouble(
+                                                        double.parse(
+                                                            foodItemModel
+                                                                .cost)),
+                                                    restaurant:
+                                                        restaurantModel.id,
+                                                    foodImage:
+                                                        foodItemModel.image1,
+                                                    isUpdated: false);
+                                            orderController.orderEdit
+                                                .add(orderEditModel);
+                                          }
                                         }
                                       },
                                     ),

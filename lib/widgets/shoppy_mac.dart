@@ -172,6 +172,7 @@ class ShooppymacPage extends StatelessWidget {
                         if (controller.cartItems.length > 1) {
                           controller.decrement(cartModel!.foodItem.value,
                               cartModel!.restaurant, true);
+                          controller.calclateTotal(false);
                           setStae();
                         } else {
                           Get.showSnackbar(GetBar(
@@ -183,9 +184,25 @@ class ShooppymacPage extends StatelessWidget {
                         }
                       } else {
                         if (controller.orderEdit.length > 1) {
-                          int v = controller.orderEdit.indexOf(orderEditModel!);
-                          controller.orderEdit[v].foodQuantity.value = 0;
-                          setStae();
+                          List<OrderEditModel> isAny0Quant = controller
+                              .orderEdit
+                              .where(
+                                  (element) => element.foodQuantity.value > 0)
+                              .toList();
+                          if (isAny0Quant.length > 1) {
+                            int v =
+                                controller.orderEdit.indexOf(orderEditModel!);
+                            controller.orderEdit[v].foodQuantity.value = 0;
+                            controller.calclateTotal(true);
+                            setStae();
+                          } else {
+                            Get.showSnackbar(GetBar(
+                              title: "Error",
+                              message:
+                                  "You should atleast have one item in cart for booking summary",
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
                         } else {
                           Get.showSnackbar(GetBar(
                             title: "Error",

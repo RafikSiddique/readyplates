@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
@@ -17,10 +18,15 @@ import 'package:readyplates/widgets/food_item_card.dart';
 class MenuPage extends StatelessWidget {
   static const id = "/menupage";
   final RestaurantModel restaurantModel;
+  final bool isAddItem;
   late HomeController controller;
   final orderController = Get.find<OrderController>();
   final bool isEditing;
-  MenuPage({Key? key, required this.restaurantModel, this.isEditing = false})
+  MenuPage(
+      {Key? key,
+      required this.restaurantModel,
+      this.isEditing = false,
+      this.isAddItem = false})
       : super(key: key) {
     bool isReg = Get.isRegistered<HomeController>();
     if (!isReg) {
@@ -47,6 +53,12 @@ class MenuPage extends StatelessWidget {
             return true;
           }
         } else {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(
+                context, LandingPage.id, (route) => false);
+          }
           return true;
         }
       },
@@ -196,7 +208,10 @@ class MenuPage extends StatelessWidget {
                         onTap: () {
                           if (isEditing) {
                             orderController.calclateTotal(true);
-                            if (orderController.orderEdit.isEmpty) {
+                            if (orderController.orderEdit.isEmpty ||
+                                orderController.orderEdit.where(
+                                        (p0) => p0.foodQuantity.value == 0) ==
+                                    orderController.orderEdit.length) {
                               Get.snackbar("Please add an item",
                                   "At least add atleast 1 item from this restaurant to proceed to booking");
                             } else {
@@ -210,16 +225,28 @@ class MenuPage extends StatelessWidget {
                               Get.snackbar("Please add an item",
                                   "At least add atleast 1 item from this restaurant to proceed to booking");
                             } else {
-                              orderController.selectedDate.value =
-                                  DateTime.now();
-                              orderController.numberOfPeople.value = 1;
-                              orderController.globletime.value = DateTime.now();
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) => BookingDetails(
-                                        restaurantModel, isEditing),
-                                  ));
+                              if (!isAddItem) {
+                                orderController.selectedDate.value =
+                                    DateTime.now();
+                                orderController.numberOfPeople.value = 1;
+                                orderController.globletime.value =
+                                    DateTime.now();
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => BookingDetails(
+                                          restaurantModel, isEditing),
+                                    ));
+                              } else {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) =>
+                                          BurgersupportingPage(
+                                              restaurantModel: restaurantModel,
+                                              isEditing: isEditing),
+                                    ));
+                              }
                             }
                           }
                         },
