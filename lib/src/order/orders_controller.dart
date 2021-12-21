@@ -167,12 +167,14 @@ class OrderController extends GetxController {
         OrderEditModel item = geteditItem(id);
         int v = orderEdit.indexOf(item);
         orderEdit[v].foodQuantity.value = 0;
+        orderEdit[v].foodPrice.value = 0;
         calclateTotal(true);
       }
     } else {
       OrderEditModel item = geteditItem(id);
       int v = orderEdit.indexOf(item);
       orderEdit[v].foodQuantity.value = 0;
+      orderEdit[v].foodPrice.value = 0;
       calclateTotal(true);
     }
     calclateTotal(true);

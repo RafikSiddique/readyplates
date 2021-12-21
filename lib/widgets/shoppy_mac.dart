@@ -193,6 +193,7 @@ class ShooppymacPage extends StatelessWidget {
                             int v =
                                 controller.orderEdit.indexOf(orderEditModel!);
                             controller.orderEdit[v].foodQuantity.value = 0;
+                            controller.orderEdit[v].foodPrice.value = 0;
                             controller.calclateTotal(true);
                             setStae();
                           } else {

@@ -175,14 +175,21 @@ class FoodItemCard extends GetView<OrderController> {
                                                   el.restaurant ==
                                                       restaurantModel.id &&
                                                   el.foodQuantity.value == 0)) {
-                                            orderController.orderEdit
-                                                .firstWhere((el) =>
-                                                    el.foodItem ==
-                                                        foodItemModel.id &&
-                                                    el.restaurant ==
-                                                        restaurantModel.id)
-                                                .foodQuantity
-                                                .value++;
+                                            OrderEditModel model =
+                                                orderController.orderEdit
+                                                    .firstWhere((el) =>
+                                                        el.foodItem ==
+                                                            foodItemModel.id &&
+                                                        el.restaurant ==
+                                                            restaurantModel.id);
+                                            int v = controller.orderEdit
+                                                .indexOf(model);
+                                            controller.orderEdit[v].foodQuantity
+                                                .value = 1;
+                                            controller.orderEdit[v].foodPrice
+                                                    .value =
+                                                double.parse(
+                                                    foodItemModel.cost);
                                           } else {
                                             OrderEditModel orderEditModel =
                                                 OrderEditModel(
