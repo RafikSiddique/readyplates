@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -155,7 +157,9 @@ class AuthController extends GetxController {
       }
       isLoading.value = false;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -180,7 +184,9 @@ class AuthController extends GetxController {
         Get.toNamed(LoginPage.id);
       }
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -191,7 +197,9 @@ class AuthController extends GetxController {
       );
       Get.toNamed(VerifyOtpPage.id);
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -248,35 +256,12 @@ class AuthController extends GetxController {
         false,
       );
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
-  // Future<void> uploadImage(File file) async {
-  //   try {
-  //     bool success = await services.uploadImage(file);
-  //     if (success) {
-  //       bool permitted = await getPermission();
-  //       if (permitted) {
-  //         Position position = await Geolocator.getCurrentPosition();
-  //         LatLng latLng = LatLng(position.latitude, position.longitude);
-  //         Get.to(() => MapPage(
-  //               isHome: false,
-  //               latLng: latLng,
-  //             ));
-  //       } else {
-  //         LatLng latLng = LatLng(20.708391858928152, -156.32455678019107);
-
-  //         Get.to(() => MapPage(
-  //               isHome: false,
-  //               latLng: latLng,
-  //             ));
-  //       }
-  //     }
-  //   } catch (e) {
-  //     Get.snackbar("Error", e.toString());
-  //   }
-  // }
 
   RxString gender = 'Male'.obs;
   final items = ['Male', 'Female'];
