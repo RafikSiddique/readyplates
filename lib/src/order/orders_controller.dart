@@ -301,6 +301,14 @@ class OrderController extends GetxController {
   //get
   Future<void> getorder() async {
     try {
+      bool isRegistered = Get.isRegistered<HomeController>();
+      HomeController homeController;
+      if (isRegistered) {
+        homeController = Get.find<HomeController>();
+      } else {
+        homeController = Get.put(HomeController());
+      }
+      homeController.onPageChange(homeController.currentIndex.value);
       String id = await sfHelper.getUserId();
       final orderList = await services.getorder(id);
       active.value = orderList
