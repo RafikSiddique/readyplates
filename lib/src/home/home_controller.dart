@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 import 'package:get/get.dart';
 import 'package:readyplates/models/food_item_model.dart';
@@ -152,7 +153,9 @@ class HomeController extends GetxController {
       if (foodItems.isNotEmpty && foodItems.first.id == -1) {
         foodItems.clear();
       }
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -193,11 +196,15 @@ class HomeController extends GetxController {
         restaurants.clear();
       }
       timer?.cancel();
-      Get.showSnackbar(GetBar(
-        title: "Server Error",
-        message: "Something went wrong",
-        duration: Duration(seconds: 1),
-      ));
+      if (e.runtimeType != SocketException &&
+          lat.value != 0 &&
+          lon.value != 0) {
+        Get.showSnackbar(GetBar(
+          title: "Server Error",
+          message: "Something went wrong",
+          duration: Duration(seconds: 1),
+        ));
+      }
     }
   }
 

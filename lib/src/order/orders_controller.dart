@@ -232,7 +232,9 @@ class OrderController extends GetxController {
       await services.addToCartApi(cartModel);
       calclateTotal();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -250,7 +252,9 @@ class OrderController extends GetxController {
       cartItems.clear();
       calclateTotal();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -294,7 +298,9 @@ class OrderController extends GetxController {
             isComplete: false,
           ));
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -317,7 +323,9 @@ class OrderController extends GetxController {
           orderList.where((element) => element.status.index > 1).toList();
       ended.sort((a, b) => b.id.compareTo(a.id));
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -326,7 +334,9 @@ class OrderController extends GetxController {
       await services.updateStatus(id, status);
       await getorder();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -335,7 +345,9 @@ class OrderController extends GetxController {
       await services.updateFeedback(id, feedback);
       await getorder();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -345,7 +357,9 @@ class OrderController extends GetxController {
 
       await getorder();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -372,7 +386,9 @@ class OrderController extends GetxController {
       imgs = null;
       Get.offAllNamed(Tellafriend.id);
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -390,7 +406,9 @@ class OrderController extends GetxController {
       Get.offAllNamed(LandingPage.id);
       Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
     }
   }
 

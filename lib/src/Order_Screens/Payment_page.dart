@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/feedback_page.dart';
+import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
@@ -315,6 +316,8 @@ class PaymentPage extends StatelessWidget {
                           isComplete: true,
                         ));
                   } else {
+                    Get.find<HomeController>().currentIndex.value = 2;
+                    Get.find<HomeController>().onPageChange(2);
                     Navigator.pushNamedAndRemoveUntil(
                         context, LandingPage.id, (route) => false);
                   }
