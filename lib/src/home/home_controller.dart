@@ -196,7 +196,9 @@ class HomeController extends GetxController {
         restaurants.clear();
       }
       timer?.cancel();
-      if (e.runtimeType != SocketException) {
+      if (e.runtimeType != SocketException &&
+          lat.value != 0 &&
+          lon.value != 0) {
         Get.showSnackbar(GetBar(
           title: "Server Error",
           message: "Something went wrong",

@@ -13,6 +13,7 @@ import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
+import 'package:readyplates/utils/fcm_service.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -214,7 +215,9 @@ class AuthController extends GetxController {
     passwordController.clear();
     usernameController.clear();
     c.currentIndex.value = 0;
+    FirebaseMessagingService().getToken();
     String s = await c.getAddress();
+
     print("Initial Address");
     print(s);
     if (s == "") {
@@ -261,7 +264,6 @@ class AuthController extends GetxController {
       }
     }
   }
-
 
   RxString gender = 'Male'.obs;
   final items = ['Male', 'Female'];
