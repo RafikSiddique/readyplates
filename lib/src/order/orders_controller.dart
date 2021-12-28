@@ -10,7 +10,6 @@ import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/models/table_model.dart';
-import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
@@ -293,10 +292,8 @@ class OrderController extends GetxController {
       cartItems.clear();
       calclateTotal();
       getorder();
-      Get.to(() => Chekoutdone(
-            orderModelApi: orderModelApi,
-            isComplete: false,
-          ));
+      Get.offAllNamed(LandingPage.id);
+      Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
       if (e.runtimeType != SocketException) {
         Get.snackbar("Error", e.toString());
