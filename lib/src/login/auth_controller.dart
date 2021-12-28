@@ -146,7 +146,7 @@ class AuthController extends GetxController {
         }
 
         lNameController.clear();
-        fNamController.clear();
+        // fNamController.clear();
         password2Controller.clear();
         passwordController.clear();
         usernameController.clear();
@@ -210,7 +210,7 @@ class AuthController extends GetxController {
 
     Get.put(OrderController());
     lNameController.clear();
-    fNamController.clear();
+    // fNamController.clear();
     password2Controller.clear();
     passwordController.clear();
     usernameController.clear();
@@ -274,6 +274,8 @@ class AuthController extends GetxController {
     Get.find<OrderController>().clearController();
     Get.offAllNamed(OnbordingPage.id);
     uid = '';
+    dobController.clear();
+    mobController.clear();
     final c = Get.find<HomeController>();
     c.clear();
   }

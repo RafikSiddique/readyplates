@@ -219,7 +219,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               Text(
                                 double.parse(widget.restaurantModel.address2)
                                         .toStringAsFixed(2) +
-                                    " Kms",
+                                    " mi",
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       fontSize: 13,
@@ -584,9 +584,10 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               Get.back();
                             },
                           ),
-                        if(Platform.isIOS) SizedBox(
-                            height: 20,
-                         )
+                          if (Platform.isIOS)
+                            SizedBox(
+                              height: 20,
+                            )
                         ],
                       ),
                     ),
@@ -688,7 +689,7 @@ class _FullImageState extends State<FullImage> {
           ),
         ),
         SizedBox.square(
-          dimension : 10,
+          dimension: 10,
         )
       ],
     ));

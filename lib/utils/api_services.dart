@@ -5,6 +5,7 @@ class ApiService {
   final String baseUrlheroku = 'https://readyplates.herokuapp.com';
   final String baseUrlLive = "http://202.53.174.5:8000";
   final String baseUrlLocal = "http://32.200.145.157:8000";
+  final String baseUrlFladdra = "http://192.168.0.194:5500";
   String get baseUriImage => baseUrlLive;
   String get baseUri => baseUriImage + "/";
 

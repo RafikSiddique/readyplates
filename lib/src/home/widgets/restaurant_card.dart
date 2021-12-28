@@ -182,7 +182,7 @@ class RestaurantCard extends GetView<HomeController> {
                             " | " +
                             double.parse(restaurantModel.address2)
                                 .toStringAsFixed(2) +
-                            " Kms",
+                            " mi",
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
