@@ -67,7 +67,9 @@ class OrderWidget extends StatelessWidget {
         CupertinoPageRoute(
           builder: (context) => BurgersupportingPage(
             restaurantModel: restaurantModel,
-            isEditing: true,
+            isEditing: orderModel.status == 0
+                ? Editing.unconfirmed
+                : Editing.confirmed,
             orderModelApi: orderModel,
           ),
         ));
@@ -195,7 +197,7 @@ class OrderWidget extends StatelessWidget {
                     context,
                     CupertinoPageRoute(
                       builder: (context) =>
-                          BookingDetails(restaurantModel, false),
+                          BookingDetails(restaurantModel, Editing.none),
                     ),
                     (route) => route.settings.name == LandingPage.id);
               },
@@ -249,7 +251,8 @@ class OrderWidget extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => BookingDetails(restaurantModel, false),
+                  builder: (context) =>
+                      BookingDetails(restaurantModel, Editing.none),
                 ),
                 (route) => route.settings.name == LandingPage.id);
           },

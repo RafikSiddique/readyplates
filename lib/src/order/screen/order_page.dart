@@ -105,7 +105,9 @@ class OrderPage extends GetView<OrderController> {
         CupertinoPageRoute(
           builder: (context) => BurgersupportingPage(
             restaurantModel: restaurantModel,
-            isEditing: true,
+            isEditing: orderModel.status == 0
+                ? Editing.unconfirmed
+                : Editing.confirmed,
             orderModelApi: orderModel,
           ),
         ));

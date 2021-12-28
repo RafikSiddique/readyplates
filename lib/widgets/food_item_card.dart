@@ -5,13 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/edit_button.dart';
 
 class FoodItemCard extends GetView<OrderController> {
-  final bool isEditing;
+  final Editing isEditing;
   final FoodItemModel foodItemModel;
   final RestaurantModel restaurantModel;
 
@@ -60,7 +61,7 @@ class FoodItemCard extends GetView<OrderController> {
                         ),
                         Align(
                             alignment: Alignment.bottomCenter,
-                            child: (isEditing
+                            child: (isEditing != Editing.none
                                     ? orderController.orderEdit.any((el) =>
                                         el.foodItem == foodItemModel.id &&
                                         el.restaurant == restaurantModel.id &&
@@ -69,7 +70,7 @@ class FoodItemCard extends GetView<OrderController> {
                                         el.foodItem.value == foodItemModel.id &&
                                         el.restaurant == restaurantModel.id))
                                 ? IncDecButton(
-                                    text: isEditing
+                                    text: isEditing != Editing.none
                                         ? orderController
                                             .geteditItem(foodItemModel.id)
                                             .foodQuantity
@@ -78,7 +79,7 @@ class FoodItemCard extends GetView<OrderController> {
                                             .foodQuantity,
                                     widthFraction: .18,
                                     onIncrement: () {
-                                      if (isEditing)
+                                      if (isEditing != Editing.none)
                                         orderController
                                             .incrementEdit(foodItemModel.id);
                                       else
@@ -87,9 +88,16 @@ class FoodItemCard extends GetView<OrderController> {
                                             restaurantModel.id);
                                     },
                                     onDecrement: () {
-                                      if (isEditing) {
-                                        orderController
-                                            .decrementEdit(foodItemModel.id);
+                                      if (isEditing != Editing.none) {
+                                        if (isEditing == Editing.confirmed) {
+                                          Get.showSnackbar(GetBar(
+                                            message:
+                                                "You cannot decrease any item once the order is confirmed",
+                                          ));
+                                        } else {
+                                          orderController
+                                              .decrementEdit(foodItemModel.id);
+                                        }
                                       } else
                                         orderController.decrement(
                                             foodItemModel.id,
@@ -112,7 +120,7 @@ class FoodItemCard extends GetView<OrderController> {
                                     child: AddButton(
                                       widthFraction: 0.18,
                                       onTap: () {
-                                        if (!isEditing) {
+                                        if (isEditing == Editing.none) {
                                           if (orderController.cartItems.any(
                                               (element) =>
                                                   element.restaurant !=

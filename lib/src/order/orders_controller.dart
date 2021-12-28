@@ -126,6 +126,7 @@ class OrderController extends GetxController {
       String id = await sfHelper.getUserId();
       List<CartApiModel> listOfApi = await services.getCart(id);
       List<CartModel> models = listOfApi
+          .where((element) => element.foodQuantity != 0)
           .map((e) => CartModel(
               user: id,
               foodItem: e.foodItem.id.obs,

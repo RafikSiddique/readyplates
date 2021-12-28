@@ -12,7 +12,7 @@ import 'package:readyplates/widgets/buuton.dart';
 
 class Bottomcontainer extends StatefulWidget {
   final RestaurantModel restaurantModel;
-  final bool isEditing;
+  final Editing isEditing;
   final Function() setState;
   const Bottomcontainer(
       {Key? key,
@@ -85,13 +85,13 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                     await Get.find<HomeController>()
                         .getFoodItems(widget.restaurantModel.id.toString());
 
-                    if (widget.isEditing) {
+                    if (widget.isEditing != Editing.none) {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
                             builder: (context) => MenuPage(
                               restaurantModel: widget.restaurantModel,
-                              isEditing: true,
+                              isEditing: widget.isEditing,
                               isAddItem: true,
                             ),
                           )).then((value) => setState(() {
@@ -103,7 +103,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                         CupertinoPageRoute(
                           builder: (context) => MenuPage(
                             restaurantModel: widget.restaurantModel,
-                            isEditing: false,
+                            isEditing: widget.isEditing,
                             isAddItem: true,
                           ),
                         ),
@@ -120,9 +120,9 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                 Elevated(
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),
-                  text: widget.isEditing ? "Confirm" : "Book",
+                  text: widget.isEditing != Editing.none ? "Confirm" : "Book",
                   onTap: () async {
-                    if (widget.isEditing) {
+                    if (widget.isEditing != Editing.none) {
                       if (controller.orderEdit.isNotEmpty &&
                           controller.orderEdit
                               .any((element) => element.foodQuantity.value > 0))

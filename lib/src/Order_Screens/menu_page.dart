@@ -20,11 +20,11 @@ class MenuPage extends StatefulWidget {
   final RestaurantModel restaurantModel;
   final bool isAddItem;
   late HomeController controller;
-  final bool isEditing;
+  final Editing isEditing;
   MenuPage(
       {Key? key,
       required this.restaurantModel,
-      this.isEditing = false,
+      this.isEditing = Editing.none,
       this.isAddItem = false})
       : super(key: key) {
     bool isReg = Get.isRegistered<HomeController>();
@@ -50,7 +50,7 @@ class _MenuPageState extends State<MenuPage> {
     // Size size = media.size;
     return WillPopScope(
       onWillPop: () async {
-        if (widget.isEditing) {
+        if (widget.isEditing != Editing.none) {
           if (orderController.orderEdit.isEmpty) {
             Navigator.pushNamedAndRemoveUntil(
                 context, LandingPage.id, (route) => false);
@@ -206,7 +206,7 @@ class _MenuPageState extends State<MenuPage> {
                   Obx(() => Elevated(
                         text: "Proceed to Booking",
                         width: double.infinity,
-                        backgroundColor: (widget.isEditing
+                        backgroundColor: (widget.isEditing != Editing.none
                                 ? orderController.orderEdit.isNotEmpty
                                 : orderController.cartItems.any((element) =>
                                     element.restaurant ==
@@ -214,7 +214,7 @@ class _MenuPageState extends State<MenuPage> {
                             ? MyTheme.buttonbackgroundColor
                             : MyTheme.hinttextColor,
                         onTap: () async {
-                          if (widget.isEditing) {
+                          if (widget.isEditing != Editing.none) {
                             orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {
                               Get.snackbar("Please add an item",

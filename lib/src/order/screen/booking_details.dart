@@ -18,7 +18,7 @@ import 'package:readyplates/widgets/buuton.dart';
 
 class BookingDetails extends GetView<OrderController> {
   final RestaurantModel restaurantModel;
-  final bool isEditing;
+  final Editing isEditing;
   BookingDetails(this.restaurantModel, this.isEditing);
   DateTime now = DateTime.now();
 
@@ -425,7 +425,7 @@ class BookingDetails extends GetView<OrderController> {
                               .format(controller.selectedDate.value)
                               .toLowerCase()) &&
                       checkTime()) {
-                    controller.calclateTotal(isEditing);
+                    controller.calclateTotal(isEditing!=Editing.none);
                     print("success");
                     Navigator.push(
                         context,
@@ -458,55 +458,3 @@ class BookingDetails extends GetView<OrderController> {
   }
 }
 
-class MonthModel {
-  String text;
-  List<int> days;
-  MonthModel({
-    required this.text,
-    required this.days,
-  });
-
-  MonthModel copyWith({
-    String? text,
-    List<int>? days,
-  }) {
-    return MonthModel(
-      text: text ?? this.text,
-      days: days ?? this.days,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'text': text,
-      'days': days,
-    };
-  }
-
-  factory MonthModel.fromMap(Map<String, dynamic> map) {
-    return MonthModel(
-      text: map['text'],
-      days: List<int>.from(map['days']),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory MonthModel.fromJson(String source) =>
-      MonthModel.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'MonthModel(text: $text, days: $days)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is MonthModel &&
-        other.text == text &&
-        listEquals(other.days, days);
-  }
-
-  @override
-  int get hashCode => text.hashCode ^ days.hashCode;
-}

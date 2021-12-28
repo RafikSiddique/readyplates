@@ -11,9 +11,11 @@ import 'package:readyplates/widgets/bottomcontainer.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:readyplates/widgets/shoppy_mac.dart';
 
+enum Editing { none, confirmed, unconfirmed }
+
 class BurgersupportingPage extends StatefulWidget {
   final RestaurantModel restaurantModel;
-  final bool isEditing;
+  final Editing isEditing;
   final OrderModelApi? orderModelApi;
   BurgersupportingPage({
     Key? key,
@@ -34,7 +36,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
   @override
   Widget build(BuildContext context) {
     DateTime dt = DateTime.now();
-    if (widget.isEditing) {
+    if (widget.isEditing != Editing.none) {
       dt = DateTime(
           int.parse(widget.orderModelApi!.date.split(' ').last),
           (controller
@@ -87,7 +89,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        if (widget.isEditing)
+                        if (widget.isEditing != Editing.none)
                           ListView(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
@@ -98,7 +100,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                                         setStae: () {
                                           setState(() {});
                                         },
-                                        isEditing: true,
+                                        isEditing: widget.isEditing,
                                         orderEditModel: element,
                                       ))
                             ],
@@ -178,8 +180,6 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                           height: 10,
                         ),
                         Divider(
-                          //indent: 18,
-                          //endIndent: 18,
                           thickness: 2,
                           color: MyTheme.devidercolor,
                         ),
@@ -224,7 +224,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                             SizedBox(
                               width: 12,
                             ),
-                            widget.isEditing
+                   widget.isEditing  !=Editing.none
                                 ? Text(DateFormat(DateFormat.WEEKDAY +
                                             ", " +
                                             DateFormat.DAY +
@@ -277,7 +277,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
               restaurantModel: widget.restaurantModel,
               isEditing: widget.isEditing,
               setState: () {
-                controller.calclateTotal(widget.isEditing);
+                controller.calclateTotal(widget.isEditing!=Editing.none);
                 setState(() {});
               },
             ),
