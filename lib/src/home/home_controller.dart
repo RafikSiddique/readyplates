@@ -184,7 +184,7 @@ class HomeController extends GetxController {
           double.parse(a.address2).compareTo(double.parse(b.address2)));
       print("Res Sorted");
       if (timer == null && currentIndex == 0) {
-        timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+        timer = Timer.periodic(Duration(minutes: 3), (timer) async {
           await getRestaurants();
           print("Restaurant Fetch");
           this.timer = timer;
@@ -211,13 +211,13 @@ class HomeController extends GetxController {
   void onPageChange(int index) {
     timer?.cancel();
     if (index == 0) {
-      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      timer = Timer.periodic(Duration(minutes: 3), (timer) async {
         await getRestaurants();
         print("Restaurant Fetch");
         this.timer = timer;
       });
     } else if (index == 2) {
-      timer = Timer.periodic(Duration(seconds: 1), (timer) async {
+      timer = Timer.periodic(Duration(minutes: 5), (timer) async {
         await Get.find<OrderController>().getorder();
         print("Order Get");
         this.timer = timer;
