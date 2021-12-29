@@ -93,6 +93,7 @@ class FoodItemCard extends GetView<OrderController> {
                                           Get.showSnackbar(GetBar(
                                             message:
                                                 "You cannot decrease any item once the order is confirmed",
+                                            duration: Duration(seconds: 2),
                                           ));
                                         } else {
                                           orderController

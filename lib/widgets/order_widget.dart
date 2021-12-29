@@ -137,28 +137,29 @@ class OrderWidget extends StatelessWidget {
               backgroundColor: Color(0xff44C4A1),
               text: "Complete Order",
               onTap: () {
-                if (orderModel.payment == "0" || orderModel.payment == "") {
+                // if (orderModel.payment == "0" || orderModel.payment == "") {
+                //   Navigator.push(
+                //       context,
+                //       CupertinoPageRoute(
+                //         builder: (context) => PaymentPage(
+                //           orderModelApi: orderModel,
+                //           isOrderComplete: true,
+                //         ),
+                //       ));
+
+                // } else{}
+
+                if (orderModel.feedbackstat == "") {
                   Navigator.push(
                       context,
                       CupertinoPageRoute(
-                        builder: (context) => PaymentPage(
-                          orderModelApi: orderModel,
-                          isOrderComplete: true,
+                        builder: (context) => FeedbackPage(
+                          e: orderModel,
+                          isComplete: true,
                         ),
                       ));
                 } else {
-                  if (orderModel.feedbackstat == "") {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => FeedbackPage(
-                            e: orderModel,
-                            isComplete: true,
-                          ),
-                        ));
-                  } else {
-                    controller.updateStatus(orderModel.id, 2);
-                  }
+                  controller.updateStatus(orderModel.id, 2);
                 }
               },
               width: Get.width,
