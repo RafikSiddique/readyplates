@@ -23,7 +23,7 @@ class Chekoutdone extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         controller.currentIndex.value = 0;
-        controller.onPageChange(controller.currentIndex.value);
+        controller.getRestaurants();
 
         Get.offAllNamed(LandingPage.id);
         return true;
@@ -78,9 +78,10 @@ class Chekoutdone extends StatelessWidget {
                     onTap: () async {
                       await Get.find<OrderController>()
                           .updatePayment(orderModelApi.id, 0);
+                      await Get.find<OrderController>().getorder();
                       Get.offAllNamed(LandingPage.id);
                       controller.currentIndex.value = 2;
-                      controller.onPageChange(controller.currentIndex.value);
+                      controller.onPageChanged(controller.currentIndex.value);
                     },
                   ),
                 ),

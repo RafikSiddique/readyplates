@@ -317,7 +317,8 @@ class PaymentPage extends StatelessWidget {
                         ));
                   } else {
                     Get.find<HomeController>().currentIndex.value = 2;
-                    Get.find<HomeController>().onPageChange(2);
+                    Get.find<HomeController>().onPageChanged(2);
+                    Get.find<OrderController>().getorder();
                     Navigator.pushNamedAndRemoveUntil(
                         context, LandingPage.id, (route) => false);
                   }

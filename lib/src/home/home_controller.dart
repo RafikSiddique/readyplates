@@ -110,7 +110,7 @@ class HomeController extends GetxController {
     getAddress();
     Get.put(OrderController());
     getRestaurants();
-    onPageChange(currentIndex.value);
+    onPageChanged(currentIndex.value);
     super.onInit();
   }
 
@@ -178,23 +178,20 @@ class HomeController extends GetxController {
       if (res.isNotEmpty) {
         print("Res Not Empty");
         restaurants.value = res;
+      } else {
+        restaurants.value = [];
       }
       print("Sorting res");
       restaurants.sort((a, b) =>
           double.parse(a.address2).compareTo(double.parse(b.address2)));
       print("Res Sorted");
-      if (timer == null && currentIndex == 0) {
-        timer = Timer.periodic(Duration(minutes: 3), (timer) async {
-          await getRestaurants();
-          print("Restaurant Fetch");
-          this.timer = timer;
-        });
-      }
+
       update();
     } catch (e) {
       if (restaurants.isNotEmpty && restaurants.first.id == -1) {
-        restaurants.clear();
+        restaurants.value = [];
       }
+      update();
       timer?.cancel();
       if (e.runtimeType != SocketException &&
           lat.value != 0 &&
@@ -208,9 +205,9 @@ class HomeController extends GetxController {
     }
   }
 
-  void onPageChange(int index) {
+  void onPageChanged(int index) {
     timer?.cancel();
-    if (index == 0) {
+    /* if (index == 0) {
       timer = Timer.periodic(Duration(minutes: 3), (timer) async {
         await getRestaurants();
         print("Restaurant Fetch");
@@ -222,7 +219,7 @@ class HomeController extends GetxController {
         print("Order Get");
         this.timer = timer;
       });
-    }
+    } */
     currentIndex.value = index;
   }
 }

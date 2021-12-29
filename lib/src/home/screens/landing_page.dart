@@ -47,7 +47,7 @@ class _LandingPageState extends State<LandingPage> {
 
       case 2:
         return OrderPage(() {
-          controller.onPageChange(0);
+          controller.onPageChanged(0);
         });
       case 3:
         return Tellafriend(

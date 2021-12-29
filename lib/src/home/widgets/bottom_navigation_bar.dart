@@ -28,7 +28,7 @@ class AppNavigationBar extends StatelessWidget {
           currentIndex: controller.currentIndex.value,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Color(0xff00ADB5),
-          onTap: controller.onPageChange,
+          onTap: controller.onPageChanged,
           items: [
             for (var i = 0; i < controller.bottomBarIcons.length; i++)
               BottomNavigationBarItem(

@@ -46,7 +46,7 @@ class HomeServices extends ApiService {
         List<dynamic> getList = jsonDecode(body);
         List<RestaurantModel> resDetail = getList
             .map((value) => RestaurantModel.fromMap(value))
-            .where((e) => e.bio.isNotEmpty)
+            .where((e) => e.bio.isNotEmpty && double.parse(e.address2) < 15)
             .toList();
         print(getList);
         return resDetail;

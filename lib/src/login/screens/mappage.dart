@@ -306,7 +306,7 @@ class _MapPageState extends State<MapPage> {
                                     onPressed: () {
                                       if (widget.isHome) {
                                         setAddress();
-                                        homeController.onPageChange(0);
+                                        homeController.getRestaurants();
                                       }
                                       // Navigator.pushNamed(
                                       //     context, MyRoutes.OnbordingPage);borderchangeColor
