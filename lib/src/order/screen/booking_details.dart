@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -8,10 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
-import 'package:readyplates/src/Order_Screens/menu_page.dart';
-import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
-import 'package:readyplates/src/order/screen/order_page.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
@@ -425,7 +420,7 @@ class BookingDetails extends GetView<OrderController> {
                               .format(controller.selectedDate.value)
                               .toLowerCase()) &&
                       checkTime()) {
-                    controller.calclateTotal(isEditing!=Editing.none);
+                    controller.calclateTotal(isEditing != Editing.none);
                     print("success");
                     Navigator.push(
                         context,
@@ -457,4 +452,3 @@ class BookingDetails extends GetView<OrderController> {
     );
   }
 }
-

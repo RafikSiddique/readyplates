@@ -15,10 +15,10 @@ import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
-class PaymentPage extends StatelessWidget {
+class CreditCardDetailsPage extends StatelessWidget {
   final OrderModelApi orderModelApi;
   final bool isOrderComplete;
-  const PaymentPage({
+  const CreditCardDetailsPage({
     Key? key,
     required this.orderModelApi,
     required this.isOrderComplete,
@@ -304,13 +304,13 @@ class PaymentPage extends StatelessWidget {
                   //   color: MyTheme.iconColor,
                   // )
                 ),
-                child: Text("Pay \$ ${orderModelApi.totalPrice}"),
+                // child: Text("Pay \$ ${orderModelApi.totalPrice}"),
+                child: Text("CONTINUE"),
                 onPressed: () {
-                  Get.find<OrderController>()
-                      .updatePayment(orderModelApi.id, 1);
                   if (isOrderComplete) {
                     Get.find<OrderController>()
                         .updateStatus(orderModelApi.id, 2);
+                    Get.find<OrderController>().getorder();
                     Get.offAll(() => FeedbackPage(
                           e: orderModelApi,
                           isComplete: true,
@@ -319,9 +319,25 @@ class PaymentPage extends StatelessWidget {
                     Get.find<HomeController>().currentIndex.value = 2;
                     Get.find<HomeController>().onPageChanged(2);
                     Get.find<OrderController>().getorder();
+
                     Navigator.pushNamedAndRemoveUntil(
                         context, LandingPage.id, (route) => false);
                   }
+                  // Get.find<OrderController>()
+                  //     .updatePayment(orderModelApi.id, 1);
+                  // if (isOrderComplete) {
+                  //   Get.find<OrderController>()
+                  //       .updateStatus(orderModelApi.id, 2);
+                  //   Get.offAll(() => FeedbackPage(
+                  //         e: orderModelApi,
+                  //         isComplete: true,
+                  //       ));
+                  // } else {
+                  //   Get.find<HomeController>().currentIndex.value = 2;
+                  //   Get.find<HomeController>().onPageChange(2);
+                  //   Navigator.pushNamedAndRemoveUntil(
+                  //       context, LandingPage.id, (route) => false);
+                  // }
                 },
               ),
             ],
