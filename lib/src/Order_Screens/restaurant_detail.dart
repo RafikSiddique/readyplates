@@ -458,15 +458,29 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   )
                                 ],
                               ),
-                              Text(
-                                bio.event_desc == ""
-                                    ? "No upcoming events"
-                                    : "Starts at ${bio.event_start} ",
-                                style: GoogleFonts.inter(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    color: MyTheme.appbartextColor),
+                              Column(
+                                children: [
+                                  Text(
+                                    'All you can eat Buffet',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: MyTheme.appbartextColor),
+                                  ),
+                                  Text(
+                                    bio.event_desc == ""
+                                        ? "No upcoming events"
+                                        : "Starts at ${bio.event_start} ",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: MyTheme.appbartextColor),
+                                  ),
+                                ],
                               ),
                               Column(
                                 children: [

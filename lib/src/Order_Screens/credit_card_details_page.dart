@@ -5,23 +5,18 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readyplates/models/order_model.dart';
-import 'package:readyplates/src/Order_Screens/feedback_page.dart';
-import 'package:readyplates/src/home/home_controller.dart';
-import 'package:readyplates/src/home/screens/index.dart';
-import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 // import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
-class PaymentPage extends StatelessWidget {
-  final OrderModelApi orderModelApi;
-  final bool isOrderComplete;
-  const PaymentPage({
+class CreditCardDetailsPage extends StatelessWidget {
+  // final OrderModelApi orderModelApi;
+  // final bool isOrderComplete;
+  const CreditCardDetailsPage({
     Key? key,
-    required this.orderModelApi,
-    required this.isOrderComplete,
+    // required this.orderModelApi,
+    // required this.isOrderComplete,
   }) : super(key: key);
 
   @override
@@ -304,23 +299,24 @@ class PaymentPage extends StatelessWidget {
                   //   color: MyTheme.iconColor,
                   // )
                 ),
-                child: Text("Pay \$ ${orderModelApi.totalPrice}"),
+                // child: Text("Pay \$ ${orderModelApi.totalPrice}"),
+                child: Text("CONTINUE"),
                 onPressed: () {
-                  Get.find<OrderController>()
-                      .updatePayment(orderModelApi.id, 1);
-                  if (isOrderComplete) {
-                    Get.find<OrderController>()
-                        .updateStatus(orderModelApi.id, 2);
-                    Get.offAll(() => FeedbackPage(
-                          e: orderModelApi,
-                          isComplete: true,
-                        ));
-                  } else {
-                    Get.find<HomeController>().currentIndex.value = 2;
-                    Get.find<HomeController>().onPageChange(2);
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, LandingPage.id, (route) => false);
-                  }
+                  // Get.find<OrderController>()
+                  //     .updatePayment(orderModelApi.id, 1);
+                  // if (isOrderComplete) {
+                  //   Get.find<OrderController>()
+                  //       .updateStatus(orderModelApi.id, 2);
+                  //   Get.offAll(() => FeedbackPage(
+                  //         e: orderModelApi,
+                  //         isComplete: true,
+                  //       ));
+                  // } else {
+                  //   Get.find<HomeController>().currentIndex.value = 2;
+                  //   Get.find<HomeController>().onPageChange(2);
+                  //   Navigator.pushNamedAndRemoveUntil(
+                  //       context, LandingPage.id, (route) => false);
+                  // }
                 },
               ),
             ],
