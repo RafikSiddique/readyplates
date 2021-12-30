@@ -123,7 +123,7 @@ class AuthController extends GetxController {
 
   Future<void> setCardDetails() async {
     try {
-      //TODO: Call save api
+      //TODO: Call card save api
         bool permitted = await getPermission();
         if (permitted) {
           Position position = await Geolocator.getCurrentPosition();

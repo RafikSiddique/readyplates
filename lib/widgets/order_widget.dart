@@ -166,7 +166,7 @@ class OrderWidget extends StatelessWidget {
             ),
           ],
         );
-      case OrderState.served:
+      case OrderState.Served:
       //TODO Show the state is served
         return Container();
       case OrderState.cancelled:
