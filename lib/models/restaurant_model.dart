@@ -124,21 +124,17 @@ class RestaurantModel {
               .toString()
               .substring(1, map['types_of_cusine'].toString().length - 1)
               .split(',')
-              .map((e) => e
-                  .trim()
-                  .trimRight()
-                  .trimLeft())) 
+              .map((e) => e.trim().trimRight().trimLeft()))
           : [],
       start_time: map['start_time'] ?? "",
       end_time: map['end_time'] ?? "",
-      open_days:map['open_days'] != null ? List<String>.from(map['open_days'] 
+      open_days: map['open_days'] != null
+          ? List<String>.from(map['open_days']
               .toString()
-              .substring(1, map['open_days'] .toString().length - 1)
+              .substring(1, map['open_days'].toString().length - 1)
               .split(',')
-              .map((e) => e
-                  .trim()
-                  .trimRight()
-                  .trimLeft()))  :[],
+              .map((e) => e.trim().trimRight().trimLeft()))
+          : [],
       completed_till: map['completed_till']?.toInt(),
       user: map['user']?.toInt(),
     );

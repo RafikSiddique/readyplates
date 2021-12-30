@@ -461,7 +461,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               Column(
                                 children: [
                                   Text(
-                                    'All you can eat Buffet',
+                                    bio.event_name == ''
+                                        ? 'No upcoming events'
+                                        : bio.event_name,
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.inter(
                                         fontSize: 15,

@@ -33,6 +33,7 @@ class RestaurantCard extends GetView<HomeController> {
             event_start: "",
             event_end: "",
             event_desc: "",
+            event_name: "",
             front_fascia_day: "",
             front_fascia_night: "",
             street_view: "",
