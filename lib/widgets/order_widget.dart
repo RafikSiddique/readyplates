@@ -167,7 +167,7 @@ class OrderWidget extends StatelessWidget {
           ],
         );
       case OrderState.Served:
-      //TODO Show the state is served
+        //TODO Show the state is served
         return Container();
       case OrderState.cancelled:
         return Elevated(
@@ -298,8 +298,7 @@ class OrderWidget extends StatelessWidget {
                           color: MyTheme.dividermiddletext),
                     )),
                 Spacer(),
-                if (orderModel.status == OrderState.inProgress ||
-                    orderModel.status == OrderState.placed)
+                if (orderModel.status == OrderState.placed)
                   GestureDetector(
                       child: Icon(
                         Icons.more_horiz,
