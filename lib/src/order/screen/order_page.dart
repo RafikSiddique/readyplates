@@ -161,7 +161,7 @@ class OrderPage extends GetView<OrderController> {
               onTap: null,
               child: PopUpMenuWidget(
                 onTap: () async {
-                  await controller.updateStatus(orderModel.id, 3);
+                  await controller.updateStatus(orderModel.id, OrderState.cancelled);
                   Get.to(() => OrderCancelledPage());
                 },
                 path: Assets.checkCircle,

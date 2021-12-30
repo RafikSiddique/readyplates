@@ -9,6 +9,7 @@ import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
+import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
@@ -16,12 +17,8 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
 class CreditCardDetailsPage extends StatelessWidget {
-  final OrderModelApi orderModelApi;
-  final bool isOrderComplete;
   const CreditCardDetailsPage({
     Key? key,
-    required this.orderModelApi,
-    required this.isOrderComplete,
   }) : super(key: key);
 
   @override
@@ -306,8 +303,31 @@ class CreditCardDetailsPage extends StatelessWidget {
                 ),
                 // child: Text("Pay \$ ${orderModelApi.totalPrice}"),
                 child: Text("CONTINUE"),
-                onPressed: () {
-                  if (isOrderComplete) {
+                onPressed: () async {
+                  Get.dialog(
+                    AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      content: SizedBox.square(
+                        dimension: Get.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox.square(
+                                dimension: 100,
+                                child: CircularProgressIndicator.adaptive(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      MyTheme.borderchangeColor),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                  await Get.find<AuthController>().setCardDetails();
+
+/*                   if (isOrderComplete) {
                     Get.find<OrderController>()
                         .updateStatus(orderModelApi.id, 2);
                     Get.find<OrderController>().getorder();
@@ -322,22 +342,7 @@ class CreditCardDetailsPage extends StatelessWidget {
 
                     Navigator.pushNamedAndRemoveUntil(
                         context, LandingPage.id, (route) => false);
-                  }
-                  // Get.find<OrderController>()
-                  //     .updatePayment(orderModelApi.id, 1);
-                  // if (isOrderComplete) {
-                  //   Get.find<OrderController>()
-                  //       .updateStatus(orderModelApi.id, 2);
-                  //   Get.offAll(() => FeedbackPage(
-                  //         e: orderModelApi,
-                  //         isComplete: true,
-                  //       ));
-                  // } else {
-                  //   Get.find<HomeController>().currentIndex.value = 2;
-                  //   Get.find<HomeController>().onPageChange(2);
-                  //   Navigator.pushNamedAndRemoveUntil(
-                  //       context, LandingPage.id, (route) => false);
-                  // }
+                  } */
                 },
               ),
             ],

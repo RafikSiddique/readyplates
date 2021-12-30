@@ -159,13 +159,16 @@ class OrderWidget extends StatelessWidget {
                         ),
                       ));
                 } else {
-                  controller.updateStatus(orderModel.id, 2);
+                  controller.updateStatus(orderModel.id, OrderState.completed);
                 }
               },
               width: Get.width,
             ),
           ],
         );
+      case OrderState.served:
+      //TODO Show the state is served
+        return Container();
       case OrderState.cancelled:
         return Elevated(
           text: "Cancelled",

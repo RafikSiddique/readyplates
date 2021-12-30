@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/auth_service.dart';
@@ -119,6 +120,24 @@ class AuthController extends GetxController {
   }
 
   String? id;
+
+  Future<void> setCardDetails() async {
+    try {
+      //TODO: Call save api
+        bool permitted = await getPermission();
+        if (permitted) {
+          Position position = await Geolocator.getCurrentPosition();
+          LatLng latLng = LatLng(position.latitude, position.longitude);
+          Get.to(() => MapPage(
+                isHome: false,
+                latLng: latLng,
+              ));
+        }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> login(
     bool changedPassword,
   ) async {
@@ -135,15 +154,7 @@ class AuthController extends GetxController {
 
         Get.put(OrderController());
         Get.put(HomeController());
-        bool permitted = await getPermission();
-        if (permitted) {
-          Position position = await Geolocator.getCurrentPosition();
-          LatLng latLng = LatLng(position.latitude, position.longitude);
-          Get.to(() => MapPage(
-                isHome: false,
-                latLng: latLng,
-              ));
-        }
+        Get.off(() => CreditCardDetailsPage());
 
         lNameController.clear();
         // fNamController.clear();

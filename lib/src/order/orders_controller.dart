@@ -327,9 +327,9 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> updateStatus(int id, int status) async {
+  Future<void> updateStatus(int id, OrderState status) async {
     try {
-      await services.updateStatus(id, status);
+      await services.updateStatus(id, status.index);
       await getorder();
     } catch (e) {
       if (e.runtimeType != SocketException) {
