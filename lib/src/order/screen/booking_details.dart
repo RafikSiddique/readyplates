@@ -230,23 +230,25 @@ class BookingDetails extends GetView<OrderController> {
                     elevation: 0,
                     child: InkWell(
                       onTap: () async {
-                        DateTime dt = await showDatePicker(
-                                context: context,
-                                initialDate: controller.selectedDate.value,
-                                firstDate: DateTime.now(),
-                                lastDate:
-                                    DateTime(DateTime.now().year, 12, 31)) ??
-                            DateTime.now();
+                        DateTime? dt = await showDatePicker(
+                          context: context,
+                          initialDate: controller.selectedDate.value,
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime.now(),
+                          currentDate: DateTime.now(),
+                        );
+                        //   DateTime(DateTime.now().year, 12, 31)) ??
+                        // DateTime.now();
 
                         print(restaurantModel.open_days);
                         if (restaurantModel.open_days.any((element) =>
                             element.toLowerCase() ==
                             DateFormat(DateFormat.WEEKDAY)
-                                .format(dt)
+                                .format(dt!)
                                 .toLowerCase())) {
                           print("Success");
                           print("Selected Day: " +
-                              DateFormat(DateFormat.WEEKDAY).format(dt));
+                              DateFormat(DateFormat.WEEKDAY).format(dt!));
                           controller.selectedDate.value = DateTime(
                               dt.year,
                               dt.month,
@@ -257,7 +259,7 @@ class BookingDetails extends GetView<OrderController> {
                         } else {
                           print("Failed");
                           print("Selected Day: " +
-                              DateFormat(DateFormat.WEEKDAY).format(dt));
+                              DateFormat(DateFormat.WEEKDAY).format(dt!));
                         }
                       },
                       child: Row(
