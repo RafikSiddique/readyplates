@@ -23,6 +23,7 @@ class OrderController extends GetxController {
   RxList<CartApiModel> cartApiItems = <CartApiModel>[].obs;
   RxList<OrderModelApi> active = <OrderModelApi>[].obs;
   RxList<OrderModelApi> inProgress = <OrderModelApi>[].obs;
+  RxList<OrderModelApi> Served = <OrderModelApi>[].obs;
   RxList<OrderModelApi> ended = <OrderModelApi>[].obs;
 
   RxList<OrderEditModel> orderEdit = <OrderEditModel>[].obs;
@@ -316,6 +317,11 @@ class OrderController extends GetxController {
           .where((element) => element.status == OrderState.inProgress)
           .toList();
       inProgress.sort((a, b) => b.id.compareTo(a.id));
+
+      Served.value = orderList
+          .where((element) => element.status == OrderState.Served)
+          .toList();
+      Served.sort((a, b) => b.id.compareTo(a.id));
 
       ended.value =
           orderList.where((element) => element.status.index > 1).toList();

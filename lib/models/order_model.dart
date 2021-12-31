@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:readyplates/models/food_item_model.dart';
 
-enum OrderState { placed, inProgress, Served, completed, cancelled }
+enum OrderState { placed, inProgress, completed, cancelled, Served }
 
 class OrderModel {
   int user;

@@ -130,9 +130,9 @@ class OrderWidget extends StatelessWidget {
               color: Color(0xff44C4A1),
               borderColor: Color(0xff44C4A1),
             ),
-            // SizedBox(
-            //   height: 10,
-            // ),
+            SizedBox(
+              height: 10,
+            ),
             // Elevated(
             //   backgroundColor: Color(0xff44C4A1),
             //   text: "Complete Order",
@@ -166,62 +166,7 @@ class OrderWidget extends StatelessWidget {
             // ),
           ],
         );
-      case OrderState.Served:
-        return Column(
-          children: [
-            // Elevated(
-            //   width: Get.width,
-            //   text: "Modify Order",
-            //   onTap: () async {
-            //     editOrder(context);
-            //   },
-            //   backgroundColor: Colors.white,
-            //   color: Color(0xff44C4A1),
-            //   borderColor: Color(0xff44C4A1),
-            // ),
-            // SizedBox(
-            //   height: 10,
-            // ),
-            Elevated(
-              backgroundColor: Color(0xff44C4A1),
-              text: "Check Out Done",
-              onTap: () {
-                // if (orderModel.payment == "0" || orderModel.payment == "") {
-                //   Navigator.push(
-                //       context,
-                //       CupertinoPageRoute(
-                //         builder: (context) => PaymentPage(
-                //           orderModelApi: orderModel,
-                //           isOrderComplete: true,
-                //         ),
-                //       ));
 
-                // } else{}
-
-                if (orderModel.feedbackstat == "") {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => FeedbackPage(
-                          e: orderModel,
-                          isComplete: true,
-                        ),
-                      ));
-                } else {
-                  controller.updateStatus(orderModel.id, OrderState.completed);
-                }
-              },
-              width: Get.width,
-            ),
-          ],
-        );
-      case OrderState.cancelled:
-        return Elevated(
-          text: "Cancelled",
-          backgroundColor: MyTheme.buttonColor,
-          width: Get.width,
-          onTap: () {},
-        );
       case OrderState.completed:
         return Column(
           children: [
@@ -275,6 +220,65 @@ class OrderWidget extends StatelessWidget {
                   ));
                 }
               },
+            ),
+          ],
+        );
+      case OrderState.cancelled:
+        return Elevated(
+          text: "Cancelled",
+          backgroundColor: MyTheme.buttonColor,
+          width: Get.width,
+          onTap: () {},
+        );
+      case OrderState.Served:
+        return Column(
+          children: [
+            // Elevated(
+            //   width: Get.width,
+            //   text: "Modify Order",
+            //   onTap: () async {
+            //     editOrder(context);
+            //   },
+            //   backgroundColor: Colors.white,
+            //   color: Color(0xff44C4A1),
+            //   borderColor: Color(0xff44C4A1),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            Elevated(
+              backgroundColor: Color(0xff44C4A1),
+              text: "Check Out Done",
+              onTap: () {
+                // if (orderModel.payment == "0" || orderModel.payment == "") {
+                //   Navigator.push(
+                //       context,
+                //       CupertinoPageRoute(
+                //         builder: (context) => PaymentPage(
+                //           orderModelApi: orderModel,
+                //           isOrderComplete: true,
+                //         ),
+                //       ));
+
+                // } else{}
+
+                if (orderModel.feedbackstat == "") {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => FeedbackPage(
+                          e: orderModel,
+                          isComplete: true,
+                        ),
+                      ));
+                } else {
+                  controller.updateStatus(orderModel.id, OrderState.Served);
+                }
+              },
+              width: Get.width,
+            ),
+            SizedBox(
+              height: 10,
             ),
           ],
         );

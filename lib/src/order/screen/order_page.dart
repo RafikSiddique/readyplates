@@ -161,7 +161,8 @@ class OrderPage extends GetView<OrderController> {
               onTap: null,
               child: PopUpMenuWidget(
                 onTap: () async {
-                  await controller.updateStatus(orderModel.id, OrderState.cancelled);
+                  await controller.updateStatus(
+                      orderModel.id, OrderState.cancelled);
                   Get.to(() => OrderCancelledPage());
                 },
                 path: Assets.checkCircle,
@@ -204,7 +205,8 @@ class OrderPage extends GetView<OrderController> {
           ),
           body: controller.active.isEmpty &&
                   controller.inProgress.isEmpty &&
-                  controller.ended.isEmpty
+                  controller.ended.isEmpty &&
+                  controller.Served.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -281,6 +283,7 @@ class OrderPage extends GetView<OrderController> {
                           SizedBox(
                             height: 10,
                           ),
+                          ////////
                           if (controller.inProgress.isNotEmpty)
                             Text(
                               "In progress".toUpperCase(),
@@ -313,6 +316,40 @@ class OrderPage extends GetView<OrderController> {
                           SizedBox(
                             height: 10,
                           ),
+                          ////////////
+                          /// ////////
+                          if (controller.Served.isNotEmpty)
+                            Text(
+                              "Food Served".toUpperCase(),
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    color: MyTheme.dividermiddletext),
+                              ),
+                            ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ListView(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              children:
+                                  controller.Served.map((e) => OrderWidget(
+                                        orderModel: e,
+                                        showMenu: (p0) {
+                                          showTextMenu(
+                                              details: p0,
+                                              restaurantId: e.restaurant.id,
+                                              context: context,
+                                              orderModel: e);
+                                        },
+                                      )).toList()),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ////////////
                           if (controller.ended.isNotEmpty)
                             Text(
                               "PREVIOUS COMPLETED ORDERS ",
