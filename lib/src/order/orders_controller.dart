@@ -324,7 +324,7 @@ class OrderController extends GetxController {
       Served.sort((a, b) => b.id.compareTo(a.id));
 
       ended.value =
-          orderList.where((element) => element.status.index > 1).toList();
+          orderList.where((element) => element.status.index > 2).toList();
       ended.sort((a, b) => b.id.compareTo(a.id));
     } catch (e) {
       if (e.runtimeType != SocketException) {
