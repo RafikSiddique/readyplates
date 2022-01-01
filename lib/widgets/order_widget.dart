@@ -13,6 +13,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/form_field.dart';
 
 class OrderWidget extends StatelessWidget {
   final OrderModelApi orderModel;
@@ -76,6 +77,7 @@ class OrderWidget extends StatelessWidget {
   }
 
   Widget bottomWidget(BuildContext context) {
+    double size = MediaQuery.of(context).size.width;
     switch (orderModel.status) {
       case OrderState.placed:
         return Column(
@@ -197,17 +199,221 @@ class OrderWidget extends StatelessWidget {
                 //       ));
 
                 // } else{}
-                await controller.updateStatus(
-                    orderModel.id, OrderState.completed);
-
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => FeedbackPage(
-                        e: orderModel,
-                        isComplete: true,
+                // await controller.updateStatus(
+                //     orderModel.id, OrderState.completed);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      actionsAlignment: MainAxisAlignment.center,
+                      // buttonPadding: EdgeInsets.symmetric(horizontal: 10),
+                      title: Text(
+                        'Tip for Restaurant',
+                        style: GoogleFonts.nunito(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                        ),
                       ),
-                    ));
+                      content: Text(
+                        'Do you wish to add a tip?',
+                        style: GoogleFonts.inter(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                          fontStyle: FontStyle.normal,
+                        ),
+                      ),
+                      actions: [
+                        Elevated(
+                          width: size * 0.23,
+                          backgroundColor: Colors.white,
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          borderColor: Colors.black,
+                          text: 'No',
+                          onTap: () async {
+                            await controller.updateStatus(
+                                orderModel.id, OrderState.completed);
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => FeedbackPage(
+                                    e: orderModel,
+                                    isComplete: true,
+                                  ),
+                                ));
+                          },
+                        ),
+                        Elevated(
+                          width: size * 0.23,
+                          backgroundColor: Colors.black,
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          text: 'Yes',
+                          onTap: () {
+                            controller.onInit();
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  title: Text(
+                                    'Enter Tip Amount',
+                                    style: GoogleFonts.nunito(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  content: Container(
+                                    height: 50,
+                                    child: AppFormField(
+                                      toptext: '',
+                                      controller:
+                                          controller.tipAmountController,
+                                      hintText: '\$20',
+                                      inputType: TextInputType.phone,
+                                    ),
+                                  ),
+                                  actions: [
+                                    Elevated(
+                                      width: size * 0.23,
+                                      backgroundColor: Colors.white,
+                                      color: Colors.black,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.normal,
+                                      borderColor: Colors.black,
+                                      text: 'Cancel',
+                                      onTap: () {
+                                        Get.back();
+                                        controller.tipAmountController.clear();
+                                      },
+                                    ),
+                                    Elevated(
+                                      width: size * 0.23,
+                                      backgroundColor: Colors.black,
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.normal,
+                                      text: 'Add',
+                                      onTap: () {
+                                        if (controller.tipAmountController.text
+                                            .isNotEmpty) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                actionsAlignment:
+                                                    MainAxisAlignment.center,
+                                                title: Text(
+                                                  'Confirm tip amount',
+                                                  style: GoogleFonts.nunito(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle: FontStyle.normal,
+                                                  ),
+                                                ),
+                                                content: Text(
+                                                  '\$${controller.tipAmountController.text} will be given as a tip, are you sure?',
+                                                  style: GoogleFonts.inter(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontStyle: FontStyle.normal,
+                                                  ),
+                                                ),
+                                                actions: [
+                                                  Elevated(
+                                                    width: size * 0.23,
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    color: Colors.black,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    borderColor: Colors.black,
+                                                    text: 'Cancel',
+                                                    onTap: () {
+                                                      Get.back();
+                                                      controller
+                                                          .tipAmountController
+                                                          .clear();
+                                                    },
+                                                  ),
+                                                  Elevated(
+                                                    width: size * 0.23,
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                    color: Colors.white,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    text: 'Confirm',
+                                                    onTap: () async {
+                                                      await controller
+                                                          .updateStatus(
+                                                              orderModel.id,
+                                                              OrderState
+                                                                  .completed);
+                                                      Navigator.push(
+                                                          context,
+                                                          CupertinoPageRoute(
+                                                            builder: (context) =>
+                                                                FeedbackPage(
+                                                              e: orderModel,
+                                                              isComplete: true,
+                                                            ),
+                                                          ));
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        } else {
+                                          Get.snackbar(
+                                              "title", "Please add amount");
+                                        } // await controller.updateStatus(
+                                        //     orderModel.id,
+                                        //     OrderState.completed);
+                                        // Navigator.push(
+                                        //     context,
+                                        //     CupertinoPageRoute(
+                                        //       builder: (context) =>
+                                        //           FeedbackPage(
+                                        //         e: orderModel,
+                                        //         isComplete: true,
+                                        //       ),
+                                        //     ));
+                                        // controller.tipAmountController.clear();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                // Navigator.push(
+                //     context,
+                //     CupertinoPageRoute(
+                //       builder: (context) => FeedbackPage(
+                //         e: orderModel,
+                //         isComplete: true,
+                //       ),
+                //     ));
 
                 // if (orderModel.feedbackstat == "") {
                 //   Navigator.push(

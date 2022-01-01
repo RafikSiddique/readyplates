@@ -27,6 +27,7 @@ class OrderController extends GetxController {
   RxList<OrderModelApi> ended = <OrderModelApi>[].obs;
 
   RxList<OrderEditModel> orderEdit = <OrderEditModel>[].obs;
+  late TextEditingController tipAmountController;
   RxInt numberOfPeople = 1.obs;
 
   RxDouble total = 0.0.obs;
@@ -79,6 +80,7 @@ class OrderController extends GetxController {
     otpFields = List.generate(4, (index) => FocusNode());
     otpText = List.generate(4, (index) => TextEditingController());
     feedback = TextEditingController();
+    tipAmountController = TextEditingController();
     super.onInit();
   }
 
