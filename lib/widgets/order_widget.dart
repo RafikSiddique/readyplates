@@ -11,6 +11,7 @@ import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
+import 'package:readyplates/src/order/screen/tip_sucessfull_page.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/form_field.dart';
@@ -363,14 +364,15 @@ class OrderWidget extends StatelessWidget {
                                                               OrderState
                                                                   .completed);
                                                       Navigator.push(
-                                                          context,
-                                                          CupertinoPageRoute(
-                                                            builder: (context) =>
-                                                                FeedbackPage(
-                                                              e: orderModel,
-                                                              isComplete: true,
-                                                            ),
-                                                          ));
+                                                        context,
+                                                        CupertinoPageRoute(
+                                                          builder: (context) =>
+                                                              TipsucessfullPage(
+                                                            orderModel:
+                                                                orderModel,
+                                                          ),
+                                                        ),
+                                                      );
                                                     },
                                                   ),
                                                 ],

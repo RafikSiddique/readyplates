@@ -8,6 +8,7 @@ import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/screen/Order_cancel_page.dart';
 import 'package:readyplates/src/order/screen/order_option2.dart';
 import 'package:readyplates/src/order/screen/payment_sucessful.dart';
+import 'package:readyplates/src/order/screen/tip_sucessfull_page.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/widgets/back_gesture_diable.dart';
 
@@ -55,8 +56,7 @@ class Routes {
 
                   case PaymentsucessfulPage.id:
                     return PaymentsucessfulPage();
-
-                  case Tellafriend.id:
+                  case TipsucessfullPage.id:
                     return Tellafriend();
                   case ChangePasswordPage1.id:
                     return ChangePasswordPage1();
