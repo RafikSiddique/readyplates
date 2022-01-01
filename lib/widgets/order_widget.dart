@@ -206,7 +206,6 @@ class OrderWidget extends StatelessWidget {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       actionsAlignment: MainAxisAlignment.center,
-                      // buttonPadding: EdgeInsets.symmetric(horizontal: 10),
                       title: Text(
                         'Tip for Restaurant',
                         style: GoogleFonts.nunito(
@@ -260,6 +259,7 @@ class OrderWidget extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
+                                  scrollable: true,
                                   actionsAlignment: MainAxisAlignment.center,
                                   title: Text(
                                     'Enter Tip Amount',
@@ -271,7 +271,7 @@ class OrderWidget extends StatelessWidget {
                                     ),
                                   ),
                                   content: Container(
-                                    height: 50,
+                                    // height: 50,
                                     child: AppFormField(
                                       toptext: '',
                                       controller:
@@ -379,7 +379,10 @@ class OrderWidget extends StatelessWidget {
                                           );
                                         } else {
                                           Get.snackbar(
-                                              "title", "Please add amount");
+                                            "Tip amount",
+                                            "Please add amount",
+                                            backgroundColor: Colors.white,
+                                          );
                                         } // await controller.updateStatus(
                                         //     orderModel.id,
                                         //     OrderState.completed);
