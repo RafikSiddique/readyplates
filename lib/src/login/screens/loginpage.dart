@@ -233,7 +233,8 @@ class LoginPage extends StatelessWidget {
                           onTap: () async {
                             _formKey.currentState!.save();
                             if (_formKey.currentState!.validate()) {
-                              await controller.login(isChangepass);
+                              await controller.login(isChangepass,
+                                  issignup: false);
                             } else {
                               Get.snackbar(
                                   "Error", "Please fill all the details");

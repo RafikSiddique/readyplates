@@ -23,6 +23,8 @@ class RestaurantCard extends GetView<HomeController> {
         ? restaurantModel.bio.first
         : Bio(
             id: 0,
+            advance_orders: "",
+            no_of_orders: "",
             description: "",
             no_of_tables: "",
             max_table_size: "",

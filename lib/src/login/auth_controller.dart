@@ -124,23 +124,21 @@ class AuthController extends GetxController {
   Future<void> setCardDetails() async {
     try {
       //TODO: Call card save api
-        bool permitted = await getPermission();
-        if (permitted) {
-          Position position = await Geolocator.getCurrentPosition();
-          LatLng latLng = LatLng(position.latitude, position.longitude);
-          Get.to(() => MapPage(
-                isHome: false,
-                latLng: latLng,
-              ));
-        }
+      bool permitted = await getPermission();
+      if (permitted) {
+        Position position = await Geolocator.getCurrentPosition();
+        LatLng latLng = LatLng(position.latitude, position.longitude);
+        Get.to(() => MapPage(
+              isHome: false,
+              latLng: latLng,
+            ));
+      }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> login(
-    bool changedPassword,
-  ) async {
+  Future<void> login(bool changedPassword, {required bool issignup}) async {
     try {
       isLoading.value = true;
       id = await services.login(
@@ -154,8 +152,19 @@ class AuthController extends GetxController {
 
         Get.put(OrderController());
         Get.put(HomeController());
-        Get.off(() => CreditCardDetailsPage());
-
+        if (issignup) {
+          Get.off(() => CreditCardDetailsPage());
+        } else {
+          bool permitted = await getPermission();
+          if (permitted) {
+            Position position = await Geolocator.getCurrentPosition();
+            LatLng latLng = LatLng(position.latitude, position.longitude);
+            Get.to(() => MapPage(
+                  isHome: false,
+                  latLng: latLng,
+                ));
+          }
+        }
         lNameController.clear();
         // fNamController.clear();
         password2Controller.clear();
@@ -269,6 +278,7 @@ class AuthController extends GetxController {
           mobNum: mobController.text);
       await login(
         false,
+        issignup: true
       );
     } catch (e) {
       if (e.runtimeType != SocketException) {

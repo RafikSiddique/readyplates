@@ -40,13 +40,15 @@ class HomeServices extends ApiService {
           headers: contentTypeJsonHeader,
           body: jsonEncode({'latitude': lat, 'longitude': lon})); */
       StreamedResponse response = await request.send();
-
       if (response.statusCode == 200) {
         String body = await response.stream.bytesToString();
         List<dynamic> getList = jsonDecode(body);
         List<RestaurantModel> resDetail = getList
+            .where((element) => (element['bio'] as List).isNotEmpty && !((element['bio'] as List).first as Map)
+                .values
+                .any((element) => element == null))
             .map((value) => RestaurantModel.fromMap(value))
-            .where((e) => e.bio.isNotEmpty && double.parse(e.address2) < 15)
+            .where((e) => e.bio.isNotEmpty && double.parse(e.address2) < 15000)
             .toList();
         print(getList);
         return resDetail;

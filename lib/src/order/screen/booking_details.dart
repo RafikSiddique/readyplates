@@ -234,7 +234,9 @@ class BookingDetails extends GetView<OrderController> {
                           context: context,
                           initialDate: controller.selectedDate.value,
                           firstDate: DateTime.now(),
-                          lastDate: DateTime(2050),
+                          lastDate: DateTime.now().add(Duration(
+                              days: int.parse(
+                                  restaurantModel.bio.first.advance_orders))),
                         );
                         //   DateTime(DateTime.now().year, 12, 31)) ??
                         // DateTime.now();
