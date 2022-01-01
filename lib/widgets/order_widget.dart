@@ -184,8 +184,8 @@ class OrderWidget extends StatelessWidget {
             // ),
             Elevated(
               backgroundColor: Color(0xff44C4A1),
-              text: "Check Out Done",
-              onTap: () {
+              text: "Checkout -->",
+              onTap: () async {
                 // if (orderModel.payment == "0" || orderModel.payment == "") {
                 //   Navigator.push(
                 //       context,
@@ -197,19 +197,30 @@ class OrderWidget extends StatelessWidget {
                 //       ));
 
                 // } else{}
+                await controller.updateStatus(
+                    orderModel.id, OrderState.completed);
 
-                if (orderModel.feedbackstat == "") {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => FeedbackPage(
-                          e: orderModel,
-                          isComplete: true,
-                        ),
-                      ));
-                } else {
-                  controller.updateStatus(orderModel.id, OrderState.Served);
-                }
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => FeedbackPage(
+                        e: orderModel,
+                        isComplete: true,
+                      ),
+                    ));
+
+                // if (orderModel.feedbackstat == "") {
+                //   Navigator.push(
+                //       context,
+                //       CupertinoPageRoute(
+                //         builder: (context) => FeedbackPage(
+                //           e: orderModel,
+                //           isComplete: true,
+                //         ),
+                //       ));
+                // } else {
+                //   controller.updateStatus(orderModel.id, OrderState.Served);
+                // }
               },
               width: Get.width,
             ),
