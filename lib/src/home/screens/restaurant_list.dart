@@ -232,7 +232,18 @@ class _ShopScreenState extends State<ShopScreen> {
                                                             ListTileControlAffinity
                                                                 .trailing,
                                                         title: Text(
-                                                            "${e.toInt()} Miles"),
+                                                          "${e.toInt()} Miles",
+                                                          style:
+                                                              GoogleFonts.inter(
+                                                            fontSize: 15,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: MyTheme
+                                                                .appbartextColor,
+                                                          ),
+                                                        ),
                                                         groupValue: groupValue,
                                                         onChanged:
                                                             (value) async {
