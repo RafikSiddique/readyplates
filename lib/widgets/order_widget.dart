@@ -202,6 +202,7 @@ class OrderWidget extends StatelessWidget {
                 // } else{}
                 // await controller.updateStatus(
                 //     orderModel.id, OrderState.completed);
+
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -379,6 +380,9 @@ class OrderWidget extends StatelessWidget {
                                                           ),
                                                         ),
                                                       );
+                                                      controller
+                                                          .tipAmountController
+                                                          .clear();
                                                     },
                                                   ),
                                                 ],

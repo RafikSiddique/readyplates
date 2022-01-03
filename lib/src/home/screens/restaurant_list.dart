@@ -156,117 +156,142 @@ class _ShopScreenState extends State<ShopScreen> {
                               width: 5,
                             ),
                             Flexible(
-                              child:
-                                  Text(controller.address.value.toUpperCase(),
-                                      overflow: TextOverflow.visible,
-                                      style: GoogleFonts.inter(
-                                        fontSize: 10,
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyTheme.appbartextColor,
-                                      )),
+                              child: Text(
+                                controller.address.value.toUpperCase(),
+                                overflow: TextOverflow.visible,
+                                style: GoogleFonts.inter(
+                                  fontSize: 10,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyTheme.appbartextColor,
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
                       Spacer(),
                       TextButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                        ),
+                        icon: FaIcon(
+                          FontAwesomeIcons.walking,
+                          size: 11,
+                          color: MyTheme.dividermiddletext,
+                        ),
+                        onPressed: () {
+                          showGeneralDialog(
+                            context: context,
+                            transitionDuration: Duration(milliseconds: 200),
+                            transitionBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return ScaleTransition(
+                                scale: animation,
+                                child: child,
+                              );
+                            },
+                            pageBuilder: (context, a, b) {
+                              double groupValue =
+                                  controller.selectedMiles.value;
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                title: Text("Show Restaurants under"),
+                                titleTextStyle: GoogleFonts.nunito(
+                                  fontSize: 15,
+                                  color: MyTheme.aboutlocatextcolor,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.normal,
+                                ),
+                                content: Container(
+                                  height: Get.height * 0.4,
+                                  width: Get.width * 0.8,
+                                  child: StatefulBuilder(
+                                      builder: (c, s) => Scrollbar(
+                                            interactive: true,
+                                            isAlwaysShown: true,
+                                            radius: Radius.circular(15),
+                                            hoverThickness: 5,
+                                            thickness: 5,
+                                            child: ListView(
+                                              physics: BouncingScrollPhysics(),
+                                              shrinkWrap: true,
+                                              children: controller.milesList
+                                                  .map((e) =>
+                                                      RadioListTile<double>(
+                                                        activeColor:
+                                                            MyTheme.buttonColor,
+                                                        contentPadding:
+                                                            EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        4),
+                                                        value: e,
+                                                        controlAffinity:
+                                                            ListTileControlAffinity
+                                                                .trailing,
+                                                        title: Text(
+                                                            "${e.toInt()} Miles"),
+                                                        groupValue: groupValue,
+                                                        onChanged:
+                                                            (value) async {
+                                                          s(() {
+                                                            groupValue =
+                                                                value ?? 15;
+                                                          });
+                                                        },
+                                                      ))
+                                                  .toList(),
+                                            ),
+                                          )),
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Cancel")),
+                                  TextButton(
+                                      onPressed: () async {
+                                        await controller.setMiles(groupValue);
+                                        Navigator.pop(context);
+                                        await controller.getRestaurants();
+                                      },
+                                      child: Text("Done"))
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        label: Obx(
+                          () => Row(
+                            children: [
+                              Text(
+                                "Under ${controller.selectedMiles.value.toInt()} mi",
+                                style: GoogleFonts.inter(
+                                  fontSize: 10,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyTheme.appbartextColor,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4),
+                                child: FaIcon(
+                                  FontAwesomeIcons.chevronDown,
+                                  size: 10,
+                                  color: MyTheme.dividermiddletext,
+                                ),
+                              ),
+                            ],
                           ),
-                          icon: FaIcon(
-                            FontAwesomeIcons.walking,
-                            size: 11,
-                            color: MyTheme.dividermiddletext,
-                          ),
-                          onPressed: () {
-                            showGeneralDialog(
-                              context: context,
-                              transitionDuration: Duration(milliseconds: 200),
-                              transitionBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return ScaleTransition(
-                                  scale: animation,
-                                  child: child,
-                                );
-                              },
-                              pageBuilder: (context, a, b) {
-                                double groupValue =
-                                    controller.selectedMiles.value;
-                                return AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  title: Text("Show Restaurants under"),
-                                  titleTextStyle: GoogleFonts.inter(
-                                      fontSize: 10,
-                                      color: MyTheme.aboutlocatextcolor
-
-                                      //TODO: TITLE STYLE HERE
-                                      ),
-                                  content: Container(
-                                    height: Get.height * 0.4,
-                                    width: Get.width * 0.8,
-                                    child: StatefulBuilder(
-                                        builder: (c, s) => Scrollbar(
-                                              interactive: true,
-                                              isAlwaysShown: true,
-                                              radius: Radius.circular( 15),
-                                              hoverThickness: 5,
-                                              thickness: 5,
-                                              child: ListView(
-                                                physics:
-                                                    BouncingScrollPhysics(),
-                                                shrinkWrap: true,
-                                                children: controller.milesList
-                                                    .map((e) =>
-                                                        RadioListTile<double>(
-                                                          activeColor: MyTheme
-                                                              .buttonColor,
-                                                          contentPadding:
-                                                              EdgeInsets
-                                                                  .symmetric(
-                                                                      horizontal:
-                                                                          4),
-                                                          value: e,
-                                                          controlAffinity:
-                                                              ListTileControlAffinity
-                                                                  .trailing,
-                                                          title: Text(
-                                                              "${e.toInt()} Miles"),
-                                                          groupValue:
-                                                              groupValue,
-                                                          onChanged:
-                                                              (value) async {
-                                                            s(() {
-                                                              groupValue =
-                                                                  value ?? 15;
-                                                            });
-                                                          },
-                                                        ))
-                                                    .toList(),
-                                              ),
-                                            )),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("Cancel")),
-                                    TextButton(
-                                        onPressed: () async {
-                                          await controller.setMiles(groupValue);
-                                          Navigator.pop(context);
-                                          await controller.getRestaurants();
-                                        },
-                                        child: Text("Done"))
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          label: Obx(() => Text(
-                              "Under ${controller.selectedMiles.value.toInt()} mi")))
+                        ),
+                      ),
                     ],
                   ),
                 ),
