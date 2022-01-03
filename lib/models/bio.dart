@@ -106,7 +106,6 @@ class Bio {
   }
 
   factory Bio.fromMap(Map<String, dynamic> map) {
-    
     return Bio(
       advance_orders: map['advance_orders'],
       no_of_orders: map['no_of_orders'],

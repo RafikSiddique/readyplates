@@ -238,13 +238,13 @@ class OrderWidget extends StatelessWidget {
                             await controller.updateStatus(
                                 orderModel.id, OrderState.completed);
                             Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (context) => FeedbackPage(
-                                    e: orderModel,
-                                    isComplete: true,
-                                  ),
-                                ));
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => TipsucessfullPage(
+                                  orderModel: orderModel,
+                                ),
+                              ),
+                            );
                           },
                         ),
                         Elevated(
