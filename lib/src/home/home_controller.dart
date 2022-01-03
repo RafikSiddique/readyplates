@@ -218,7 +218,7 @@ class HomeController extends GetxController {
   void onPageChanged(int index) {
     timer?.cancel();
     /* if (index == 0) {
-      timer = Timer.periodic(Duration(minutes: 3), (timer) async {
+      timer = Timer.periodic(Duration(minutx`es: 3), (timer) async {
         await getRestaurants();
         print("Restaurant Fetch");
         this.timer = timer;

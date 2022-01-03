@@ -346,8 +346,7 @@ class OrderController extends GetxController {
     }
   }
 
-
-    Future<void> updateTip(int id, String tip) async {
+  Future<void> updateTip(int id, String tip) async {
     try {
       await services.updatetip(id, tip);
       await getorder();
@@ -355,6 +354,16 @@ class OrderController extends GetxController {
       if (e.runtimeType != SocketException) {
         Get.snackbar("Error", e.toString());
       }
+    }
+  }
+
+  Future<int> getOrderCount(int restaurant, DateTime date) async {
+    try {
+      int data = await services.orderCount(restaurant, date.toString());
+      return data;
+    } catch (e) {
+      Get.showSnackbar(GetBar());
+      return -1;
     }
   }
 

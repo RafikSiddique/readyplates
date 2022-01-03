@@ -69,8 +69,14 @@ class Orderservices extends ApiService {
     try {
       Response response =
           await post(orderCountApi, body: {'restaurant': resId, 'date': date});
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 400) {
+        var data = jsonDecode(response.body);
+        if (data is Map) {
+          int? count = int.tryParse(data['Order Count'].toString());
+          return count ?? 0;
+        } else {
+          return 0;
+        }
       } else {
         throw AppException(message: response.reasonPhrase);
       }
