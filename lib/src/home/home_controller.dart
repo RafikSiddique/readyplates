@@ -126,6 +126,7 @@ class HomeController extends GetxController {
     address.value = await sfHelper.getAddress();
     lat.value = await sfHelper.getLat();
     lon.value = await sfHelper.getLon();
+    selectedMiles.value = await sfHelper.getMiles();
     return address.value;
   }
 
@@ -171,8 +172,8 @@ class HomeController extends GetxController {
     try {
       await getAddress();
 
-      List<RestaurantModel> res =
-          await homeService.getRestaurantWithSort(lat.value, lon.value);
+      List<RestaurantModel> res = await homeService.getRestaurantWithSort(
+          lat.value, lon.value, selectedMiles.value);
       print("Got res");
       ;
       if (res.isNotEmpty) {
@@ -203,6 +204,15 @@ class HomeController extends GetxController {
         ));
       }
     }
+  }
+
+  List<double> milesList = List.generate(20, (index) => (index + 1) * 5);
+
+  RxDouble selectedMiles = 15.0.obs;
+
+  Future<void> setMiles(double miles) async {
+    await sfHelper.setMiles(miles);
+    selectedMiles.value = await sfHelper.getMiles();
   }
 
   void onPageChanged(int index) {

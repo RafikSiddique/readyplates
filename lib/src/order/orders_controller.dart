@@ -346,6 +346,18 @@ class OrderController extends GetxController {
     }
   }
 
+
+    Future<void> updateTip(int id, String tip) async {
+    try {
+      await services.updatetip(id, tip);
+      await getorder();
+    } catch (e) {
+      if (e.runtimeType != SocketException) {
+        Get.snackbar("Error", e.toString());
+      }
+    }
+  }
+
   Future<void> updateFeedback(String id, int feedback) async {
     try {
       await services.updateFeedback(id, feedback);

@@ -30,7 +30,7 @@ class HomeServices extends ApiService {
   }
 
   Future<List<RestaurantModel>> getRestaurantWithSort(
-      double lat, double lon) async {
+      double lat, double lon, double miles) async {
     try {
       print(lat);
       print(lon);
@@ -48,7 +48,7 @@ class HomeServices extends ApiService {
                 .values
                 .any((element) => element == null))
             .map((value) => RestaurantModel.fromMap(value))
-            .where((e) => e.bio.isNotEmpty && double.parse(e.address2) < 15000)
+            .where((e) => e.bio.isNotEmpty && double.parse(e.address2) <=miles)
             .toList();
         print(getList);
         return resDetail;

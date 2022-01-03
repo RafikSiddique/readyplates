@@ -255,7 +255,7 @@ class OrderWidget extends StatelessWidget {
                           fontWeight: FontWeight.normal,
                           text: 'Yes',
                           onTap: () {
-                            controller.onInit();
+                            Navigator.pop(context);
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -305,6 +305,7 @@ class OrderWidget extends StatelessWidget {
                                       onTap: () {
                                         if (controller.tipAmountController.text
                                             .isNotEmpty) {
+                                          Navigator.pop(context);
                                           showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
@@ -358,6 +359,11 @@ class OrderWidget extends StatelessWidget {
                                                         FontWeight.normal,
                                                     text: 'Confirm',
                                                     onTap: () async {
+                                                      await controller.updateTip(
+                                                          orderModel.id,
+                                                          controller
+                                                              .tipAmountController
+                                                              .text);
                                                       await controller
                                                           .updateStatus(
                                                               orderModel.id,

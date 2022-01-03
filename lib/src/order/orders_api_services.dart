@@ -65,6 +65,20 @@ class Orderservices extends ApiService {
     }
   }
 
+  Future<int> orderCount(int resId, String date) async {
+    try {
+      Response response =
+          await post(orderCountApi, body: {'restaurant': resId, 'date': date});
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw AppException(message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<CartApiModel>> getCart(String id) async {
     try {
       print('object');
@@ -168,6 +182,23 @@ class Orderservices extends ApiService {
       request.fields.addAll({
         'id': id.toString(),
         'status': status.toString(),
+      });
+      var response = await request.send();
+      if (response.statusCode != 202) {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updatetip(int id, String tip) async {
+    try {
+      var request = MultipartRequest('PUT', updateStatusUrl);
+      request.fields.addAll({
+        'id': id.toString(),
+        'tip': tip,
       });
       var response = await request.send();
       if (response.statusCode != 202) {

@@ -8,6 +8,7 @@ class SharedPreferenceHelper {
   final String _address = "address";
   final String _latitude = "lat";
   final String _longitude = "lon";
+  final String _miles = "miles";
 
   Future<bool> setUserToken(String token) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -73,36 +74,52 @@ class SharedPreferenceHelper {
     }
   }
 
-    Future<bool> setLat(double lat) async {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      bool success = await preferences.setDouble(_latitude, lat);
-      return success;
-    }
+  Future<bool> setMiles(double miles) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool success = await preferences.setDouble(_miles, miles);
+    return success;
+  }
 
-    Future<double> getLat() async {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      double? data = preferences.getDouble(_latitude);
-      if (data != null)
-        return data;
-      else {
-        throw AppException(code: 0, message: "Unknown Coords");
-      }
-    }
+  Future<double> getMiles() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    double? data = preferences.getDouble(_miles);
 
-    Future<bool> setLon(double lon) async {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      bool success = await preferences.setDouble(_longitude, lon);
-      return success;
+    if (data != null)
+      return data;
+    else {
+      return 15;
     }
+  }
 
-    Future<double> getLon() async {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      double? data = preferences.getDouble(_longitude);
-      if (data != null)
-        return data;
-      else {
-        throw AppException(code: 0, message: "Unknown Coords");
-      }
+  Future<bool> setLat(double lat) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool success = await preferences.setDouble(_latitude, lat);
+    return success;
+  }
+
+  Future<double> getLat() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    double? data = preferences.getDouble(_latitude);
+    if (data != null)
+      return data;
+    else {
+      throw AppException(code: 0, message: "Unknown Coords");
     }
-  
+  }
+
+  Future<bool> setLon(double lon) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool success = await preferences.setDouble(_longitude, lon);
+    return success;
+  }
+
+  Future<double> getLon() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    double? data = preferences.getDouble(_longitude);
+    if (data != null)
+      return data;
+    else {
+      throw AppException(code: 0, message: "Unknown Coords");
+    }
+  }
 }

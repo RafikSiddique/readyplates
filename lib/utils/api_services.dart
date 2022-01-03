@@ -42,4 +42,6 @@ class ApiService {
   Uri get feedbackApi => customers("feedback/");
 
   Uri get tableList => restaurants("availabletable/");
+
+  Uri get orderCountApi => restaurants('ordercount/');
 }
