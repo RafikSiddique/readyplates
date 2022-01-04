@@ -3,7 +3,7 @@ class AppException implements Exception {
   AppException({int? code, this.message});
   @override
   String toString() {
-    if (message != null) {
+    if (message != null && message != "") {
       return message!;
     } else {
       return "Something went wrong";

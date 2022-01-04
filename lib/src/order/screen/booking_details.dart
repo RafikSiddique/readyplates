@@ -191,6 +191,28 @@ class BookingDetails extends GetView<OrderController> {
 
   DateTime tempTime = DateTime.now();
 
+  Future<void> proceedToSummary(BuildContext context) async {
+    DateTime selectedDate = controller.selectedDate.value;
+    DateTime selectedTime = controller.globletime.value;
+    DateTime overallTime = DateTime(
+        selectedDate.year,
+        selectedDate.month,
+        selectedDate.day,
+        selectedTime.hour,
+        selectedTime.minute,
+        selectedTime.second);
+    bool isAfterCurrent = overallTime.isAfter(DateTime.now());
+
+    controller.calclateTotal(isEditing != Editing.none);
+    print("success");
+    Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => BurgersupportingPage(
+              restaurantModel: restaurantModel, isEditing: isEditing),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -401,55 +423,112 @@ class BookingDetails extends GetView<OrderController> {
             ),
             Spacer(),
             Elevated(
-              text: "Confirm",
-              width: double.infinity,
-              onTap: () {
-                DateTime selectedDate = controller.selectedDate.value;
-                DateTime selectedTime = controller.globletime.value;
-                DateTime overallTime = DateTime(
-                    selectedDate.year,
-                    selectedDate.month,
-                    selectedDate.day,
-                    selectedTime.hour,
-                    selectedTime.minute,
-                    selectedTime.second);
-                bool isAfterCurrent = overallTime.isAfter(DateTime.now());
-                print(isAfterCurrent);
-                print(overallTime);
-                print(DateTime.now());
-                if (isAfterCurrent) {
-                  if (restaurantModel.open_days.any((element) =>
-                          element.toLowerCase() ==
-                          DateFormat(DateFormat.WEEKDAY)
-                              .format(controller.selectedDate.value)
-                              .toLowerCase()) &&
-                      checkTime()) {
-                    controller.calclateTotal(isEditing != Editing.none);
-                    print("success");
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => BurgersupportingPage(
-                              restaurantModel: restaurantModel,
-                              isEditing: isEditing),
+                text: "Confirm",
+                width: double.infinity,
+                onTap: () async {
+                  DateTime selectedDate = controller.selectedDate.value;
+                  DateTime selectedTime = controller.globletime.value;
+                  DateTime overallTime = DateTime(
+                      selectedDate.year,
+                      selectedDate.month,
+                      selectedDate.day,
+                      selectedTime.hour,
+                      selectedTime.minute,
+                      selectedTime.second);
+                  bool isAfterCurrent = overallTime.isAfter(DateTime.now());
+                  print(isAfterCurrent);
+                  print(overallTime);
+                  print(DateTime.now());
+
+                  print("Starting conditions");
+                  if (isAfterCurrent) {
+                    print("Time validated");
+                    if (restaurantModel.open_days.any((element) =>
+                            element.toLowerCase() ==
+                            DateFormat(DateFormat.WEEKDAY)
+                                .format(controller.selectedDate.value)
+                                .toLowerCase()) &&
+                        checkTime()) {
+                      Get.showSnackbar(GetBar(
+                        icon: Center(
+                          child: SizedBox.square(
+                            dimension: 20,
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                            )),
+                          ),
+                        ),
+                        message: "Confirming booking",
+                      ));
+                      int ordersCount = await controller.getOrderCount(
+                          restaurantModel.id, controller.selectedDate.value);
+                      print("Order Count received $ordersCount");
+                      bool isAutoOrder = await controller
+                          .getAutoOrder(restaurantModel.id.toString());
+                      print("auto order availability recieved $isAutoOrder");
+                      Get.back();
+                      print("Restaurant Open");
+                      if (int.parse(restaurantModel.bio.first.no_of_orders) >
+                          ordersCount) {
+                        print("Order Limit not exceeded");
+                        if (restaurantModel.open_orders) {
+                          print("Orders are allowed");
+                          await proceedToSummary(context);
+                        } else {
+                          print("Order Not allowed");
+                          if (isAutoOrder) {
+                            print("Auto switching on");
+                            DateTime nextDayTime = DateTime(tempTime.year,
+                                tempTime.month, tempTime.day + 1, 00, 00, 00);
+                            print(
+                                "Check if the selected date is before the tomorrow");
+                            if (overallTime.isBefore(nextDayTime)) {
+                              print("Selected date is invalid");
+                              Get.showSnackbar(GetBar(
+                                duration: Duration(milliseconds: 2000),
+                                message:
+                                    "The restaurant has stopped taking orders for today,\nPlease schedule order for tomorrow or later",
+                              ));
+                            } else {
+                              print(
+                                  "Time validated, placing order for tomorrow or later");
+                              await proceedToSummary(context);
+                            }
+                          } else {
+                            Get.showSnackbar(GetBar(
+                              duration: Duration(milliseconds: 2000),
+                              message:
+                                  "The restaurant has stopped taking order for now,\nPlease try again later",
+                            ));
+                          }
+                        }
+                      } else {
+                        Get.showSnackbar(GetBar(
+                          duration: Duration(milliseconds: 2000),
+                          message:
+                              "The restaurant has exceeded the order limits for " +
+                                  DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY)
+                                      .format(overallTime) +
+                                  ",\nPlease try any other date",
                         ));
+                      }
+                    } else {
+                      Get.showSnackbar(GetBar(
+                        title: "Closed",
+                        message:
+                            "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
+                        duration: Duration(seconds: 2),
+                      ));
+                    }
                   } else {
                     Get.showSnackbar(GetBar(
                       title: "Closed",
-                      message:
-                          "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
+                      message: "Please select a time after current time",
                       duration: Duration(seconds: 2),
                     ));
                   }
-                } else {
-                  Get.showSnackbar(GetBar(
-                    title: "Closed",
-                    message: "Please select a time after current time",
-                    duration: Duration(seconds: 2),
-                  ));
-                }
-              },
-            ),
+                }),
           ],
         ),
       ),

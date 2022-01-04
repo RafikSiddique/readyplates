@@ -40,6 +40,7 @@ class HomeController extends GetxController {
     RestaurantModel(
         id: -1,
         resName: "",
+        open_orders: false,
         address2: "",
         overall_experience: "",
         address: "",
@@ -206,7 +207,7 @@ class HomeController extends GetxController {
     }
   }
 
-  List<double> milesList = List.generate(20, (index) => (index + 1) * 5);
+  List<double> milesList = List.generate(200, (index) => (index + 200) * 50);
 
   RxDouble selectedMiles = 15.0.obs;
 

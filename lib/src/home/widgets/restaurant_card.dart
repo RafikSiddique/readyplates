@@ -55,13 +55,6 @@ class RestaurantCard extends GetView<HomeController> {
             completed_till: 0,
             user: 0);
 
-    String toc = restaurantModel.types_of_cusine
-        .getRange(
-            0,
-            restaurantModel.types_of_cusine.length > 3
-                ? 3
-                : restaurantModel.types_of_cusine.length)
-        .join(", ");
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(

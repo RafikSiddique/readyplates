@@ -65,10 +65,24 @@ class Orderservices extends ApiService {
     }
   }
 
+  Future<bool> getAutoOrder(String resid) async {
+    try {
+      Response res = await get(autoOrders(resid));
+      if (res.statusCode == 200) {
+        Map data = jsonDecode(res.body);
+        return data['Auto-Order-On'];
+      } else {
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<int> orderCount(int resId, String date) async {
     try {
-      Response response =
-          await post(orderCountApi, body: {'restaurant': resId, 'date': date});
+      Response response = await post(orderCountApi,
+          body: {'restaurant': resId.toString(), 'date': date});
       if (response.statusCode == 200 || response.statusCode == 400) {
         var data = jsonDecode(response.body);
         if (data is Map) {

@@ -295,7 +295,7 @@ class OrderController extends GetxController {
       });
       cartItems.clear();
       calclateTotal();
-      getorder();
+      await getorder();
       Get.offAllNamed(LandingPage.id);
       Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
@@ -362,8 +362,17 @@ class OrderController extends GetxController {
       int data = await services.orderCount(restaurant, date.toString());
       return data;
     } catch (e) {
-      Get.showSnackbar(GetBar());
-      return -1;
+      return 0;
+    }
+  }
+
+  Future<bool> getAutoOrder(String resid) async {
+    try {
+      bool data = await services.getAutoOrder(resid.toString());
+      return data;
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+      return true;
     }
   }
 

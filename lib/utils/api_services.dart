@@ -44,4 +44,6 @@ class ApiService {
   Uri get tableList => restaurants("availabletable/");
 
   Uri get orderCountApi => restaurants('ordercount/');
+  Uri autoOrders(String resid) => restaurants('autoorders/$resid');
+
 }

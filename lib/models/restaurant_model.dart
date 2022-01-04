@@ -7,6 +7,7 @@ import 'bio.dart';
 class RestaurantModel {
   final int id;
   final List<Bio> bio;
+  final bool open_orders;
   final String resName;
   final String own_name;
   final String own_mobile;
@@ -62,42 +63,13 @@ class RestaurantModel {
     required this.open_days,
     required this.completed_till,
     required this.user,
+    required this.open_orders,
   });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'bio': bio.map((x) => x.toMap()).toList(),
-      'res_name': resName,
-      'own_name': own_name,
-      'own_mobile': own_mobile,
-      'res_city': res_city,
-      'poc': poc,
-      'poc_number': poc_number,
-      'address': address,
-      'postal_code': postal_code,
-      'latitude': latitude,
-      'longitude': longitude,
-      'gstin_present': gstin_present,
-      'gstin_num': gstin_num,
-      'fssai_status': fssai_status,
-      'fssai_expiry': fssai_expiry,
-      'kyc_image': kyc_image,
-      'gstin_image': gstin_image,
-      'fssai_image': fssai_image,
-      'type_of_estd': type_of_estd,
-      'types_of_cusine': types_of_cusine,
-      'start_time': start_time,
-      'end_time': end_time,
-      'open_days': open_days,
-      'completed_till': completed_till,
-      'user': user,
-    };
-  }
 
   factory RestaurantModel.fromMap(Map<String, dynamic> map) {
     return RestaurantModel(
       id: map['id']?.toInt(),
+      open_orders: map['open_orders'] ?? false,
       bio: List<Bio>.from(map['bio']?.map((x) => Bio.fromMap(x))),
       resName: map['res_name'] ?? "",
       address2: (map['address2'] ?? "0").toString(),
@@ -140,7 +112,6 @@ class RestaurantModel {
     );
   }
 
-  String toJson() => json.encode(toMap());
 
   factory RestaurantModel.fromJson(String source) =>
       RestaurantModel.fromMap(json.decode(source));

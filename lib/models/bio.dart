@@ -107,8 +107,8 @@ class Bio {
 
   factory Bio.fromMap(Map<String, dynamic> map) {
     return Bio(
-      advance_orders: map['advance_orders'],
-      no_of_orders: map['no_of_orders'],
+      advance_orders: map['advance_orders'] ?? "5",
+      no_of_orders: map['no_of_orders'] ?? "0",
       id: map['id']?.toInt(),
       description: map['description'] ?? "",
       no_of_tables: map['no_of_tables'] ?? "",
@@ -151,38 +151,6 @@ class Bio {
     return 'Bio(id: $id, description: $description, no_of_tables: $no_of_tables, max_table_size: $max_table_size, cost_for_two: $cost_for_two, serving_time: $servingTime, recurring_event_date: $recurring_event_date, recur_freq: $recur_freq, event_start: $event_start, event_end: $event_end, event_desc: $event_desc, event_name: $event_name, front_fascia_day: $front_fascia_day, front_fascia_night: $front_fascia_night, street_view: $street_view, entrance: $entrance, ambience1: $ambience1, ambience2: $ambience2, ambience3: $ambience3, ambience4: $ambience4, food1: $food1, food2: $food2, food3: $food3, food4: $food4, cv19prec1: $cv19prec1, cv19prec2: $cv19prec2, cv19prec3: $cv19prec3, cv19prec4: $cv19prec4, completed_till: $completed_till, user: $user)';
   }
 
-  bool isNotNull() {
-    return id != null &&
-        description != null &&
-        no_of_tables != null &&
-        max_table_size != null &&
-        cost_for_two != null &&
-        servingTime != null &&
-        recurring_event_date != null &&
-        recur_freq != null &&
-        event_start != null &&
-        event_end != null &&
-        event_name != null &&
-        event_desc != null &&
-        front_fascia_day != null &&
-        front_fascia_night != null &&
-        street_view != null &&
-        entrance != null &&
-        ambience1 != null &&
-        ambience2 != null &&
-        ambience3 != null &&
-        ambience4 != null &&
-        food1 != null &&
-        food2 != null &&
-        food3 != null &&
-        food4 != null &&
-        cv19prec1 != null &&
-        cv19prec2 != null &&
-        cv19prec3 != null &&
-        cv19prec4 != null &&
-        completed_till != null &&
-        user != null;
-  }
 
   @override
   bool operator ==(Object other) {
