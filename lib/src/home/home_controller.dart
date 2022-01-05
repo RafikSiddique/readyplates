@@ -33,6 +33,20 @@ class HomeController extends GetxController {
     return deg * (pi / 180);
   }
 
+  Future<RestaurantModel?> getRestaurant(int resId) async {
+    try {
+      RestaurantModel restaurantModel = await homeService.getRes(resId);
+      return restaurantModel;
+    } catch (e) {
+      if (e.runtimeType != SocketException)
+        Get.showSnackbar(GetBar(
+          title: "Error",
+          message: "Something went wrong",
+        ));
+      return null;
+    }
+  }
+
   Timer? timer;
 
   RxString address = "".obs;

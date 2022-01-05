@@ -29,6 +29,23 @@ class HomeServices extends ApiService {
     }
   }
 
+    Future<RestaurantModel> getRes(int id) async {
+    try {
+      Response response =
+          await get(singleRestaurantUri(id), headers: contentTypeJsonHeader);
+      if (response.statusCode == 200) {
+        print(response.request);
+        Map<String, dynamic> data = jsonDecode(response.body).first;
+        return RestaurantModel.fromMap(data);
+      } else {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<RestaurantModel>> getRestaurantWithSort(
       double lat, double lon, double miles) async {
     try {
