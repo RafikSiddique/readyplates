@@ -178,6 +178,7 @@ class AuthController extends GetxController {
       }
       isLoading.value = false;
     } catch (e) {
+      isLoading.value = false;
       if (e.runtimeType != SocketException) {
         Get.snackbar("Error", e.toString());
       }
@@ -276,10 +277,7 @@ class AuthController extends GetxController {
           gender: gender.value,
           dob: dobController.text,
           mobNum: mobController.text);
-      await login(
-        false,
-        issignup: true
-      );
+      await login(false, issignup: true);
     } catch (e) {
       if (e.runtimeType != SocketException) {
         Get.snackbar("Error", e.toString());

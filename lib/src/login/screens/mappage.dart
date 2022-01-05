@@ -268,17 +268,19 @@ class _MapPageState extends State<MapPage> {
                             SizedBox(
                               height: 15,
                             ),
-                            Text("NEARBY",
-                                style: GoogleFonts.inter(
-                                  fontSize: 10,
+                            Text(
+                              "NEARBY",
+                              style: GoogleFonts.inter(
+                                fontSize: 10,
 
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyTheme.dividermiddletext,
-                                  // color: Color(0xff4E535A),appbartextColor,dividermiddletext
-                                  //color: Color.fromRGBO(78, 83, 90, 0.8),
-                                  letterSpacing: 1,
-                                )),
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500,
+                                color: MyTheme.dividermiddletext,
+                                // color: Color(0xff4E535A),appbartextColor,dividermiddletext
+                                //color: Color.fromRGBO(78, 83, 90, 0.8),
+                                letterSpacing: 1,
+                              ),
+                            ),
                             SizedBox(
                               height: 13,
                             ),
@@ -291,14 +293,17 @@ class _MapPageState extends State<MapPage> {
                                 children: [
                                   Flexible(
                                     child: Obx(
-                                        () => Text(authController.address.value,
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontStyle: FontStyle.normal,
-                                              fontWeight: FontWeight.normal,
-                                              letterSpacing: -0.264706,
-                                              color: MyTheme.appbartextColor,
-                                            ))),
+                                      () => Text(
+                                        authController.address.value,
+                                        style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.normal,
+                                          letterSpacing: -0.264706,
+                                          color: MyTheme.appbartextColor,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   IconButton(
                                     icon: const Icon(Icons.done),
@@ -307,6 +312,12 @@ class _MapPageState extends State<MapPage> {
                                       if (widget.isHome) {
                                         setAddress();
                                         homeController.getRestaurants();
+                                        Get.snackbar(
+                                          "Location",
+                                          "location Updated",
+                                          backgroundColor: Colors.black,
+                                          colorText: Colors.white,
+                                        );
                                       }
                                       // Navigator.pushNamed(
                                       //     context, MyRoutes.OnbordingPage);borderchangeColor
