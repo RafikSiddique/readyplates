@@ -6,20 +6,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
+import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class BookingDetails extends GetView<OrderController> {
-  final RestaurantModel restaurantModel;
+  late RestaurantModel restaurantModel;
   final Editing isEditing;
   BookingDetails(this.restaurantModel, this.isEditing);
-  DateTime now = DateTime.now();
+  final DateTime now = DateTime.now();
 
   Text weekText(String text) {
     return Text(text);
   }
+
+  DateTime tempTime = DateTime.now();
 
   Widget numberChange(Size size) {
     return Column(
@@ -189,20 +192,7 @@ class BookingDetails extends GetView<OrderController> {
     );
   }
 
-  DateTime tempTime = DateTime.now();
-
   Future<void> proceedToSummary(BuildContext context) async {
-    DateTime selectedDate = controller.selectedDate.value;
-    DateTime selectedTime = controller.globletime.value;
-    DateTime overallTime = DateTime(
-        selectedDate.year,
-        selectedDate.month,
-        selectedDate.day,
-        selectedTime.hour,
-        selectedTime.minute,
-        selectedTime.second);
-    bool isAfterCurrent = overallTime.isAfter(DateTime.now());
-
     controller.calclateTotal(isEditing != Editing.none);
     print("success");
     Navigator.push(
@@ -460,12 +450,18 @@ class BookingDetails extends GetView<OrderController> {
                         ),
                         message: "Confirming booking",
                       ));
+                      RestaurantModel model = this.restaurantModel;
+                      restaurantModel = await Get.find<HomeController>()
+                              .getRestaurant(restaurantModel.id) ??
+                          model;
                       int ordersCount = await controller.getOrderCount(
                           restaurantModel.id, controller.selectedDate.value);
                       print("Order Count received $ordersCount");
+
                       bool isAutoOrder = await controller
                           .getAutoOrder(restaurantModel.id.toString());
                       print("auto order availability recieved $isAutoOrder");
+
                       Get.back();
                       print("Restaurant Open");
                       if (int.parse(restaurantModel.bio.first.no_of_orders) >

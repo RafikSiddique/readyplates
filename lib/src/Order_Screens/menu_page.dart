@@ -214,6 +214,7 @@ class _MenuPageState extends State<MenuPage> {
                             ? MyTheme.buttonbackgroundColor
                             : MyTheme.hinttextColor,
                         onTap: () async {
+                          
                           if (widget.isEditing != Editing.none) {
                             orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {

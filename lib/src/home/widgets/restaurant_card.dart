@@ -79,26 +79,17 @@ class RestaurantCard extends GetView<HomeController> {
         type: MaterialType.transparency,
         child: InkWell(
           onTap: () async {
-            Get.showSnackbar(GetBar(
-              showProgressIndicator: true,
-              messageText: Container(),
-            ));
-            RestaurantModel? model =
-                await controller.getRestaurant(restaurantModel.id);
-            Get.back();
+
             controller.timer?.cancel();
             Navigator.push(
                 context,
                 CupertinoPageRoute(
                     settings: RouteSettings(name: 'details'),
                     builder: (context) => RestaurantDetails(
-                          restaurantModel: model ?? restaurantModel,
+                          restaurantModel:  restaurantModel,
                         )));
 
-            // Get.to(() => RestaurantDetails(
-            //       restaurantModel: restaurantModel,
-            //       controller: controller,
-            //     ));
+
           },
           child: Padding(
             padding: EdgeInsets.all(media.size.width * 0.025),
