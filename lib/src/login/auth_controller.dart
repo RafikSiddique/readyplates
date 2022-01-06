@@ -18,7 +18,8 @@ import 'package:readyplates/utils/fcm_service.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String uid = '';
+// String uid = '';
+bool isForgotPass = false;
 
 class AuthController extends GetxController {
   final AuthenticationServices services = AuthenticationServices();
@@ -144,7 +145,7 @@ class AuthController extends GetxController {
       id = await services.login(
           usernameController.text.toLowerCase(), passwordController.text);
       await sfHelper.setUserId(id!);
-      uid = id!;
+      // uid = id!;
       if (!changedPassword) {
         // if (implicit) {
         //   // Get.toNamed(ImagePage.id);
@@ -191,7 +192,7 @@ class AuthController extends GetxController {
         usernameController.text.toLowerCase(),
         passwordController.text,
       );
-      if (uid != '') {
+      if (isForgotPass == false) {
         Get.put(HomeController());
         Get.offAllNamed(LandingPage.id);
       } else {
@@ -292,7 +293,7 @@ class AuthController extends GetxController {
     (await SharedPreferences.getInstance()).clear();
     Get.find<OrderController>().clearController();
     Get.offAllNamed(OnbordingPage.id);
-    uid = '';
+    // uid = '';
     dobController.clear();
     mobController.clear();
     final c = Get.find<HomeController>();

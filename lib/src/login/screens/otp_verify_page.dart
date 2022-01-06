@@ -280,6 +280,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                   onTap: () async {
                                     if (controller.otpVerification.value ==
                                         controller.otpVerified) {
+                                      isForgotPass = true;
                                       Get.toNamed(ChangePasswordPage1.id);
                                     }
                                   },
