@@ -221,7 +221,7 @@ class HomeController extends GetxController {
     }
   }
 
-  List<double> milesList = List.generate(200, (index) => (index + 200) * 50);
+  List<double> milesList = List.generate(5, (index) => (index + 1) * 5);
 
   RxDouble selectedMiles = 15.0.obs;
 
