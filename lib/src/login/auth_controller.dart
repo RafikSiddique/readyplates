@@ -195,6 +195,9 @@ class AuthController extends GetxController {
       if (isForgotPass == false) {
         Get.put(HomeController());
         Get.offAllNamed(LandingPage.id);
+        usernameController.clear();
+        passwordController.clear();
+        password2Controller.clear();
       } else {
         usernameController.clear();
         passwordController.clear();

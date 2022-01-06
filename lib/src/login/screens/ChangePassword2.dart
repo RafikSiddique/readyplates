@@ -202,6 +202,7 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                               formKey.currentState!.save();
                               if (formKey.currentState!.validate())
                                 await controller.changePassword();
+                              isForgotPass = false;
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
