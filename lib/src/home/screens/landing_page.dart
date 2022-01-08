@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -69,8 +70,30 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
   }
 
+  void showDialogLocal(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Checkout Orders"),
+          content: Text(
+              "You have not checkout your previous order, do you want to checkkout?"),
+          actions: [
+            TextButton(onPressed: () {}, child: Text("No")),
+            TextButton(onPressed: () {}, child: Text("Yes"))
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // bool isDialogShown = false;
+    // if (!isDialogShown) {
+    //   showDialogLocal(context);
+    //   isDialogShown = true;
+    // }
     return Scaffold(
       body: Obx(() => getBody()),
       bottomNavigationBar: AppNavigationBar(),
