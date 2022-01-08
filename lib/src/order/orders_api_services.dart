@@ -79,7 +79,7 @@ class Orderservices extends ApiService {
     }
   }
 
-  Future<int> orderCount(int resId, String date) async {
+/*   Future<int> orderCount(int resId, String date) async {
     try {
       Response response = await post(orderCountApi,
           body: {'restaurant': resId.toString(), 'date': date});
@@ -97,7 +97,7 @@ class Orderservices extends ApiService {
     } catch (e) {
       rethrow;
     }
-  }
+  } */
 
   Future<List<CartApiModel>> getCart(String id) async {
     try {

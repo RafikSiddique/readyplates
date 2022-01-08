@@ -454,51 +454,56 @@ class BookingDetails extends GetView<OrderController> {
                       restaurantModel = await Get.find<HomeController>()
                               .getRestaurant(restaurantModel.id) ??
                           model;
-                      int ordersCount = await controller.getOrderCount(
-                          restaurantModel.id, controller.selectedDate.value);
-                      print("Order Count received $ordersCount");
+                      /*      int ordersCount = await controller.getOrderCount(
+                          restaurantModel.id, controller.selectedDate.value); */
+                      //  print("Order Count received $ordersCount");
 
-                      bool isAutoOrder = await controller
-                          .getAutoOrder(restaurantModel.id.toString());
-                      print("auto order availability recieved $isAutoOrder");
+                      /*         bool isAutoOrder = await controller
+                          .getAutoOrder(restaurantModel.id.toString()); */
+                      // print("auto order availability recieved $isAutoOrder");
 
                       Get.back();
                       print("Restaurant Open");
-                      if (int.parse(restaurantModel.bio.first.no_of_orders) >
-                          ordersCount) {
-                        print("Order Limit not exceeded");
-                        if (restaurantModel.open_orders) {
-                          print("Orders are allowed");
-                          await proceedToSummary(context);
-                        } else {
-                          print("Order Not allowed");
-                          if (isAutoOrder) {
-                            print("Auto switching on");
-                            DateTime nextDayTime = DateTime(tempTime.year,
-                                tempTime.month, tempTime.day + 1, 00, 00, 00);
-                            print(
-                                "Check if the selected date is before the tomorrow");
-                            if (overallTime.isBefore(nextDayTime)) {
+                      /*    if (int.parse(restaurantModel.bio.first.no_of_orders) >
+                          ordersCount) { */
+                      print("Order Limit not exceeded");
+                      if (restaurantModel.open_orders) {
+                        print("Orders are allowed");
+                        await proceedToSummary(context);
+                      } else {
+                        print("Order Not allowed");
+                        //if (isAutoOrder) {
+                        print("Auto switching on");
+                        /*    DateTime nextDayTime = DateTime(tempTime.year,
+                                tempTime.month, tempTime.day + 1, 00, 00, 00); */
+                        print(
+                            "Check if the selected date is before the tomorrow");
+                        /*         if (overallTime.isBefore(nextDayTime)) {
                               print("Selected date is invalid");
                               Get.showSnackbar(GetBar(
                                 duration: Duration(milliseconds: 2000),
                                 message:
                                     "The restaurant has stopped taking orders for today,\nPlease schedule order for tomorrow or later",
                               ));
-                            } else {
-                              print(
+                            } else { */
+                        Get.showSnackbar(GetBar(
+                          duration: Duration(milliseconds: 2000),
+                          message:
+                              "The restaurant has stopped taking order for now,\nPlease try again later",
+                        ));
+                        /* print(
                                   "Time validated, placing order for tomorrow or later");
-                              await proceedToSummary(context);
-                            }
-                          } else {
+                              await proceedToSummary(context); */
+                        //     }
+                        /*            } else {
                             Get.showSnackbar(GetBar(
                               duration: Duration(milliseconds: 2000),
                               message:
                                   "The restaurant has stopped taking order for now,\nPlease try again later",
                             ));
-                          }
-                        }
-                      } else {
+                          } */
+                      }
+                      /*          } else {
                         Get.showSnackbar(GetBar(
                           duration: Duration(milliseconds: 2000),
                           message:
@@ -507,7 +512,7 @@ class BookingDetails extends GetView<OrderController> {
                                       .format(overallTime) +
                                   ",\nPlease try any other date",
                         ));
-                      }
+                      } */
                     } else {
                       Get.showSnackbar(GetBar(
                         title: "Closed",

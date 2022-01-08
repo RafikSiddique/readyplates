@@ -357,14 +357,14 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<int> getOrderCount(int restaurant, DateTime date) async {
+/*   Future<int> getOrderCount(int restaurant, DateTime date) async {
     try {
       int data = await services.orderCount(restaurant, date.toString());
       return data;
     } catch (e) {
       return 0;
     }
-  }
+  } */
 
   Future<bool> getAutoOrder(String resid) async {
     try {
