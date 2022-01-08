@@ -13,8 +13,6 @@ import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:http/http.dart' as http;
 
-bool isCheckedOut = true;
-
 class LandingPage extends StatefulWidget {
   static const id = "/landingPage";
   LandingPage({Key? key}) : super(key: key);
@@ -109,11 +107,11 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    
-     if (!isCheckedOut) {
-       showDialogLocal(context);
-    isCheckedOut = true;
-     }
+    bool isCheckedOut = false;
+    if (!isCheckedOut) {
+      showDialogLocal(context);
+      isCheckedOut = true;
+    }
     return Scaffold(
       body: Obx(() => getBody()),
       bottomNavigationBar: AppNavigationBar(),
