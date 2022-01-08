@@ -11,6 +11,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class BookingDetails extends GetView<OrderController> {
   late RestaurantModel restaurantModel;
@@ -438,6 +439,21 @@ class BookingDetails extends GetView<OrderController> {
                                 .format(controller.selectedDate.value)
                                 .toLowerCase()) &&
                         checkTime()) {
+                      // Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                      //   title: 'Booking',
+                      //   message: 'Confirming booking',
+                      //   icon: Center(
+                      //     child: SizedBox.square(
+                      //       dimension: 20,
+                      //       child: Center(
+                      //         child: CircularProgressIndicator(
+                      //           strokeWidth: 2,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ));
+
                       Get.showSnackbar(GetBar(
                         icon: Center(
                           child: SizedBox.square(

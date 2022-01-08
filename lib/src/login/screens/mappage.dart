@@ -14,6 +14,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/place_search.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 import 'package:uuid/uuid.dart';
 
 class MapPage extends StatefulWidget {
@@ -312,12 +313,16 @@ class _MapPageState extends State<MapPage> {
                                       if (widget.isHome) {
                                         setAddress();
                                         homeController.getRestaurants();
-                                        Get.snackbar(
-                                          "Location",
-                                          "location Updated",
-                                          backgroundColor: Colors.black,
-                                          colorText: Colors.white,
-                                        );
+                                        Get.showSnackbar(
+                                            MySnackBar.myLoadingSnackBar(
+                                                title: 'Location',
+                                                message: 'location Updated'));
+                                        // Get.snackbar(
+                                        //   "Location",
+                                        //   "location Updated",
+                                        //   backgroundColor: Colors.black,
+                                        //   colorText: Colors.white,
+                                        // );
                                       }
                                       // Navigator.pushNamed(
                                       //     context, MyRoutes.OnbordingPage);borderchangeColor
