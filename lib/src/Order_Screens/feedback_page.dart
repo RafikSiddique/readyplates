@@ -354,11 +354,11 @@ class _FeedbackPageState extends State<FeedbackPage> {
                             controller.feedback.text.isEmpty &&
                                 controller.imgs?.path != null)
                         ? MyTheme.buttonColor
-                        : MyTheme.buttonchangeColor,
+                        : MyTheme.buttonbackgroundColor,
                     text: 'Post Feedback',
                     borderColor: controller.feedback.text.isEmpty
                         ? MyTheme.buttontextColor
-                        : MyTheme.buttontextchangeColor,
+                        : MyTheme.appbackgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                   SizedBox(

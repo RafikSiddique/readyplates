@@ -138,7 +138,6 @@ class IncDecButton extends StatelessWidget {
                   Icons.add,
                   color: MyTheme.editbuttontextColor,
                 ),
-                
               ),
             ),
           ],
@@ -174,7 +173,7 @@ class EditButton extends StatelessWidget {
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         // color: Color(0xffFFF0F3),
-        color: MyTheme.appbackcolor, //Colors.white, //appbackcolor,
+        color: MyTheme.containerColor, //Colors.white, //appbackcolor,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(6),

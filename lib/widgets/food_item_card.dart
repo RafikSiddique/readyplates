@@ -247,7 +247,7 @@ class FoodItemCard extends GetView<OrderController> {
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 16,
-                                color: MyTheme.buttonchangeColor),
+                                color: MyTheme.buttonbackgroundColor),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

@@ -216,7 +216,7 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                                         controller
                                             .passwordController.text.isEmpty)
                                     ? MyTheme.buttonColor
-                                    : MyTheme.buttonchangeColor,
+                                    : MyTheme.buttonbackgroundColor,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),

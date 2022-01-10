@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class MyTheme {
   static Color backgroundcolor = Color(0xffF5F5F5);
-  static Color appbackcolor = Color(0xffEFEFEF);
+  // static Color appbackcolor = Color(0xffEFEFEF);
 
   static Color iconColor = Color(0xff000000);
-  static Color buttonbackgroundcolor3 = Color(0xff7A7E83);
+  // static Color buttonbackgroundcolor3 = Color(0xff7A7E83);
 
   static Color appbartextColor = Color(0xff393E46);
 
@@ -42,7 +42,7 @@ class MyTheme {
 
   static Color buttontextlogin = Color(0xff222222);
 
-  static Color forgetpasslogintext = Color(0xff32B768);
+  // static Color forgetpasslogintext = Color(0xff32B768);
   static Color feedbackhintcolor = Color(0xffB7B7B7);
 
   static Color boxdecoration = Color(0xff32B768);
@@ -82,11 +82,11 @@ class MyTheme {
   static Color imgtextColor = Color(0xff979797);
   static Color buttonColor = Color(0xff7A7E83);
 
-  static Color buttonchangeColor = Color(0xff222831);
+  // static Color buttonchangeColor = Color(0xff222831);
 
   static Color buttontextColor = Color(0xffE5E5E5);
-  static Color buttontextchangeColor = Color(0xffFFFFFF);
-  static Color text3Color = Color(0xff393E46);
+  // static Color buttontextchangeColor = Color(0xffFFFFFF);
+  // static Color text3Color = Color(0xff393E46);
   static Color desFont = Color(0xff7F7F7F);
   static Color pricecolor = Color(0xff595959);
   static Color timebutton = Color(0xffE4E4E4);

@@ -21,10 +21,10 @@ class Tellafriend extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        backgroundColor: MyTheme.appbackcolor,
+        backgroundColor: MyTheme.containerColor,
         appBar: AppBar(
           toolbarHeight: kToolbarHeight,
-          backgroundColor: MyTheme.appbackcolor,
+          backgroundColor: MyTheme.containerColor,
           elevation: 0,
           centerTitle: true,
           title: Text('Tell a friend',
@@ -101,7 +101,7 @@ class Tellafriend extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: MyTheme.appbackcolor,
+                          primary: MyTheme.containerColor,
 
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),

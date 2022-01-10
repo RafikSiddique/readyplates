@@ -175,7 +175,7 @@ class _MenuPageState extends State<MenuPage> {
                                         fontSize: 15,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.w500,
-                                        color: MyTheme.text3Color,
+                                        color: MyTheme.appbartextColor,
                                       ),
                                     ),
                                   ),
@@ -214,7 +214,6 @@ class _MenuPageState extends State<MenuPage> {
                             ? MyTheme.buttonbackgroundColor
                             : MyTheme.hinttextColor,
                         onTap: () async {
-                          
                           if (widget.isEditing != Editing.none) {
                             orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {

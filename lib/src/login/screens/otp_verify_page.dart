@@ -291,7 +291,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                       color:
                                           (controller.otpNumber[j].text.isEmpty)
                                               ? MyTheme.imgtextColor
-                                              : MyTheme.buttonchangeColor,
+                                              : MyTheme.buttonbackgroundColor,
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(6)),
                                     ),
@@ -306,8 +306,8 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                           fontWeight: FontWeight.w600,
                                           color: (controller
                                                   .otpNumber[j].text.isEmpty)
-                                              ? MyTheme.buttontextchangeColor
-                                              : MyTheme.buttontextchangeColor,
+                                              ? MyTheme.appbackgroundColor
+                                              : MyTheme.appbackgroundColor,
                                         ),
                                       ),
                                     ),
