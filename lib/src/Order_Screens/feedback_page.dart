@@ -346,9 +346,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
                       controller.feedbacks(widget.e.restaurant.id.toString(),
                           widget.e.id.toString());
-                      if (widget.isComplete) {
-                        controller.updateStatus(widget.e.id, OrderState.completed);
-                      }
+                      // if (widget.isComplete) {
+                      //   controller.updateStatus(widget.e.id, OrderState.completed);
+                      // }
                     },
                     backgroundColor: (ratingText == '' ||
                             controller.feedback.text.isEmpty &&
