@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/src/home/screens/restaurant_list.dart';
 import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/src/order/screen/order_page.dart';

@@ -93,4 +93,10 @@ class MyTheme {
   static Color errorIcon = Color(0xffFF7976);
   static Color backcolor = Color(0xffFFD9C1);
   static Color chevrondowncolor = Color(0xff797979);
+
+  static Color orangeColor = Color(0xffF47121);
+
+  static Color verifyButtonColor = Color(0xffFFF6E9);
+
+  static Color verifyTextColor = Color(0xffFDD7A6);
 }

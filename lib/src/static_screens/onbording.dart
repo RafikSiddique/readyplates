@@ -10,6 +10,7 @@ import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/src/login/screens/signuppage.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:readyplates/widgets/readyplates.dart';
 
@@ -55,6 +56,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                     fontSize: 17,
                     color: textColor,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.normal,
                   ),
                 ),
               ),
@@ -99,17 +101,17 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                             style: GoogleFonts.montserrat(
                               fontSize: 30,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(255, 255, 255, 0.9),
+                              fontWeight: FontWeight.w700,
+                              color: MyTheme.orangeColor,
                             ),
                             children: [
                               TextSpan(
-                                text: ' Plates'.toUpperCase(),
+                                text: 'Plates'.toUpperCase(),
                                 style: GoogleFonts.montserrat(
                                   fontSize: 30,
                                   fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color.fromRGBO(255, 255, 255, 0.9),
+                                  fontWeight: FontWeight.w200,
+                                  color: MyTheme.orangeColor,
                                 ),
                               ),
                             ]),
@@ -147,7 +149,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                                     height: 54,
                                     decoration: BoxDecoration(
                                       color:
-                                          Color(0xffFFFFFF).withOpacity(0.30),
+                                          Color(0xffFFFFFF).withOpacity(0.38),
                                     ),
                                     child: Center(
                                       child: BackdropFilter(
@@ -186,10 +188,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                             },
                             text: "SIGN UP",
                             textColor: Color(0xffFFFFFF),
-                            border: Border.all(
-                              color: Color(0XffD0D0D0).withOpacity(0.6),
-                              width: 1.5,
-                            ),
+                            color: Color(0xff222831).withOpacity(0.26),
                           ),
                         ),
                         SizedBox(
