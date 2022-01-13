@@ -90,7 +90,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
               iconSize: 14.83,
               icon: FaIcon(
                 FontAwesomeIcons.chevronLeft,
-                color: MyTheme.iconColor,
+                color: MyTheme.orangeColor,
               ),
               onPressed: () {
                 Get.back();
@@ -102,7 +102,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w500,
               fontSize: 17,
-              color: MyTheme.appbartextColor,
+              color: MyTheme.orangeColor,
             ),
           ),
         ),
@@ -141,8 +141,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         starCount: 5,
                         size: 30,
                         spacing: 22,
-                        borderColor: MyTheme.ratingfillColor,
-                        color: MyTheme.ratingfillColor,
+                        borderColor: MyTheme.orangeColor,
+                        color: MyTheme.orangeColor,
                       ),
                       Text(
                         stringText(controller.rating1),
@@ -182,8 +182,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         starCount: 5,
                         size: 30,
                         spacing: 22,
-                        borderColor: MyTheme.ratingfillColor,
-                        color: MyTheme.ratingfillColor,
+                        borderColor: MyTheme.orangeColor,
+                        color: MyTheme.orangeColor,
                       ),
                       Text(stringText(controller.rating2),
                           style: GoogleFonts.inter(
@@ -220,8 +220,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         starCount: 5,
                         size: 30,
                         spacing: 22,
-                        borderColor: MyTheme.ratingfillColor,
-                        color: MyTheme.ratingfillColor,
+                        borderColor: MyTheme.orangeColor,
+                        color: MyTheme.orangeColor,
                       ),
                       Text(stringText(controller.rating3),
                           style: GoogleFonts.inter(
@@ -258,8 +258,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         starCount: 5,
                         size: 30,
                         spacing: 22,
-                        borderColor: MyTheme.ratingfillColor,
-                        color: MyTheme.ratingfillColor,
+                        borderColor: MyTheme.orangeColor,
+                        color: MyTheme.orangeColor,
                       ),
                       Text(
                         stringText(controller.rating4),
@@ -296,7 +296,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: MyTheme.containerColor,
+                          color: MyTheme.verifyButtonColor,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         height: 228,
@@ -312,6 +312,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                       child: Image.asset(
                                         'assets/images/camera.png',
                                         fit: BoxFit.cover,
+                                        color: MyTheme.orangeColor,
                                       ),
                                     ),
                                     SizedBox(
@@ -324,7 +325,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                           fontSize: 12,
                                           fontWeight: FontWeight.w500,
                                           fontStyle: FontStyle.normal,
-                                          color: MyTheme.imgtextColor,
+                                          color: MyTheme.orangeColor,
                                         ),
                                       ),
                                     ),
@@ -350,15 +351,22 @@ class _FeedbackPageState extends State<FeedbackPage> {
                       //   controller.updateStatus(widget.e.id, OrderState.completed);
                       // }
                     },
-                    backgroundColor: (ratingText == '' ||
-                            controller.feedback.text.isEmpty &&
-                                controller.imgs?.path != null)
-                        ? MyTheme.buttonColor
-                        : MyTheme.buttonbackgroundColor,
-                    text: 'Post Feedback',
-                    borderColor: controller.feedback.text.isEmpty
-                        ? MyTheme.buttontextColor
+                    backgroundColor: (controller.rating1 == 0.0 ||
+                            controller.rating2 == 0.0 ||
+                            controller.rating3 == 0.0 ||
+                            controller.rating4 == 0.0 ||
+                            controller.feedback.text.isEmpty)
+                        ? MyTheme.verifyButtonColor
+                        : MyTheme.orangeColor,
+                    color: (controller.rating1 == 0.0 ||
+                            controller.rating2 == 0.0 ||
+                            controller.rating3 == 0.0 ||
+                            controller.rating4 == 0.0 ||
+                            controller.feedback.text.isEmpty)
+                        ? MyTheme.verifyTextColor
                         : MyTheme.appbackgroundColor,
+                    text: 'Post Feedback',
+                    borderColor: Colors.transparent,
                     fontWeight: FontWeight.bold,
                   ),
                   SizedBox(

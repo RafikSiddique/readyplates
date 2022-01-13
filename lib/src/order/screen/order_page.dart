@@ -232,6 +232,7 @@ class OrderPage extends GetView<OrderController> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Elevated(
+                          color: Colors.white,
                           width: MediaQuery.of(context).size.width,
                           text: "Order Now",
                           onTap: () {

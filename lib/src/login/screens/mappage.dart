@@ -306,35 +306,36 @@ class _MapPageState extends State<MapPage> {
                                       ),
                                     ),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.done),
-                                    color: MyTheme.borderchangeColor,
-                                    onPressed: () {
-                                      if (widget.isHome) {
-                                        setAddress();
-                                        homeController.getRestaurants();
-                                        Get.showSnackbar(
-                                            MySnackBar.myLoadingSnackBar(
-                                                title: 'Location',
-                                                message: 'location Updated'));
-                                        // Get.snackbar(
-                                        //   "Location",
-                                        //   "location Updated",
-                                        //   backgroundColor: Colors.black,
-                                        //   colorText: Colors.white,
-                                        // );
-                                      }
-                                      // Navigator.pushNamed(
-                                      //     context, MyRoutes.OnbordingPage);borderchangeColor
-                                    },
-                                  ),
+                                  if (widget.isHome)
+                                    IconButton(
+                                      icon: const Icon(Icons.done),
+                                      color: MyTheme.switchButtonColor,
+                                      onPressed: () {
+                                        if (widget.isHome) {
+                                          setAddress();
+                                          homeController.getRestaurants();
+                                          Get.showSnackbar(
+                                              MySnackBar.myLoadingSnackBar(
+                                                  title: 'Location',
+                                                  message: 'location Updated'));
+                                          // Get.snackbar(
+                                          //   "Location",
+                                          //   "location Updated",
+                                          //   backgroundColor: Colors.black,
+                                          //   colorText: Colors.white,
+                                          // );
+                                        }
+                                        // Navigator.pushNamed(
+                                        //     context, MyRoutes.OnbordingPage);borderchangeColor
+                                      },
+                                    ),
                                 ],
                               ),
                             ),
                             Divider(
                               // indent: 16,
                               //// endIndent: 16,
-                              thickness: 2,
+                              thickness: 1,
                               color: MyTheme.devidercolor,
                               //  color: Color(0xffD8D8D8),
                             ),
@@ -344,7 +345,9 @@ class _MapPageState extends State<MapPage> {
                             if (!widget.isHome)
                               ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
+                                    primary: authController.address.value == ''
+                                        ? MyTheme.verifyButtonColor
+                                        : MyTheme.orangeColor,
                                     minimumSize: Size(size.width, 50),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(7),
@@ -367,9 +370,11 @@ class _MapPageState extends State<MapPage> {
                                   child: Text('NEXT',
                                       style: GoogleFonts.inter(
                                         fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: -0.1,
-                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        color:
+                                            authController.address.value == ''
+                                                ? MyTheme.verifyTextColor
+                                                : MyTheme.appbackgroundColor,
                                         fontSize: 17,
                                       ))),
                             SizedBox(

@@ -37,7 +37,7 @@ class _SignupPageState extends State<SignupPage> {
                 iconSize: 14.83,
                 icon: FaIcon(
                   FontAwesomeIcons.chevronLeft,
-                  color: Colors.black,
+                  color: MyTheme.orangeColor,
                 ),
                 onPressed: () {
                   Get.toNamed(LoginPage.id);
@@ -52,7 +52,7 @@ class _SignupPageState extends State<SignupPage> {
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.normal,
                 fontSize: 17,
-                color: MyTheme.appbartextColor,
+                color: MyTheme.orangeColor,
               ),
             ),
           ),
@@ -76,9 +76,9 @@ class _SignupPageState extends State<SignupPage> {
                         bottomLeft: const Radius.circular(0),
                         bottomRight: const Radius.circular(0.0)),
                   ),
-                  SizedBox(
-                    height: 2,
-                  ),
+                  // SizedBox(
+                  //   height: 2,
+                  // ),
                   AppFormField(
                     hintText: 'Last Name',
                     controller: controller.lNameController,
@@ -102,57 +102,71 @@ class _SignupPageState extends State<SignupPage> {
                         fontWeight: FontWeight.w500,
                       )),
                   SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: MyTheme.borderColor),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    width: MediaQuery.of(context).size.width,
-
-                    // width: 341,
-                    height: 45,
-                    child: DropdownButtonFormField<String>(
-                      icon: Padding(
-                        padding: const EdgeInsets.only(
-                          right: 12.21,
+                  Obx(
+                    () => Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: controller.gender.value == ''
+                              ? MyTheme.borderColor
+                              : MyTheme.borderchangeColor,
                         ),
-                        child: FaIcon(
-                          FontAwesomeIcons.chevronDown,
-                          color: Colors.black,
-                          size: 14.87,
-                        ),
+                        borderRadius: BorderRadius.circular(6),
                       ),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            // borderRadius: BorderRadius.all(
-                            //   Radius.circular(6.0),
-                            // ),
+                      width: MediaQuery.of(context).size.width,
+
+                      // width: 341,
+                      height: 48,
+                      child: DropdownButtonFormField<String>(
+                        style: GoogleFonts.inter(
+                          fontSize: 15,
+                          color: MyTheme.hinttextchangeColor,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        icon: Padding(
+                          padding: const EdgeInsets.only(
+                            right: 12.21,
                           ),
-                          hintText: 'Gender',
-                          contentPadding:
-                              EdgeInsets.only(left: 14, top: 14, bottom: 14),
-                          hintStyle: GoogleFonts.inter(
-                            fontSize: 15,
-                            color: MyTheme.hinttextColor,
-                            //color: Color(0xff979797).withOpacity(0.7),
-                            // fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                          )),
-                      items: controller.items
-                          .map(
-                              (e) => DropdownMenuItem(child: Text(e), value: e))
-                          .toList(),
-                      onChanged: (newValue) {
-                        controller.gender.value =
-                            newValue ?? controller.items.first;
-                      },
+                          child: FaIcon(
+                            FontAwesomeIcons.chevronDown,
+                            color: Colors.black,
+                            size: 14.87,
+                          ),
+                        ),
+                        value: controller.value,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              // borderRadius: BorderRadius.all(
+                              //   Radius.circular(6.0),
+                              // ),
+                            ),
+                            hintText: 'Gender',
+                            contentPadding:
+                                EdgeInsets.only(left: 14, top: 14, bottom: 14),
+                            hintStyle: GoogleFonts.inter(
+                              fontSize: 15,
+                              color: MyTheme.hinttextColor,
+                              //color: Color(0xff979797).withOpacity(0.7),
+                              // fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                            )),
+                        items: controller.items
+                            .map((e) =>
+                                DropdownMenuItem(child: Text(e), value: e))
+                            .toList(),
+                        onChanged: (newValue) {
+                          controller.gender.value =
+                              newValue ?? controller.items.first;
+                        },
+                      ),
                     ),
                   ),
+
                   SizedBox(height: 19),
                   Text("Date of Birth",
                       style: GoogleFonts.inter(
-                        fontSize: 13,
+                        fontSize: 15,
                         color: MyTheme.hinttextchangeColors,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
@@ -160,12 +174,22 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(height: 5),
                   Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: MyTheme.borderColor),
+                      border: Border.all(
+                        color: controller.dobController.text.isEmpty
+                            ? MyTheme.borderColor
+                            : MyTheme.borderchangeColor,
+                      ),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     height: 45,
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
+                      style: GoogleFonts.inter(
+                        fontSize: 15,
+                        color: MyTheme.hinttextchangeColor,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w500,
+                      ),
                       onTap: () async {
                         DateTime? dt = await showDatePicker(
                             context: context,
@@ -274,36 +298,78 @@ class _SignupPageState extends State<SignupPage> {
                   //   ],
                   // ),
                   SizedBox(height: 20),
-                  InkWell(
-                    onTap: () async {
-                      formKey.currentState!.save();
-                      if (formKey.currentState!.validate())
-                        await controller.register();
-                      //Navigator.pushNamed(context, MyRoutes.LoginPage);
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
+                  AnimatedBuilder(
+                      animation: Listenable.merge([
+                        controller.fNamController,
+                        controller.lNameController,
+                        controller.dobController,
+                        controller.usernameController,
+                        controller.mobController,
+                        controller.passwordController,
+                        controller.password2Controller,
+                      ]),
+                      builder: (context, child) {
+                        return InkWell(
+                          onTap: () async {
+                            formKey.currentState!.save();
+                            if (formKey.currentState!.validate())
+                              await controller.register();
+                            //Navigator.pushNamed(context, MyRoutes.LoginPage);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
 
-                      //width:size.width,
-                      height: 45,
-                      decoration: BoxDecoration(
-                        // color: Color(0xff222831),
-                        color: MyTheme.buttonbackgroundColor,
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
-                      ),
-                      child: Center(
-                        child: Text('CONTINUE',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(
-                              fontSize: 17,
-                              //fontFamily: 'Inter-Regular',
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white, //(0xffE5E5E5),
-                            )),
-                      ),
-                    ),
-                  ),
+                            //width:size.width,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              // color: Color(0xff222831),
+                              color: (controller.fNamController.text.isEmpty ||
+                                      controller.lNameController.text.isEmpty ||
+                                      controller.gender.isEmpty ||
+                                      controller.dobController.text.isEmpty ||
+                                      controller
+                                          .usernameController.text.isEmpty ||
+                                      controller.mobController.text.isEmpty ||
+                                      controller
+                                          .passwordController.text.isEmpty ||
+                                      controller
+                                          .password2Controller.text.isEmpty)
+                                  ? MyTheme.verifyButtonColor
+                                  : MyTheme.orangeColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: Center(
+                              child: Text('CONTINUE',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.inter(
+                                    fontSize: 17,
+                                    //fontFamily: 'Inter-Regular',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w600,
+                                    color: (controller
+                                                .fNamController.text.isEmpty ||
+                                            controller
+                                                .lNameController.text.isEmpty ||
+                                            controller.gender.isEmpty ||
+                                            controller
+                                                .dobController.text.isEmpty ||
+                                            controller.usernameController.text
+                                                .isEmpty ||
+                                            controller
+                                                .mobController.text.isEmpty ||
+                                            controller.passwordController.text
+                                                .isEmpty ||
+                                            controller.password2Controller.text
+                                                .isEmpty)
+                                        ? MyTheme.verifyTextColor
+                                        : MyTheme
+                                            .appbackgroundColor, //(0xffE5E5E5),
+                                  )),
+                            ),
+                          ),
+                        );
+                      }),
 
                   SizedBox(height: 16),
                 ],

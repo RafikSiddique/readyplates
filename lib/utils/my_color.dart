@@ -11,7 +11,7 @@ class MyTheme {
 
   static Color borderColor = Color(0xffE0E0E0);
 
-  static Color borderchangeColor = Color(0xff00ADB5);
+  static Color borderchangeColor = Color(0xffFBBA79);
 
   static Color hinttextColor = Color(0xff979797).withOpacity(0.7);
 
@@ -99,4 +99,8 @@ class MyTheme {
   static Color verifyButtonColor = Color(0xffFFF6E9);
 
   static Color verifyTextColor = Color(0xffFDD7A6);
+
+  static Color switchButtonColor = Color(0xff00ADB5);
+  static Color cancelOrderBackColor = Color(0xffFEE4E3);
+  static Color cancelOrderTextColor = Color(0xffEB5449);
 }

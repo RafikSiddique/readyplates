@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -245,52 +244,75 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                           SizedBox(height: 20),
-                          InkWell(
-                            onTap: () async {
-                              _formKey.currentState!.save();
-                              if (_formKey.currentState!.validate()) {
-                                await controller.login(isChangepass,
-                                    issignup: false);
-                              } else {
-                                Get.snackbar(
-                                    "Error", "Please fill all the details");
-                              }
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 54,
-                              decoration: BoxDecoration(
-                                color: MyTheme.buttonbackgroundColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(6)),
-                              ),
-                              child: Obx(() => controller.isLoading.value
-                                  ? Center(
-                                      child: SizedBox(
-                                          height: 40,
-                                          width: 40,
-                                          child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                            strokeWidth: 2,
+                          AnimatedBuilder(
+                              animation: Listenable.merge([
+                                controller.usernameController,
+                                controller.passwordController,
+                              ]),
+                              builder: (context, child) {
+                                return InkWell(
+                                  onTap: () async {
+                                    _formKey.currentState!.save();
+                                    if (_formKey.currentState!.validate()) {
+                                      await controller.login(isChangepass,
+                                          issignup: false);
+                                    } else {
+                                      Get.snackbar("Error",
+                                          "Please fill all the details");
+                                    }
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 54,
+                                    decoration: BoxDecoration(
+                                      color: (controller.usernameController.text
+                                                  .isEmpty ||
+                                              controller.passwordController.text
+                                                  .isEmpty)
+                                          ? MyTheme.verifyButtonColor
+                                          : MyTheme.orangeColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(6)),
+                                    ),
+                                    child: Obx(() => controller.isLoading.value
+                                        ? Center(
+                                            child: SizedBox(
+                                                height: 40,
+                                                width: 40,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: Colors.white,
+                                                  strokeWidth: 2,
+                                                )),
+                                          )
+                                        : Center(
+                                            child: Text(
+                                              isChangepass == true
+                                                  ? "Proceed"
+                                                  : "Login",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 17,
+                                                fontFamily: 'Inter-Regular',
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w600,
+                                                color: (controller
+                                                            .usernameController
+                                                            .text
+                                                            .isEmpty ||
+                                                        controller
+                                                            .passwordController
+                                                            .text
+                                                            .isEmpty)
+                                                    ? MyTheme.verifyTextColor
+                                                    : MyTheme
+                                                        .appbackgroundColor,
+                                              ),
+                                            ),
                                           )),
-                                    )
-                                  : Center(
-                                      child: Text(
-                                        isChangepass == true
-                                            ? "Proceed"
-                                            : "Login",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          fontFamily: 'Inter-Regular',
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )),
-                            ),
-                          ),
+                                  ),
+                                );
+                              }),
                           SizedBox(
                             height: 16,
                           ),

@@ -204,6 +204,7 @@ class _MenuPageState extends State<MenuPage> {
                     )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Obx(() => Elevated(
+                        color: MyTheme.appbackgroundColor,
                         text: "Proceed to Booking",
                         width: double.infinity,
                         backgroundColor: (widget.isEditing != Editing.none
@@ -211,8 +212,8 @@ class _MenuPageState extends State<MenuPage> {
                                 : orderController.cartItems.any((element) =>
                                     element.restaurant ==
                                     widget.restaurantModel.id))
-                            ? MyTheme.buttonbackgroundColor
-                            : MyTheme.hinttextColor,
+                            ? MyTheme.orangeColor
+                            : MyTheme.imgtextColor,
                         onTap: () async {
                           if (widget.isEditing != Editing.none) {
                             orderController.calclateTotal(true);

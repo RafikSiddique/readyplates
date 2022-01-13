@@ -75,10 +75,11 @@ class Tellafriend extends StatelessWidget {
                     ),
                     Text("Enjoying Ready Plates?",
                         style: GoogleFonts.nunito(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            color: MyTheme.borderchangeColor)),
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                          color: MyTheme.orangeColor,
+                        )),
                     SizedBox(
                       height: 8,
                     ),

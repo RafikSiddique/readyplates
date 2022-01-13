@@ -224,7 +224,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
                             SizedBox(
                               width: 12,
                             ),
-                   widget.isEditing  !=Editing.none
+                            widget.isEditing != Editing.none
                                 ? Text(DateFormat(DateFormat.WEEKDAY +
                                             ", " +
                                             DateFormat.DAY +
@@ -277,7 +277,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
               restaurantModel: widget.restaurantModel,
               isEditing: widget.isEditing,
               setState: () {
-                controller.calclateTotal(widget.isEditing!=Editing.none);
+                controller.calclateTotal(widget.isEditing != Editing.none);
                 setState(() {});
               },
             ),

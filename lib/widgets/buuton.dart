@@ -22,7 +22,7 @@ class Elevated extends StatelessWidget {
     this.height,
     required this.onTap,
     this.infoFilled = false,
-    this.backgroundColor = const Color(0xff222831),
+    this.backgroundColor = const Color(0xffF47121),
     this.borderColor,
     this.padding = const EdgeInsets.symmetric(vertical: 20.0),
     this.fontSize = 17,

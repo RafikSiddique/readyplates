@@ -118,6 +118,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   width: 9,
                 ),
                 Elevated(
+                  color: MyTheme.appbackgroundColor,
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),
                   text: widget.isEditing != Editing.none ? "Confirm" : "Book",

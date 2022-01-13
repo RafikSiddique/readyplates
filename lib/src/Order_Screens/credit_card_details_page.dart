@@ -27,7 +27,7 @@ class CreditCardDetailsPage extends StatelessWidget {
             iconSize: 14.83,
             icon: FaIcon(
               FontAwesomeIcons.chevronLeft,
-              color: MyTheme.iconColor,
+              color: MyTheme.orangeColor,
             ),
             onPressed: () {}),
         centerTitle: true,
@@ -37,7 +37,7 @@ class CreditCardDetailsPage extends StatelessWidget {
             fontSize: 17,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w500,
-            color: MyTheme.appbartextColor,
+            color: MyTheme.orangeColor,
           ),
         ),
       ),
@@ -289,7 +289,7 @@ class CreditCardDetailsPage extends StatelessWidget {
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.normal),
-                  primary: MyTheme.buttonbackgroundColor,
+                  primary: MyTheme.orangeColor,
                   onPrimary: MyTheme.appbackgroundColor,
                   // side: BorderSide(
                   //   width: 1,
@@ -297,7 +297,7 @@ class CreditCardDetailsPage extends StatelessWidget {
                   // )
                 ),
                 // child: Text("Pay \$ ${orderModelApi.totalPrice}"),
-                child: Text("CONTINUE"),
+                child: Text("Save Card Details"),
                 onPressed: () async {
                   Get.dialog(
                     AlertDialog(

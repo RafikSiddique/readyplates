@@ -289,8 +289,9 @@ class AuthController extends GetxController {
     }
   }
 
-  RxString gender = 'Male'.obs;
-  final items = ['Male', 'Female'];
+  String? value;
+  RxString gender = ''.obs;
+  final List<String> items = ['Male', 'Female'];
 
   void logout() async {
     (await SharedPreferences.getInstance()).clear();

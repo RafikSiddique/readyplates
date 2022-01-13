@@ -24,10 +24,11 @@ class AppNavigationBar extends StatelessWidget {
         ),
         child: BottomNavigationBar(
           backgroundColor: MyTheme.appbackgroundColor,
+          selectedItemColor: MyTheme.orangeColor,
+          unselectedItemColor: MyTheme.appbartextColor,
           elevation: 25,
           currentIndex: controller.currentIndex.value,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Color(0xff00ADB5),
           onTap: controller.onPageChanged,
           items: [
             for (var i = 0; i < controller.bottomBarIcons.length; i++)
@@ -37,8 +38,8 @@ class AppNavigationBar extends StatelessWidget {
                     height: 20,
                     width: 20,
                     color: controller.currentIndex.value == i
-                        ? Color(0xff00ADB5)
-                        : null,
+                        ? MyTheme.orangeColor
+                        : MyTheme.appbartextColor,
                   ),
                   label: controller.label[i])
           ],

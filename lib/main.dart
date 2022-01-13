@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Ready Plates',
       theme: ThemeData(
+        primarySwatch: Colors.orange,
         popupMenuTheme: PopupMenuThemeData(
           enableFeedback: true,
         ),

@@ -28,7 +28,14 @@ class BookingDetails extends GetView<OrderController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Number of People"),
+        Text(
+          "Number of People",
+          style: GoogleFonts.nunito(
+            fontWeight: FontWeight.normal,
+            color: Color(0xff676B71),
+            fontSize: 13,
+          ),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,10 +45,11 @@ class BookingDetails extends GetView<OrderController> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     controller.numberOfPeople.value.toString(),
-                    style: GoogleFonts.nunito(
-                        fontWeight: FontWeight.w500,
-                        color: MyTheme.dividermiddletext,
-                        fontSize: 20),
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w500,
+                      color: MyTheme.dividermiddletext,
+                      fontSize: 20,
+                    ),
                   ),
                 )),
             Spacer(),
@@ -145,7 +153,7 @@ class BookingDetails extends GetView<OrderController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TimeButton(
-                    borcolor: Colors.white,
+                    borcolor: Colors.transparent,
                     onTap: () {
                       if (checkTime()) {
                         controller.globletime.value = tempTime;
@@ -171,16 +179,16 @@ class BookingDetails extends GetView<OrderController> {
                     text: "Done",
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
-                    backgroundColor: Colors.black,
+                    backgroundColor: MyTheme.orangeColor,
                   ),
                   TimeButton(
-                    borcolor: Colors.black,
+                    borcolor: MyTheme.orangeColor,
                     onTap: () {
                       Get.back();
                     },
                     fontSize: 12,
                     text: "Cancel",
-                    color: Colors.black,
+                    color: MyTheme.orangeColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ],
@@ -214,7 +222,7 @@ class BookingDetails extends GetView<OrderController> {
           },
           child: Icon(
             FontAwesomeIcons.chevronLeft,
-            color: MyTheme.appbartextColor,
+            color: MyTheme.orangeColor,
             size: 14.83,
           ),
         ),
@@ -224,7 +232,10 @@ class BookingDetails extends GetView<OrderController> {
         title: Text(
           "Order",
           style: GoogleFonts.inter(
-            color: Colors.black,
+            fontStyle: FontStyle.normal,
+            color: MyTheme.orangeColor,
+            fontWeight: FontWeight.w500,
+            fontSize: 17,
           ),
         ),
       ),
@@ -282,7 +293,7 @@ class BookingDetails extends GetView<OrderController> {
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.w300,
                               fontSize: 40,
-                              color: MyTheme.borderchangeColor,
+                              color: MyTheme.orangeColor,
                             ),
                           ),
                           SizedBox(
@@ -352,7 +363,7 @@ class BookingDetails extends GetView<OrderController> {
                           children: [
                             Image.asset(
                               Assets.clock,
-                              color: MyTheme.borderchangeColor,
+                              color: MyTheme.orangeColor,
                               height: 25,
                             ),
                             SizedBox(
@@ -390,17 +401,17 @@ class BookingDetails extends GetView<OrderController> {
             Text(
               "Venue",
               style: GoogleFonts.nunito(
-                fontWeight: FontWeight.w300,
-                //color: Color(0xff84888E),
-                color: MyTheme.bookingtextcolor,
-              ),
+                  fontWeight: FontWeight.normal,
+                  color: Color(0xff84888E),
+                  fontSize: 13),
             ),
             Text(
               restaurantModel.resName,
-              style: GoogleFonts.nunito(
-                  fontWeight: FontWeight.w500,
-                  color: MyTheme.bookingtextcolor,
-                  fontSize: 20),
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w500,
+                color: MyTheme.bookingtextcolor.withOpacity(0.6),
+                fontSize: 17,
+              ),
             ),
             Divider(),
             SizedBox(
@@ -412,6 +423,7 @@ class BookingDetails extends GetView<OrderController> {
             ),
             Spacer(),
             Elevated(
+                color: MyTheme.appbackgroundColor,
                 text: "Confirm",
                 width: double.infinity,
                 onTap: () async {

@@ -88,10 +88,11 @@ class OrderWidget extends StatelessWidget {
                 "Report at the restaurant and share PIN to initiate order",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                    color: MyTheme.borderchangeColor),
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17,
+                  color: MyTheme.switchButtonColor,
+                ),
               ),
             ),
             SizedBox(
@@ -130,8 +131,8 @@ class OrderWidget extends StatelessWidget {
                 editOrder(context);
               },
               backgroundColor: Colors.white,
-              color: Color(0xff44C4A1),
-              borderColor: Color(0xff44C4A1),
+              color: MyTheme.orangeColor,
+              borderColor: MyTheme.orangeColor,
             ),
             SizedBox(
               height: 10,
@@ -186,7 +187,8 @@ class OrderWidget extends StatelessWidget {
             //   height: 10,
             // ),
             Elevated(
-              backgroundColor: Color(0xff44C4A1),
+              backgroundColor: MyTheme.orangeColor,
+              color: MyTheme.appbackgroundColor,
               text: "Checkout -->",
               onTap: () async {
                 // if (orderModel.payment == "0" || orderModel.payment == "") {
@@ -229,11 +231,11 @@ class OrderWidget extends StatelessWidget {
                       actions: [
                         Elevated(
                           width: size * 0.23,
-                          backgroundColor: Colors.white,
-                          color: Colors.black,
+                          backgroundColor: MyTheme.appbackgroundColor,
+                          color: MyTheme.orangeColor,
+                          borderColor: MyTheme.orangeColor,
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
-                          borderColor: Colors.black,
                           text: 'No',
                           onTap: () async {
                             await controller.updateStatus(
@@ -250,8 +252,8 @@ class OrderWidget extends StatelessWidget {
                         ),
                         Elevated(
                           width: size * 0.23,
-                          backgroundColor: Colors.black,
-                          color: Colors.white,
+                          backgroundColor: MyTheme.orangeColor,
+                          color: MyTheme.appbackgroundColor,
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
                           text: 'Yes',
@@ -285,11 +287,12 @@ class OrderWidget extends StatelessWidget {
                                   actions: [
                                     Elevated(
                                       width: size * 0.23,
-                                      backgroundColor: Colors.white,
-                                      color: Colors.black,
+                                      backgroundColor:
+                                          MyTheme.appbackgroundColor,
+                                      color: MyTheme.orangeColor,
+                                      borderColor: MyTheme.orangeColor,
                                       fontSize: 13,
                                       fontWeight: FontWeight.normal,
-                                      borderColor: Colors.black,
                                       text: 'Cancel',
                                       onTap: () {
                                         Get.back();
@@ -298,8 +301,8 @@ class OrderWidget extends StatelessWidget {
                                     ),
                                     Elevated(
                                       width: size * 0.23,
-                                      backgroundColor: Colors.black,
-                                      color: Colors.white,
+                                      backgroundColor: MyTheme.orangeColor,
+                                      color: MyTheme.appbackgroundColor,
                                       fontSize: 13,
                                       fontWeight: FontWeight.normal,
                                       text: 'Add',
@@ -335,13 +338,14 @@ class OrderWidget extends StatelessWidget {
                                                 actions: [
                                                   Elevated(
                                                     width: size * 0.23,
-                                                    backgroundColor:
-                                                        Colors.white,
-                                                    color: Colors.black,
+                                                    backgroundColor: MyTheme
+                                                        .appbackgroundColor,
+                                                    color: MyTheme.orangeColor,
+                                                    borderColor:
+                                                        MyTheme.orangeColor,
                                                     fontSize: 13,
                                                     fontWeight:
                                                         FontWeight.normal,
-                                                    borderColor: Colors.black,
                                                     text: 'Cancel',
                                                     onTap: () {
                                                       Get.back();
@@ -353,8 +357,9 @@ class OrderWidget extends StatelessWidget {
                                                   Elevated(
                                                     width: size * 0.23,
                                                     backgroundColor:
-                                                        Colors.black,
-                                                    color: Colors.white,
+                                                        MyTheme.orangeColor,
+                                                    color: MyTheme
+                                                        .appbackgroundColor,
                                                     fontSize: 13,
                                                     fontWeight:
                                                         FontWeight.normal,
@@ -454,6 +459,7 @@ class OrderWidget extends StatelessWidget {
         return Column(
           children: [
             Elevated(
+              color: MyTheme.appbackgroundColor,
               width: Get.width,
               text: "Order Again",
               onTap: () async {
@@ -484,11 +490,14 @@ class OrderWidget extends StatelessWidget {
               height: 10,
             ),
             Elevated(
+              color: orderModel.feedbackstat == ""
+                  ? MyTheme.orangeColor
+                  : MyTheme.verifyTextColor,
               backgroundColor: Colors.white,
               width: Get.width,
-              borderColor: orderModel.feedbackstat != ""
-                  ? MyTheme.buttonColor
-                  : Color(0xff222831),
+              borderColor: orderModel.feedbackstat == ""
+                  ? MyTheme.orangeColor
+                  : MyTheme.verifyTextColor,
               text: "Give Feedback",
               onTap: () {
                 if (orderModel.feedbackstat == "") {
@@ -509,13 +518,15 @@ class OrderWidget extends StatelessWidget {
       case OrderState.cancelled:
         return Elevated(
           text: "Cancelled",
-          backgroundColor: MyTheme.buttonColor,
+          backgroundColor: MyTheme.cancelOrderBackColor,
+          color: MyTheme.cancelOrderTextColor,
           width: Get.width,
           onTap: () {},
         );
 
       default:
         return Elevated(
+          color: MyTheme.appbackgroundColor,
           width: Get.width,
           text: "Order Again",
           onTap: () async {
