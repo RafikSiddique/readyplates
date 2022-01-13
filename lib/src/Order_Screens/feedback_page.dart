@@ -275,13 +275,20 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   SizedBox(
                     height: 17,
                   ),
-                  AppFormFields(
+                  AppFormField(
                     toptext: 'Feedback',
                     hintText: 'Tell us more about your overall experience',
                     controller: controller.feedback,
-                    hintfontSize: 12,
                     line: 5,
+                    hintfontSize: 15,
                   ),
+                  // AppFormFields(
+                  //   toptext: 'Feedback',
+                  //   hintText: 'Tell us more about your overall experience',
+                  //   controller: controller.feedback,
+                  //   hintfontSize: 12,
+                  //   line: 5,
+                  // ),
                   SizedBox(
                     height: 17,
                   ),
