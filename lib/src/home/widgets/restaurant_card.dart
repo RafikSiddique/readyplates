@@ -79,17 +79,14 @@ class RestaurantCard extends GetView<HomeController> {
         type: MaterialType.transparency,
         child: InkWell(
           onTap: () async {
-
             controller.timer?.cancel();
             Navigator.push(
                 context,
                 CupertinoPageRoute(
                     settings: RouteSettings(name: 'details'),
                     builder: (context) => RestaurantDetails(
-                          restaurantModel:  restaurantModel,
+                          restaurantModel: restaurantModel,
                         )));
-
-
           },
           child: Padding(
             padding: EdgeInsets.all(media.size.width * 0.025),
@@ -189,10 +186,16 @@ class RestaurantCard extends GetView<HomeController> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            width: media.size.height * 0.012,
-                            height: media.size.height * 0.012,
-                            child: Image.asset(Assets.star),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 2),
+                            child: Container(
+                              width: media.size.height * 0.012,
+                              height: media.size.height * 0.012,
+                              child: Image.asset(
+                                Assets.star,
+                                color: MyTheme.lightorangeColor,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             width: 3,
@@ -216,7 +219,7 @@ class RestaurantCard extends GetView<HomeController> {
                                           .toString()) +
                                   " | Serving Time : ${bio.servingTime} mins ",
                               style: GoogleFonts.montserrat(
-                                  color: MyTheme.shoptextcolor.withOpacity(0.8),
+                                  color: MyTheme.lightorangeColor,
                                   fontSize: media.size.height * 0.013,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w600))

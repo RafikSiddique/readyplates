@@ -102,7 +102,7 @@ class Tellafriend extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: MyTheme.containerColor,
+                          primary: Color(0xffFFF6E9),
 
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -122,6 +122,7 @@ class Tellafriend extends StatelessWidget {
                                     "assets/images/ShareNetwork.png",
                                     height: 30,
                                     width: 33,
+                                    color: MyTheme.orangeColor,
                                     fit: BoxFit.cover)),
                             SizedBox(
                               width: 6,
@@ -132,7 +133,7 @@ class Tellafriend extends StatelessWidget {
                                     fontSize: 19,
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.normal,
-                                    color: MyTheme.appbartextColor,
+                                    color: MyTheme.orangeColor,
                                   )),
                             ),
                           ],

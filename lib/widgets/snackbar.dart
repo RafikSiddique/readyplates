@@ -7,7 +7,7 @@ class MySnackBar {
   static GetBar myLoadingSnackBar({
     String title = '',
     required String message,
-    int duration = 2,
+    int duration = 3,
     SnackPosition snackPosition = SnackPosition.TOP,
     Color color = Colors.white,
     Widget? icon,
@@ -18,8 +18,8 @@ class MySnackBar {
         style: GoogleFonts.nunito(
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.bold,
-          fontSize: 22,
-          color: MyTheme.bottomtextColor,
+          fontSize: 17,
+          color: MyTheme.appbartextColor,
         ),
       ),
       messageText: Text(
@@ -27,8 +27,8 @@ class MySnackBar {
         style: GoogleFonts.nunito(
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.normal,
-          fontSize: 21,
-          color: MyTheme.shoptextcolor2,
+          fontSize: 17,
+          color: MyTheme.appbartextColor,
         ),
       ),
       duration: Duration(seconds: duration),

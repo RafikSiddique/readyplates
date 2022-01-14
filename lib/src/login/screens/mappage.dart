@@ -147,45 +147,58 @@ class _MapPageState extends State<MapPage> {
                 padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
                 child: Container(
                   height: 54,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: TypeAheadField<Suggestion>(
-                      itemBuilder: (BuildContext context, itemData) {
-                        return ListTile(
-                          title: Text(itemData.description.toString()),
-                        );
-                      },
-                      onSuggestionSelected: (Suggestion? suggestion) async {
-                        final session = Uuid().v4();
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(width: 1, color: MyTheme.orangeColor)),
+                  child: TypeAheadField<Suggestion>(
+                    itemBuilder: (BuildContext context, itemData) {
+                      return ListTile(
+                        title: Text(itemData.description.toString()),
+                      );
+                    },
+                    onSuggestionSelected: (Suggestion? suggestion) async {
+                      final session = Uuid().v4();
 
-                        Place place = await PlaceApiProvider(session)
-                            .getPlaceDetailFromId(suggestion!.placeId);
-                        controller?.animateCamera(CameraUpdate.newLatLng(
-                            LatLng(place.lat!, place.lang!)));
-                      },
-                      suggestionsCallback: (String pattern) async {
-                        final session = Uuid().v4();
-                        return PlaceApiProvider(session)
-                            .fetchSuggestions(pattern, 'en');
-                      },
-                      textFieldConfiguration: TextFieldConfiguration(
-                        // textAlign: TextAlign.center,
-                        controller: TextEditingController(),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            hintText: "Search Any Location",
-                            contentPadding:
-                                const EdgeInsets.only(top: 27, left: 10),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Icon(
-                                Icons.search,
-                                color: Colors.grey,
-                              ),
-                            )),
+                      Place place = await PlaceApiProvider(session)
+                          .getPlaceDetailFromId(suggestion!.placeId);
+                      controller?.animateCamera(CameraUpdate.newLatLng(
+                          LatLng(place.lat!, place.lang!)));
+                    },
+                    suggestionsCallback: (String pattern) async {
+                      final session = Uuid().v4();
+                      return PlaceApiProvider(session)
+                          .fetchSuggestions(pattern, 'en');
+                    },
+                    textFieldConfiguration: TextFieldConfiguration(
+                      // textAlign: TextAlign.center,
+                      controller: TextEditingController(),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+
+                        hintText: "Search Location",
+                        contentPadding:
+                            const EdgeInsets.only(top: 12, left: 10),
+                        // suffixIcon: Padding(
+                        //   padding: const EdgeInsets.only(top: 5),
+                        //   child: Icon(
+                        //     Icons.search,
+                        //     color: Colors.grey,
+                        //   ),
+                        // ),
+                        hintStyle: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          color: MyTheme.chevrondowncolor,
+                        ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -254,7 +267,7 @@ class _MapPageState extends State<MapPage> {
                                       fontSize: 20,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.bold,
-                                      color: MyTheme.buttonbackgroundColor,
+                                      color: MyTheme.orangeColor,
                                     )),
                                 SizedBox(
                                   width: 6,
@@ -262,7 +275,10 @@ class _MapPageState extends State<MapPage> {
                                 Container(
                                   width: 16,
                                   height: 20.13,
-                                  child: Icon(Icons.location_on),
+                                  child: Icon(
+                                    Icons.location_on,
+                                    color: MyTheme.orangeColor,
+                                  ),
                                 ),
                               ],
                             ),
@@ -316,8 +332,13 @@ class _MapPageState extends State<MapPage> {
                                           homeController.getRestaurants();
                                           Get.showSnackbar(
                                               MySnackBar.myLoadingSnackBar(
-                                                  title: 'Location',
-                                                  message: 'location Updated'));
+                                            title: 'Location',
+                                            message: 'Location updated',
+                                            icon: Icon(
+                                              Icons.check_circle,
+                                              color: MyTheme.greenColor,
+                                            ),
+                                          ));
                                           // Get.snackbar(
                                           //   "Location",
                                           //   "location Updated",

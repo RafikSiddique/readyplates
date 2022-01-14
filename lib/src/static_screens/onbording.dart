@@ -29,7 +29,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
     Color textColor = Colors.black,
     required Function() onTap,
   }) {
-    double blur = 8;
+    double blur = 4;
     return Material(
       type: MaterialType.transparency,
       child: InkWell(
@@ -55,7 +55,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                   style: TextStyle(
                     fontSize: 17,
                     color: textColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.normal,
                   ),
                 ),
@@ -85,40 +85,96 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
               controller: controller,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Assets.logo,
-                        width: MediaQuery.of(context).size.width * 0.6,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                            text: 'READY',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 30,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w700,
-                              color: MyTheme.orangeColor,
-                            ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: Get.height,
+                    color: Colors.white,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Hero(
+                        tag: "rp",
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextSpan(
-                                text: 'Plates'.toUpperCase(),
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 30,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w200,
-                                  color: MyTheme.orangeColor,
+                              Container(
+                                height: 40,
+                                child: Image.asset(
+                                  Assets.logo,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            ]),
+                              SizedBox(width: 16),
+                              Container(
+                                // width: size.width * 0.6,
+                                height: 39,
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'READY',
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 30,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w700,
+                                        color: MyTheme.orangeColor,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: 'Plates'.toUpperCase(),
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 30,
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.w200,
+                                            color: MyTheme.orangeColor,
+                                          ),
+                                        ),
+                                      ]),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
+                // BackdropFilter(
+                //   filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Image.asset(
+                //         Assets.logo,
+                //         width: MediaQuery.of(context).size.width * 0.6,
+                //       ),
+                //       RichText(
+                //         text: TextSpan(
+                //             text: 'READY',
+                //             style: GoogleFonts.montserrat(
+                //               fontSize: 30,
+                //               fontStyle: FontStyle.normal,
+                //               fontWeight: FontWeight.w700,
+                //               color: MyTheme.orangeColor,
+                //             ),
+                //             children: [
+                //               TextSpan(
+                //                 text: 'Plates'.toUpperCase(),
+                //                 style: GoogleFonts.montserrat(
+                //                   fontSize: 30,
+                //                   fontStyle: FontStyle.normal,
+                //                   fontWeight: FontWeight.w200,
+                //                   color: MyTheme.orangeColor,
+                //                 ),
+                //               ),
+                //             ]),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -149,13 +205,13 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                                     height: 54,
                                     decoration: BoxDecoration(
                                       color:
-                                          Color(0xffFFFFFF).withOpacity(0.38),
+                                          Color(0xffF47121).withOpacity(0.15),
                                     ),
                                     child: Center(
                                       child: BackdropFilter(
                                         filter: ImageFilter.blur(
-                                          sigmaX: 10,
-                                          sigmaY: 10,
+                                          sigmaX: 6,
+                                          sigmaY: 6,
                                         ),
                                         child: Text(
                                           'LOGIN',
@@ -163,8 +219,8 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                                           style: GoogleFonts.inter(
                                             fontSize: 17,
                                             fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff222831),
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xff2F2E41),
                                           ),
                                         ),
                                       ),
@@ -188,7 +244,7 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                             },
                             text: "SIGN UP",
                             textColor: Color(0xffFFFFFF),
-                            color: Color(0xff222831).withOpacity(0.26),
+                            color: Color(0xffFF7622).withOpacity(0.6),
                           ),
                         ),
                         SizedBox(

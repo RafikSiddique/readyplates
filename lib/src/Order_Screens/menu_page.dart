@@ -14,6 +14,7 @@ import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/food_item_card.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class MenuPage extends StatefulWidget {
   static const id = "/menupage";
@@ -204,7 +205,13 @@ class _MenuPageState extends State<MenuPage> {
                     )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Obx(() => Elevated(
-                        color: MyTheme.appbackgroundColor,
+                        color: (widget.isEditing != Editing.none
+                                ? orderController.orderEdit.isNotEmpty
+                                : orderController.cartItems.any((element) =>
+                                    element.restaurant ==
+                                    widget.restaurantModel.id))
+                            ? MyTheme.appbackgroundColor
+                            : MyTheme.appbackgroundColor.withOpacity(0.7),
                         text: "Proceed to Booking",
                         width: double.infinity,
                         backgroundColor: (widget.isEditing != Editing.none
@@ -213,19 +220,37 @@ class _MenuPageState extends State<MenuPage> {
                                     element.restaurant ==
                                     widget.restaurantModel.id))
                             ? MyTheme.orangeColor
-                            : MyTheme.imgtextColor,
+                            : MyTheme.orangeColor.withOpacity(0.4),
                         onTap: () async {
                           if (widget.isEditing != Editing.none) {
                             orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {
-                              Get.snackbar("Please add an item",
-                                  "At least add atleast 1 item from this restaurant to proceed to booking");
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                title: 'Please add an item',
+                                message:
+                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                icon: Icon(
+                                  Icons.error,
+                                  color: MyTheme.blueColor,
+                                ),
+                              ));
+                              // Get.snackbar("Please add an item",
+                              //     "At least add atleast 1 item from this restaurant to proceed to booking");
                             } else if (orderController.orderEdit.any(
                                 (element) => element.foodQuantity.value > 0)) {
                               Get.back();
                             } else {
-                              Get.snackbar("Please add an item",
-                                  "At least add atleast 1 item from this restaurant to proceed to booking");
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                title: 'Please add an item',
+                                message:
+                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                icon: Icon(
+                                  Icons.error,
+                                  color: MyTheme.blueColor,
+                                ),
+                              ));
+                              // Get.snackbar("Please add an item",
+                              //     "At least add atleast 1 item from this restaurant to proceed to booking");
                             }
                           } else {
                             orderController.calclateTotal();
@@ -234,8 +259,17 @@ class _MenuPageState extends State<MenuPage> {
                                     element.restaurant ==
                                     widget.restaurantModel.id);
                             if (!check) {
-                              Get.snackbar("Please add an item",
-                                  "At least add atleast 1 item from this restaurant to proceed to booking");
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                title: 'Please add an item',
+                                message:
+                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                icon: Icon(
+                                  Icons.error,
+                                  color: MyTheme.blueColor,
+                                ),
+                              ));
+                              // Get.snackbar("Please add an item",
+                              //     "At least add atleast 1 item from this restaurant to proceed to booking");
                             } else {
                               if (!widget.isAddItem) {
                                 orderController.selectedDate.value =

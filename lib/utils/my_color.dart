@@ -103,4 +103,9 @@ class MyTheme {
   static Color switchButtonColor = Color(0xff00ADB5);
   static Color cancelOrderBackColor = Color(0xffFEE4E3);
   static Color cancelOrderTextColor = Color(0xffEB5449);
+  static Color greenColor = Color(0xff2D8416);
+  static Color blueColor = Color(0xff154E81);
+  static Color redColor = Color(0xffEB4132);
+
+  static Color lightorangeColor = Color(0xffF68D4D);
 }

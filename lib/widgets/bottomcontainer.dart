@@ -121,7 +121,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   color: MyTheme.appbackgroundColor,
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),
-                  text: widget.isEditing != Editing.none ? "Confirm" : "Book",
+                  text: widget.isEditing != Editing.none ? "Confirm" : "Order",
                   onTap: () async {
                     if (widget.isEditing != Editing.none) {
                       if (controller.orderEdit.isNotEmpty &&

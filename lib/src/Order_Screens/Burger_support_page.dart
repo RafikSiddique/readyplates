@@ -57,7 +57,7 @@ class _BurgersupportingPageState extends State<BurgersupportingPage> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'Booking Summmary',
+          'Order Summmary',
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,

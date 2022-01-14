@@ -11,6 +11,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class BookingDetails extends GetView<OrderController> {
   late RestaurantModel restaurantModel;
@@ -58,7 +59,15 @@ class BookingDetails extends GetView<OrderController> {
                 if (controller.numberOfPeople.value != 1) {
                   controller.numberOfPeople--;
                 } else {
-                  Get.snackbar("Error", "There should be atleast one person");
+                  Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                    title: 'Error',
+                    message: 'here should be atleast one person',
+                    icon: Icon(
+                      Icons.error,
+                      color: MyTheme.redColor,
+                    ),
+                  ));
+                  // Get.snackbar("Error", "There should be atleast one person");
                 }
               },
               child: Padding(
@@ -168,11 +177,20 @@ class BookingDetails extends GetView<OrderController> {
                         Get.back();
                       } else {
                         Get.back();
-                        Get.showSnackbar(GetBar(
-                          duration: Duration(seconds: 2),
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          title: '',
                           message:
                               "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
+                          icon: Icon(
+                            Icons.error,
+                            color: MyTheme.blueColor,
+                          ),
                         ));
+                        // Get.showSnackbar(GetBar(
+                        //   duration: Duration(seconds: 2),
+                        //   message:
+                        //       "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
+                        // ));
                       }
                     },
                     fontSize: 12,
@@ -464,8 +482,9 @@ class BookingDetails extends GetView<OrderController> {
                       //     ),
                       //   ),
                       // ));
-
-                      Get.showSnackbar(GetBar(
+                      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                        title: 'Booking',
+                        message: "Confirming booking",
                         icon: Center(
                           child: SizedBox.square(
                             dimension: 20,
@@ -475,8 +494,20 @@ class BookingDetails extends GetView<OrderController> {
                             )),
                           ),
                         ),
-                        message: "Confirming booking",
                       ));
+
+                      // Get.showSnackbar(GetBar(
+                      //   icon: Center(
+                      //     child: SizedBox.square(
+                      //       dimension: 20,
+                      //       child: Center(
+                      //           child: CircularProgressIndicator(
+                      //         strokeWidth: 2,
+                      //       )),
+                      //     ),
+                      //   ),
+                      //   message: "Confirming booking",
+                      // ));
                       RestaurantModel model = this.restaurantModel;
                       restaurantModel = await Get.find<HomeController>()
                               .getRestaurant(restaurantModel.id) ??
@@ -513,11 +544,20 @@ class BookingDetails extends GetView<OrderController> {
                                     "The restaurant has stopped taking orders for today,\nPlease schedule order for tomorrow or later",
                               ));
                             } else { */
-                        Get.showSnackbar(GetBar(
-                          duration: Duration(milliseconds: 2000),
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          title: 'Orders',
                           message:
                               "The restaurant has stopped taking order for now,\nPlease try again later",
+                          icon: Icon(
+                            Icons.error,
+                            color: MyTheme.blueColor,
+                          ),
                         ));
+                        // Get.showSnackbar(GetBar(
+                        //   duration: Duration(milliseconds: 2000),
+                        //   message:
+                        //       "The restaurant has stopped taking order for now,\nPlease try again later",
+                        // ));
                         /* print(
                                   "Time validated, placing order for tomorrow or later");
                               await proceedToSummary(context); */
@@ -541,19 +581,36 @@ class BookingDetails extends GetView<OrderController> {
                         ));
                       } */
                     } else {
-                      Get.showSnackbar(GetBar(
-                        title: "Closed",
+                      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                        title: 'Closed',
                         message:
                             "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
-                        duration: Duration(seconds: 2),
+                        icon: Icon(
+                          Icons.error,
+                          color: MyTheme.blueColor,
+                        ),
                       ));
+                      // Get.showSnackbar(GetBar(
+                      //   title: "Closed",
+                      //   message:
+                      //       "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
+                      //   duration: Duration(seconds: 2),
+                      // ));
                     }
                   } else {
-                    Get.showSnackbar(GetBar(
-                      title: "Closed",
+                    Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                      title: 'Closed',
                       message: "Please select a time after current time",
-                      duration: Duration(seconds: 2),
+                      icon: Icon(
+                        Icons.error,
+                        color: MyTheme.blueColor,
+                      ),
                     ));
+                    // Get.showSnackbar(GetBar(
+                    //   title: "Closed",
+                    //   message: "Please select a time after current time",
+                    //   duration: Duration(seconds: 2),
+                    // ));
                   }
                 }),
           ],

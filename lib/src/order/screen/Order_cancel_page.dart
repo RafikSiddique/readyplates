@@ -34,7 +34,7 @@ class OrderCancelledPage extends StatelessWidget {
                 fontSize: 25,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w500,
-                color: MyTheme.appbartextColor,
+                color: MyTheme.orangeColor,
               ),
             ),
             SizedBox(
