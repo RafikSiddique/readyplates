@@ -226,12 +226,13 @@ class _MenuPageState extends State<MenuPage> {
                             orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
                                     'At least add atleast 1 item from this restaurant to proceed to booking',
                                 icon: Icon(
-                                  Icons.error,
-                                  color: MyTheme.blueColor,
+                                  Icons.warning_amber_rounded,
+                                  color: MyTheme.orangelightColor,
                                 ),
                               ));
                               // Get.snackbar("Please add an item",
@@ -241,12 +242,13 @@ class _MenuPageState extends State<MenuPage> {
                               Get.back();
                             } else {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
                                     'At least add atleast 1 item from this restaurant to proceed to booking',
                                 icon: Icon(
-                                  Icons.error,
-                                  color: MyTheme.blueColor,
+                                  Icons.warning_amber_rounded,
+                                  color: MyTheme.orangelightColor,
                                 ),
                               ));
                               // Get.snackbar("Please add an item",
@@ -260,14 +262,16 @@ class _MenuPageState extends State<MenuPage> {
                                     widget.restaurantModel.id);
                             if (!check) {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
                                     'At least add atleast 1 item from this restaurant to proceed to booking',
                                 icon: Icon(
-                                  Icons.error,
-                                  color: MyTheme.blueColor,
+                                  Icons.warning_amber_rounded,
+                                  color: MyTheme.orangelightColor,
                                 ),
                               ));
+
                               // Get.snackbar("Please add an item",
                               //     "At least add atleast 1 item from this restaurant to proceed to booking");
                             } else {

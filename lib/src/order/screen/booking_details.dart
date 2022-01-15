@@ -483,6 +483,7 @@ class BookingDetails extends GetView<OrderController> {
                       //   ),
                       // ));
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                        color: MyTheme.verifyButtonColor,
                         title: 'Booking',
                         message: "Confirming booking",
                         icon: Center(
@@ -491,6 +492,7 @@ class BookingDetails extends GetView<OrderController> {
                             child: Center(
                                 child: CircularProgressIndicator(
                               strokeWidth: 2,
+                              color: MyTheme.orangeColor,
                             )),
                           ),
                         ),
@@ -582,14 +584,16 @@ class BookingDetails extends GetView<OrderController> {
                       } */
                     } else {
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                        color: MyTheme.verifyButtonColor,
                         title: 'Closed',
                         message:
                             "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
                         icon: Icon(
-                          Icons.error,
+                          Icons.error_outline_rounded,
                           color: MyTheme.blueColor,
                         ),
                       ));
+
                       // Get.showSnackbar(GetBar(
                       //   title: "Closed",
                       //   message:
@@ -599,13 +603,15 @@ class BookingDetails extends GetView<OrderController> {
                     }
                   } else {
                     Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                      title: 'Closed',
-                      message: "Please select a time after current time",
-                      icon: Icon(
-                        Icons.error,
-                        color: MyTheme.blueColor,
+                      color: MyTheme.verifyButtonColor,
+                      title: 'Time',
+                      message: 'Please select a time after current time',
+                      icon: FaIcon(
+                        FontAwesomeIcons.timesCircle,
+                        color: MyTheme.redColor,
                       ),
                     ));
+
                     // Get.showSnackbar(GetBar(
                     //   title: "Closed",
                     //   message: "Please select a time after current time",

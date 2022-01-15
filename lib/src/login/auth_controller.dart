@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,7 +17,9 @@ import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/fcm_service.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // String uid = '';
@@ -179,9 +183,20 @@ class AuthController extends GetxController {
       }
       isLoading.value = false;
     } catch (e) {
+      Map resp = json.decode(e.toString());
+      String s = resp['ERROR'];
       isLoading.value = false;
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: s.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+        // Get.snackbar("Error", e.toString());
       }
     }
   }
@@ -224,7 +239,16 @@ class AuthController extends GetxController {
       Get.toNamed(VerifyOtpPage.id);
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString().replaceAll('"', ''),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+        // Get.snackbar("Error", e.toString());
       }
     }
   }
@@ -283,8 +307,20 @@ class AuthController extends GetxController {
           mobNum: mobController.text);
       await login(false, issignup: true);
     } catch (e) {
+      Map resp = json.decode(e.toString());
+      String s = resp['email'][0];
+      // print("$resp['email'][0]!!!!!!!!!!!!!!");
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: s.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+        // Get.snackbar("Error", e.toString());
       }
     }
   }

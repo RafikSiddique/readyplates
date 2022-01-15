@@ -332,10 +332,12 @@ class _MapPageState extends State<MapPage> {
                                           homeController.getRestaurants();
                                           Get.showSnackbar(
                                               MySnackBar.myLoadingSnackBar(
+                                            color: MyTheme.verifyButtonColor,
                                             title: 'Location',
                                             message: 'Location updated',
                                             icon: Icon(
-                                              Icons.check_circle,
+                                              Icons
+                                                  .check_circle_outline_rounded,
                                               color: MyTheme.greenColor,
                                             ),
                                           ));

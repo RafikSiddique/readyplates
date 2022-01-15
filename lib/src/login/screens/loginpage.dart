@@ -11,6 +11,7 @@ import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/readyplates.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class LoginPage extends StatelessWidget {
   static const id = "/loginpage";
@@ -257,8 +258,18 @@ class LoginPage extends StatelessWidget {
                                       await controller.login(isChangepass,
                                           issignup: false);
                                     } else {
-                                      Get.snackbar("Error",
-                                          "Please fill all the details");
+                                      Get.showSnackbar(
+                                          MySnackBar.myLoadingSnackBar(
+                                        color: MyTheme.verifyButtonColor,
+                                        title: 'Error',
+                                        message: "Please fill all the details",
+                                        icon: FaIcon(
+                                          FontAwesomeIcons.timesCircle,
+                                          color: MyTheme.redColor,
+                                        ),
+                                      ));
+                                      // Get.snackbar("Error",
+                                      //     "Please fill all the details");
                                     }
                                   },
                                   child: Container(
