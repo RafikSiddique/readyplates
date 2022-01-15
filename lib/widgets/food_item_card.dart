@@ -23,6 +23,21 @@ class FoodItemCard extends GetView<OrderController> {
       required this.restaurantModel})
       : super(key: key);
   OrderController get orderController => controller;
+  Color color(int i) {
+    if (i == 0)
+      return Color(0xff7af400);
+    else if (i == 1)
+      return Color(0xff70e000);
+    else if (i == 2)
+      return Color(0xff66cc00);
+    else if (i == 3)
+      return Color(0xff5cb900);
+    else if (i == 4)
+      return Color(0xff53a500);
+    else
+      return Color(0xff7af400);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -237,7 +252,7 @@ class FoodItemCard extends GetView<OrderController> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 8),
+                        SizedBox(height: 5),
                         Padding(
                           padding: const EdgeInsets.only(right: 16),
                           child: Text(
@@ -253,7 +268,7 @@ class FoodItemCard extends GetView<OrderController> {
                         ),
                         SizedBox(height: 4),
                         Container(
-                          height: 45,
+                          height: 29,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 16),
                             child: SingleChildScrollView(
@@ -266,6 +281,25 @@ class FoodItemCard extends GetView<OrderController> {
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 9,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16, top: 4),
+                          child: Container(
+                            width: size.width * 0.5,
+                            child: Text(
+                              foodItemModel.stdServingSize,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 13,
+                                  color: MyTheme.buttonbackgroundColor,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ),
@@ -295,10 +329,7 @@ class FoodItemCard extends GetView<OrderController> {
                               double.parse(foodItemModel.spiceLevel).toInt(),
                               (index) => Image.asset(
                                 Assets.spice,
-                                color: index == 0
-                                    ? MyTheme
-                                        .shoppageimgcolor //Color(0xff25A244)
-                                    : null,
+                                color: color(index),
                               ),
                             ),
                             Spacer(),

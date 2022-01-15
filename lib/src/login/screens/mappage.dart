@@ -370,8 +370,9 @@ class _MapPageState extends State<MapPage> {
                                         ? MyTheme.verifyButtonColor
                                         : MyTheme.orangeColor,
                                     minimumSize: Size(size.width, 50),
+                                    elevation: 0,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(7),
+                                      borderRadius: BorderRadius.circular(6),
                                     ),
                                   ),
                                   onPressed: () async {
