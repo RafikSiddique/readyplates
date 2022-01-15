@@ -9,6 +9,7 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class Bottomcontainer extends StatefulWidget {
   final RestaurantModel restaurantModel;
@@ -129,15 +130,33 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                               .any((element) => element.foodQuantity.value > 0))
                         Get.find<OrderController>().editOrders();
                       else
-                        Get.snackbar("Error",
-                            "Please add atleast one item to complete the order");
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          title: 'Error',
+                          message:
+                              'Please add atleast one item to complete the order',
+                          icon: Icon(
+                            Icons.error,
+                            color: MyTheme.redColor,
+                          ),
+                        ));
+                      // Get.snackbar("Error",
+                      //     "Please add atleast one item to complete the order");
                     } else {
                       if (controller.cartItems.isNotEmpty) {
                         await Get.find<OrderController>()
                             .order(widget.restaurantModel);
                       } else
-                        Get.snackbar("Error",
-                            "Please add atleast one item to complete the order");
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          title: 'Error',
+                          message:
+                              'Please add atleast one item to complete the order',
+                          icon: Icon(
+                            Icons.error,
+                            color: MyTheme.redColor,
+                          ),
+                        ));
+                      // Get.snackbar("Error",
+                      //     "Please add atleast one item to complete the order");
                     }
                   },
                 ),

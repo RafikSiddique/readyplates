@@ -7,6 +7,7 @@ import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class ShooppymacPage extends StatelessWidget {
   final void Function() setStae;
@@ -180,12 +181,21 @@ class ShooppymacPage extends StatelessWidget {
                             controller.calclateTotal(false);
                             setStae();
                           } else {
-                            Get.showSnackbar(GetBar(
-                              title: "Error",
+                            Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                              title: 'Error',
                               message:
-                                  "You should atleast have one item in cart for booking summary",
-                              duration: Duration(seconds: 2),
+                                  'You should atleast have one item in cart for booking summary',
+                              icon: Icon(
+                                Icons.error,
+                                color: MyTheme.redColor,
+                              ),
                             ));
+                            // Get.showSnackbar(GetBar(
+                            //   title: "Error",
+                            //   message:
+                            //       "You should atleast have one item in cart for booking summary",
+                            //   duration: Duration(seconds: 2),
+                            // ));
                           }
                         } else {
                           if (controller.orderEdit.length > 1) {
@@ -202,20 +212,38 @@ class ShooppymacPage extends StatelessWidget {
                               controller.calclateTotal(true);
                               setStae();
                             } else {
-                              Get.showSnackbar(GetBar(
-                                title: "Error",
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                title: 'Error',
                                 message:
-                                    "You should atleast have one item in cart for booking summary",
-                                duration: Duration(seconds: 2),
+                                    'You should atleast have one item in cart for booking summary',
+                                icon: Icon(
+                                  Icons.error,
+                                  color: MyTheme.redColor,
+                                ),
                               ));
+                              // Get.showSnackbar(GetBar(
+                              //   title: "Error",
+                              //   message:
+                              //       "You should atleast have one item in cart for booking summary",
+                              //   duration: Duration(seconds: 2),
+                              // ));
                             }
                           } else {
-                            Get.showSnackbar(GetBar(
-                              title: "Error",
+                            Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                              title: 'Error',
                               message:
-                                  "You should atleast have one item in cart for booking summary",
-                              duration: Duration(seconds: 2),
+                                  'You should atleast have one item in cart for booking summary',
+                              icon: Icon(
+                                Icons.error,
+                                color: MyTheme.redColor,
+                              ),
                             ));
+                            // Get.showSnackbar(GetBar(
+                            //   title: "Error",
+                            //   message:
+                            //       "You should atleast have one item in cart for booking summary",
+                            //   duration: Duration(seconds: 2),
+                            // ));
                           }
                         }
                       },

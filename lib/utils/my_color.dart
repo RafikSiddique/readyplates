@@ -106,6 +106,7 @@ class MyTheme {
   static Color greenColor = Color(0xff2D8416);
   static Color blueColor = Color(0xff154E81);
   static Color redColor = Color(0xffEB4132);
+  static Color orangelightColor = Color(0xffEF9400);
 
   static Color lightorangeColor = Color(0xffF68D4D);
 }

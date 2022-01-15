@@ -10,6 +10,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/edit_button.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class FoodItemCard extends GetView<OrderController> {
   final Editing isEditing;
@@ -105,11 +106,21 @@ class FoodItemCard extends GetView<OrderController> {
                                     onDecrement: () {
                                       if (isEditing != Editing.none) {
                                         if (isEditing == Editing.confirmed) {
-                                          Get.showSnackbar(GetBar(
+                                          Get.showSnackbar(
+                                              MySnackBar.myLoadingSnackBar(
+                                            title: 'Warning',
                                             message:
-                                                "You cannot decrease any item once the order is confirmed",
-                                            duration: Duration(seconds: 2),
+                                                'You cannot decrease any item once the order is confirmed',
+                                            icon: Icon(
+                                              Icons.warning,
+                                              color: MyTheme.orangelightColor,
+                                            ),
                                           ));
+                                          // Get.showSnackbar(GetBar(
+                                          //   message:
+                                          //       "You cannot decrease any item once the order is confirmed",
+                                          //   duration: Duration(seconds: 2),
+                                          // ));
                                         } else {
                                           orderController
                                               .decrementEdit(foodItemModel.id);
