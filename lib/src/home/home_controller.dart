@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_sevices.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class HomeController extends GetxController {
   final SharedPreferenceHelper sfHelper = Get.find();
@@ -38,11 +41,21 @@ class HomeController extends GetxController {
       RestaurantModel restaurantModel = await homeService.getRes(resId);
       return restaurantModel;
     } catch (e) {
-      if (e.runtimeType != SocketException)
-        Get.showSnackbar(GetBar(
-          title: "Error",
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
           message: "Something went wrong",
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
         ));
+      }
+      // Get.showSnackbar(GetBar(
+      //   title: "Error",
+      //   message: "Something went wrong",
+      // ));
       return null;
     }
   }
@@ -170,7 +183,15 @@ class HomeController extends GetxController {
         foodItems.clear();
       }
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -212,11 +233,21 @@ class HomeController extends GetxController {
       if (e.runtimeType != SocketException &&
           lat.value != 0 &&
           lon.value != 0) {
-        Get.showSnackbar(GetBar(
-          title: "Server Error",
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
           message: "Something went wrong",
-          duration: Duration(seconds: 1),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
         ));
+
+        // Get.showSnackbar(GetBar(
+        //   title: "Server Error",
+        //   message: "Something went wrong",
+        //   duration: Duration(seconds: 1),
+        // ));
       }
     }
   }

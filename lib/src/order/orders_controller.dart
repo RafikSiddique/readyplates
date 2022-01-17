@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/cart_model.dart';
@@ -14,7 +15,9 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class OrderController extends GetxController {
   final Orderservices services = Orderservices();
@@ -60,7 +63,16 @@ class OrderController extends GetxController {
       int tableNo = tables.indexWhere((element) => element.id == tableId);
       return tableNo + 1;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message: e.toString(),
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
+
       return -1;
     }
   }
@@ -141,7 +153,15 @@ class OrderController extends GetxController {
           .toList();
       cartItems.value = models;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message: e.toString(),
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
     }
   }
 
@@ -236,7 +256,15 @@ class OrderController extends GetxController {
       calclateTotal();
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -256,7 +284,15 @@ class OrderController extends GetxController {
       calclateTotal();
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -300,7 +336,15 @@ class OrderController extends GetxController {
       Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -330,7 +374,15 @@ class OrderController extends GetxController {
       ended.sort((a, b) => b.id.compareTo(a.id));
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -341,7 +393,15 @@ class OrderController extends GetxController {
       await getorder();
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -352,7 +412,15 @@ class OrderController extends GetxController {
       await getorder();
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -371,7 +439,16 @@ class OrderController extends GetxController {
       bool data = await services.getAutoOrder(resid.toString());
       return data;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message: e.toString(),
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
+
       return true;
     }
   }
@@ -382,7 +459,15 @@ class OrderController extends GetxController {
       await getorder();
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -394,7 +479,15 @@ class OrderController extends GetxController {
       await getorder();
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -423,7 +516,15 @@ class OrderController extends GetxController {
       Get.offAllNamed(Tellafriend.id);
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -443,7 +544,15 @@ class OrderController extends GetxController {
       Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
       if (e.runtimeType != SocketException) {
-        Get.snackbar("Error", e.toString());
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
