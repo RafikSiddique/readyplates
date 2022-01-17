@@ -60,11 +60,12 @@ class BookingDetails extends GetView<OrderController> {
                   controller.numberOfPeople--;
                 } else {
                   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                    title: 'Error',
+                    color: MyTheme.verifyButtonColor,
+                    title: 'Warning',
                     message: 'here should be atleast one person',
                     icon: Icon(
-                      Icons.error,
-                      color: MyTheme.redColor,
+                      Icons.warning_amber_rounded,
+                      color: MyTheme.orangelightColor,
                     ),
                   ));
                   // Get.snackbar("Error", "There should be atleast one person");
@@ -178,11 +179,12 @@ class BookingDetails extends GetView<OrderController> {
                       } else {
                         Get.back();
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          title: '',
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Info',
                           message:
                               "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
                           icon: Icon(
-                            Icons.error,
+                            Icons.error_outline_rounded,
                             color: MyTheme.blueColor,
                           ),
                         ));
@@ -547,11 +549,12 @@ class BookingDetails extends GetView<OrderController> {
                               ));
                             } else { */
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          title: 'Orders',
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Info',
                           message:
                               "The restaurant has stopped taking order for now,\nPlease try again later",
                           icon: Icon(
-                            Icons.error,
+                            Icons.error_outline_rounded,
                             color: MyTheme.blueColor,
                           ),
                         ));
@@ -585,7 +588,7 @@ class BookingDetails extends GetView<OrderController> {
                     } else {
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
                         color: MyTheme.verifyButtonColor,
-                        title: 'Closed',
+                        title: 'Info',
                         message:
                             "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
                         icon: Icon(
@@ -604,7 +607,7 @@ class BookingDetails extends GetView<OrderController> {
                   } else {
                     Get.showSnackbar(MySnackBar.myLoadingSnackBar(
                       color: MyTheme.verifyButtonColor,
-                      title: 'Time',
+                      title: 'Error',
                       message: 'Please select a time after current time',
                       icon: FaIcon(
                         FontAwesomeIcons.timesCircle,

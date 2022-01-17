@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
@@ -131,14 +132,16 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                         Get.find<OrderController>().editOrders();
                       else
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          title: 'Error',
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Warning',
                           message:
                               'Please add atleast one item to complete the order',
-                          icon: Icon(
-                            Icons.error,
+                          icon: FaIcon(
+                            FontAwesomeIcons.timesCircle,
                             color: MyTheme.redColor,
                           ),
                         ));
+
                       // Get.snackbar("Error",
                       //     "Please add atleast one item to complete the order");
                     } else {
@@ -147,11 +150,12 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                             .order(widget.restaurantModel);
                       } else
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          title: 'Error',
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Warning',
                           message:
                               'Please add atleast one item to complete the order',
-                          icon: Icon(
-                            Icons.error,
+                          icon: FaIcon(
+                            FontAwesomeIcons.timesCircle,
                             color: MyTheme.redColor,
                           ),
                         ));

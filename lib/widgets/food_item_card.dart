@@ -108,14 +108,16 @@ class FoodItemCard extends GetView<OrderController> {
                                         if (isEditing == Editing.confirmed) {
                                           Get.showSnackbar(
                                               MySnackBar.myLoadingSnackBar(
+                                            color: MyTheme.verifyButtonColor,
                                             title: 'Warning',
                                             message:
                                                 'You cannot decrease any item once the order is confirmed',
                                             icon: Icon(
-                                              Icons.warning,
+                                              Icons.warning_amber_rounded,
                                               color: MyTheme.orangelightColor,
                                             ),
                                           ));
+
                                           // Get.showSnackbar(GetBar(
                                           //   message:
                                           //       "You cannot decrease any item once the order is confirmed",
@@ -153,9 +155,41 @@ class FoodItemCard extends GetView<OrderController> {
                                                   element.restaurant !=
                                                   restaurantModel.id)) {
                                             Get.showSnackbar(GetBar(
-                                              title: "Error",
-                                              message:
+                                              backgroundColor:
+                                                  MyTheme.verifyButtonColor,
+                                              titleText: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 8),
+                                                child: Text(
+                                                  "Error",
+                                                  style: GoogleFonts.nunito(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 17,
+                                                    color:
+                                                        MyTheme.appbartextColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              // title: "Error",
+                                              messageText: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 8),
+                                                child: Text(
                                                   "Sorry you cannot add items from 2 Restaurant",
+                                                  style: GoogleFonts.nunito(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 17,
+                                                    color:
+                                                        MyTheme.appbartextColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              // message:
+                                              //     "Sorry you cannot add items from 2 Restaurant",
+
                                               isDismissible: true,
                                               mainButton: TextButton(
                                                 onPressed: () async {
@@ -184,7 +218,13 @@ class FoodItemCard extends GetView<OrderController> {
                                                   Get.back();
                                                 },
                                                 child: Text(
-                                                    "Remove all from other restaurants"),
+                                                  "Remove all from other restaurants",
+                                                  style: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 15,
+                                                    color: MyTheme.orangeColor,
+                                                  ),
+                                                ),
                                               ),
                                             ));
                                           } else {

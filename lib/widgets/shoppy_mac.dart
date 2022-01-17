@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
@@ -182,14 +183,16 @@ class ShooppymacPage extends StatelessWidget {
                             setStae();
                           } else {
                             Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                              title: 'Error',
+                              color: MyTheme.verifyButtonColor,
+                              title: 'Warning',
                               message:
                                   'You should atleast have one item in cart for booking summary',
-                              icon: Icon(
-                                Icons.error,
+                              icon: FaIcon(
+                                FontAwesomeIcons.timesCircle,
                                 color: MyTheme.redColor,
                               ),
                             ));
+
                             // Get.showSnackbar(GetBar(
                             //   title: "Error",
                             //   message:
@@ -213,11 +216,12 @@ class ShooppymacPage extends StatelessWidget {
                               setStae();
                             } else {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                title: 'Error',
+                                color: MyTheme.verifyButtonColor,
+                                title: 'Warning',
                                 message:
                                     'You should atleast have one item in cart for booking summary',
-                                icon: Icon(
-                                  Icons.error,
+                                icon: FaIcon(
+                                  FontAwesomeIcons.timesCircle,
                                   color: MyTheme.redColor,
                                 ),
                               ));
@@ -230,11 +234,12 @@ class ShooppymacPage extends StatelessWidget {
                             }
                           } else {
                             Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                              title: 'Error',
+                              color: MyTheme.verifyButtonColor,
+                              title: 'Warning',
                               message:
                                   'You should atleast have one item in cart for booking summary',
-                              icon: Icon(
-                                Icons.error,
+                              icon: FaIcon(
+                                FontAwesomeIcons.timesCircle,
                                 color: MyTheme.redColor,
                               ),
                             ));
