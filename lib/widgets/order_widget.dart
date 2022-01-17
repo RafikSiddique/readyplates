@@ -15,6 +15,7 @@ import 'package:readyplates/src/order/screen/tip_sucessfull_page.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/form_field.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class OrderWidget extends StatelessWidget {
   final OrderModelApi orderModel;
@@ -506,10 +507,19 @@ class OrderWidget extends StatelessWidget {
                         isComplete: false,
                       ));
                 } else {
-                  Get.showSnackbar(GetBar(
+                  Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                    color: MyTheme.verifyButtonColor,
+                    title: 'Info',
                     message: "Feedback Already Provided",
-                    duration: Duration(seconds: 1),
+                    icon: Icon(
+                      Icons.error_outline_rounded,
+                      color: MyTheme.blueColor,
+                    ),
                   ));
+                  // Get.showSnackbar(GetBar(
+                  //   message: "Feedback Already Provided",
+                  //   duration: Duration(seconds: 1),
+                  // ));
                 }
               },
             ),

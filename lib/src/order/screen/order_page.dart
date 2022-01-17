@@ -222,8 +222,10 @@ class OrderPage extends GetView<OrderController> {
                       Text(
                         "No Orders at the moment",
                         style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 17,
+                          color: Colors.black,
                         ),
                       ),
                       SizedBox(

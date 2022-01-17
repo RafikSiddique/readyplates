@@ -340,6 +340,9 @@ class CreditCardDetailsPage extends StatelessWidget {
                   } */
                 },
               ),
+              SizedBox(
+                height: 22,
+              ),
             ],
           ),
         ),
