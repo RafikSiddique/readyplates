@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseMessagingService extends ApiService {
   int i = 0;
@@ -108,6 +109,13 @@ class FirebaseMessagingService extends ApiService {
     String userId = await SharedPreferenceHelper().getUserId();
     try {
       if (userId != "") {
+        
+        FirebaseFirestore.instance.collection('customer').doc(userId).set({
+         DateTime.now().toString() : 
+          token,
+
+         
+        },);
         var res = await post(Uri.parse(baseUri + 'restaurants/token/'),
             headers: contentTypeJsonHeader,
             body: jsonEncode({
