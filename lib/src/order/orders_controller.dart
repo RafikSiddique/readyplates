@@ -4,18 +4,20 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/order_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/models/table_model.dart';
-import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/screens/Tell_a_friend.dart';
 import 'package:readyplates/src/order/orders_api_services.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class OrderController extends GetxController {
   final Orderservices services = Orderservices();
@@ -24,9 +26,11 @@ class OrderController extends GetxController {
   RxList<CartApiModel> cartApiItems = <CartApiModel>[].obs;
   RxList<OrderModelApi> active = <OrderModelApi>[].obs;
   RxList<OrderModelApi> inProgress = <OrderModelApi>[].obs;
+  RxList<OrderModelApi> Served = <OrderModelApi>[].obs;
   RxList<OrderModelApi> ended = <OrderModelApi>[].obs;
 
   RxList<OrderEditModel> orderEdit = <OrderEditModel>[].obs;
+  late TextEditingController tipAmountController;
   RxInt numberOfPeople = 1.obs;
 
   RxDouble total = 0.0.obs;
@@ -41,7 +45,9 @@ class OrderController extends GetxController {
     total.value = 0;
     if (isEdit) {
       for (var item in orderEdit) {
-        total.value += item.foodPrice.value;
+        if (item.foodQuantity.value != 0) {
+          total.value += item.foodPrice.value;
+        }
       }
     } else {
       for (var item in cartItems) {
@@ -57,7 +63,16 @@ class OrderController extends GetxController {
       int tableNo = tables.indexWhere((element) => element.id == tableId);
       return tableNo + 1;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message: e.toString(),
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
+
       return -1;
     }
   }
@@ -77,6 +92,7 @@ class OrderController extends GetxController {
     otpFields = List.generate(4, (index) => FocusNode());
     otpText = List.generate(4, (index) => TextEditingController());
     feedback = TextEditingController();
+    tipAmountController = TextEditingController();
     super.onInit();
   }
 
@@ -125,6 +141,7 @@ class OrderController extends GetxController {
       String id = await sfHelper.getUserId();
       List<CartApiModel> listOfApi = await services.getCart(id);
       List<CartModel> models = listOfApi
+          .where((element) => element.foodQuantity != 0)
           .map((e) => CartModel(
               user: id,
               foodItem: e.foodItem.id.obs,
@@ -136,7 +153,15 @@ class OrderController extends GetxController {
           .toList();
       cartItems.value = models;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message: e.toString(),
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
     }
   }
 
@@ -163,11 +188,17 @@ class OrderController extends GetxController {
         geteditItem(id).foodQuantity--;
       } else {
         OrderEditModel item = geteditItem(id);
-        orderEdit.remove(item);
+        int v = orderEdit.indexOf(item);
+        orderEdit[v].foodQuantity.value = 0;
+        orderEdit[v].foodPrice.value = 0;
+        calclateTotal(true);
       }
     } else {
       OrderEditModel item = geteditItem(id);
-      orderEdit.remove(item);
+      int v = orderEdit.indexOf(item);
+      orderEdit[v].foodQuantity.value = 0;
+      orderEdit[v].foodPrice.value = 0;
+      calclateTotal(true);
     }
     calclateTotal(true);
   }
@@ -224,7 +255,17 @@ class OrderController extends GetxController {
       await services.addToCartApi(cartModel);
       calclateTotal();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
@@ -242,53 +283,19 @@ class OrderController extends GetxController {
       cartItems.clear();
       calclateTotal();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
-
-/*   Future<void> orderWithoutPayment(RestaurantModel restaurantModel) async {
-    try {
-      String id = await sfHelper.getUserId();
-      OrderModel orderModel = OrderModel(
-          payment: "",
-          user: int.parse(id),
-          orderState: OrderState.placed,
-          restaurant: restaurantModel.id,
-          orderitems: cartItems
-              .map((element) => OrderFoodItem(
-                  id: element.foodItem.value,
-                  count: element.foodQuantity.value,
-                  price: element.foodPrice.value))
-              .toList(),
-          noOfPeople: numberOfPeople.value,
-          table: null,
-          tax: 50,
-          totalprice: calclateTotal(),
-          date:
-              DateFormat(DateFormat.YEAR_MONTH_DAY).format(selectedDate.value),
-          time:
-              DateFormat(DateFormat.HOUR24_MINUTE).format(selectedDate.value));
-      OrderModelApi orderModelApi = await services.orderapi(orderModel);
-
-      await getorder();
-      cartApiItems.clear();
-      cartItems.forEach((e) {
-        CartModel element = getCartItem(e.foodItem.value);
-        element.foodQuantity.value = 0;
-        element.user = id;
-        cart(element);
-      });
-      cartItems.clear();
-      calclateTotal();
-
-      Get.to(() => Chekoutdone(
-            orderModelApi: orderModelApi,
-            isComplete: false,
-          ));
-    } catch (e) {
-      Get.snackbar("Error", e.toString());
-    }
-  } */
 
   Future<void> order(RestaurantModel restaurantModel) async {
     try {
@@ -324,13 +331,21 @@ class OrderController extends GetxController {
       });
       cartItems.clear();
       calclateTotal();
-      getorder();
-      Get.to(() => Chekoutdone(
-            orderModelApi: orderModelApi,
-            isComplete: false,
-          ));
+      await getorder();
+      Get.offAllNamed(LandingPage.id);
+      Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
@@ -349,20 +364,92 @@ class OrderController extends GetxController {
           .toList();
       inProgress.sort((a, b) => b.id.compareTo(a.id));
 
+      Served.value = orderList
+          .where((element) => element.status == OrderState.Served)
+          .toList();
+      Served.sort((a, b) => b.id.compareTo(a.id));
+
       ended.value =
-          orderList.where((element) => element.status.index > 1).toList();
+          orderList.where((element) => element.status.index > 2).toList();
       ended.sort((a, b) => b.id.compareTo(a.id));
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
-  Future<void> updateStatus(int id, int status) async {
+  Future<void> updateStatus(int id, OrderState status) async {
     try {
-      await services.updateStatus(id, status);
+      await services.updateStatus(id, status.index);
       await getorder();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
+    }
+  }
+
+  Future<void> updateTip(int id, String tip) async {
+    try {
+      await services.updatetip(id, tip);
+      await getorder();
+    } catch (e) {
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
+    }
+  }
+
+/*   Future<int> getOrderCount(int restaurant, DateTime date) async {
+    try {
+      int data = await services.orderCount(restaurant, date.toString());
+      return data;
+    } catch (e) {
+      return 0;
+    }
+  } */
+
+  Future<bool> getAutoOrder(String resid) async {
+    try {
+      bool data = await services.getAutoOrder(resid.toString());
+      return data;
+    } catch (e) {
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message: e.toString(),
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
+
+      return true;
     }
   }
 
@@ -371,7 +458,17 @@ class OrderController extends GetxController {
       await services.updateFeedback(id, feedback);
       await getorder();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
@@ -381,7 +478,17 @@ class OrderController extends GetxController {
 
       await getorder();
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
@@ -408,7 +515,17 @@ class OrderController extends GetxController {
       imgs = null;
       Get.offAllNamed(Tellafriend.id);
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
@@ -426,39 +543,20 @@ class OrderController extends GetxController {
       Get.offAllNamed(LandingPage.id);
       Get.find<HomeController>().currentIndex.value = 2;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
 //
   Rx<DateTime> globletime = DateTime.now().obs;
-
-  // Future<void> tableList(
-  //   int resId,
-  // ) async {
-  //   globletime.addListener(GetStream(
-  //     onListen: () {
-  //       print(globletime.value);
-  //     },
-  //   ));
-
-  //   DateTime end = globletime.value;
-
-  //   try {
-  //     String id = await sfHelper.getUserId();
-  //     await services.tableconfig(
-  //         id,
-  //         TableModel(
-  //             restaurant: resId,
-  //             capacity: numberOfPeople.value,
-  //             orderdate: DateFormat(DateFormat.YEAR_MONTH_DAY)
-  //                 .format(selectedDate.value),
-  //             starttime: DateFormat(DateFormat.HOUR24_MINUTE_SECOND)
-  //                 .format(globletime.value),
-  //             endtime: DateFormat(DateFormat.HOUR24_MINUTE_SECOND)
-  //                 .format(end.add(Duration(minutes: 45)))));
-  //   } catch (e) {
-  //     Get.snackbar("Error", e.toString());
-  //   }
-  // }
 }

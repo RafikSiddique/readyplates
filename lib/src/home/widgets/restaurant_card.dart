@@ -23,6 +23,8 @@ class RestaurantCard extends GetView<HomeController> {
         ? restaurantModel.bio.first
         : Bio(
             id: 0,
+            advance_orders: "",
+            no_of_orders: "",
             description: "",
             no_of_tables: "",
             max_table_size: "",
@@ -33,6 +35,7 @@ class RestaurantCard extends GetView<HomeController> {
             event_start: "",
             event_end: "",
             event_desc: "",
+            event_name: "",
             front_fascia_day: "",
             front_fascia_night: "",
             street_view: "",
@@ -52,13 +55,6 @@ class RestaurantCard extends GetView<HomeController> {
             completed_till: 0,
             user: 0);
 
-    String toc = restaurantModel.types_of_cusine
-        .getRange(
-            0,
-            restaurantModel.types_of_cusine.length > 3
-                ? 3
-                : restaurantModel.types_of_cusine.length)
-        .join(", ");
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(
@@ -82,7 +78,7 @@ class RestaurantCard extends GetView<HomeController> {
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
-          onTap: () {
+          onTap: () async {
             controller.timer?.cancel();
             Navigator.push(
                 context,
@@ -91,11 +87,6 @@ class RestaurantCard extends GetView<HomeController> {
                     builder: (context) => RestaurantDetails(
                           restaurantModel: restaurantModel,
                         )));
-
-            // Get.to(() => RestaurantDetails(
-            //       restaurantModel: restaurantModel,
-            //       controller: controller,
-            //     ));
           },
           child: Padding(
             padding: EdgeInsets.all(media.size.width * 0.025),
@@ -182,7 +173,7 @@ class RestaurantCard extends GetView<HomeController> {
                             " | " +
                             double.parse(restaurantModel.address2)
                                 .toStringAsFixed(2) +
-                            " Kms",
+                            " mi",
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontSize: media.size.height * 0.013,
@@ -195,10 +186,16 @@ class RestaurantCard extends GetView<HomeController> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            width: media.size.height * 0.012,
-                            height: media.size.height * 0.012,
-                            child: Image.asset(Assets.star),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 2),
+                            child: Container(
+                              width: media.size.height * 0.012,
+                              height: media.size.height * 0.012,
+                              child: Image.asset(
+                                Assets.star,
+                                color: MyTheme.lightorangeColor,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             width: 3,
@@ -222,7 +219,7 @@ class RestaurantCard extends GetView<HomeController> {
                                           .toString()) +
                                   " | Serving Time : ${bio.servingTime} mins ",
                               style: GoogleFonts.montserrat(
-                                  color: MyTheme.shoptextcolor.withOpacity(0.8),
+                                  color: MyTheme.lightorangeColor,
                                   fontSize: media.size.height * 0.013,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w600))

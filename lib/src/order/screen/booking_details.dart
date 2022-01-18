@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -8,26 +6,37 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/Burger_support_page.dart';
+import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class BookingDetails extends GetView<OrderController> {
-  final RestaurantModel restaurantModel;
-  final bool isEditing;
+  late RestaurantModel restaurantModel;
+  final Editing isEditing;
   BookingDetails(this.restaurantModel, this.isEditing);
-  DateTime now = DateTime.now();
+  final DateTime now = DateTime.now();
 
   Text weekText(String text) {
     return Text(text);
   }
 
+  DateTime tempTime = DateTime.now();
+
   Widget numberChange(Size size) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Number of People"),
+        Text(
+          "Number of People",
+          style: GoogleFonts.nunito(
+            fontWeight: FontWeight.normal,
+            color: Color(0xff676B71),
+            fontSize: 13,
+          ),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,10 +46,11 @@ class BookingDetails extends GetView<OrderController> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     controller.numberOfPeople.value.toString(),
-                    style: GoogleFonts.nunito(
-                        fontWeight: FontWeight.w500,
-                        color: MyTheme.dividermiddletext,
-                        fontSize: 20),
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w500,
+                      color: MyTheme.dividermiddletext,
+                      fontSize: 20,
+                    ),
                   ),
                 )),
             Spacer(),
@@ -49,7 +59,16 @@ class BookingDetails extends GetView<OrderController> {
                 if (controller.numberOfPeople.value != 1) {
                   controller.numberOfPeople--;
                 } else {
-                  Get.snackbar("Error", "There should be atleast one person");
+                  Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                    color: MyTheme.verifyButtonColor,
+                    title: 'Warning',
+                    message: 'here should be atleast one person',
+                    icon: Icon(
+                      Icons.warning_amber_rounded,
+                      color: MyTheme.orangelightColor,
+                    ),
+                  ));
+                  // Get.snackbar("Error", "There should be atleast one person");
                 }
               },
               child: Padding(
@@ -144,7 +163,7 @@ class BookingDetails extends GetView<OrderController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TimeButton(
-                    borcolor: Colors.white,
+                    borcolor: Colors.transparent,
                     onTap: () {
                       if (checkTime()) {
                         controller.globletime.value = tempTime;
@@ -159,27 +178,37 @@ class BookingDetails extends GetView<OrderController> {
                         Get.back();
                       } else {
                         Get.back();
-                        Get.showSnackbar(GetBar(
-                          duration: Duration(seconds: 2),
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Info',
                           message:
                               "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
+                          icon: Icon(
+                            Icons.error_outline_rounded,
+                            color: MyTheme.blueColor,
+                          ),
                         ));
+                        // Get.showSnackbar(GetBar(
+                        //   duration: Duration(seconds: 2),
+                        //   message:
+                        //       "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
+                        // ));
                       }
                     },
                     fontSize: 12,
                     text: "Done",
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
-                    backgroundColor: Colors.black,
+                    backgroundColor: MyTheme.orangeColor,
                   ),
                   TimeButton(
-                    borcolor: Colors.black,
+                    borcolor: MyTheme.orangeColor,
                     onTap: () {
                       Get.back();
                     },
                     fontSize: 12,
                     text: "Cancel",
-                    color: Colors.black,
+                    color: MyTheme.orangeColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ],
@@ -191,7 +220,16 @@ class BookingDetails extends GetView<OrderController> {
     );
   }
 
-  DateTime tempTime = DateTime.now();
+  Future<void> proceedToSummary(BuildContext context) async {
+    controller.calclateTotal(isEditing != Editing.none);
+    print("success");
+    Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => BurgersupportingPage(
+              restaurantModel: restaurantModel, isEditing: isEditing),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +242,7 @@ class BookingDetails extends GetView<OrderController> {
           },
           child: Icon(
             FontAwesomeIcons.chevronLeft,
-            color: MyTheme.appbartextColor,
+            color: MyTheme.orangeColor,
             size: 14.83,
           ),
         ),
@@ -214,7 +252,10 @@ class BookingDetails extends GetView<OrderController> {
         title: Text(
           "Order",
           style: GoogleFonts.inter(
-            color: Colors.black,
+            fontStyle: FontStyle.normal,
+            color: MyTheme.orangeColor,
+            fontWeight: FontWeight.w500,
+            fontSize: 17,
           ),
         ),
       ),
@@ -232,23 +273,26 @@ class BookingDetails extends GetView<OrderController> {
                     elevation: 0,
                     child: InkWell(
                       onTap: () async {
-                        DateTime dt = await showDatePicker(
-                                context: context,
-                                initialDate: controller.selectedDate.value,
-                                firstDate: DateTime.now(),
-                                lastDate:
-                                    DateTime(DateTime.now().year, 12, 31)) ??
-                            DateTime.now();
+                        DateTime? dt = await showDatePicker(
+                          context: context,
+                          initialDate: controller.selectedDate.value,
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime.now().add(Duration(
+                              days: int.parse(
+                                  restaurantModel.bio.first.advance_orders))),
+                        );
+                        //   DateTime(DateTime.now().year, 12, 31)) ??
+                        // DateTime.now();
 
                         print(restaurantModel.open_days);
                         if (restaurantModel.open_days.any((element) =>
                             element.toLowerCase() ==
                             DateFormat(DateFormat.WEEKDAY)
-                                .format(dt)
+                                .format(dt!)
                                 .toLowerCase())) {
                           print("Success");
                           print("Selected Day: " +
-                              DateFormat(DateFormat.WEEKDAY).format(dt));
+                              DateFormat(DateFormat.WEEKDAY).format(dt!));
                           controller.selectedDate.value = DateTime(
                               dt.year,
                               dt.month,
@@ -259,7 +303,7 @@ class BookingDetails extends GetView<OrderController> {
                         } else {
                           print("Failed");
                           print("Selected Day: " +
-                              DateFormat(DateFormat.WEEKDAY).format(dt));
+                              DateFormat(DateFormat.WEEKDAY).format(dt!));
                         }
                       },
                       child: Row(
@@ -269,7 +313,7 @@ class BookingDetails extends GetView<OrderController> {
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.w300,
                               fontSize: 40,
-                              color: MyTheme.borderchangeColor,
+                              color: MyTheme.orangeColor,
                             ),
                           ),
                           SizedBox(
@@ -339,7 +383,7 @@ class BookingDetails extends GetView<OrderController> {
                           children: [
                             Image.asset(
                               Assets.clock,
-                              color: MyTheme.borderchangeColor,
+                              color: MyTheme.orangeColor,
                               height: 25,
                             ),
                             SizedBox(
@@ -377,17 +421,17 @@ class BookingDetails extends GetView<OrderController> {
             Text(
               "Venue",
               style: GoogleFonts.nunito(
-                fontWeight: FontWeight.w300,
-                //color: Color(0xff84888E),
-                color: MyTheme.bookingtextcolor,
-              ),
+                  fontWeight: FontWeight.normal,
+                  color: Color(0xff84888E),
+                  fontSize: 13),
             ),
             Text(
               restaurantModel.resName,
-              style: GoogleFonts.nunito(
-                  fontWeight: FontWeight.w500,
-                  color: MyTheme.bookingtextcolor,
-                  fontSize: 20),
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w500,
+                color: MyTheme.bookingtextcolor.withOpacity(0.6),
+                fontSize: 17,
+              ),
             ),
             Divider(),
             SizedBox(
@@ -399,111 +443,188 @@ class BookingDetails extends GetView<OrderController> {
             ),
             Spacer(),
             Elevated(
-              text: "Confirm",
-              width: double.infinity,
-              onTap: () {
-                DateTime selectedDate = controller.selectedDate.value;
-                DateTime selectedTime = controller.globletime.value;
-                DateTime overallTime = DateTime(
-                    selectedDate.year,
-                    selectedDate.month,
-                    selectedDate.day,
-                    selectedTime.hour,
-                    selectedTime.minute,
-                    selectedTime.second);
-                bool isAfterCurrent = overallTime.isAfter(DateTime.now());
-                print(isAfterCurrent);
-                print(overallTime);
-                print(DateTime.now());
-                if (isAfterCurrent) {
-                  if (restaurantModel.open_days.any((element) =>
-                          element.toLowerCase() ==
-                          DateFormat(DateFormat.WEEKDAY)
-                              .format(controller.selectedDate.value)
-                              .toLowerCase()) &&
-                      checkTime()) {
-                    controller.calclateTotal(isEditing);
-                    print("success");
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => BurgersupportingPage(
-                              restaurantModel: restaurantModel,
-                              isEditing: isEditing),
+                color: MyTheme.appbackgroundColor,
+                text: "Confirm",
+                width: double.infinity,
+                onTap: () async {
+                  DateTime selectedDate = controller.selectedDate.value;
+                  DateTime selectedTime = controller.globletime.value;
+                  DateTime overallTime = DateTime(
+                      selectedDate.year,
+                      selectedDate.month,
+                      selectedDate.day,
+                      selectedTime.hour,
+                      selectedTime.minute,
+                      selectedTime.second);
+                  bool isAfterCurrent = overallTime.isAfter(DateTime.now());
+                  print(isAfterCurrent);
+                  print(overallTime);
+                  print(DateTime.now());
+
+                  print("Starting conditions");
+                  if (isAfterCurrent) {
+                    print("Time validated");
+                    if (restaurantModel.open_days.any((element) =>
+                            element.toLowerCase() ==
+                            DateFormat(DateFormat.WEEKDAY)
+                                .format(controller.selectedDate.value)
+                                .toLowerCase()) &&
+                        checkTime()) {
+                      // Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                      //   title: 'Booking',
+                      //   message: 'Confirming booking',
+                      //   icon: Center(
+                      //     child: SizedBox.square(
+                      //       dimension: 20,
+                      //       child: Center(
+                      //         child: CircularProgressIndicator(
+                      //           strokeWidth: 2,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ));
+                      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                        color: MyTheme.verifyButtonColor,
+                        title: 'Booking',
+                        message: "Confirming booking",
+                        icon: Center(
+                          child: SizedBox.square(
+                            dimension: 20,
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: MyTheme.orangeColor,
+                            )),
+                          ),
+                        ),
+                      ));
+
+                      // Get.showSnackbar(GetBar(
+                      //   icon: Center(
+                      //     child: SizedBox.square(
+                      //       dimension: 20,
+                      //       child: Center(
+                      //           child: CircularProgressIndicator(
+                      //         strokeWidth: 2,
+                      //       )),
+                      //     ),
+                      //   ),
+                      //   message: "Confirming booking",
+                      // ));
+                      RestaurantModel model = this.restaurantModel;
+                      restaurantModel = await Get.find<HomeController>()
+                              .getRestaurant(restaurantModel.id) ??
+                          model;
+                      /*      int ordersCount = await controller.getOrderCount(
+                          restaurantModel.id, controller.selectedDate.value); */
+                      //  print("Order Count received $ordersCount");
+
+                      /*         bool isAutoOrder = await controller
+                          .getAutoOrder(restaurantModel.id.toString()); */
+                      // print("auto order availability recieved $isAutoOrder");
+
+                      Get.back();
+                      print("Restaurant Open");
+                      /*    if (int.parse(restaurantModel.bio.first.no_of_orders) >
+                          ordersCount) { */
+                      print("Order Limit not exceeded");
+                      if (restaurantModel.open_orders) {
+                        print("Orders are allowed");
+                        await proceedToSummary(context);
+                      } else {
+                        print("Order Not allowed");
+                        //if (isAutoOrder) {
+                        print("Auto switching on");
+                        /*    DateTime nextDayTime = DateTime(tempTime.year,
+                                tempTime.month, tempTime.day + 1, 00, 00, 00); */
+                        print(
+                            "Check if the selected date is before the tomorrow");
+                        /*         if (overallTime.isBefore(nextDayTime)) {
+                              print("Selected date is invalid");
+                              Get.showSnackbar(GetBar(
+                                duration: Duration(milliseconds: 2000),
+                                message:
+                                    "The restaurant has stopped taking orders for today,\nPlease schedule order for tomorrow or later",
+                              ));
+                            } else { */
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Info',
+                          message:
+                              "The restaurant has stopped taking order for now,\nPlease try again later",
+                          icon: Icon(
+                            Icons.error_outline_rounded,
+                            color: MyTheme.blueColor,
+                          ),
                         ));
+                        // Get.showSnackbar(GetBar(
+                        //   duration: Duration(milliseconds: 2000),
+                        //   message:
+                        //       "The restaurant has stopped taking order for now,\nPlease try again later",
+                        // ));
+                        /* print(
+                                  "Time validated, placing order for tomorrow or later");
+                              await proceedToSummary(context); */
+                        //     }
+                        /*            } else {
+                            Get.showSnackbar(GetBar(
+                              duration: Duration(milliseconds: 2000),
+                              message:
+                                  "The restaurant has stopped taking order for now,\nPlease try again later",
+                            ));
+                          } */
+                      }
+                      /*          } else {
+                        Get.showSnackbar(GetBar(
+                          duration: Duration(milliseconds: 2000),
+                          message:
+                              "The restaurant has exceeded the order limits for " +
+                                  DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY)
+                                      .format(overallTime) +
+                                  ",\nPlease try any other date",
+                        ));
+                      } */
+                    } else {
+                      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                        color: MyTheme.verifyButtonColor,
+                        title: 'Info',
+                        message:
+                            "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
+                        icon: Icon(
+                          Icons.error_outline_rounded,
+                          color: MyTheme.blueColor,
+                        ),
+                      ));
+
+                      // Get.showSnackbar(GetBar(
+                      //   title: "Closed",
+                      //   message:
+                      //       "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
+                      //   duration: Duration(seconds: 2),
+                      // ));
+                    }
                   } else {
-                    Get.showSnackbar(GetBar(
-                      title: "Closed",
-                      message:
-                          "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
-                      duration: Duration(seconds: 2),
+                    Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                      color: MyTheme.verifyButtonColor,
+                      title: 'Error',
+                      message: 'Please select a time after current time',
+                      icon: FaIcon(
+                        FontAwesomeIcons.timesCircle,
+                        color: MyTheme.redColor,
+                      ),
                     ));
+
+                    // Get.showSnackbar(GetBar(
+                    //   title: "Closed",
+                    //   message: "Please select a time after current time",
+                    //   duration: Duration(seconds: 2),
+                    // ));
                   }
-                } else {
-                  Get.showSnackbar(GetBar(
-                    title: "Closed",
-                    message: "Please select a time after current time",
-                    duration: Duration(seconds: 2),
-                  ));
-                }
-              },
-            ),
+                }),
           ],
         ),
       ),
     );
   }
-}
-
-class MonthModel {
-  String text;
-  List<int> days;
-  MonthModel({
-    required this.text,
-    required this.days,
-  });
-
-  MonthModel copyWith({
-    String? text,
-    List<int>? days,
-  }) {
-    return MonthModel(
-      text: text ?? this.text,
-      days: days ?? this.days,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'text': text,
-      'days': days,
-    };
-  }
-
-  factory MonthModel.fromMap(Map<String, dynamic> map) {
-    return MonthModel(
-      text: map['text'],
-      days: List<int>.from(map['days']),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory MonthModel.fromJson(String source) =>
-      MonthModel.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'MonthModel(text: $text, days: $days)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is MonthModel &&
-        other.text == text &&
-        listEquals(other.days, days);
-  }
-
-  @override
-  int get hashCode => text.hashCode ^ days.hashCode;
 }

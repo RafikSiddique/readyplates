@@ -4,6 +4,8 @@ import 'package:readyplates/models/food_item_model.dart';
 
 class Bio {
   final int id;
+  final String advance_orders;
+  final String no_of_orders;
   final String description;
   final String no_of_tables;
   final String max_table_size;
@@ -13,6 +15,7 @@ class Bio {
   final String recur_freq;
   final String event_start;
   final String event_end;
+  final String event_name;
   final String event_desc;
   final String front_fascia_day;
   final String front_fascia_night;
@@ -34,6 +37,8 @@ class Bio {
   final int user;
   Bio({
     required this.id,
+    required this.advance_orders,
+    required this.no_of_orders,
     required this.description,
     required this.no_of_tables,
     required this.max_table_size,
@@ -43,6 +48,7 @@ class Bio {
     required this.recur_freq,
     required this.event_start,
     required this.event_end,
+    required this.event_name,
     required this.event_desc,
     required this.front_fascia_day,
     required this.front_fascia_night,
@@ -76,6 +82,7 @@ class Bio {
       'recur_freq': recur_freq,
       'event_start': event_start,
       'event_end': event_end,
+      'event_name': event_name,
       'event_desc': event_desc,
       'front_fascia_day': front_fascia_day,
       'front_fascia_night': front_fascia_night,
@@ -100,6 +107,8 @@ class Bio {
 
   factory Bio.fromMap(Map<String, dynamic> map) {
     return Bio(
+      advance_orders: map['advance_orders'] ?? "5",
+      no_of_orders: map['no_of_orders'] ?? "0",
       id: map['id']?.toInt(),
       description: map['description'] ?? "",
       no_of_tables: map['no_of_tables'] ?? "",
@@ -111,6 +120,7 @@ class Bio {
       event_start: map['event_start'] ?? "",
       event_end: map['event_end'] ?? "",
       event_desc: map['event_desc'] ?? "",
+      event_name: map['event_name'] ?? "",
       front_fascia_day: getUrl(map['front_fascia_day'] ?? ""),
       front_fascia_night: getUrl(map['front_fascia_night'] ?? ""),
       street_view: getUrl(map['street_view'] ?? ""),
@@ -138,8 +148,9 @@ class Bio {
 
   @override
   String toString() {
-    return 'Bio(id: $id, description: $description, no_of_tables: $no_of_tables, max_table_size: $max_table_size, cost_for_two: $cost_for_two, serving_time: $servingTime, recurring_event_date: $recurring_event_date, recur_freq: $recur_freq, event_start: $event_start, event_end: $event_end, event_desc: $event_desc, front_fascia_day: $front_fascia_day, front_fascia_night: $front_fascia_night, street_view: $street_view, entrance: $entrance, ambience1: $ambience1, ambience2: $ambience2, ambience3: $ambience3, ambience4: $ambience4, food1: $food1, food2: $food2, food3: $food3, food4: $food4, cv19prec1: $cv19prec1, cv19prec2: $cv19prec2, cv19prec3: $cv19prec3, cv19prec4: $cv19prec4, completed_till: $completed_till, user: $user)';
+    return 'Bio(id: $id, description: $description, no_of_tables: $no_of_tables, max_table_size: $max_table_size, cost_for_two: $cost_for_two, serving_time: $servingTime, recurring_event_date: $recurring_event_date, recur_freq: $recur_freq, event_start: $event_start, event_end: $event_end, event_desc: $event_desc, event_name: $event_name, front_fascia_day: $front_fascia_day, front_fascia_night: $front_fascia_night, street_view: $street_view, entrance: $entrance, ambience1: $ambience1, ambience2: $ambience2, ambience3: $ambience3, ambience4: $ambience4, food1: $food1, food2: $food2, food3: $food3, food4: $food4, cv19prec1: $cv19prec1, cv19prec2: $cv19prec2, cv19prec3: $cv19prec3, cv19prec4: $cv19prec4, completed_till: $completed_till, user: $user)';
   }
+
 
   @override
   bool operator ==(Object other) {
@@ -156,6 +167,7 @@ class Bio {
         other.recur_freq == recur_freq &&
         other.event_start == event_start &&
         other.event_end == event_end &&
+        other.event_name == event_name &&
         other.event_desc == event_desc &&
         other.front_fascia_day == front_fascia_day &&
         other.front_fascia_night == front_fascia_night &&
@@ -189,6 +201,7 @@ class Bio {
         recur_freq.hashCode ^
         event_start.hashCode ^
         event_end.hashCode ^
+        event_name.hashCode ^
         event_desc.hashCode ^
         front_fascia_day.hashCode ^
         front_fascia_night.hashCode ^

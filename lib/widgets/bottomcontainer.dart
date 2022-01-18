@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
@@ -9,10 +10,11 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class Bottomcontainer extends StatefulWidget {
   final RestaurantModel restaurantModel;
-  final bool isEditing;
+  final Editing isEditing;
   final Function() setState;
   const Bottomcontainer(
       {Key? key,
@@ -84,13 +86,15 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   onTap: () async {
                     await Get.find<HomeController>()
                         .getFoodItems(widget.restaurantModel.id.toString());
-                    if (widget.isEditing) {
+
+                    if (widget.isEditing != Editing.none) {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
                             builder: (context) => MenuPage(
                               restaurantModel: widget.restaurantModel,
-                              isEditing: true,
+                              isEditing: widget.isEditing,
+                              isAddItem: true,
                             ),
                           )).then((value) => setState(() {
                             widget.setState();
@@ -101,7 +105,8 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                         CupertinoPageRoute(
                           builder: (context) => MenuPage(
                             restaurantModel: widget.restaurantModel,
-                            isEditing: false,
+                            isEditing: widget.isEditing,
+                            isAddItem: true,
                           ),
                         ),
                         (route) => route.settings.name == 'details',
@@ -115,23 +120,47 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                   width: 9,
                 ),
                 Elevated(
+                  color: MyTheme.appbackgroundColor,
                   width: size.width * 0.43,
                   padding: EdgeInsets.all(15),
-                  text: widget.isEditing ? "Confirm" : "Book",
+                  text: widget.isEditing != Editing.none ? "Confirm" : "Order",
                   onTap: () async {
-                    if (widget.isEditing) {
-                      if (controller.orderEdit.isNotEmpty)
+                    if (widget.isEditing != Editing.none) {
+                      if (controller.orderEdit.isNotEmpty &&
+                          controller.orderEdit
+                              .any((element) => element.foodQuantity.value > 0))
                         Get.find<OrderController>().editOrders();
                       else
-                        Get.snackbar("Error",
-                            "Please add atleast one item to complete the order");
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Warning',
+                          message:
+                              'Please add atleast one item to complete the order',
+                          icon: FaIcon(
+                            FontAwesomeIcons.timesCircle,
+                            color: MyTheme.redColor,
+                          ),
+                        ));
+
+                      // Get.snackbar("Error",
+                      //     "Please add atleast one item to complete the order");
                     } else {
                       if (controller.cartItems.isNotEmpty) {
                         await Get.find<OrderController>()
                             .order(widget.restaurantModel);
                       } else
-                        Get.snackbar("Error",
-                            "Please add atleast one item to complete the order");
+                        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                          color: MyTheme.verifyButtonColor,
+                          title: 'Warning',
+                          message:
+                              'Please add atleast one item to complete the order',
+                          icon: FaIcon(
+                            FontAwesomeIcons.timesCircle,
+                            color: MyTheme.redColor,
+                          ),
+                        ));
+                      // Get.snackbar("Error",
+                      //     "Please add atleast one item to complete the order");
                     }
                   },
                 ),
@@ -139,7 +168,7 @@ class _BottomcontainerState extends State<Bottomcontainer> {
             ),
           ),
           SizedBox(
-            height: Platform.isIOS? 20 : 10,
+            height: Platform.isIOS ? 20 : 10,
           )
         ],
       ),

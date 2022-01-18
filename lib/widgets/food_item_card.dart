@@ -5,13 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/cart_model.dart';
 import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/edit_button.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class FoodItemCard extends GetView<OrderController> {
-  final bool isEditing;
+  final Editing isEditing;
   final FoodItemModel foodItemModel;
   final RestaurantModel restaurantModel;
 
@@ -22,6 +24,21 @@ class FoodItemCard extends GetView<OrderController> {
       required this.restaurantModel})
       : super(key: key);
   OrderController get orderController => controller;
+  Color color(int i) {
+    if (i == 0)
+      return Color(0xff7af400);
+    else if (i == 1)
+      return Color(0xff70e000);
+    else if (i == 2)
+      return Color(0xff66cc00);
+    else if (i == 3)
+      return Color(0xff5cb900);
+    else if (i == 4)
+      return Color(0xff53a500);
+    else
+      return Color(0xff7af400);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -60,15 +77,16 @@ class FoodItemCard extends GetView<OrderController> {
                         ),
                         Align(
                             alignment: Alignment.bottomCenter,
-                            child: (isEditing
+                            child: (isEditing != Editing.none
                                     ? orderController.orderEdit.any((el) =>
                                         el.foodItem == foodItemModel.id &&
-                                        el.restaurant == restaurantModel.id)
+                                        el.restaurant == restaurantModel.id &&
+                                        el.foodQuantity.value != 0)
                                     : orderController.cartItems.any((el) =>
                                         el.foodItem.value == foodItemModel.id &&
                                         el.restaurant == restaurantModel.id))
                                 ? IncDecButton(
-                                    text: isEditing
+                                    text: isEditing != Editing.none
                                         ? orderController
                                             .geteditItem(foodItemModel.id)
                                             .foodQuantity
@@ -77,7 +95,7 @@ class FoodItemCard extends GetView<OrderController> {
                                             .foodQuantity,
                                     widthFraction: .18,
                                     onIncrement: () {
-                                      if (isEditing)
+                                      if (isEditing != Editing.none)
                                         orderController
                                             .incrementEdit(foodItemModel.id);
                                       else
@@ -86,10 +104,30 @@ class FoodItemCard extends GetView<OrderController> {
                                             restaurantModel.id);
                                     },
                                     onDecrement: () {
-                                      if (isEditing)
-                                        orderController
-                                            .decrementEdit(foodItemModel.id);
-                                      else
+                                      if (isEditing != Editing.none) {
+                                        if (isEditing == Editing.confirmed) {
+                                          Get.showSnackbar(
+                                              MySnackBar.myLoadingSnackBar(
+                                            color: MyTheme.verifyButtonColor,
+                                            title: 'Warning',
+                                            message:
+                                                'You cannot decrease any item once the order is confirmed',
+                                            icon: Icon(
+                                              Icons.warning_amber_rounded,
+                                              color: MyTheme.orangelightColor,
+                                            ),
+                                          ));
+
+                                          // Get.showSnackbar(GetBar(
+                                          //   message:
+                                          //       "You cannot decrease any item once the order is confirmed",
+                                          //   duration: Duration(seconds: 2),
+                                          // ));
+                                        } else {
+                                          orderController
+                                              .decrementEdit(foodItemModel.id);
+                                        }
+                                      } else
                                         orderController.decrement(
                                             foodItemModel.id,
                                             restaurantModel.id);
@@ -111,15 +149,47 @@ class FoodItemCard extends GetView<OrderController> {
                                     child: AddButton(
                                       widthFraction: 0.18,
                                       onTap: () {
-                                        if (!isEditing) {
+                                        if (isEditing == Editing.none) {
                                           if (orderController.cartItems.any(
                                               (element) =>
                                                   element.restaurant !=
                                                   restaurantModel.id)) {
                                             Get.showSnackbar(GetBar(
-                                              title: "Error",
-                                              message:
+                                              backgroundColor:
+                                                  MyTheme.verifyButtonColor,
+                                              titleText: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 8),
+                                                child: Text(
+                                                  "Error",
+                                                  style: GoogleFonts.nunito(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 17,
+                                                    color:
+                                                        MyTheme.appbartextColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              // title: "Error",
+                                              messageText: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 8),
+                                                child: Text(
                                                   "Sorry you cannot add items from 2 Restaurant",
+                                                  style: GoogleFonts.nunito(
+                                                    fontStyle: FontStyle.normal,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 17,
+                                                    color:
+                                                        MyTheme.appbartextColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              // message:
+                                              //     "Sorry you cannot add items from 2 Restaurant",
+
                                               isDismissible: true,
                                               mainButton: TextButton(
                                                 onPressed: () async {
@@ -148,7 +218,13 @@ class FoodItemCard extends GetView<OrderController> {
                                                   Get.back();
                                                 },
                                                 child: Text(
-                                                    "Remove all from other restaurants"),
+                                                  "Remove all from other restaurants",
+                                                  style: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 15,
+                                                    color: MyTheme.orangeColor,
+                                                  ),
+                                                ),
                                               ),
                                             ));
                                           } else {
@@ -167,25 +243,51 @@ class FoodItemCard extends GetView<OrderController> {
                                             orderController.cart(cartModel);
                                           }
                                         } else {
-                                          OrderEditModel orderEditModel =
-                                              OrderEditModel(
-                                                  foodName: foodItemModel.name,
-                                                  orderId:
-                                                      orderController.orderId,
-                                                  id: -1,
-                                                  foodItem:
-                                                      foodItemModel.id.obs,
-                                                  foodQuantity: 1.obs,
-                                                  foodPrice: RxDouble(
-                                                      double.parse(
-                                                          foodItemModel.cost)),
-                                                  restaurant:
-                                                      restaurantModel.id,
-                                                  foodImage:
-                                                      foodItemModel.image1,
-                                                  isUpdated: false);
-                                          orderController.orderEdit
-                                              .add(orderEditModel);
+                                          if (orderController.orderEdit.any(
+                                              (el) =>
+                                                  el.foodItem ==
+                                                      foodItemModel.id &&
+                                                  el.restaurant ==
+                                                      restaurantModel.id &&
+                                                  el.foodQuantity.value == 0)) {
+                                            OrderEditModel model =
+                                                orderController.orderEdit
+                                                    .firstWhere((el) =>
+                                                        el.foodItem ==
+                                                            foodItemModel.id &&
+                                                        el.restaurant ==
+                                                            restaurantModel.id);
+                                            int v = controller.orderEdit
+                                                .indexOf(model);
+                                            controller.orderEdit[v].foodQuantity
+                                                .value = 1;
+                                            controller.orderEdit[v].foodPrice
+                                                    .value =
+                                                double.parse(
+                                                    foodItemModel.cost);
+                                          } else {
+                                            OrderEditModel orderEditModel =
+                                                OrderEditModel(
+                                                    foodName:
+                                                        foodItemModel.name,
+                                                    orderId:
+                                                        orderController.orderId,
+                                                    id: -1,
+                                                    foodItem:
+                                                        foodItemModel.id.obs,
+                                                    foodQuantity: 1.obs,
+                                                    foodPrice: RxDouble(
+                                                        double.parse(
+                                                            foodItemModel
+                                                                .cost)),
+                                                    restaurant:
+                                                        restaurantModel.id,
+                                                    foodImage:
+                                                        foodItemModel.image1,
+                                                    isUpdated: false);
+                                            orderController.orderEdit
+                                                .add(orderEditModel);
+                                          }
                                         }
                                       },
                                     ),
@@ -201,7 +303,7 @@ class FoodItemCard extends GetView<OrderController> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 8),
+                        SizedBox(height: 5),
                         Padding(
                           padding: const EdgeInsets.only(right: 16),
                           child: Text(
@@ -211,13 +313,13 @@ class FoodItemCard extends GetView<OrderController> {
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 16,
-                                color: MyTheme.buttonchangeColor),
+                                color: MyTheme.buttonbackgroundColor),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(height: 4),
                         Container(
-                          height: 45,
+                          height: 29,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 16),
                             child: SingleChildScrollView(
@@ -230,6 +332,25 @@ class FoodItemCard extends GetView<OrderController> {
                                   fontWeight: FontWeight.normal,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 9,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16, top: 4),
+                          child: Container(
+                            width: size.width * 0.5,
+                            child: Text(
+                              foodItemModel.stdServingSize,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 13,
+                                  color: MyTheme.buttonbackgroundColor,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ),
@@ -259,10 +380,7 @@ class FoodItemCard extends GetView<OrderController> {
                               double.parse(foodItemModel.spiceLevel).toInt(),
                               (index) => Image.asset(
                                 Assets.spice,
-                                color: index == 0
-                                    ? MyTheme
-                                        .shoppageimgcolor //Color(0xff25A244)
-                                    : null,
+                                color: color(index),
                               ),
                             ),
                             Spacer(),

@@ -65,6 +65,40 @@ class Orderservices extends ApiService {
     }
   }
 
+  Future<bool> getAutoOrder(String resid) async {
+    try {
+      Response res = await get(autoOrders(resid));
+      if (res.statusCode == 200) {
+        Map data = jsonDecode(res.body);
+        return data['Auto-Order-On'];
+      } else {
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+/*   Future<int> orderCount(int resId, String date) async {
+    try {
+      Response response = await post(orderCountApi,
+          body: {'restaurant': resId.toString(), 'date': date});
+      if (response.statusCode == 200 || response.statusCode == 400) {
+        var data = jsonDecode(response.body);
+        if (data is Map) {
+          int? count = int.tryParse(data['Order Count'].toString());
+          return count ?? 0;
+        } else {
+          return 0;
+        }
+      } else {
+        throw AppException(message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  } */
+
   Future<List<CartApiModel>> getCart(String id) async {
     try {
       print('object');
@@ -168,6 +202,23 @@ class Orderservices extends ApiService {
       request.fields.addAll({
         'id': id.toString(),
         'status': status.toString(),
+      });
+      var response = await request.send();
+      if (response.statusCode != 202) {
+        throw AppException(
+            code: response.statusCode, message: response.reasonPhrase);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updatetip(int id, String tip) async {
+    try {
+      var request = MultipartRequest('PUT', updateStatusUrl);
+      request.fields.addAll({
+        'id': id.toString(),
+        'tip': tip,
       });
       var response = await request.send();
       if (response.statusCode != 202) {

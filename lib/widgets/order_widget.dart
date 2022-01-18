@@ -11,8 +11,11 @@ import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
+import 'package:readyplates/src/order/screen/tip_sucessfull_page.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
+import 'package:readyplates/widgets/form_field.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class OrderWidget extends StatelessWidget {
   final OrderModelApi orderModel;
@@ -67,13 +70,16 @@ class OrderWidget extends StatelessWidget {
         CupertinoPageRoute(
           builder: (context) => BurgersupportingPage(
             restaurantModel: restaurantModel,
-            isEditing: true,
+            isEditing: orderModel.status == 0
+                ? Editing.unconfirmed
+                : Editing.confirmed,
             orderModelApi: orderModel,
           ),
         ));
   }
 
   Widget bottomWidget(BuildContext context) {
+    double size = MediaQuery.of(context).size.width;
     switch (orderModel.status) {
       case OrderState.placed:
         return Column(
@@ -83,10 +89,11 @@ class OrderWidget extends StatelessWidget {
                 "Report at the restaurant and share PIN to initiate order",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                    color: MyTheme.borderchangeColor),
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17,
+                  color: MyTheme.switchButtonColor,
+                ),
               ),
             ),
             SizedBox(
@@ -125,58 +132,339 @@ class OrderWidget extends StatelessWidget {
                 editOrder(context);
               },
               backgroundColor: Colors.white,
-              color: Color(0xff44C4A1),
-              borderColor: Color(0xff44C4A1),
+              color: MyTheme.orangeColor,
+              borderColor: MyTheme.orangeColor,
             ),
             SizedBox(
               height: 10,
             ),
+            // Elevated(
+            //   backgroundColor: Color(0xff44C4A1),
+            //   text: "Complete Order",
+            //   onTap: () {
+            //     // if (orderModel.payment == "0" || orderModel.payment == "") {
+            //     //   Navigator.push(
+            //     //       context,
+            //     //       CupertinoPageRoute(
+            //     //         builder: (context) => PaymentPage(
+            //     //           orderModelApi: orderModel,
+            //     //           isOrderComplete: true,
+            //     //         ),
+            //     //       ));
+
+            //     // } else{}
+
+            //     if (orderModel.feedbackstat == "") {
+            //       Navigator.push(
+            //           context,
+            //           CupertinoPageRoute(
+            //             builder: (context) => FeedbackPage(
+            //               e: orderModel,
+            //               isComplete: true,
+            //             ),
+            //           ));
+            //     } else {
+            //       controller.updateStatus(orderModel.id, OrderState.completed);
+            //     }
+            //   },
+            //   width: Get.width,
+            // ),
+          ],
+        );
+      case OrderState.Served:
+        return Column(
+          children: [
+            // Elevated(
+            //   width: Get.width,
+            //   text: "Modify Order",
+            //   onTap: () async {
+            //     editOrder(context);
+            //   },
+            //   backgroundColor: Colors.white,
+            //   color: Color(0xff44C4A1),
+            //   borderColor: Color(0xff44C4A1),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
             Elevated(
-              backgroundColor: Color(0xff44C4A1),
-              text: "Complete Order",
-              onTap: () {
-                if (orderModel.payment == "0" || orderModel.payment == "") {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => PaymentPage(
-                          orderModelApi: orderModel,
-                          isOrderComplete: true,
+              backgroundColor: MyTheme.orangeColor,
+              color: MyTheme.appbackgroundColor,
+              text: "Checkout -->",
+              onTap: () async {
+                // if (orderModel.payment == "0" || orderModel.payment == "") {
+                //   Navigator.push(
+                //       context,
+                //       CupertinoPageRoute(
+                //         builder: (context) => PaymentPage(
+                //           orderModelApi: orderModel,
+                //           isOrderComplete: true,
+                //         ),
+                //       ));
+
+                // } else{}
+                // await controller.updateStatus(
+                //     orderModel.id, OrderState.completed);
+
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      actionsAlignment: MainAxisAlignment.center,
+                      title: Text(
+                        'Tip for Restaurant',
+                        style: GoogleFonts.nunito(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
                         ),
-                      ));
-                } else {
-                  if (orderModel.feedbackstat == "") {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => FeedbackPage(
-                            e: orderModel,
-                            isComplete: true,
-                          ),
-                        ));
-                  } else {
-                    controller.updateStatus(orderModel.id, 2);
-                  }
-                }
+                      ),
+                      content: Text(
+                        'Do you wish to add a tip?',
+                        style: GoogleFonts.inter(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                          fontStyle: FontStyle.normal,
+                        ),
+                      ),
+                      actions: [
+                        Elevated(
+                          width: size * 0.23,
+                          backgroundColor: MyTheme.appbackgroundColor,
+                          color: MyTheme.orangeColor,
+                          borderColor: MyTheme.orangeColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          text: 'No',
+                          onTap: () async {
+                            await controller.updateStatus(
+                                orderModel.id, OrderState.completed);
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => TipsucessfullPage(
+                                  orderModel: orderModel,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        Elevated(
+                          width: size * 0.23,
+                          backgroundColor: MyTheme.orangeColor,
+                          color: MyTheme.appbackgroundColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.normal,
+                          text: 'Yes',
+                          onTap: () {
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  scrollable: true,
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  title: Text(
+                                    'Enter Tip Amount',
+                                    style: GoogleFonts.nunito(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  content: Container(
+                                    // height: 50,
+                                    child: AppFormField(
+                                      toptext: '',
+                                      controller:
+                                          controller.tipAmountController,
+                                      hintText: '\$20',
+                                      inputType: TextInputType.phone,
+                                    ),
+                                  ),
+                                  actions: [
+                                    Elevated(
+                                      width: size * 0.23,
+                                      backgroundColor:
+                                          MyTheme.appbackgroundColor,
+                                      color: MyTheme.orangeColor,
+                                      borderColor: MyTheme.orangeColor,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.normal,
+                                      text: 'Cancel',
+                                      onTap: () {
+                                        Get.back();
+                                        controller.tipAmountController.clear();
+                                      },
+                                    ),
+                                    Elevated(
+                                      width: size * 0.23,
+                                      backgroundColor: MyTheme.orangeColor,
+                                      color: MyTheme.appbackgroundColor,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.normal,
+                                      text: 'Add',
+                                      onTap: () {
+                                        if (controller.tipAmountController.text
+                                            .isNotEmpty) {
+                                          Navigator.pop(context);
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                actionsAlignment:
+                                                    MainAxisAlignment.center,
+                                                title: Text(
+                                                  'Confirm tip amount',
+                                                  style: GoogleFonts.nunito(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle: FontStyle.normal,
+                                                  ),
+                                                ),
+                                                content: Text(
+                                                  '\$${controller.tipAmountController.text} will be given as a tip, are you sure?',
+                                                  style: GoogleFonts.inter(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontStyle: FontStyle.normal,
+                                                  ),
+                                                ),
+                                                actions: [
+                                                  Elevated(
+                                                    width: size * 0.23,
+                                                    backgroundColor: MyTheme
+                                                        .appbackgroundColor,
+                                                    color: MyTheme.orangeColor,
+                                                    borderColor:
+                                                        MyTheme.orangeColor,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    text: 'Cancel',
+                                                    onTap: () {
+                                                      Get.back();
+                                                      controller
+                                                          .tipAmountController
+                                                          .clear();
+                                                    },
+                                                  ),
+                                                  Elevated(
+                                                    width: size * 0.23,
+                                                    backgroundColor:
+                                                        MyTheme.orangeColor,
+                                                    color: MyTheme
+                                                        .appbackgroundColor,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    text: 'Confirm',
+                                                    onTap: () async {
+                                                      await controller.updateTip(
+                                                          orderModel.id,
+                                                          controller
+                                                              .tipAmountController
+                                                              .text);
+                                                      await controller
+                                                          .updateStatus(
+                                                              orderModel.id,
+                                                              OrderState
+                                                                  .completed);
+                                                      Navigator.push(
+                                                        context,
+                                                        CupertinoPageRoute(
+                                                          builder: (context) =>
+                                                              TipsucessfullPage(
+                                                            orderModel:
+                                                                orderModel,
+                                                          ),
+                                                        ),
+                                                      );
+                                                      controller
+                                                          .tipAmountController
+                                                          .clear();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        } else {
+                                          Get.snackbar(
+                                            "Tip amount",
+                                            "Please add amount",
+                                            backgroundColor: Colors.white,
+                                          );
+                                        } // await controller.updateStatus(
+                                        //     orderModel.id,
+                                        //     OrderState.completed);
+                                        // Navigator.push(
+                                        //     context,
+                                        //     CupertinoPageRoute(
+                                        //       builder: (context) =>
+                                        //           FeedbackPage(
+                                        //         e: orderModel,
+                                        //         isComplete: true,
+                                        //       ),
+                                        //     ));
+                                        // controller.tipAmountController.clear();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                // Navigator.push(
+                //     context,
+                //     CupertinoPageRoute(
+                //       builder: (context) => FeedbackPage(
+                //         e: orderModel,
+                //         isComplete: true,
+                //       ),
+                //     ));
+
+                // if (orderModel.feedbackstat == "") {
+                //   Navigator.push(
+                //       context,
+                //       CupertinoPageRoute(
+                //         builder: (context) => FeedbackPage(
+                //           e: orderModel,
+                //           isComplete: true,
+                //         ),
+                //       ));
+                // } else {
+                //   controller.updateStatus(orderModel.id, OrderState.Served);
+                // }
               },
               width: Get.width,
             ),
+            SizedBox(
+              height: 10,
+            ),
           ],
-        );
-      case OrderState.cancelled:
-        return Elevated(
-          text: "Cancelled",
-          backgroundColor: MyTheme.buttonColor,
-          width: Get.width,
-          onTap: () {},
         );
       case OrderState.completed:
         return Column(
           children: [
             Elevated(
+              color: MyTheme.appbackgroundColor,
               width: Get.width,
               text: "Order Again",
               onTap: () async {
+                controller.cartItems.clear();
                 orderModel.orderitems.forEach((e) {
                   controller.cartItems.add(CartModel(
                       user: "",
@@ -186,14 +474,15 @@ class OrderWidget extends StatelessWidget {
                       foodImage: e.menu.image1,
                       foodPrice: double.parse(e.price).obs,
                       restaurant: orderModel.restaurant.id));
+                  print('menu image 11111111111 ${e.menu.image1}');
                 });
                 RestaurantModel restaurantModel = await controller
                     .getSingleRestaurant(orderModel.restaurant.id);
                 Navigator.pushAndRemoveUntil(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => BurgersupportingPage(
-                          restaurantModel: restaurantModel, isEditing: false),
+                      builder: (context) =>
+                          BookingDetails(restaurantModel, Editing.none),
                     ),
                     (route) => route.settings.name == LandingPage.id);
               },
@@ -202,11 +491,14 @@ class OrderWidget extends StatelessWidget {
               height: 10,
             ),
             Elevated(
+              color: orderModel.feedbackstat == ""
+                  ? MyTheme.orangeColor
+                  : MyTheme.verifyTextColor,
               backgroundColor: Colors.white,
               width: Get.width,
-              borderColor: orderModel.feedbackstat != ""
-                  ? MyTheme.buttonColor
-                  : Color(0xff222831),
+              borderColor: orderModel.feedbackstat == ""
+                  ? MyTheme.orangeColor
+                  : MyTheme.verifyTextColor,
               text: "Give Feedback",
               onTap: () {
                 if (orderModel.feedbackstat == "") {
@@ -215,17 +507,36 @@ class OrderWidget extends StatelessWidget {
                         isComplete: false,
                       ));
                 } else {
-                  Get.showSnackbar(GetBar(
+                  Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                    color: MyTheme.verifyButtonColor,
+                    title: 'Info',
                     message: "Feedback Already Provided",
-                    duration: Duration(seconds: 1),
+                    icon: Icon(
+                      Icons.error_outline_rounded,
+                      color: MyTheme.blueColor,
+                    ),
                   ));
+                  // Get.showSnackbar(GetBar(
+                  //   message: "Feedback Already Provided",
+                  //   duration: Duration(seconds: 1),
+                  // ));
                 }
               },
             ),
           ],
         );
+      case OrderState.cancelled:
+        return Elevated(
+          text: "Cancelled",
+          backgroundColor: MyTheme.cancelOrderBackColor,
+          color: MyTheme.cancelOrderTextColor,
+          width: Get.width,
+          onTap: () {},
+        );
+
       default:
         return Elevated(
+          color: MyTheme.appbackgroundColor,
           width: Get.width,
           text: "Order Again",
           onTap: () async {
@@ -247,7 +558,8 @@ class OrderWidget extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => BookingDetails(restaurantModel, false),
+                  builder: (context) =>
+                      BookingDetails(restaurantModel, Editing.none),
                 ),
                 (route) => route.settings.name == LandingPage.id);
           },
@@ -289,8 +601,7 @@ class OrderWidget extends StatelessWidget {
                           color: MyTheme.dividermiddletext),
                     )),
                 Spacer(),
-                if (orderModel.status == OrderState.inProgress ||
-                    orderModel.status == OrderState.placed)
+                if (orderModel.status == OrderState.placed)
                   GestureDetector(
                       child: Icon(
                         Icons.more_horiz,

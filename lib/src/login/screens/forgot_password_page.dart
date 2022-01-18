@@ -29,7 +29,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(Assets.ready),
+                image: AssetImage(Assets.onboardingBg),
                 fit: BoxFit.cover,
               ),
             ),
@@ -69,18 +69,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     style: GoogleFonts.montserrat(
                                       fontSize: 30,
                                       fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromRGBO(255, 255, 255, 0.9),
+                                      fontWeight: FontWeight.w700,
+                                      color: MyTheme.orangeColor,
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: ' Plates'.toUpperCase(),
+                                        text: 'Plates'.toUpperCase(),
                                         style: GoogleFonts.montserrat(
                                           fontSize: 30,
                                           fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.normal,
-                                          color: Color.fromRGBO(
-                                              255, 255, 255, 0.9),
+                                          fontWeight: FontWeight.w200,
+                                          color: MyTheme.orangeColor,
                                         ),
                                       ),
                                     ]),
@@ -177,7 +176,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     width: MediaQuery.of(context).size.width,
                                     height: 54,
                                     decoration: BoxDecoration(
-                                      color: MyTheme.buttonbackgroundColor,
+                                      color: controller
+                                              .usernameController.text.isEmpty
+                                          ? MyTheme.verifyButtonColor
+                                          : MyTheme.orangeColor,
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(6)),
                                     ),
@@ -190,7 +192,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                           fontFamily: 'Inter-Regular',
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.white,
+                                          color: controller.usernameController
+                                                  .text.isEmpty
+                                              ? MyTheme.verifyTextColor
+                                              : MyTheme.appbackgroundColor,
                                         ),
                                       ),
                                     ),

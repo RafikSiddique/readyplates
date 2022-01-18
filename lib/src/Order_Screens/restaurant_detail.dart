@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -131,7 +129,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   fontSize: 25,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.normal,
-                                  color: MyTheme.appbartextColor,
+                                  color: MyTheme.orangeColor,
                                 ),
                               )),
 
@@ -219,7 +217,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               Text(
                                 double.parse(widget.restaurantModel.address2)
                                         .toStringAsFixed(2) +
-                                    " Kms",
+                                    " mi",
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       fontSize: 13,
@@ -458,15 +456,31 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   )
                                 ],
                               ),
-                              Text(
-                                bio.event_desc == ""
-                                    ? "No upcoming events"
-                                    : "Starts at ${bio.event_start} ",
-                                style: GoogleFonts.inter(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    color: MyTheme.appbartextColor),
+                              Column(
+                                children: [
+                                  Text(
+                                    bio.event_name == ''
+                                        ? 'No upcoming events'
+                                        : bio.event_name,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: MyTheme.appbartextColor),
+                                  ),
+                                  Text(
+                                    bio.event_desc == ""
+                                        ? "No upcoming events"
+                                        : "Starts at ${bio.event_start} ",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FontStyle.normal,
+                                        color: MyTheme.appbartextColor),
+                                  ),
+                                ],
                               ),
                               Column(
                                 children: [
@@ -554,6 +568,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                             height: 29,
                           ),
                           Elevated(
+                            color: MyTheme.appbackgroundColor,
                             text: 'Proceed to Menu',
                             width: MediaQuery.of(context).size.width,
                             onTap: () {
@@ -579,14 +594,16 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                             text: "Schedule for later",
                             width: media.size.width,
                             backgroundColor: Colors.white,
-                            borderColor: MyTheme.buttonbackgroundColor,
+                            borderColor: MyTheme.orangeColor,
                             onTap: () {
                               Get.back();
                             },
                           ),
-                        if(Platform.isIOS) SizedBox(
+
+                          // if (Platform.isIOS)
+                          SizedBox(
                             height: 20,
-                         )
+                          )
                         ],
                       ),
                     ),
@@ -688,7 +705,7 @@ class _FullImageState extends State<FullImage> {
           ),
         ),
         SizedBox.square(
-          dimension : 10,
+          dimension: 10,
         )
       ],
     ));

@@ -1,7 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/login/auth_service.dart';
@@ -11,10 +16,14 @@ import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
+import 'package:readyplates/utils/fcm_service.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String uid = '';
+// String uid = '';
+bool isForgotPass = false;
 
 class AuthController extends GetxController {
   final AuthenticationServices services = AuthenticationServices();
@@ -116,33 +125,53 @@ class AuthController extends GetxController {
   }
 
   String? id;
-  Future<void> login(
-    bool changedPassword,
-  ) async {
+
+  Future<void> setCardDetails() async {
+    try {
+      //TODO: Call card save api
+      bool permitted = await getPermission();
+      if (permitted) {
+        Position position = await Geolocator.getCurrentPosition();
+        LatLng latLng = LatLng(position.latitude, position.longitude);
+        Get.to(() => MapPage(
+              isHome: false,
+              latLng: latLng,
+            ));
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> login(bool changedPassword, {required bool issignup}) async {
     try {
       isLoading.value = true;
       id = await services.login(
           usernameController.text.toLowerCase(), passwordController.text);
       await sfHelper.setUserId(id!);
-      uid = id!;
+      // uid = id!;
       if (!changedPassword) {
         // if (implicit) {
         //   // Get.toNamed(ImagePage.id);
         // } else {
 
         Get.put(OrderController());
-        bool permitted = await getPermission();
-        if (permitted) {
-          Position position = await Geolocator.getCurrentPosition();
-          LatLng latLng = LatLng(position.latitude, position.longitude);
-          Get.to(() => MapPage(
-                isHome: false,
-                latLng: latLng,
-              ));
+        Get.put(HomeController());
+        if (issignup) {
+          Get.off(() => CreditCardDetailsPage());
+        } else {
+          bool permitted = await getPermission();
+          if (permitted) {
+            Position position = await Geolocator.getCurrentPosition();
+            LatLng latLng = LatLng(position.latitude, position.longitude);
+            Get.to(() => MapPage(
+                  isHome: false,
+                  latLng: latLng,
+                ));
+          }
         }
-
         lNameController.clear();
-        fNamController.clear();
+        // fNamController.clear();
         password2Controller.clear();
         passwordController.clear();
         usernameController.clear();
@@ -154,7 +183,21 @@ class AuthController extends GetxController {
       }
       isLoading.value = false;
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Map resp = json.decode(e.toString());
+      String s = resp['ERROR'];
+      isLoading.value = false;
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: s.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+        // Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -164,16 +207,35 @@ class AuthController extends GetxController {
         usernameController.text.toLowerCase(),
         passwordController.text,
       );
-      if (uid != '') {
+      if (isForgotPass == false) {
         Get.put(HomeController());
         Get.offAllNamed(LandingPage.id);
+        usernameController.clear();
+        passwordController.clear();
+        password2Controller.clear();
       } else {
         usernameController.clear();
         passwordController.clear();
+        password2Controller.clear();
+        for (var i = 0; i < otpNumber.length; i++) {
+          otpNumber[i].clear();
+        }
+        otpVerification = "".obs;
+        otpNum = '';
         Get.toNamed(LoginPage.id);
       }
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
@@ -184,7 +246,18 @@ class AuthController extends GetxController {
       );
       Get.toNamed(VerifyOtpPage.id);
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString().replaceAll('"', ''),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+        // Get.snackbar("Error", e.toString());
+      }
     }
   }
 
@@ -194,13 +267,16 @@ class AuthController extends GetxController {
 
     Get.put(OrderController());
     lNameController.clear();
-    fNamController.clear();
+    // fNamController.clear();
     password2Controller.clear();
     passwordController.clear();
     usernameController.clear();
     c.currentIndex.value = 0;
+    FirebaseMessagingService().getToken();
     String s = await c.getAddress();
+
     print("Initial Address");
+    FirebaseMessagingService().getToken();
     print(s);
     if (s == "") {
       print("Address Was empty");
@@ -237,47 +313,37 @@ class AuthController extends GetxController {
           gender: gender.value,
           dob: dobController.text,
           mobNum: mobController.text);
-      await login(
-        false,
-      );
+      await login(false, issignup: true);
     } catch (e) {
-      Get.snackbar("Error", e.toString());
+      Map resp = json.decode(e.toString());
+      String s = resp['email'][0];
+      // print("$resp['email'][0]!!!!!!!!!!!!!!");
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: s.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+        // Get.snackbar("Error", e.toString());
+      }
     }
   }
 
-  // Future<void> uploadImage(File file) async {
-  //   try {
-  //     bool success = await services.uploadImage(file);
-  //     if (success) {
-  //       bool permitted = await getPermission();
-  //       if (permitted) {
-  //         Position position = await Geolocator.getCurrentPosition();
-  //         LatLng latLng = LatLng(position.latitude, position.longitude);
-  //         Get.to(() => MapPage(
-  //               isHome: false,
-  //               latLng: latLng,
-  //             ));
-  //       } else {
-  //         LatLng latLng = LatLng(20.708391858928152, -156.32455678019107);
-
-  //         Get.to(() => MapPage(
-  //               isHome: false,
-  //               latLng: latLng,
-  //             ));
-  //       }
-  //     }
-  //   } catch (e) {
-  //     Get.snackbar("Error", e.toString());
-  //   }
-  // }
-
-  RxString gender = 'Male'.obs;
-  final items = ['Male', 'Female'];
+  String? value;
+  RxString gender = ''.obs;
+  final List<String> items = ['Male', 'Female'];
 
   void logout() async {
     (await SharedPreferences.getInstance()).clear();
     Get.find<OrderController>().clearController();
     Get.offAllNamed(OnbordingPage.id);
+    // uid = '';
+    dobController.clear();
+    mobController.clear();
     final c = Get.find<HomeController>();
     c.clear();
   }

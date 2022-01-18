@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/screens/restaurant_list.dart';
 import 'package:readyplates/src/login/screens/index.dart';
@@ -8,6 +10,10 @@ import 'package:readyplates/src/order/screen/order_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/profile_page.dart';
 import 'package:readyplates/src/home/widgets/bottom_navigation_bar.dart';
+import 'package:readyplates/utils/api_services.dart';
+import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:http/http.dart' as http;
 
 class LandingPage extends StatefulWidget {
   static const id = "/landingPage";
@@ -47,7 +53,7 @@ class _LandingPageState extends State<LandingPage> {
 
       case 2:
         return OrderPage(() {
-          controller.onPageChange(0);
+          controller.onPageChanged(0);
         });
       case 3:
         return Tellafriend(
@@ -69,8 +75,75 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
   }
 
+  void showDialogLocal(BuildContext context) async {
+    String userId = await SharedPreferenceHelper().getUserId();
+    bool flag = jsonDecode(
+            (await http.get(ApiService().customers('checkout/$userId')))
+                .body) ??
+        false;
+    if (flag) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              "Uh-Oh, You forgot to checkout!",
+              style: GoogleFonts.nunito(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            content: Text(
+              "Hi, \nYou forgot to checkout from your order.",
+              style: GoogleFonts.inter(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.normal,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Ok",
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                      color: MyTheme.orangeColor,
+                    ),
+                  )),
+              TextButton(
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    controller.onPageChanged(2);
+                  },
+                  child: Text(
+                    "View Orders",
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                      color: MyTheme.orangeColor,
+                    ),
+                  ))
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isCheckedOut = false;
+    if (!isCheckedOut) {
+      showDialogLocal(context);
+      isCheckedOut = true;
+    }
     return Scaffold(
       body: Obx(() => getBody()),
       bottomNavigationBar: AppNavigationBar(),

@@ -46,7 +46,7 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/ready.png'),
+                image: AssetImage('assets/images/readyplates.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -86,18 +86,17 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                                     style: GoogleFonts.montserrat(
                                       fontSize: 30,
                                       fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromRGBO(255, 255, 255, 0.9),
+                                      fontWeight: FontWeight.w700,
+                                      color: MyTheme.orangeColor,
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: ' Plates'.toUpperCase(),
+                                        text: 'Plates'.toUpperCase(),
                                         style: GoogleFonts.montserrat(
                                           fontSize: 30,
                                           fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.normal,
-                                          color: Color.fromRGBO(
-                                              255, 255, 255, 0.9),
+                                          fontWeight: FontWeight.w200,
+                                          color: MyTheme.orangeColor,
                                         ),
                                       ),
                                     ]),
@@ -134,7 +133,7 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                                       iconSize: 14.83,
                                       icon: FaIcon(
                                         FontAwesomeIcons.chevronLeft,
-                                        color: MyTheme.iconColor,
+                                        color: MyTheme.orangeColor,
                                       ),
                                       onPressed: () {
                                         Get.back();
@@ -157,7 +156,7 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                                             fontSize: 17,
                                             fontWeight: FontWeight.w500,
                                             fontStyle: FontStyle.normal,
-                                            color: MyTheme.appbartextColor,
+                                            color: MyTheme.orangeColor,
                                           ),
                                         ),
                                       ),
@@ -197,41 +196,59 @@ class _ChangePasswordPage1State extends State<ChangePasswordPage1> {
                           SizedBox(
                             height: kToolbarHeight * 0.6,
                           ),
-                          InkWell(
-                            onTap: () async {
-                              formKey.currentState!.save();
-                              if (formKey.currentState!.validate())
-                                await controller.changePassword();
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
+                          AnimatedBuilder(
+                              animation: Listenable.merge([
+                                controller.passwordController,
+                                controller.password2Controller,
+                              ]),
+                              builder: (context, child) {
+                                return InkWell(
+                                  onTap: () async {
+                                    formKey.currentState!.save();
+                                    if (formKey.currentState!.validate())
+                                      await controller.changePassword();
+                                    isForgotPass = false;
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
 
-                              //width:size.width,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                // color: Color(0xff222831),
-                                color: (controller
-                                            .usernameController.text.isEmpty ||
-                                        controller
-                                            .passwordController.text.isEmpty)
-                                    ? MyTheme.buttonColor
-                                    : MyTheme.buttonchangeColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(6)),
-                              ),
-                              child: Center(
-                                child: Text('CONTINUE',
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.inter(
-                                      fontSize: 17,
-                                      //fontFamily: 'Inter-Regular',
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white, //(0xffE5E5E5),
-                                    )),
-                              ),
-                            ),
-                          ),
+                                    //width:size.width,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      // color: Color(0xff222831),
+                                      color: (controller.passwordController.text
+                                                  .isEmpty ||
+                                              controller.password2Controller
+                                                  .text.isEmpty)
+                                          ? MyTheme.verifyButtonColor
+                                          : MyTheme.orangeColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(6)),
+                                    ),
+                                    child: Center(
+                                      child: Text('CONTINUE',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.inter(
+                                            fontSize: 17,
+                                            //fontFamily: 'Inter-Regular',
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.w600,
+                                            color: (controller
+                                                        .passwordController
+                                                        .text
+                                                        .isEmpty ||
+                                                    controller
+                                                        .password2Controller
+                                                        .text
+                                                        .isEmpty)
+                                                ? MyTheme.verifyTextColor
+                                                : MyTheme
+                                                    .appbackgroundColor, //(0xffE5E5E5),
+                                          )),
+                                    ),
+                                  ),
+                                );
+                              }),
                           // OnboardingButton(
                           //   height: 54,
                           //   onTap: () async {

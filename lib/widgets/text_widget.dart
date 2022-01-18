@@ -19,7 +19,7 @@ class Textwidget extends StatelessWidget {
             fontSize: 12,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
-            color: MyTheme.text3Color,
+            color: MyTheme.appbartextColor,
           ),
         ),
       ),

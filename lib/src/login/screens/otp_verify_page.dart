@@ -31,7 +31,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(Assets.ready),
+                image: AssetImage(Assets.onboardingBg),
                 fit: BoxFit.cover,
               ),
             ),
@@ -71,18 +71,17 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                     style: GoogleFonts.montserrat(
                                       fontSize: 30,
                                       fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromRGBO(255, 255, 255, 0.9),
+                                      fontWeight: FontWeight.w700,
+                                      color: MyTheme.orangeColor,
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: ' Plates'.toUpperCase(),
+                                        text: 'Plates'.toUpperCase(),
                                         style: GoogleFonts.montserrat(
                                           fontSize: 30,
                                           fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.normal,
-                                          color: Color.fromRGBO(
-                                              255, 255, 255, 0.9),
+                                          fontWeight: FontWeight.w200,
+                                          color: MyTheme.orangeColor,
                                         ),
                                       ),
                                     ]),
@@ -119,7 +118,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                       iconSize: 14.83,
                                       icon: FaIcon(
                                         FontAwesomeIcons.chevronLeft,
-                                        color: MyTheme.iconColor,
+                                        color: MyTheme.orangeColor,
                                       ),
                                       onPressed: () {
                                         Get.back();
@@ -130,19 +129,19 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Hero(
-                                    tag: "Forgot Password",
+                                    tag: "OTP Verification",
                                     child: Card(
                                       elevation: 0,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          "Forgot Password",
+                                          "OTP Verification",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.inter(
                                             fontSize: 17,
                                             fontWeight: FontWeight.w500,
                                             fontStyle: FontStyle.normal,
-                                            color: MyTheme.appbartextColor,
+                                            color: MyTheme.orangeColor,
                                           ),
                                         ),
                                       ),
@@ -175,80 +174,100 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                           SizedBox(
                             height: 10,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              for (var i = 0;
-                                  i < controller.otpField.length;
-                                  i++)
-                                Container(
-                                  width: 38,
-                                  height: 50,
-                                  margin: EdgeInsets.all(8),
-                                  child: TextField(
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600),
-                                    controller: controller.otpNumber[i],
-                                    textAlignVertical: TextAlignVertical.bottom,
-                                    focusNode: controller.otpField[i],
-                                    maxLength: 1,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
-                                    ],
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      counterText: "",
-                                      hintText: (i + 1).toString(),
-                                      hintStyle: TextStyle(
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          width: 1,
-                                          color: MyTheme.borderColor,
+                          AnimatedBuilder(
+                              animation: Listenable.merge([
+                                controller.otpNumber[j],
+                              ]),
+                              builder: (context, child) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    for (var i = 0;
+                                        i < controller.otpField.length;
+                                        i++)
+                                      Container(
+                                        width: 38,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1,
+                                            color: (controller
+                                                    .otpNumber[j].text.isEmpty)
+                                                ? MyTheme.borderColor
+                                                : MyTheme.borderchangeColor,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                      ),
-                                    ),
-                                    onChanged: (value) {
-                                      print(value);
-                                      print(
-                                          '${controller.otp} type otp isssssssssssssss');
-                                      print(
-                                          '${respOtp} respOtp otp isssssssssssssss');
-                                      print(controller.otpNumber[i]);
-                                      if (value.length == 1) {
-                                        controller.otpNum += value;
-                                        if (i < 5) {
-                                          controller.otpField[i + 1]
-                                              .requestFocus();
-                                        } else {
-                                          if (respOtp == controller.otpNum) {
-                                            controller.otpVerification.value =
-                                                controller.otpVerified;
-                                          } else {
-                                            controller.otpVerification.value =
-                                                controller.incorrect;
-                                          }
-                                        }
-                                      } else {
-                                        if (i != 0) {
-                                          controller.otpNum =
-                                              controller.otpNum.substring(0, i);
-                                          controller.otpFields[i - 1]
-                                              .requestFocus();
-                                        } else {
-                                          controller.otpNum = "";
-                                        }
-                                      }
-                                    },
-                                  ),
-                                )
-                            ],
-                          ),
+                                        margin: EdgeInsets.all(8),
+                                        child: TextField(
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600),
+                                          controller: controller.otpNumber[i],
+                                          textAlignVertical:
+                                              TextAlignVertical.bottom,
+                                          focusNode: controller.otpField[i],
+                                          maxLength: 1,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly,
+                                          ],
+                                          keyboardType: TextInputType.number,
+                                          decoration: InputDecoration(
+                                            counterText: "",
+                                            hintText: (i + 1).toString(),
+                                            hintStyle: TextStyle(
+                                              color: Colors.grey.shade300,
+                                            ),
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                                  BorderRadius.circular(6.0),
+                                            ),
+                                          ),
+                                          onChanged: (value) {
+                                            print(value);
+                                            print(
+                                                '${controller.otp} type otp isssssssssssssss');
+                                            print(
+                                                '${respOtp} respOtp otp isssssssssssssss');
+                                            print(controller.otpNumber[i]);
+                                            if (value.length == 1) {
+                                              controller.otpNum += value;
+                                              if (i < 5) {
+                                                controller.otpField[i + 1]
+                                                    .requestFocus();
+                                              } else {
+                                                if (respOtp ==
+                                                    controller.otpNum) {
+                                                  controller.otpVerification
+                                                          .value =
+                                                      controller.otpVerified;
+                                                } else {
+                                                  controller.otpVerification
+                                                          .value =
+                                                      controller.incorrect;
+                                                }
+                                              }
+                                            } else {
+                                              if (i != 0) {
+                                                controller.otpNum = controller
+                                                    .otpNum
+                                                    .substring(0, i);
+                                                controller.otpField[i - 1]
+                                                    .requestFocus();
+                                              } else {
+                                                controller.otpNum = "";
+                                              }
+                                            }
+                                          },
+                                        ),
+                                      )
+                                  ],
+                                );
+                              }),
                           Obx(() => controller.otpVerification.value != ""
                               ? SizedBox(
                                   height: 8,
@@ -264,8 +283,8 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                       fontStyle: FontStyle.normal,
                                       color: controller.otpVerification.value ==
                                               controller.otpVerified
-                                          ? MyTheme.borderchangeColor
-                                          : Colors.red,
+                                          ? MyTheme.switchButtonColor
+                                          : MyTheme.errorIcon,
                                     )),
                               )),
                           SizedBox(
@@ -280,6 +299,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                   onTap: () async {
                                     if (controller.otpVerification.value ==
                                         controller.otpVerified) {
+                                      isForgotPass = true;
                                       Get.toNamed(ChangePasswordPage1.id);
                                     }
                                   },
@@ -289,8 +309,8 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                     decoration: BoxDecoration(
                                       color:
                                           (controller.otpNumber[j].text.isEmpty)
-                                              ? MyTheme.imgtextColor
-                                              : MyTheme.buttonchangeColor,
+                                              ? MyTheme.verifyButtonColor
+                                              : MyTheme.orangeColor,
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(6)),
                                     ),
@@ -305,8 +325,8 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                           fontWeight: FontWeight.w600,
                                           color: (controller
                                                   .otpNumber[j].text.isEmpty)
-                                              ? MyTheme.buttontextchangeColor
-                                              : MyTheme.buttontextchangeColor,
+                                              ? MyTheme.verifyTextColor
+                                              : MyTheme.appbackgroundColor,
                                         ),
                                       ),
                                     ),

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/models/restaurant_model.dart';
+import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
@@ -13,14 +14,19 @@ import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/food_item_card.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends StatefulWidget {
   static const id = "/menupage";
   final RestaurantModel restaurantModel;
+  final bool isAddItem;
   late HomeController controller;
-  final orderController = Get.find<OrderController>();
-  final bool isEditing;
-  MenuPage({Key? key, required this.restaurantModel, this.isEditing = false})
+  final Editing isEditing;
+  MenuPage(
+      {Key? key,
+      required this.restaurantModel,
+      this.isEditing = Editing.none,
+      this.isAddItem = false})
       : super(key: key) {
     bool isReg = Get.isRegistered<HomeController>();
     if (!isReg) {
@@ -30,6 +36,13 @@ class MenuPage extends StatelessWidget {
     }
   }
 
+  @override
+  State<MenuPage> createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+  final orderController = Get.find<OrderController>();
+
   List<String> categories = ["Starter", "Main Course", "Desserts", "Sides"];
 
   @override
@@ -38,7 +51,7 @@ class MenuPage extends StatelessWidget {
     // Size size = media.size;
     return WillPopScope(
       onWillPop: () async {
-        if (isEditing) {
+        if (widget.isEditing != Editing.none) {
           if (orderController.orderEdit.isEmpty) {
             Navigator.pushNamedAndRemoveUntil(
                 context, LandingPage.id, (route) => false);
@@ -47,6 +60,12 @@ class MenuPage extends StatelessWidget {
             return true;
           }
         } else {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(
+                context, LandingPage.id, (route) => false);
+          }
           return true;
         }
       },
@@ -66,7 +85,7 @@ class MenuPage extends StatelessWidget {
               }),
           centerTitle: true,
           title: Text(
-            restaurantModel.resName,
+            widget.restaurantModel.resName,
             style: TextStyle(
               fontSize: 17,
               color: MyTheme.appbartextColor,
@@ -102,8 +121,8 @@ class MenuPage extends StatelessWidget {
                     ),
                     child: TextField(
                       onChanged: (value) {
-                        controller.searchFoor(
-                            value, restaurantModel.id.toString());
+                        widget.controller.searchFoor(
+                            value, widget.restaurantModel.id.toString());
                       },
                       decoration: InputDecoration(
                           hintText: "Search",
@@ -127,12 +146,12 @@ class MenuPage extends StatelessWidget {
                     SizedBox(
                       height: 12,
                     ),
-                  if (controller.foodItems.isEmpty)
+                  if (widget.controller.foodItems.isEmpty)
                     Container(
                       alignment: Alignment.center,
                       child: Text("No Food Item in the menu"),
                     )
-                  else if (controller.foodItems.first.id == -1)
+                  else if (widget.controller.foodItems.first.id == -1)
                     Center(
                       child: CircularProgressIndicator.adaptive(),
                     )
@@ -146,7 +165,7 @@ class MenuPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (controller.foodItems
+                                if (widget.controller.foodItems
                                     .any((p0) => p0.category == categories[i]))
                                   Padding(
                                     padding:
@@ -157,7 +176,7 @@ class MenuPage extends StatelessWidget {
                                         fontSize: 15,
                                         fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.w500,
-                                        color: MyTheme.text3Color,
+                                        color: MyTheme.appbartextColor,
                                       ),
                                     ),
                                   ),
@@ -167,14 +186,15 @@ class MenuPage extends StatelessWidget {
                                         : EdgeInsets.zero,
                                     physics: BouncingScrollPhysics(),
                                     shrinkWrap: true,
-                                    children: controller.foodItems
+                                    children: widget.controller.foodItems
                                         .where((p0) =>
                                             p0.category == categories[i])
                                         .map(
                                       (e) {
                                         return FoodItemCard(
-                                            restaurantModel: restaurantModel,
-                                            isEditing: isEditing,
+                                            restaurantModel:
+                                                widget.restaurantModel,
+                                            isEditing: widget.isEditing,
                                             foodItemModel: e);
                                       },
                                     ).toList()),
@@ -185,40 +205,101 @@ class MenuPage extends StatelessWidget {
                     )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Obx(() => Elevated(
-                        text: "Proceed to Booking",
-                        width: double.infinity,
-                        backgroundColor: (isEditing
+                        color: (widget.isEditing != Editing.none
                                 ? orderController.orderEdit.isNotEmpty
                                 : orderController.cartItems.any((element) =>
-                                    element.restaurant == restaurantModel.id))
-                            ? MyTheme.buttonbackgroundColor
-                            : MyTheme.hinttextColor,
-                        onTap: () {
-                          if (isEditing) {
+                                    element.restaurant ==
+                                    widget.restaurantModel.id))
+                            ? MyTheme.appbackgroundColor
+                            : MyTheme.appbackgroundColor.withOpacity(0.7),
+                        text: "Proceed to Booking",
+                        width: double.infinity,
+                        backgroundColor: (widget.isEditing != Editing.none
+                                ? orderController.orderEdit.isNotEmpty
+                                : orderController.cartItems.any((element) =>
+                                    element.restaurant ==
+                                    widget.restaurantModel.id))
+                            ? MyTheme.orangeColor
+                            : MyTheme.orangeColor.withOpacity(0.4),
+                        onTap: () async {
+                          if (widget.isEditing != Editing.none) {
+                            orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {
-                              Get.snackbar("Please add an item",
-                                  "At least add atleast 1 item from this restaurant to proceed to booking");
-                            } else {
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                color: MyTheme.verifyButtonColor,
+                                title: 'Please add an item',
+                                message:
+                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                icon: Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: MyTheme.orangelightColor,
+                                ),
+                              ));
+                              // Get.snackbar("Please add an item",
+                              //     "At least add atleast 1 item from this restaurant to proceed to booking");
+                            } else if (orderController.orderEdit.any(
+                                (element) => element.foodQuantity.value > 0)) {
                               Get.back();
+                            } else {
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                color: MyTheme.verifyButtonColor,
+                                title: 'Please add an item',
+                                message:
+                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                icon: Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: MyTheme.orangelightColor,
+                                ),
+                              ));
+                              // Get.snackbar("Please add an item",
+                              //     "At least add atleast 1 item from this restaurant to proceed to booking");
                             }
                           } else {
+                            orderController.calclateTotal();
                             bool check = orderController.cartItems.any(
                                 (element) =>
-                                    element.restaurant == restaurantModel.id);
+                                    element.restaurant ==
+                                    widget.restaurantModel.id);
                             if (!check) {
-                              Get.snackbar("Please add an item",
-                                  "At least add atleast 1 item from this restaurant to proceed to booking");
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                color: MyTheme.verifyButtonColor,
+                                title: 'Please add an item',
+                                message:
+                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                icon: Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: MyTheme.orangelightColor,
+                                ),
+                              ));
+
+                              // Get.snackbar("Please add an item",
+                              //     "At least add atleast 1 item from this restaurant to proceed to booking");
                             } else {
-                              orderController.selectedDate.value =
-                                  DateTime.now();
-                              orderController.numberOfPeople.value = 1;
-                              orderController.globletime.value = DateTime.now();
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) => BookingDetails(
-                                        restaurantModel, isEditing),
-                                  ));
+                              if (!widget.isAddItem) {
+                                orderController.selectedDate.value =
+                                    DateTime.now();
+                                orderController.numberOfPeople.value = 1;
+                                orderController.globletime.value =
+                                    DateTime.now();
+                                await Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => BookingDetails(
+                                          widget.restaurantModel,
+                                          widget.isEditing),
+                                    ));
+                              } else {
+                                await Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) =>
+                                          BurgersupportingPage(
+                                              restaurantModel:
+                                                  widget.restaurantModel,
+                                              isEditing: widget.isEditing),
+                                    ));
+                                setState(() {});
+                              }
                             }
                           }
                         },

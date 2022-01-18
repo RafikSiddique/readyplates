@@ -41,6 +41,10 @@ class ProfilePage extends StatelessWidget {
               title: "Logout",
               onTap: () {
                 Get.find<AuthController>().logout();
+                final controller = Get.find<AuthController>();
+                controller.usernameController.clear();
+                controller.passwordController.clear();
+                controller.password2Controller.clear();
               },
               isLogout: true,
             ),

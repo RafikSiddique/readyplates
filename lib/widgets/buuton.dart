@@ -8,6 +8,7 @@ class Elevated extends StatelessWidget {
   final FontWeight fontWeight;
   final void Function()? onTap;
   final double? width;
+  final double? height;
   final Color? backgroundColor;
   final Color? borderColor;
   final EdgeInsets padding;
@@ -18,9 +19,10 @@ class Elevated extends StatelessWidget {
     required this.text,
     this.color,
     this.width,
+    this.height,
     required this.onTap,
     this.infoFilled = false,
-    this.backgroundColor = const Color(0xff222831),
+    this.backgroundColor = const Color(0xffF47121),
     this.borderColor,
     this.padding = const EdgeInsets.symmetric(vertical: 20.0),
     this.fontSize = 17,
@@ -31,6 +33,7 @@ class Elevated extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
+      height: height,
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(backgroundColor),
@@ -47,6 +50,7 @@ class Elevated extends StatelessWidget {
             text,
             style: GoogleFonts.inter(
               fontWeight: fontWeight,
+              fontSize: fontSize,
               color: color,
             ),
           ),

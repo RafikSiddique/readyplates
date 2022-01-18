@@ -14,6 +14,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/place_search.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 import 'package:uuid/uuid.dart';
 
 class MapPage extends StatefulWidget {
@@ -146,45 +147,58 @@ class _MapPageState extends State<MapPage> {
                 padding: EdgeInsets.fromLTRB(8, media.viewPadding.top, 8, 8),
                 child: Container(
                   height: 54,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: TypeAheadField<Suggestion>(
-                      itemBuilder: (BuildContext context, itemData) {
-                        return ListTile(
-                          title: Text(itemData.description.toString()),
-                        );
-                      },
-                      onSuggestionSelected: (Suggestion? suggestion) async {
-                        final session = Uuid().v4();
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(width: 1, color: MyTheme.orangeColor)),
+                  child: TypeAheadField<Suggestion>(
+                    itemBuilder: (BuildContext context, itemData) {
+                      return ListTile(
+                        title: Text(itemData.description.toString()),
+                      );
+                    },
+                    onSuggestionSelected: (Suggestion? suggestion) async {
+                      final session = Uuid().v4();
 
-                        Place place = await PlaceApiProvider(session)
-                            .getPlaceDetailFromId(suggestion!.placeId);
-                        controller?.animateCamera(CameraUpdate.newLatLng(
-                            LatLng(place.lat!, place.lang!)));
-                      },
-                      suggestionsCallback: (String pattern) async {
-                        final session = Uuid().v4();
-                        return PlaceApiProvider(session)
-                            .fetchSuggestions(pattern, 'en');
-                      },
-                      textFieldConfiguration: TextFieldConfiguration(
-                        // textAlign: TextAlign.center,
-                        controller: TextEditingController(),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            hintText: "Search Any Location",
-                            contentPadding:
-                                const EdgeInsets.only(top: 27, left: 10),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Icon(
-                                Icons.search,
-                                color: Colors.grey,
-                              ),
-                            )),
+                      Place place = await PlaceApiProvider(session)
+                          .getPlaceDetailFromId(suggestion!.placeId);
+                      controller?.animateCamera(CameraUpdate.newLatLng(
+                          LatLng(place.lat!, place.lang!)));
+                    },
+                    suggestionsCallback: (String pattern) async {
+                      final session = Uuid().v4();
+                      return PlaceApiProvider(session)
+                          .fetchSuggestions(pattern, 'en');
+                    },
+                    textFieldConfiguration: TextFieldConfiguration(
+                      // textAlign: TextAlign.center,
+                      controller: TextEditingController(),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+
+                        hintText: "Search Location",
+                        contentPadding:
+                            const EdgeInsets.only(top: 12, left: 10),
+                        // suffixIcon: Padding(
+                        //   padding: const EdgeInsets.only(top: 5),
+                        //   child: Icon(
+                        //     Icons.search,
+                        //     color: Colors.grey,
+                        //   ),
+                        // ),
+                        hintStyle: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          color: MyTheme.chevrondowncolor,
+                        ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -253,7 +267,7 @@ class _MapPageState extends State<MapPage> {
                                       fontSize: 20,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.bold,
-                                      color: MyTheme.buttonbackgroundColor,
+                                      color: MyTheme.orangeColor,
                                     )),
                                 SizedBox(
                                   width: 6,
@@ -261,24 +275,29 @@ class _MapPageState extends State<MapPage> {
                                 Container(
                                   width: 16,
                                   height: 20.13,
-                                  child: Icon(Icons.location_on),
+                                  child: Icon(
+                                    Icons.location_on,
+                                    color: MyTheme.orangeColor,
+                                  ),
                                 ),
                               ],
                             ),
                             SizedBox(
                               height: 15,
                             ),
-                            Text("NEARBY",
-                                style: GoogleFonts.inter(
-                                  fontSize: 10,
+                            Text(
+                              "NEARBY",
+                              style: GoogleFonts.inter(
+                                fontSize: 10,
 
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyTheme.dividermiddletext,
-                                  // color: Color(0xff4E535A),appbartextColor,dividermiddletext
-                                  //color: Color.fromRGBO(78, 83, 90, 0.8),
-                                  letterSpacing: 1,
-                                )),
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500,
+                                color: MyTheme.dividermiddletext,
+                                // color: Color(0xff4E535A),appbartextColor,dividermiddletext
+                                //color: Color.fromRGBO(78, 83, 90, 0.8),
+                                letterSpacing: 1,
+                              ),
+                            ),
                             SizedBox(
                               height: 13,
                             ),
@@ -291,34 +310,55 @@ class _MapPageState extends State<MapPage> {
                                 children: [
                                   Flexible(
                                     child: Obx(
-                                        () => Text(authController.address.value,
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontStyle: FontStyle.normal,
-                                              fontWeight: FontWeight.normal,
-                                              letterSpacing: -0.264706,
-                                              color: MyTheme.appbartextColor,
-                                            ))),
+                                      () => Text(
+                                        authController.address.value,
+                                        style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.normal,
+                                          letterSpacing: -0.264706,
+                                          color: MyTheme.appbartextColor,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.done),
-                                    color: MyTheme.borderchangeColor,
-                                    onPressed: () {
-                                      if (widget.isHome) {
-                                        setAddress();
-                                        homeController.onPageChange(0);
-                                      }
-                                      // Navigator.pushNamed(
-                                      //     context, MyRoutes.OnbordingPage);borderchangeColor
-                                    },
-                                  ),
+                                  if (widget.isHome)
+                                    IconButton(
+                                      icon: const Icon(Icons.done),
+                                      color: MyTheme.switchButtonColor,
+                                      onPressed: () {
+                                        if (widget.isHome) {
+                                          setAddress();
+                                          homeController.getRestaurants();
+                                          Get.showSnackbar(
+                                              MySnackBar.myLoadingSnackBar(
+                                            color: MyTheme.verifyButtonColor,
+                                            title: 'Location',
+                                            message: 'Location updated',
+                                            icon: Icon(
+                                              Icons
+                                                  .check_circle_outline_rounded,
+                                              color: MyTheme.greenColor,
+                                            ),
+                                          ));
+                                          // Get.snackbar(
+                                          //   "Location",
+                                          //   "location Updated",
+                                          //   backgroundColor: Colors.black,
+                                          //   colorText: Colors.white,
+                                          // );
+                                        }
+                                        // Navigator.pushNamed(
+                                        //     context, MyRoutes.OnbordingPage);borderchangeColor
+                                      },
+                                    ),
                                 ],
                               ),
                             ),
                             Divider(
                               // indent: 16,
                               //// endIndent: 16,
-                              thickness: 2,
+                              thickness: 1,
                               color: MyTheme.devidercolor,
                               //  color: Color(0xffD8D8D8),
                             ),
@@ -328,10 +368,13 @@ class _MapPageState extends State<MapPage> {
                             if (!widget.isHome)
                               ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
+                                    primary: authController.address.value == ''
+                                        ? MyTheme.verifyButtonColor
+                                        : MyTheme.orangeColor,
                                     minimumSize: Size(size.width, 50),
+                                    elevation: 0,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(7),
+                                      borderRadius: BorderRadius.circular(6),
                                     ),
                                   ),
                                   onPressed: () async {
@@ -351,9 +394,11 @@ class _MapPageState extends State<MapPage> {
                                   child: Text('NEXT',
                                       style: GoogleFonts.inter(
                                         fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: -0.1,
-                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        color:
+                                            authController.address.value == ''
+                                                ? MyTheme.verifyTextColor
+                                                : MyTheme.appbackgroundColor,
                                         fontSize: 17,
                                       ))),
                             SizedBox(

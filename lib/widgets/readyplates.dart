@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/utils/assets.dart';
+import 'package:readyplates/utils/my_color.dart';
 
 class ReadyPlatesText extends StatelessWidget {
   const ReadyPlatesText({Key? key}) : super(key: key);
@@ -35,17 +36,17 @@ class ReadyPlatesText extends StatelessWidget {
                       style: GoogleFonts.montserrat(
                         fontSize: 30,
                         fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(255, 255, 255, 0.9),
+                        fontWeight: FontWeight.w700,
+                        color: MyTheme.orangeColor,
                       ),
                       children: [
                         TextSpan(
-                          text: ' Plates'.toUpperCase(),
+                          text: 'Plates'.toUpperCase(),
                           style: GoogleFonts.montserrat(
                             fontSize: 30,
                             fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.normal,
-                            color: Color.fromRGBO(255, 255, 255, 0.9),
+                            fontWeight: FontWeight.w200,
+                            color: MyTheme.orangeColor,
                           ),
                         ),
                       ]),

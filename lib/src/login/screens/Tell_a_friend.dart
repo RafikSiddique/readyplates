@@ -21,10 +21,10 @@ class Tellafriend extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        backgroundColor: MyTheme.appbackcolor,
+        backgroundColor: MyTheme.containerColor,
         appBar: AppBar(
           toolbarHeight: kToolbarHeight,
-          backgroundColor: MyTheme.appbackcolor,
+          backgroundColor: MyTheme.containerColor,
           elevation: 0,
           centerTitle: true,
           title: Text('Tell a friend',
@@ -75,10 +75,11 @@ class Tellafriend extends StatelessWidget {
                     ),
                     Text("Enjoying Ready Plates?",
                         style: GoogleFonts.nunito(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            color: MyTheme.borderchangeColor)),
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                          color: MyTheme.orangeColor,
+                        )),
                     SizedBox(
                       height: 8,
                     ),
@@ -101,7 +102,7 @@ class Tellafriend extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: MyTheme.appbackcolor,
+                          primary: Color(0xffFFF6E9),
 
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -121,6 +122,7 @@ class Tellafriend extends StatelessWidget {
                                     "assets/images/ShareNetwork.png",
                                     height: 30,
                                     width: 33,
+                                    color: MyTheme.orangeColor,
                                     fit: BoxFit.cover)),
                             SizedBox(
                               width: 6,
@@ -131,7 +133,7 @@ class Tellafriend extends StatelessWidget {
                                     fontSize: 19,
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.normal,
-                                    color: MyTheme.appbartextColor,
+                                    color: MyTheme.orangeColor,
                                   )),
                             ),
                           ],

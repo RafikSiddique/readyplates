@@ -1,11 +1,15 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_sevices.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class HomeController extends GetxController {
   final SharedPreferenceHelper sfHelper = Get.find();
@@ -32,6 +36,30 @@ class HomeController extends GetxController {
     return deg * (pi / 180);
   }
 
+  Future<RestaurantModel?> getRestaurant(int resId) async {
+    try {
+      RestaurantModel restaurantModel = await homeService.getRes(resId);
+      return restaurantModel;
+    } catch (e) {
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: "Something went wrong",
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
+      // Get.showSnackbar(GetBar(
+      //   title: "Error",
+      //   message: "Something went wrong",
+      // ));
+      return null;
+    }
+  }
+
   Timer? timer;
 
   RxString address = "".obs;
@@ -39,6 +67,7 @@ class HomeController extends GetxController {
     RestaurantModel(
         id: -1,
         resName: "",
+        open_orders: false,
         address2: "",
         overall_experience: "",
         address: "",
@@ -109,21 +138,7 @@ class HomeController extends GetxController {
     getAddress();
     Get.put(OrderController());
     getRestaurants();
-    restaurants.addListener(GetStream(
-      onListen: () {
-        if (restaurants.isEmpty) {
-          print('Empty');
-        } else {
-          if (restaurants.first.id == -1) {
-            print(
-                "--------------------------------------1-------------------------------");
-          } else {
-            print('Successs');
-            print(restaurants);
-          }
-        }
-      },
-    ));
+    onPageChanged(currentIndex.value);
     super.onInit();
   }
 
@@ -139,6 +154,7 @@ class HomeController extends GetxController {
     address.value = await sfHelper.getAddress();
     lat.value = await sfHelper.getLat();
     lon.value = await sfHelper.getLon();
+    selectedMiles.value = await sfHelper.getMiles();
     return address.value;
   }
 
@@ -166,7 +182,17 @@ class HomeController extends GetxController {
       if (foodItems.isNotEmpty && foodItems.first.id == -1) {
         foodItems.clear();
       }
-      Get.snackbar("Error", e.toString());
+      if (e.runtimeType != SocketException) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+      }
     }
   }
 
@@ -182,54 +208,74 @@ class HomeController extends GetxController {
     try {
       await getAddress();
 
-      List<RestaurantModel> res =
-          await homeService.getRestaurantWithSort(lat.value, lon.value);
+      List<RestaurantModel> res = await homeService.getRestaurantWithSort(
+          lat.value, lon.value, selectedMiles.value);
       print("Got res");
       ;
       if (res.isNotEmpty) {
         print("Res Not Empty");
         restaurants.value = res;
+      } else {
+        restaurants.value = [];
       }
       print("Sorting res");
       restaurants.sort((a, b) =>
           double.parse(a.address2).compareTo(double.parse(b.address2)));
       print("Res Sorted");
-      if (timer == null && currentIndex == 0) {
-        timer = Timer.periodic(Duration(seconds: 3), (timer) async {
-          await getRestaurants();
-          print("Restaurant Fetch");
-          this.timer = timer;
-        });
-      }
+
       update();
     } catch (e) {
       if (restaurants.isNotEmpty && restaurants.first.id == -1) {
-        restaurants.clear();
+        restaurants.value = [];
       }
+      update();
       timer?.cancel();
-      Get.showSnackbar(GetBar(
-        title: "Server Error",
-        message: "Something went wrong",
-        duration: Duration(seconds: 1),
-      ));
+      if (e.runtimeType != SocketException &&
+          lat.value != 0 &&
+          lon.value != 0) {
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message: "Something went wrong",
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+
+        // Get.showSnackbar(GetBar(
+        //   title: "Server Error",
+        //   message: "Something went wrong",
+        //   duration: Duration(seconds: 1),
+        // ));
+      }
     }
   }
 
-  void onPageChange(int index) {
+  List<double> milesList = List.generate(5, (index) => (index + 1) * 5);
+
+  RxDouble selectedMiles = 15.0.obs;
+
+  Future<void> setMiles(double miles) async {
+    await sfHelper.setMiles(miles);
+    selectedMiles.value = await sfHelper.getMiles();
+  }
+
+  void onPageChanged(int index) {
     timer?.cancel();
-    if (index == 0) {
-      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+    /* if (index == 0) {
+      timer = Timer.periodic(Duration(minutx`es: 3), (timer) async {
         await getRestaurants();
         print("Restaurant Fetch");
         this.timer = timer;
       });
     } else if (index == 2) {
-      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      timer = Timer.periodic(Duration(minutes: 5), (timer) async {
         await Get.find<OrderController>().getorder();
         print("Order Get");
         this.timer = timer;
       });
-    }
+    } */
     currentIndex.value = index;
   }
 }
