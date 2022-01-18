@@ -18,6 +18,7 @@ class CreditCardDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RxBool isCheck = false.obs;
     return Scaffold(
       backgroundColor: MyTheme.appbackgroundColor,
       appBar: AppBar(
@@ -140,6 +141,7 @@ class CreditCardDetailsPage extends StatelessWidget {
                       Container(
                         width: 180,
                         child: TextFormField(
+                          keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             hintText: "MM/YY",
                             hintStyle: GoogleFonts.inter(
@@ -251,17 +253,13 @@ class CreditCardDetailsPage extends StatelessWidget {
                     hintStyle: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      letterSpacing: -0.26,
                       color: MyTheme.hinttextColor,
                     ),
                   ),
                   items: [
                     DropdownMenuItem(child: Text(""), value: ""),
                     DropdownMenuItem(
-                        child: Text("Bangladesh"), value: "Bangladesh"),
-                    DropdownMenuItem(
                         child: Text("United State"), value: "United State"),
-                    DropdownMenuItem(child: Text("India"), value: "India"),
                   ],
                   onChanged: (newValue) {},
                 ),
@@ -278,7 +276,51 @@ class CreditCardDetailsPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 56,
+                height: 20,
+              ),
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                            maxHeight: Get.height, maxWidth: Get.width * 0.07),
+                        child: Checkbox(
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
+                            activeColor: MyTheme.orangeColor,
+                            checkColor: Colors.white,
+                            value: isCheck.value,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            tristate: false,
+                            onChanged: (value) {
+                              isCheck.value = !isCheck.value;
+                            }),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Use this for all future payements',
+                      style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: isCheck.value == true
+                            ? FontWeight.bold
+                            : FontWeight.w500,
+                        color: MyTheme.bottomtextColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
