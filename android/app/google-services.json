@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:621674002284:android:02870c871f39225c9f6549",
         "android_client_info": {
-          "package_name": "com.fladdra.readyplates"
+          "package_name": "com.apsissolutions.readyplates"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "621674002284-8aa0809pakjrp46lu6h6k91taofv83nj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.fladdra.readyplates"
+                "bundle_id": "com.apsissolutions.readyplates"
               }
             }
           ]
@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:621674002284:android:8932a552828540c49f6549",
         "android_client_info": {
-          "package_name": "com.fladdra.readyplates.restaurant"
+          "package_name": "com.apsissolutions.readyplates.restaurant"
         }
       },
       "oauth_client": [
@@ -70,7 +70,7 @@
               "client_id": "621674002284-8aa0809pakjrp46lu6h6k91taofv83nj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.fladdra.readyplates"
+                "bundle_id": "com.apsissolutions.readyplates"
               }
             }
           ]
