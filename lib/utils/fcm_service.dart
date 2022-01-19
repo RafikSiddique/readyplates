@@ -7,7 +7,6 @@ import 'package:http/http.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 
-
 class FirebaseMessagingService extends ApiService {
   int i = 0;
   FirebaseMessagingService() {
@@ -50,10 +49,14 @@ class FirebaseMessagingService extends ApiService {
     return Future<void>.value();
   }
 
+  
+
   void initializeMessaging() {
-    // if (i < 2) {
-    print("Init Messaging Called");
-    getToken();
+    if (i == 0) {
+      print("Init Messaging Called");
+      getToken();
+      i++;
+    }
     FirebaseMessaging.onMessage.listen((event) {
       print("OnMessage");
       showMessage(event);
@@ -110,13 +113,11 @@ class FirebaseMessagingService extends ApiService {
     String userId = await SharedPreferenceHelper().getUserId();
     try {
       if (userId != "") {
-        
-        FirebaseFirestore.instance.collection('customer').doc(userId).set({
-         DateTime.now().toString() : 
-          token,
-
-         
-        },);
+        FirebaseFirestore.instance.collection('customer').doc(userId).set(
+          {
+            DateTime.now().toString(): token,
+          },
+        );
         var res = await post(Uri.parse(baseUri + 'restaurants/token/'),
             headers: contentTypeJsonHeader,
             body: jsonEncode({
