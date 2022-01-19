@@ -11,7 +11,6 @@ import 'utils/routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessagingService();
   Get.put(SharedPreferenceHelper());
   Get.put(AuthController());
   runApp(MyApp());

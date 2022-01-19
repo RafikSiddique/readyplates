@@ -157,6 +157,7 @@ class AuthController extends GetxController {
 
         Get.put(OrderController());
         Get.put(HomeController());
+        FirebaseMessagingService();
         if (issignup) {
           Get.off(() => CreditCardDetailsPage());
         } else {
