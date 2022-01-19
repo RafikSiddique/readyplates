@@ -29,27 +29,29 @@ class ReadyPlatesText extends StatelessWidget {
               SizedBox(width: 16),
               Container(
                 // width: size.width * 0.6,
-                height: 39,
-                child: RichText(
-                  text: TextSpan(
-                      text: 'READY',
-                      style: GoogleFonts.montserrat(
-                        fontSize: 30,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w700,
-                        color: MyTheme.orangeColor,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: 'Plates'.toUpperCase(),
-                          style: GoogleFonts.montserrat(
-                            fontSize: 30,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w200,
-                            color: MyTheme.orangeColor,
-                          ),
+                height: 40,
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                        text: 'READY',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 30,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w700,
+                          color: MyTheme.orangeColor,
                         ),
-                      ]),
+                        children: [
+                          TextSpan(
+                            text: 'Plates'.toUpperCase(),
+                            style: GoogleFonts.montserrat(
+                              fontSize: 30,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w200,
+                              color: MyTheme.orangeColor,
+                            ),
+                          ),
+                        ]),
+                  ),
                 ),
               ),
             ],
