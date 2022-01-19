@@ -486,8 +486,8 @@ class BookingDetails extends GetView<OrderController> {
                       // ));
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
                         color: MyTheme.verifyButtonColor,
-                        title: 'Booking',
-                        message: "Confirming booking",
+                        title: 'Order',
+                        message: "Confirming Order",
                         icon: Center(
                           child: SizedBox.square(
                             dimension: 20,

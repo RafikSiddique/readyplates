@@ -212,7 +212,7 @@ class _MenuPageState extends State<MenuPage> {
                                     widget.restaurantModel.id))
                             ? MyTheme.appbackgroundColor
                             : MyTheme.appbackgroundColor.withOpacity(0.7),
-                        text: "Proceed to Booking",
+                        text: "Proceed to Order",
                         width: double.infinity,
                         backgroundColor: (widget.isEditing != Editing.none
                                 ? orderController.orderEdit.isNotEmpty
