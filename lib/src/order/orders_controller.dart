@@ -34,6 +34,8 @@ class OrderController extends GetxController {
   RxInt numberOfPeople = 1.obs;
 
   RxDouble total = 0.0.obs;
+  List<String> categories = ["Starter", "Main Course", "Desserts", "Sides"];
+  RxString isDesserts = ''.obs;
 
   int orderId = -1;
 

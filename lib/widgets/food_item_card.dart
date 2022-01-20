@@ -352,7 +352,11 @@ class FoodItemCard extends GetView<OrderController> {
                           child: Container(
                             width: size.width * 0.5,
                             child: Text(
-                              foodItemModel.stdServingSize,
+                              (foodItemModel.stdServingSize ==
+                                          'Not Applicable' ||
+                                      foodItemModel.stdServingSize == 'Other')
+                                  ? ''
+                                  : foodItemModel.stdServingSize,
                               textAlign: TextAlign.left,
                               style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(
@@ -388,10 +392,12 @@ class FoodItemCard extends GetView<OrderController> {
                             ),
                             ...List.generate(
                               double.parse(foodItemModel.spiceLevel).toInt(),
-                              (index) => Image.asset(
-                                Assets.spice,
-                                color: color(index),
-                              ),
+                              (index) => foodItemModel.category == 'Desserts'
+                                  ? Container()
+                                  : Image.asset(
+                                      Assets.spice,
+                                      color: color(index),
+                                    ),
                             ),
                             Spacer(),
                             Text("\$ " + foodItemModel.cost,
