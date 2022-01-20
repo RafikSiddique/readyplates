@@ -330,19 +330,20 @@ class AuthController extends GetxController {
           ),
         ));
         // Get.snackbar("Error", e.toString());
-      } else {
-        //There seems to be a server/internet connectivity issue. Please check the same
-        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-          color: MyTheme.verifyButtonColor,
-          title: 'Error',
-          message:
-              "There seems to be a server/internet connectivity issue. Please check the same",
-          icon: FaIcon(
-            FontAwesomeIcons.timesCircle,
-            color: MyTheme.redColor,
-          ),
-        ));
-      }
+      } 
+      // else {
+      //   //There seems to be a server/internet connectivity issue. Please check the same
+      //   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+      //     color: MyTheme.verifyButtonColor,
+      //     title: 'Error',
+      //     message:
+      //         "There seems to be a server/internet connectivity issue. Please check the same",
+      //     icon: FaIcon(
+      //       FontAwesomeIcons.timesCircle,
+      //       color: MyTheme.redColor,
+      //     ),
+      //   ));
+      // }
     }
   }
 
