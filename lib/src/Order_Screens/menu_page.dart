@@ -229,7 +229,7 @@ class _MenuPageState extends State<MenuPage> {
                                 color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
-                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                    'Please add at least 1 item to proceed with order',
                                 icon: Icon(
                                   Icons.warning_amber_rounded,
                                   color: MyTheme.orangelightColor,
@@ -245,7 +245,7 @@ class _MenuPageState extends State<MenuPage> {
                                 color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
-                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                    'Please add at least 1 item to proceed with order',
                                 icon: Icon(
                                   Icons.warning_amber_rounded,
                                   color: MyTheme.orangelightColor,
@@ -265,7 +265,7 @@ class _MenuPageState extends State<MenuPage> {
                                 color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
-                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                    'Please add at least 1 item to proceed with order',
                                 icon: Icon(
                                   Icons.warning_amber_rounded,
                                   color: MyTheme.orangelightColor,

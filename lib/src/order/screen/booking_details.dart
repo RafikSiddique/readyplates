@@ -62,7 +62,8 @@ class BookingDetails extends GetView<OrderController> {
                   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
                     color: MyTheme.verifyButtonColor,
                     title: 'Warning',
-                    message: 'here should be atleast one person',
+                    message:
+                        'PAX qty should be minimum 1 to proceed with order confirmation',
                     icon: Icon(
                       Icons.warning_amber_rounded,
                       color: MyTheme.orangelightColor,
@@ -310,7 +311,7 @@ class BookingDetails extends GetView<OrderController> {
                             color: MyTheme.verifyButtonColor,
                             title: 'Info',
                             message:
-                                "The restaurant is closed at selected Day\nThe restaurant is open days \n${restaurantModel.open_days.join(', ')}",
+                                "The restaurant is closed at selected Day\nRestaurant open days are \n${restaurantModel.open_days.join(', ')}",
                             icon: Icon(
                               Icons.error_outline_rounded,
                               color: MyTheme.blueColor,
@@ -498,8 +499,8 @@ class BookingDetails extends GetView<OrderController> {
                       // ));
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
                         color: MyTheme.verifyButtonColor,
-                        title: 'Order',
-                        message: "Confirming Order",
+                        title: 'Order Info',
+                        message: "Date and Time selected successfully",
                         icon: Center(
                           child: SizedBox.square(
                             dimension: 20,

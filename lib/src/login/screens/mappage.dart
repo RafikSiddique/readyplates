@@ -178,7 +178,7 @@ class _MapPageState extends State<MapPage> {
 
                         hintText: "Search Location",
                         contentPadding:
-                            const EdgeInsets.only(top: 12, left: 10),
+                            const EdgeInsets.only(top: 15, left: 10),
                         // suffixIcon: Padding(
                         //   padding: const EdgeInsets.only(top: 5),
                         //   child: Icon(
@@ -193,7 +193,7 @@ class _MapPageState extends State<MapPage> {
                           color: MyTheme.chevrondowncolor,
                         ),
                         prefixIcon: Padding(
-                          padding: const EdgeInsets.only(top: 0),
+                          padding: const EdgeInsets.only(top: 4),
                           child: Icon(
                             Icons.search,
                             color: Colors.grey,

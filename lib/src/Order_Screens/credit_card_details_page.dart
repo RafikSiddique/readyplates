@@ -258,8 +258,7 @@ class CreditCardDetailsPage extends StatelessWidget {
                   ),
                   items: [
                     DropdownMenuItem(child: Text(""), value: ""),
-                    DropdownMenuItem(
-                        child: Text("United State"), value: "United State"),
+                    DropdownMenuItem(child: Text("USA"), value: "USA"),
                   ],
                   onChanged: (newValue) {},
                 ),

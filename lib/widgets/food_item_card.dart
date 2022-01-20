@@ -176,7 +176,7 @@ class FoodItemCard extends GetView<OrderController> {
                                                 padding:
                                                     EdgeInsets.only(left: 6),
                                                 child: Text(
-                                                  "Sorry you cannot add items from 2 Restaurant, Remove all from other Restaurants",
+                                                  "Sorry you cannot add items from 2 Restaurants, remove all items from other Restaurants?",
                                                   style: GoogleFonts.nunito(
                                                     fontStyle: FontStyle.normal,
                                                     fontWeight:
