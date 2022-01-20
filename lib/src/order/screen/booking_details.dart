@@ -274,6 +274,8 @@ class BookingDetails extends GetView<OrderController> {
                     child: InkWell(
                       onTap: () async {
                         DateTime? dt = await showDatePicker(
+                          confirmText: 'Ok',
+                          cancelText: 'Cancel',
                           context: context,
                           initialDate: controller.selectedDate.value,
                           firstDate: DateTime.now(),
@@ -304,6 +306,16 @@ class BookingDetails extends GetView<OrderController> {
                           print("Failed");
                           print("Selected Day: " +
                               DateFormat(DateFormat.WEEKDAY).format(dt!));
+                          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                            color: MyTheme.verifyButtonColor,
+                            title: 'Info',
+                            message:
+                                "The restaurant is closed at selected Day\nThe restaurant is open days \n${restaurantModel.open_days.join(', ')}",
+                            icon: Icon(
+                              Icons.error_outline_rounded,
+                              color: MyTheme.blueColor,
+                            ),
+                          ));
                         }
                       },
                       child: Row(
