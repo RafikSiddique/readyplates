@@ -88,19 +88,19 @@ class _LandingPageState extends State<LandingPage> {
           return AlertDialog(
             title: Text(
               "Uh-Oh, You forgot to checkout!",
-              style: GoogleFonts.nunito(
-                color: Colors.black,
+              style: GoogleFonts.inter(
+                color: MyTheme.appbartextColor,
                 fontSize: 15,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
               ),
             ),
             content: Text(
               "Hi, \nYou forgot to checkout from your order.",
-              style: GoogleFonts.inter(
-                color: Colors.black,
+              style: GoogleFonts.nunito(
+                color: MyTheme.appbartextColor,
                 fontSize: 15,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
               ),
             ),

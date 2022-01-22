@@ -128,7 +128,7 @@ class AuthController extends GetxController {
 
   Future<void> setCardDetails() async {
     try {
-      //TODO: Call card save api
+       //TODO: call card save API
       bool permitted = await getPermission();
       if (permitted) {
         Position position = await Geolocator.getCurrentPosition();
@@ -330,7 +330,7 @@ class AuthController extends GetxController {
           ),
         ));
         // Get.snackbar("Error", e.toString());
-      } 
+      }
       // else {
       //   //There seems to be a server/internet connectivity issue. Please check the same
       //   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
