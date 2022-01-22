@@ -81,7 +81,7 @@ class OrderWidget extends StatelessWidget {
   }
 
   Widget bottomWidget(BuildContext context) {
-    double size = MediaQuery.of(context).size.width;
+    // double size = MediaQuery.of(context).size.width;
     switch (orderModel.status) {
       case OrderState.placed:
         return Column(

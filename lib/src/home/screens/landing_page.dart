@@ -113,7 +113,7 @@ class _LandingPageState extends State<LandingPage> {
                     "Ok",
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,
-                      fontSize: 17,
+                      fontSize: 15,
                       color: MyTheme.orangeColor,
                     ),
                   )),
@@ -126,7 +126,7 @@ class _LandingPageState extends State<LandingPage> {
                     "View Orders",
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,
-                      fontSize: 17,
+                      fontSize: 15,
                       color: MyTheme.orangeColor,
                     ),
                   ))
