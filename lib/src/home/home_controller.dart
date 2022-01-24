@@ -45,7 +45,20 @@ class HomeController extends GetxController {
         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
           color: MyTheme.verifyButtonColor,
           title: 'Error',
-          message: "Something went wrong",
+          message: e.toString(),
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
+        // Get.snackbar("Error", e.toString());
+      } else {
+        //There seems to be a server/internet connectivity issue. Please check the same
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message:
+              "There seems to be a server/internet connectivity issue. Please check the same",
           icon: FaIcon(
             FontAwesomeIcons.timesCircle,
             color: MyTheme.redColor,
@@ -192,6 +205,19 @@ class HomeController extends GetxController {
             color: MyTheme.redColor,
           ),
         ));
+        // Get.snackbar("Error", e.toString());
+      } else {
+        //There seems to be a server/internet connectivity issue. Please check the same
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message:
+              "There seems to be a server/internet connectivity issue. Please check the same",
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
     }
   }
@@ -242,13 +268,25 @@ class HomeController extends GetxController {
             color: MyTheme.redColor,
           ),
         ));
-
-        // Get.showSnackbar(GetBar(
-        //   title: "Server Error",
-        //   message: "Something went wrong",
-        //   duration: Duration(seconds: 1),
-        // ));
+      } else {
+        //There seems to be a server/internet connectivity issue. Please check the same
+        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+          color: MyTheme.verifyButtonColor,
+          title: 'Error',
+          message:
+              "There seems to be a server/internet connectivity issue. Please check the same",
+          icon: FaIcon(
+            FontAwesomeIcons.timesCircle,
+            color: MyTheme.redColor,
+          ),
+        ));
       }
+      // Get.showSnackbar(GetBar(
+      //   title: "Server Error",
+      //   message: "Something went wrong",
+      //   duration: Duration(seconds: 1),
+      // ));
+
     }
   }
 

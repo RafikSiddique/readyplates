@@ -325,8 +325,6 @@ class _SignupPageState extends State<SignupPage> {
                               // color: Color(0xff222831),
                               color: (controller.fNamController.text.isEmpty ||
                                       controller.lNameController.text.isEmpty ||
-                                      controller.gender.isEmpty ||
-                                      controller.dobController.text.isEmpty ||
                                       controller
                                           .usernameController.text.isEmpty ||
                                       controller.mobController.text.isEmpty ||
@@ -351,9 +349,6 @@ class _SignupPageState extends State<SignupPage> {
                                                 .fNamController.text.isEmpty ||
                                             controller
                                                 .lNameController.text.isEmpty ||
-                                            controller.gender.isEmpty ||
-                                            controller
-                                                .dobController.text.isEmpty ||
                                             controller.usernameController.text
                                                 .isEmpty ||
                                             controller
