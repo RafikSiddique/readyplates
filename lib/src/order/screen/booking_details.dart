@@ -62,7 +62,6 @@ class BookingDetails extends GetView<OrderController> {
                   controller.numberOfPeople--;
                 } else {
                   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                    color: MyTheme.verifyButtonColor,
                     title: 'Warning',
                     message:
                         'PAX qty should be minimum 1 to proceed with order confirmation',
@@ -182,7 +181,6 @@ class BookingDetails extends GetView<OrderController> {
                       } else {
                         Get.back();
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          color: MyTheme.verifyButtonColor,
                           title: 'Info',
                           message:
                               "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
@@ -310,7 +308,6 @@ class BookingDetails extends GetView<OrderController> {
                           print("Selected Day: " +
                               DateFormat(DateFormat.WEEKDAY).format(dt!));
                           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                            color: MyTheme.verifyButtonColor,
                             title: 'Info',
                             message:
                                 "The restaurant is closed at selected Day\nRestaurant open days are \n${restaurantModel.open_days.join(', ')}",
@@ -500,7 +497,6 @@ class BookingDetails extends GetView<OrderController> {
                       //   ),
                       // ));
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                        color: MyTheme.verifyButtonColor,
                         title: 'Order Info',
                         message: "Date and Time selected successfully",
                         icon: Center(
@@ -564,7 +560,6 @@ class BookingDetails extends GetView<OrderController> {
                               ));
                             } else { */
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          color: MyTheme.verifyButtonColor,
                           title: 'Info',
                           message:
                               "The restaurant has stopped taking order for now,\nPlease try again later",
@@ -602,7 +597,6 @@ class BookingDetails extends GetView<OrderController> {
                       } */
                     } else {
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                        color: MyTheme.verifyButtonColor,
                         title: 'Info',
                         message:
                             "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
@@ -621,7 +615,6 @@ class BookingDetails extends GetView<OrderController> {
                     }
                   } else {
                     Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                      color: MyTheme.verifyButtonColor,
                       title: 'Error',
                       message: 'Please select a time after current time',
                       icon: FaIcon(

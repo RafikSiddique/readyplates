@@ -192,7 +192,6 @@ class AuthController extends GetxController {
         isLoading.value = false;
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message: s.toString(),
             icon: FaIcon(
@@ -204,7 +203,6 @@ class AuthController extends GetxController {
         } else {
           //There seems to be a server/internet connectivity issue. Please check the same
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message:
                 "There seems to be a server/internet connectivity issue. Please check the same",
@@ -217,10 +215,9 @@ class AuthController extends GetxController {
       }
     } else {
       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-        color: MyTheme.verifyButtonColor,
         title: 'Error',
         message:
-            "There seems to be a internet connectivity issue. Please check the your connection",
+            "There seems to be a internet connectivity issue. Please check your connection",
         icon: FaIcon(
           FontAwesomeIcons.timesCircle,
           color: MyTheme.redColor,
@@ -256,7 +253,6 @@ class AuthController extends GetxController {
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message: e.toString(),
             icon: FaIcon(
@@ -267,7 +263,6 @@ class AuthController extends GetxController {
         } else {
           //There seems to be a server/internet connectivity issue. Please check the same
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message:
                 "There seems to be a server/internet connectivity issue. Please check the same",
@@ -280,10 +275,9 @@ class AuthController extends GetxController {
       }
     } else {
       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-        color: MyTheme.verifyButtonColor,
         title: 'Error',
         message:
-            "There seems to be a internet connectivity issue. Please check the your connection",
+            "There seems to be a internet connectivity issue. Please check your connection",
         icon: FaIcon(
           FontAwesomeIcons.timesCircle,
           color: MyTheme.redColor,
@@ -302,7 +296,6 @@ class AuthController extends GetxController {
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message: e.toString().replaceAll('"', ''),
             icon: FaIcon(
@@ -314,7 +307,6 @@ class AuthController extends GetxController {
         } else {
           //There seems to be a server/internet connectivity issue. Please check the same
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message:
                 "There seems to be a server/internet connectivity issue. Please check the same",
@@ -327,10 +319,9 @@ class AuthController extends GetxController {
       }
     } else {
       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-        color: MyTheme.verifyButtonColor,
         title: 'Error',
         message:
-            "There seems to be a internet connectivity issue. Please check the your connection",
+            "There seems to be a internet connectivity issue. Please check your connection",
         icon: FaIcon(
           FontAwesomeIcons.timesCircle,
           color: MyTheme.redColor,
@@ -398,7 +389,6 @@ class AuthController extends GetxController {
         String s = resp['email'][0];
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message: s.toString(),
             icon: FaIcon(
@@ -410,7 +400,6 @@ class AuthController extends GetxController {
         } else {
           //There seems to be a server/internet connectivity issue. Please check the same
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-            color: MyTheme.verifyButtonColor,
             title: 'Error',
             message:
                 "There seems to be a server/internet connectivity issue. Please check the same",
@@ -423,10 +412,9 @@ class AuthController extends GetxController {
       }
     } else {
       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-        color: MyTheme.verifyButtonColor,
         title: 'Error',
         message:
-            "There seems to be a internet connectivity issue. Please check the your connection",
+            "There seems to be a internet connectivity issue. Please check your connection",
         icon: FaIcon(
           FontAwesomeIcons.timesCircle,
           color: MyTheme.redColor,

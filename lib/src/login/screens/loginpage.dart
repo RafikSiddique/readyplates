@@ -260,7 +260,6 @@ class LoginPage extends StatelessWidget {
                                     } else {
                                       Get.showSnackbar(
                                           MySnackBar.myLoadingSnackBar(
-                                        color: MyTheme.verifyButtonColor,
                                         title: 'Error',
                                         message: "Please fill all the details",
                                         icon: FaIcon(
