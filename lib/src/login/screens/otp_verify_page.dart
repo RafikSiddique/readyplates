@@ -188,8 +188,8 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                         i < controller.otpField.length;
                                         i++)
                                       Container(
-                                        width: 38,
-                                        height: 50,
+                                        width: 40,
+                                        // height: 50,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             width: 1,
@@ -209,7 +209,7 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                               fontWeight: FontWeight.w600),
                                           controller: controller.otpNumber[i],
                                           textAlignVertical:
-                                              TextAlignVertical.bottom,
+                                              TextAlignVertical.center,
                                           focusNode: controller.otpField[i],
                                           maxLength: 1,
                                           inputFormatters: [
@@ -218,6 +218,10 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                                           ],
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                              vertical: 8.0,
+                                            ),
                                             counterText: "",
                                             hintText: (i + 1).toString(),
                                             hintStyle: TextStyle(

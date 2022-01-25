@@ -7,6 +7,7 @@ import 'package:readyplates/models/food_item_model.dart';
 import 'package:readyplates/models/restaurant_model.dart';
 import 'package:readyplates/src/home/home_sevices.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
+import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:readyplates/widgets/snackbar.dart';
@@ -14,6 +15,7 @@ import 'package:readyplates/widgets/snackbar.dart';
 class HomeController extends GetxController {
   final SharedPreferenceHelper sfHelper = Get.find();
   final HomeServices homeService = HomeServices();
+  final ApiService s = ApiService();
   RxString selectedCategory = "".obs;
   RxDouble lat = 0.0.obs;
   RxDouble lon = 0.0.obs;
@@ -37,39 +39,52 @@ class HomeController extends GetxController {
   }
 
   Future<RestaurantModel?> getRestaurant(int resId) async {
-    try {
-      RestaurantModel restaurantModel = await homeService.getRes(resId);
-      return restaurantModel;
-    } catch (e) {
-      if (e.runtimeType != SocketException) {
-        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-          color: MyTheme.verifyButtonColor,
-          title: 'Error',
-          message: e.toString(),
-          icon: FaIcon(
-            FontAwesomeIcons.timesCircle,
-            color: MyTheme.redColor,
-          ),
-        ));
-        // Get.snackbar("Error", e.toString());
-      } else {
-        //There seems to be a server/internet connectivity issue. Please check the same
-        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-          color: MyTheme.verifyButtonColor,
-          title: 'Error',
-          message:
-              "There seems to be a server/internet connectivity issue. Please check the same",
-          icon: FaIcon(
-            FontAwesomeIcons.timesCircle,
-            color: MyTheme.redColor,
-          ),
-        ));
+    if (await s.isConnected()) {
+      try {
+        RestaurantModel restaurantModel = await homeService.getRes(resId);
+        return restaurantModel;
+      } catch (e) {
+        if (e.runtimeType != SocketException) {
+          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+            color: MyTheme.verifyButtonColor,
+            title: 'Error',
+            message: e.toString(),
+            icon: FaIcon(
+              FontAwesomeIcons.timesCircle,
+              color: MyTheme.redColor,
+            ),
+          ));
+          // Get.snackbar("Error", e.toString());
+        } else {
+          //There seems to be a server/internet connectivity issue. Please check the same
+          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+            color: MyTheme.verifyButtonColor,
+            title: 'Error',
+            message:
+                "There seems to be a server/internet connectivity issue. Please check the same",
+            icon: FaIcon(
+              FontAwesomeIcons.timesCircle,
+              color: MyTheme.redColor,
+            ),
+          ));
+        }
+        // Get.showSnackbar(GetBar(
+        //   title: "Error",
+        //   message: "Something went wrong",
+        // ));
+        return null;
       }
-      // Get.showSnackbar(GetBar(
-      //   title: "Error",
-      //   message: "Something went wrong",
-      // ));
-      return null;
+    } else {
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message:
+            "There seems to be a internet connectivity issue. Please check the your connection",
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
     }
   }
 
@@ -189,36 +204,49 @@ class HomeController extends GetxController {
   }
 
   Future<void> getFoodItems(String id) async {
-    try {
-      foodItems.value = await homeService.getMenu(id);
-    } catch (e) {
-      if (foodItems.isNotEmpty && foodItems.first.id == -1) {
-        foodItems.clear();
+    if (await s.isConnected()) {
+      try {
+        foodItems.value = await homeService.getMenu(id);
+      } catch (e) {
+        if (foodItems.isNotEmpty && foodItems.first.id == -1) {
+          foodItems.clear();
+        }
+        if (e.runtimeType != SocketException) {
+          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+            color: MyTheme.verifyButtonColor,
+            title: 'Error',
+            message: e.toString(),
+            icon: FaIcon(
+              FontAwesomeIcons.timesCircle,
+              color: MyTheme.redColor,
+            ),
+          ));
+          // Get.snackbar("Error", e.toString());
+        } else {
+          //There seems to be a server/internet connectivity issue. Please check the same
+          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+            color: MyTheme.verifyButtonColor,
+            title: 'Error',
+            message:
+                "There seems to be a server/internet connectivity issue. Please check the same",
+            icon: FaIcon(
+              FontAwesomeIcons.timesCircle,
+              color: MyTheme.redColor,
+            ),
+          ));
+        }
       }
-      if (e.runtimeType != SocketException) {
-        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-          color: MyTheme.verifyButtonColor,
-          title: 'Error',
-          message: e.toString(),
-          icon: FaIcon(
-            FontAwesomeIcons.timesCircle,
-            color: MyTheme.redColor,
-          ),
-        ));
-        // Get.snackbar("Error", e.toString());
-      } else {
-        //There seems to be a server/internet connectivity issue. Please check the same
-        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-          color: MyTheme.verifyButtonColor,
-          title: 'Error',
-          message:
-              "There seems to be a server/internet connectivity issue. Please check the same",
-          icon: FaIcon(
-            FontAwesomeIcons.timesCircle,
-            color: MyTheme.redColor,
-          ),
-        ));
-      }
+    } else {
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message:
+            "There seems to be a internet connectivity issue. Please check the your connection",
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
     }
   }
 
@@ -231,62 +259,75 @@ class HomeController extends GetxController {
   ];
 
   Future<void> getRestaurants() async {
-    try {
-      await getAddress();
+    if (await s.isConnected()) {
+      try {
+        await getAddress();
 
-      List<RestaurantModel> res = await homeService.getRestaurantWithSort(
-          lat.value, lon.value, selectedMiles.value);
-      print("Got res");
-      ;
-      if (res.isNotEmpty) {
-        print("Res Not Empty");
-        restaurants.value = res;
-      } else {
-        restaurants.value = [];
-      }
-      print("Sorting res");
-      restaurants.sort((a, b) =>
-          double.parse(a.address2).compareTo(double.parse(b.address2)));
-      print("Res Sorted");
+        List<RestaurantModel> res = await homeService.getRestaurantWithSort(
+            lat.value, lon.value, selectedMiles.value);
+        print("Got res");
+        ;
+        if (res.isNotEmpty) {
+          print("Res Not Empty");
+          restaurants.value = res;
+        } else {
+          restaurants.value = [];
+        }
+        print("Sorting res");
+        restaurants.sort((a, b) =>
+            double.parse(a.address2).compareTo(double.parse(b.address2)));
+        print("Res Sorted");
 
-      update();
-    } catch (e) {
-      if (restaurants.isNotEmpty && restaurants.first.id == -1) {
-        restaurants.value = [];
-      }
-      update();
-      timer?.cancel();
-      if (e.runtimeType != SocketException &&
-          lat.value != 0 &&
-          lon.value != 0) {
-        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-          color: MyTheme.verifyButtonColor,
-          title: 'Error',
-          message: "Something went wrong",
-          icon: FaIcon(
-            FontAwesomeIcons.timesCircle,
-            color: MyTheme.redColor,
-          ),
-        ));
-      } else {
-        //There seems to be a server/internet connectivity issue. Please check the same
-        Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-          color: MyTheme.verifyButtonColor,
-          title: 'Error',
-          message:
-              "There seems to be a server/internet connectivity issue. Please check the same",
-          icon: FaIcon(
-            FontAwesomeIcons.timesCircle,
-            color: MyTheme.redColor,
-          ),
-        ));
-      }
-      // Get.showSnackbar(GetBar(
-      //   title: "Server Error",
-      //   message: "Something went wrong",
-      //   duration: Duration(seconds: 1),
-      // ));
+        update();
+      } catch (e) {
+        if (restaurants.isNotEmpty && restaurants.first.id == -1) {
+          restaurants.value = [];
+        }
+        update();
+        timer?.cancel();
+        if (e.runtimeType != SocketException &&
+            lat.value != 0 &&
+            lon.value != 0) {
+          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+            color: MyTheme.verifyButtonColor,
+            title: 'Error',
+            message: "Something went wrong",
+            icon: FaIcon(
+              FontAwesomeIcons.timesCircle,
+              color: MyTheme.redColor,
+            ),
+          ));
+        } else {
+          //There seems to be a server/internet connectivity issue. Please check the same
+          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+            color: MyTheme.verifyButtonColor,
+            title: 'Error',
+            message:
+                "There seems to be a server/internet connectivity issue. Please check the same",
+            icon: FaIcon(
+              FontAwesomeIcons.timesCircle,
+              color: MyTheme.redColor,
+            ),
+          ));
+        }
+        // Get.showSnackbar(GetBar(
+        //   title: "Server Error",
+        //   message: "Something went wrong",
+        //   duration: Duration(seconds: 1),
+        // ));
 
+      }
+    } else {
+      Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+        color: MyTheme.verifyButtonColor,
+        title: 'Error',
+        message:
+            "There seems to be a internet connectivity issue. Please check the your connection",
+        icon: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ));
     }
   }
 

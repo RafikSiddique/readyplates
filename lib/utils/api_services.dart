@@ -1,12 +1,21 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 class ApiService {
   final contentTypeJsonHeader = {'Content-Type': 'application/json'};
+
+  Future<bool> isConnected() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    return connectivityResult != ConnectivityResult.none;
+  }
+
   // http://202.53.174.5:8000/ global
   // http://192.168.29.31:5500/ local
   final String baseUrlheroku = 'https://readyplates.herokuapp.com';
   final String baseUrlLive = "http://202.53.174.5:8000";
-  final String baseUrlLocal = "http://192.168.29.31:5500";
+  final String baseUrlLocal = "http://192.168.29.89:8000";
   final String baseUrlFladdra = "http://192.168.29.31:5500";
-  String get baseUriImage => baseUrlLive;
+  String get baseUriImage => baseUrlLocal;
   String get baseUri => baseUriImage + "/";
 
   Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);

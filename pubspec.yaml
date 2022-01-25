@@ -22,6 +22,7 @@ environment:
 dependencies:
   after_layout: ^1.1.0
   cloud_firestore: ^3.1.6
+  connectivity_plus: ^2.2.0
   cupertino_icons: ^1.0.2
   firebase_core: ^1.10.0
   firebase_messaging: ^11.1.0
