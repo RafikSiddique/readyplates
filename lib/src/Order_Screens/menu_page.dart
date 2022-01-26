@@ -233,7 +233,6 @@ class _MenuPageState extends State<MenuPage> {
                             orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
                                     'Please add at least 1 item to proceed with order',
@@ -249,7 +248,6 @@ class _MenuPageState extends State<MenuPage> {
                               Get.back();
                             } else {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
                                     'Please add at least 1 item to proceed with order',
@@ -269,7 +267,6 @@ class _MenuPageState extends State<MenuPage> {
                                     widget.restaurantModel.id);
                             if (!check) {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
                                     'Please add at least 1 item to proceed with order',

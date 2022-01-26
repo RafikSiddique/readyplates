@@ -407,7 +407,6 @@ class OrderWidget extends StatelessWidget {
                                         } else {
                                           Get.showSnackbar(
                                               MySnackBar.myLoadingSnackBar(
-                                            color: MyTheme.verifyButtonColor,
                                             title: 'Tip',
                                             message: "Please add a tip amount",
                                             icon: Icon(
@@ -567,7 +566,6 @@ class OrderWidget extends StatelessWidget {
                       ));
                 } else {
                   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                    color: MyTheme.verifyButtonColor,
                     title: 'Info',
                     message: "Feedback Already Provided",
                     icon: Icon(

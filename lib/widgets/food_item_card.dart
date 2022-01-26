@@ -108,7 +108,7 @@ class FoodItemCard extends GetView<OrderController> {
                                         if (isEditing == Editing.confirmed) {
                                           Get.showSnackbar(
                                               MySnackBar.myLoadingSnackBar(
-                                            color: MyTheme.verifyButtonColor,
+                                            
                                             title: 'Warning',
                                             message:
                                                 'You cannot decrease any item once the order is confirmed',

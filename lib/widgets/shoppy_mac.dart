@@ -185,7 +185,6 @@ class ShooppymacPage extends StatelessWidget {
                             setStae();
                           } else {
                             Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                              color: MyTheme.verifyButtonColor,
                               title: 'Warning',
                               message:
                                   'You should atleast have one item in cart for booking summary',
@@ -218,7 +217,6 @@ class ShooppymacPage extends StatelessWidget {
                               setStae();
                             } else {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Warning',
                                 message:
                                     'You should atleast have one item in cart for booking summary',
@@ -236,7 +234,6 @@ class ShooppymacPage extends StatelessWidget {
                             }
                           } else {
                             Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                              color: MyTheme.verifyButtonColor,
                               title: 'Warning',
                               message:
                                   'You should atleast have one item in cart for booking summary',
