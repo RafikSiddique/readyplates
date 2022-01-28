@@ -176,11 +176,15 @@ class HomeController extends GetxController {
   }
 
   Future<String> getAddress() async {
-    address.value = await sfHelper.getAddress();
-    lat.value = await sfHelper.getLat();
-    lon.value = await sfHelper.getLon();
-    selectedMiles.value = await sfHelper.getMiles();
-    return address.value;
+    try {
+      address.value = await sfHelper.getAddress();
+      lat.value = await sfHelper.getLat();
+      lon.value = await sfHelper.getLon();
+      selectedMiles.value = await sfHelper.getMiles();
+      return address.value;
+    } catch (e) {
+      return "";
+    }
   }
 
   void search(String q) async {

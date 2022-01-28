@@ -7,6 +7,7 @@ import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class SignupPage extends StatefulWidget {
   static const id = "/signup";
@@ -311,9 +312,13 @@ class _SignupPageState extends State<SignupPage> {
                       builder: (context, child) {
                         return InkWell(
                           onTap: () async {
+                            Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                message: "Loading"));
                             formKey.currentState!.save();
-                            if (formKey.currentState!.validate())
+                            if (formKey.currentState!.validate()) {
                               await controller.register();
+                            }
+                            //Get.back();
                             //Navigator.pushNamed(context, MyRoutes.LoginPage);
                           },
                           child: Container(
