@@ -312,8 +312,23 @@ class _SignupPageState extends State<SignupPage> {
                       builder: (context, child) {
                         return InkWell(
                           onTap: () async {
-                            Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                message: "Loading"));
+                            Get.showSnackbar(
+                              MySnackBar.myLoadingSnackBar(
+                                title: 'Info',
+                                message: "Loading...",
+                                icon: Center(
+                                  child: SizedBox.square(
+                                    dimension: 20,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        color: MyTheme.orangeColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                             formKey.currentState!.save();
                             if (formKey.currentState!.validate()) {
                               await controller.register();
