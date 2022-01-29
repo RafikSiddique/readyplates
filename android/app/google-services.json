@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:621674002284:android:864a607fa67f684f9f6549",
+        "mobilesdk_app_id": "1:621674002284:android:642197cc35ccdd979f6549",
         "android_client_info": {
-          "package_name": "com.apsissolutions.readyplates"
+          "package_name": "com.readyplates"
         }
       },
       "oauth_client": [
@@ -21,9 +21,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyDQETfkVRJRXm10bdpbhO7SBDaw79vwWDU"
-        },
-        {
-          "current_key": "AIzaSyAfxiRI6vsx12PBB-6VsrjbrioHADge8p8"
         }
       ],
       "services": {
@@ -46,9 +43,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:621674002284:android:17d3ad1dae36961e9f6549",
+        "mobilesdk_app_id": "1:621674002284:android:2adc99ee93a69c6a9f6549",
         "android_client_info": {
-          "package_name": "com.apsissolutions.readyplates.restaurant"
+          "package_name": "com.readyplates.restaurant"
         }
       },
       "oauth_client": [
@@ -60,48 +57,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyDQETfkVRJRXm10bdpbhO7SBDaw79vwWDU"
-        },
-        {
-          "current_key": "AIzaSyAfxiRI6vsx12PBB-6VsrjbrioHADge8p8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "621674002284-8aa0809pakjrp46lu6h6k91taofv83nj.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.fladdra.readyplates"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:621674002284:android:02870c871f39225c9f6549",
-        "android_client_info": {
-          "package_name": "com.fladdra.readyplates"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "621674002284-10sppiof62355753rfhjq3d252m6l9jq.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDQETfkVRJRXm10bdpbhO7SBDaw79vwWDU"
-        },
-        {
-          "current_key": "AIzaSyAfxiRI6vsx12PBB-6VsrjbrioHADge8p8"
         }
       ],
       "services": {

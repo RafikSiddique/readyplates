@@ -1,4 +1,4 @@
-package com.apsissolutions.readyplates
+package com.readyplates
 
 import io.flutter.embedding.android.FlutterActivity
 
