@@ -17,7 +17,7 @@ class ApiService {
   final String baseUrlLocal = "http://192.168.29.89:8000";
   final String baseUrlFladdra = "http://192.168.29.31:5500";
   String get baseUriImage => baseUrlLive;
-  String get baseUri => baseUrlCRM + "/";
+  String get baseUri => baseUrlLive + "/";
 
   Uri customers(String path) => Uri.parse(baseUri + "customers/" + path);
 
