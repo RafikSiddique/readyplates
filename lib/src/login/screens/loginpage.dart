@@ -233,7 +233,7 @@ class LoginPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text("Forget Password?",
+                                    Text("Forgot Password?",
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           fontStyle: FontStyle.normal,
