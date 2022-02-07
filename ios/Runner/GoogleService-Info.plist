@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>621674002284-cugujj3e7n6ukp2bt6f4vpvuv8rdtvbl.apps.googleusercontent.com</string>
+	<string>621674002284-kpv35vrpstu6fa79idrs77bplpaug210.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.621674002284-cugujj3e7n6ukp2bt6f4vpvuv8rdtvbl</string>
+	<string>com.googleusercontent.apps.621674002284-kpv35vrpstu6fa79idrs77bplpaug210</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDWQgSZkt4qjj7beavsp2QV6CV7_YUnwMU</string>
+	<string>AIzaSyCehmxrryIOLm1AlKRjPRPMukJeyjwKK6c</string>
 	<key>GCM_SENDER_ID</key>
 	<string>621674002284</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.fladra.readyplates</string>
+	<string>com.readyplates</string>
 	<key>PROJECT_ID</key>
 	<string>readyplates-31cb4</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:621674002284:ios:e8f67f5b535045f99f6549</string>
+	<string>1:621674002284:ios:19cfda2a011e25719f6549</string>
 </dict>
 </plist>
