@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -471,7 +473,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   ),
                                   Text(
                                     bio.event_desc == ""
-                                        ? "No upcoming events"
+                                        ? ""
                                         : "Starts at ${bio.event_start} ",
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.inter(
@@ -551,7 +553,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                           Visibility(
                             visible: isVisible,
                             child: Text(
-                              bio.event_desc == "" ? "" : bio.event_desc,
+                              bio.event_desc == ""
+                                  ? "No upcoming events"
+                                  : bio.event_desc,
                               style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,

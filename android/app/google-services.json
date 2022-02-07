@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:621674002284:android:02870c871f39225c9f6549",
+        "mobilesdk_app_id": "1:621674002284:android:642197cc35ccdd979f6549",
         "android_client_info": {
-          "package_name": "com.fladdra.readyplates"
+          "package_name": "com.readyplates"
         }
       },
       "oauth_client": [
@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAfxiRI6vsx12PBB-6VsrjbrioHADge8p8"
+          "current_key": "AIzaSyDQETfkVRJRXm10bdpbhO7SBDaw79vwWDU"
         }
       ],
       "services": {
@@ -43,9 +43,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:621674002284:android:8932a552828540c49f6549",
+        "mobilesdk_app_id": "1:621674002284:android:2adc99ee93a69c6a9f6549",
         "android_client_info": {
-          "package_name": "com.fladdra.readyplates.restaurant"
+          "package_name": "com.readyplates.restaurant"
         }
       },
       "oauth_client": [
@@ -56,7 +56,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAfxiRI6vsx12PBB-6VsrjbrioHADge8p8"
+          "current_key": "AIzaSyDQETfkVRJRXm10bdpbhO7SBDaw79vwWDU"
         }
       ],
       "services": {

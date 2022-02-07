@@ -108,7 +108,7 @@ class FoodItemCard extends GetView<OrderController> {
                                         if (isEditing == Editing.confirmed) {
                                           Get.showSnackbar(
                                               MySnackBar.myLoadingSnackBar(
-                                            color: MyTheme.verifyButtonColor,
+                                            
                                             title: 'Warning',
                                             message:
                                                 'You cannot decrease any item once the order is confirmed',
@@ -159,9 +159,9 @@ class FoodItemCard extends GetView<OrderController> {
                                                   MyTheme.verifyButtonColor,
                                               titleText: Padding(
                                                 padding:
-                                                    EdgeInsets.only(left: 8),
+                                                    EdgeInsets.only(left: 6),
                                                 child: Text(
-                                                  "Error",
+                                                  "Info",
                                                   style: GoogleFonts.nunito(
                                                     fontStyle: FontStyle.normal,
                                                     fontWeight: FontWeight.bold,
@@ -174,9 +174,9 @@ class FoodItemCard extends GetView<OrderController> {
                                               // title: "Error",
                                               messageText: Padding(
                                                 padding:
-                                                    EdgeInsets.only(left: 8),
+                                                    EdgeInsets.only(left: 6),
                                                 child: Text(
-                                                  "Sorry you cannot add items from 2 Restaurant",
+                                                  "Sorry you cannot add items from 2 Restaurants, remove all items from other Restaurants?",
                                                   style: GoogleFonts.nunito(
                                                     fontStyle: FontStyle.normal,
                                                     fontWeight:
@@ -191,38 +191,48 @@ class FoodItemCard extends GetView<OrderController> {
                                               //     "Sorry you cannot add items from 2 Restaurant",
 
                                               isDismissible: true,
-                                              mainButton: TextButton(
-                                                onPressed: () async {
-                                                  await orderController
-                                                      .removeAllFromRes(
-                                                          restaurantModel.id);
-                                                  CartModel cartModel = CartModel(
-                                                      foodItem:
-                                                          foodItemModel.id.obs,
-                                                      foodName:
-                                                          foodItemModel.name,
-                                                      foodImage:
-                                                          foodItemModel.image1,
-                                                      foodPrice: double.parse(
-                                                              foodItemModel
-                                                                  .cost)
-                                                          .obs,
-                                                      restaurant:
-                                                          restaurantModel.id,
-                                                      user: "",
-                                                      foodQuantity: 1.obs);
-                                                  orderController.cartItems
-                                                      .add(cartModel);
-                                                  orderController
-                                                      .cart(cartModel);
-                                                  Get.back();
-                                                },
-                                                child: Text(
-                                                  "Remove all from other restaurants",
-                                                  style: GoogleFonts.inter(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 15,
-                                                    color: MyTheme.orangeColor,
+                                              mainButton: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 0, right: 4),
+                                                child: TextButton(
+                                                  onPressed: () async {
+                                                    await orderController
+                                                        .removeAllFromRes(
+                                                            restaurantModel.id);
+                                                    CartModel cartModel = CartModel(
+                                                        foodItem: foodItemModel
+                                                            .id.obs,
+                                                        foodName:
+                                                            foodItemModel.name,
+                                                        foodImage: foodItemModel
+                                                            .image1,
+                                                        foodPrice: double.parse(
+                                                                foodItemModel
+                                                                    .cost)
+                                                            .obs,
+                                                        restaurant:
+                                                            restaurantModel.id,
+                                                        user: "",
+                                                        foodQuantity: 1.obs);
+                                                    orderController.cartItems
+                                                        .add(cartModel);
+                                                    orderController
+                                                        .cart(cartModel);
+                                                    Get.back();
+                                                  },
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Remove",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 15,
+                                                        color:
+                                                            MyTheme.orangeColor,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -342,7 +352,11 @@ class FoodItemCard extends GetView<OrderController> {
                           child: Container(
                             width: size.width * 0.5,
                             child: Text(
-                              foodItemModel.stdServingSize,
+                              (foodItemModel.stdServingSize ==
+                                          'Not Applicable' ||
+                                      foodItemModel.stdServingSize == 'Other')
+                                  ? ''
+                                  : foodItemModel.stdServingSize,
                               textAlign: TextAlign.left,
                               style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(
@@ -378,10 +392,12 @@ class FoodItemCard extends GetView<OrderController> {
                             ),
                             ...List.generate(
                               double.parse(foodItemModel.spiceLevel).toInt(),
-                              (index) => Image.asset(
-                                Assets.spice,
-                                color: color(index),
-                              ),
+                              (index) => foodItemModel.category == 'Desserts'
+                                  ? Container()
+                                  : Image.asset(
+                                      Assets.spice,
+                                      color: color(index),
+                                    ),
                             ),
                             Spacer(),
                             Text("\$ " + foodItemModel.cost,

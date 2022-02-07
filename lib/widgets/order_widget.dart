@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -79,7 +81,7 @@ class OrderWidget extends StatelessWidget {
   }
 
   Widget bottomWidget(BuildContext context) {
-    double size = MediaQuery.of(context).size.width;
+    // double size = MediaQuery.of(context).size.width;
     switch (orderModel.status) {
       case OrderState.placed:
         return Column(
@@ -205,73 +207,71 @@ class OrderWidget extends StatelessWidget {
                 // } else{}
                 // await controller.updateStatus(
                 //     orderModel.id, OrderState.completed);
-
+                controller.tipAmountController.clear();
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
+                      buttonPadding: EdgeInsets.only(left: 13, right: 13),
                       actionsAlignment: MainAxisAlignment.center,
+                      contentPadding:
+                          EdgeInsets.only(left: 13, top: 20, bottom: 20),
+                      actionsPadding: EdgeInsets.only(bottom: 5),
+                      titlePadding: EdgeInsets.only(
+                        left: 13,
+                        top: 15,
+                      ),
                       title: Text(
                         'Tip for Restaurant',
-                        style: GoogleFonts.nunito(
-                          color: Colors.black,
+                        style: GoogleFonts.inter(
+                          color: MyTheme.appbartextColor,
                           fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
                         ),
                       ),
                       content: Text(
                         'Do you wish to add a tip?',
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
+                        style: GoogleFonts.nunito(
+                          color: MyTheme.appbartextColor,
                           fontSize: 15,
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
                         ),
                       ),
                       actions: [
                         Elevated(
-                          width: size * 0.23,
-                          backgroundColor: MyTheme.appbackgroundColor,
-                          color: MyTheme.orangeColor,
-                          borderColor: MyTheme.orangeColor,
-                          fontSize: 13,
-                          fontWeight: FontWeight.normal,
-                          text: 'No',
-                          onTap: () async {
-                            await controller.updateStatus(
-                                orderModel.id, OrderState.completed);
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => TipsucessfullPage(
-                                  orderModel: orderModel,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        Elevated(
-                          width: size * 0.23,
+                          height: 44,
+                          width: Get.width * 0.32,
                           backgroundColor: MyTheme.orangeColor,
                           color: MyTheme.appbackgroundColor,
-                          fontSize: 13,
-                          fontWeight: FontWeight.normal,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
                           text: 'Yes',
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           onTap: () {
                             Navigator.pop(context);
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  scrollable: true,
+                                  buttonPadding:
+                                      EdgeInsets.only(left: 13, right: 13),
                                   actionsAlignment: MainAxisAlignment.center,
+                                  contentPadding: EdgeInsets.only(
+                                      left: 13, top: 20, bottom: 20, right: 13),
+                                  actionsPadding: EdgeInsets.only(bottom: 5),
+                                  titlePadding: EdgeInsets.only(
+                                    left: 13,
+                                    top: 15,
+                                  ),
+                                  scrollable: true,
                                   title: Text(
                                     'Enter Tip Amount',
-                                    style: GoogleFonts.nunito(
-                                      color: Colors.black,
+                                    style: GoogleFonts.inter(
+                                      color: MyTheme.appbartextColor,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                     ),
                                   ),
@@ -287,26 +287,15 @@ class OrderWidget extends StatelessWidget {
                                   ),
                                   actions: [
                                     Elevated(
-                                      width: size * 0.23,
-                                      backgroundColor:
-                                          MyTheme.appbackgroundColor,
-                                      color: MyTheme.orangeColor,
-                                      borderColor: MyTheme.orangeColor,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.normal,
-                                      text: 'Cancel',
-                                      onTap: () {
-                                        Get.back();
-                                        controller.tipAmountController.clear();
-                                      },
-                                    ),
-                                    Elevated(
-                                      width: size * 0.23,
+                                      height: 44,
+                                      width: Get.width * 0.32,
                                       backgroundColor: MyTheme.orangeColor,
                                       color: MyTheme.appbackgroundColor,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.normal,
-                                      text: 'Add',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      text: 'Confirm',
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15.0),
                                       onTap: () {
                                         if (controller.tipAmountController.text
                                             .isNotEmpty) {
@@ -315,56 +304,55 @@ class OrderWidget extends StatelessWidget {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
+                                                buttonPadding: EdgeInsets.only(
+                                                    right: 13, left: 13),
                                                 actionsAlignment:
                                                     MainAxisAlignment.center,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 14.5,
+                                                    top: 20,
+                                                    bottom: 20,
+                                                    right: 13),
+                                                actionsPadding: EdgeInsets.only(
+                                                    bottom: 5, left: 2),
+                                                titlePadding: EdgeInsets.only(
+                                                  left: 14.5,
+                                                  top: 15,
+                                                ),
                                                 title: Text(
-                                                  'Confirm tip amount',
-                                                  style: GoogleFonts.nunito(
-                                                    color: Colors.black,
+                                                  'Confirm Tip Amount',
+                                                  style: GoogleFonts.inter(
+                                                    color:
+                                                        MyTheme.appbartextColor,
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.w600,
                                                     fontStyle: FontStyle.normal,
                                                   ),
                                                 ),
                                                 content: Text(
                                                   '\$${controller.tipAmountController.text} will be given as a tip, are you sure?',
-                                                  style: GoogleFonts.inter(
-                                                    color: Colors.black,
+                                                  style: GoogleFonts.nunito(
+                                                    color:
+                                                        MyTheme.appbartextColor,
                                                     fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                                    fontWeight: FontWeight.w600,
                                                     fontStyle: FontStyle.normal,
                                                   ),
                                                 ),
                                                 actions: [
                                                   Elevated(
-                                                    width: size * 0.23,
-                                                    backgroundColor: MyTheme
-                                                        .appbackgroundColor,
-                                                    color: MyTheme.orangeColor,
-                                                    borderColor:
-                                                        MyTheme.orangeColor,
-                                                    fontSize: 13,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    text: 'Cancel',
-                                                    onTap: () {
-                                                      Get.back();
-                                                      controller
-                                                          .tipAmountController
-                                                          .clear();
-                                                    },
-                                                  ),
-                                                  Elevated(
-                                                    width: size * 0.23,
+                                                    height: 44,
+                                                    width: Get.width * 0.35,
                                                     backgroundColor:
                                                         MyTheme.orangeColor,
                                                     color: MyTheme
                                                         .appbackgroundColor,
-                                                    fontSize: 13,
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w600,
                                                     text: 'Confirm',
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 10.0),
                                                     onTap: () async {
                                                       await controller.updateTip(
                                                           orderModel.id,
@@ -391,16 +379,46 @@ class OrderWidget extends StatelessWidget {
                                                           .clear();
                                                     },
                                                   ),
+                                                  Elevated(
+                                                    height: 44,
+                                                    width: Get.width * 0.35,
+                                                    backgroundColor: MyTheme
+                                                        .appbackgroundColor,
+                                                    color: MyTheme.orangeColor,
+                                                    borderColor:
+                                                        MyTheme.orangeColor,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                    text: 'Cancel',
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 10.0),
+                                                    onTap: () {
+                                                      Get.back();
+                                                      controller
+                                                          .tipAmountController
+                                                          .clear();
+                                                    },
+                                                  ),
                                                 ],
                                               );
                                             },
                                           );
                                         } else {
-                                          Get.snackbar(
-                                            "Tip amount",
-                                            "Please add amount",
-                                            backgroundColor: Colors.white,
-                                          );
+                                          Get.showSnackbar(
+                                              MySnackBar.myLoadingSnackBar(
+                                            title: 'Tip',
+                                            message: "Please add a tip amount",
+                                            icon: Icon(
+                                              Icons.error_outline_rounded,
+                                              color: MyTheme.blueColor,
+                                            ),
+                                          ));
+                                          // Get.snackbar(
+                                          //   "Tip",
+                                          //   "Please add amount",
+                                          //   backgroundColor: Colors.white,
+                                          // );
                                         } // await controller.updateStatus(
                                         //     orderModel.id,
                                         //     OrderState.completed);
@@ -416,9 +434,49 @@ class OrderWidget extends StatelessWidget {
                                         // controller.tipAmountController.clear();
                                       },
                                     ),
+                                    Elevated(
+                                      height: 44,
+                                      width: Get.width * 0.32,
+                                      backgroundColor:
+                                          MyTheme.appbackgroundColor,
+                                      color: MyTheme.orangeColor,
+                                      borderColor: MyTheme.orangeColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      text: 'Cancel',
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      onTap: () {
+                                        Get.back();
+                                        controller.tipAmountController.clear();
+                                      },
+                                    ),
                                   ],
                                 );
                               },
+                            );
+                          },
+                        ),
+                        Elevated(
+                          height: 44,
+                          width: Get.width * 0.32,
+                          backgroundColor: MyTheme.appbackgroundColor,
+                          color: MyTheme.orangeColor,
+                          borderColor: MyTheme.orangeColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          text: 'No',
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          onTap: () async {
+                            await controller.updateStatus(
+                                orderModel.id, OrderState.completed);
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => TipsucessfullPage(
+                                  orderModel: orderModel,
+                                ),
+                              ),
                             );
                           },
                         ),
@@ -508,7 +566,6 @@ class OrderWidget extends StatelessWidget {
                       ));
                 } else {
                   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                    color: MyTheme.verifyButtonColor,
                     title: 'Info',
                     message: "Feedback Already Provided",
                     icon: Icon(

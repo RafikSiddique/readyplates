@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -43,7 +45,7 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   final orderController = Get.find<OrderController>();
 
-  List<String> categories = ["Starter", "Main Course", "Desserts", "Sides"];
+  // List<String> categories = ["Starter", "Main Course", "Desserts", "Sides"];
 
   @override
   Widget build(BuildContext context) {
@@ -161,17 +163,21 @@ class _MenuPageState extends State<MenuPage> {
                       physics: BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          for (var i = 0; i < categories.length; i++)
+                          for (var i = 0;
+                              i < orderController.categories.length;
+                              i++)
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (widget.controller.foodItems
-                                    .any((p0) => p0.category == categories[i]))
+                                if (widget.controller.foodItems.any((p0) =>
+                                    p0.category ==
+                                    orderController.categories[i]))
                                   Padding(
                                     padding:
                                         EdgeInsets.only(left: 10.0, top: 15),
                                     child: Text(
-                                      categories[i].toUpperCase(),
+                                      orderController.categories[i]
+                                          .toUpperCase(),
                                       style: GoogleFonts.inter(
                                         fontSize: 15,
                                         fontStyle: FontStyle.normal,
@@ -188,7 +194,8 @@ class _MenuPageState extends State<MenuPage> {
                                     shrinkWrap: true,
                                     children: widget.controller.foodItems
                                         .where((p0) =>
-                                            p0.category == categories[i])
+                                            p0.category ==
+                                            orderController.categories[i])
                                         .map(
                                       (e) {
                                         return FoodItemCard(
@@ -212,7 +219,7 @@ class _MenuPageState extends State<MenuPage> {
                                     widget.restaurantModel.id))
                             ? MyTheme.appbackgroundColor
                             : MyTheme.appbackgroundColor.withOpacity(0.7),
-                        text: "Proceed to Booking",
+                        text: "Proceed to Order",
                         width: double.infinity,
                         backgroundColor: (widget.isEditing != Editing.none
                                 ? orderController.orderEdit.isNotEmpty
@@ -226,10 +233,9 @@ class _MenuPageState extends State<MenuPage> {
                             orderController.calclateTotal(true);
                             if (orderController.orderEdit.isEmpty) {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
-                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                    'Please add at least 1 item to proceed with order',
                                 icon: Icon(
                                   Icons.warning_amber_rounded,
                                   color: MyTheme.orangelightColor,
@@ -242,10 +248,9 @@ class _MenuPageState extends State<MenuPage> {
                               Get.back();
                             } else {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
-                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                    'Please add at least 1 item to proceed with order',
                                 icon: Icon(
                                   Icons.warning_amber_rounded,
                                   color: MyTheme.orangelightColor,
@@ -262,10 +267,9 @@ class _MenuPageState extends State<MenuPage> {
                                     widget.restaurantModel.id);
                             if (!check) {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Please add an item',
                                 message:
-                                    'At least add atleast 1 item from this restaurant to proceed to booking',
+                                    'Please add at least 1 item to proceed with order',
                                 icon: Icon(
                                   Icons.warning_amber_rounded,
                                   color: MyTheme.orangelightColor,

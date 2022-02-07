@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -183,7 +185,6 @@ class ShooppymacPage extends StatelessWidget {
                             setStae();
                           } else {
                             Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                              color: MyTheme.verifyButtonColor,
                               title: 'Warning',
                               message:
                                   'You should atleast have one item in cart for booking summary',
@@ -216,7 +217,6 @@ class ShooppymacPage extends StatelessWidget {
                               setStae();
                             } else {
                               Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                                color: MyTheme.verifyButtonColor,
                                 title: 'Warning',
                                 message:
                                     'You should atleast have one item in cart for booking summary',
@@ -234,7 +234,6 @@ class ShooppymacPage extends StatelessWidget {
                             }
                           } else {
                             Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                              color: MyTheme.verifyButtonColor,
                               title: 'Warning',
                               message:
                                   'You should atleast have one item in cart for booking summary',

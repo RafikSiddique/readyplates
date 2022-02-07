@@ -9,7 +9,7 @@ class MySnackBar {
     required String message,
     int duration = 3,
     SnackPosition snackPosition = SnackPosition.TOP,
-    Color color = Colors.white,
+    // Color color = Colors.white,
     Widget? icon,
   }) {
     return GetBar(
@@ -39,7 +39,7 @@ class MySnackBar {
       ),
       duration: Duration(seconds: duration),
       snackPosition: snackPosition,
-      backgroundColor: color,
+      backgroundColor: MyTheme.verifyButtonColor,
       icon: Padding(padding: EdgeInsets.only(left: 12), child: icon),
     );
   }

@@ -132,7 +132,6 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                         Get.find<OrderController>().editOrders();
                       else
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          color: MyTheme.verifyButtonColor,
                           title: 'Warning',
                           message:
                               'Please add atleast one item to complete the order',
@@ -150,7 +149,6 @@ class _BottomcontainerState extends State<Bottomcontainer> {
                             .order(widget.restaurantModel);
                       } else
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          color: MyTheme.verifyButtonColor,
                           title: 'Warning',
                           message:
                               'Please add atleast one item to complete the order',

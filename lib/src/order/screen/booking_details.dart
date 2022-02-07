@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -60,9 +62,9 @@ class BookingDetails extends GetView<OrderController> {
                   controller.numberOfPeople--;
                 } else {
                   Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                    color: MyTheme.verifyButtonColor,
                     title: 'Warning',
-                    message: 'here should be atleast one person',
+                    message:
+                        'PAX qty should be minimum 1 to proceed with order confirmation',
                     icon: Icon(
                       Icons.warning_amber_rounded,
                       color: MyTheme.orangelightColor,
@@ -179,7 +181,6 @@ class BookingDetails extends GetView<OrderController> {
                       } else {
                         Get.back();
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          color: MyTheme.verifyButtonColor,
                           title: 'Info',
                           message:
                               "The restaurant is unavailable at the selected time\nPlease select time between ${restaurantModel.start_time} and ${restaurantModel.end_time}",
@@ -274,6 +275,8 @@ class BookingDetails extends GetView<OrderController> {
                     child: InkWell(
                       onTap: () async {
                         DateTime? dt = await showDatePicker(
+                          confirmText: 'Ok',
+                          cancelText: 'Cancel',
                           context: context,
                           initialDate: controller.selectedDate.value,
                           firstDate: DateTime.now(),
@@ -304,6 +307,15 @@ class BookingDetails extends GetView<OrderController> {
                           print("Failed");
                           print("Selected Day: " +
                               DateFormat(DateFormat.WEEKDAY).format(dt!));
+                          Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                            title: 'Info',
+                            message:
+                                "The restaurant is closed at selected Day\nRestaurant open days are \n${restaurantModel.open_days.join(', ')}",
+                            icon: Icon(
+                              Icons.error_outline_rounded,
+                              color: MyTheme.blueColor,
+                            ),
+                          ));
                         }
                       },
                       child: Row(
@@ -485,9 +497,8 @@ class BookingDetails extends GetView<OrderController> {
                       //   ),
                       // ));
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                        color: MyTheme.verifyButtonColor,
-                        title: 'Booking',
-                        message: "Confirming booking",
+                        title: 'Order Info',
+                        message: "Date and Time selected successfully",
                         icon: Center(
                           child: SizedBox.square(
                             dimension: 20,
@@ -549,7 +560,6 @@ class BookingDetails extends GetView<OrderController> {
                               ));
                             } else { */
                         Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                          color: MyTheme.verifyButtonColor,
                           title: 'Info',
                           message:
                               "The restaurant has stopped taking order for now,\nPlease try again later",
@@ -587,7 +597,6 @@ class BookingDetails extends GetView<OrderController> {
                       } */
                     } else {
                       Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                        color: MyTheme.verifyButtonColor,
                         title: 'Info',
                         message:
                             "The restaurant is closed at selected time\nThe restaurant is open between ${restaurantModel.start_time}-${restaurantModel.end_time}\nOn ${restaurantModel.open_days.join(', ')}",
@@ -606,7 +615,6 @@ class BookingDetails extends GetView<OrderController> {
                     }
                   } else {
                     Get.showSnackbar(MySnackBar.myLoadingSnackBar(
-                      color: MyTheme.verifyButtonColor,
                       title: 'Error',
                       message: 'Please select a time after current time',
                       icon: FaIcon(

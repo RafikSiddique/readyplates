@@ -1,5 +1,3 @@
-// import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -258,8 +256,7 @@ class CreditCardDetailsPage extends StatelessWidget {
                   ),
                   items: [
                     DropdownMenuItem(child: Text(""), value: ""),
-                    DropdownMenuItem(
-                        child: Text("United State"), value: "United State"),
+                    DropdownMenuItem(child: Text("USA"), value: "USA"),
                   ],
                   onChanged: (newValue) {},
                 ),

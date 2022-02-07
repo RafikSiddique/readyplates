@@ -7,6 +7,7 @@ import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
+import 'package:readyplates/widgets/snackbar.dart';
 
 class SignupPage extends StatefulWidget {
   static const id = "/signup";
@@ -311,9 +312,28 @@ class _SignupPageState extends State<SignupPage> {
                       builder: (context, child) {
                         return InkWell(
                           onTap: () async {
+                            Get.showSnackbar(
+                              MySnackBar.myLoadingSnackBar(
+                                title: 'Info',
+                                message: "Loading...",
+                                icon: Center(
+                                  child: SizedBox.square(
+                                    dimension: 20,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        color: MyTheme.orangeColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                             formKey.currentState!.save();
-                            if (formKey.currentState!.validate())
+                            if (formKey.currentState!.validate()) {
                               await controller.register();
+                            }
+                            //Get.back();
                             //Navigator.pushNamed(context, MyRoutes.LoginPage);
                           },
                           child: Container(
@@ -325,8 +345,6 @@ class _SignupPageState extends State<SignupPage> {
                               // color: Color(0xff222831),
                               color: (controller.fNamController.text.isEmpty ||
                                       controller.lNameController.text.isEmpty ||
-                                      controller.gender.isEmpty ||
-                                      controller.dobController.text.isEmpty ||
                                       controller
                                           .usernameController.text.isEmpty ||
                                       controller.mobController.text.isEmpty ||
@@ -351,9 +369,6 @@ class _SignupPageState extends State<SignupPage> {
                                                 .fNamController.text.isEmpty ||
                                             controller
                                                 .lNameController.text.isEmpty ||
-                                            controller.gender.isEmpty ||
-                                            controller
-                                                .dobController.text.isEmpty ||
                                             controller.usernameController.text
                                                 .isEmpty ||
                                             controller
