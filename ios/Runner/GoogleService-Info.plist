@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>621674002284-kpv35vrpstu6fa79idrs77bplpaug210.apps.googleusercontent.com</string>
+	<string>621674002284-g5l6kfmvjrku8sg6nmu35imfudml3k79.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.621674002284-kpv35vrpstu6fa79idrs77bplpaug210</string>
+	<string>com.googleusercontent.apps.621674002284-g5l6kfmvjrku8sg6nmu35imfudml3k79</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCehmxrryIOLm1AlKRjPRPMukJeyjwKK6c</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.readyplates</string>
+	<string>com.readyplates.app</string>
 	<key>PROJECT_ID</key>
 	<string>readyplates-31cb4</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:621674002284:ios:19cfda2a011e25719f6549</string>
+	<string>1:621674002284:ios:3f6decb7d95098099f6549</string>
 </dict>
 </plist>
