@@ -37,6 +37,8 @@
 	<string>For Map</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To enable map</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To Upload the feedback image</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
