@@ -8,6 +8,8 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/imagewidget.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../utils/routes.dart';
+
 class Tellafriend extends StatelessWidget {
   static const id = "/tellafriend";
   final bool isHome;
@@ -17,7 +19,8 @@ class Tellafriend extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAllNamed(LandingPage.id);
+        Routes.pushAndRemoveUntil(page: LandingPage());
+
         return true;
       },
       child: Scaffold(
@@ -156,7 +159,7 @@ class Tellafriend extends StatelessWidget {
                                         BorderSide(color: Colors.transparent))),
                           ),
                           onPressed: () {
-                            Get.offAllNamed(LandingPage.id);
+                            Routes.pushAndRemoveUntil(page: LandingPage());
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 15.0),

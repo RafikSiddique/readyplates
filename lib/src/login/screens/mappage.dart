@@ -20,7 +20,13 @@ import 'package:uuid/uuid.dart';
 class MapPage extends StatefulWidget {
   final bool isHome;
   final LatLng latLng;
-  MapPage({required this.isHome, required this.latLng});
+  final Widget? nextPage;
+  final bool isLoggedIn;
+  MapPage(
+      {required this.isHome,
+      required this.latLng,
+      this.nextPage,
+      required this.isLoggedIn});
   @override
   State<MapPage> createState() => _MapPageState();
 }
@@ -385,10 +391,13 @@ class _MapPageState extends State<MapPage> {
                                         authController.address.value);
                                     c.getAddress();
                                     c.getRestaurants();
+
                                     authController.gotoHome(
                                         latLng.latitude,
                                         latLng.longitude,
-                                        authController.address.value);
+                                        authController.address.value,
+                                        isLoggedIn: widget.isLoggedIn,
+                                        nextPage: widget.nextPage);
                                   },
                                   child: Text('NEXT',
                                       style: GoogleFonts.inter(

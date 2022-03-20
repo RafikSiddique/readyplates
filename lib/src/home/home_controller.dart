@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:readyplates/models/food_item_model.dart';
@@ -83,6 +84,7 @@ class HomeController extends GetxController {
         ),
       ));
     }
+    return null;
   }
 
   Timer? timer;

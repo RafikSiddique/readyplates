@@ -10,8 +10,10 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/widgets/form_field.dart';
 
 class CreditCardDetailsPage extends StatelessWidget {
+  final Widget? nextPage;
   const CreditCardDetailsPage({
     Key? key,
+    this.nextPage,
   }) : super(key: key);
 
   @override
@@ -359,7 +361,7 @@ class CreditCardDetailsPage extends StatelessWidget {
                       ),
                     ),
                   );
-                  await Get.find<AuthController>().setCardDetails();
+                  await Get.find<AuthController>().setCardDetails(nextPage: nextPage);
 
 /*                   if (isOrderComplete) {
                     Get.find<OrderController>()

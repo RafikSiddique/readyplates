@@ -14,12 +14,13 @@ import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/food_item_card.dart';
 import 'package:readyplates/widgets/snackbar.dart';
 
 class MenuPage extends StatefulWidget {
-  static const id = "/menupage";
+  static const id = "menupage";
   final RestaurantModel restaurantModel;
   final bool isAddItem;
   late HomeController controller;
@@ -55,8 +56,8 @@ class _MenuPageState extends State<MenuPage> {
       onWillPop: () async {
         if (widget.isEditing != Editing.none) {
           if (orderController.orderEdit.isEmpty) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, LandingPage.id, (route) => false);
+            Routes.pushAndRemoveUntil(page: LandingPage());
+
             return true;
           } else {
             return true;
@@ -65,8 +66,7 @@ class _MenuPageState extends State<MenuPage> {
           if (Navigator.canPop(context)) {
             Navigator.pop(context);
           } else {
-            Navigator.pushNamedAndRemoveUntil(
-                context, LandingPage.id, (route) => false);
+            Routes.pushAndRemoveUntil(page: LandingPage());
           }
           return true;
         }

@@ -14,6 +14,7 @@ import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 
 class RestaurantDetails extends StatefulWidget {
@@ -582,13 +583,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               widget.controller.getFoodItems(
                                   widget.restaurantModel.id.toString());
                               Get.find<OrderController>().getCart();
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) => MenuPage(
-                                        restaurantModel:
-                                            widget.restaurantModel),
-                                  ));
+                              Routes.push(
+                                  page: MenuPage(
+                                      restaurantModel: widget.restaurantModel));
                             },
                           ),
                           SizedBox(

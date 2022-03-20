@@ -14,15 +14,15 @@ import 'package:readyplates/widgets/readyplates.dart';
 import 'package:readyplates/widgets/snackbar.dart';
 
 class LoginPage extends StatelessWidget {
-  static const id = "/loginpage";
-
   final AuthController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
   final ScrollController scrollController = ScrollController();
+  final Widget? nextPage;
   final bool isChangepass;
   LoginPage({
     Key? key,
     this.isChangepass = false,
+    this.nextPage,
   }) : super(key: key);
 
   @override
@@ -256,7 +256,7 @@ class LoginPage extends StatelessWidget {
                                     _formKey.currentState!.save();
                                     if (_formKey.currentState!.validate()) {
                                       await controller.login(isChangepass,
-                                          issignup: false);
+                                          issignup: false, nextPage: nextPage);
                                     } else {
                                       Get.showSnackbar(
                                           MySnackBar.myLoadingSnackBar(

@@ -8,6 +8,7 @@ import 'package:readyplates/src/Order_Screens/restaurant_detail.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 
 class RestaurantCard extends GetView<HomeController> {
   final RestaurantModel restaurantModel;
@@ -80,13 +81,8 @@ class RestaurantCard extends GetView<HomeController> {
         child: InkWell(
           onTap: () async {
             controller.timer?.cancel();
-            Navigator.push(
-                context,
-                CupertinoPageRoute(
-                    settings: RouteSettings(name: 'details'),
-                    builder: (context) => RestaurantDetails(
-                          restaurantModel: restaurantModel,
-                        )));
+            Routes.push(
+                page: RestaurantDetails(restaurantModel: restaurantModel));
           },
           child: Padding(
             padding: EdgeInsets.all(media.size.width * 0.025),

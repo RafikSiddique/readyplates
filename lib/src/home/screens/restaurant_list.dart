@@ -13,7 +13,8 @@ import 'package:readyplates/utils/my_color.dart';
 
 class ShopScreen extends StatefulWidget {
   static const id = "/shop";
-  ShopScreen({Key? key}) : super(key: key);
+  final bool isLoggedIn;
+  ShopScreen({Key? key, required this.isLoggedIn}) : super(key: key);
 
   @override
   State<ShopScreen> createState() => _ShopScreenState();
@@ -88,8 +89,11 @@ class _ShopScreenState extends State<ShopScreen> {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) =>
-                              MapPage(isHome: false, latLng: latLng),
+                          builder: (context) => MapPage(
+                            isHome: false,
+                            isLoggedIn: widget.isLoggedIn,
+                            latLng: latLng,
+                          ),
                         ));
                   }
                 }

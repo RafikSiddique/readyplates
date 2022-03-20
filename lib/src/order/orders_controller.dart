@@ -20,6 +20,8 @@ import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:readyplates/widgets/snackbar.dart';
 
+import '../../utils/routes.dart';
+
 class OrderController extends GetxController {
   final Orderservices services = Orderservices();
   final SharedPreferenceHelper sfHelper = Get.find();
@@ -168,20 +170,22 @@ class OrderController extends GetxController {
   Future<void> getCart() async {
     if (await s.isConnected()) {
       try {
-        String id = await sfHelper.getUserId();
-        List<CartApiModel> listOfApi = await services.getCart(id);
-        List<CartModel> models = listOfApi
-            .where((element) => element.foodQuantity != 0)
-            .map((e) => CartModel(
-                user: id,
-                foodItem: e.foodItem.id.obs,
-                foodName: e.foodItem.name,
-                foodQuantity: e.foodQuantity.obs,
-                foodImage: e.foodImage,
-                foodPrice: e.foodPrice.obs,
-                restaurant: e.restaurant))
-            .toList();
-        cartItems.value = models;
+        String? id = await sfHelper.getUserId();
+        if (id != null) {
+          List<CartApiModel> listOfApi = await services.getCart(id);
+          List<CartModel> models = listOfApi
+              .where((element) => element.foodQuantity != 0)
+              .map((e) => CartModel(
+                  user: id,
+                  foodItem: e.foodItem.id.obs,
+                  foodName: e.foodItem.name,
+                  foodQuantity: e.foodQuantity.obs,
+                  foodImage: e.foodImage,
+                  foodPrice: e.foodPrice.obs,
+                  restaurant: e.restaurant))
+              .toList();
+          cartItems.value = models;
+        } else {}
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
@@ -224,13 +228,13 @@ class OrderController extends GetxController {
     return ((number * mod).round().toDouble() / mod);
   }
 
-  void increment(int id, int resId) async {
+  void increment(int id, int resId, Widget nextPage) async {
     CartModel cartModel = getCartItem(id);
     getCartItem(id).foodPrice.value += roundUptoDigits(
         cartModel.foodPrice.value / cartModel.foodQuantity.value);
     getCartItem(id).foodQuantity++;
     calclateTotal();
-    cart(getCartItem(id));
+    cart(getCartItem(id), nextPage: nextPage);
   }
 
   void decrementEdit(int id, [bool isRemoval = false]) {
@@ -265,7 +269,8 @@ class OrderController extends GetxController {
     calclateTotal(true);
   }
 
-  void decrement(int id, int resId, [bool isRemoval = false]) async {
+  void decrement(int id, int resId,
+      {bool isRemoval = false, required Widget nextPage}) async {
     if (!isRemoval) {
       if (getCartItem(id).foodQuantity.value > 1) {
         CartModel cartModel = getCartItem(id);
@@ -274,14 +279,14 @@ class OrderController extends GetxController {
         getCartItem(id).foodQuantity--;
         calclateTotal();
 
-        await cart(getCartItem(id));
+        await cart(getCartItem(id), nextPage: nextPage);
       } else {
         CartModel item = getCartItem(id);
         item.foodQuantity = 0.obs;
         cartItems.remove(item);
         calclateTotal();
 
-        await cart(item);
+        await cart(item, nextPage: nextPage);
       }
     } else {
       CartModel item = getCartItem(id);
@@ -289,7 +294,7 @@ class OrderController extends GetxController {
       item.foodPrice = 0.0.obs;
       cartItems.remove(item);
       calclateTotal();
-      await cart(item);
+      await cart(item, nextPage: nextPage);
     }
   }
 
@@ -301,14 +306,18 @@ class OrderController extends GetxController {
     return orderEdit.firstWhere((element) => element.foodItem.value == id);
   }
 
-  Future<void> cart(CartModel cartModel) async {
+  Future<void> cart(CartModel cartModel, {required Widget nextPage}) async {
     if (await s.isConnected()) {
       try {
-        String id = await sfHelper.getUserId();
-        cartModel.user = id;
+        String? id = await sfHelper.getUserId();
+        if (id != null) {
+          cartModel.user = id;
 
-        await services.addToCartApi(cartModel);
-        calclateTotal();
+          await services.addToCartApi(cartModel);
+          calclateTotal();
+        } else {
+          Get.showSnackbar(MySnackBar.loginSnackBar(nextPage: nextPage));
+        }
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
@@ -346,20 +355,22 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> removeAllFromRes(int resId) async {
+  Future<void> removeAllFromRes(int resId, Widget nextPage) async {
     if (await s.isConnected()) {
       try {
-        String id = await sfHelper.getUserId();
-        List<CartModel> cartL =
-            cartItems.where((p0) => p0.restaurant != resId).toList();
-        cartL.forEach((e) {
-          CartModel element = getCartItem(e.foodItem.value);
-          element.user = id;
-          element.foodQuantity = 0.obs;
-          cart(element);
-        });
-        cartItems.clear();
-        calclateTotal();
+        String? id = await sfHelper.getUserId();
+        if (id != null) {
+          List<CartModel> cartL =
+              cartItems.where((p0) => p0.restaurant != resId).toList();
+          cartL.forEach((e) {
+            CartModel element = getCartItem(e.foodItem.value);
+            element.user = id;
+            element.foodQuantity = 0.obs;
+            cart(element, nextPage: nextPage);
+          });
+          cartItems.clear();
+          calclateTotal();
+        }
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
@@ -400,41 +411,43 @@ class OrderController extends GetxController {
   Future<void> order(RestaurantModel restaurantModel) async {
     if (await s.isConnected()) {
       try {
-        String id = await sfHelper.getUserId();
-        OrderModel orderModel = OrderModel(
-            user: int.parse(id),
-            payment: "",
-            feedbackstat: "",
-            orderState: OrderState.placed,
-            restaurant: restaurantModel.id,
-            orderitems: cartItems
-                .map((element) => OrderFoodItem(
-                    id: element.foodItem.value,
-                    count: element.foodQuantity.value,
-                    price: element.foodPrice.value))
-                .toList(),
-            noOfPeople: numberOfPeople.value,
-            table: null,
-            tax: 50,
-            totalprice: calclateTotal(),
-            date: DateFormat(DateFormat.YEAR_MONTH_DAY)
-                .format(selectedDate.value),
-            time: DateFormat(DateFormat.HOUR24_MINUTE)
-                .format(selectedDate.value));
-        OrderModelApi orderModelApi = await services.orderapi(orderModel);
-        print(orderModelApi);
-        cartApiItems.clear();
-        cartItems.forEach((e) async {
-          CartModel element = getCartItem(e.foodItem.value);
-          element.foodQuantity.value = 0;
-          element.user = id;
-          await cart(element);
-        });
-        cartItems.clear();
-        calclateTotal();
-        await getorder();
-        Get.offAllNamed(LandingPage.id);
-        Get.find<HomeController>().currentIndex.value = 2;
+        String? id = await sfHelper.getUserId();
+        if (id != null) {
+          OrderModel orderModel = OrderModel(
+              user: int.parse(id),
+              payment: "",
+              feedbackstat: "",
+              orderState: OrderState.placed,
+              restaurant: restaurantModel.id,
+              orderitems: cartItems
+                  .map((element) => OrderFoodItem(
+                      id: element.foodItem.value,
+                      count: element.foodQuantity.value,
+                      price: element.foodPrice.value))
+                  .toList(),
+              noOfPeople: numberOfPeople.value,
+              table: null,
+              tax: 50,
+              totalprice: calclateTotal(),
+              date: DateFormat(DateFormat.YEAR_MONTH_DAY)
+                  .format(selectedDate.value),
+              time: DateFormat(DateFormat.HOUR24_MINUTE)
+                  .format(selectedDate.value));
+          OrderModelApi orderModelApi = await services.orderapi(orderModel);
+          print(orderModelApi);
+          cartApiItems.clear();
+          cartItems.forEach((e) async {
+            CartModel element = getCartItem(e.foodItem.value);
+            element.foodQuantity.value = 0;
+            element.user = id;
+            await cart(element, nextPage: LandingPage());
+          });
+          cartItems.clear();
+          calclateTotal();
+          await getorder();
+          Routes.pushAndRemoveUntil(page: LandingPage());
+          Get.find<HomeController>().currentIndex.value = 2;
+        }
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
@@ -476,26 +489,28 @@ class OrderController extends GetxController {
   Future<void> getorder() async {
     if (await s.isConnected()) {
       try {
-        String id = await sfHelper.getUserId();
-        final orderList = await services.getorder(id);
-        active.value = orderList
-            .where((element) => element.status == OrderState.placed)
-            .toList();
-        active.sort((a, b) => b.id.compareTo(a.id));
+        String? id = await sfHelper.getUserId();
+        if (id != null) {
+          final orderList = await services.getorder(id);
+          active.value = orderList
+              .where((element) => element.status == OrderState.placed)
+              .toList();
+          active.sort((a, b) => b.id.compareTo(a.id));
 
-        inProgress.value = orderList
-            .where((element) => element.status == OrderState.inProgress)
-            .toList();
-        inProgress.sort((a, b) => b.id.compareTo(a.id));
+          inProgress.value = orderList
+              .where((element) => element.status == OrderState.inProgress)
+              .toList();
+          inProgress.sort((a, b) => b.id.compareTo(a.id));
 
-        Served.value = orderList
-            .where((element) => element.status == OrderState.Served)
-            .toList();
-        Served.sort((a, b) => b.id.compareTo(a.id));
+          Served.value = orderList
+              .where((element) => element.status == OrderState.Served)
+              .toList();
+          Served.sort((a, b) => b.id.compareTo(a.id));
 
-        ended.value =
-            orderList.where((element) => element.status.index > 2).toList();
-        ended.sort((a, b) => b.id.compareTo(a.id));
+          ended.value =
+              orderList.where((element) => element.status.index > 2).toList();
+          ended.sort((a, b) => b.id.compareTo(a.id));
+        }
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
@@ -759,26 +774,28 @@ class OrderController extends GetxController {
   Future<void> feedbacks(String resId, String orderid) async {
     if (await s.isConnected()) {
       try {
-        String userid = await sfHelper.getUserId();
-        await services.feedbackapi(
-          resId,
-          userid,
-          orderid,
-          rating1.toString(),
-          rating2.toString(),
-          rating3.toString(),
-          rating4.toString(),
-          feedback.text,
-          imgs,
-        );
-        await updateFeedback(orderid, 1);
-        rating1 = 0;
-        rating2 = 0;
-        rating3 = 0;
-        rating4 = 0;
-        feedback.clear();
-        imgs = null;
-        Get.offAllNamed(Tellafriend.id);
+        String? userid = await sfHelper.getUserId();
+        if (userid != null) {
+          await services.feedbackapi(
+            resId,
+            userid,
+            orderid,
+            rating1.toString(),
+            rating2.toString(),
+            rating3.toString(),
+            rating4.toString(),
+            feedback.text,
+            imgs,
+          );
+          await updateFeedback(orderid, 1);
+          rating1 = 0;
+          rating2 = 0;
+          rating3 = 0;
+          rating4 = 0;
+          feedback.clear();
+          imgs = null;
+          Get.offAllNamed(Tellafriend.id);
+        }
       } catch (e) {
         if (e.runtimeType != SocketException) {
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
@@ -828,7 +845,7 @@ class OrderController extends GetxController {
           }
         });
         await getorder();
-        Get.offAllNamed(LandingPage.id);
+        Routes.pushAndRemoveUntil(page: LandingPage());
         Get.find<HomeController>().currentIndex.value = 2;
       } catch (e) {
         if (e.runtimeType != SocketException) {

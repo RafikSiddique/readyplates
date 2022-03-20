@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 
 class PaymentsucessfulPage extends StatelessWidget {
   static const id = "/PaymentsucessfulPage";
@@ -14,11 +15,11 @@ class PaymentsucessfulPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 5), () {
-      Get.offAllNamed(LandingPage.id);
+      Routes.pushAndRemoveUntil(page: LandingPage());
     });
     return WillPopScope(
       onWillPop: () async {
-        Get.offAllNamed(LandingPage.id);
+        Routes.pushAndRemoveUntil(page: LandingPage());
         return true;
       },
       child: Scaffold(

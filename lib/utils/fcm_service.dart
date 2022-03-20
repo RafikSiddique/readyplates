@@ -110,9 +110,9 @@ class FirebaseMessagingService extends ApiService {
   }
 
   Future<void> setToken(String token) async {
-    String userId = await SharedPreferenceHelper().getUserId();
+    String? userId = await SharedPreferenceHelper().getUserId();
     try {
-      if (userId != "") {
+      if (userId!=null && userId != "") {
         FirebaseFirestore.instance.collection('customer').doc(userId).set(
           {
             DateTime.now().toString(): token,

@@ -9,16 +9,17 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/Order_Screens/index.dart';
 import 'package:readyplates/src/home/home_controller.dart';
 import 'package:readyplates/src/home/screens/index.dart';
+import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/auth_service.dart';
 import 'package:readyplates/src/login/screens/ChangePassword2.dart';
 import 'package:readyplates/src/login/screens/index.dart';
-import 'package:readyplates/src/home/screens/landing_page.dart';
 import 'package:readyplates/src/login/screens/otp_verify_page.dart';
 import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/api_services.dart';
 import 'package:readyplates/utils/fcm_service.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:readyplates/widgets/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -128,50 +129,53 @@ class AuthController extends GetxController {
 
   String? id;
 
-  Future<void> setCardDetails() async {
+  Future<void> setCardDetails({Widget? nextPage}) async {
     try {
       //TODO: call card save API
       bool permitted = await getPermission();
       if (permitted) {
         Position position = await Geolocator.getCurrentPosition();
         LatLng latLng = LatLng(position.latitude, position.longitude);
-        Get.to(() => MapPage(
-              isHome: false,
-              latLng: latLng,
-            ));
+        Routes.push(
+            page: MapPage(
+          isHome: false,
+          latLng: latLng,
+          isLoggedIn: true,
+        ));
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> login(bool changedPassword, {required bool issignup}) async {
+  Future<void> login(bool changedPassword,
+      {required bool issignup, Widget? nextPage}) async {
     if (await s.isConnected()) {
       try {
         isLoading.value = true;
         id = await services.login(
             usernameController.text.toLowerCase(), passwordController.text);
         await sfHelper.setUserId(id!);
-        // uid = id!;
         if (!changedPassword) {
-          // if (implicit) {
-          //   // Get.toNamed(ImagePage.id);
-          // } else {
-
           Get.put(OrderController());
           Get.put(HomeController());
           FirebaseMessagingService();
           if (issignup) {
-            Get.off(() => CreditCardDetailsPage());
+            Routes.pushReplacement(CreditCardDetailsPage(
+              nextPage: nextPage,
+            ));
           } else {
             bool permitted = await getPermission();
             if (permitted) {
               Position position = await Geolocator.getCurrentPosition();
               LatLng latLng = LatLng(position.latitude, position.longitude);
-              Get.to(() => MapPage(
-                    isHome: false,
-                    latLng: latLng,
-                  ));
+              Routes.push(
+                  page: MapPage(
+                isHome: false,
+                latLng: latLng,
+                isLoggedIn: true,
+                nextPage: nextPage,
+              ));
             }
           }
           lNameController.clear();
@@ -199,7 +203,6 @@ class AuthController extends GetxController {
               color: MyTheme.redColor,
             ),
           ));
-          // Get.snackbar("Error", e.toString());
         } else {
           //There seems to be a server/internet connectivity issue. Please check the same
           Get.showSnackbar(MySnackBar.myLoadingSnackBar(
@@ -235,7 +238,7 @@ class AuthController extends GetxController {
         );
         if (isForgotPass == false) {
           Get.put(HomeController());
-          Get.offAllNamed(LandingPage.id);
+          Routes.pushAndRemoveUntil(page: LandingPage());
           usernameController.clear();
           passwordController.clear();
           password2Controller.clear();
@@ -248,7 +251,7 @@ class AuthController extends GetxController {
           }
           otpVerification = "".obs;
           otpNum = '';
-          Get.toNamed(LoginPage.id);
+          Routes.push(page: LoginPage());
         }
       } catch (e) {
         if (e.runtimeType != SocketException) {
@@ -330,8 +333,9 @@ class AuthController extends GetxController {
     }
   }
 
-  void gotoHome(double lat, double lon, String address) async {
-    await sfHelper.setLoggedIn(true);
+  void gotoHome(double lat, double lon, String address,
+      {required bool isLoggedIn, Widget? nextPage}) async {
+    await sfHelper.setLoggedIn(isLoggedIn);
     final c = Get.find<HomeController>();
 
     Get.put(OrderController());
@@ -358,7 +362,11 @@ class AuthController extends GetxController {
 
       print(c.address);
       c.getRestaurants();
-      Get.offAllNamed(LandingPage.id);
+      if (nextPage != null) {
+        Routes.pushAndRemoveUntil(page: nextPage);
+      } else {
+        Routes.pushAndRemoveUntil(page: LandingPage());
+      }
     } else {
       print("Address Was not empty");
 
@@ -367,11 +375,15 @@ class AuthController extends GetxController {
       c.lon.value = lon;
       print(c.address);
       c.getRestaurants();
-      Get.offAllNamed(LandingPage.id);
+      if (nextPage != null) {
+        Routes.pushAndRemoveUntil(page: nextPage);
+      } else {
+        Routes.pushAndRemoveUntil(page: LandingPage());
+      }
     }
   }
 
-  Future<void> register() async {
+  Future<void> register({Widget? nextPage}) async {
     if (await s.isConnected()) {
       try {
         await services.register(
@@ -383,7 +395,7 @@ class AuthController extends GetxController {
             gender: gender.value,
             dob: dobController.text,
             mobNum: mobController.text);
-        await login(false, issignup: true);
+        await login(false, issignup: true, nextPage: nextPage);
       } catch (e) {
         Map resp = json.decode(e.toString());
         String s = resp['email'][0];
@@ -430,7 +442,7 @@ class AuthController extends GetxController {
   void logout() async {
     (await SharedPreferences.getInstance()).clear();
     Get.find<OrderController>().clearController();
-    Get.offAllNamed(OnbordingPage.id);
+    Routes.pushAndRemoveUntil(page: OnbordingPage());
     // uid = '';
     dobController.clear();
     mobController.clear();

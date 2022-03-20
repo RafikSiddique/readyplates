@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/text_widget.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
+
+import '../../utils/routes.dart';
 
 class FeedbackPage extends StatefulWidget {
   final OrderModelApi e;
@@ -78,7 +81,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAllNamed(LandingPage.id);
+        Routes.pushAndRemoveUntil(page: LandingPage());
+
         return true;
       },
       child: Scaffold(

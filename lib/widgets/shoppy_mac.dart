@@ -122,8 +122,11 @@ class ShooppymacPage extends StatelessWidget {
                       onTap: () {
                         if (isEditing == Editing.none) {
                           if (cartModel!.foodQuantity.value != 1)
+                          //TODO: REMOVE CONTAINER
                             controller.decrement(cartModel!.foodItem.value,
-                                cartModel!.restaurant);
+                                cartModel!.restaurant,
+                                nextPage: Container()
+                                );
                         } else {
                           print("decrement");
                           if (orderEditModel!.foodQuantity.value != 1)
@@ -151,8 +154,10 @@ class ShooppymacPage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (isEditing == Editing.none)
+                      //TODO : Remove Container
                         controller.increment(
-                            cartModel!.foodItem.value, cartModel!.restaurant);
+
+                            cartModel!.foodItem.value, cartModel!.restaurant, Container());
                       else
                         controller
                             .incrementEdit(orderEditModel!.foodItem.value);
@@ -179,8 +184,9 @@ class ShooppymacPage extends StatelessWidget {
                       onTap: () {
                         if (isEditing == Editing.none) {
                           if (controller.cartItems.length > 1) {
+                            //TODO: Remove container
                             controller.decrement(cartModel!.foodItem.value,
-                                cartModel!.restaurant, true);
+                                cartModel!.restaurant,isRemoval:  true, nextPage: Container());
                             controller.calclateTotal(false);
                             setStae();
                           } else {

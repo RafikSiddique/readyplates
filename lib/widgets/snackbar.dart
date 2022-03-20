@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 
 class MySnackBar {
   static GetBar myLoadingSnackBar({
@@ -9,7 +12,6 @@ class MySnackBar {
     required String message,
     int duration = 3,
     SnackPosition snackPosition = SnackPosition.TOP,
-    // Color color = Colors.white,
     Widget? icon,
   }) {
     return GetBar(
@@ -41,6 +43,61 @@ class MySnackBar {
       snackPosition: snackPosition,
       backgroundColor: MyTheme.verifyButtonColor,
       icon: Padding(padding: EdgeInsets.only(left: 12), child: icon),
+    );
+  }
+
+  static GetBar loginSnackBar({
+    String title = 'Error',
+    int duration = 3,
+    SnackPosition snackPosition = SnackPosition.TOP,
+    Widget? nextPage,
+    String? until,
+  }) {
+    return GetBar(
+      titleText: Padding(
+        padding: EdgeInsets.only(left: 8),
+        child: Text(
+          title,
+          style: GoogleFonts.nunito(
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+            color: MyTheme.appbartextColor,
+          ),
+        ),
+      ),
+      messageText: Padding(
+        padding: EdgeInsets.only(left: 8),
+        child: Text(
+          'Please login to continue',
+          style: GoogleFonts.nunito(
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.normal,
+            fontSize: 17,
+            color: MyTheme.appbartextColor,
+          ),
+        ),
+      ),
+      mainButton: TextButton(
+          onPressed: () {
+            Routes.push(
+              page: OnbordingPage(
+                nextPage: nextPage,
+                until: until,
+              ),
+            );
+          },
+          child: Text('Login')),
+      duration: Duration(seconds: duration),
+      snackPosition: snackPosition,
+      backgroundColor: MyTheme.verifyButtonColor,
+      icon: Padding(
+        padding: EdgeInsets.only(left: 12),
+        child: FaIcon(
+          FontAwesomeIcons.timesCircle,
+          color: MyTheme.redColor,
+        ),
+      ),
     );
   }
 }

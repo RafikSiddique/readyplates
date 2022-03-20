@@ -15,6 +15,7 @@ import 'package:readyplates/src/order/orders_controller.dart';
 import 'package:readyplates/src/order/screen/booking_details.dart';
 import 'package:readyplates/src/order/screen/tip_sucessfull_page.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/buuton.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/snackbar.dart';
@@ -536,13 +537,10 @@ class OrderWidget extends StatelessWidget {
                 });
                 RestaurantModel restaurantModel = await controller
                     .getSingleRestaurant(orderModel.restaurant.id);
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) =>
-                          BookingDetails(restaurantModel, Editing.none),
-                    ),
-                    (route) => route.settings.name == LandingPage.id);
+                Routes.pushAndRemoveUntil(
+                    page: BookingDetails(restaurantModel, Editing.none),
+                    predicate: (r) =>
+                        r.settings.name == Routes.getName(LandingPage));
               },
             ),
             SizedBox(
@@ -612,13 +610,10 @@ class OrderWidget extends StatelessWidget {
             controller.selectedDate.value = DateTime.now();
             controller.numberOfPeople.value = 1;
             controller.globletime.value = DateTime.now();
-            Navigator.pushAndRemoveUntil(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) =>
-                      BookingDetails(restaurantModel, Editing.none),
-                ),
-                (route) => route.settings.name == LandingPage.id);
+            Routes.pushAndRemoveUntil(
+                page: BookingDetails(restaurantModel, Editing.none),
+                predicate: (r) =>
+                    r.settings.name == Routes.getName(LandingPage));
           },
         );
     }

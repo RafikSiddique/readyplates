@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:readyplates/src/home/screens/restaurant_list.dart';
+import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/index.dart';
 import 'package:readyplates/src/order/screen/order_page.dart';
 import 'package:readyplates/src/home/home_controller.dart';
@@ -16,8 +17,8 @@ import 'package:readyplates/utils/shared_preference_helper.dart';
 import 'package:http/http.dart' as http;
 
 class LandingPage extends StatefulWidget {
-  static const id = "/landingPage";
-  LandingPage({Key? key}) : super(key: key);
+  LandingPage({Key? key, this.isLoggedIn = true}) : super(key: key);
+  final bool isLoggedIn;
 
   @override
   State<LandingPage> createState() => _LandingPageState();
@@ -35,7 +36,9 @@ class _LandingPageState extends State<LandingPage> {
   Widget getBody() {
     switch (controller.currentIndex.value) {
       case 0:
-        return ShopScreen();
+        return ShopScreen(
+          isLoggedIn: widget.isLoggedIn,
+        );
       case 1:
         return Obx(() {
           if (controller.lat.value == 0 && controller.lon.value == 0) {
@@ -46,6 +49,7 @@ class _LandingPageState extends State<LandingPage> {
           } else {
             return MapPage(
               isHome: true,
+              isLoggedIn: widget.isLoggedIn,
               latLng: LatLng(controller.lat.value, controller.lon.value),
             );
           }
@@ -63,7 +67,7 @@ class _LandingPageState extends State<LandingPage> {
         return ProfilePage();
 
       default:
-        return ShopScreen();
+        return ShopScreen(isLoggedIn: widget.isLoggedIn,);
     }
   }
 
@@ -76,11 +80,14 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   void showDialogLocal(BuildContext context) async {
-    String userId = await SharedPreferenceHelper().getUserId();
-    bool flag = jsonDecode(
-            (await http.get(ApiService().customers('checkout/$userId')))
-                .body) ??
-        false;
+    String? userId = await SharedPreferenceHelper().getUserId();
+    bool flag = false;
+    if (userId != null) {
+      flag = jsonDecode(
+              (await http.get(ApiService().customers('checkout/$userId')))
+                  .body) ??
+          false;
+    }
     if (flag) {
       showDialog(
         context: context,

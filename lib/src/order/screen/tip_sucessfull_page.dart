@@ -9,6 +9,7 @@ import 'package:readyplates/src/Order_Screens/feedback_page.dart';
 import 'package:readyplates/src/home/screens/index.dart';
 import 'package:readyplates/utils/assets.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 
 class TipsucessfullPage extends StatelessWidget {
   static const id = "/tipSucessfull";
@@ -33,7 +34,7 @@ class TipsucessfullPage extends StatelessWidget {
     });
     return WillPopScope(
       onWillPop: () async {
-        Get.offAllNamed(LandingPage.id);
+        Routes.pushAndRemoveUntil(page: LandingPage());
         return true;
       },
       child: Scaffold(

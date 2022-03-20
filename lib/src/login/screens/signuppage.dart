@@ -6,11 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/login/screens/loginpage.dart';
 import 'package:readyplates/utils/my_color.dart';
+import 'package:readyplates/utils/routes.dart';
 import 'package:readyplates/widgets/form_field.dart';
 import 'package:readyplates/widgets/snackbar.dart';
 
 class SignupPage extends StatefulWidget {
-  static const id = "/signup";
+  final Widget? nextPage;
+
+  const SignupPage({Key? key, this.nextPage}) : super(key: key);
   @override
   _SignupPageState createState() => _SignupPageState();
 }
@@ -41,7 +44,10 @@ class _SignupPageState extends State<SignupPage> {
                   color: MyTheme.orangeColor,
                 ),
                 onPressed: () {
-                  Get.toNamed(LoginPage.id);
+                  Routes.push(
+                      page: LoginPage(
+                    nextPage: widget.nextPage,
+                  ));
                 }),
           ),
           centerTitle: true,
@@ -331,7 +337,8 @@ class _SignupPageState extends State<SignupPage> {
                             );
                             formKey.currentState!.save();
                             if (formKey.currentState!.validate()) {
-                              await controller.register();
+                              await controller.register(
+                                  nextPage: widget.nextPage);
                             }
                             //Get.back();
                             //Navigator.pushNamed(context, MyRoutes.LoginPage);

@@ -5,6 +5,7 @@ import 'package:readyplates/src/login/auth_controller.dart';
 import 'package:readyplates/src/static_screens/onbording.dart';
 import 'package:readyplates/utils/my_color.dart';
 import 'package:readyplates/utils/shared_preference_helper.dart';
+
 import 'utils/routes.dart';
 
 void main() async {
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: OnbordingPage(),
-      onGenerateRoute: Routes.onGenerateRoute,
+      navigatorKey: Routes.navigatorKey,
+      onGenerateRoute: Routes.pages,
     );
   }
 }
