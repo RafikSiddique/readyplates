@@ -286,6 +286,8 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                             top: MediaQuery.of(context).viewPadding.top),
                         child: TextButton(
                             onPressed: () async {
+                              Get.showSnackbar(MySnackBar.myLoadingSnackBar(
+                                  message: "Loading..."));
                               if (widget.nextPage == null) {
                                 bool getPermission =
                                     await authController.getPermission();

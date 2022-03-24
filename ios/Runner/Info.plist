@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>ReadyPlates</string>
+	<string>Readyplates</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,19 +24,13 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>For map</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>For Map</string>
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
 		<key>wantAccurateLocation</key>
-		<string>For Map</string>
+		<string>Location is needed to initialize map and find the nearby restaurant which is required functionality of application</string>
 	</dict>
-	<key>NSLocationUsageDescription</key>
-	<string>For Map</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To enable map</string>
+	<string>Location is needed to initialize map and find the nearby restaurant which is required functionality of application</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To Upload the feedback image</string>
 	<key>UILaunchStoryboardName</key>
@@ -57,6 +51,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
+	<false/>
 </dict>
 </plist>
