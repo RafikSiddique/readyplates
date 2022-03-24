@@ -42,6 +42,8 @@ class AuthController extends GetxController {
 
   late FocusNode userNameFocus;
 
+  LatLng hawaiiLatLng = LatLng(21.35424135772487, -157.88902572538217);
+
   late List<FocusNode> otpFields;
 
   late List<TextEditingController> otpText;
@@ -111,13 +113,16 @@ class AuthController extends GetxController {
     bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
     if (isLocationEnabled) {
       LocationPermission permission = await Geolocator.requestPermission();
-
-      if (permission == LocationPermission.denied) {
-        GeolocatorPlatform.instance.requestPermission();
-        return getPermission();
-      } else if (permission == LocationPermission.deniedForever) {
-        await Geolocator.openAppSettings();
-        return getPermission();
+      if (Platform.isAndroid) {
+        if (permission == LocationPermission.denied) {
+          GeolocatorPlatform.instance.requestPermission();
+          return getPermission();
+        } else if (permission == LocationPermission.deniedForever) {
+          await Geolocator.openAppSettings();
+          return getPermission();
+        } else {
+          return true;
+        }
       } else {
         return true;
       }
@@ -134,14 +139,23 @@ class AuthController extends GetxController {
       //TODO: call card save API
       bool permitted = await getPermission();
       if (permitted) {
-        Position position = await Geolocator.getCurrentPosition();
-        LatLng latLng = LatLng(position.latitude, position.longitude);
-        Routes.push(
-            page: MapPage(
-          isHome: false,
-          latLng: latLng,
-          isLoggedIn: true,
-        ));
+        if (Platform.isAndroid) {
+          Position position = await Geolocator.getCurrentPosition();
+          LatLng latLng = LatLng(position.latitude, position.longitude);
+          Routes.push(
+              page: MapPage(
+            isHome: false,
+            latLng: latLng,
+            isLoggedIn: true,
+          ));
+        } else {
+          Routes.push(
+              page: MapPage(
+            isHome: false,
+            latLng: hawaiiLatLng,
+            isLoggedIn: true,
+          ));
+        }
       }
     } catch (e) {
       print(e);
@@ -167,15 +181,25 @@ class AuthController extends GetxController {
           } else {
             bool permitted = await getPermission();
             if (permitted) {
-              Position position = await Geolocator.getCurrentPosition();
-              LatLng latLng = LatLng(position.latitude, position.longitude);
-              Routes.push(
-                  page: MapPage(
-                isHome: false,
-                latLng: latLng,
-                isLoggedIn: true,
-                nextPage: nextPage,
-              ));
+              if (Platform.isAndroid) {
+                Position position = await Geolocator.getCurrentPosition();
+                LatLng latLng = LatLng(position.latitude, position.longitude);
+                Routes.push(
+                    page: MapPage(
+                  isHome: false,
+                  latLng: latLng,
+                  isLoggedIn: true,
+                  nextPage: nextPage,
+                ));
+              } else {
+                Routes.push(
+                    page: MapPage(
+                  isHome: false,
+                  isLoggedIn: true,
+                  nextPage: nextPage,
+                  latLng: hawaiiLatLng,
+                ));
+              }
             }
           }
           lNameController.clear();
