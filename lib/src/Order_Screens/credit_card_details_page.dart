@@ -361,28 +361,56 @@ class CreditCardDetailsPage extends StatelessWidget {
                       ),
                     ),
                   );
-                  await Get.find<AuthController>().setCardDetails(nextPage: nextPage);
-
-/*                   if (isOrderComplete) {
-                    Get.find<OrderController>()
-                        .updateStatus(orderModelApi.id, 2);
-                    Get.find<OrderController>().getorder();
-                    Get.offAll(() => FeedbackPage(
-                          e: orderModelApi,
-                          isComplete: true,
-                        ));
-                  } else {
-                    Get.find<HomeController>().currentIndex.value = 2;
-                    Get.find<HomeController>().onPageChanged(2);
-                    Get.find<OrderController>().getorder();
-
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, LandingPage.id, (route) => false);
-                  } */
+                  await Get.find<AuthController>()
+                      .setCardDetails(nextPage: nextPage);
                 },
               ),
               SizedBox(
                 height: 22,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(6))),
+                  minimumSize: Size.fromHeight(45),
+                  textStyle: GoogleFonts.inter(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal),
+                  primary: MyTheme.orangeColor,
+                  onPrimary: MyTheme.appbackgroundColor,
+                  // side: BorderSide(
+                  //   width: 1,
+                  //   color: MyTheme.iconColor,
+                  // )
+                ),
+                // child: Text("Pay \$ ${orderModelApi.totalPrice}"),
+                child: Text("Skip for now"),
+                onPressed: () async {
+                  Get.dialog(
+                    AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      content: SizedBox.square(
+                        dimension: Get.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox.square(
+                                dimension: 100,
+                                child: CircularProgressIndicator.adaptive(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      MyTheme.borderchangeColor),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                  await Get.find<AuthController>()
+                      .setCardDetails(nextPage: nextPage);
+                },
               ),
             ],
           ),

@@ -309,7 +309,7 @@ class _SignupPageState extends State<SignupPage> {
                       animation: Listenable.merge([
                         controller.fNamController,
                         controller.lNameController,
-                        controller.dobController,
+                        
                         controller.usernameController,
                         controller.mobController,
                         controller.passwordController,
