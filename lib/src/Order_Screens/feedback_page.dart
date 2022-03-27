@@ -40,7 +40,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
     XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (file != null) {
-      File? croppedFile = await ImageCropper.cropImage(
+      File? croppedFile = await ImageCropper().cropImage(
         sourcePath: file.path,
         aspectRatio: CropAspectRatio(ratioX: 4, ratioY: 3),
         aspectRatioPresets: [CropAspectRatioPreset.square],

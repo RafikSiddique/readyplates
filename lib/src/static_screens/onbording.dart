@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:after_layout/after_layout.dart';
@@ -292,14 +293,23 @@ class _OnbordingPageState extends State<OnbordingPage> with AfterLayoutMixin {
                                 bool getPermission =
                                     await authController.getPermission();
                                 if (getPermission) {
-                                  Position position =
-                                      await Geolocator.getCurrentPosition();
-                                  Routes.push(
-                                      page: MapPage(
-                                          isLoggedIn: false,
-                                          isHome: false,
-                                          latLng: LatLng(position.latitude,
-                                              position.longitude)));
+                                  if (Platform.isAndroid) {
+                                    Position position =
+                                        await Geolocator.getCurrentPosition();
+                                    Routes.push(
+                                        page: MapPage(
+                                            isLoggedIn: false,
+                                            isHome: false,
+                                            latLng: LatLng(position.latitude,
+                                                position.longitude)));
+                                  } else {
+                                    Routes.push(
+                                        page: MapPage(
+                                            isLoggedIn: false,
+                                            isHome: false,
+                                            latLng:
+                                                authController.hawaiiLatLng));
+                                  }
                                 } else {
                                   Get.showSnackbar(
                                     MySnackBar.myLoadingSnackBar(
